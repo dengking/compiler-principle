@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <meta name="author" content="Deng King">
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+  <title>Lexical Analysis - compiler principle</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  <link href="../../css/extra.css" rel="stylesheet">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Lexical Analysis";
+    var mkdocs_page_input_path = "Chapter3-Lexical-Analysis/Lexical Analysis.md";
+    var mkdocs_page_url = "/compiler-principle/Chapter3-Lexical-Analysis/Lexical Analysis/";
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> compiler principle</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Chapter1-Introduction</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../Chapter1-Introduction/introduction/">introduction</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter1-Introduction/1.2The-Structure-of-a-Compiler.md">1.2 The Structure of a Compiler</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Chapter2-A-Simple-Syntax-Directed-Translator</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../Chapter2-A-Simple-Syntax-Directed-Translator/A-Simple-Syntax-Directed-Translator/">A Simple Syntax Directed Translator</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter2-A-Simple-Syntax-Directed-Translator/2.1Introduction/">2.1 Introduction</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter2-A-Simple-Syntax-Directed-Translator/2.2Syntax-Definition/">2.2 Syntax Definition</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter2-A-Simple-Syntax-Directed-Translator/2.3Syntax-Directed-Translation/">2.3 Syntax-Directed Translation</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter2-A-Simple-Syntax-Directed-Translator/2.4Parsing/">2.4 Parsing</a>
+                </li>
+    </ul>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">compiler principle</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>Lexical Analysis</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="lexical-analysis">Lexical Analysis<a class="headerlink" href="#lexical-analysis" title="Permanent link"></a></h1>
+<p>In this chapter we show how to construct a <a href="https://en.wikipedia.org/wiki/Lexical_analysis"><strong>lexical analyzer</strong></a>. To implement a <strong>lexical analyzer</strong> by hand, it helps to start with a diagram or other description for the lexemes of each token. We can then write code to identify each occurrence of each lexeme on the input and to return information about the token identified.</p>
+<blockquote>
+<p>NOTE: Manual implementation just to make it easier for the readers to understand how the lexical analyzer works,  what should be focused on is how does it work automatically and how to implement it.</p>
+</blockquote>
+<p>We can also produce a lexical analyzer automatically by specifying the <a href="https://en.wikipedia.org/wiki/Lexeme">lexeme</a> patterns to a lexical-analyzer generator and compiling those patterns into code that functions as a <strong>lexical analyzer</strong>. This approach makes it easier to modify a <strong>lexical analyzer</strong>, since we have only to rewrite the affected patterns, not
+the entire program. It also speeds up the process of implementing the lexical analyzer, since the programmer specifies the software at the very high level of patterns and relies on the generator to produce the detailed code. We shall introduce in Section 3.5 a lexical-analyzer generator called <a href="https://en.wikipedia.org/wiki/Lex_%28software%29">Lex</a> (or Flex in a more recent embodiment).</p>
+<blockquote>
+<p>NOTE: In fact, the essence lies in how lex works.</p>
+</blockquote>
+<p>We begin the study of lexical-analyzer generators by introducing regular expressions, a convenient notation for specifying lexeme patterns. We show how this notation can be transformed, first into nondeterministic automata and then into deterministic automata. The latter two notations can be used as input to a "driver," that is, code which simulates these automata and uses them as a guide to determining the next token. This driver and the specification of the automaton form the nucleus of the lexical analyzer.</p>
+<blockquote>
+<p>NOTE: Nucleus of the lexical analyzer is what we should focus on.</p>
+<p>NOTE: This chapter is mainly about algorithms of lexical analysis, I extend to include the algorithms  relevant to lexical analysis in wikipedia which is listed in section wikipedia String </p>
+</blockquote>
+              
+            </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/dengking/compiler-principle" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+      
+    </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="../../search/main.js" defer></script>
+
+</body>
+</html>

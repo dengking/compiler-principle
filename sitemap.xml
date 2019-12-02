@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <url>
+     <loc>https://dengking.github.io/compiler-principle/Chapter1-Introduction/introduction/</loc>
+     <lastmod>2019-12-02</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc></loc>
+     
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://dengking.github.io/compiler-principle/Chapter2-A-Simple-Syntax-Directed-Translator/A-Simple-Syntax-Directed-Translator/</loc>
+     <lastmod>2019-12-02</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://dengking.github.io/compiler-principle/Chapter2-A-Simple-Syntax-Directed-Translator/2.1Introduction/</loc>
+     <lastmod>2019-12-02</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://dengking.github.io/compiler-principle/Chapter2-A-Simple-Syntax-Directed-Translator/2.2Syntax-Definition/</loc>
+     <lastmod>2019-12-02</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://dengking.github.io/compiler-principle/Chapter2-A-Simple-Syntax-Directed-Translator/2.3Syntax-Directed-Translation/</loc>
+     <lastmod>2019-12-02</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://dengking.github.io/compiler-principle/Chapter2-A-Simple-Syntax-Directed-Translator/2.4Parsing/</loc>
+     <lastmod>2019-12-02</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+</urlset>

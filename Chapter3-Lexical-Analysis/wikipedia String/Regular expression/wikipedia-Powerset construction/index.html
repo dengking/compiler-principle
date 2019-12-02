@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <meta name="author" content="Deng King">
+  <link rel="shortcut icon" href="../../../../img/favicon.ico">
+  <title>[Powerset construction](https://en.wikipedia.org/wiki/Powerset_construction) - compiler principle</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  <link href="../../../../css/extra.css" rel="stylesheet">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "[Powerset construction](https://en.wikipedia.org/wiki/Powerset_construction)";
+    var mkdocs_page_input_path = "Chapter3-Lexical-Analysis/wikipedia String/Regular expression/wikipedia-Powerset construction.md";
+    var mkdocs_page_url = "/compiler-principle/Chapter3-Lexical-Analysis/wikipedia String/Regular expression/wikipedia-Powerset construction/";
+  </script>
+  
+  <script src="../../../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../../../.." class="icon icon-home"> compiler principle</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Chapter1-Introduction</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../../../Chapter1-Introduction/introduction/">introduction</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../../../Chapter1-Introduction/1.2The-Structure-of-a-Compiler.md">1.2 The Structure of a Compiler</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Chapter2-A-Simple-Syntax-Directed-Translator</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../../../Chapter2-A-Simple-Syntax-Directed-Translator/A-Simple-Syntax-Directed-Translator/">A Simple Syntax Directed Translator</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../../../Chapter2-A-Simple-Syntax-Directed-Translator/2.1Introduction/">2.1 Introduction</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../../../Chapter2-A-Simple-Syntax-Directed-Translator/2.2Syntax-Definition/">2.2 Syntax Definition</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../../../Chapter2-A-Simple-Syntax-Directed-Translator/2.3Syntax-Directed-Translation/">2.3 Syntax-Directed Translation</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../../../Chapter2-A-Simple-Syntax-Directed-Translator/2.4Parsing/">2.4 Parsing</a>
+                </li>
+    </ul>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../../../..">compiler principle</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../../../..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>[Powerset construction](https://en.wikipedia.org/wiki/Powerset_construction)</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="powerset-construction"><a href="https://en.wikipedia.org/wiki/Powerset_construction">Powerset construction</a><a class="headerlink" href="#powerset-construction" title="Permanent link"></a></h1>
+<p>In the <a href="https://en.wikipedia.org/wiki/Theory_of_computation">theory of computation</a> and <a href="https://en.wikipedia.org/wiki/Automata_theory">automata theory</a>, the <strong>powerset construction</strong> or <strong>subset construction</strong> is a standard method for <a href="https://en.wikipedia.org/wiki/Automata_construction">converting</a> a <a href="https://en.wikipedia.org/wiki/Nondeterministic_finite_automaton">nondeterministic finite automaton</a> (NFA) into a <a href="https://en.wikipedia.org/wiki/Deterministic_finite_automaton">deterministic finite automaton</a> (DFA) which recognizes the same <a href="https://en.wikipedia.org/wiki/Formal_language">formal language</a>. It is important in theory because it establishes that NFAs, despite their additional flexibility, are unable to recognize any language that cannot be recognized by some DFA. It is also important in practice for converting easier-to-construct NFAs into more efficiently executable DFAs. However, if the NFA has <em>n</em> states, the resulting DFA may have up to $2^n$ states, an exponentially larger number, which sometimes makes the construction impractical for large NFAs.</p>
+<p>The construction, sometimes called the <strong>Rabin–Scott powerset construction</strong> (or subset construction) to distinguish it from similar constructions for other types of automata, was first published by <a href="https://en.wikipedia.org/wiki/Michael_O._Rabin">Michael O. Rabin</a> and <a href="https://en.wikipedia.org/wiki/Dana_Scott">Dana Scott</a> in 1959.[<a href="https://en.wikipedia.org/wiki/Powerset_construction#cite_note-1">1]</a></p>
+<h2 id="intuition">Intuition<a class="headerlink" href="#intuition" title="Permanent link"></a></h2>
+<p>To simulate the operation of a DFA on a given input string, one needs to keep track of <strong>a single state</strong> at any time: the state that the automaton will reach after seeing a <a href="https://en.wikipedia.org/wiki/Substring#Prefix">prefix</a> of the input. In contrast, to simulate an NFA, one needs to keep track of <strong>a set of states</strong>: all of the states that the automaton could reach after seeing the same prefix of the input, according to the nondeterministic choices made by the automaton. If, after a certain prefix of the input, a set <em>S</em> of states can be reached, then after the next input symbol <em>x</em> the set of reachable states is a deterministic function of <em>S</em> and <em>x</em>. Therefore, the sets of reachable NFA states play the same role in the NFA simulation as single DFA states play in the DFA simulation, and in fact the sets of NFA states appearing in this simulation may be re-interpreted as being states of a DFA.[<a href="https://en.wikipedia.org/wiki/Powerset_construction#cite_note-sipser-2">2]</a></p>
+<blockquote>
+<p>NOTE: The difference between DFA and NFA can help to understand why <strong>a single state</strong> in DFA versus <strong>a set of states</strong> in NFA,  below is come from <a href="https://en.wikipedia.org/wiki/Finite-state_machine#Determinism">Finite-state machine</a>:</p>
+<p>In a deterministic automaton, every state has exactly one transition for each possible input. In a non-deterministic automaton, an input can lead to one, more than one, or no transition for a given state. The <a href="https://en.wikipedia.org/wiki/Powerset_construction">powerset construction</a> algorithm can transform any nondeterministic automaton into a (usually more complex) deterministic automaton with identical functionality.</p>
+</blockquote>
+              
+            </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/dengking/compiler-principle" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+      
+    </span>
+</div>
+    <script>var base_url = '../../../..';</script>
+    <script src="../../../../js/theme.js" defer></script>
+      <script src="../../../../search/main.js" defer></script>
+
+</body>
+</html>
