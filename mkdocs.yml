@@ -1,0 +1,36 @@
+site_name:  compiler principle
+site_url: https://dengking.github.io/compiler-principle
+site_description: Project documentation with Markdown.
+site_author: Deng King
+
+
+repo_url: https://github.com/dengking/compiler-principle
+edit_uri: ""
+
+theme: readthedocs
+
+nav:
+    - Chapter1-Introduction: 
+        - introduction: Chapter1-Introduction/introduction.md
+        - 1.2 The Structure of a Compiler: Chapter1-Introduction/1.2The-Structure-of-a-Compiler.md
+    - Chapter2-A-Simple-Syntax-Directed-Translator:
+        - A Simple Syntax Directed Translator: Chapter2-A-Simple-Syntax-Directed-Translator/A-Simple-Syntax-Directed-Translator.md
+        - 2.1 Introduction: Chapter2-A-Simple-Syntax-Directed-Translator/2.1Introduction.md
+        - 2.2 Syntax Definition: Chapter2-A-Simple-Syntax-Directed-Translator/2.2Syntax-Definition.md
+        - 2.3 Syntax-Directed Translation: Chapter2-A-Simple-Syntax-Directed-Translator/2.3Syntax-Directed-Translation.md
+        - 2.4 Parsing: Chapter2-A-Simple-Syntax-Directed-Translator/2.4Parsing.md
+        
+extra_css:
+    - css/extra.css
+
+markdown_extensions:
+    - toc:
+        permalink: 
+    - admonition
+    - def_list
+    - mdx_gh_links:
+        user: mkdocs
+        repo: mkdocs
+        
+plugins:
+    - search
