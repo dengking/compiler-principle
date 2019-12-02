@@ -1,25 +1,41 @@
 site_name:  compiler principle
 site_url: https://dengking.github.io/compiler-principle
 site_description: Project documentation with Markdown.
-site_author: Deng King
+site_author: DengKing
 
 
 repo_url: https://github.com/dengking/compiler-principle
 edit_uri: ""
 
-theme: readthedocs
 
+
+theme:
+    name: readthedocs
+    highlightjs: true
+    hljs_languages:
+        - yaml
+        - django
+        
 nav:
-    - Chapter1-Introduction: 
-        - introduction: Chapter1-Introduction/introduction.md
+    - Chapter1-Introduction: Chapter1-Introduction/introduction.md
         - 1.2 The Structure of a Compiler: Chapter1-Introduction/1.2The-Structure-of-a-Compiler.md
-    - Chapter2-A-Simple-Syntax-Directed-Translator:
-        - A Simple Syntax Directed Translator: Chapter2-A-Simple-Syntax-Directed-Translator/A-Simple-Syntax-Directed-Translator.md
+    - Chapter2-A-Simple-Syntax-Directed-Translator: Chapter2-A-Simple-Syntax-Directed-Translator/A-Simple-Syntax-Directed-Translator.md
         - 2.1 Introduction: Chapter2-A-Simple-Syntax-Directed-Translator/2.1Introduction.md
         - 2.2 Syntax Definition: Chapter2-A-Simple-Syntax-Directed-Translator/2.2Syntax-Definition.md
         - 2.3 Syntax-Directed Translation: Chapter2-A-Simple-Syntax-Directed-Translator/2.3Syntax-Directed-Translation.md
         - 2.4 Parsing: Chapter2-A-Simple-Syntax-Directed-Translator/2.4Parsing.md
-        
+    - Chapter3-Lexical-Analysis: Chapter3-Lexical-Analysis/Lexical-Analysis.md   
+        - 3.1 The Role of the Lexical Analyzer: Chapter3-Lexical-Analysis/3.1The-Role-of-the-Lexical-Analyzer.md
+        - 3.4 Recognition of Tokens: Chapter3-Lexical-Analysis/3.4Recognition-of-Tokens.md
+        - 3.6 Finite Automata: Chapter3-Lexical-Analysis/3.6Finite-Automata.md
+        - 3.7 From Regular Expressions to Automata: Chapter3-Lexical-Analysis/3.7-From-Regular-Expressions-to-Automata.md
+        - wikipedia String: Chapter3-Lexical-Analysis/wikipedia-String/wikipedia-String(computer-science).md
+            - string searching: Chapter3-Lexical-Analysis/wikipedia-String/string-searching/wikipedia-Aho–Corasick-algorithm.md
+            - Regular expression: Chapter3-Lexical-Analysis/wikipedia-String/Regular-expression/wikipedia-Powerset-construction.md
+    - Chapter4 Syntax Analysis: Chapter4-Syntax-Analysis/Syntax-Analysis.md
+        - Wikipedia Parsing algorithms: Chapter4-Syntax-Analysis/Wikipedia-Parsing-algorithms/wikipedia-Parsing.md
+            - Bottom-up: Chapter4-Syntax-Analysis/Wikipedia-Parsing-algorithms/Bottom-up
+            - Top-down
 extra_css:
     - css/extra.css
 
