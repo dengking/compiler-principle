@@ -1,8 +1,6 @@
 # Lexical Analysis
 
-In this chapter we show how to construct a [**lexical analyzer**](https://en.wikipedia.org/wiki/Lexical_analysis). To implement a **lexical analyzer** by hand, it helps to start with a diagram or other description for
-the lexemes of each token. We can then write co de to identify each o ccurrence of
-each lexeme on the input and to return information ab out the token identi?ed.
+In this chapter we show how to construct a [**lexical analyzer**](https://en.wikipedia.org/wiki/Lexical_analysis). To implement a **lexical analyzer** by hand, it helps to start with a diagram or other description for the lexemes of each token. We can then write code to identify each occurrence of each lexeme on the input and to return information about the token identified.
 
 > NOTE: Manual implementation just to make it easier for the readers to understand how the lexical analyzer works,  what should be focused on is how does it work automatically and how to implement it.
 
@@ -14,4 +12,8 @@ the entire program. It also speeds up the process of implementing the lexical an
 We begin the study of lexical-analyzer generators by introducing regular expressions, a convenient notation for specifying lexeme patterns. We show how this notation can be transformed, first into nondeterministic automata and then into deterministic automata. The latter two notations can be used as input to a "driver," that is, code which simulates these automata and uses them as a guide to determining the next token. This driver and the specification of the automaton form the nucleus of the lexical analyzer.
 
 > NOTE: Nucleus of the lexical analyzer is what we should focus on.
+
+
+
+> NOTE: This chapter is mainly about algorithms of lexical analysis, I extend to include the algorithms  relevant to lexical analysis in wikipedia which is listed in section wikipedia String 
 
