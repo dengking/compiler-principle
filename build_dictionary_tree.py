@@ -1,4 +1,5 @@
 import os
+import yaml
 
 
 class Node:
@@ -10,6 +11,8 @@ class DictionaryTreeBuilder:
     def __init__(self, root_dir='docs'):
         self.root_dir = root_dir  # 根路径名称
         self.root_node = dict()  # 使用dict来作为节点
+        self.build()
+        self.yaml_nav = yaml.dump(self.root_node, default_flow_style=False)
 
     def build(self):
         """
