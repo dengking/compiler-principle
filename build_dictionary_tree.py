@@ -57,7 +57,7 @@ class DictionaryTreeBuilder:
             node[dirname] = dict()  # 内节点
         for filename in filenames:
             if filename.endswith('.md'):
-                key = filename[0:-3].replace('-', ' ')
+                key = filename[0:-3]
                 node[key] = os.path.join(dirpath, filename)  # 叶子节点
 
     @staticmethod
