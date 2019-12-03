@@ -12,6 +12,7 @@ We start small by creating a syntax-directed translator that maps infix arithmet
 >
 > - [Shunting-yard algorithm](https://en.wikipedia.org/wiki/Shunting-yard_algorithm)
 
+
 ```java
 {
     int i; int j; float[100] a; float v; float x;
@@ -24,7 +25,17 @@ We start small by creating a syntax-directed translator that maps infix arithmet
 }
 ```
 
+
 Figure 2.1: A code fragment to be translated
+
+
+
+
+
+
+
+
+
 |      |                         |
 | :--: | :---------------------: |
 |  1:  |       `i = i + 1`       |
