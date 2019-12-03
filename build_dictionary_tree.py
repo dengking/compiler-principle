@@ -43,8 +43,7 @@ class DictionaryTreeBuilder:
                         raise Exception(error)
                 self.add_descend_node(current_node, path, dirnames, filenames)
 
-    @staticmethod
-    def add_descend_node(node, dirpath, dirnames, filenames):
+    def add_descend_node(self, node, dirpath, dirnames, filenames):
         """
         添加后裔节点
         :param node:
@@ -54,11 +53,16 @@ class DictionaryTreeBuilder:
         """
         # 第一级
         for dirname in dirnames:
-            node[dirname] = dict()  # 内节点
+            key = self.key_name(dirname)
+            node[key] = dict()  # 内节点
         for filename in filenames:
             if filename.endswith('.md'):
-                key = filename[0:-3]
+                key = self.key_name(filename[0:-3])
                 node[key] = os.path.join(dirpath, filename)  # 叶子节点
+
+    @staticmethod
+    def key_name(dirname_or_filename):
+        return '- ' + dirname_or_filename
 
     @staticmethod
     def split_path(path):
