@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
+     <loc>https://dengking.github.io/compiler-principle/</loc>
+     <lastmod>2019-12-03</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
      <loc>https://dengking.github.io/compiler-principle/Chapter1-Introduction/introduction/</loc>
      <lastmod>2019-12-03</lastmod>
      <changefreq>daily</changefreq>
