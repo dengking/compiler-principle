@@ -56,8 +56,8 @@
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc></loc>
-     
+     <loc>https://dengking.github.io/compiler-principle/Chapter3-Lexical-Analysis/3.7From-Regular-Expressions-to-Automata/</loc>
+     <lastmod>2019-12-03</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
@@ -66,12 +66,52 @@
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc></loc>
-     
+     <loc>https://dengking.github.io/compiler-principle/Chapter3-Lexical-Analysis/wikipedia-String/Regular-expression/wikipedia-Powerset-construction/</loc>
+     <lastmod>2019-12-03</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
-     <loc>https://dengking.github.io/compiler-principle/Chapter3-Lexical-Analysis/wikipedia-String/Regular-expression/wikipedia-Powerset-construction/</loc>
+     <loc>https://dengking.github.io/compiler-principle/Chapter3-Lexical-Analysis/wikipedia-String/string-searching/wikipedia-Aho-Corasick-algorithm/</loc>
+     <lastmod>2019-12-03</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://dengking.github.io/compiler-principle/Chapter4-Syntax-Analysis/Syntax-Analysis/</loc>
+     <lastmod>2019-12-03</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://dengking.github.io/compiler-principle/Chapter4-Syntax-Analysis/Wikipedia-Parsing-algorithms/wikipedia-Parsing/</loc>
+     <lastmod>2019-12-03</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://dengking.github.io/compiler-principle/Chapter4-Syntax-Analysis/Wikipedia-Parsing-algorithms/Bottom-up/Precedence/wikipedia-Operator-precedence-parser/</loc>
+     <lastmod>2019-12-03</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://dengking.github.io/compiler-principle/Chapter4-Syntax-Analysis/Wikipedia-Parsing-algorithms/Bottom-up/Precedence/wikipedia-Shunting-yard-algorithm/</loc>
+     <lastmod>2019-12-03</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://dengking.github.io/compiler-principle/Chapter4-Syntax-Analysis/Wikipedia-Parsing-algorithms/Bottom-up/blog-Equation(expression)parser-with-precedence/</loc>
+     <lastmod>2019-12-03</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://dengking.github.io/compiler-principle/Chapter4-Syntax-Analysis/Wikipedia-Parsing-algorithms/Bottom-up/wikipedia-CYK-algorithm/</loc>
+     <lastmod>2019-12-03</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://dengking.github.io/compiler-principle/Chapter4-Syntax-Analysis/Wikipedia-Parsing-algorithms/Bottom-up/wikipedia-LR-parser/</loc>
+     <lastmod>2019-12-03</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://dengking.github.io/compiler-principle/Chapter4-Syntax-Analysis/Wikipedia-Parsing-algorithms/Bottom-up/wikipedia-Top-down-parsing/</loc>
      <lastmod>2019-12-03</lastmod>
      <changefreq>daily</changefreq>
     </url>
