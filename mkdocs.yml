@@ -17,7 +17,7 @@ theme:
         - django
         
 nav:
-- Home: index.md
+- Home: README.md
 - Chapter1-Introduction:
   - introduction: Chapter1-Introduction/introduction.md
   - 1.2The-Structure-of-a-Compiler: Chapter1-Introduction/1.2The-Structure-of-a-Compiler.md
