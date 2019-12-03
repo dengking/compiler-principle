@@ -279,23 +279,73 @@
 }
 </code></pre>
 
-<p>Figure 2.1: A code fragment to be translated
-|      |                         |
-| :--: | :---------------------: |
-|  1:  |       <code>i = i + 1</code>       |
-|  2:  |     <code>t1 = a [ i ]</code>      |
-|  3:  |   <code>if t1 &lt; v goto 1</code>    |
-|  4:  |       <code>j = j - 1</code>       |
-|  5:  |     <code>t2 = a [ j ]</code>      |
-|  6:  |   <code>if t2 &gt; v goto 4</code>    |
-|  7:  | <code>ifFalse i &gt;= j goto 9</code> |
-|  8:  |        <code>goto 14</code>        |
-|  9:  |      <code>x = a [ i ]</code>      |
-| 10:  |     <code>t3 = a [ j ]</code>      |
-| 11:  |     <code>a [ i ] = t3</code>      |
-| 12:  |      <code>a [ j ] = x</code>      |
-| 13:  |        <code>goto 1</code>         |
-| 14:  |                         |</p>
+<p>Figure 2.1: A code fragment to be translated</p>
+<table>
+<thead>
+<tr>
+<th align="center"></th>
+<th align="center"></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="center">1:</td>
+<td align="center"><code>i = i + 1</code></td>
+</tr>
+<tr>
+<td align="center">2:</td>
+<td align="center"><code>t1 = a [ i ]</code></td>
+</tr>
+<tr>
+<td align="center">3:</td>
+<td align="center"><code>if t1 &lt; v goto 1</code></td>
+</tr>
+<tr>
+<td align="center">4:</td>
+<td align="center"><code>j = j - 1</code></td>
+</tr>
+<tr>
+<td align="center">5:</td>
+<td align="center"><code>t2 = a [ j ]</code></td>
+</tr>
+<tr>
+<td align="center">6:</td>
+<td align="center"><code>if t2 &gt; v goto 4</code></td>
+</tr>
+<tr>
+<td align="center">7:</td>
+<td align="center"><code>ifFalse i &gt;= j goto 9</code></td>
+</tr>
+<tr>
+<td align="center">8:</td>
+<td align="center"><code>goto 14</code></td>
+</tr>
+<tr>
+<td align="center">9:</td>
+<td align="center"><code>x = a [ i ]</code></td>
+</tr>
+<tr>
+<td align="center">10:</td>
+<td align="center"><code>t3 = a [ j ]</code></td>
+</tr>
+<tr>
+<td align="center">11:</td>
+<td align="center"><code>a [ i ] = t3</code></td>
+</tr>
+<tr>
+<td align="center">12:</td>
+<td align="center"><code>a [ j ] = x</code></td>
+</tr>
+<tr>
+<td align="center">13:</td>
+<td align="center"><code>goto 1</code></td>
+</tr>
+<tr>
+<td align="center">14:</td>
+<td align="center"></td>
+</tr>
+</tbody>
+</table>
 <p>Figure 2.2: Simplified intermediate code for the program fragment in Fig. 2.1</p>
               
             </div>
