@@ -189,7 +189,29 @@ These steps are repeated until the parser stops, and then it will have either co
 
 ## Constructing an LL(1) parsing table
 
-In order to fill the **parsing table**, we have to establish what grammar rule the parser should choose if it sees a nonterminal `A` on the top of its stack and a symbol `a` on its input stream. It is easy to see that such a rule should be of the form `A` → `w` and that the language corresponding to `w` should have at least one string starting with `a`. For this purpose we define the *First-set* of `w`, written here as `Fi(w)`, as the set of terminals that can be found at the start of some string in `w`, plus $\epsilon$ if the empty string also belongs to `w`. Given a grammar with the rules $A_1 \to w_1, \dots, A_n \to w_n$, we can compute the `Fi(wi)` and `Fi(Ai)` for every rule as follows:
+In order to fill the **parsing table**, we have to establish what grammar rule the parser should choose if it sees a nonterminal `A` on the top of its stack and a symbol `a` on its input stream. It is easy to see that such a rule should be of the form `A` → `w` and that the language corresponding to `w` should have at least one string starting with `a`. For this purpose we define the *First-set* of `w`, written here as **`Fi`** `(w)`, as the set of terminals that can be found at the start of some string in `w`, plus $\epsilon$ if the empty string also belongs to `w`. Given a grammar with the rules $A_1 \to w_1, \dots, A_n \to w_n$, we can compute the **`Fi`** `(wi)` and **`Fi`** `(Ai)` for every rule as follows:
+
+- initialize every `Fi(Ai)` with the empty set
+- add `Fi(wi)` to **`Fi`** `(wi)` for every rule $A_i \to w_i$, where `Fi` is defined as follows:
+  - `Fi(aw) = { a }` for every terminal `a`
+  - 
 
 
+
+> NOTE: $A_i$ is non-terminal while $w_i$ is terminal.
+>
+> The description above is too abstract, [here](http://web.cs.wpi.edu/~kal/PLT/PLT4.3.html)'s an easy explanation
+>
+> Algorithm
+>
+> LL(1) Table Generation
+>
+> For every production $A \to \alpha $  in the grammar:
+>
+> 1. If  $\alpha$ can derive a string starting with `a` (i.e., for all `a` in FIRST( $\alpha $) ,
+>
+>    $Table [A, a] = A \to \alpha $
+>
+> 2. If $\alpha$ can derive the empty string,  $\epsilon$ , then, for all `b` that can follow a string derived from A (i.e., for all b in FOLLOW (A) ,
+> $Table [A, b] = A \to \alpha $
 
