@@ -122,5 +122,25 @@ FIRST(F) = { (, int }
 
 ### FOLLOW
 
-Now, let's do **FOLLOW**. Just as **FIRST** shows us the terminals that can be at the beginning of a derived non-terminal, **FOLLOW** shows us the terminals that can come *after* a derived non-terminal. Note, this does *not* mean the last terminal derived from a non-terminal. It's the set of terminals that can come after it. We define **FOLLOW** for all the **non-terminals** in the grammar.
+Now, let's do **FOLLOW**. Just as **FIRST** shows us the **terminals** that can be at the beginning of a derived non-terminal, **FOLLOW** shows us the **terminals** that can come *after* a derived non-terminal. Note, this does *not* mean the last terminal derived from a non-terminal. It's the set of terminals that can come after it. We define **FOLLOW** for all the **non-terminals** in the grammar.
+
+How do we figure out **FOLLOW**? Instead of looking at the first terminal for each phrase on the right side of the arrow, we find every place our **non-terminal** is located on the right side of *any* of the arrows. Then we look for some **terminals**. As we go through our example, you'll see almost all of the different ways we figure out the **FOLLOW** of a non-terminal.
+
+First, however, let's pretend that our grammar starts with a unique starting production (it's not really part of the grammar):
+
+```
+S  -> E
+```
+
+We start our journey at `S`, but rewrite it a bit to reflect the `EOF` that can be at the end. In parser-land, `EOF` is represented by `$`. So our production is really:
+
+```
+S -> E $
+```
+
+What is **FOLLOW**(`E`)? (Note: We don't really care about **FOLLOW**(`S`) because it's just imaginary.) Look on all of the right-hand sides (after the arrow) of all of the productions in the grammar. What terminals appear on the right of the `E`? Well, I see a `$` and `a` ).
+
+```
+FOLLOW(E) = { $, ) }
+```
 
