@@ -14,14 +14,22 @@ The Aho–Corasick string-matching algorithm formed the basis of the original [U
 
 ## Example
 
-In this example, we will consider a dictionary consisting of the following words: {a, ab, bab, bc, bca, c, caa}.
+In this example, we will consider a dictionary consisting of the following words: {`a`, `ab`, `bab`, `bc`, `bca`, `c`, `caa`}.
 
-The graph below is the Aho–Corasick data structure constructed from the specified dictionary, with each row in the table representing a node in the trie, with the column path indicating the (unique) sequence of characters from the root to the node.
+The graph below is the Aho–Corasick data structure constructed from the specified dictionary, with each **row** in the table representing a **node** in the trie, with the column **path** indicating the (unique) sequence of characters from the **root** to the node.
 
-The data structure has one node for every prefix of every string in the dictionary. So if (bca) is in the dictionary, then there will be nodes for (bca), (bc), (b), and (). If a node is in the dictionary then it is a blue node. Otherwise it is a grey node.
+The data structure has one node for every prefix of every string in the dictionary. So if (`bca`) is in the dictionary, then there will be nodes for (`bca`), (`bc`), (`b`), and (). If a node is in the dictionary then it is a **blue node**. Otherwise it is a **grey node**.
 
 There is a black directed "child" arc from each node to a node whose name is found by appending one character. So there is a black arc from (bc) to (bca).
 
 There is a blue directed "suffix" arc from each node to the node that is the longest possible strict suffix of it in the graph. For example, for node (caa), its strict suffixes are (aa) and (a) and (). The longest of these that exists in the graph is (a). So there is a blue arc from (caa) to (a). The blue arcs can be computed in linear time by repeatedly traversing the blue arcs of a node's parent until the traversing node has a child matching the character of the target node.
 
 There is a green "dictionary suffix" arc from each node to the next node in the dictionary that can be reached by following blue arcs. For example, there is a green arc from (bca) to (a) because (a) is the first node in the dictionary (i.e. a blue node) that is reached when following the blue arcs to (ca) and then on to (a). The green arcs can be computed in linear time by repeatedly traversing blue arcs until a filled in node is found, and [memoizing](https://en.wikipedia.org/wiki/Memoization) this information.
+
+
+
+
+
+# Implementation
+
+https://github.com/WojciechMula/pyahocorasick
