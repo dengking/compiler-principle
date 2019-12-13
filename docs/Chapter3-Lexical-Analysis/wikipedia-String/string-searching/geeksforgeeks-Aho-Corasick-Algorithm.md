@@ -63,3 +63,16 @@ This part fills entries in goto `g[][]` and output `o[]`.
 
 This part fills entries in failure `f[]` and output `o[]`.
 
+**Go to :**
+
+We build [Trie](https://www.geeksforgeeks.org/trie-insert-and-search/). And for all characters which don’t have an edge at root, we add an edge back to root.
+
+**Failure :**
+
+For a state `s`, we find the longest proper suffix which is a proper prefix of some pattern. This is done using Breadth First Traversal of Trie.
+
+**Output :**
+
+For a state `s`, indexes of all words ending at `s` are stored. These indexes are stored as bitwise map (by doing bitwise OR of values). This is also computing using Breadth First Traversal with Failure.
+
+Below is C++ implementation of Aho-Corasick Algorithm
