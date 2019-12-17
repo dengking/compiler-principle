@@ -86,6 +86,8 @@ Faster search algorithms preprocess the text. After building a [substring index]
 
 > NOTE: https://github.com/fxsjy/jieba
 
+
+
 ### Other variants
 
 Some search methods, for instance [trigram search](https://en.wikipedia.org/wiki/Trigram_search), are intended to find a "closeness" score between the search string and the text rather than a "match/non-match". These are sometimes called ["fuzzy" searches](https://en.wikipedia.org/wiki/Approximate_string_matching).
