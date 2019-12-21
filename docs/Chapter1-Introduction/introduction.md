@@ -33,3 +33,14 @@ A **programming language** is a [formal language](https://en.wikipedia.org/wiki/
 
 [Lexical grammar](https://en.wikipedia.org/wiki/Lexical_grammar), [syntax ](https://en.wikipedia.org/wiki/Syntax_(programming_languages)) and [semantics ](https://en.wikipedia.org/wiki/Semantics_(computer_science)) define a programming language,.Only when specifying [lexical grammar](https://en.wikipedia.org/wiki/Lexical_grammar), [syntax ](https://en.wikipedia.org/wiki/Syntax_(programming_languages)) and [semantics ](https://en.wikipedia.org/wiki/Semantics_(computer_science)) can the **compiler** understand what programmer have written and translate the language correctly. 
 
+
+
+
+
+
+
+This book is about how to design and implement compilers. We shall discover that a few basic ideas can be used to construct translators for a wide variety of languages and machines. Besides compilers, the **principles** and **techniques** for compiler design are applicable to so many other domains that they
+are likely to b e reused many times in the career of a computer scientist. The study of compiler writing touches up on programming languages, machine architecture, language theory, algorithms, and software engineering.
+
+> NOTE: 在我的编程生涯中，曾多次收到作者在本书中所描述的principle和technique的启发而解决了实际问题。
+
