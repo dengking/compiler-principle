@@ -2,13 +2,11 @@
 
 # [Abstract syntax tree](https://en.wikipedia.org/wiki/Abstract_syntax_tree)
 
-抽象语法树
-
 In [computer science](https://en.wikipedia.org/wiki/Computer_science), an **abstract syntax tree** (**AST**), or just **syntax tree**, is a [tree](https://en.wikipedia.org/wiki/Directed_tree) representation of the [abstract syntactic](https://en.wikipedia.org/wiki/Abstract_syntax) structure of [source code](https://en.wikipedia.org/wiki/Source_code) written in a [programming language](https://en.wikipedia.org/wiki/Programming_language). Each node of the tree denotes a construct occurring in the source code.
 
-***SUMMARY*** : 表示源代码的抽象语法结构，树中的每个节点都表示源代码中的一个construct。
+> NOTE : 表示源代码的抽象语法结构，树中的每个节点都表示源代码中的一个construct。
 
-The syntax is "abstract" in the sense that it does not represent every **detail** appearing in the real **syntax**, but rather just the **structural or content-related details**（仅仅描述了**structural or content-related details**而没有描述syntax中的每个月detail，所以就叫它抽象语法树）. For instance, grouping [parentheses](https://en.wikipedia.org/wiki/Bracket#Parentheses) are implicit in the **tree structure**, so these do not have to be represented as separate nodes. Likewise, a syntactic construct like an if-condition-then expression may be denoted by means of a single node with three branches.
+The syntax is "abstract" in the sense that it does not represent every **detail** appearing in the real **syntax**, but rather just the **structural or content-related details**. For instance, grouping [parentheses](https://en.wikipedia.org/wiki/Bracket#Parentheses) are implicit in the **tree structure**, so these do not have to be represented as separate nodes. Likewise, a syntactic construct like an if-condition-then expression may be denoted by means of a single node with three branches.
 
 This distinguishes **abstract syntax trees** from **concrete syntax trees**, traditionally designated [parse trees](https://en.wikipedia.org/wiki/Parse_tree). Parse trees are typically **built** by a [parser](https://en.wikipedia.org/wiki/Parser) during the source code translation and [compiling](https://en.wikipedia.org/wiki/Compiler) process. Once built, additional information is added to the AST by means of subsequent processing, e.g., [contextual analysis](https://en.wikipedia.org/wiki/Semantic_analysis_(compilers)).
 
