@@ -4,7 +4,7 @@ In [computer science](https://en.wikipedia.org/wiki/Computer_science), a **symbo
 
 ## Background
 
-A symbol table may only exist in memory during the translation process, or it may be embedded in the output of the translation, such as in an [ABI](https://en.wikipedia.org/wiki/Application_binary_interface) [object file](https://en.wikipedia.org/wiki/Object_file) for later use. For example, it might be used during an interactive [debugging session](https://en.wikipedia.org/wiki/Debugger), or as a resource for formatting a diagnostic report during or after [execution](https://en.wikipedia.org/wiki/Execution_(computers)) of a program.[[1\]](https://en.wikipedia.org/wiki/Symbol_table#cite_note-1)
+A symbol table may only exist in memory during the translation process, or it may be embedded in the output of the translation, such as in an [ABI](https://en.wikipedia.org/wiki/Application_binary_interface) [object file](https://en.wikipedia.org/wiki/Object_file) for later use. For example, it might be used during an interactive [debugging session](https://en.wikipedia.org/wiki/Debugger), or as a resource for formatting a diagnostic report during or after [execution](https://en.wikipedia.org/wiki/Execution_(computers)) of a program.
 
 ## Description
 
@@ -77,7 +77,7 @@ The [Python](https://en.wikipedia.org/wiki/Python_(programming_language)) progra
 
 Some programming languages allow the **symbol table** to be manipulated at run-time, so that symbols can be added at any time. [Racket](https://en.wikipedia.org/wiki/Racket_(programming_language)) is an example of such a language[[3\]](https://en.wikipedia.org/wiki/Symbol_table#cite_note-3).
 
-Both the [LISP](https://en.wikipedia.org/wiki/LISP) and the [Scheme](https://en.wikipedia.org/wiki/Scheme_(programming_language)) programming languages allow arbitrary, generic properties to be associated with each symbol.[[4\]](https://en.wikipedia.org/wiki/Symbol_table#cite_note-4)
+Both the [LISP](https://en.wikipedia.org/wiki/LISP) and the [Scheme](https://en.wikipedia.org/wiki/Scheme_(programming_language)) programming languages allow arbitrary, generic properties to be associated with each symbol.
 
 The [Prolog](https://en.wikipedia.org/wiki/Prolog) programming language is essentially a symbol-table manipulation language; symbols are called *atoms*, and the relationships between symbols can be reasoned over. Similarly, [OpenCog](https://en.wikipedia.org/wiki/OpenCog) provides a dynamic symbol table, called the *atomspace*, which is used for [knowledge representation](https://en.wikipedia.org/wiki/Knowledge_representation).
 
