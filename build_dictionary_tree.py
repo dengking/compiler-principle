@@ -92,6 +92,7 @@ class NavBuilder:
     {'Chapter6': 'Chapter6-Intermediate-Code-Generation'},
     {'Chapter7': 'Chapter7-Run-Time Environments'},
     {'Chapter9': 'Chapter9-Machine-Independent-Optimizations'}]}
+    非常类似于前缀树
 
     """
     MKDOCS_File = 'mkdocs.yml'
@@ -143,19 +144,30 @@ class NavBuilder:
 
     def __find_parent_node__(self, nav_path):
         """
-        寻找指定路径对应的节点
+        寻找指定路径对应的节点，使用迭代法
         :param nav_path:
         :return:
         """
         split_nav_path = os.path.split(nav_path)
-        node = self.nav
-        nodes = [self.nav] # type hint: list of dict
+        current_node = self.nav
+        child_nodes = [self.nav]
         for node_label in split_nav_path:
-            node = self.__find__(node_label, nodes)
-            nodes = node[node_label]
-        return node
+
+            if node_label in current_node:
+                child_nodes = current_node[node_label]
+                current_node = self.__find__(node_label, child_nodes)
+            else:
+                return current_node
+
+        return current_node
 
     def __find__(self, node_label, nodes):
+        """
+
+        :param node_label:
+        :param nodes:
+        :return:
+        """
         for node in nodes:
             if node_label in node:
                 return node
