@@ -9,7 +9,8 @@ except ImportError:
 
 class Node:
     def __init__(self):
-        pass
+        self.label = None
+        self.children = None
 
 
 class DictionaryTreeBuilder:
@@ -95,7 +96,8 @@ class NavBuilder:
     非常类似于前缀树
 
     """
-    MKDOCS_File = 'mkdocs.yml'
+    MkdocsFileName = 'mkdocs.yml'
+    RootNav = 'docs'
 
     def __init__(self, root_dir='docs'):
         self.root_dir = root_dir  # 根路径名称
@@ -108,7 +110,7 @@ class NavBuilder:
         每个目录，使用目录名称作为key
         :return:
         """
-        mkdocs_file_path = os.path.join(self.root_dir, self.MKDOCS_File)
+        mkdocs_file_path = os.path.join(self.root_dir, self.MkdocsFileName)
         nav_path = self.root_dir
         self.__expand__(nav_path, mkdocs_file_path)
 
@@ -120,55 +122,71 @@ class NavBuilder:
         """
         if os.path.exists(mkdocs_file_path):
             with open(mkdocs_file_path, encoding='utf-8') as f:
+                child_nodes = yaml_load(f, Loader=Loader)['docs']  # type hint list of dict
+                self.__add_node__(nav_path, child_nodes)
+
                 split_file_path = os.path.split(mkdocs_file_path)
-                split_nav_path = os.path.split(nav_path)
-                node_label = split_nav_path[-1]
-
                 current_file_path = os.path.join(split_file_path[0:-1])
-                nav = yaml_load(f, Loader=Loader)['docs']  # type hint list of dict
-                self.nav[node_label] = nav
-                for item in nav:  # type hint: dict
-                    for k, v in item:
-                        file = os.path.join(current_file_path, v)
 
+                for child_node in child_nodes:  # type hint: dict
+                    for child_node_label, child_node_value in child_node:
+                        if child_node_value.endwith('.md'):
+                            # child_node = self.__find_node__(nav_path)
+                            # split_nav_path = os.path.split(nav_path)
+                            # node_label = split_nav_path[-1]
+                            child_node[child_node_label] = os.path.join(current_file_path, child_node_value)  # 补全路径
+                        else:
+                            self.__expand__(os.path.join(nav_path, child_node_label),
+                                            os.path.join(current_file_path, child_node_value, self.MkdocsFileName))
         else:
             log = "配置文件有误，当前目录不存在'{}'"
             raise Exception(log)
 
-    def __add_node__(self, nav_path):
-        node = self.__find_parent_node__(nav_path)
-        if node is None:
-            self.nav = None
-        else:
-            pass
+    def __add_node__(self, nav_path, child_nodes):
+        """
 
-    def __find_parent_node__(self, nav_path):
+        :param nav_path:
+        :param child_nodes: type hint: list of dict
+        :return:
+        """
+        if nav_path == self.RootNav:
+            self.nav[nav_path] = child_nodes
+        else:
+            split_nav_path = os.path.split(nav_path)
+            root_nav = split_nav_path[0]
+            if root_nav in self.nav:
+                children = self.nav[root_nav]  # type hint: list of dict
+                for nav in split_nav_path[1:]:
+                    for child_node in children:  # type hint: dict
+                        if nav in child_node:
+                            children = child_node[nav]
+                        else:
+                            child_node[nav] = child_nodes
+                            return
+            else:
+                # 抛出异常
+                pass
+
+    def __find_node__(self, nav_path):
         """
         寻找指定路径对应的节点，使用迭代法
         :param nav_path:
         :return:
         """
-        split_nav_path = os.path.split(nav_path)
-        current_node = self.nav
-        child_nodes = [self.nav]
-        for node_label in split_nav_path:
-
-            if node_label in current_node:
-                child_nodes = current_node[node_label]
-                current_node = self.__find__(node_label, child_nodes)
+        if nav_path == self.RootNav:
+            return self.nav
+        else:
+            split_nav_path = os.path.split(nav_path)
+            root_nav = split_nav_path[0]
+            if root_nav in self.nav:
+                children = self.nav[root_nav]  # type hint: list of dict
+                for nav in split_nav_path[1:]:
+                    for child_node in children:  # type hint: dict
+                        if nav in child_node:
+                            children = child_node[nav]
+                        else:
+                            return child_node
+                return child_node
             else:
-                return current_node
-
-        return current_node
-
-    def __find__(self, node_label, nodes):
-        """
-
-        :param node_label:
-        :param nodes:
-        :return:
-        """
-        for node in nodes:
-            if node_label in node:
-                return node
-        return None
+                # 抛出异常
+                pass
