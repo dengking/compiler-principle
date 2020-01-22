@@ -1,4 +1,4 @@
-# Lexical Analysis
+# Chapter 3 Lexical Analysis
 
 In this chapter we show how to construct a [**lexical analyzer**](https://en.wikipedia.org/wiki/Lexical_analysis). To implement a **lexical analyzer** by hand, it helps to start with a diagram or other description for the lexemes of each token. We can then write code to identify each occurrence of each lexeme on the input and to return information about the token identified.
 

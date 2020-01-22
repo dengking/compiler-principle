@@ -1,0 +1,8 @@
+docs:
+    - 4: index.md
+    - 4.2: 4.2Context-Free-Grammars.md
+    - 4.3: 4.3Writing-a-Grammar.md
+    - 4.5: 4.5Bottom-Up-Parsing.md
+    - 4.6: 4.6Introduction-to-LR-Parsing-Simple-LR.md
+    - 4.7: 4.7More-Powerful-LR-Parsers.md
+    - VS-LL-parser-VS-LR-parser: VS-LL-parser-VS-LR-parser.md

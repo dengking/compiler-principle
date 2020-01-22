@@ -1,5 +1,6 @@
 # compiler-principle
-Compilers Principles, Techniques and Tools Second Edition(dragon book) is really an amazing book, as mentioned in Chapter 1 Introduction  
+[Compilers Principles, Techniques and Tools Second Edition(aka ***dragon book***)](https://en.wikipedia.org/wiki/Compilers:_Principles,_Techniques,_and_Tools) is really an amazing book, as mentioned in Chapter 1 Introduction  
+
 > This book is is about how to design and implement compilers. We shall discover that a few basic ideas can be used to construct translators for a wide variety of languages and machines. Besides compilers, the principles and techniques for compiler design are applicable to so many other domains that they are likely to be reused many times in the career of a computer scientist. The study of compiler writing touches up on **programming languages**, **machine architecture**, **language theory**, **algorithms**, and **software engineering**.
 
 As mentioned in the paragraph above, the study of compiler is an interdiscipline involving **computer science**(**programming languages**, **machine architecture**, **algorithms**, and **software engineering**) and **language theory**, so the book may be hard to understand if lacking experience in programming, grasp of common data structure(especially [tree](https://en.wikipedia.org/wiki/Tree_%28data_structure%29) which is mainly used in the front end, [graph](http://en.wikipedia.org/wiki/Graph_(abstract_data_type)) which is mainly used in the back end) and algorithms(especially [recursion](https://en.wikipedia.org/wiki/Recursion_(computer_science))).
@@ -13,15 +14,3 @@ The algorithm mentioned in the book can be found in my repository [algorithm](ht
 Beside the book, this repository also contain some material supplemented to help understand.
 
 
-
-# TODO
-
-## 20191231
-
-### symbol table and AST
-
-在[Abstract syntax tree](https://en.wikipedia.org/wiki/Abstract_syntax_tree)中有这样的描述：
-
-> The compiler also generates [symbol tables](https://en.wikipedia.org/wiki/Symbol_table) based on the AST during semantic analysis.
-
-我的疑惑是：symbol table到底是由谁创建的？记得上周末的时候，还在看python的symbol table的实现。所以，有必要对symbol table做一次专题的分析。

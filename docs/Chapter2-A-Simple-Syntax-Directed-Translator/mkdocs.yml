@@ -1,0 +1,6 @@
+docs:
+    - 2: index.md
+    - 2.1: 2.1Introduction.md
+    - 2.2: 2.2Syntax-Definition.md
+    - 2.3: 2.3Syntax-Directed-Translation.md
+    - 2.4: 2.4Parsing.md

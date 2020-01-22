@@ -1,0 +1,9 @@
+docs:
+    - Introduction: index.md
+    - Chapter1-Introduction: None
+    - Chapter2-A-Simple-Syntax-Directed-Translator: None
+    - Chapter3-Lexical-Analysis: None
+    - Chapter4-Syntax-Analysis: None
+    - Chapter5-Syntax-Directed-Translation: None
+    - Chapter6-Intermediate-Code-Generation: None
+    - Chapter9-Machine-Independent-Optimizations: None

@@ -1,6 +1,6 @@
 [TOC]
 
-# Introduction
+# Chapter 1 Introduction
 
 How long have you been programming? Have you ever wondered what a programming language is? 
 
@@ -18,11 +18,11 @@ A **programming language** is a [formal language](https://en.wikipedia.org/wiki/
 
 
 
-## From the perspectives of a compiler front end
+## From the perspectives of a compiler 
 
+How dose compiler understand what the program mean? The table is a summary of the implementation of compiler.
 
-
-|                                                              |                                                              |                                                              |                                                              |                                                              |
+| language                                                     | phase                                                        | grammar                                                      | technique                                                    | generator                                                    |
 | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------------ |
 | [alphabet](https://en.wikipedia.org/wiki/Alphabet_(computer_science)) |                                                              |                                                              |                                                              |                                                              |
 | [Lexical grammar](https://en.wikipedia.org/wiki/Lexical_grammar) | [Lexical analysis](https://en.wikipedia.org/wiki/Lexical_analysis) | [regular expressions](https://en.wikipedia.org/wiki/Regular_expression) | [Finite-state machine](https://en.wikipedia.org/wiki/Finite-state_machine) | Scanner generators, for example [Lex (software)](https://en.wikipedia.org/wiki/Lex_(software)) |
@@ -35,12 +35,5 @@ A **programming language** is a [formal language](https://en.wikipedia.org/wiki/
 
 
 
-
-
-
-
 This book is about how to design and implement compilers. We shall discover that a few basic ideas can be used to construct translators for a wide variety of languages and machines. Besides compilers, the **principles** and **techniques** for compiler design are applicable to so many other domains that they
-are likely to b e reused many times in the career of a computer scientist. The study of compiler writing touches up on programming languages, machine architecture, language theory, algorithms, and software engineering.
-
-> NOTE: 在我的编程生涯中，曾多次收到作者在本书中所描述的principle和technique的启发而解决了实际问题。
-
+are likely to be reused many times in the career of a computer scientist. The study of compiler writing touches up on programming languages, machine architecture, language theory, algorithms, and software engineering.
