@@ -83,9 +83,11 @@ class NavBuilder:
     每个目录下都有一个配置文件mkdocs.yml，根据配置文件中的内容来进行组装，最终的组装结果是一棵树，下面描述的是组装过程：
     - 如果值是一个文件，则是叶子节点
     - 如果值是一个目录，则是一个内节点，需要进行扩展
-    显然这个过程是非常类似于top-down parsing的
+    显然这个过程是非常类似于top-down parsing
+
     从root_dir开始
 
+    如下是通过yaml.load读入到内存中的mkdocs.yml的格式：
     {'nav': [{'Home': 'index.md'},
     {'Chapter1': 'Chapter1-Introduction'},
     {'Chapter2': 'Chapter2-A-Simple-Syntax-Directed-Translator'},
@@ -98,23 +100,22 @@ class NavBuilder:
     非常类似于前缀树
 
     """
-    MkdocsTemplateFileName = 'mkdocs-template.yml'
+    MkdocsTemplateFileName = 'mkdocs-template.yml' # 模板文件
     MkdocsFileName = 'mkdocs.yml'
     Nav = 'nav'
 
     def __init__(self, root_dir='docs'):
         self.root_dir = root_dir  # 根路径名称
         self.root_nav = self.Nav
-        # 保存结果（最终结果就是一棵树），它表示一个树节点，
+        # 最终结果就是一棵树
+        # 它表示这棵树的root节点，
         # key作为节点的label(type hint str)，
         # value作为节点的子节点(type hint: list of dict)
         self.nav = dict()
 
     def build(self):
         """
-        首先检查当前目录下是否存在root_dir，如果不存在，则需要抛出异常
-        总的来说，还是一棵树
-        每个目录，使用目录名称作为key
+        从根目录开始，逐步添加目录
         :return:
         """
         mkdocs_file_path = os.path.join(self.root_dir, self.MkdocsFileName)
