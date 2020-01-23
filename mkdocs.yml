@@ -12,47 +12,47 @@ markdown_extensions:
     repo: mkdocs
     user: mkdocs
 nav:
-- Home: docs/index.md
+- Home: index.md
 - Chapter1:
-  - 1: docs/Chapter1-Introduction/index.md
-  - 1.1: docs/Chapter1-Introduction/1.1Language-Processors.md
-  - 1.2: docs/Chapter1-Introduction/1.2The-Structure-of-a-Compiler.md
-  - 1.5: docs/Chapter1-Introduction/1.5Applications-of-Compiler-Technology.md
-  - 1.6: docs/Chapter1-Introduction/1.6Programming-Language-Basics.md
+  - 1: Chapter1-Introduction/index.md
+  - 1.1: Chapter1-Introduction/1.1Language-Processors.md
+  - 1.2: Chapter1-Introduction/1.2The-Structure-of-a-Compiler.md
+  - 1.5: Chapter1-Introduction/1.5Applications-of-Compiler-Technology.md
+  - 1.6: Chapter1-Introduction/1.6Programming-Language-Basics.md
 - Chapter2:
-  - 2: docs/Chapter2-A-Simple-Syntax-Directed-Translator/index.md
-  - 2.1: docs/Chapter2-A-Simple-Syntax-Directed-Translator/2.1Introduction.md
-  - 2.2: docs/Chapter2-A-Simple-Syntax-Directed-Translator/2.2Syntax-Definition.md
-  - 2.3: docs/Chapter2-A-Simple-Syntax-Directed-Translator/2.3Syntax-Directed-Translation.md
-  - 2.4: docs/Chapter2-A-Simple-Syntax-Directed-Translator/2.4Parsing.md
+  - 2: Chapter2-A-Simple-Syntax-Directed-Translator/index.md
+  - 2.1: Chapter2-A-Simple-Syntax-Directed-Translator/2.1Introduction.md
+  - 2.2: Chapter2-A-Simple-Syntax-Directed-Translator/2.2Syntax-Definition.md
+  - 2.3: Chapter2-A-Simple-Syntax-Directed-Translator/2.3Syntax-Directed-Translation.md
+  - 2.4: Chapter2-A-Simple-Syntax-Directed-Translator/2.4Parsing.md
 - Chapter3:
-  - 3: docs/Chapter3-Lexical-Analysis/index.md
-  - 3.1: docs/Chapter3-Lexical-Analysis/3.1The-Role-of-the-Lexical-Analyzer.md
-  - 3.4: docs/Chapter3-Lexical-Analysis/3.4Recognition-of-Tokens.md
-  - 3.6: docs/Chapter3-Lexical-Analysis/3.6Finite-Automata.md
-  - 3.7: docs/Chapter3-Lexical-Analysis/3.7From-Regular-Expressions-to-Automata.md
+  - 3: Chapter3-Lexical-Analysis/index.md
+  - 3.1: Chapter3-Lexical-Analysis/3.1The-Role-of-the-Lexical-Analyzer.md
+  - 3.4: Chapter3-Lexical-Analysis/3.4Recognition-of-Tokens.md
+  - 3.6: Chapter3-Lexical-Analysis/3.6Finite-Automata.md
+  - 3.7: Chapter3-Lexical-Analysis/3.7From-Regular-Expressions-to-Automata.md
 - Chapter4:
-  - 4: docs/Chapter4-Syntax-Analysis/index.md
-  - 4.2: docs/Chapter4-Syntax-Analysis/4.2Context-Free-Grammars.md
-  - 4.3: docs/Chapter4-Syntax-Analysis/4.3Writing-a-Grammar.md
-  - 4.5: docs/Chapter4-Syntax-Analysis/4.5Bottom-Up-Parsing.md
-  - 4.6: docs/Chapter4-Syntax-Analysis/4.6Introduction-to-LR-Parsing-Simple-LR.md
-  - 4.7: docs/Chapter4-Syntax-Analysis/4.7More-Powerful-LR-Parsers.md
-  - VS-LL-parser-VS-LR-parser: docs/Chapter4-Syntax-Analysis/VS-LL-parser-VS-LR-parser.md
+  - 4: Chapter4-Syntax-Analysis/index.md
+  - 4.2: Chapter4-Syntax-Analysis/4.2Context-Free-Grammars.md
+  - 4.3: Chapter4-Syntax-Analysis/4.3Writing-a-Grammar.md
+  - 4.5: Chapter4-Syntax-Analysis/4.5Bottom-Up-Parsing.md
+  - 4.6: Chapter4-Syntax-Analysis/4.6Introduction-to-LR-Parsing-Simple-LR.md
+  - 4.7: Chapter4-Syntax-Analysis/4.7More-Powerful-LR-Parsers.md
+  - VS-LL-parser-VS-LR-parser: Chapter4-Syntax-Analysis/VS-LL-parser-VS-LR-parser.md
 - Chapter5:
-  - 5: docs/Chapter5-Syntax-Directed-Translation/index.md
-  - 5.1: docs/Chapter5-Syntax-Directed-Translation/5.1Syntax-Directed-Definitions.md
-  - 5.2: docs/Chapter5-Syntax-Directed-Translation/5.2Evaluation-Orders-for-SDD's.md
-  - 5.3: docs/Chapter5-Syntax-Directed-Translation/5.3Applications-of-Syntax-Directed-Translation.md
+  - 5: Chapter5-Syntax-Directed-Translation/index.md
+  - 5.1: Chapter5-Syntax-Directed-Translation/5.1Syntax-Directed-Definitions.md
+  - 5.2: Chapter5-Syntax-Directed-Translation/5.2Evaluation-Orders-for-SDD's.md
+  - 5.3: Chapter5-Syntax-Directed-Translation/5.3Applications-of-Syntax-Directed-Translation.md
 - Chapter6:
-  - 6: docs/Chapter6-Intermediate-Code-Generation/index.md
-  - 6.3: docs/Chapter6-Intermediate-Code-Generation/6.3Types-and-Declarations.md
+  - 6: Chapter6-Intermediate-Code-Generation/index.md
+  - 6.3: Chapter6-Intermediate-Code-Generation/6.3Types-and-Declarations.md
 - Chapter7:
-  - 7: docs/Chapter7-Run-Time-Environments/index.md
-  - 7.1: docs/Chapter7-Run-Time-Environments/7.1Storage-Organization.md
-  - 7.2: docs/Chapter7-Run-Time-Environments/7.2Stack-Allocation-of-Space.md
+  - 7: Chapter7-Run-Time-Environments/index.md
+  - 7.1: Chapter7-Run-Time-Environments/7.1Storage-Organization.md
+  - 7.2: Chapter7-Run-Time-Environments/7.2Stack-Allocation-of-Space.md
 - Chapter9:
-  - 9: docs/Chapter9-Machine-Independent-Optimizations/index.md
+  - 9: Chapter9-Machine-Independent-Optimizations/index.md
 plugins:
 - search
 repo_url: https://github.com/dengking/compiler-principle

@@ -133,15 +133,21 @@ class NavBuilder:
                 child_nodes = yaml_load(f, Loader=Loader)[self.Nav]  # type hint list of dict
                 self.__add_node__(nav_path, child_nodes)
 
-                split_file_path = os.path.split(mkdocs_file_path)
-                current_file_path = os.path.join(*split_file_path[0:-1])
-
                 for child_node in child_nodes:  # type hint: dict
+                    split_file_path = mkdocs_file_path.split(os.sep)  # os.path.split(mkdocs_file_path)
+                    print(split_file_path)
                     for child_node_label, child_node_value in child_node.items():
                         if child_node_value.endswith('.md'):
-                            child_node[child_node_label] = pathlib.Path(
-                                os.path.join(current_file_path, child_node_value)).as_posix()  # 补全路径
+                            split_file_path = split_file_path[1:-1]
+                            print(split_file_path)
+                            if split_file_path:
+                                current_file_path = os.path.join(*split_file_path)
+                                child_node[child_node_label] = pathlib.Path(
+                                    os.path.join(current_file_path, child_node_value)).as_posix()  # 补全路径
+                            else:
+                                child_node[child_node_label] = child_node_value
                         else:
+                            current_file_path = os.path.join(*split_file_path[0:-1])
                             self.__expand__(os.path.join(nav_path, child_node_label),
                                             os.path.join(current_file_path, child_node_value, self.MkdocsFileName))
         else:
