@@ -1,0 +1,70 @@
+site_name:  compiler principle
+site_url: https://dengking.github.io/compiler-principle
+site_description: Project documentation with Markdown.
+site_author: DengKing
+
+
+repo_url: https://github.com/dengking/compiler-principle
+edit_uri: ""
+
+
+
+theme:
+    name: readthedocs
+    highlightjs: true
+    hljs_languages:
+        - yaml
+        - django
+        
+nav:
+- Home: README.md
+- Chapter1-Introduction:
+  - introduction: Chapter1-Introduction/introduction.md
+  - 1.2The-Structure-of-a-Compiler: Chapter1-Introduction/1.2The-Structure-of-a-Compiler.md
+- Chapter2-A-Simple-Syntax-Directed-Translator:
+  - A-Simple-Syntax-Directed-Translator: Chapter2-A-Simple-Syntax-Directed-Translator/A-Simple-Syntax-Directed-Translator.md
+  - 2.1Introduction: Chapter2-A-Simple-Syntax-Directed-Translator/2.1Introduction.md
+  - 2.2Syntax-Definition: Chapter2-A-Simple-Syntax-Directed-Translator/2.2Syntax-Definition.md
+  - 2.3Syntax-Directed-Translation: Chapter2-A-Simple-Syntax-Directed-Translator/2.3Syntax-Directed-Translation.md
+  - 2.4Parsing: Chapter2-A-Simple-Syntax-Directed-Translator/2.4Parsing.md
+- Chapter3-Lexical-Analysis:
+  - Lexical-Analysis: Chapter3-Lexical-Analysis/Lexical-Analysis.md
+  - 3.1The-Role-of-the-Lexical-Analyzer: Chapter3-Lexical-Analysis/3.1The-Role-of-the-Lexical-Analyzer.md
+  - 3.4Recognition-of-Tokens: Chapter3-Lexical-Analysis/3.4Recognition-of-Tokens.md
+  - 3.6Finite-Automata: Chapter3-Lexical-Analysis/3.6Finite-Automata.md
+  - 3.7From-Regular-Expressions-to-Automata: Chapter3-Lexical-Analysis/3.7From-Regular-Expressions-to-Automata.md
+  - wikipedia-String:
+    - wikipedia-String(computer-science): Chapter3-Lexical-Analysis/wikipedia-String/wikipedia-String(computer-science).md
+    - Regular-expression:
+      - wikipedia-Powerset-construction: Chapter3-Lexical-Analysis/wikipedia-String/Regular-expression/wikipedia-Powerset-construction.md
+    - string-searching:
+      - wikipedia-Aho-Corasick-algorithm: Chapter3-Lexical-Analysis/wikipedia-String/string-searching/wikipedia-Aho-Corasick-algorithm.md
+- Chapter4-Syntax-Analysis:
+  - Syntax-Analysis: Chapter4-Syntax-Analysis/Syntax-Analysis.md
+  - Wikipedia-Parsing-algorithms:
+    - wikipedia-Parsing: Chapter4-Syntax-Analysis/Wikipedia-Parsing-algorithms/wikipedia-Parsing.md
+    - Bottom-up:
+      - Precedence:
+        - wikipedia-Operator-precedence-parser: Chapter4-Syntax-Analysis/Wikipedia-Parsing-algorithms/Bottom-up/Precedence/wikipedia-Operator-precedence-parser.md
+        - wikipedia-Shunting-yard-algorithm: Chapter4-Syntax-Analysis/Wikipedia-Parsing-algorithms/Bottom-up/Precedence/wikipedia-Shunting-yard-algorithm.md
+      - blog-Equation(expression)parser-with-precedence: Chapter4-Syntax-Analysis/Wikipedia-Parsing-algorithms/Bottom-up/blog-Equation(expression)parser-with-precedence.md
+      - wikipedia-CYK-algorithm: Chapter4-Syntax-Analysis/Wikipedia-Parsing-algorithms/Bottom-up/wikipedia-CYK-algorithm.md
+      - wikipedia-LR-parser: Chapter4-Syntax-Analysis/Wikipedia-Parsing-algorithms/Bottom-up/wikipedia-LR-parser.md
+      - wikipedia-Top-down-parsing: Chapter4-Syntax-Analysis/Wikipedia-Parsing-algorithms/Bottom-up/wikipedia-Top-down-parsing.md
+
+
+    
+extra_css:
+    - css/extra.css
+
+markdown_extensions:
+    - toc:
+        permalink: 
+    - admonition
+    - def_list
+    - mdx_gh_links:
+        user: mkdocs
+        repo: mkdocs
+        
+plugins:
+    - search

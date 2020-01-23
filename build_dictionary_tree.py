@@ -1,4 +1,6 @@
+import logging
 import os
+import pathlib
 from yaml import load as yaml_load, dump as yaml_dump
 
 try:
@@ -84,7 +86,7 @@ class NavBuilder:
     显然这个过程是非常类似于top-down parsing的
     从root_dir开始
 
-    {'docs': [{'Home': 'index.md'},
+    {'nav': [{'Home': 'index.md'},
     {'Chapter1': 'Chapter1-Introduction'},
     {'Chapter2': 'Chapter2-A-Simple-Syntax-Directed-Translator'},
     {'Chapter3': 'Chapter3-Lexical-Analysis'},
@@ -96,12 +98,17 @@ class NavBuilder:
     非常类似于前缀树
 
     """
+    MkdocsTemplateFileName = 'mkdocs-template.yml'
     MkdocsFileName = 'mkdocs.yml'
-    RootNav = 'docs'
+    Nav = 'nav'
 
     def __init__(self, root_dir='docs'):
         self.root_dir = root_dir  # 根路径名称
-        self.nav = dict()  # 保存结果（最终结果就是一棵树），它表示一个树节点，key作为节点的label(type hint str)，value作为节点的子节点(type hint: list of dict)
+        self.root_nav = self.Nav
+        # 保存结果（最终结果就是一棵树），它表示一个树节点，
+        # key作为节点的label(type hint str)，
+        # value作为节点的子节点(type hint: list of dict)
+        self.nav = dict()
 
     def build(self):
         """
@@ -111,8 +118,9 @@ class NavBuilder:
         :return:
         """
         mkdocs_file_path = os.path.join(self.root_dir, self.MkdocsFileName)
-        nav_path = self.root_dir
+        nav_path = self.root_nav
         self.__expand__(nav_path, mkdocs_file_path)
+        self.__save__()
 
     def __expand__(self, nav_path, mkdocs_file_path):
         """
@@ -122,24 +130,22 @@ class NavBuilder:
         """
         if os.path.exists(mkdocs_file_path):
             with open(mkdocs_file_path, encoding='utf-8') as f:
-                child_nodes = yaml_load(f, Loader=Loader)['docs']  # type hint list of dict
+                child_nodes = yaml_load(f, Loader=Loader)[self.Nav]  # type hint list of dict
                 self.__add_node__(nav_path, child_nodes)
 
                 split_file_path = os.path.split(mkdocs_file_path)
-                current_file_path = os.path.join(split_file_path[0:-1])
+                current_file_path = os.path.join(*split_file_path[0:-1])
 
                 for child_node in child_nodes:  # type hint: dict
-                    for child_node_label, child_node_value in child_node:
-                        if child_node_value.endwith('.md'):
-                            # child_node = self.__find_node__(nav_path)
-                            # split_nav_path = os.path.split(nav_path)
-                            # node_label = split_nav_path[-1]
-                            child_node[child_node_label] = os.path.join(current_file_path, child_node_value)  # 补全路径
+                    for child_node_label, child_node_value in child_node.items():
+                        if child_node_value.endswith('.md'):
+                            child_node[child_node_label] = pathlib.Path(
+                                os.path.join(current_file_path, child_node_value)).as_posix()  # 补全路径
                         else:
                             self.__expand__(os.path.join(nav_path, child_node_label),
                                             os.path.join(current_file_path, child_node_value, self.MkdocsFileName))
         else:
-            log = "配置文件有误，当前目录不存在'{}'"
+            log = "配置文件'{}'不存在".format(mkdocs_file_path)
             raise Exception(log)
 
     def __add_node__(self, nav_path, child_nodes):
@@ -149,23 +155,51 @@ class NavBuilder:
         :param child_nodes: type hint: list of dict
         :return:
         """
-        if nav_path == self.RootNav:
+
+        def __find_in_nodes__(label, nodes):
+            """
+
+            :param label:
+            :param nodes: list of dict
+            :return:
+            """
+            for node in nodes:  # type hint: dict
+                if label in node:
+                    return node
+            return None
+
+        if nav_path == self.Nav:
             self.nav[nav_path] = child_nodes
         else:
             split_nav_path = os.path.split(nav_path)
             root_nav = split_nav_path[0]
             if root_nav in self.nav:
                 children = self.nav[root_nav]  # type hint: list of dict
+                # 不断进行迭代
                 for nav in split_nav_path[1:]:
-                    for child_node in children:  # type hint: dict
-                        if nav in child_node:
-                            children = child_node[nav]
+                    node = __find_in_nodes__(nav, children)
+                    if node:
+                        children = node[nav]
+                        if isinstance(children, list):
+                            continue
+                        elif isinstance(children, str):
+                            if children.endswith('.md'):
+                                log = "nav路径'{}'指向的是单个文件，无需进行扩展".format(nav_path)
+                                raise Exception(log)
+                            else:
+                                log = "nav路径'{}'指向的是一个目录，需要进行扩展，现进行扩展".format(nav_path)
+                                logging.debug(log)
+                                node[nav] = child_nodes
+                                return
                         else:
-                            child_node[nav] = child_nodes
-                            return
+                            log = "不支持的类型'{}'".format(type(children))
+                            raise Exception(log)
+                    else:
+                        log = "'{}'还未添加到树中".format(nav)
+                        raise Exception(log)
             else:
-                # 抛出异常
-                pass
+                log = "'{}'还未添加到树中".format(root_nav)
+                raise Exception(log)
 
     def __find_node__(self, nav_path):
         """
@@ -173,7 +207,7 @@ class NavBuilder:
         :param nav_path:
         :return:
         """
-        if nav_path == self.RootNav:
+        if nav_path == self.Nav:
             return self.nav
         else:
             split_nav_path = os.path.split(nav_path)
@@ -190,3 +224,10 @@ class NavBuilder:
             else:
                 # 抛出异常
                 pass
+
+    def __save__(self):
+        with open(self.MkdocsTemplateFileName, encoding='utf-8') as template_f, open(self.MkdocsFileName, 'w',
+                                                                                     encoding='utf-8') as f:
+            mkdocs = yaml_load(template_f, Loader=Loader)
+            mkdocs[self.Nav] = self.nav[self.Nav]
+            yaml_dump(mkdocs, f, default_flow_style=False)

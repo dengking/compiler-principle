@@ -1,4 +1,4 @@
-docs:
+nav:
     - Home: index.md
     - Chapter1: Chapter1-Introduction
     - Chapter2: Chapter2-A-Simple-Syntax-Directed-Translator
@@ -6,5 +6,5 @@ docs:
     - Chapter4: Chapter4-Syntax-Analysis
     - Chapter5: Chapter5-Syntax-Directed-Translation
     - Chapter6: Chapter6-Intermediate-Code-Generation
-    - Chapter7: Chapter7-Run-Time Environments
+    - Chapter7: Chapter7-Run-Time-Environments
     - Chapter9: Chapter9-Machine-Independent-Optimizations

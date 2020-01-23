@@ -1,4 +1,4 @@
-docs:
+nav:
     - 4: index.md
     - 4.2: 4.2Context-Free-Grammars.md
     - 4.3: 4.3Writing-a-Grammar.md

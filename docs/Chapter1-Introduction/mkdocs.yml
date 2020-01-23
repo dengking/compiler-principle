@@ -1,4 +1,4 @@
-docs:
+nav:
     - 1: index.md
     - 1.1: 1.1Language-Processors.md
     - 1.2: 1.2The-Structure-of-a-Compiler.md
