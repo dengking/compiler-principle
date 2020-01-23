@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <meta name="author" content="DengKing">
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+  <title>4.7 - compiler principle</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  <link href="../../css/extra.css" rel="stylesheet">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = 4.7;
+    var mkdocs_page_input_path = "Chapter4-Syntax-Analysis/4.7More-Powerful-LR-Parsers.md";
+    var mkdocs_page_url = "/compiler-principle/Chapter4-Syntax-Analysis/4.7More-Powerful-LR-Parsers/";
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/django.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> compiler principle</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../..">Home</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Chapter1</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../Chapter1-Introduction/">1</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter1-Introduction/1.1Language-Processors/">1.1</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter1-Introduction/1.2The-Structure-of-a-Compiler/">1.2</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter1-Introduction/1.5Applications-of-Compiler-Technology/">1.5</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter1-Introduction/1.6Programming-Language-Basics/">1.6</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Chapter2</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../Chapter2-A-Simple-Syntax-Directed-Translator/">2</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter2-A-Simple-Syntax-Directed-Translator/2.1Introduction/">2.1</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter2-A-Simple-Syntax-Directed-Translator/2.2Syntax-Definition/">2.2</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter2-A-Simple-Syntax-Directed-Translator/2.3Syntax-Directed-Translation/">2.3</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter2-A-Simple-Syntax-Directed-Translator/2.4Parsing/">2.4</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Chapter3</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../Chapter3-Lexical-Analysis/">3</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter3-Lexical-Analysis/3.1The-Role-of-the-Lexical-Analyzer/">3.1</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter3-Lexical-Analysis/3.4Recognition-of-Tokens/">3.4</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter3-Lexical-Analysis/3.6Finite-Automata/">3.6</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter3-Lexical-Analysis/3.7From-Regular-Expressions-to-Automata/">3.7</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Chapter4</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../">4</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../4.2Context-Free-Grammars/">4.2</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../4.3Writing-a-Grammar/">4.3</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../4.5Bottom-Up-Parsing/">4.5</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../4.6Introduction-to-LR-Parsing-Simple-LR/">4.6</a>
+                </li>
+                <li class=" current">
+                    
+    <a class="current" href="./">4.7</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l3"><a href="#47_more_powerful_lr_parsers">4.7 More Powerful LR Parsers</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#474_constructing_lalr_parsing_tables">4.7.4 Constructing LALR Parsing Tables</a></li>
+        
+        </ul>
+    
+
+    </ul>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../VS-LL-parser-VS-LR-parser/">VS-LL-parser-VS-LR-parser</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Chapter5</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../Chapter5-Syntax-Directed-Translation/">5</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter5-Syntax-Directed-Translation/5.1Syntax-Directed-Definitions/">5.1</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter5-Syntax-Directed-Translation/5.2Evaluation-Orders-for-SDD's/">5.2</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter5-Syntax-Directed-Translation/5.3Applications-of-Syntax-Directed-Translation/">5.3</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Chapter6</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../Chapter6-Intermediate-Code-Generation/">6</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter6-Intermediate-Code-Generation/6.3Types-and-Declarations/">6.3</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Chapter7</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../Chapter7-Run-Time-Environments/">7</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter7-Run-Time-Environments/7.1Storage-Organization/">7.1</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter7-Run-Time-Environments/7.2Stack-Allocation-of-Space/">7.2</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Chapter9</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../Chapter9-Machine-Independent-Optimizations/">9</a>
+                </li>
+    </ul>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">compiler principle</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Chapter4 &raquo;</li>
+        
+      
+    
+    <li>4.7</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <div class="toc">
+<ul>
+<li><a href="#47_more_powerful_lr_parsers">4.7 More Powerful LR Parsers</a><ul>
+<li><a href="#474_constructing_lalr_parsing_tables">4.7.4 Constructing LALR Parsing Tables</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<h2 id="47_more_powerful_lr_parsers">4.7 More Powerful LR Parsers<a class="headerlink" href="#47_more_powerful_lr_parsers" title="Permanent link">#</a></h2>
+<p>In this section, we shall extend the previous LR parsing techniques to use one symbol of lookahead on the input. There are two different methods:</p>
+<ol>
+<li>The "canonical-LR" or just "LR" method</li>
+<li>The "lookahead-LR" or "LALR" method</li>
+</ol>
+<p>After introducing both these methods, we conclude with a discussion of how to compact LR parsing tables for environments with limited memory.</p>
+<h3 id="474_constructing_lalr_parsing_tables">4.7.4 Constructing LALR Parsing Tables<a class="headerlink" href="#474_constructing_lalr_parsing_tables" title="Permanent link">#</a></h3>
+<p>We now introduce our last parser construction method, the LALR (lookahead-LR) technique. This method is often used in practice, because the tables obtained by it are considerably smaller than the canonical LR tables, yet most common syntactic constructs of programming languages can be expressed conveniently by an LALR grammar. The same is almost true for SLR grammars, but there are a few constructs that cannot be conveniently handled by SLR techniques (see Example 4.48, for example).</p>
+<p>For a comparison of parser size, the SLR and LALR tables for a grammar always have the same number of states, and this number is typically several hundred states for a language like C. The canonical LR table would typically have several thousand states for the same-size language. Thus, it is much easier and more economical to construct SLR and LALR tables than the canonical LR tables.</p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../VS-LL-parser-VS-LR-parser/" class="btn btn-neutral float-right" title="VS-LL-parser-VS-LR-parser">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../4.6Introduction-to-LR-Parsing-Simple-LR/" class="btn btn-neutral" title="4.6"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/dengking/compiler-principle" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href="../4.6Introduction-to-LR-Parsing-Simple-LR/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../VS-LL-parser-VS-LR-parser/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="../../search/main.js" defer></script>
+
+</body>
+</html>

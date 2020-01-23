@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <meta name="author" content="DengKing">
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+  <title>7.1 - compiler principle</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  <link href="../../css/extra.css" rel="stylesheet">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = 7.1;
+    var mkdocs_page_input_path = "Chapter7-Run-Time-Environments/7.1Storage-Organization.md";
+    var mkdocs_page_url = "/compiler-principle/Chapter7-Run-Time-Environments/7.1Storage-Organization/";
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/django.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> compiler principle</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../..">Home</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Chapter1</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../Chapter1-Introduction/">1</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter1-Introduction/1.1Language-Processors/">1.1</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter1-Introduction/1.2The-Structure-of-a-Compiler/">1.2</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter1-Introduction/1.5Applications-of-Compiler-Technology/">1.5</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter1-Introduction/1.6Programming-Language-Basics/">1.6</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Chapter2</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../Chapter2-A-Simple-Syntax-Directed-Translator/">2</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter2-A-Simple-Syntax-Directed-Translator/2.1Introduction/">2.1</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter2-A-Simple-Syntax-Directed-Translator/2.2Syntax-Definition/">2.2</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter2-A-Simple-Syntax-Directed-Translator/2.3Syntax-Directed-Translation/">2.3</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter2-A-Simple-Syntax-Directed-Translator/2.4Parsing/">2.4</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Chapter3</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../Chapter3-Lexical-Analysis/">3</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter3-Lexical-Analysis/3.1The-Role-of-the-Lexical-Analyzer/">3.1</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter3-Lexical-Analysis/3.4Recognition-of-Tokens/">3.4</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter3-Lexical-Analysis/3.6Finite-Automata/">3.6</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter3-Lexical-Analysis/3.7From-Regular-Expressions-to-Automata/">3.7</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Chapter4</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../Chapter4-Syntax-Analysis/">4</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter4-Syntax-Analysis/4.2Context-Free-Grammars/">4.2</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter4-Syntax-Analysis/4.3Writing-a-Grammar/">4.3</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter4-Syntax-Analysis/4.5Bottom-Up-Parsing/">4.5</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter4-Syntax-Analysis/4.6Introduction-to-LR-Parsing-Simple-LR/">4.6</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter4-Syntax-Analysis/4.7More-Powerful-LR-Parsers/">4.7</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter4-Syntax-Analysis/VS-LL-parser-VS-LR-parser/">VS-LL-parser-VS-LR-parser</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Chapter5</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../Chapter5-Syntax-Directed-Translation/">5</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter5-Syntax-Directed-Translation/5.1Syntax-Directed-Definitions/">5.1</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter5-Syntax-Directed-Translation/5.2Evaluation-Orders-for-SDD's/">5.2</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter5-Syntax-Directed-Translation/5.3Applications-of-Syntax-Directed-Translation/">5.3</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Chapter6</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../Chapter6-Intermediate-Code-Generation/">6</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter6-Intermediate-Code-Generation/6.3Types-and-Declarations/">6.3</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Chapter7</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../">7</a>
+                </li>
+                <li class=" current">
+                    
+    <a class="current" href="./">7.1</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l3"><a href="#71_storage_organization">7.1 Storage Organization</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#711_static_versus_dynamic_storage_allocation">7.1.1 Static Versus Dynamic Storage Allocation</a></li>
+        
+        </ul>
+    
+
+    </ul>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../7.2Stack-Allocation-of-Space/">7.2</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Chapter9</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../Chapter9-Machine-Independent-Optimizations/">9</a>
+                </li>
+    </ul>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">compiler principle</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Chapter7 &raquo;</li>
+        
+      
+    
+    <li>7.1</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <div class="toc">
+<ul>
+<li><a href="#71_storage_organization">7.1 Storage Organization</a><ul>
+<li><a href="#711_static_versus_dynamic_storage_allocation">7.1.1 Static Versus Dynamic Storage Allocation</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<h2 id="71_storage_organization">7.1 Storage Organization<a class="headerlink" href="#71_storage_organization" title="Permanent link">#</a></h2>
+<p>From the perspective of the compiler writer, the executing target program runs in its own <strong>logical address space</strong> in which each program value has a <strong>location</strong>. The management and organization of this <strong>logical address space</strong> is shared between the compiler, operating system, and target machine. The operating system maps the <strong>logical addresses</strong> into <strong>physical addresses</strong>, which are usually spread throughout memory.</p>
+<p>The <strong>run-time</strong> representation of an object program in the <strong>logical address space</strong> consists of <strong>data</strong> and <strong>program</strong> areas as shown in Fig. 7.1. A compiler for a language like C++ on an operating system like Linux might sub divide memory in this way.</p>
+<p><img alt="" src="../Figure-7.1-Typical-sub-division-of-run-time-memory-into-code-and-data-areas.png" /></p>
+<p>Throughout this book, we assume the <strong>run-time storage</strong> comes in blocks of contiguous bytes, where a byte is the smallest unit of addressable memory(字节是内存的最小编址单元). A byte is eight bits and four bytes form a machine word. Multibyte objects are stored in consecutive bytes and given the address of the first byte(多字节数据对象总数存储在一段连续的字节中，并且将第一个字节作为地址).</p>
+<p>As discussed in Chapter 6, the amount of storage needed for a name is determined from its type. An elementary data type, such as a character, integer,or float, can be stored in an integral number of bytes. Storage for an aggregate type, such as an array or structure, must be large enough to hold all its components.</p>
+<p>The storage layout for data objects is strongly influenced by the addressing constraints of the target machine. On many machines, instructions to add integers may expect integers to be aligned, that is, placed at an address divisible by 4. Although a character array (as in C) of length 10 needs only enough bytes to hold ten characters, a compiler may allocate 12 bytes to get the proper alignment, leaving 2 bytes unused. Space left unused due to alignment considerations is referred to as <strong>padding</strong>. When space is at a premium, a compiler may pack data so that no <strong>padding</strong> is left; additional instructions may then need to be executed at run time to position packed data so that it can be operated on as if it were properly aligned.</p>
+<p>The size of the generated target code is fixed at compile time, so the compiler can place the executable target code in a statically determined area <strong><em>Code</em></strong>,usually in the low end of memory. Similarly, the size of some <strong>program data objects</strong>, such as <strong>global constants</strong>, and <strong>data generated by the compiler</strong>, such as
+information to support garbage collection, may be known at <strong>compile time</strong>, and these data objects can be placed in another statically determined area called <strong><em>Static</em></strong>. One reason for statically allocating as many data objects as possible is that the <strong>addresses</strong> of these objects can be compiled into the target code. In early versions of Fortran, all data objects could be allocated statically.</p>
+<p>To maximize the utilization of space at <strong>run time</strong>, the other two areas, <strong><em>Stack</em></strong> and <strong><em>Heap</em></strong>, are at the opposite ends of the remainder of the <strong>address space</strong>. These areas are <strong>dynamic</strong>; their size can change as the program executes. These areas grow towards each other as needed. The stack is used to store data structures called <strong>activation records</strong> that get generated during procedure calls.</p>
+<p>In practice, the <strong><em>stack</em></strong> grows towards lower addresses, the <strong><em>heap</em></strong> towards higher. However, throughout this chapter and the next we shall assume that the <strong><em>stack</em></strong> grows towards higher addresses so that we can use positive offsets for notational convenience in all our examples.</p>
+<p>As we shall see in the next section, an <strong>activation record</strong> is used to store information about the status of the machine, such as the value of the <strong>program counter</strong> and <strong>machine registers</strong>, when a <strong>procedure</strong> call occurs. When control returns from the call, the activation of the calling procedure can be restarted after restoring the values of relevant registers and setting the program counter to the point immediately after the call. <strong>Data objects</strong> whose lifetimes are contained in that of an activation can be allocated on the stack along with other information associated with the activation.</p>
+<p>Many programming languages allow the programmer to allocate and deallocate data under program control. For example, C has the functions <code>malloc</code> and <code>free</code>that can be used to obtain and give back arbitrary chunks of storage. The heap is used to manage this kind of long-lived data. Section 7.4 will
+discuss various memory-management algorithms that can be used to maintain the heap</p>
+<h3 id="711_static_versus_dynamic_storage_allocation">7.1.1 Static Versus Dynamic Storage Allocation<a class="headerlink" href="#711_static_versus_dynamic_storage_allocation" title="Permanent link">#</a></h3>
+<p>The layout and allocation of data to memory locations in the <strong>run-time</strong> environment are key issues in <strong>storage management</strong>. These issues are tricky because the same name in a program text can refer to multiple locations at run time. The two adjectives <strong><em>static</em></strong> and <strong><em>dynamic</em></strong> distinguish between <strong>compile time</strong> and <strong>run time</strong>, respectively. We say that a storage-allocation decision is <strong><em>static</em></strong>, if it can be made by the <strong>compiler</strong> looking only at the text of the program, not at what the program does when it executes. Conversely, a decision is <strong><em>dynamic</em></strong> if it can be decided only while the program is running. Many compilers use some combination of the following two strategies for dynamic storage allocation:</p>
+<ol>
+<li><strong>Stack storage</strong>. Names local to a procedure are allocated space on a <strong>stack</strong>.We discuss the run-time stack starting in Section 7.2. The stack supports the normal call/return policy for procedures</li>
+<li><strong>Heap storage</strong>. Data that may outlive the call to the <strong>procedure</strong> that created it is usually allocated on a heap of reusable storage. We discuss heap management starting in Section 7.4. The heap is an area of <strong>virtual memory</strong> that allows objects or other data elements to obtain storage when they are created and to return that storage when they are invalidated</li>
+</ol>
+<p>To support <strong>heap management</strong>, garbage collection enables the <strong>run-time system</strong> to detect useless data elements and reuse their storage, even if the programmer does not return their space explicitly. Automatic garbage collection is an essential feature of many modern languages, despite it being a difficult operation to do efficiently; it may not even be possible for some languages</p>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../7.2Stack-Allocation-of-Space/" class="btn btn-neutral float-right" title="7.2">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../" class="btn btn-neutral" title="7"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/dengking/compiler-principle" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href="../" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../7.2Stack-Allocation-of-Space/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="../../search/main.js" defer></script>
+
+</body>
+</html>

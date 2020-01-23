@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <meta name="author" content="DengKing">
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+  <title>wikipedia Abstract syntax tree - compiler principle</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  <link href="../../css/extra.css" rel="stylesheet">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "wikipedia Abstract syntax tree";
+    var mkdocs_page_input_path = "parse-tree-VS-syntax-tree-VS-DFA/wikipedia-Abstract-syntax-tree.md";
+    var mkdocs_page_url = "/compiler-principle/parse-tree-VS-syntax-tree-VS-DFA/wikipedia-Abstract-syntax-tree/";
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/django.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> compiler principle</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../..">Home</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Chapter1</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../Chapter1-Introduction/">1</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter1-Introduction/1.1Language-Processors/">1.1</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter1-Introduction/1.2The-Structure-of-a-Compiler/">1.2</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter1-Introduction/1.5Applications-of-Compiler-Technology/">1.5</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter1-Introduction/1.6Programming-Language-Basics/">1.6</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Chapter2</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../Chapter2-A-Simple-Syntax-Directed-Translator/">2</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter2-A-Simple-Syntax-Directed-Translator/2.1Introduction/">2.1</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter2-A-Simple-Syntax-Directed-Translator/2.2Syntax-Definition/">2.2</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter2-A-Simple-Syntax-Directed-Translator/2.3Syntax-Directed-Translation/">2.3</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter2-A-Simple-Syntax-Directed-Translator/2.4Parsing/">2.4</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Chapter3</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../Chapter3-Lexical-Analysis/">3</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter3-Lexical-Analysis/3.1The-Role-of-the-Lexical-Analyzer/">3.1</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter3-Lexical-Analysis/3.4Recognition-of-Tokens/">3.4</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter3-Lexical-Analysis/3.6Finite-Automata/">3.6</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter3-Lexical-Analysis/3.7From-Regular-Expressions-to-Automata/">3.7</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Chapter4</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../Chapter4-Syntax-Analysis/">4</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter4-Syntax-Analysis/4.2Context-Free-Grammars/">4.2</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter4-Syntax-Analysis/4.3Writing-a-Grammar/">4.3</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter4-Syntax-Analysis/4.5Bottom-Up-Parsing/">4.5</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter4-Syntax-Analysis/4.6Introduction-to-LR-Parsing-Simple-LR/">4.6</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter4-Syntax-Analysis/4.7More-Powerful-LR-Parsers/">4.7</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter4-Syntax-Analysis/VS-LL-parser-VS-LR-parser/">VS-LL-parser-VS-LR-parser</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Chapter5</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../Chapter5-Syntax-Directed-Translation/">5</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter5-Syntax-Directed-Translation/5.1Syntax-Directed-Definitions/">5.1</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter5-Syntax-Directed-Translation/5.2Evaluation-Orders-for-SDD's/">5.2</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter5-Syntax-Directed-Translation/5.3Applications-of-Syntax-Directed-Translation/">5.3</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Chapter6</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../Chapter6-Intermediate-Code-Generation/">6</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter6-Intermediate-Code-Generation/6.3Types-and-Declarations/">6.3</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Chapter7</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../Chapter7-Run-Time-Environments/">7</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter7-Run-Time-Environments/7.1Storage-Organization/">7.1</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter7-Run-Time-Environments/7.2Stack-Allocation-of-Space/">7.2</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Chapter9</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../Chapter9-Machine-Independent-Optimizations/">9</a>
+                </li>
+    </ul>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">compiler principle</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>wikipedia Abstract syntax tree</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <div class="toc">
+<ul>
+<li><a href="#abstract_syntax_tree">Abstract syntax tree</a><ul>
+<li><a href="#application_in_compilers">Application in compilers</a><ul>
+<li><a href="#motivation">Motivation</a></li>
+<li><a href="#design">Design</a></li>
+<li><a href="#design_patterns">Design patterns</a></li>
+<li><a href="#usage">Usage</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<h2 id="abstract_syntax_tree"><a href="https://en.wikipedia.org/wiki/Abstract_syntax_tree">Abstract syntax tree</a><a class="headerlink" href="#abstract_syntax_tree" title="Permanent link">#</a></h2>
+<p>In <a href="https://en.wikipedia.org/wiki/Computer_science">computer science</a>, an <strong>abstract syntax tree</strong> (<strong>AST</strong>), or just <strong>syntax tree</strong>, is a <a href="https://en.wikipedia.org/wiki/Directed_tree">tree</a> representation of the <a href="https://en.wikipedia.org/wiki/Abstract_syntax">abstract syntactic</a> structure of <a href="https://en.wikipedia.org/wiki/Source_code">source code</a> written in a <a href="https://en.wikipedia.org/wiki/Programming_language">programming language</a>. Each node of the tree denotes a construct occurring in the source code.</p>
+<blockquote>
+<p>NOTE : 表示源代码的抽象语法结构，树中的每个节点都表示源代码中的一个construct。</p>
+</blockquote>
+<p>The syntax is "abstract" in the sense that it does not represent every <strong>detail</strong> appearing in the real <strong>syntax</strong>, but rather just the <strong>structural or content-related details</strong>. For instance, grouping <a href="https://en.wikipedia.org/wiki/Bracket#Parentheses">parentheses</a> are implicit in the <strong>tree structure</strong>, so these do not have to be represented as separate nodes. Likewise, a syntactic construct like an if-condition-then expression may be denoted by means of a single node with three branches.</p>
+<p>This distinguishes <strong>abstract syntax trees</strong> from <strong>concrete syntax trees</strong>, traditionally designated <a href="https://en.wikipedia.org/wiki/Parse_tree">parse trees</a>. Parse trees are typically <strong>built</strong> by a <a href="https://en.wikipedia.org/wiki/Parser">parser</a> during the source code translation and <a href="https://en.wikipedia.org/wiki/Compiler">compiling</a> process. Once built, additional information is added to the AST by means of subsequent processing, e.g., <a href="https://en.wikipedia.org/wiki/Semantic_analysis_(compilers)">contextual analysis</a>.</p>
+<p><strong><em>SUMMARY</em></strong> : parse tree和abstract syntax tree的构建</p>
+<p>Abstract syntax trees are also used in <a href="https://en.wikipedia.org/wiki/Program_analysis">program analysis</a> and <a href="https://en.wikipedia.org/wiki/Program_transformation">program transformation</a> systems.</p>
+<p><a href="https://en.wikipedia.org/wiki/File:Abstract_syntax_tree_for_Euclidean_algorithm.svg"><img alt="img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Abstract_syntax_tree_for_Euclidean_algorithm.svg/400px-Abstract_syntax_tree_for_Euclidean_algorithm.svg.png" /></a></p>
+<p>An abstract syntax tree for the following code for the <a href="https://en.wikipedia.org/wiki/Euclidean_algorithm">Euclidean algorithm</a></p>
+<pre><code class="pseudocode">while b ≠ 0
+  if a &gt; b
+    a := a − b
+  else
+    b := b − a
+return a
+</code></pre>
+
+<h3 id="application_in_compilers">Application in compilers<a class="headerlink" href="#application_in_compilers" title="Permanent link">#</a></h3>
+<p><strong>Abstract syntax trees</strong> are <a href="https://en.wikipedia.org/wiki/Data_structures">data structures</a> widely used in <a href="https://en.wikipedia.org/wiki/Compilers">compilers</a> to represent the structure of program code. An AST is usually the result of the <a href="https://en.wikipedia.org/wiki/Syntax_analysis">syntax analysis</a> phase of a compiler. It often serves as an intermediate representation of the program through several stages that the compiler requires, and has a strong impact on the final output of the compiler. </p>
+<h4 id="motivation">Motivation<a class="headerlink" href="#motivation" title="Permanent link">#</a></h4>
+<p>An AST has several properties that aid the further steps of the compilation process:</p>
+<ul>
+<li>An AST can be edited and enhanced with information such as properties and annotations for every element it contains. Such editing and annotation is impossible with the source code of a program, since it would imply changing it.</li>
+<li>Compared to the <a href="https://en.wikipedia.org/wiki/Source_code">source code</a>, an AST does not include inessential punctuation and delimiters (braces, semicolons, parentheses, etc.).</li>
+<li>An AST usually contains extra information about the program, due to the consecutive stages of analysis by the compiler. For example, it may store the position of each element in the source code, allowing the compiler to print useful <strong>error messages</strong>.</li>
+</ul>
+<p>ASTs are needed because of the inherent nature of programming languages and their documentation. Languages are often ambiguous by nature. In order to avoid this ambiguity, programming languages are often specified as a <a href="https://en.wikipedia.org/wiki/Context-free_grammar">context-free grammar</a> (CFG). However, there are often aspects of programming languages that a CFG can't express, but are part of the language and are documented in its specification. These are details that require a context to determine their validity and behaviour. For example, if a language allows new types to be declared, a CFG cannot predict the names of such types nor the way in which they should be used. Even if a language has a predefined set of types, enforcing proper usage usually requires some context. Another example is <a href="https://en.wikipedia.org/wiki/Duck_typing">duck typing</a>, where the type of an element can change depending on context. <a href="https://en.wikipedia.org/wiki/Operator_overloading">Operator overloading</a> is yet another case where correct usage and final function are determined based on the context. Java provides an excellent example, where the '+' operator is both numerical addition and concatenation of strings.</p>
+<p>Although there are other <a href="https://en.wikipedia.org/wiki/Data_structure">data structures</a> involved in the inner workings of a compiler, the AST performs a unique function. During the first stage, the <a href="https://en.wikipedia.org/wiki/Syntax_analysis">syntax analysis</a> stage, a compiler produces a parse tree. This parse tree can be used to perform almost all functions of a compiler by means of s<strong>yntax-directed translation</strong>. Although this method can lead to a more efficient compiler, it goes against the software engineering principles of writing and maintaining programs[<em><a href="https://en.wikipedia.org/wiki/Wikipedia:Citation_needed">citation needed</a></em>]. Another advantage that the AST has over a parse tree is the size, particularly the smaller height of the AST and the smaller number of elements.</p>
+<h4 id="design">Design<a class="headerlink" href="#design" title="Permanent link">#</a></h4>
+<p>The design of an AST is often closely linked with the design of a compiler and its expected features.</p>
+<p>Core requirements include the following:</p>
+<ul>
+<li>Variable types must be preserved, as well as the location of each declaration in source code.</li>
+<li>The order of executable statements must be explicitly represented and well defined.</li>
+<li>Left and right components of binary operations must be stored and correctly identified.</li>
+<li>Identifiers and their assigned values must be stored for assignment statements.</li>
+</ul>
+<p>These requirements can be used to design the data structure for the AST.</p>
+<p>Some operations will always require two elements, such as the two terms for addition. However, some language constructs require an arbitrarily large number of children, such as argument lists passed to programs from the <a href="https://en.wikipedia.org/wiki/Command_shell">command shell</a>. As a result, an AST used to represent code written in such a language has to also be flexible enough to allow for quick addition of an unknown quantity of children.</p>
+<p>To support compiler verification it should be possible to unparse an AST into source code form. The source code produced should be sufficiently similar to the original in appearance and identical in execution, upon recompilation.</p>
+<h4 id="design_patterns">Design patterns<a class="headerlink" href="#design_patterns" title="Permanent link">#</a></h4>
+<p>Due to the complexity of the requirements for an AST and the overall complexity of a compiler, it is beneficial to apply sound software development principles. One of these is to use proven design patterns to enhance modularity and ease of development.</p>
+<p>Different operations don't necessarily have different types, so it is important to have a sound node class hierarchy. This is crucial in the creation and the modification of the AST as the compiler progresses.</p>
+<p>Because the compiler traverses the tree several times to determine syntactic correctness, it is important to make traversing the tree a simple operation. The compiler executes a specific set of operations, depending on the type of each node, upon reaching it, so it often makes sense to use the <a href="https://en.wikipedia.org/wiki/Visitor_pattern">visitor pattern</a>.</p>
+<h4 id="usage">Usage<a class="headerlink" href="#usage" title="Permanent link">#</a></h4>
+<p>The AST is used intensively during <a href="https://en.wikipedia.org/wiki/Semantic_analysis_(compilers)">semantic analysis</a>, where the compiler checks for correct usage of the elements of the program and the language. The compiler also generates <a href="https://en.wikipedia.org/wiki/Symbol_table">symbol tables</a> based on the AST during semantic analysis. A complete traversal of the tree allows verification of the correctness of the program.</p>
+<p>After verifying correctness, the AST serves as the base for code generation. The AST is often used to generate an intermediate representation (IR), sometimes called an <a href="https://en.wikipedia.org/wiki/Intermediate_language">intermediate language</a>, for the code generation.</p>
+              
+            </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/dengking/compiler-principle" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+      
+    </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="../../search/main.js" defer></script>
+
+</body>
+</html>

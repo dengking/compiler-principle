@@ -8,7 +8,7 @@
   
   <meta name="author" content="DengKing">
   <link rel="shortcut icon" href="../../img/favicon.ico">
-  <title>1.2The-Structure-of-a-Compiler - compiler principle</title>
+  <title>1.2 - compiler principle</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
@@ -18,7 +18,7 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "1.2The-Structure-of-a-Compiler";
+    var mkdocs_page_name = 1.2;
     var mkdocs_page_input_path = "Chapter1-Introduction/1.2The-Structure-of-a-Compiler.md";
     var mkdocs_page_url = "/compiler-principle/Chapter1-Introduction/1.2The-Structure-of-a-Compiler/";
   </script>
@@ -58,149 +58,212 @@
           
             <li class="toctree-l1">
 		
-    <span class="caption-text">Chapter1-Introduction</span>
+    <span class="caption-text">Chapter1</span>
     <ul class="subnav">
                 <li class="">
                     
-    <a class="" href="../introduction/">introduction</a>
+    <a class="" href="../">1</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../1.1Language-Processors/">1.1</a>
                 </li>
                 <li class=" current">
                     
-    <a class="current" href="./">1.2The-Structure-of-a-Compiler</a>
+    <a class="current" href="./">1.2</a>
     <ul class="subnav">
             
+    <li class="toctree-l3"><a href="#12_the_structure_of_a_compiler">1.2 The Structure of a Compiler</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#121_lexical_analysis">1.2.1 Lexical Analysis</a></li>
+        
+            <li><a class="toctree-l4" href="#122_syntax_analysis">1.2.2 Syntax Analysis</a></li>
+        
+            <li><a class="toctree-l4" href="#123_semantic_analysis">1.2.3 Semantic Analysis</a></li>
+        
+            <li><a class="toctree-l4" href="#124_intermediate_code_generation">1.2.4 Intermediate Code Generation</a></li>
+        
+            <li><a class="toctree-l4" href="#125_code_optimization">1.2.5 Code Optimization</a></li>
+        
+            <li><a class="toctree-l4" href="#126_code_generation">1.2.6 Code Generation</a></li>
+        
+            <li><a class="toctree-l4" href="#127_symbol-table_management">1.2.7 Symbol-Table Management</a></li>
+        
+            <li><a class="toctree-l4" href="#128_the_grouping_of_phases_into_passes">1.2.8 The Grouping of Phases into Passes</a></li>
+        
+            <li><a class="toctree-l4" href="#129_compiler-construction_tools">1.2.9 Compiler-Construction Tools</a></li>
+        
+        </ul>
+    
+
     </ul>
                 </li>
-    </ul>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <span class="caption-text">Chapter2-A-Simple-Syntax-Directed-Translator</span>
-    <ul class="subnav">
                 <li class="">
                     
-    <a class="" href="../../Chapter2-A-Simple-Syntax-Directed-Translator/A-Simple-Syntax-Directed-Translator/">A-Simple-Syntax-Directed-Translator</a>
+    <a class="" href="../1.5Applications-of-Compiler-Technology/">1.5</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../../Chapter2-A-Simple-Syntax-Directed-Translator/2.1Introduction/">2.1Introduction</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../Chapter2-A-Simple-Syntax-Directed-Translator/2.2Syntax-Definition/">2.2Syntax-Definition</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../Chapter2-A-Simple-Syntax-Directed-Translator/2.3Syntax-Directed-Translation/">2.3Syntax-Directed-Translation</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../Chapter2-A-Simple-Syntax-Directed-Translator/2.4Parsing/">2.4Parsing</a>
-                </li>
-    </ul>
-	    </li>
-          
-            <li class="toctree-l1">
-		
-    <span class="caption-text">Chapter3-Lexical-Analysis</span>
-    <ul class="subnav">
-                <li class="">
-                    
-    <a class="" href="../../Chapter3-Lexical-Analysis/Lexical-Analysis/">Lexical-Analysis</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../Chapter3-Lexical-Analysis/3.1The-Role-of-the-Lexical-Analyzer/">3.1The-Role-of-the-Lexical-Analyzer</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../Chapter3-Lexical-Analysis/3.4Recognition-of-Tokens/">3.4Recognition-of-Tokens</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../Chapter3-Lexical-Analysis/3.6Finite-Automata/">3.6Finite-Automata</a>
-                </li>
-                <li class="">
-                    
-    <a class="" href="../../Chapter3-Lexical-Analysis/3.7From-Regular-Expressions-to-Automata/">3.7From-Regular-Expressions-to-Automata</a>
-                </li>
-                <li class="">
-                    
-    <span class="caption-text">wikipedia-String</span>
-    <ul class="subnav">
-                <li class="toctree-l3">
-                    
-    <a class="" href="../../Chapter3-Lexical-Analysis/wikipedia-String/wikipedia-String(computer-science)/">wikipedia-String(computer-science)</a>
-                </li>
-                <li class="toctree-l3">
-                    
-    <span class="caption-text">string-searching</span>
-    <ul class="subnav">
-                <li class="toctree-l4">
-                    
-    <a class="" href="../../Chapter3-Lexical-Analysis/wikipedia-String/string-searching/wikipedia-Aho-Corasick-algorithm/">wikipedia-Aho-Corasick-algorithm</a>
-                </li>
-    </ul>
-                </li>
-    </ul>
+    <a class="" href="../1.6Programming-Language-Basics/">1.6</a>
                 </li>
     </ul>
 	    </li>
           
             <li class="toctree-l1">
 		
-    <span class="caption-text">Chapter4-Syntax-Analysis</span>
+    <span class="caption-text">Chapter2</span>
     <ul class="subnav">
                 <li class="">
                     
-    <a class="" href="../../Chapter4-Syntax-Analysis/Syntax-Analysis/">Syntax-Analysis</a>
+    <a class="" href="../../Chapter2-A-Simple-Syntax-Directed-Translator/">2</a>
                 </li>
                 <li class="">
                     
-    <span class="caption-text">Wikipedia-Parsing-algorithms</span>
-    <ul class="subnav">
-                <li class="toctree-l3">
-                    
-    <a class="" href="../../Chapter4-Syntax-Analysis/Wikipedia-Parsing-algorithms/wikipedia-Parsing/">wikipedia-Parsing</a>
+    <a class="" href="../../Chapter2-A-Simple-Syntax-Directed-Translator/2.1Introduction/">2.1</a>
                 </li>
-                <li class="toctree-l3">
+                <li class="">
                     
-    <span class="caption-text">Bottom-up</span>
-    <ul class="subnav">
-                <li class="toctree-l4">
-                    
-    <span class="caption-text">Precedence</span>
-    <ul class="subnav">
-                <li class="toctree-l5">
-                    
-    <a class="" href="../../Chapter4-Syntax-Analysis/Wikipedia-Parsing-algorithms/Bottom-up/Precedence/wikipedia-Operator-precedence-parser/">wikipedia-Operator-precedence-parser</a>
+    <a class="" href="../../Chapter2-A-Simple-Syntax-Directed-Translator/2.2Syntax-Definition/">2.2</a>
                 </li>
-                <li class="toctree-l5">
+                <li class="">
                     
-    <a class="" href="../../Chapter4-Syntax-Analysis/Wikipedia-Parsing-algorithms/Bottom-up/Precedence/wikipedia-Shunting-yard-algorithm/">wikipedia-Shunting-yard-algorithm</a>
+    <a class="" href="../../Chapter2-A-Simple-Syntax-Directed-Translator/2.3Syntax-Directed-Translation/">2.3</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter2-A-Simple-Syntax-Directed-Translator/2.4Parsing/">2.4</a>
                 </li>
     </ul>
-                </li>
-                <li class="toctree-l4">
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Chapter3</span>
+    <ul class="subnav">
+                <li class="">
                     
-    <a class="" href="../../Chapter4-Syntax-Analysis/Wikipedia-Parsing-algorithms/Bottom-up/blog-Equation(expression)parser-with-precedence/">blog-Equation(expression)parser-with-precedence</a>
+    <a class="" href="../../Chapter3-Lexical-Analysis/">3</a>
                 </li>
-                <li class="toctree-l4">
+                <li class="">
                     
-    <a class="" href="../../Chapter4-Syntax-Analysis/Wikipedia-Parsing-algorithms/Bottom-up/wikipedia-CYK-algorithm/">wikipedia-CYK-algorithm</a>
+    <a class="" href="../../Chapter3-Lexical-Analysis/3.1The-Role-of-the-Lexical-Analyzer/">3.1</a>
                 </li>
-                <li class="toctree-l4">
+                <li class="">
                     
-    <a class="" href="../../Chapter4-Syntax-Analysis/Wikipedia-Parsing-algorithms/Bottom-up/wikipedia-LR-parser/">wikipedia-LR-parser</a>
+    <a class="" href="../../Chapter3-Lexical-Analysis/3.4Recognition-of-Tokens/">3.4</a>
                 </li>
-                <li class="toctree-l4">
+                <li class="">
                     
-    <a class="" href="../../Chapter4-Syntax-Analysis/Wikipedia-Parsing-algorithms/Bottom-up/wikipedia-Top-down-parsing/">wikipedia-Top-down-parsing</a>
+    <a class="" href="../../Chapter3-Lexical-Analysis/3.6Finite-Automata/">3.6</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter3-Lexical-Analysis/3.7From-Regular-Expressions-to-Automata/">3.7</a>
                 </li>
     </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Chapter4</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../Chapter4-Syntax-Analysis/">4</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter4-Syntax-Analysis/4.2Context-Free-Grammars/">4.2</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter4-Syntax-Analysis/4.3Writing-a-Grammar/">4.3</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter4-Syntax-Analysis/4.5Bottom-Up-Parsing/">4.5</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter4-Syntax-Analysis/4.6Introduction-to-LR-Parsing-Simple-LR/">4.6</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter4-Syntax-Analysis/4.7More-Powerful-LR-Parsers/">4.7</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter4-Syntax-Analysis/VS-LL-parser-VS-LR-parser/">VS-LL-parser-VS-LR-parser</a>
                 </li>
     </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Chapter5</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../Chapter5-Syntax-Directed-Translation/">5</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter5-Syntax-Directed-Translation/5.1Syntax-Directed-Definitions/">5.1</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter5-Syntax-Directed-Translation/5.2Evaluation-Orders-for-SDD's/">5.2</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter5-Syntax-Directed-Translation/5.3Applications-of-Syntax-Directed-Translation/">5.3</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Chapter6</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../Chapter6-Intermediate-Code-Generation/">6</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter6-Intermediate-Code-Generation/6.3Types-and-Declarations/">6.3</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Chapter7</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../Chapter7-Run-Time-Environments/">7</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter7-Run-Time-Environments/7.1Storage-Organization/">7.1</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter7-Run-Time-Environments/7.2Stack-Allocation-of-Space/">7.2</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Chapter9</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../Chapter9-Machine-Independent-Optimizations/">9</a>
                 </li>
     </ul>
 	    </li>
@@ -227,11 +290,11 @@
     
       
         
-          <li>Chapter1-Introduction &raquo;</li>
+          <li>Chapter1 &raquo;</li>
         
       
     
-    <li>1.2The-Structure-of-a-Compiler</li>
+    <li>1.2</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -241,7 +304,204 @@
           <div role="main">
             <div class="section">
               
-                
+                <div class="toc">
+<ul>
+<li><a href="#12_the_structure_of_a_compiler">1.2 The Structure of a Compiler</a><ul>
+<li><a href="#121_lexical_analysis">1.2.1 Lexical Analysis</a></li>
+<li><a href="#122_syntax_analysis">1.2.2 Syntax Analysis</a></li>
+<li><a href="#123_semantic_analysis">1.2.3 Semantic Analysis</a></li>
+<li><a href="#124_intermediate_code_generation">1.2.4 Intermediate Code Generation</a></li>
+<li><a href="#125_code_optimization">1.2.5 Code Optimization</a></li>
+<li><a href="#126_code_generation">1.2.6 Code Generation</a></li>
+<li><a href="#127_symbol-table_management">1.2.7 Symbol-Table Management</a></li>
+<li><a href="#128_the_grouping_of_phases_into_passes">1.2.8 The Grouping of Phases into Passes</a></li>
+<li><a href="#129_compiler-construction_tools">1.2.9 Compiler-Construction Tools</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<h2 id="12_the_structure_of_a_compiler">1.2 The Structure of a Compiler<a class="headerlink" href="#12_the_structure_of_a_compiler" title="Permanent link">#</a></h2>
+<p>Up to this point we have treated a compiler as a single box that maps a source program into a semantically equivalent target program. If we open up this box a little, we see that there are two parts to this mapping: </p>
+<ul>
+<li>analysis</li>
+<li>synthesis</li>
+</ul>
+<p>The <em>analysis</em> part breaks up the source program into constituent pieces and imposes a grammatical structure on them. It then uses this structure to create an <strong>intermediate representation</strong> of the source program. If the analysis part detects that the source program is either syntactically ill formed or semantically unsound, then it must provide informative messages, so the user can take corrective action. The analysis part also collects information about the source program and stores it in a data structure called a <em>symbol table</em>, which is passed along with the <strong>intermediate representation</strong> to the <strong>synthesis part</strong>.</p>
+<p>The <em>synthesis</em> part constructs the desired target program from the <strong>intermediate representation</strong> and the information in the symbol table. </p>
+<p>The <strong>analysis part</strong> is often called the <em>front end</em> of the compiler; the <strong>synthesis part</strong> is the <strong>back end</strong>.</p>
+<p>If we examine the compilation process in more detail, we see that it operates as a sequence of <em>phases</em>, each of which transforms one representation of the source program to another. A typical decomposition of a compiler into phases is shown in Fig. 1.6. In practice, several phases may be grouped together, and the intermediate representations between the grouped phases need not be constructed explicitly. </p>
+<p>The <strong>symbol table</strong>, which stores information about the entire source program, is used by all phases of the compiler.</p>
+<blockquote>
+<p>NOTE: 符号表也是一门科学，需要对它仔细研究，本书中涉及符号表的章节有：</p>
+<ul>
+<li>
+<p>1.2.1 Lexical Analysis</p>
+</li>
+<li>
+<p>1.2.7 Symbol-Table Management</p>
+</li>
+<li>2.7 Symbol Tables</li>
+</ul>
+<p>除此之外，下面是关于符号表的一些扩展知识：</p>
+<ul>
+<li>维基百科的<a href="https://en.wikipedia.org/wiki/Symbol_table">Symbol table</a>，内容非常好，本章节中收录了这篇文章。</li>
+</ul>
+<p>Questions:</p>
+<ul>
+<li>CPython symbol table</li>
+<li>Clang symbol table</li>
+</ul>
+</blockquote>
+<p><img alt="" src="../Figure1.6Phases-of-a-compiler.jpg" /></p>
+<p>Some compilers have a <strong>machine-independent optimization</strong> phase between the <strong>front end</strong> and the <strong>back end</strong>. The purpose of this optimization phase is to perform transformations on the <strong>intermediate representation</strong>, so that the back end can produce a better target program than it would have otherwise produced from an unoptimized intermediate representation. Since optimization is optional, one or the other of the two optimization phases shown in Fig. 1.6 may be missing.</p>
+<blockquote>
+<p>NOTE: 图1.6给出了一个compiler的架构，这个架构是清晰的，作为一名软件工程师，我们可以尝试思考一下如何来实现一个编译器，如下是两种策略：</p>
+<ul>
+<li>分开实现各个部件然后将它们组装成一个完整的编译器，每个部件可以独立工作（耦合度低）</li>
+<li>所有功能集成起来形成一个monolithic compiler，不能独立地使用其中某个部件（耦合度高）</li>
+</ul>
+<p>目前c系语言中最流行的两款编译器：<a href="https://gcc.gnu.org/">gcc</a>和<a href="https://llvm.org/">clang</a>。在clang的官方网站的文章<a href="https://clang.llvm.org/comparison.html">Clang vs Other Open Source Compilers</a>中，给出了这两款编译器的对比（各自的长处与短处），下面是两种的差异之一：</p>
+<blockquote>
+<p>Clang is designed as an API from its inception, allowing it to be reused by source analysis tools, refactoring, IDEs (etc) as well as for code generation. GCC is built as a monolithic static compiler, which makes it extremely difficult to use as an API and integrate into other tools. Further, its historic design and <a href="https://gcc.gnu.org/ml/gcc/2007-11/msg00460.html">current</a> <a href="https://gcc.gnu.org/ml/gcc/2004-12/msg00888.html">policy</a> makes it difficult to decouple the front-end from the rest of the compiler.</p>
+</blockquote>
+<p>显然，clang所采取的是第一种策略，gcc所采取的是第二种策略，正如在这篇文章中作者提出的观点</p>
+<blockquote>
+<p><strong>differences in goals lead to different strengths and weaknesses</strong></p>
+</blockquote>
+<p>我觉得是非常正确的。在clang的官方文档中，将clang的这种设计策略称为：<a href="https://clang.llvm.org/features.html#libraryarch">Library Based Architecture</a>。</p>
+<p>这两款编译器的架构所采取的截然不同的两种策略是软件设计领域一个非常典型的问题。</p>
+<p>抛开软件设计不谈，回归本书。本书所讲述的是编译器的设计原理，是纯理论上的，如图1.6所展示的编译器的构成，本书会分章节来介绍编译器各个部分的设计原理，从前端到后端。实践是有助于理论的理解的，所以我们必须要使用一些工具来验证这些理论。clang作为一个工业级别的完整的、成熟的编译器，它实现了图1.6所展示的编译器的各个部分，而且它的<a href="https://clang.llvm.org/features.html#libraryarch">Library Based Architecture</a>，使得基本上编译器的每个部分都对应为它的一个库，这些库有着简洁的API，并且文档详尽，所以我们可以使用clang来作为学习编译器各个部件的好工具。</p>
+<p>除此之外，<a href="https://docs.python.org/3/">python</a>也可以作为学习编译原理的非常好的工具：</p>
+<ul>
+<li>Design of CPython’s Compiler<a href="https://devguide.python.org/compiler/#design-of-cpython-s-compiler">¶</a>，其中给出cpython编译器的设计</li>
+<li>Python Language Services<a href="https://docs.python.org/3/library/language.html#python-language-services">¶</a>，这是python标准库提供的module，these modules support tokenizing, parsing, syntax analysis, bytecode disassembly, and various other facilities.</li>
+</ul>
+<p>结合这些工具，我们能够详尽地观察编译器各个部件的工作原理。</p>
+</blockquote>
+<h3 id="121_lexical_analysis">1.2.1 Lexical Analysis<a class="headerlink" href="#121_lexical_analysis" title="Permanent link">#</a></h3>
+<p>The first phase of a compiler is called <em>lexical analysis</em> or <em>scanning</em>. The <strong>lexical analyzer</strong> reads the stream of characters making up the source program and groups the characters into meaningful sequences called <em>lexemes</em>. For each <strong>lexeme</strong>, the lexical analyzer produces as output a <em>token</em> of the form</p>
+<pre><code>&lt;token-name, attribute-value&gt;
+</code></pre>
+
+<p>that it passes on to the subsequent phase, <strong>syntax analysis</strong>. In the token, the first component <strong>token-name</strong> is an abstract symbol that is used during <strong>syntax analysis</strong>, and the second component <strong>attribute-value</strong> points to an entry in the <strong>symbol table</strong> for this token. Information from the symbol-table entry is needed
+for <strong>semantic analysis</strong> and <strong>code generation</strong>.</p>
+<p>For example, suppose a source program contains the assignment statement</p>
+<pre><code>position = initial + rate * 60                                                      (1.1)
+</code></pre>
+
+<p>The characters in this assignment could be grouped into the following <strong>lexemes</strong> and mapped into the following tokens passed on to the <strong>syntax analyzer</strong>:</p>
+<ol>
+<li>
+<p><code>position</code> is a <strong>lexeme</strong> that would be mapped into a token <code>&lt;id, 1&gt;</code>, where <code>id</code> is an abstract symbol standing for identifier and <code>1</code> points to the <strong>symbol-table entry</strong> for <code>position</code>. The symbol-table entry for an identifier holds information about the identifier, such as its <strong>name</strong> and <strong>type</strong>.</p>
+</li>
+<li>
+<p>The assignment symbol <code>=</code> is a <strong>lexeme</strong> that is mapped into the token <code>&lt;=&gt;</code>. Since this token needs no attribute-value, we have omitted the second component. We could have used any abstract symbol such as assign for the token-name, but for notational convenience we have chosen to use the lexeme itself as the name of the abstract symbol.</p>
+</li>
+<li>
+<p><code>initial</code> is a lexeme that is mapped into the token <code>&lt;id, 2&gt;</code>, where <code>2</code> points to the symbol-table entry for <code>initial</code>.</p>
+</li>
+<li>
+<p><code>+</code> is a lexeme that is mapped into the token <code>&lt;+&gt;</code>.</p>
+</li>
+<li>
+<p><code>rate</code> is a lexeme that is mapped into the token <code>&lt;id, 3&gt;</code>, where 3 points to the symbol-table entry for <code>rate</code>.</p>
+</li>
+<li>
+<p><code>*</code> is a lexeme that is mapped into the token <code>&lt;*&gt;</code>.</p>
+</li>
+<li>
+<p><code>60</code> is a lexeme that is mapped into the token <code>&lt;60&gt;</code>.</p>
+</li>
+</ol>
+<blockquote>
+<p>Technically speaking, for the lexeme <code>60</code> we should make up a token like <code>&lt;number, 4&gt;</code>,
+where 4 points to the symbol table for the internal representation of integer <code>60</code> but we shall
+defer the discussion of tokens for numbers until Chapter 2. Chapter 3 discusses techniques
+for building lexical analyzers.</p>
+</blockquote>
+<p>Blanks separating the lexemes would b e discarded by the lexical analyzer.</p>
+<p>Figure 1.7 shows the representation of the assignment statement (1.1) after lexical analysis as the sequence of tokens</p>
+<pre><code>&lt;id, 1&gt; &lt;=&gt; &lt;id, 2&gt; &lt;+&gt; &lt;id, 3&gt; &lt;?&gt; &lt;60&gt;                                            (1.2)
+</code></pre>
+
+<p><img alt="" src="../Figure-1.7Translation-of-an-assignment-statement.jpg" /></p>
+<blockquote>
+<p>NOTE: Lexical Analysis主要在Chapter 3 Lexical Analysis中讲述。</p>
+<p>NOTE: <a href="http://clang.llvm.org/">Clang</a>中由<a href="http://clang.llvm.org/features.html#libraryarch"><strong>liblex</strong></a>来实现Lexical Analysis，如下是文档:</p>
+<ul>
+<li><a href="http://clang.llvm.org/docs/InternalsManual.html#id19">The Lexer and Preprocessor Library</a><a href="http://clang.llvm.org/docs/InternalsManual.html#the-lexer-and-preprocessor-library">¶</a></li>
+</ul>
+</blockquote>
+<h3 id="122_syntax_analysis">1.2.2 Syntax Analysis<a class="headerlink" href="#122_syntax_analysis" title="Permanent link">#</a></h3>
+<p>The second phase of the compiler is <em>syntax analysis</em> or <em>parsing</em>. The parser uses the first components of the tokens produced by the <strong>lexical analyzer</strong> to create a tree-like intermediate representation that depicts the grammatical structure of the token stream. A typical representation is a <em>syntax tree</em> in which each interior node represents an operation and the children of the node represent the arguments of the operation. A syntax tree for the token stream (1.2) is shown as the output of the syntactic analyzer in Fig. 1.7.</p>
+<p>This tree shows the order in which the operations in the assignment <code>position = initial + rate * 60</code> are to be performed. The tree has an interior node labeled <code>*</code> with <code>&lt;id, 3&gt;</code> as its left child and the integer <code>60</code> as its right child. The node <code>&lt;id, 3&gt;</code> represents the identifier <code>rate</code>. The node labeled <code>*</code> makes it explicit that we must first multiply the value of <code>rate</code> by <code>60</code>. The node labeled <code>+</code> indicates that we must
+add the result of this multiplication to the value of initial. The <code>root</code> of the tree, labeled <code>=</code>, indicates that we must store the result of this addition into the location for the identifier <code>position</code>. This ordering of operations is consistent with the usual conventions of arithmetic which tell us that multiplication has
+higher precedence than addition, and hence that the multiplication is to be performed before the addition.</p>
+<p>The subsequent phases of the compiler use the grammatical structure to help analyze the source program and generate the target program. In Chapter 4 we shall use context-free grammars to specify the grammatical structure of programming languages and discuss algorithms for constructing efficient syntax
+analyzers automatically from certain classes of grammars. In Chapters 2 and 5 we shall see that <strong>syntax-directed definitions</strong> can help specify the translation of programming language constructs.</p>
+<blockquote>
+<p>NOTE:  <a href="http://clang.llvm.org/">Clang</a>中由<a href="http://clang.llvm.org/features.html#libraryarch"><strong>libparse</strong></a>来实现Syntax Analysis，如下是文档:</p>
+<ul>
+<li><a href="http://clang.llvm.org/docs/InternalsManual.html#id25">The Parser Library</a><a href="http://clang.llvm.org/docs/InternalsManual.html#the-parser-library">¶</a></li>
+</ul>
+</blockquote>
+<h3 id="123_semantic_analysis">1.2.3 Semantic Analysis<a class="headerlink" href="#123_semantic_analysis" title="Permanent link">#</a></h3>
+<p>The <em>semantic analyzer</em> uses the <strong>syntax tree</strong> and the information in the symbol table to check the source program for semantic consistency with the language definition. It also gathers type information and saves it in either the syntax tree or the symbol table, for subsequent use during intermediate-code generation.</p>
+<p>An important part of <strong>semantic analysis</strong> is <em>type checking</em>, where the compiler checks that each operator has matching operands. For example, many programming language definitions require an array index to be an integer; the compiler must report an error if a floating-point number is used to index an array.</p>
+<p>The language specification may permit some type conversions called <em>coercions</em>. For example, a binary arithmetic operator may be applied to either a pair of integers or to a pair of floating-point numbers. If the operator is applied to a floating-point number and an integer, the compiler may convert or coerce the integer into a floating-point number.</p>
+<p>In Fig. 1.7, notice that the output of the semantic analyzer has an extra node for the operator <strong>inttofloat</strong>, which explicitly converts its integer argument into a floating-point number.  <strong>Type checking</strong> and <strong>semantic analysis</strong> are discussed in Chapter 6.</p>
+<blockquote>
+<p>NOTE:  <a href="http://clang.llvm.org/">Clang</a>中由<a href="http://clang.llvm.org/features.html#libraryarch"><strong>libsema </strong></a>来实现Semantic Analysis，如下是文档:</p>
+<ul>
+<li><a href="http://clang.llvm.org/docs/InternalsManual.html#id57">The Sema Library</a><a href="http://clang.llvm.org/docs/InternalsManual.html#the-sema-library">¶</a></li>
+</ul>
+</blockquote>
+<h3 id="124_intermediate_code_generation">1.2.4 Intermediate Code Generation<a class="headerlink" href="#124_intermediate_code_generation" title="Permanent link">#</a></h3>
+<p>In the process of translating a source program into target code, a compiler may construct one or more <strong>intermediate representations</strong>, which can have a variety of forms. <strong>Syntax trees</strong> are a form of <strong>intermediate representation</strong>; they are commonly used during syntax and semantic analysis.</p>
+<p>After syntax and semantic analysis of the source program, many compilers generate an explicit low-level or machine-like intermediate representation, which we can think of as a program for an abstract machine. This intermediate representation should have two important properties: it should be easy to produce and it should be easy to translate into the target machine.</p>
+<p>In Chapter 6, we consider an intermediate form called three-address code, which consists of a sequence of assembly-like instructions with three operands per instruction. Each operand can act like a register. The output of the intermediate code generator in Fig. 1.7 consists of the three-address code sequence</p>
+<p>In Chapter 6, we cover the principal intermediate representations used in compilers. Chapter 5 introduces techniques for <strong>syntax-directed translation</strong> that are applied in Chapter 6 to <strong>type checking</strong> and intermediate-code generation for typical programming language constructs such as expressions, flow-of-control constructs, and procedure calls.</p>
+<h3 id="125_code_optimization">1.2.5 Code Optimization<a class="headerlink" href="#125_code_optimization" title="Permanent link">#</a></h3>
+<p>The machine-independent code-optimization phase attempts to improve the intermediate code so that better target code will result. Usually better means faster, but other objectives may be desired, such as shorter code, or target code that consumes less power. For example, a straightforward algorithm generates
+the intermediate code (1.3), using an instruction for each operator in the tree representation that comes from the semantic analyzer.</p>
+<p>A simple intermediate code generation algorithm followed by code optimization is a reasonable way to generate good target code. The optimizer can deduce that the conversion of 60 from integer to floating point can be done once and for all at compile time, so the inttofloat operation can be eliminated by replacing the integer 60 by the floating-point number 60.0. Moreover, <code>t3</code> is used only once to transmit its value to <code>id1</code> so the optimizer can transform (1.3) into the shorter sequence</p>
+<pre><code>t1 = id3 * 60.0
+id1 = id2 + t1                                                  (1.4)
+</code></pre>
+
+<p>There is a great variation in the amount of code optimization different compilers perform. In those that do the most, the so-called "optimizing compilers," a significant amount of time is spent on this phase. There are simple optimizations that significantly improve the running time of the target program without slowing down compilation too much. The chapters from 8 on discuss machine-independent and machine-dependent optimizations in detail.</p>
+<h3 id="126_code_generation">1.2.6 Code Generation<a class="headerlink" href="#126_code_generation" title="Permanent link">#</a></h3>
+<p>The code generator takes as input an intermediate representation of the source program and maps it into the target language. If the target language is machine code, registers or memory locations are selected for each of the variables used by the program. Then, the intermediate instructions are translated into sequences of machine instructions that perform the same task. A crucial aspect of code generation is the judicious assignment of registers to hold variables.</p>
+<p>For example, using registers <code>R1</code> and <code>R2</code>, the intermediate code in (1.4) might get translated into the machine code</p>
+<pre><code>LDF R2, id3
+MULF R2, R2, #60.0
+LDF R1, id2
+ADDF R1, R1, R2
+STF id1, R1                                                     (1.5)
+</code></pre>
+
+<h3 id="127_symbol-table_management">1.2.7 Symbol-Table Management<a class="headerlink" href="#127_symbol-table_management" title="Permanent link">#</a></h3>
+<p>An essential function of a compiler is to record the variable names used in the source program and collect information about various attributes of each name. These attributes may provide information about the storage allocated for a name, its type, its scope (where in the program its value may b e used), and in the case of procedure names, such things as the number and types of its arguments, the method of passing each argument (for example, by value or by reference), and the type returned.</p>
+<p>The symbol table is a data structure containing a record for each variable name, with fields for the attributes of the name. The data structure should be designed to allow the compiler to find the record for each name quickly and to store or retrieve data from that record quickly. Symbol tables are discussed in
+Chapter 2.</p>
+<h3 id="128_the_grouping_of_phases_into_passes">1.2.8 The Grouping of Phases into Passes<a class="headerlink" href="#128_the_grouping_of_phases_into_passes" title="Permanent link">#</a></h3>
+<h3 id="129_compiler-construction_tools">1.2.9 Compiler-Construction Tools<a class="headerlink" href="#129_compiler-construction_tools" title="Permanent link">#</a></h3>
+<p>The compiler writer, like any software developer, can profitably use modern software development environments containing tools such as language editors, debuggers, version managers, profilers, test harnesses, and so on. In addition to these general software-development tools, other more specialized tools have been created to help implement various phases of a compiler.</p>
+<p>These tools use specialized languages for specifying and implementing specific components, and many use quite sophisticated algorithms. The most successful tools are those that hide the details of the generation algorithm and produce components that can be easily integrated into the remainder of the compiler. Some commonly used compiler-construction tools include</p>
+<ol>
+<li><em>Parser generators</em> that automatically produce syntax analyzers from a grammatical description of a programming language.</li>
+<li><em>Scanner generators</em> that produce lexical analyzers from a regular-expression description of the tokens of a language.</li>
+<li><em>Syntax-directed translation engines</em> that produce collections of routines for walking a parse tree and generating <strong>intermediate code</strong>.</li>
+<li><em>Code-generator generators</em> that produce a code generator from a collection of rules for translating each operation of the intermediate language into the machine language for a target machine.</li>
+<li><em>Data-flow analysis engines</em> that facilitate the gathering of information about how values are transmitted from one part of a program to each other part. Data-flow analysis is a key part of code optimization.</li>
+<li>Compiler-construction toolkits that provide an integrated set of routines for constructing various phases of a compiler.</li>
+</ol>
+<p>We shall describe many of these tools throughout this book.</p>
+<blockquote>
+<p>NOTE: </p>
+<p>Wikipedia的<a href="https://en.wikipedia.org/wiki/Comparison_of_parser_generators">Comparison of parser generators</a>总结了parser generator和scanner generator。
+</p>
+</blockquote>
               
             </div>
           </div>
@@ -249,10 +509,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../../Chapter2-A-Simple-Syntax-Directed-Translator/A-Simple-Syntax-Directed-Translator/" class="btn btn-neutral float-right" title="A-Simple-Syntax-Directed-Translator">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../1.5Applications-of-Compiler-Technology/" class="btn btn-neutral float-right" title="1.5">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../introduction/" class="btn btn-neutral" title="introduction"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../1.1Language-Processors/" class="btn btn-neutral" title="1.1"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -280,10 +540,10 @@
           <a href="https://github.com/dengking/compiler-principle" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
       
       
-        <span><a href="../introduction/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="../1.1Language-Processors/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../../Chapter2-A-Simple-Syntax-Directed-Translator/A-Simple-Syntax-Directed-Translator/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../1.5Applications-of-Compiler-Technology/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>

@@ -1,0 +1,6 @@
+nav:
+    - 3: index.md
+    - 3.1: 3.1The-Role-of-the-Lexical-Analyzer.md
+    - 3.4: 3.4Recognition-of-Tokens.md
+    - 3.6: 3.6Finite-Automata.md
+    - 3.7: 3.7From-Regular-Expressions-to-Automata.md

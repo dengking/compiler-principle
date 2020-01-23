@@ -8,7 +8,7 @@
   
   <meta name="author" content="DengKing">
   <link rel="shortcut icon" href="../../img/favicon.ico">
-  <title>3.4Recognition-of-Tokens - compiler principle</title>
+  <title>3.4 - compiler principle</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
@@ -18,7 +18,7 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "3.4Recognition-of-Tokens";
+    var mkdocs_page_name = 3.4;
     var mkdocs_page_input_path = "Chapter3-Lexical-Analysis/3.4Recognition-of-Tokens.md";
     var mkdocs_page_url = "/compiler-principle/Chapter3-Lexical-Analysis/3.4Recognition-of-Tokens/";
   </script>
@@ -58,68 +58,80 @@
           
             <li class="toctree-l1">
 		
-    <span class="caption-text">Chapter1-Introduction</span>
+    <span class="caption-text">Chapter1</span>
     <ul class="subnav">
                 <li class="">
                     
-    <a class="" href="../../Chapter1-Introduction/introduction/">introduction</a>
+    <a class="" href="../../Chapter1-Introduction/">1</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../../Chapter1-Introduction/1.2The-Structure-of-a-Compiler/">1.2The-Structure-of-a-Compiler</a>
+    <a class="" href="../../Chapter1-Introduction/1.1Language-Processors/">1.1</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter1-Introduction/1.2The-Structure-of-a-Compiler/">1.2</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter1-Introduction/1.5Applications-of-Compiler-Technology/">1.5</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter1-Introduction/1.6Programming-Language-Basics/">1.6</a>
                 </li>
     </ul>
 	    </li>
           
             <li class="toctree-l1">
 		
-    <span class="caption-text">Chapter2-A-Simple-Syntax-Directed-Translator</span>
+    <span class="caption-text">Chapter2</span>
     <ul class="subnav">
                 <li class="">
                     
-    <a class="" href="../../Chapter2-A-Simple-Syntax-Directed-Translator/A-Simple-Syntax-Directed-Translator/">A-Simple-Syntax-Directed-Translator</a>
+    <a class="" href="../../Chapter2-A-Simple-Syntax-Directed-Translator/">2</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../../Chapter2-A-Simple-Syntax-Directed-Translator/2.1Introduction/">2.1Introduction</a>
+    <a class="" href="../../Chapter2-A-Simple-Syntax-Directed-Translator/2.1Introduction/">2.1</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../../Chapter2-A-Simple-Syntax-Directed-Translator/2.2Syntax-Definition/">2.2Syntax-Definition</a>
+    <a class="" href="../../Chapter2-A-Simple-Syntax-Directed-Translator/2.2Syntax-Definition/">2.2</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../../Chapter2-A-Simple-Syntax-Directed-Translator/2.3Syntax-Directed-Translation/">2.3Syntax-Directed-Translation</a>
+    <a class="" href="../../Chapter2-A-Simple-Syntax-Directed-Translator/2.3Syntax-Directed-Translation/">2.3</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../../Chapter2-A-Simple-Syntax-Directed-Translator/2.4Parsing/">2.4Parsing</a>
+    <a class="" href="../../Chapter2-A-Simple-Syntax-Directed-Translator/2.4Parsing/">2.4</a>
                 </li>
     </ul>
 	    </li>
           
             <li class="toctree-l1">
 		
-    <span class="caption-text">Chapter3-Lexical-Analysis</span>
+    <span class="caption-text">Chapter3</span>
     <ul class="subnav">
                 <li class="">
                     
-    <a class="" href="../Lexical-Analysis/">Lexical-Analysis</a>
+    <a class="" href="../">3</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../3.1The-Role-of-the-Lexical-Analyzer/">3.1The-Role-of-the-Lexical-Analyzer</a>
+    <a class="" href="../3.1The-Role-of-the-Lexical-Analyzer/">3.1</a>
                 </li>
                 <li class=" current">
                     
-    <a class="current" href="./">3.4Recognition-of-Tokens</a>
+    <a class="current" href="./">3.4</a>
     <ul class="subnav">
             
-    <li class="toctree-l3"><a href="#34-recognition-of-tokens">3.4 Recognition of Tokens</a></li>
+    <li class="toctree-l3"><a href="#34_recognition_of_tokens">3.4 Recognition of Tokens</a></li>
     
         <ul>
         
-            <li><a class="toctree-l4" href="#aho-corasick-algorithm">Aho-Corasick algorithm</a></li>
+            <li><a class="toctree-l4" href="#aho-corasick_algorithm">Aho-Corasick algorithm</a></li>
         
         </ul>
     
@@ -128,88 +140,114 @@
                 </li>
                 <li class="">
                     
-    <a class="" href="../3.6Finite-Automata/">3.6Finite-Automata</a>
+    <a class="" href="../3.6Finite-Automata/">3.6</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../3.7From-Regular-Expressions-to-Automata/">3.7From-Regular-Expressions-to-Automata</a>
-                </li>
-                <li class="">
-                    
-    <span class="caption-text">wikipedia-String</span>
-    <ul class="subnav">
-                <li class="toctree-l3">
-                    
-    <a class="" href="../wikipedia-String/wikipedia-String(computer-science)/">wikipedia-String(computer-science)</a>
-                </li>
-                <li class="toctree-l3">
-                    
-    <span class="caption-text">string-searching</span>
-    <ul class="subnav">
-                <li class="toctree-l4">
-                    
-    <a class="" href="../wikipedia-String/string-searching/wikipedia-Aho-Corasick-algorithm/">wikipedia-Aho-Corasick-algorithm</a>
-                </li>
-    </ul>
-                </li>
-    </ul>
+    <a class="" href="../3.7From-Regular-Expressions-to-Automata/">3.7</a>
                 </li>
     </ul>
 	    </li>
           
             <li class="toctree-l1">
 		
-    <span class="caption-text">Chapter4-Syntax-Analysis</span>
+    <span class="caption-text">Chapter4</span>
     <ul class="subnav">
                 <li class="">
                     
-    <a class="" href="../../Chapter4-Syntax-Analysis/Syntax-Analysis/">Syntax-Analysis</a>
+    <a class="" href="../../Chapter4-Syntax-Analysis/">4</a>
                 </li>
                 <li class="">
                     
-    <span class="caption-text">Wikipedia-Parsing-algorithms</span>
-    <ul class="subnav">
-                <li class="toctree-l3">
-                    
-    <a class="" href="../../Chapter4-Syntax-Analysis/Wikipedia-Parsing-algorithms/wikipedia-Parsing/">wikipedia-Parsing</a>
+    <a class="" href="../../Chapter4-Syntax-Analysis/4.2Context-Free-Grammars/">4.2</a>
                 </li>
-                <li class="toctree-l3">
+                <li class="">
                     
-    <span class="caption-text">Bottom-up</span>
-    <ul class="subnav">
-                <li class="toctree-l4">
-                    
-    <span class="caption-text">Precedence</span>
-    <ul class="subnav">
-                <li class="toctree-l5">
-                    
-    <a class="" href="../../Chapter4-Syntax-Analysis/Wikipedia-Parsing-algorithms/Bottom-up/Precedence/wikipedia-Operator-precedence-parser/">wikipedia-Operator-precedence-parser</a>
+    <a class="" href="../../Chapter4-Syntax-Analysis/4.3Writing-a-Grammar/">4.3</a>
                 </li>
-                <li class="toctree-l5">
+                <li class="">
                     
-    <a class="" href="../../Chapter4-Syntax-Analysis/Wikipedia-Parsing-algorithms/Bottom-up/Precedence/wikipedia-Shunting-yard-algorithm/">wikipedia-Shunting-yard-algorithm</a>
+    <a class="" href="../../Chapter4-Syntax-Analysis/4.5Bottom-Up-Parsing/">4.5</a>
                 </li>
-    </ul>
-                </li>
-                <li class="toctree-l4">
+                <li class="">
                     
-    <a class="" href="../../Chapter4-Syntax-Analysis/Wikipedia-Parsing-algorithms/Bottom-up/blog-Equation(expression)parser-with-precedence/">blog-Equation(expression)parser-with-precedence</a>
+    <a class="" href="../../Chapter4-Syntax-Analysis/4.6Introduction-to-LR-Parsing-Simple-LR/">4.6</a>
                 </li>
-                <li class="toctree-l4">
+                <li class="">
                     
-    <a class="" href="../../Chapter4-Syntax-Analysis/Wikipedia-Parsing-algorithms/Bottom-up/wikipedia-CYK-algorithm/">wikipedia-CYK-algorithm</a>
+    <a class="" href="../../Chapter4-Syntax-Analysis/4.7More-Powerful-LR-Parsers/">4.7</a>
                 </li>
-                <li class="toctree-l4">
+                <li class="">
                     
-    <a class="" href="../../Chapter4-Syntax-Analysis/Wikipedia-Parsing-algorithms/Bottom-up/wikipedia-LR-parser/">wikipedia-LR-parser</a>
-                </li>
-                <li class="toctree-l4">
-                    
-    <a class="" href="../../Chapter4-Syntax-Analysis/Wikipedia-Parsing-algorithms/Bottom-up/wikipedia-Top-down-parsing/">wikipedia-Top-down-parsing</a>
+    <a class="" href="../../Chapter4-Syntax-Analysis/VS-LL-parser-VS-LR-parser/">VS-LL-parser-VS-LR-parser</a>
                 </li>
     </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Chapter5</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../Chapter5-Syntax-Directed-Translation/">5</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter5-Syntax-Directed-Translation/5.1Syntax-Directed-Definitions/">5.1</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter5-Syntax-Directed-Translation/5.2Evaluation-Orders-for-SDD's/">5.2</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter5-Syntax-Directed-Translation/5.3Applications-of-Syntax-Directed-Translation/">5.3</a>
                 </li>
     </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Chapter6</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../Chapter6-Intermediate-Code-Generation/">6</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter6-Intermediate-Code-Generation/6.3Types-and-Declarations/">6.3</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Chapter7</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../Chapter7-Run-Time-Environments/">7</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter7-Run-Time-Environments/7.1Storage-Organization/">7.1</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter7-Run-Time-Environments/7.2Stack-Allocation-of-Space/">7.2</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Chapter9</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../Chapter9-Machine-Independent-Optimizations/">9</a>
                 </li>
     </ul>
 	    </li>
@@ -236,11 +274,11 @@
     
       
         
-          <li>Chapter3-Lexical-Analysis &raquo;</li>
+          <li>Chapter3 &raquo;</li>
         
       
     
-    <li>3.4Recognition-of-Tokens</li>
+    <li>3.4</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -252,13 +290,13 @@
               
                 <div class="toc">
 <ul>
-<li><a href="#34-recognition-of-tokens">3.4 Recognition of Tokens</a><ul>
-<li><a href="#aho-corasick-algorithm">Aho-Corasick algorithm</a></li>
+<li><a href="#34_recognition_of_tokens">3.4 Recognition of Tokens</a><ul>
+<li><a href="#aho-corasick_algorithm">Aho-Corasick algorithm</a></li>
 </ul>
 </li>
 </ul>
 </div>
-<h1 id="34-recognition-of-tokens">3.4 Recognition of Tokens<a class="headerlink" href="#34-recognition-of-tokens" title="Permanent link"></a></h1>
+<h2 id="34_recognition_of_tokens">3.4 Recognition of Tokens<a class="headerlink" href="#34_recognition_of_tokens" title="Permanent link">#</a></h2>
 <blockquote>
 <p>NOTE:  This chapter  describes conversion from regular-expression patterns to <strong>transition diagrams</strong> by hand, which is intended to help reader to understand the <strong>finite automaton</strong>(finite state machine) widely used in engineering described in section 3.5. In essence, a transition diagram is a visual representation of a finite state machine.</p>
 </blockquote>
@@ -275,7 +313,7 @@ term \to id \
 \end{align}
 $$
 Figure 3.10: A grammar for branching statements</p>
-<h2 id="aho-corasick-algorithm">Aho-Corasick algorithm<a class="headerlink" href="#aho-corasick-algorithm" title="Permanent link"></a></h2>
+<h3 id="aho-corasick_algorithm">Aho-Corasick algorithm<a class="headerlink" href="#aho-corasick_algorithm" title="Permanent link">#</a></h3>
 <blockquote>
 <p>NOTE: The main content of this chapter is passed, but in the exercise,  the author introduce <a href="https://en.wikipedia.org/wiki/Aho%E2%80%93Corasick_algorithm">Aho-Corasick algorithm</a> and <a href="https://en.wikipedia.org/wiki/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm">KMP algorithm</a> which are interesting.</p>
 </blockquote>
@@ -343,10 +381,10 @@ Figure 3.10: A grammar for branching statements</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../3.6Finite-Automata/" class="btn btn-neutral float-right" title="3.6Finite-Automata">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../3.6Finite-Automata/" class="btn btn-neutral float-right" title="3.6">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../3.1The-Role-of-the-Lexical-Analyzer/" class="btn btn-neutral" title="3.1The-Role-of-the-Lexical-Analyzer"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../3.1The-Role-of-the-Lexical-Analyzer/" class="btn btn-neutral" title="3.1"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   

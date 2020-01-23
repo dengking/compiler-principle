@@ -8,7 +8,7 @@
   
   <meta name="author" content="DengKing">
   <link rel="shortcut icon" href="../../img/favicon.ico">
-  <title>2.4Parsing - compiler principle</title>
+  <title>2.4 - compiler principle</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
@@ -18,7 +18,7 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "2.4Parsing";
+    var mkdocs_page_name = 2.4;
     var mkdocs_page_input_path = "Chapter2-A-Simple-Syntax-Directed-Translator/2.4Parsing.md";
     var mkdocs_page_url = "/compiler-principle/Chapter2-A-Simple-Syntax-Directed-Translator/2.4Parsing/";
   </script>
@@ -58,53 +58,65 @@
           
             <li class="toctree-l1">
 		
-    <span class="caption-text">Chapter1-Introduction</span>
+    <span class="caption-text">Chapter1</span>
     <ul class="subnav">
                 <li class="">
                     
-    <a class="" href="../../Chapter1-Introduction/introduction/">introduction</a>
+    <a class="" href="../../Chapter1-Introduction/">1</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../../Chapter1-Introduction/1.2The-Structure-of-a-Compiler/">1.2The-Structure-of-a-Compiler</a>
+    <a class="" href="../../Chapter1-Introduction/1.1Language-Processors/">1.1</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter1-Introduction/1.2The-Structure-of-a-Compiler/">1.2</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter1-Introduction/1.5Applications-of-Compiler-Technology/">1.5</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter1-Introduction/1.6Programming-Language-Basics/">1.6</a>
                 </li>
     </ul>
 	    </li>
           
             <li class="toctree-l1">
 		
-    <span class="caption-text">Chapter2-A-Simple-Syntax-Directed-Translator</span>
+    <span class="caption-text">Chapter2</span>
     <ul class="subnav">
                 <li class="">
                     
-    <a class="" href="../A-Simple-Syntax-Directed-Translator/">A-Simple-Syntax-Directed-Translator</a>
+    <a class="" href="../">2</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../2.1Introduction/">2.1Introduction</a>
+    <a class="" href="../2.1Introduction/">2.1</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../2.2Syntax-Definition/">2.2Syntax-Definition</a>
+    <a class="" href="../2.2Syntax-Definition/">2.2</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../2.3Syntax-Directed-Translation/">2.3Syntax-Directed-Translation</a>
+    <a class="" href="../2.3Syntax-Directed-Translation/">2.3</a>
                 </li>
                 <li class=" current">
                     
-    <a class="current" href="./">2.4Parsing</a>
+    <a class="current" href="./">2.4</a>
     <ul class="subnav">
             
-    <li class="toctree-l3"><a href="#24-parsing">2.4 Parsing</a></li>
+    <li class="toctree-l3"><a href="#24_parsing">2.4 Parsing</a></li>
     
         <ul>
         
-            <li><a class="toctree-l4" href="#241-top-down-parsing">2.4.1 Top-Down Parsing</a></li>
+            <li><a class="toctree-l4" href="#241_top-down_parsing">2.4.1 Top-Down Parsing</a></li>
         
-            <li><a class="toctree-l4" href="#242-predictive-parsing">2.4.2 Predictive Parsing</a></li>
+            <li><a class="toctree-l4" href="#242_predictive_parsing">2.4.2 Predictive Parsing</a></li>
         
-            <li><a class="toctree-l4" href="#243-when-to-use-epsilon-productions">2.4.3 When to Use $\epsilon$-Productions</a></li>
+            <li><a class="toctree-l4" href="#243_when_to_use_epsilon-productions">2.4.3 When to Use $\epsilon$-Productions</a></li>
         
         </ul>
     
@@ -116,104 +128,130 @@
           
             <li class="toctree-l1">
 		
-    <span class="caption-text">Chapter3-Lexical-Analysis</span>
+    <span class="caption-text">Chapter3</span>
     <ul class="subnav">
                 <li class="">
                     
-    <a class="" href="../../Chapter3-Lexical-Analysis/Lexical-Analysis/">Lexical-Analysis</a>
+    <a class="" href="../../Chapter3-Lexical-Analysis/">3</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../../Chapter3-Lexical-Analysis/3.1The-Role-of-the-Lexical-Analyzer/">3.1The-Role-of-the-Lexical-Analyzer</a>
+    <a class="" href="../../Chapter3-Lexical-Analysis/3.1The-Role-of-the-Lexical-Analyzer/">3.1</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../../Chapter3-Lexical-Analysis/3.4Recognition-of-Tokens/">3.4Recognition-of-Tokens</a>
+    <a class="" href="../../Chapter3-Lexical-Analysis/3.4Recognition-of-Tokens/">3.4</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../../Chapter3-Lexical-Analysis/3.6Finite-Automata/">3.6Finite-Automata</a>
+    <a class="" href="../../Chapter3-Lexical-Analysis/3.6Finite-Automata/">3.6</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../../Chapter3-Lexical-Analysis/3.7From-Regular-Expressions-to-Automata/">3.7From-Regular-Expressions-to-Automata</a>
-                </li>
-                <li class="">
-                    
-    <span class="caption-text">wikipedia-String</span>
-    <ul class="subnav">
-                <li class="toctree-l3">
-                    
-    <a class="" href="../../Chapter3-Lexical-Analysis/wikipedia-String/wikipedia-String(computer-science)/">wikipedia-String(computer-science)</a>
-                </li>
-                <li class="toctree-l3">
-                    
-    <span class="caption-text">string-searching</span>
-    <ul class="subnav">
-                <li class="toctree-l4">
-                    
-    <a class="" href="../../Chapter3-Lexical-Analysis/wikipedia-String/string-searching/wikipedia-Aho-Corasick-algorithm/">wikipedia-Aho-Corasick-algorithm</a>
-                </li>
-    </ul>
-                </li>
-    </ul>
+    <a class="" href="../../Chapter3-Lexical-Analysis/3.7From-Regular-Expressions-to-Automata/">3.7</a>
                 </li>
     </ul>
 	    </li>
           
             <li class="toctree-l1">
 		
-    <span class="caption-text">Chapter4-Syntax-Analysis</span>
+    <span class="caption-text">Chapter4</span>
     <ul class="subnav">
                 <li class="">
                     
-    <a class="" href="../../Chapter4-Syntax-Analysis/Syntax-Analysis/">Syntax-Analysis</a>
+    <a class="" href="../../Chapter4-Syntax-Analysis/">4</a>
                 </li>
                 <li class="">
                     
-    <span class="caption-text">Wikipedia-Parsing-algorithms</span>
-    <ul class="subnav">
-                <li class="toctree-l3">
-                    
-    <a class="" href="../../Chapter4-Syntax-Analysis/Wikipedia-Parsing-algorithms/wikipedia-Parsing/">wikipedia-Parsing</a>
+    <a class="" href="../../Chapter4-Syntax-Analysis/4.2Context-Free-Grammars/">4.2</a>
                 </li>
-                <li class="toctree-l3">
+                <li class="">
                     
-    <span class="caption-text">Bottom-up</span>
-    <ul class="subnav">
-                <li class="toctree-l4">
-                    
-    <span class="caption-text">Precedence</span>
-    <ul class="subnav">
-                <li class="toctree-l5">
-                    
-    <a class="" href="../../Chapter4-Syntax-Analysis/Wikipedia-Parsing-algorithms/Bottom-up/Precedence/wikipedia-Operator-precedence-parser/">wikipedia-Operator-precedence-parser</a>
+    <a class="" href="../../Chapter4-Syntax-Analysis/4.3Writing-a-Grammar/">4.3</a>
                 </li>
-                <li class="toctree-l5">
+                <li class="">
                     
-    <a class="" href="../../Chapter4-Syntax-Analysis/Wikipedia-Parsing-algorithms/Bottom-up/Precedence/wikipedia-Shunting-yard-algorithm/">wikipedia-Shunting-yard-algorithm</a>
+    <a class="" href="../../Chapter4-Syntax-Analysis/4.5Bottom-Up-Parsing/">4.5</a>
                 </li>
-    </ul>
-                </li>
-                <li class="toctree-l4">
+                <li class="">
                     
-    <a class="" href="../../Chapter4-Syntax-Analysis/Wikipedia-Parsing-algorithms/Bottom-up/blog-Equation(expression)parser-with-precedence/">blog-Equation(expression)parser-with-precedence</a>
+    <a class="" href="../../Chapter4-Syntax-Analysis/4.6Introduction-to-LR-Parsing-Simple-LR/">4.6</a>
                 </li>
-                <li class="toctree-l4">
+                <li class="">
                     
-    <a class="" href="../../Chapter4-Syntax-Analysis/Wikipedia-Parsing-algorithms/Bottom-up/wikipedia-CYK-algorithm/">wikipedia-CYK-algorithm</a>
+    <a class="" href="../../Chapter4-Syntax-Analysis/4.7More-Powerful-LR-Parsers/">4.7</a>
                 </li>
-                <li class="toctree-l4">
+                <li class="">
                     
-    <a class="" href="../../Chapter4-Syntax-Analysis/Wikipedia-Parsing-algorithms/Bottom-up/wikipedia-LR-parser/">wikipedia-LR-parser</a>
-                </li>
-                <li class="toctree-l4">
-                    
-    <a class="" href="../../Chapter4-Syntax-Analysis/Wikipedia-Parsing-algorithms/Bottom-up/wikipedia-Top-down-parsing/">wikipedia-Top-down-parsing</a>
+    <a class="" href="../../Chapter4-Syntax-Analysis/VS-LL-parser-VS-LR-parser/">VS-LL-parser-VS-LR-parser</a>
                 </li>
     </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Chapter5</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../Chapter5-Syntax-Directed-Translation/">5</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter5-Syntax-Directed-Translation/5.1Syntax-Directed-Definitions/">5.1</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter5-Syntax-Directed-Translation/5.2Evaluation-Orders-for-SDD's/">5.2</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter5-Syntax-Directed-Translation/5.3Applications-of-Syntax-Directed-Translation/">5.3</a>
                 </li>
     </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Chapter6</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../Chapter6-Intermediate-Code-Generation/">6</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter6-Intermediate-Code-Generation/6.3Types-and-Declarations/">6.3</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Chapter7</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../Chapter7-Run-Time-Environments/">7</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter7-Run-Time-Environments/7.1Storage-Organization/">7.1</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter7-Run-Time-Environments/7.2Stack-Allocation-of-Space/">7.2</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Chapter9</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../Chapter9-Machine-Independent-Optimizations/">9</a>
                 </li>
     </ul>
 	    </li>
@@ -240,11 +278,11 @@
     
       
         
-          <li>Chapter2-A-Simple-Syntax-Directed-Translator &raquo;</li>
+          <li>Chapter2 &raquo;</li>
         
       
     
-    <li>2.4Parsing</li>
+    <li>2.4</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -256,15 +294,15 @@
               
                 <div class="toc">
 <ul>
-<li><a href="#24-parsing">2.4 Parsing</a><ul>
-<li><a href="#241-top-down-parsing">2.4.1 Top-Down Parsing</a></li>
-<li><a href="#242-predictive-parsing">2.4.2 Predictive Parsing</a></li>
-<li><a href="#243-when-to-use-epsilon-productions">2.4.3 When to Use $\epsilon$-Productions</a></li>
+<li><a href="#24_parsing">2.4 Parsing</a><ul>
+<li><a href="#241_top-down_parsing">2.4.1 Top-Down Parsing</a></li>
+<li><a href="#242_predictive_parsing">2.4.2 Predictive Parsing</a></li>
+<li><a href="#243_when_to_use_epsilon-productions">2.4.3 When to Use $\epsilon$-Productions</a></li>
 </ul>
 </li>
 </ul>
 </div>
-<h1 id="24-parsing">2.4 Parsing<a class="headerlink" href="#24-parsing" title="Permanent link"></a></h1>
+<h2 id="24_parsing">2.4 Parsing<a class="headerlink" href="#24_parsing" title="Permanent link">#</a></h2>
 <p>Parsing is the process of determining how a string of <strong>terminals</strong> can be generated by a <strong>grammar</strong>. In discussing this problem, it is helpful to think of a <strong>parse tree</strong> being constructed, even though a compiler may not construct one, in practice. However, a parser must be capable of constructing the tree in principle, or else the translation cannot be guaranteed correct.</p>
 <blockquote>
 <p>NOTE: The concept of parsing is introduced in chapter 2.2.2 Derivations</p>
@@ -278,7 +316,7 @@
 <li><a href="https://en.wikipedia.org/wiki/Parsing">Parsing algorithms</a></li>
 </ul>
 </blockquote>
-<h2 id="241-top-down-parsing">2.4.1 Top-Down Parsing<a class="headerlink" href="#241-top-down-parsing" title="Permanent link"></a></h2>
+<h3 id="241_top-down_parsing">2.4.1 Top-Down Parsing<a class="headerlink" href="#241_top-down_parsing" title="Permanent link">#</a></h3>
 <p>We introduce <strong>top-down parsing</strong> by considering a grammar that is well-suited for this class of methods. Later in this section, we consider the construction of top-down parsers in general. The grammar in Fig. 2.16 generates a subset of the statements of C or Java. We use the boldface terminals <strong>if</strong> and <strong>for</strong> for the keywords "if" and "for", respectively, to emphasize that these character sequences are treated as units, i.e., as single terminal symbols. Further, the terminal <code>expr</code> represents expressions; a more complete grammar would use a nonterminal <code>expr</code> and have productions for nonterminal <code>expr</code>. Similarly, other is a terminal representing other statement constructs.</p>
 <p><img alt="" src="../Figure2.16A-grammar-for-some-statements-in-C-and-Java.jpg" /></p>
 <p>The <strong>top-down</strong> construction of a <strong>parse tree</strong> like the one in Fig. 2.17, is done by starting with the root, labeled with the starting nonterminal <code>stmt</code>, and repeatedly performing the following two steps.</p>
@@ -301,7 +339,7 @@ child labeled with for is being considered.</p>
 <blockquote>
 <p>NOTE: There is a good illustration of Top-Down Parser in <a href="https://www.tutorialspoint.com/compiler_design/compiler_design_top_down_parser.htm">this blog</a>.</p>
 </blockquote>
-<h2 id="242-predictive-parsing">2.4.2 Predictive Parsing<a class="headerlink" href="#242-predictive-parsing" title="Permanent link"></a></h2>
+<h3 id="242_predictive_parsing">2.4.2 Predictive Parsing<a class="headerlink" href="#242_predictive_parsing" title="Permanent link">#</a></h3>
 <p><em>Recursive-descent parsing</em> is a top-down method of syntax analysis in which a set of recursive procedures is used to process the input. One procedure is associated with each nonterminal of a grammar. Here, we consider a simple form of <strong>recursive-descent parsing</strong>, called <em>predictive parsing</em>, in which the <strong>lookahead symbol</strong> unambiguously determines the flow of control through the procedure body for each <strong>nonterminal</strong>. The sequence of procedure calls during the analysis of an input string <strong>implicitly</strong> defines a <strong>parse tree</strong> for the input, and can be used to build an <strong>explicit parse tree</strong>, if desired.</p>
 <p>The predictive parser in Fig. 2.19 consists of procedures for the nonterminals <code>stmt</code> and <code>optexpr</code> of the grammar in Fig. 2.16 and an additional procedure match, used to simplify the code for <code>stmt</code> and <code>optexpr</code>. Procedure <code>match(t)</code> compares its argument <code>t</code> with the <strong>lookahead symbol</strong> and advances to the next input terminal if they match. Thus match changes the value of variable lookahead, a global variable that holds the currently scanned input terminal.</p>
 <pre><code class="pseudocode">void stmt () {
@@ -361,7 +399,7 @@ FIRST(expr ;) = {expr}
 </blockquote>
 <p>The FIRST sets must be considered if there are two pro ductions $A \to \alpha$ and $A \to \beta$ . Ignoring $\epsilon$-productions for the moment, predictive parsing requires $FIRST (\alpha)$ and $FIRST(\beta )$ to b e disjoint. The lookahead symbol can then be used to decide which production to use; if the lookahead symbol is in $FIRST (\alpha)$, then
 $\alpha$ is used. Otherwise, if the lookahead symbol is in $FIRST (\beta)$, then $\beta$ is used.</p>
-<h2 id="243-when-to-use-epsilon-productions">2.4.3 When to Use $\epsilon$-Productions<a class="headerlink" href="#243-when-to-use-epsilon-productions" title="Permanent link"></a></h2>
+<h3 id="243_when_to_use_epsilon-productions">2.4.3 When to Use $\epsilon$-Productions<a class="headerlink" href="#243_when_to_use_epsilon-productions" title="Permanent link">#</a></h3>
               
             </div>
           </div>
@@ -369,10 +407,10 @@ $\alpha$ is used. Otherwise, if the lookahead symbol is in $FIRST (\beta)$, then
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../../Chapter3-Lexical-Analysis/Lexical-Analysis/" class="btn btn-neutral float-right" title="Lexical-Analysis">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../../Chapter3-Lexical-Analysis/" class="btn btn-neutral float-right" title="3">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../2.3Syntax-Directed-Translation/" class="btn btn-neutral" title="2.3Syntax-Directed-Translation"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../2.3Syntax-Directed-Translation/" class="btn btn-neutral" title="2.3"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -403,7 +441,7 @@ $\alpha$ is used. Otherwise, if the lookahead symbol is in $FIRST (\beta)$, then
         <span><a href="../2.3Syntax-Directed-Translation/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../../Chapter3-Lexical-Analysis/Lexical-Analysis/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../../Chapter3-Lexical-Analysis/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>

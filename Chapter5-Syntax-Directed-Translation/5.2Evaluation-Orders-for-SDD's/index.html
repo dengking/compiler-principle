@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <meta name="author" content="DengKing">
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+  <title>5.2 - compiler principle</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  <link href="../../css/extra.css" rel="stylesheet">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = 5.2;
+    var mkdocs_page_input_path = "Chapter5-Syntax-Directed-Translation/5.2Evaluation-Orders-for-SDD's.md";
+    var mkdocs_page_url = "/compiler-principle/Chapter5-Syntax-Directed-Translation/5.2Evaluation-Orders-for-SDD's/";
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/django.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> compiler principle</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../..">Home</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Chapter1</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../Chapter1-Introduction/">1</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter1-Introduction/1.1Language-Processors/">1.1</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter1-Introduction/1.2The-Structure-of-a-Compiler/">1.2</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter1-Introduction/1.5Applications-of-Compiler-Technology/">1.5</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter1-Introduction/1.6Programming-Language-Basics/">1.6</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Chapter2</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../Chapter2-A-Simple-Syntax-Directed-Translator/">2</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter2-A-Simple-Syntax-Directed-Translator/2.1Introduction/">2.1</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter2-A-Simple-Syntax-Directed-Translator/2.2Syntax-Definition/">2.2</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter2-A-Simple-Syntax-Directed-Translator/2.3Syntax-Directed-Translation/">2.3</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter2-A-Simple-Syntax-Directed-Translator/2.4Parsing/">2.4</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Chapter3</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../Chapter3-Lexical-Analysis/">3</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter3-Lexical-Analysis/3.1The-Role-of-the-Lexical-Analyzer/">3.1</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter3-Lexical-Analysis/3.4Recognition-of-Tokens/">3.4</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter3-Lexical-Analysis/3.6Finite-Automata/">3.6</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter3-Lexical-Analysis/3.7From-Regular-Expressions-to-Automata/">3.7</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Chapter4</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../Chapter4-Syntax-Analysis/">4</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter4-Syntax-Analysis/4.2Context-Free-Grammars/">4.2</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter4-Syntax-Analysis/4.3Writing-a-Grammar/">4.3</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter4-Syntax-Analysis/4.5Bottom-Up-Parsing/">4.5</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter4-Syntax-Analysis/4.6Introduction-to-LR-Parsing-Simple-LR/">4.6</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter4-Syntax-Analysis/4.7More-Powerful-LR-Parsers/">4.7</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter4-Syntax-Analysis/VS-LL-parser-VS-LR-parser/">VS-LL-parser-VS-LR-parser</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Chapter5</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../">5</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../5.1Syntax-Directed-Definitions/">5.1</a>
+                </li>
+                <li class=" current">
+                    
+    <a class="current" href="./">5.2</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l3"><a href="#52_evaluation_orders_for_sdds">5.2 Evaluation Orders for SDD's</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#521_dependency_graphs">5.2.1 Dependency Graphs</a></li>
+        
+            <li><a class="toctree-l4" href="#522_ordering_the_evaluation_of_attributes">5.2.2 Ordering the Evaluation of Attributes</a></li>
+        
+            <li><a class="toctree-l4" href="#523_s-attributed_definitions">5.2.3 S-Attributed Definitions</a></li>
+        
+            <li><a class="toctree-l4" href="#524_l-attributed_definitions">5.2.4 L-Attributed Definitions</a></li>
+        
+            <li><a class="toctree-l4" href="#525_semantic_rules_with_controlled_side_effects">5.2.5 Semantic Rules with Controlled Side Effects</a></li>
+        
+        </ul>
+    
+
+    </ul>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../5.3Applications-of-Syntax-Directed-Translation/">5.3</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Chapter6</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../Chapter6-Intermediate-Code-Generation/">6</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter6-Intermediate-Code-Generation/6.3Types-and-Declarations/">6.3</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Chapter7</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../Chapter7-Run-Time-Environments/">7</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter7-Run-Time-Environments/7.1Storage-Organization/">7.1</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter7-Run-Time-Environments/7.2Stack-Allocation-of-Space/">7.2</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Chapter9</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../Chapter9-Machine-Independent-Optimizations/">9</a>
+                </li>
+    </ul>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">compiler principle</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Chapter5 &raquo;</li>
+        
+      
+    
+    <li>5.2</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h2 id="52_evaluation_orders_for_sdds">5.2 Evaluation Orders for SDD's<a class="headerlink" href="#52_evaluation_orders_for_sdds" title="Permanent link">#</a></h2>
+<p>Dependency graphs" are a useful tool for determining an evaluation order for the attribute instances in a given <strong>parse tree</strong>. While an annotated parse tree shows the values of attributes, a <strong>dependency graph</strong> helps us determine how those values can be computed.</p>
+<p>In this section, in addition to dependency graphs, we define two important classes of SDD's: the "S-attributed" and the more general "L-attributed" SDD's. The translations specified by these two classes fit well with the parsing methods we have studied, and most translations encountered in practice can be
+written to conform to the requirements of at least one of these classes.</p>
+<h3 id="521_dependency_graphs">5.2.1 Dependency Graphs<a class="headerlink" href="#521_dependency_graphs" title="Permanent link">#</a></h3>
+<p>A <em>dependency graph</em> depicts the flow of information among the attribute instances in a particular <strong>parse tree</strong>; an edge from one attribute instance to another means that the value of the first is needed to compute the second. Edges express constraints implied by the <strong>semantic rules</strong>. In more detail:</p>
+<ul>
+<li>
+<p>For each parse-tree node, say a node labeled by grammar symbol <code>X</code> , the dependency graph has a node for each attribute associated with <code>X</code> .</p>
+</li>
+<li>
+<p>Suppose that a semantic rule associated with a production <code>p</code> defines the value of <strong>synthesized attribute</strong> <code>A.b</code> in terms of the value of <code>X.c</code> (the rule may define <code>A.b</code> in terms of other attributes in addition to <code>X.c</code>). Then, the dependency graph has an edge from <code>X.c</code> to <code>A.b</code>. More precisely, at every node <code>N</code> labeled <code>A</code> where production <code>p</code> is applied, create an edge to attribute <code>b</code> at <code>N</code> , from the attribute <code>c</code> at the child of <code>N</code> corresponding to this instance of the symbol <code>X</code> in the body of the production.</p>
+</li>
+</ul>
+<blockquote>
+<p>Since a node <code>N</code> can have several children labeled <code>X</code> , we again assume that subscripts distinguish among uses of the same symbol at different places in the production.</p>
+</blockquote>
+<ul>
+<li>Suppose that a semantic rule associated with a production <code>p</code> defines the value of inherited attribute <code>B.c</code> in terms of the value of <code>X.a</code>. Then, the dependency graph has an edge from <code>X.a</code> to <code>B.c</code>. For each node <code>N</code> labeled <code>B</code> that corresponds to an occurrence of this <code>B</code> in the body of production <code>p</code>, create an edge to attribute <code>c</code> at <code>N</code> from the attribute <code>a</code> at the node <code>M</code> that corresponds to this occurrence of <code>X</code> . Note that <code>M</code> could be either the parent or a sibling of <code>N</code> .</li>
+</ul>
+<blockquote>
+<p>NOTE: What is described above is an algorithm for constructing a dependency graph.</p>
+</blockquote>
+<h3 id="522_ordering_the_evaluation_of_attributes">5.2.2 Ordering the Evaluation of Attributes<a class="headerlink" href="#522_ordering_the_evaluation_of_attributes" title="Permanent link">#</a></h3>
+<p>The <em>dependency graph</em> characterizes the possible orders in which we can evaluate the attributes at the various nodes of a <strong>parse tree</strong>. If the dependency graph has an edge from node <code>M</code> to node <code>N</code> , then the attribute corresponding to <code>M</code> must be evaluated before the attribute of <code>N</code> . Thus, the only allowable orders
+of evaluation are those sequences of nodes $N_1, N_2,\dots , N_k$ such that if there is an edge of the dependency graph from $N_i$ to $N_j$, then i &lt; j . Such an ordering embeds a directed graph into a linear order, and is called a <em>topological sort</em> of the graph.</p>
+<p>If there is any <strong>cycle</strong> in the graph, then there are no <strong>topological sorts</strong>; that is, there is no way to evaluate the SDD on this <strong>parse tree</strong>. If there are no <strong>cycles</strong>, however, then there is always at least one topological sort. To see why, since there are no cycles, we can surely find a node with no edge entering. For if there were no such node, we could proceed from predecessor to predecessor until we came back to some node we had already seen, yielding a cycle. Make this node the first in the topological order, remove it from the dependency graph, and repeat the process on the remaining nodes.</p>
+<h3 id="523_s-attributed_definitions">5.2.3 S-Attributed Definitions<a class="headerlink" href="#523_s-attributed_definitions" title="Permanent link">#</a></h3>
+<p>As mentioned earlier, given an SDD, it is very hard to tell whether there exist any parse trees whose dependency graphs have cycles. In practice, translations can be implemented using classes of SDD's that guarantee an evaluation order, since they do not permit dependency graphs with cycles. Moreover, the two
+classes introduced in this section can be implemented efficiently in connection with <strong>top-down</strong> or <strong>bottom-up</strong> parsing.</p>
+<p>The first class is defined as follows:</p>
+<ul>
+<li>An SDD is S-attributed if every attribute is synthesized.</li>
+</ul>
+<p>When an SDD is <strong>S-attributed</strong>, we can evaluate its attributes in any bottom-up order of the nodes of the <strong>parse tree</strong>. It is often especially simple to evaluate the attributes by performing a <strong>postorder traversal</strong> of the <strong>parse tree</strong> and evaluating the attributes at a node <code>N</code> when the traversal leaves <code>N</code> for the last time. That is, we apply the function <code>postorder</code>, defined below, to the root of the parse tree (see also the box "Preorder and Postorder Traversals" in Section 2.3.4):</p>
+<p><img alt="" src="../S-attribute-postorder.jpg" /></p>
+<p><strong>S-attributed definitions</strong> can be implemented during bottom-up parsing, since a bottom-up parse corresponds to a <strong>postorder traversal</strong>. Specifically, postorder corresponds exactly to the order in which an <strong>LR parser</strong> reduces a production body to its head. This fact will b e used in Section 5.4.2 to evaluate <strong>synthesized attributes</strong> and store them on the <strong>stack</strong> during <strong>LR parsing</strong>, without creating the tree nodes explicitly.</p>
+<h3 id="524_l-attributed_definitions">5.2.4 L-Attributed Definitions<a class="headerlink" href="#524_l-attributed_definitions" title="Permanent link">#</a></h3>
+<p>The second class of SDD's is called <em>L-attributed definitions</em>. The idea behind this class is that, between the attributes associated with a production body, <strong>dependency-graph edges</strong> can go from <strong>left</strong> to <strong>right</strong>, but not from <strong>right</strong> to <strong>left</strong> (hence "L-attributed"). More precisely, each attribute must be either</p>
+<ol>
+<li>Synthesized, or</li>
+<li>Inherited, but with the rules limited as follows. Suppose that there is a production $A \to X_1, X_2, \dots,  X_n$, and that there is an <strong>inherited attribute</strong> $X_i.a$ computed by a rule associated with this production. Then the rule may use only:</li>
+<li>Inherited attributes associated with the head <code>A</code>.</li>
+<li>Either inherited or synthesized attributes associated with the occurrences of symbols $X_1, X_2, \dots, X_{i-1}$ located to the left of $X_i$.</li>
+<li>Inherited or synthesized attributes associated with this occurrence of $X_i$ itself, but only in such a way that there are no cycles in a dependency graph formed by the attributes of this $X_i$.</li>
+</ol>
+<p><strong>Example 5.8 :</strong>  The SDD in Fig. 5.4 is <strong>L-attributed</strong>. To see why, consider the semantic rules for inherited attributes, which are repeated here for convenience:</p>
+<p><img alt="" src="../SDD-in-Fig5.4.jpg" /></p>
+<p>The first of these rules defines the inherited attribute <code>T'.inh</code> using only <code>F.val</code> , and <code>F</code> appears to the left of <code>T'</code> in the production body, as required. The second rule defines $T_1'.inh$ using the inherited attribute <code>T'inh</code> associated with the <strong>head</strong>, and <code>F.val</code> , where <code>F</code> appears to the left of $T_1'$ in the production body.</p>
+<p>In each of these cases, the rules use information "from above or from the left," as required by the class. The remaining attributes are synthesized. Hence, the SDD is L-attributed. </p>
+<p><strong>Example 5.9 :</strong> Any SDD containing the following production and rules cannot be L-attributed:</p>
+<p><img alt="" src="../Example5.9.jpg" /></p>
+<p>The second rule defines an inherited attribute <code>B.i</code>, so the entire SDD cannot be S-attributed. Further, although the rule is legal, the SDD cannot be L-attributed, because the attribute <code>C.c</code> is used to help define <code>B.i</code>, and <code>C</code> is to the right of <code>B</code> in the production body. </p>
+<h3 id="525_semantic_rules_with_controlled_side_effects">5.2.5 Semantic Rules with Controlled Side Effects<a class="headerlink" href="#525_semantic_rules_with_controlled_side_effects" title="Permanent link">#</a></h3>
+<p>In practice, translations involve side effects: a desk calculator might print a result; a code generator might enter the type of an identifier into a symbol table. With SDD's, we strike a balance between <strong>attribute grammars</strong> and <strong>translation schemes</strong>. Attribute grammars have no side effects and allow any evaluation
+order consistent with the dependency graph. Translation schemes impose left-to-right evaluation and allow semantic actions to contain any program fragment; translation schemes are discussed in Section 5.4.</p>
+<p>We shall control side effcts in SDD's in one of the following ways:</p>
+<ul>
+<li>Permit incidental side effects that do not constrain attribute evaluation. In other words, permit side effects when attribute evaluation based on any topological sort of the dependency graph produces a "correct" translation, where "correct" depends on the application.</li>
+<li>Constrain the allowable evaluation orders, so that the same translation is produced for any allowable order. The constraints can be thought of as implicit edges added to the dependency graph.</li>
+</ul>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../5.3Applications-of-Syntax-Directed-Translation/" class="btn btn-neutral float-right" title="5.3">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../5.1Syntax-Directed-Definitions/" class="btn btn-neutral" title="5.1"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/dengking/compiler-principle" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href="../5.1Syntax-Directed-Definitions/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../5.3Applications-of-Syntax-Directed-Translation/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="../../search/main.js" defer></script>
+
+</body>
+</html>

@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <meta name="author" content="DengKing">
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+  <title>wikipedia Lex(software) - compiler principle</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  <link href="../../css/extra.css" rel="stylesheet">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "wikipedia Lex(software)";
+    var mkdocs_page_input_path = "Chapter3-Lexical-Analysis/wikipedia-Lex(software).md";
+    var mkdocs_page_url = "/compiler-principle/Chapter3-Lexical-Analysis/wikipedia-Lex(software)/";
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/django.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> compiler principle</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../..">Home</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Chapter1</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../Chapter1-Introduction/">1</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter1-Introduction/1.1Language-Processors/">1.1</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter1-Introduction/1.2The-Structure-of-a-Compiler/">1.2</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter1-Introduction/1.5Applications-of-Compiler-Technology/">1.5</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter1-Introduction/1.6Programming-Language-Basics/">1.6</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Chapter2</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../Chapter2-A-Simple-Syntax-Directed-Translator/">2</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter2-A-Simple-Syntax-Directed-Translator/2.1Introduction/">2.1</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter2-A-Simple-Syntax-Directed-Translator/2.2Syntax-Definition/">2.2</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter2-A-Simple-Syntax-Directed-Translator/2.3Syntax-Directed-Translation/">2.3</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter2-A-Simple-Syntax-Directed-Translator/2.4Parsing/">2.4</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Chapter3</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../">3</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../3.1The-Role-of-the-Lexical-Analyzer/">3.1</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../3.4Recognition-of-Tokens/">3.4</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../3.6Finite-Automata/">3.6</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../3.7From-Regular-Expressions-to-Automata/">3.7</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Chapter4</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../Chapter4-Syntax-Analysis/">4</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter4-Syntax-Analysis/4.2Context-Free-Grammars/">4.2</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter4-Syntax-Analysis/4.3Writing-a-Grammar/">4.3</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter4-Syntax-Analysis/4.5Bottom-Up-Parsing/">4.5</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter4-Syntax-Analysis/4.6Introduction-to-LR-Parsing-Simple-LR/">4.6</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter4-Syntax-Analysis/4.7More-Powerful-LR-Parsers/">4.7</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter4-Syntax-Analysis/VS-LL-parser-VS-LR-parser/">VS-LL-parser-VS-LR-parser</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Chapter5</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../Chapter5-Syntax-Directed-Translation/">5</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter5-Syntax-Directed-Translation/5.1Syntax-Directed-Definitions/">5.1</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter5-Syntax-Directed-Translation/5.2Evaluation-Orders-for-SDD's/">5.2</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter5-Syntax-Directed-Translation/5.3Applications-of-Syntax-Directed-Translation/">5.3</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Chapter6</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../Chapter6-Intermediate-Code-Generation/">6</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter6-Intermediate-Code-Generation/6.3Types-and-Declarations/">6.3</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Chapter7</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../Chapter7-Run-Time-Environments/">7</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter7-Run-Time-Environments/7.1Storage-Organization/">7.1</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter7-Run-Time-Environments/7.2Stack-Allocation-of-Space/">7.2</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Chapter9</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../Chapter9-Machine-Independent-Optimizations/">9</a>
+                </li>
+    </ul>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">compiler principle</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>wikipedia Lex(software)</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <div class="toc">
+<ul>
+<li><a href="#lex_software">Lex (software)</a><ul>
+<li><a href="#open_source">Open source</a></li>
+<li><a href="#structure_of_a_lex_file">Structure of a Lex file</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<h2 id="lex_software"><a href="https://en.wikipedia.org/wiki/Lex_(software)">Lex (software)</a><a class="headerlink" href="#lex_software" title="Permanent link">#</a></h2>
+<p><strong>Lex</strong> is a <a href="https://en.wikipedia.org/wiki/Computer_program">computer program</a> that generates <a href="https://en.wikipedia.org/wiki/Lexical_analysis">lexical analyzers</a> ("scanners" or "lexers").[<a href="https://en.wikipedia.org/wiki/Lex_(software)#cite_note-1">1]</a>[<a href="https://en.wikipedia.org/wiki/Lex_(software)#cite_note-2">2]</a></p>
+<p>Lex is commonly used with the <a href="https://en.wikipedia.org/wiki/Yacc">yacc</a> <a href="https://en.wikipedia.org/wiki/Parser_generator">parser generator</a>. Lex, originally written by <a href="https://en.wikipedia.org/wiki/Mike_Lesk">Mike Lesk</a> and <a href="https://en.wikipedia.org/wiki/Eric_Schmidt">Eric Schmidt</a>[<a href="https://en.wikipedia.org/wiki/Lex_(software)#cite_note-3">3]</a> and described in 1975,[<a href="https://en.wikipedia.org/wiki/Lex_(software)#cite_note-4">4]</a>[<a href="https://en.wikipedia.org/wiki/Lex_(software)#cite_note-5">5]</a> is the standard <a href="https://en.wikipedia.org/wiki/Lexical_analyzer">lexical analyzer</a> generator on many <a href="https://en.wikipedia.org/wiki/Unix">Unix</a> systems, and an equivalent tool is specified as part of the <a href="https://en.wikipedia.org/wiki/POSIX">POSIX</a> standard.[<em>citation needed</em>]</p>
+<p>Lex reads an input <a href="https://en.wikipedia.org/wiki/Stream_(computing)">stream</a> specifying the lexical analyzer and outputs <a href="https://en.wikipedia.org/wiki/Source_code">source code</a> implementing the lexer in the <a href="https://en.wikipedia.org/wiki/C_(programming_language)">C programming language</a>. In addition to C, some old versions of Lex could also generate a lexer in <a href="https://en.wikipedia.org/wiki/Ratfor">Ratfor</a>.[<a href="https://en.wikipedia.org/wiki/Lex_(software)#cite_note-6">6]</a></p>
+<h3 id="open_source">Open source<a class="headerlink" href="#open_source" title="Permanent link">#</a></h3>
+<p>Though originally distributed as proprietary software, some versions of Lex are now <a href="https://en.wikipedia.org/wiki/Open-source_software">open source</a>. Open source versions of Lex, based on the original AT&amp;T code are now distributed as a part of open source operating systems such as <a href="https://en.wikipedia.org/wiki/OpenSolaris">OpenSolaris</a> and <a href="https://en.wikipedia.org/wiki/Plan_9_from_Bell_Labs">Plan 9 from Bell Labs</a>.[<em>clarification needed</em>] One popular open source version of Lex, called <a href="https://en.wikipedia.org/wiki/Flex_lexical_analyser">flex</a>, or the "fast lexical analyzer", is not derived from proprietary coding.</p>
+<h3 id="structure_of_a_lex_file">Structure of a Lex file<a class="headerlink" href="#structure_of_a_lex_file" title="Permanent link">#</a></h3>
+<p>The structure of a Lex file is intentionally similar to that of a yacc file; files are divided into three sections, separated by lines that contain only two percent signs, as follows</p>
+<ul>
+<li>The <strong>definition</strong> section defines <a href="https://en.wikipedia.org/wiki/Macro_(computer_science)">macros</a> and imports <a href="https://en.wikipedia.org/wiki/Header_file">header files</a> written in <a href="https://en.wikipedia.org/wiki/C_(programming_language)">C</a>. It is also possible to write any C code here, which will be copied verbatim into the generated source file.</li>
+<li>The <strong>rules</strong> section associates <a href="https://en.wikipedia.org/wiki/Regular_expression">regular expression</a> patterns with C <a href="https://en.wikipedia.org/wiki/Statement_(programming)">statements</a>. When the lexer sees text in the input matching a given pattern, it will execute the associated C code.</li>
+<li>The <strong>C code</strong> section contains C statements and <a href="https://en.wikipedia.org/wiki/Function_(programming)">functions</a> that are copied verbatim to the generated source file. These statements presumably contain code called by the rules in the rules section. In large programs it is more convenient to place this code in a separate file linked in at <a href="https://en.wikipedia.org/wiki/Compiler">compile</a> time.</li>
+</ul>
+              
+            </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/dengking/compiler-principle" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+      
+    </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="../../search/main.js" defer></script>
+
+</body>
+</html>

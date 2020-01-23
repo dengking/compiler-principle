@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <meta name="author" content="DengKing">
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+  <title>VS abstract syntax tree VS concrete syntax tree - compiler principle</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  <link href="../../css/extra.css" rel="stylesheet">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "VS abstract syntax tree VS concrete syntax tree";
+    var mkdocs_page_input_path = "parse-tree-VS-syntax-tree-VS-DFA/VS-abstract-syntax-tree-VS-concrete-syntax-tree.md";
+    var mkdocs_page_url = "/compiler-principle/parse-tree-VS-syntax-tree-VS-DFA/VS-abstract-syntax-tree-VS-concrete-syntax-tree/";
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/django.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> compiler principle</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../..">Home</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Chapter1</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../Chapter1-Introduction/">1</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter1-Introduction/1.1Language-Processors/">1.1</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter1-Introduction/1.2The-Structure-of-a-Compiler/">1.2</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter1-Introduction/1.5Applications-of-Compiler-Technology/">1.5</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter1-Introduction/1.6Programming-Language-Basics/">1.6</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Chapter2</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../Chapter2-A-Simple-Syntax-Directed-Translator/">2</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter2-A-Simple-Syntax-Directed-Translator/2.1Introduction/">2.1</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter2-A-Simple-Syntax-Directed-Translator/2.2Syntax-Definition/">2.2</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter2-A-Simple-Syntax-Directed-Translator/2.3Syntax-Directed-Translation/">2.3</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter2-A-Simple-Syntax-Directed-Translator/2.4Parsing/">2.4</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Chapter3</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../Chapter3-Lexical-Analysis/">3</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter3-Lexical-Analysis/3.1The-Role-of-the-Lexical-Analyzer/">3.1</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter3-Lexical-Analysis/3.4Recognition-of-Tokens/">3.4</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter3-Lexical-Analysis/3.6Finite-Automata/">3.6</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter3-Lexical-Analysis/3.7From-Regular-Expressions-to-Automata/">3.7</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Chapter4</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../Chapter4-Syntax-Analysis/">4</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter4-Syntax-Analysis/4.2Context-Free-Grammars/">4.2</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter4-Syntax-Analysis/4.3Writing-a-Grammar/">4.3</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter4-Syntax-Analysis/4.5Bottom-Up-Parsing/">4.5</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter4-Syntax-Analysis/4.6Introduction-to-LR-Parsing-Simple-LR/">4.6</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter4-Syntax-Analysis/4.7More-Powerful-LR-Parsers/">4.7</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter4-Syntax-Analysis/VS-LL-parser-VS-LR-parser/">VS-LL-parser-VS-LR-parser</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Chapter5</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../Chapter5-Syntax-Directed-Translation/">5</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter5-Syntax-Directed-Translation/5.1Syntax-Directed-Definitions/">5.1</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter5-Syntax-Directed-Translation/5.2Evaluation-Orders-for-SDD's/">5.2</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter5-Syntax-Directed-Translation/5.3Applications-of-Syntax-Directed-Translation/">5.3</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Chapter6</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../Chapter6-Intermediate-Code-Generation/">6</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter6-Intermediate-Code-Generation/6.3Types-and-Declarations/">6.3</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Chapter7</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../Chapter7-Run-Time-Environments/">7</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter7-Run-Time-Environments/7.1Storage-Organization/">7.1</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter7-Run-Time-Environments/7.2Stack-Allocation-of-Space/">7.2</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Chapter9</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../Chapter9-Machine-Independent-Optimizations/">9</a>
+                </li>
+    </ul>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">compiler principle</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>VS abstract syntax tree VS concrete syntax tree</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <div class="toc">
+<ul>
+<li><a href="#what_is_the_difference_between_an_abstract_syntax_tree_and_a_concrete_syntax_tree">What is the difference between an Abstract Syntax Tree and a Concrete Syntax Tree?</a><ul>
+<li><a href="#a">A</a></li>
+<li><a href="#a_1">A</a></li>
+<li><a href="#a_2">A</a></li>
+</ul>
+</li>
+<li><a href="#whats_the_difference_between_parse_tree_and_ast">What's the difference between parse tree and AST?</a><ul>
+<li><a href="#-_parse_tree_is_the_result_of_your_grammar_with_its_artifacts_you_can_write_an_infinity_of_grammars_for_the_same_language_an_ast_reduce_the_parse_tree_the_closest_possible_to_the_language_several_grammars_for_the_same_language_will_give_different_parse_trees_but_should_result_to_the_same_ast_you_can_also_reduce_different_scripts_different_parse_trees_from_the_same_grammar_to_the_same_ast_guillaume86_aug_29_12_at_1438">- Parse Tree is the result of your grammar with its artifacts (you can write an infinity of grammars for the same language), an AST reduce the Parse Tree the closest possible to the language. Several grammars for the same language will give different parse trees but should result to the same AST. (you can also reduce different scripts (different parse trees from the same grammar) to the same AST) – Guillaume86 Aug 29 '12 at 14:38</a></li>
+<li><a href="#a_3">A</a></li>
+<li><a href="#a_4">A</a></li>
+<li><a href="#a_5">A</a></li>
+<li><a href="#a_6">A</a></li>
+</ul>
+</li>
+<li><a href="#what_would_an_ast_abstract_syntax_tree_for_an_object-oriented_programming_language_look_like">What would an AST (abstract syntax tree) for an object-oriented programming language look like?</a><ul>
+<li><a href="#a_7">A</a></li>
+<li><a href="#a_8">A</a></li>
+</ul>
+</li>
+<li><a href="#dms_software_reengineering_toolkit">DMS Software Reengineering Toolkit</a></li>
+<li><a href="#abstract_vs_concrete_syntax_trees">Abstract vs. Concrete Syntax Trees</a></li>
+<li><a href="#compiling_an_ast_back_to_source_code">Compiling an AST back to source code</a></li>
+</ul>
+</div>
+<h2 id="what_is_the_difference_between_an_abstract_syntax_tree_and_a_concrete_syntax_tree"><a href="https://stackoverflow.com/questions/1888854/what-is-the-difference-between-an-abstract-syntax-tree-and-a-concrete-syntax-tre">What is the difference between an Abstract Syntax Tree and a Concrete Syntax Tree?</a><a class="headerlink" href="#what_is_the_difference_between_an_abstract_syntax_tree_and_a_concrete_syntax_tree" title="Permanent link">#</a></h2>
+<p>I've been reading a bit about how interpreters/compilers work, and one area where I'm getting confused is the difference between an AST and a CST. My understanding is that the <strong>parser</strong> makes a CST, hands it to the <strong>semantic analyzer</strong> which turns it into an <strong>AST</strong>. However, my understanding is that the <strong>semantic analyzer</strong> simply ensures that rules are followed. I don't really understand why it would actually make any changes to make it abstract rather than concrete.</p>
+<p>Is there something that I'm missing about the <strong>semantic analyzer</strong>, or is the difference between an AST and CST somewhat artificial?</p>
+<h3 id="a"><a href="https://stackoverflow.com/a/1888973">A</a><a class="headerlink" href="#a" title="Permanent link">#</a></h3>
+<p>A <strong>concrete syntax tree</strong> represents the source text exactly in parsed form. In general, it conforms to the <strong>context-free grammar</strong> defining the source language.</p>
+<p>However, the concrete grammar and tree have a lot of things that are necessary to make source text <strong>unambiguously parseable</strong>, but do not contribute to actual meaning. For example, to implement <strong>operator precedence</strong>, your CFG usually has several levels of expression components (term, factor, etc.), with the operators connecting them at the different levels (you add terms to get expressions, terms are composed of factors optionally multipled, etc.). To actually interpret or compile the language, however, you don't need this; you just need Expression nodes that have operators and operands. The abstract syntax tree is the result of simplifying the concrete syntax tree down to this things actually needed to represent the meaning of the program. This tree has a much simpler definition and is thus easier to process in the later stages of <strong>execution</strong>.</p>
+<p>You usually don't need to actually build a concrete syntax tree. The action routines in your YACC (or Antlr, or Menhir, or whatever...) grammar can directly build the <strong>abstract syntax tree</strong>, so the <strong>concrete syntax tree</strong> only exists as a conceptual entity representing the parse structure of your source text.</p>
+<p><strong><em>COMMENTS</em></strong> : </p>
+<ul>
+<li>Supplement: the Python interpreter first builds a CST and then converts to AST. – <a href="https://stackoverflow.com/users/8039762/cgsdfc">cgsdfc</a> <a href="https://stackoverflow.com/questions/1888854/what-is-the-difference-between-an-abstract-syntax-tree-and-a-concrete-syntax-tree#comment94023727_1888973">Dec 2 '18 at 12:18</a> </li>
+</ul>
+<h3 id="a_1"><a href="https://stackoverflow.com/a/1916687">A</a><a class="headerlink" href="#a_1" title="Permanent link">#</a></h3>
+<p>A <em>concrete syntax tree</em> matches what the grammar rules say is the syntax. The purpose of the <em>abstract syntax tree</em> is have a "simple" representation of what's essential in "the syntax tree".</p>
+<p>A real value in the AST IMHO is that it is <em>smaller</em> than the CST, and therefore takes less time to process. (You might say, who cares? But I work with a tool where we have tens of millions of nodes live at once!).</p>
+<p>Most parser generators that have any support for building syntax trees insist that you personally specify exactly how they get built under the assumption that your tree nodes will be "simpler" than the CST (and in that, they are generally right, as programmers are pretty lazy). Arguably it means you have to code fewer tree visitor functions, and that's valuable, too, in that it minimizes engineering energy. When you have 3500 rules (e.g., for COBOL) this matters. And this "simpler"ness leads to the good property of "smallness".</p>
+<p>But having such ASTs creates a problem that wasn't there: it doesn't match the grammar, and now you have to mentally track both of them. And when there are 1500 AST nodes for a 3500 rule grammar, this matters a lot. And if the grammar evolves (they always do!), now you have two giant sets of things to keep in synch.</p>
+<p>Another solution is to let the parser simply build CST nodes for you and just use those. This is a huge advantage when building the grammars: there's no need to invent 1500 special AST nodes to model 3500 grammar rules. Just think about the tree being isomorphic to the grammar. From the point of view of the grammar engineer this is completely brainless, which lets him focus on getting the grammar right and hacking at it to his heart's content. Arguably you have to write more node visitor rules, but that can be managed. More on this later.</p>
+<p>What we do with the <a href="http://www.semanticdesigns.com/Products/DMS/DMSToolkit.html">DMS Software Reengineering Toolkit</a> is to automatically build a CST based on the results of a (GLR) parsing process. DMS then automatically constructs an "compressed" CST for space efficiency reasons, by eliminating non-value carrying terminals (keywords, punctation), semantically useless unary productions, and forming lists for grammar rule pairs that are list like:</p>
+<pre><code>    L = e ;
+    L = L e ;
+    L2 = e2 ;
+    L2 = L2  ','  e2 ;
+</code></pre>
+
+<p>and a wide variety of variations of such forms. You think in terms of the grammar rules and the virtual CST; the tool operates on the compressed representation. Easy on your brain, faster/smaller at runtime.</p>
+<p>Remarkably, the compressed CST built this way looks a lot an AST that you might have designed by hand (see link at end to examples). In particular, the compressed CST doesn't carry any nodes that are just concrete syntax. There are minor bits of awkwardness: for example while the concrete nodes for '(' and ')' classically found in expression subgrammars are not in the tree, a "parentheses node" <em>does</em> appear in the compressed CST and has to be handled. A true AST would not have this. This seems like a pretty small price to pay for the convenience of not have to specify the AST construction, ever. And the documentation for the tree is always available and correct: the grammar <em>is</em> the documentation.</p>
+<p>How do we avoid "extra visitors"? We don't entirely, but DMS provides an AST library that walks the AST and handles the differences between the CST and the AST transparently. DMS also offers an "attribute grammar" evaluator (AGE), which is a method for passing values computed a nodes up and down the tree; the AGE handles all the tree representation issues and so the tool engineer only worries about writing computations effectively directly on the grammar rules themselves. Finally, DMS also provides "surface-syntax" patterns, which allows code fragments from the grammar to used to find specific types of subtrees, without knowing most of the node types involved.</p>
+<p>One of the other answers observes that if you want to build tools that can regenerate source, your AST will have to match the CST. That's not really right, but it is far easier to regenerate the source if you have CST nodes. <a href="https://stackoverflow.com/questions/5832412/compiling-an-ast-back-to-source-code/5834775#5834775">DMS generates most of the prettyprinter automatically</a> because it has access to both :-}</p>
+<p>Bottom line: ASTs are good for small, both phyiscal and conceptual. Automated AST construction from the CST provides both, and lets you avoid the problem of tracking two different sets.</p>
+<p>EDIT March 2015: <a href="https://stackoverflow.com/a/6378997/120163">Link to examples of CST vs. "AST" built this way</a></p>
+<h3 id="a_2"><a href="https://stackoverflow.com/a/1888898">A</a><a class="headerlink" href="#a_2" title="Permanent link">#</a></h3>
+<p><a href="http://eli.thegreenplace.net/2009/02/16/abstract-vs-concrete-syntax-trees/">This blog post</a> may be helpful.</p>
+<p>It seems to me that the AST "throws away" a lot of intermediate grammatical/structural information that wouldn't contribute to semantics. For example, you don't care that 3 is an atom is a term is a factor is a.... You just care that it's <code>3</code> when you're implementing the exponentiation expression or whatever.</p>
+<h2 id="whats_the_difference_between_parse_tree_and_ast"><a href="https://stackoverflow.com/questions/5026517/whats-the-difference-between-parse-tree-and-ast">What's the difference between parse tree and AST?</a><a class="headerlink" href="#whats_the_difference_between_parse_tree_and_ast" title="Permanent link">#</a></h2>
+<p>Are they generated by different phases of a compiling process? Or are they just different names for the same thing? </p>
+<p><strong><em>COMMENTS</em></strong>:</p>
+<h3 id="-_parse_tree_is_the_result_of_your_grammar_with_its_artifacts_you_can_write_an_infinity_of_grammars_for_the_same_language_an_ast_reduce_the_parse_tree_the_closest_possible_to_the_language_several_grammars_for_the_same_language_will_give_different_parse_trees_but_should_result_to_the_same_ast_you_can_also_reduce_different_scripts_different_parse_trees_from_the_same_grammar_to_the_same_ast_guillaume86_aug_29_12_at_1438">- <strong>Parse Tree</strong> is the result of your <strong>grammar</strong> with its artifacts (you can write an infinity of grammars for the same language), an <strong>AST</strong> reduce the <strong>Parse Tree</strong> the closest possible to the language. Several <strong>grammars</strong> for the same language will give different <strong>parse trees</strong> but should result to the same AST. (you can also reduce different scripts (different parse trees from the same grammar) to the same AST) – <a href="https://stackoverflow.com/users/172074/guillaume86">Guillaume86</a> <a href="https://stackoverflow.com/questions/5026517/whats-the-difference-between-parse-tree-and-ast#comment16306109_5026517">Aug 29 '12 at 14:38</a><a class="headerlink" href="#-_parse_tree_is_the_result_of_your_grammar_with_its_artifacts_you_can_write_an_infinity_of_grammars_for_the_same_language_an_ast_reduce_the_parse_tree_the_closest_possible_to_the_language_several_grammars_for_the_same_language_will_give_different_parse_trees_but_should_result_to_the_same_ast_you_can_also_reduce_different_scripts_different_parse_trees_from_the_same_grammar_to_the_same_ast_guillaume86_aug_29_12_at_1438" title="Permanent link">#</a></h3>
+<h3 id="a_3"><a href="https://stackoverflow.com/a/9864571">A</a><a class="headerlink" href="#a_3" title="Permanent link">#</a></h3>
+<p>This is based on the <a href="http://www.antlr3.org/works/help/tutorial/calculator.html">Expression Evaluator</a> grammar by Terrence Parr.</p>
+<p>The grammar for this example:</p>
+<pre><code>grammar Expr002;
+
+options 
+{
+    output=AST;
+    ASTLabelType=CommonTree; // type of $stat.tree ref etc...
+}
+
+prog    :   ( stat )+ ;
+
+stat    :   expr NEWLINE        -&gt; expr
+        |   ID '=' expr NEWLINE -&gt; ^('=' ID expr)
+        |   NEWLINE             -&gt;
+        ;
+
+expr    :   multExpr (( '+'^ | '-'^ ) multExpr)*
+        ; 
+
+multExpr
+        :   atom ('*'^ atom)*
+        ; 
+
+atom    :   INT 
+        |   ID
+        |   '('! expr ')'!
+        ;
+
+ID      : ('a'..'z' | 'A'..'Z' )+ ;
+INT     : '0'..'9'+ ;
+NEWLINE : '\r'? '\n' ;
+WS      : ( ' ' | '\t' )+ { skip(); } ;
+</code></pre>
+
+<p>Input</p>
+<pre><code>x=1
+y=2
+3*(x+y)
+</code></pre>
+
+<p><strong>Parse Tree</strong></p>
+<p>The parse tree is a concrete representation of the input. The parse tree retains all of the information of the input. The empty boxes represent whitespace, i.e. end of line.</p>
+<p><img alt="Parse Tree" src="https://i.stack.imgur.com/SyonV.png" /></p>
+<p><strong>AST</strong></p>
+<p>The AST is an abstract representation of the input. Notice that parens are not present in the AST because the associations are derivable from the tree structure.</p>
+<p><img alt="AST" src="https://i.stack.imgur.com/dhd3v.png" /></p>
+<p>For a more through explanation see <a href="http://www.cs.ru.ac.za/compilers/pdfvers.pdf">Compilers and Compiler Generators</a> pg. 23
+or <a href="http://homepage.divms.uiowa.edu/~slonnegr/plf/Book/Chapter1.pdf">Abstract Syntax Trees</a> on pg. 21 in <a href="http://homepage.divms.uiowa.edu/~slonnegr/plf/Book/">Syntax and Semantics of Programming Languages</a></p>
+<p><strong><em>COMMENTS</em></strong></p>
+<ul>
+<li>How do you derive the AST from the parse tree? What's the method of simplifying a parse tree into an AST? – <a href="https://stackoverflow.com/users/582917/cmcdragonkai">CMCDragonkai</a> <a href="https://stackoverflow.com/questions/5026517/whats-the-difference-between-parse-tree-and-ast#comment45364941_9864571">Feb 15 '15 at 8:54</a> </li>
+</ul>
+<h3 id="a_4"><a href="https://stackoverflow.com/a/5026608">A</a><a class="headerlink" href="#a_4" title="Permanent link">#</a></h3>
+<p>From what I understand, the AST focuses more on the abstract relationships between the components of source code, while the parse tree focuses on the actual implementation of the <strong>grammar</strong> utilized by the language, including the nitpicky details. They are definitely not the same, since another term for "parse tree" is "concrete syntax tree".</p>
+<p>I found this <a href="http://www.jguru.com/faq/view.jsp?EID=814505">page</a> which attempts to resolve this exact question.</p>
+<h3 id="a_5"><a href="https://stackoverflow.com/a/5026642">A</a><a class="headerlink" href="#a_5" title="Permanent link">#</a></h3>
+<p>The <a href="https://martinfowler.com/books/dsl.html">DSL book</a> from Martin Fowler explains this nicely. The AST only contains all 'useful' elements that will be used for further processing, while the parse tree contains all the artifacts (spaces, brackets, ...) from the original document you parse </p>
+<h3 id="a_6"><a href="https://stackoverflow.com/a/31811999">A</a><a class="headerlink" href="#a_6" title="Permanent link">#</a></h3>
+<p>Take the pascal assignment Age:= 42;</p>
+<p>The syntax tree would look just like the source code. Below I am putting brackets around the nodes. <code>[Age][:=][42][;]</code></p>
+<p>An abstract tree would look like this <code>[=][Age][42]</code></p>
+<p>The assignment becomes a node with 2 elements, <code>Age</code> and <code>42</code>. The idea is that you can <strong>execute</strong> the assignment.</p>
+<p>Also note that the pascal syntax disappears. Thus it is possible to have more than one language generate the same AST. This is useful for cross language script engines.</p>
+<h2 id="what_would_an_ast_abstract_syntax_tree_for_an_object-oriented_programming_language_look_like"><a href="https://stackoverflow.com/questions/6376662/what-would-an-ast-abstract-syntax-tree-for-an-object-oriented-programming-lang">What would an AST (abstract syntax tree) for an object-oriented programming language look like?</a><a class="headerlink" href="#what_would_an_ast_abstract_syntax_tree_for_an_object-oriented_programming_language_look_like" title="Permanent link">#</a></h2>
+<p>I'm reading about AST (abstract syntax trees) but all the samples I see use expressions such as:</p>
+<pre><code class="java">a + b * c 
+</code></pre>
+
+<p>Which could be represented in a lispy like syntax as:</p>
+<pre><code class="java">(+ a (* b c) )
+</code></pre>
+
+<p>Which will be the equivalent to:</p>
+<pre><code class="java">  +
+ / \
+a   * 
+   / \
+  b   c
+</code></pre>
+
+<p>My question is How an AST for a class in a OOPL would look like?</p>
+<p>My naive attempt is for this Java code:</p>
+<pre><code class="java"> class Person { 
+     String name;
+     int    age;
+     public String toString() { 
+        return &quot;name&quot;;
+     }
+ }
+</code></pre>
+
+<p>Is:</p>
+<pre><code class="java">;Hand written
+(classDeclaration Person 
+     (varDeclaration String name)
+     (varDeclaration int    age )
+     (funcDeclaration String toString 
+           (return &quot;name&quot;)
+     )
+ )
+</code></pre>
+
+<p>But I'm not quite sure how close or far am I to a real AST representation.</p>
+<p>Does it depends on the language I choose. How much detail is needed? Are those "xyzDeclaraction" needed or could be as:</p>
+<pre><code class="java"> (Person (String name) (int age))
+</code></pre>
+
+<p>Where can I see a "real" representation of an actual programming language to learn more.</p>
+<h3 id="a_7"><a href="https://stackoverflow.com/a/6376707">A</a><a class="headerlink" href="#a_7" title="Permanent link">#</a></h3>
+<p>AST is an abstraction of the CST (<a href="http://en.wikipedia.org/wiki/Parse_tree">concrete syntax tree</a>, or, parse tree). The concrete syntax tree is the tree resulting from the productions (in the grammar) used to parse the file. So your AST is basically derived from your grammar definition, but has for transformed</p>
+<pre><code class="java">                        Exp                    
+                      /  |  \                   
+                     /   |   \                       *
+                 Ident BinOp Ident       into       / \
+                  /      |     \                  &quot;x&quot; &quot;y&quot;
+                 /       |      \
+               &quot;x&quot;       *      &quot;y&quot;
+</code></pre>
+
+<p>All in all I think the example in your post looks fine. I would probably wrap the variable declarations in a <code>varDeclList</code> and the function declaration in a <code>methDeclList</code>, and the return statement in a <code>stmtList</code>. (See below.)</p>
+<p>One more or less "real" representation of an AST is described by Apple in his book "Modern Compiler Implementation in Java". (Resources can be found <a href="http://www.cambridge.org/resources/052182060X/">here</a>.)</p>
+<p>Using those classes, your program would be represented as follows:</p>
+<pre><code class="java">Program
+    ClassDeclList
+        ClassDecl
+            Identifier
+                id: Person
+            VarDeclList
+                VarDecl
+                    type: String
+                    id: name
+                VarDecl
+                    type: int
+                    id: age
+            MethDeclList
+                MethodDecl
+                    modifiers: public
+                    returnType: String
+                    id: toString
+                    Formals
+                        (empty)
+                    StmtList
+                        returnStmt
+                            Identifier
+                                id: name
+</code></pre>
+
+<h3 id="a_8"><a href="https://stackoverflow.com/a/6378997">A</a><a class="headerlink" href="#a_8" title="Permanent link">#</a></h3>
+<p>OP: <em>Where can I see a real representation of an actual programming language to learn more?</em></p>
+<p>For your source text as a file Person.java:</p>
+<pre><code class="java">class Person {  
+    String name;
+    int    age;
+    public String toString()
+      { return &quot;name&quot;;     } 
+}
+</code></pre>
+
+<p>what follows are both Concrete and Abstract Syntax Tree in an S-expression-style dump of the parser tree from our <a href="http://www.semanticdesigns.com/Products/DMS/DMSToolkit.html">DMS Software Reengineering Toolkit</a>, using its Java1.6 parser. All the apparant complexity is pretty much caused by the real complexity of the language (e.g., of Java itself).</p>
+<p>The CST clearly contains more stuff (139 nodes) than the AST (54 nodes). The AST drops everything that can be automatically inferred from the grammar, given the AST. This includes removing non-value-carrying leaves, unary productions, and compressing spines caused by left or right recursive grammar rules into explicit list nodes.</p>
+<p>A left paren signals a new subtree. Following the left paren is the name of the node type; <a class="gh-link gh-mention" href="https://github.com/Java" title="GitHub User: @Java">@Java</a>~Java1_.6 might seem unnecessary until you understand DMS can handle many languages at once, including langauges nested inside one another. The #nnnnnn is the memory address of the node. ^M means "this node has M parents and is left off when M==1. Things inside [...] are the node value. A { M } means this list node has M list-children. Each node is stamped with position information.</p>
+<p>This is the Concrete Syntax tree (see further down for AST):</p>
+<pre><code class="java">(compilation_unit@Java~Java1_6=1#4885d00^0 Line 1 Column 1 File C:/temp/Person.java
+ (type_declarations@Java~Java1_6=15#4885cc0 Line 1 Column 1 File C:/temp/Person.java
+  (type_declarations@Java~Java1_6=16#4884d80 Line 1 Column 1 File C:/temp/Person.java)type_declarations
+  (type_declaration@Java~Java1_6=17#4885ca0 Line 1 Column 1 File C:/temp/Person.java
+   (type_class_modifiers@Java~Java1_6=77#4884dc0 Line 1 Column 1 File C:/temp/Person.java)type_class_modifiers
+   (class_header@Java~Java1_6=89#4884ec0 Line 1 Column 1 File C:/temp/Person.java
+   |('class'@Java~Java1_6=459#4884c60[Keyword:0] Line 1 Column 1 File C:/temp/Person.java)'class'
+   |(IDENTIFIER@Java~Java1_6=447#4884e20[`Person'] Line 1 Column 7 File C:/temp/Person.java)IDENTIFIER
+   |(type_parameters@Java~Java1_6=408#4884e80 Line 1 Column 14 File C:/temp/Person.java)type_parameters
+   )class_header
+   (class_body@Java~Java1_6=94#4885c80 Line 1 Column 14 File C:/temp/Person.java
+   |('{'@Java~Java1_6=448#4884e60[Keyword:0] Line 1 Column 14 File C:/temp/Person.java)'{'
+   |(class_body_declarations@Java~Java1_6=111#4885c60 Line 2 Column 5 File C:/temp/Person.java
+   | (class_body_declarations@Java~Java1_6=111#4885380 Line 2 Column 5 File C:/temp/Person.java
+   |  (class_body_declarations@Java~Java1_6=110#4885400 Line 2 Column 5 File C:/temp/Person.java
+   |   (class_body_declaration@Java~Java1_6=118#4885360 Line 2 Column 5 File C:/temp/Person.java
+   |   |(field_declaration@Java~Java1_6=168#4885440 Line 2 Column 5 File C:/temp/Person.java
+   |   | (field_modifiers@Java~Java1_6=170#4884f40 Line 2 Column 5 File C:/temp/Person.java)field_modifiers
+   |   | (type@Java~Java1_6=191#48852c0 Line 2 Column 5 File C:/temp/Person.java
+   |   |  (name@Java~Java1_6=406#48851e0 Line 2 Column 5 File C:/temp/Person.java
+   |   |   (IDENTIFIER@Java~Java1_6=447#4884f20[`String'] Line 2 Column 5 File C:/temp/Person.java)IDENTIFIER
+   |   |   (type_arguments@Java~Java1_6=407#4885160 Line 2 Column 12 File C:/temp/Person.java)type_arguments
+   |   |  )name
+   |   |  (brackets@Java~Java1_6=157#4885260 Line 2 Column 12 File C:/temp/Person.java)brackets
+   |   | )type
+   |   | (variable_declarator_list@Java~Java1_6=179#4884e00 Line 2 Column 12 File C:/temp/Person.java
+   |   |  (variable_declarator@Java~Java1_6=181#4885300 Line 2 Column 12 File C:/temp/Person.java
+   |   |   (variable_declarator_id@Java~Java1_6=167#4885320 Line 2 Column 12 File C:/temp/Person.java
+   |   |   |(IDENTIFIER@Java~Java1_6=447#4885140[`name'] Line 2 Column 12 File C:/temp/Person.java)IDENTIFIER
+   |   |   |(brackets@Java~Java1_6=157#4885040 Line 2 Column 16 File C:/temp/Person.java)brackets
+   |   |   )variable_declarator_id
+   |   |  )variable_declarator
+   |   | )variable_declarator_list
+   |   | (';'@Java~Java1_6=440#4885100[Keyword:0] Line 2 Column 16 File C:/temp/Person.java)';'
+   |   |)field_declaration
+   |   )class_body_declaration
+   |  )class_body_declarations
+   |  (class_body_declaration@Java~Java1_6=118#48852e0 Line 3 Column 5 File C:/temp/Person.java
+   |   (field_declaration@Java~Java1_6=168#4885480 Line 3 Column 5 File C:/temp/Person.java
+   |   |(field_modifiers@Java~Java1_6=170#4885340 Line 3 Column 5 File C:/temp/Person.java)field_modifiers
+   |   |(type@Java~Java1_6=192#4885220 Line 3 Column 5 File C:/temp/Person.java
+   |   | (primitive_type@Java~Java1_6=198#4885420 Line 3 Column 5 File C:/temp/Person.java
+   |   |  ('int'@Java~Java1_6=479#48853e0[Keyword:0] Line 3 Column 5 File C:/temp/Person.java)'int'
+   |   | )primitive_type
+   |   | (brackets@Java~Java1_6=157#4885200 Line 3 Column 12 File C:/temp/Person.java)brackets
+   |   |)type
+   |   |(variable_declarator_list@Java~Java1_6=179#4885540 Line 3 Column 12 File C:/temp/Person.java
+   |   | (variable_declarator@Java~Java1_6=181#4885520 Line 3 Column 12 File C:/temp/Person.java
+   |   |  (variable_declarator_id@Java~Java1_6=167#4885500 Line 3 Column 12 File C:/temp/Person.java
+   |   |   (IDENTIFIER@Java~Java1_6=447#4884fc0[`age'] Line 3 Column 12 File C:/temp/Person.java)IDENTIFIER
+   |   |   (brackets@Java~Java1_6=157#48854e0 Line 3 Column 15 File C:/temp/Person.java)brackets
+   |   |  )variable_declarator_id
+   |   | )variable_declarator
+   |   |)variable_declarator_list
+   |   |(';'@Java~Java1_6=440#48854c0[Keyword:0] Line 3 Column 15 File C:/temp/Person.java)';'
+   |   )field_declaration
+   |  )class_body_declaration
+   | )class_body_declarations
+   | (class_body_declaration@Java~Java1_6=117#4885c40 Line 4 Column 5 File C:/temp/Person.java
+   |  (method_declaration@Java~Java1_6=135#4885c00 Line 4 Column 5 File C:/temp/Person.java
+   |   (method_modifiers@Java~Java1_6=141#4885700 Line 4 Column 5 File C:/temp/Person.java
+   |   |(method_modifiers@Java~Java1_6=142#4884e40 Line 4 Column 5 File C:/temp/Person.java)method_modifiers
+   |   |(method_modifier@Java~Java1_6=147#48856a0 Line 4 Column 5 File C:/temp/Person.java
+   |   | ('public'@Java~Java1_6=453#48853a0[Keyword:0] Line 4 Column 5 File C:/temp/Person.java)'public'
+   |   |)method_modifier
+   |   )method_modifiers
+   |   (type_parameters@Java~Java1_6=408#4885740 Line 4 Column 12 File C:/temp/Person.java)type_parameters
+   |   (type@Java~Java1_6=191#4885900 Line 4 Column 12 File C:/temp/Person.java
+   |   |(name@Java~Java1_6=406#48852a0 Line 4 Column 12 File C:/temp/Person.java
+   |   | (IDENTIFIER@Java~Java1_6=447#4885660[`String'] Line 4 Column 12 File C:/temp/Person.java)IDENTIFIER
+   |   | (type_arguments@Java~Java1_6=407#48851a0 Line 4 Column 19 File C:/temp/Person.java)type_arguments
+   |   |)name
+   |   |(brackets@Java~Java1_6=157#48858c0 Line 4 Column 19 File C:/temp/Person.java)brackets
+   |   )type
+   |   (IDENTIFIER@Java~Java1_6=447#48855c0[`toString'] Line 4 Column 19 File C:/temp/Person.java)IDENTIFIER
+   |   (parameters@Java~Java1_6=158#48858e0 Line 4 Column 27 File C:/temp/Person.java
+   |   |('('@Java~Java1_6=450#4885840[Keyword:0] Line 4 Column 27 File C:/temp/Person.java)'('
+   |   |(')'@Java~Java1_6=451#4885620[Keyword:0] Line 4 Column 28 File C:/temp/Person.java)')'
+   |   )parameters
+   |   (brackets@Java~Java1_6=157#4885060 Line 5 Column 7 File C:/temp/Person.java)brackets
+   |   (block@Java~Java1_6=217#4885be0 Line 5 Column 7 File C:/temp/Person.java
+   |   |('{'@Java~Java1_6=448#48851c0[Keyword:0] Line 5 Column 7 File C:/temp/Person.java)'{'
+   |   |(statement_sequence@Java~Java1_6=218#4885ba0 Line 5 Column 9 File C:/temp/Person.java
+   |   | (statement_sequence_member@Java~Java1_6=223#4885b80 Line 5 Column 9 File C:/temp/Person.java
+   |   |  (executable_statement@Java~Java1_6=243#4885b60 Line 5 Column 9 File C:/temp/Person.java
+   |   |   ('return'@Java~Java1_6=491#4884f60[Keyword:0] Line 5 Column 9 File C:/temp/Person.java)'return'
+   |   |   (expression@Java~Java1_6=332#4885ac0 Line 5 Column 16 File C:/temp/Person.java
+   |   |   |(conditional_expression@Java~Java1_6=345#4885a60 Line 5 Column 16 File C:/temp/Person.java
+   |   |   | (conditional_or_expression@Java~Java1_6=347#4885a20 Line 5 Column 16 File C:/temp/Person.java
+   |   |   |  (conditional_and_expression@Java~Java1_6=349#48859e0 Line 5 Column 16 File C:/temp/Person.java
+   |   |   |   (inclusive_or_expression@Java~Java1_6=351#48857e0 Line 5 Column 16 File C:/temp/Person.java
+   |   |   |   |(exclusive_or_expression@Java~Java1_6=353#48855a0 Line 5 Column 16 File C:/temp/Person.java
+   |   |   |   | (and_expression@Java~Java1_6=355#4885940 Line 5 Column 16 File C:/temp/Person.java
+   |   |   |   |  (equality_expression@Java~Java1_6=357#4885880 Line 5 Column 16 File C:/temp/Person.java
+   |   |   |   |   (relational_expression@Java~Java1_6=360#4885800 Line 5 Column 16 File C:/temp/Person.java
+   |   |   |   |   |(shift_expression@Java~Java1_6=366#48856c0 Line 5 Column 16 File C:/temp/Person.java
+   |   |   |   |   | (additive_expression@Java~Java1_6=370#4885180 Line 5 Column 16 File C:/temp/Person.java
+   |   |   |   |   |  (multiplicative_expression@Java~Java1_6=373#4885780 Line 5 Column 16 File C:/temp/Person.java
+   |   |   |   |   |   (unary_expression@Java~Java1_6=383#4885600 Line 5 Column 16 File C:/temp/Person.java
+   |   |   |   |   |   |(unary_expression_not_plus_minus@Java~Java1_6=389#4885680 Line 5 Column 16 File C:/temp/Person.java
+   |   |   |   |   |   | (literal@Java~Java1_6=390#4884f80 Line 5 Column 16 File C:/temp/Person.java
+   |   |   |   |   |   |  (STRING@Java~Java1_6=536#4885120[`name'] Line 5 Column 16 File C:/temp/Person.java)STRING
+   |   |   |   |   |   | )literal
+   |   |   |   |   |   |)unary_expression_not_plus_minus
+   |   |   |   |   |   )unary_expression
+   |   |   |   |   |  )multiplicative_expression
+   |   |   |   |   | )additive_expression
+   |   |   |   |   |)shift_expression
+   |   |   |   |   )relational_expression
+   |   |   |   |  )equality_expression
+   |   |   |   | )and_expression
+   |   |   |   |)exclusive_or_expression
+   |   |   |   )inclusive_or_expression
+   |   |   |  )conditional_and_expression
+   |   |   | )conditional_or_expression
+   |   |   |)conditional_expression
+   |   |   )expression
+   |   |   (';'@Java~Java1_6=440#48856e0[Keyword:0] Line 5 Column 22 File C:/temp/Person.java)';'
+   |   |  )executable_statement
+   |   | )statement_sequence_member
+   |   |)statement_sequence
+   |   |('}'@Java~Java1_6=449#4885b40[Keyword:0] Line 5 Column 28 File C:/temp/Person.java)'}'
+   |   )block
+   |  )method_declaration
+   | )class_body_declaration
+   |)class_body_declarations
+   |('}'@Java~Java1_6=449#4885bc0[Keyword:0] Line 6 Column 1 File C:/temp/Person.java)'}'
+   )class_body
+  )type_declaration
+ )type_declarations
+ (optional_CONTROL_Z@Java~Java1_6=5#4885ce0 Line 7 Column 1 File C:/temp/Person.java)optional_CONTROL_Z
+)compilation_unit
+</code></pre>
+
+<p>This is the AST (automatically generated by DMS from the CST):</p>
+<pre><code class="java">(compilation_unit@Java~Java1_6=1#486f900^0 Line 1 Column 1 File C:/temp/Person.java
+ (type_declarations@Java~Java1_6=15#486f4c0 {1} Line 1 Column 1 File C:/temp/Person.java
+  (type_declaration@Java~Java1_6=17#486f5e0 Line 1 Column 1 File C:/temp/Person.java
+   (type_class_modifiers@Java~Java1_6=77#486eda0 Line 1 Column 1 File C:/temp/Person.java)type_class_modifiers
+   (class_header@Java~Java1_6=89#486ee60 Line 1 Column 1 File C:/temp/Person.java
+   |(IDENTIFIER@Java~Java1_6=447#486ede0[`Person'] Line 1 Column 7 File C:/temp/Person.java)IDENTIFIER
+   |(type_parameters@Java~Java1_6=408#486ee20 Line 1 Column 14 File C:/temp/Person.java)type_parameters
+   )class_header
+   (class_body@Java~Java1_6=94#486f040 Line 1 Column 14 File C:/temp/Person.java
+   |(class_body_declarations@Java~Java1_6=111#486ee40 {3} Line 2 Column 5 File C:/temp/Person.java
+   | (class_body_declaration@Java~Java1_6=118#486f300 Line 2 Column 5 File C:/temp/Person.java
+   |  (field_declaration@Java~Java1_6=168#486f380 Line 2 Column 5 File C:/temp/Person.java
+   |   (field_modifiers@Java~Java1_6=170#486eec0 Line 2 Column 5 File C:/temp/Person.java)field_modifiers
+   |   (type@Java~Java1_6=191#486f240 Line 2 Column 5 File C:/temp/Person.java
+   |   |(name@Java~Java1_6=406#486f180 Line 2 Column 5 File C:/temp/Person.java
+   |   | (IDENTIFIER@Java~Java1_6=447#486eea0[`String'] Line 2 Column 5 File C:/temp/Person.java)IDENTIFIER
+   |   | (type_arguments@Java~Java1_6=407#486f0e0 Line 2 Column 12 File C:/temp/Person.java)type_arguments
+   |   |)name
+   |   |(brackets@Java~Java1_6=157#486f200 Line 2 Column 12 File C:/temp/Person.java)brackets
+   |   )type
+   |   (variable_declarator@Java~Java1_6=181#486ef20 Line 2 Column 12 File C:/temp/Person.java
+   |   |(variable_declarator_id@Java~Java1_6=167#486efe0 Line 2 Column 12 File C:/temp/Person.java
+   |   | (IDENTIFIER@Java~Java1_6=447#486f0c0[`name'] Line 2 Column 12 File C:/temp/Person.java)IDENTIFIER
+   |   | (brackets@Java~Java1_6=157#486f060 Line 2 Column 16 File C:/temp/Person.java)brackets
+   |   |)variable_declarator_id
+   |   )variable_declarator
+   |  )field_declaration
+   | )class_body_declaration
+   | (class_body_declaration@Java~Java1_6=118#486f000 Line 3 Column 5 File C:/temp/Person.java
+   |  (field_declaration@Java~Java1_6=168#486f320 Line 3 Column 5 File C:/temp/Person.java
+   |   (field_modifiers@Java~Java1_6=170#486f2a0 Line 3 Column 5 File C:/temp/Person.java)field_modifiers
+   |   (type@Java~Java1_6=192#486eee0 Line 3 Column 5 File C:/temp/Person.java
+   |   |(primitive_type@Java~Java1_6=198#486ef60 Line 3 Column 5 File C:/temp/Person.java)primitive_type
+   |   |(brackets@Java~Java1_6=157#486ee00 Line 3 Column 12 File C:/temp/Person.java)brackets
+   |   )type
+   |   (variable_declarator@Java~Java1_6=181#486f2c0 Line 3 Column 12 File C:/temp/Person.java
+   |   |(variable_declarator_id@Java~Java1_6=167#486f3a0 Line 3 Column 12 File C:/temp/Person.java
+   |   | (IDENTIFIER@Java~Java1_6=447#486f120[`age'] Line 3 Column 12 File C:/temp/Person.java)IDENTIFIER
+   |   | (brackets@Java~Java1_6=157#486ef00 Line 3 Column 15 File C:/temp/Person.java)brackets
+   |   |)variable_declarator_id
+   |   )variable_declarator
+   |  )field_declaration
+   | )class_body_declaration
+   | (class_body_declaration@Java~Java1_6=117#486f7a0 Line 4 Column 5 File C:/temp/Person.java
+   |  (method_declaration@Java~Java1_6=135#486f480 Line 4 Column 5 File C:/temp/Person.java
+   |   (method_modifiers@Java~Java1_6=141#486f460 {1} Line 4 Column 5 File C:/temp/Person.java
+   |   |(method_modifier@Java~Java1_6=147#486f400 Line 4 Column 5 File C:/temp/Person.java)method_modifier
+   |   )method_modifiers
+   |   (type_parameters@Java~Java1_6=408#486f540 Line 4 Column 12 File C:/temp/Person.java)type_parameters
+   |   (type@Java~Java1_6=191#486f740 Line 4 Column 12 File C:/temp/Person.java
+   |   |(name@Java~Java1_6=406#486f620 Line 4 Column 12 File C:/temp/Person.java
+   |   | (IDENTIFIER@Java~Java1_6=447#486f080[`String'] Line 4 Column 12 File C:/temp/Person.java)IDENTIFIER
+   |   | (type_arguments@Java~Java1_6=407#486f640 Line 4 Column 19 File C:/temp/Person.java)type_arguments
+   |   |)name
+   |   |(brackets@Java~Java1_6=157#486f700 Line 4 Column 19 File C:/temp/Person.java)brackets
+   |   )type
+   |   (IDENTIFIER@Java~Java1_6=447#486f140[`toString'] Line 4 Column 19 File C:/temp/Person.java)IDENTIFIER
+   |   (parameters@Java~Java1_6=158#486f760 Line 4 Column 27 File C:/temp/Person.java)parameters
+   |   (brackets@Java~Java1_6=157#486f820 Line 5 Column 7 File C:/temp/Person.java)brackets
+   |   (block@Java~Java1_6=217#486f780 Line 5 Column 7 File C:/temp/Person.java
+   |   |(statement_sequence@Java~Java1_6=218#486f6e0 Line 5 Column 9 File C:/temp/Person.java
+   |   | (statement_sequence_member@Java~Java1_6=223#486f6c0 Line 5 Column 9 File C:/temp/Person.java
+   |   |  (executable_statement@Java~Java1_6=243#486f6a0 Line 5 Column 9 File C:/temp/Person.java
+   |   |   (unary_expression_not_plus_minus@Java~Java1_6=389#486f720 Line 5 Column 16 File C:/temp/Person.java
+   |   |   |(literal@Java~Java1_6=390#486f280 Line 5 Column 16 File C:/temp/Person.java
+   |   |   | (STRING@Java~Java1_6=536#486f160[`name'] Line 5 Column 16 File C:/temp/Person.java)STRING
+   |   |   |)literal
+   |   |   )unary_expression_not_plus_minus
+   |   |  )executable_statement
+   |   | )statement_sequence_member
+   |   |)statement_sequence
+   |   )block
+   |  )method_declaration
+   | )class_body_declaration
+   |)class_body_declarations
+   )class_body
+  )type_declaration
+ )type_declarations
+ (optional_CONTROL_Z@Java~Java1_6=5#486f4e0 Line 7 Column 1 File C:/temp/Person.java)optional_CONTROL_Z
+)compilation_unit
+</code></pre>
+
+<p>EDIT March 2015: <a href="https://stackoverflow.com/a/17393852/120163">Here's a link to some C++ AST examples</a></p>
+<p>Edit May 2015: DMS has long done Java 1.7 and 1.8, too.</p>
+<h2 id="dms_software_reengineering_toolkit"><a href="https://en.wikipedia.org/wiki/DMS_Software_Reengineering_Toolkit">DMS Software Reengineering Toolkit</a><a class="headerlink" href="#dms_software_reengineering_toolkit" title="Permanent link">#</a></h2>
+<h2 id="abstract_vs_concrete_syntax_trees"><a href="https://eli.thegreenplace.net/2009/02/16/abstract-vs-concrete-syntax-trees">Abstract vs. Concrete Syntax Trees</a><a class="headerlink" href="#abstract_vs_concrete_syntax_trees" title="Permanent link">#</a></h2>
+<h2 id="compiling_an_ast_back_to_source_code"><a href="https://stackoverflow.com/questions/5832412/compiling-an-ast-back-to-source-code">Compiling an AST back to source code</a><a class="headerlink" href="#compiling_an_ast_back_to_source_code" title="Permanent link">#</a></h2>
+              
+            </div>
+          </div>
+          <footer>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/dengking/compiler-principle" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+      
+    </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="../../search/main.js" defer></script>
+
+</body>
+</html>

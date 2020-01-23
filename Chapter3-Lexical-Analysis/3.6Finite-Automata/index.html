@@ -8,7 +8,7 @@
   
   <meta name="author" content="DengKing">
   <link rel="shortcut icon" href="../../img/favicon.ico">
-  <title>3.6Finite-Automata - compiler principle</title>
+  <title>3.6 - compiler principle</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
@@ -18,7 +18,7 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "3.6Finite-Automata";
+    var mkdocs_page_name = 3.6;
     var mkdocs_page_input_path = "Chapter3-Lexical-Analysis/3.6Finite-Automata.md";
     var mkdocs_page_url = "/compiler-principle/Chapter3-Lexical-Analysis/3.6Finite-Automata/";
   </script>
@@ -58,76 +58,88 @@
           
             <li class="toctree-l1">
 		
-    <span class="caption-text">Chapter1-Introduction</span>
+    <span class="caption-text">Chapter1</span>
     <ul class="subnav">
                 <li class="">
                     
-    <a class="" href="../../Chapter1-Introduction/introduction/">introduction</a>
+    <a class="" href="../../Chapter1-Introduction/">1</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../../Chapter1-Introduction/1.2The-Structure-of-a-Compiler/">1.2The-Structure-of-a-Compiler</a>
+    <a class="" href="../../Chapter1-Introduction/1.1Language-Processors/">1.1</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter1-Introduction/1.2The-Structure-of-a-Compiler/">1.2</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter1-Introduction/1.5Applications-of-Compiler-Technology/">1.5</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter1-Introduction/1.6Programming-Language-Basics/">1.6</a>
                 </li>
     </ul>
 	    </li>
           
             <li class="toctree-l1">
 		
-    <span class="caption-text">Chapter2-A-Simple-Syntax-Directed-Translator</span>
+    <span class="caption-text">Chapter2</span>
     <ul class="subnav">
                 <li class="">
                     
-    <a class="" href="../../Chapter2-A-Simple-Syntax-Directed-Translator/A-Simple-Syntax-Directed-Translator/">A-Simple-Syntax-Directed-Translator</a>
+    <a class="" href="../../Chapter2-A-Simple-Syntax-Directed-Translator/">2</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../../Chapter2-A-Simple-Syntax-Directed-Translator/2.1Introduction/">2.1Introduction</a>
+    <a class="" href="../../Chapter2-A-Simple-Syntax-Directed-Translator/2.1Introduction/">2.1</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../../Chapter2-A-Simple-Syntax-Directed-Translator/2.2Syntax-Definition/">2.2Syntax-Definition</a>
+    <a class="" href="../../Chapter2-A-Simple-Syntax-Directed-Translator/2.2Syntax-Definition/">2.2</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../../Chapter2-A-Simple-Syntax-Directed-Translator/2.3Syntax-Directed-Translation/">2.3Syntax-Directed-Translation</a>
+    <a class="" href="../../Chapter2-A-Simple-Syntax-Directed-Translator/2.3Syntax-Directed-Translation/">2.3</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../../Chapter2-A-Simple-Syntax-Directed-Translator/2.4Parsing/">2.4Parsing</a>
+    <a class="" href="../../Chapter2-A-Simple-Syntax-Directed-Translator/2.4Parsing/">2.4</a>
                 </li>
     </ul>
 	    </li>
           
             <li class="toctree-l1">
 		
-    <span class="caption-text">Chapter3-Lexical-Analysis</span>
+    <span class="caption-text">Chapter3</span>
     <ul class="subnav">
                 <li class="">
                     
-    <a class="" href="../Lexical-Analysis/">Lexical-Analysis</a>
+    <a class="" href="../">3</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../3.1The-Role-of-the-Lexical-Analyzer/">3.1The-Role-of-the-Lexical-Analyzer</a>
+    <a class="" href="../3.1The-Role-of-the-Lexical-Analyzer/">3.1</a>
                 </li>
                 <li class="">
                     
-    <a class="" href="../3.4Recognition-of-Tokens/">3.4Recognition-of-Tokens</a>
+    <a class="" href="../3.4Recognition-of-Tokens/">3.4</a>
                 </li>
                 <li class=" current">
                     
-    <a class="current" href="./">3.6Finite-Automata</a>
+    <a class="current" href="./">3.6</a>
     <ul class="subnav">
             
-    <li class="toctree-l3"><a href="#36-finite-automata">3.6 Finite Automata</a></li>
+    <li class="toctree-l3"><a href="#36_finite_automata">3.6 Finite Automata</a></li>
     
         <ul>
         
-            <li><a class="toctree-l4" href="#361-nondeterministic-finite-automata">3.6.1 Nondeterministic Finite Automata</a></li>
+            <li><a class="toctree-l4" href="#361_nondeterministic_finite_automata">3.6.1 Nondeterministic Finite Automata</a></li>
         
-            <li><a class="toctree-l4" href="#362-transition-tables">3.6.2 Transition Tables</a></li>
+            <li><a class="toctree-l4" href="#362_transition_tables">3.6.2 Transition Tables</a></li>
         
-            <li><a class="toctree-l4" href="#364-deterministic-finite-automata">3.6.4 Deterministic Finite Automata</a></li>
+            <li><a class="toctree-l4" href="#364_deterministic_finite_automata">3.6.4 Deterministic Finite Automata</a></li>
         
         </ul>
     
@@ -136,84 +148,110 @@
                 </li>
                 <li class="">
                     
-    <a class="" href="../3.7From-Regular-Expressions-to-Automata/">3.7From-Regular-Expressions-to-Automata</a>
-                </li>
-                <li class="">
-                    
-    <span class="caption-text">wikipedia-String</span>
-    <ul class="subnav">
-                <li class="toctree-l3">
-                    
-    <a class="" href="../wikipedia-String/wikipedia-String(computer-science)/">wikipedia-String(computer-science)</a>
-                </li>
-                <li class="toctree-l3">
-                    
-    <span class="caption-text">string-searching</span>
-    <ul class="subnav">
-                <li class="toctree-l4">
-                    
-    <a class="" href="../wikipedia-String/string-searching/wikipedia-Aho-Corasick-algorithm/">wikipedia-Aho-Corasick-algorithm</a>
-                </li>
-    </ul>
-                </li>
-    </ul>
+    <a class="" href="../3.7From-Regular-Expressions-to-Automata/">3.7</a>
                 </li>
     </ul>
 	    </li>
           
             <li class="toctree-l1">
 		
-    <span class="caption-text">Chapter4-Syntax-Analysis</span>
+    <span class="caption-text">Chapter4</span>
     <ul class="subnav">
                 <li class="">
                     
-    <a class="" href="../../Chapter4-Syntax-Analysis/Syntax-Analysis/">Syntax-Analysis</a>
+    <a class="" href="../../Chapter4-Syntax-Analysis/">4</a>
                 </li>
                 <li class="">
                     
-    <span class="caption-text">Wikipedia-Parsing-algorithms</span>
-    <ul class="subnav">
-                <li class="toctree-l3">
-                    
-    <a class="" href="../../Chapter4-Syntax-Analysis/Wikipedia-Parsing-algorithms/wikipedia-Parsing/">wikipedia-Parsing</a>
+    <a class="" href="../../Chapter4-Syntax-Analysis/4.2Context-Free-Grammars/">4.2</a>
                 </li>
-                <li class="toctree-l3">
+                <li class="">
                     
-    <span class="caption-text">Bottom-up</span>
-    <ul class="subnav">
-                <li class="toctree-l4">
-                    
-    <span class="caption-text">Precedence</span>
-    <ul class="subnav">
-                <li class="toctree-l5">
-                    
-    <a class="" href="../../Chapter4-Syntax-Analysis/Wikipedia-Parsing-algorithms/Bottom-up/Precedence/wikipedia-Operator-precedence-parser/">wikipedia-Operator-precedence-parser</a>
+    <a class="" href="../../Chapter4-Syntax-Analysis/4.3Writing-a-Grammar/">4.3</a>
                 </li>
-                <li class="toctree-l5">
+                <li class="">
                     
-    <a class="" href="../../Chapter4-Syntax-Analysis/Wikipedia-Parsing-algorithms/Bottom-up/Precedence/wikipedia-Shunting-yard-algorithm/">wikipedia-Shunting-yard-algorithm</a>
+    <a class="" href="../../Chapter4-Syntax-Analysis/4.5Bottom-Up-Parsing/">4.5</a>
                 </li>
-    </ul>
-                </li>
-                <li class="toctree-l4">
+                <li class="">
                     
-    <a class="" href="../../Chapter4-Syntax-Analysis/Wikipedia-Parsing-algorithms/Bottom-up/blog-Equation(expression)parser-with-precedence/">blog-Equation(expression)parser-with-precedence</a>
+    <a class="" href="../../Chapter4-Syntax-Analysis/4.6Introduction-to-LR-Parsing-Simple-LR/">4.6</a>
                 </li>
-                <li class="toctree-l4">
+                <li class="">
                     
-    <a class="" href="../../Chapter4-Syntax-Analysis/Wikipedia-Parsing-algorithms/Bottom-up/wikipedia-CYK-algorithm/">wikipedia-CYK-algorithm</a>
+    <a class="" href="../../Chapter4-Syntax-Analysis/4.7More-Powerful-LR-Parsers/">4.7</a>
                 </li>
-                <li class="toctree-l4">
+                <li class="">
                     
-    <a class="" href="../../Chapter4-Syntax-Analysis/Wikipedia-Parsing-algorithms/Bottom-up/wikipedia-LR-parser/">wikipedia-LR-parser</a>
-                </li>
-                <li class="toctree-l4">
-                    
-    <a class="" href="../../Chapter4-Syntax-Analysis/Wikipedia-Parsing-algorithms/Bottom-up/wikipedia-Top-down-parsing/">wikipedia-Top-down-parsing</a>
+    <a class="" href="../../Chapter4-Syntax-Analysis/VS-LL-parser-VS-LR-parser/">VS-LL-parser-VS-LR-parser</a>
                 </li>
     </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Chapter5</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../Chapter5-Syntax-Directed-Translation/">5</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter5-Syntax-Directed-Translation/5.1Syntax-Directed-Definitions/">5.1</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter5-Syntax-Directed-Translation/5.2Evaluation-Orders-for-SDD's/">5.2</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter5-Syntax-Directed-Translation/5.3Applications-of-Syntax-Directed-Translation/">5.3</a>
                 </li>
     </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Chapter6</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../Chapter6-Intermediate-Code-Generation/">6</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter6-Intermediate-Code-Generation/6.3Types-and-Declarations/">6.3</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Chapter7</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../Chapter7-Run-Time-Environments/">7</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter7-Run-Time-Environments/7.1Storage-Organization/">7.1</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter7-Run-Time-Environments/7.2Stack-Allocation-of-Space/">7.2</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Chapter9</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../Chapter9-Machine-Independent-Optimizations/">9</a>
                 </li>
     </ul>
 	    </li>
@@ -240,11 +278,11 @@
     
       
         
-          <li>Chapter3-Lexical-Analysis &raquo;</li>
+          <li>Chapter3 &raquo;</li>
         
       
     
-    <li>3.6Finite-Automata</li>
+    <li>3.6</li>
     <li class="wy-breadcrumbs-aside">
       
     </li>
@@ -254,7 +292,7 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="36-finite-automata">3.6 Finite Automata<a class="headerlink" href="#36-finite-automata" title="Permanent link"></a></h1>
+                <h2 id="36_finite_automata">3.6 Finite Automata<a class="headerlink" href="#36_finite_automata" title="Permanent link">#</a></h2>
 <p>We shall now discover how Lex turns its input program into a lexical analyzer. At the heart of the transition is the formalism known as <a href="https://en.wikipedia.org/wiki/Finite-state_machine"><em>finite automata</em></a>. These are essentially graphs, like transition diagrams, with a few differences:</p>
 <ol>
 <li>
@@ -266,14 +304,14 @@
 </ol>
 <p>(a) <a href="https://en.wikipedia.org/wiki/Nondeterministic_finite_automaton">Nondeterministic finite automata (NFA)</a> have no restrictions on the labels of their edges. A symbol can label several edges out of the same state, and $\epsilon$, the empty string, is a possible label.</p>
 <p>(b) <a href="https://en.wikipedia.org/wiki/Deterministic_finite_automaton">Deterministic finite automata (DFA)</a> have, for each state, and for each symbol of its input alphabet exactly one edge with that symbol leaving that state.</p>
-<p>Both deterministic and nondeterministic finite automata are capable of recognizing the same languages. In fact these languages are exactly the same languages, called the regular languages, that regular expressions can describe.</p>
+<p>Both deterministic and nondeterministic finite automata are capable of recognizing the same languages. In fact these languages are exactly the same languages, called the <a href="https://en.wikipedia.org/wiki/Regular_language"><strong>regular languages</strong></a>, that regular expressions can describe.</p>
 <blockquote>
 <p>There is a small lacuna: as we defined them, regular expressions cannot describe the empty language, since we would never want to use this pattern in practice. However, finite automata can define the empty language. In the theory, $\phi$ is treated as an additional regular expression for the sole purpose of defining the empty language.</p>
 <p>NOTE: In chapter 3.4 Recognition of Tokens, there are description as below</p>
 <p>A <a href="https://en.wikipedia.org/wiki/Trie">trie</a> is a tree-structured transition diagram or <strong>finite automaton</strong>, </p>
 <p>It is known to us all that tree is graph. In first paragraph, the author also regard <a href="https://en.wikipedia.org/wiki/Finite-state_machine"><em>finite automata</em></a> as graph.</p>
 </blockquote>
-<h2 id="361-nondeterministic-finite-automata">3.6.1 Nondeterministic Finite Automata<a class="headerlink" href="#361-nondeterministic-finite-automata" title="Permanent link"></a></h2>
+<h3 id="361_nondeterministic_finite_automata">3.6.1 Nondeterministic Finite Automata<a class="headerlink" href="#361_nondeterministic_finite_automata" title="Permanent link">#</a></h3>
 <p>A nondeterministic finite automaton (NFA) consists of:</p>
 <ol>
 <li>A finite set of states <code>S</code> .</li>
@@ -282,18 +320,21 @@
 <li>A state $s_0$ from $S$ that is distinguished as the <em>start state</em> (or initial state).</li>
 <li>A set of states $F$ , a subset of $S$ , that is distinguished as the <em>accepting states</em> (or <em>final states</em>).</li>
 </ol>
-<p>We can represent either an NFA or DFA by a <em>transition graph</em>, where the nodes are states and the labeled edges represent the transition function. There is an edge labeled a from state $s$ to state $t$ if and only if $t$ is one of the next states for state $s$ and input $a$. This graph is very much like a transition diagram, except:</p>
+<p>We can represent either an NFA or DFA by a <em>transition graph</em>, where the nodes are states and the labeled edges represent the transition function. There is an edge labeled <code>a</code> from state $s$ to state $t$ if and only if $t$ is one of the next states for state $s$ and input $a$. This graph(transition graph) is very much like a <strong>transition diagram</strong>, except:</p>
 <p>a) The same symbol can label edges from one state to several different states, and</p>
 <p>b) An edge may be labeled by $\epsilon$, the empty string, instead of, or in addition to, symbols from the input alphabet.</p>
-<p><strong>Example 3.14</strong> : The transition graph for an NFA recognizing the language of regular expression $(a|b)*abb$ is shown in Fig. 3.24. This abstract example, describing all strings of a's and b's ending in the particular string <code>abb</code>, will be used throughout this section. It is similar to regular expressions that describe languages of real interest, however. For instance, an expression describing all files whose name ends in .o is any
-<code>*</code>.o, where any stands for any printable character.</p>
+<blockquote>
+<p>NOTE: <strong>Transition diagram</strong> is formally described in chapter 3.4.1 Transition Diagrams</p>
+</blockquote>
+<p><strong>Example 3.14</strong> : The transition graph for an NFA recognizing the language of regular expression $(a|b)*abb$ is shown in Fig. 3.24. This abstract example, describing all strings of <code>a</code>'s and <code>b</code>'s ending in the particular string <code>abb</code>, will be used throughout this section. It is similar to regular expressions that describe languages of real interest, however. For instance, an expression describing all files whose name ends in <code>.o</code> is any
+<code>*.o</code>, where any stands for any printable character.</p>
 <p><img alt="" src="../Figure3.24A-nondeterministic-finite-automaton.jpg" /></p>
 <blockquote>
 <p>NOTE: There are two edges labeled with <code>a</code> from state 0 while this is not allowed in DFA. Below is come from <a href="https://en.wikipedia.org/wiki/Finite-state_machine#Determinism">Finite-state machine</a>:</p>
 <p>In a deterministic automaton, every state has exactly one transition for each possible input. In a non-deterministic automaton, an input can lead to one, more than one, or no transition for a given state. The <a href="https://en.wikipedia.org/wiki/Powerset_construction">powerset construction</a> algorithm can transform any nondeterministic automaton into a (usually more complex) deterministic automaton with identical functionality.</p>
 </blockquote>
 <p>Following our convention for transition diagrams, the double circle around state 3 indicates that this state is accepting. Notice that the only ways to get from the start state 0 to the accepting state is to follow some path that stays in state 0 for a while, then go es to states 1, 2, and 3 by reading <code>abb</code> from the input. Thus, the only strings getting to the accepting state are those that end in <code>abb</code>. </p>
-<h2 id="362-transition-tables">3.6.2 Transition Tables<a class="headerlink" href="#362-transition-tables" title="Permanent link"></a></h2>
+<h3 id="362_transition_tables">3.6.2 Transition Tables<a class="headerlink" href="#362_transition_tables" title="Permanent link">#</a></h3>
 <p>We can also represent an NFA by a <em>transition table</em>, whose rows correspond to states, and whose columns correspond to the input symbols and $\epsilon$. The entry for a given state and input is the value of the transition function applied to those arguments. If the transition function has no information about that state-input
 pair, we put $\phi$ in the table for the pair.</p>
 <p><strong>Example 3.15</strong> : The transition table for the NFA of Fig. 3.24 is shown in Fig. 3.25.</p>
@@ -302,7 +343,7 @@ pair, we put $\phi$ in the table for the pair.</p>
 <blockquote>
 <p>NOTE: Transition diagrams and transition table correspond to two kind of data structure describing finite automata</p>
 </blockquote>
-<h2 id="364-deterministic-finite-automata">3.6.4 Deterministic Finite Automata<a class="headerlink" href="#364-deterministic-finite-automata" title="Permanent link"></a></h2>
+<h3 id="364_deterministic_finite_automata">3.6.4 Deterministic Finite Automata<a class="headerlink" href="#364_deterministic_finite_automata" title="Permanent link">#</a></h3>
 <p>A <em>deterministic finite automaton</em> (DFA) is a special case of an NFA where:</p>
 <ol>
 <li>There are no moves on input $\epsilon$ , and</li>
@@ -324,10 +365,10 @@ pair, we put $\phi$ in the table for the pair.</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../3.7From-Regular-Expressions-to-Automata/" class="btn btn-neutral float-right" title="3.7From-Regular-Expressions-to-Automata">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../3.7From-Regular-Expressions-to-Automata/" class="btn btn-neutral float-right" title="3.7">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="../3.4Recognition-of-Tokens/" class="btn btn-neutral" title="3.4Recognition-of-Tokens"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../3.4Recognition-of-Tokens/" class="btn btn-neutral" title="3.4"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   

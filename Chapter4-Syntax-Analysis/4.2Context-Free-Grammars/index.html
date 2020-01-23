@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <meta name="author" content="DengKing">
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+  <title>4.2 - compiler principle</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  <link href="../../css/extra.css" rel="stylesheet">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = 4.2;
+    var mkdocs_page_input_path = "Chapter4-Syntax-Analysis/4.2Context-Free-Grammars.md";
+    var mkdocs_page_url = "/compiler-principle/Chapter4-Syntax-Analysis/4.2Context-Free-Grammars/";
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/django.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> compiler principle</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../..">Home</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Chapter1</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../Chapter1-Introduction/">1</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter1-Introduction/1.1Language-Processors/">1.1</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter1-Introduction/1.2The-Structure-of-a-Compiler/">1.2</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter1-Introduction/1.5Applications-of-Compiler-Technology/">1.5</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter1-Introduction/1.6Programming-Language-Basics/">1.6</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Chapter2</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../Chapter2-A-Simple-Syntax-Directed-Translator/">2</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter2-A-Simple-Syntax-Directed-Translator/2.1Introduction/">2.1</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter2-A-Simple-Syntax-Directed-Translator/2.2Syntax-Definition/">2.2</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter2-A-Simple-Syntax-Directed-Translator/2.3Syntax-Directed-Translation/">2.3</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter2-A-Simple-Syntax-Directed-Translator/2.4Parsing/">2.4</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Chapter3</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../Chapter3-Lexical-Analysis/">3</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter3-Lexical-Analysis/3.1The-Role-of-the-Lexical-Analyzer/">3.1</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter3-Lexical-Analysis/3.4Recognition-of-Tokens/">3.4</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter3-Lexical-Analysis/3.6Finite-Automata/">3.6</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter3-Lexical-Analysis/3.7From-Regular-Expressions-to-Automata/">3.7</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Chapter4</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../">4</a>
+                </li>
+                <li class=" current">
+                    
+    <a class="current" href="./">4.2</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l3"><a href="#42_context-free_grammars">4.2 Context-Free Grammars</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#423_derivations">4.2.3 Derivations</a></li>
+        
+            <li><a class="toctree-l4" href="#424_parse_trees_and_derivations">4.2.4 Parse Trees and Derivations</a></li>
+        
+            <li><a class="toctree-l4" href="#427_context-free_grammars_versus_regular_expressions">4.2.7 Context-Free Grammars Versus Regular Expressions</a></li>
+        
+        </ul>
+    
+
+    </ul>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../4.3Writing-a-Grammar/">4.3</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../4.5Bottom-Up-Parsing/">4.5</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../4.6Introduction-to-LR-Parsing-Simple-LR/">4.6</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../4.7More-Powerful-LR-Parsers/">4.7</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../VS-LL-parser-VS-LR-parser/">VS-LL-parser-VS-LR-parser</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Chapter5</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../Chapter5-Syntax-Directed-Translation/">5</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter5-Syntax-Directed-Translation/5.1Syntax-Directed-Definitions/">5.1</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter5-Syntax-Directed-Translation/5.2Evaluation-Orders-for-SDD's/">5.2</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter5-Syntax-Directed-Translation/5.3Applications-of-Syntax-Directed-Translation/">5.3</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Chapter6</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../Chapter6-Intermediate-Code-Generation/">6</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter6-Intermediate-Code-Generation/6.3Types-and-Declarations/">6.3</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Chapter7</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../Chapter7-Run-Time-Environments/">7</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter7-Run-Time-Environments/7.1Storage-Organization/">7.1</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter7-Run-Time-Environments/7.2Stack-Allocation-of-Space/">7.2</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Chapter9</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../Chapter9-Machine-Independent-Optimizations/">9</a>
+                </li>
+    </ul>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">compiler principle</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Chapter4 &raquo;</li>
+        
+      
+    
+    <li>4.2</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h2 id="42_context-free_grammars">4.2 Context-Free Grammars<a class="headerlink" href="#42_context-free_grammars" title="Permanent link">#</a></h2>
+<h3 id="423_derivations">4.2.3 Derivations<a class="headerlink" href="#423_derivations" title="Permanent link">#</a></h3>
+<blockquote>
+<p>NOTE: Derivation means 推导 in Chinese.</p>
+</blockquote>
+<p>The construction of a parse tree can be made precise by taking a derivational view, in which productions are treated as rewriting rules. Beginning with the start symbol, each rewriting step replaces a <strong>nonterminal</strong> by the body of one of its productions. This derivational view corresponds to the <strong>top-down</strong> construction
+of a <strong>parse tree</strong>, but the precision afforded by <strong>derivations</strong> will be especially helpful when <strong>bottom-up</strong> parsing is discussed. As we shall see, <strong>bottom-up parsing</strong> is related to a class of derivations known as "<strong>rightmost</strong>" derivations, in which the <strong>rightmost nonterminal</strong> is rewritten at each step.</p>
+<blockquote>
+<p>NOTE: I still do not understand why bottom-up parsing corresponds "<strong>rightmost</strong>" derivations.</p>
+</blockquote>
+<p>$\Rightarrow$</p>
+<p>If $S \xrightarrow []{ \ast} \alpha$ where $S$ is the start symbol of a grammar $G$, we say that $\alpha$ is a <em>sentential form</em> of G. Note that a <strong>sentential form</strong> may contain both <strong>terminals</strong> and <strong>nonterminals</strong>, and may be empty. A <em>sentence</em> of G is a <strong>sentential form</strong> with no <strong>nonterminals</strong>. The <em>language</em> generated by a grammar is its set of <strong>sentences</strong>.
+Thus, a string of terminals $w$ is in $L(G)$, the language generated by G, if and only if $w$ is a sentence of G (or $S \xrightarrow []{ \ast} w $. A language that can be generated by a <strong>grammar</strong> is said to be a <strong>context-free language</strong>. If two grammars generate the same language, the grammars are said to be <em>equivalent</em>.</p>
+<blockquote>
+<p>NOTE: Natural language is not <strong>context-free language</strong>.</p>
+</blockquote>
+<p>To understand how parsers work, we shall consider derivations in which the <strong>nonterminal</strong> to be replaced at each step is chosen as follows:</p>
+<ol>
+<li>In <em>leftmost derivations</em>, the <strong>leftmost nonterminal</strong> in each sentential is always chosen. If $\alpha \to \beta $ is a step in which the leftmost nonterminal in $\alpha$ is replaced, we write $\alpha \xrightarrow [ \text{lm} ]{} \beta$ .</li>
+<li>In <em>rightmost derivations</em>, the <strong>rightmost nonterminal</strong> is always chosen; we write $\alpha \xrightarrow [ \text{rm} ]{} \beta$   in this case.</li>
+</ol>
+<p>If  , then we say that  is a <em>left-sentential form</em> of the grammar at hand.</p>
+<p>Analogous definitions hold for <strong>rightmost derivations</strong>. Rightmost derivations are sometimes called <em>canonical derivations</em>.</p>
+<h3 id="424_parse_trees_and_derivations">4.2.4 Parse Trees and Derivations<a class="headerlink" href="#424_parse_trees_and_derivations" title="Permanent link">#</a></h3>
+<p>A parse tree is a graphical representation of a derivation that filters out the <strong>order</strong> in which productions are applied to replace nonterminals. Each interior node of a parse tree represents the application of a production. The interior node is labeled with the nonterminal <code>A</code> in the head of the production; the children of the node are labeled, from left to right, by the symbols in the body of the production by which this <code>A</code> was replaced during the derivation.</p>
+<blockquote>
+<p>NOTE: Left-most derivation and right-most derivation yield the same tree in the end but the order in which productions are applied to replace nonterminals is different.</p>
+</blockquote>
+<h3 id="427_context-free_grammars_versus_regular_expressions">4.2.7 Context-Free Grammars Versus Regular Expressions<a class="headerlink" href="#427_context-free_grammars_versus_regular_expressions" title="Permanent link">#</a></h3>
+<blockquote>
+<p>NOTE: 下面这些内容是在阅读<a href="https://en.wikipedia.org/wiki/Comparison_of_parser_generators">Comparison of parser generators</a>中<a href="https://en.wikipedia.org/wiki/Comparison_of_parser_generators#Regular_languages">Regular languages</a>章节时，发现这一段的内容正好和本节内容相关，可以作为一个补充，并且它的讲解也比较易懂：</p>
+<blockquote>
+<p><a href="https://en.wikipedia.org/wiki/Regular_language">Regular languages</a> are a category of languages (sometimes termed <a href="https://en.wikipedia.org/wiki/Chomsky_hierarchy">Chomsky Type 3</a>) which can be matched by a state machine (more specifically, by a <a href="https://en.wikipedia.org/wiki/Deterministic_finite_automaton">deterministic finite automaton</a> or a <a href="https://en.wikipedia.org/wiki/Nondeterministic_finite_automaton">nondeterministic finite automaton</a>) constructed from a <a href="https://en.wikipedia.org/wiki/Regular_expression">regular expression</a>. In particular, a regular language can match constructs like "A follows B", "Either A or B", "A, followed by zero or more instances of B", but cannot match constructs which require consistency between non-adjacent elements, such as "some instances of A followed by the same number of instances of B", and also cannot express the concept of recursive "nesting" ("every A is eventually followed by a matching B"). A classic example of a problem which a regular grammar cannot handle is the question of whether a given string contains correctly-nested parentheses. (This is typically handled by a Chomsky Type 2 grammar, also termed a <a href="https://en.wikipedia.org/wiki/Context-free_grammar">context-free grammar</a>.)</p>
+</blockquote>
+<p>regular expression属于<a href="https://en.wikipedia.org/wiki/Regular_language">Regular languages</a>，使用<a href="https://en.wikipedia.org/wiki/Regular_grammar">regular grammar</a>，按照<a href="https://en.wikipedia.org/wiki/Chomsky_hierarchy">Chomsky hierarchy</a>:</p>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Regular_grammar">regular grammar</a>属于<a href="https://en.wikipedia.org/wiki/Chomsky_hierarchy#Type-3_grammars">Type-3 grammars</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Context-free_grammar">context-free grammar</a>属于<a href="https://en.wikipedia.org/wiki/Chomsky_hierarchy#Type-2_grammars">Type-2 grammars</a></li>
+</ul>
+<p><a href="https://en.wikipedia.org/wiki/File:Chomsky-hierarchy.svg"><img alt="The Chomsky hierarchy" src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9a/Chomsky-hierarchy.svg/200px-Chomsky-hierarchy.svg.png" /></a></p>
+<p>Every <strong>regular language</strong> is <strong>context-free</strong>, every <strong>context-free</strong> language is <strong>context-sensitive</strong>, every <strong>context-sensitive language</strong> is <strong>recursive</strong> and every <strong>recursive language</strong> is recursively enumerable. These are all proper inclusions, meaning that there exist recursively enumerable languages that are not context-sensitive, context-sensitive languages that are not context-free and context-free languages that are not regular.</p>
+</blockquote>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../4.3Writing-a-Grammar/" class="btn btn-neutral float-right" title="4.3">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../" class="btn btn-neutral" title="4"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/dengking/compiler-principle" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href="../" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../4.3Writing-a-Grammar/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="../../search/main.js" defer></script>
+
+</body>
+</html>

@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <meta name="author" content="DengKing">
+  <link rel="shortcut icon" href="../../img/favicon.ico">
+  <title>1.6 - compiler principle</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  <link href="../../css/extra.css" rel="stylesheet">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = 1.6;
+    var mkdocs_page_input_path = "Chapter1-Introduction/1.6Programming-Language-Basics.md";
+    var mkdocs_page_url = "/compiler-principle/Chapter1-Introduction/1.6Programming-Language-Basics/";
+  </script>
+  
+  <script src="../../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/django.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../.." class="icon icon-home"> compiler principle</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../..">Home</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Chapter1</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../">1</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../1.1Language-Processors/">1.1</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../1.2The-Structure-of-a-Compiler/">1.2</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../1.5Applications-of-Compiler-Technology/">1.5</a>
+                </li>
+                <li class=" current">
+                    
+    <a class="current" href="./">1.6</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l3"><a href="#16_programming_language_basics">1.6 Programming Language Basics</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#161_the_staticdynamic_distinction">1.6.1 The Static/Dynamic Distinction</a></li>
+        
+            <li><a class="toctree-l4" href="#162_environments_and_states">1.6.2 Environments and States</a></li>
+        
+            <li><a class="toctree-l4" href="#163_static_scope_and_block_structure">1.6.3 Static Scope and Block Structure</a></li>
+        
+            <li><a class="toctree-l4" href="#164_explicit_access_control">1.6.4 Explicit Access Control</a></li>
+        
+            <li><a class="toctree-l4" href="#165_dynamic_scope">1.6.5 Dynamic Scope</a></li>
+        
+            <li><a class="toctree-l4" href="#166_parameter_passing_mechanisms">1.6.6 Parameter Passing Mechanisms</a></li>
+        
+            <li><a class="toctree-l4" href="#167_aliasing">1.6.7 Aliasing</a></li>
+        
+        </ul>
+    
+
+    </ul>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Chapter2</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../Chapter2-A-Simple-Syntax-Directed-Translator/">2</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter2-A-Simple-Syntax-Directed-Translator/2.1Introduction/">2.1</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter2-A-Simple-Syntax-Directed-Translator/2.2Syntax-Definition/">2.2</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter2-A-Simple-Syntax-Directed-Translator/2.3Syntax-Directed-Translation/">2.3</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter2-A-Simple-Syntax-Directed-Translator/2.4Parsing/">2.4</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Chapter3</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../Chapter3-Lexical-Analysis/">3</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter3-Lexical-Analysis/3.1The-Role-of-the-Lexical-Analyzer/">3.1</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter3-Lexical-Analysis/3.4Recognition-of-Tokens/">3.4</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter3-Lexical-Analysis/3.6Finite-Automata/">3.6</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter3-Lexical-Analysis/3.7From-Regular-Expressions-to-Automata/">3.7</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Chapter4</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../Chapter4-Syntax-Analysis/">4</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter4-Syntax-Analysis/4.2Context-Free-Grammars/">4.2</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter4-Syntax-Analysis/4.3Writing-a-Grammar/">4.3</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter4-Syntax-Analysis/4.5Bottom-Up-Parsing/">4.5</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter4-Syntax-Analysis/4.6Introduction-to-LR-Parsing-Simple-LR/">4.6</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter4-Syntax-Analysis/4.7More-Powerful-LR-Parsers/">4.7</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter4-Syntax-Analysis/VS-LL-parser-VS-LR-parser/">VS-LL-parser-VS-LR-parser</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Chapter5</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../Chapter5-Syntax-Directed-Translation/">5</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter5-Syntax-Directed-Translation/5.1Syntax-Directed-Definitions/">5.1</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter5-Syntax-Directed-Translation/5.2Evaluation-Orders-for-SDD's/">5.2</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter5-Syntax-Directed-Translation/5.3Applications-of-Syntax-Directed-Translation/">5.3</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Chapter6</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../Chapter6-Intermediate-Code-Generation/">6</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter6-Intermediate-Code-Generation/6.3Types-and-Declarations/">6.3</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Chapter7</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../Chapter7-Run-Time-Environments/">7</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter7-Run-Time-Environments/7.1Storage-Organization/">7.1</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../../Chapter7-Run-Time-Environments/7.2Stack-Allocation-of-Space/">7.2</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Chapter9</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../../Chapter9-Machine-Independent-Optimizations/">9</a>
+                </li>
+    </ul>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../..">compiler principle</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../..">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Chapter1 &raquo;</li>
+        
+      
+    
+    <li>1.6</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <div class="toc">
+<ul>
+<li><a href="#16_programming_language_basics">1.6 Programming Language Basics</a><ul>
+<li><a href="#161_the_staticdynamic_distinction">1.6.1 The Static/Dynamic Distinction</a></li>
+<li><a href="#162_environments_and_states">1.6.2 Environments and States</a></li>
+<li><a href="#163_static_scope_and_block_structure">1.6.3 Static Scope and Block Structure</a></li>
+<li><a href="#164_explicit_access_control">1.6.4 Explicit Access Control</a></li>
+<li><a href="#165_dynamic_scope">1.6.5 Dynamic Scope</a></li>
+<li><a href="#166_parameter_passing_mechanisms">1.6.6 Parameter Passing Mechanisms</a><ul>
+<li><a href="#call-by-value">Call-by-Value</a></li>
+<li><a href="#call-by-reference">Call-by-Reference</a></li>
+<li><a href="#call-by-name">Call-by-Name</a></li>
+</ul>
+</li>
+<li><a href="#167_aliasing">1.6.7 Aliasing</a><ul>
+<li><a href="#_1"></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<h2 id="16_programming_language_basics">1.6 Programming Language Basics<a class="headerlink" href="#16_programming_language_basics" title="Permanent link">#</a></h2>
+<p>In this section, we shall cover the most important terminology and distinctions that appear in the study of programming languages. It is not our purpose to cover all concepts or all the popular programming languages. We assume that the reader is familiar with at least one of C, <code>C++</code>, C#, or Java, and may have
+encountered other languages as well.</p>
+<h3 id="161_the_staticdynamic_distinction">1.6.1 The Static/Dynamic Distinction<a class="headerlink" href="#161_the_staticdynamic_distinction" title="Permanent link">#</a></h3>
+<p>Among the most important issues that we face when designing a compiler for a language is what decisions can the <strong>compiler</strong> make about a program. If a language uses a policy that allows the compiler to decide an issue, then we say that the language uses a <strong><em>static policy</em></strong> or that the issue can be decided at <strong><em>compile</em></strong>
+<strong><em>time</em></strong>. On the other hand, a policy that only allows a decision to be made when we execute the program is said to be a <strong><em>dynamic policy</em></strong> or to require a decision at <strong><em>run time</em></strong>.</p>
+<p>One issue on which we shall concentrate is the <strong><em>scope of declarations</em></strong>. The <strong><em>scope of a declaration</em></strong> of <code>x</code> is the region of the program in which uses of <code>x</code> refer to this declaration. A language uses <strong><em>static scope</em></strong> or <strong><em>lexical scope</em></strong> if it is possible to determine the scope of a declaration by looking only at the program. Otherwise, the language uses <strong><em>dynamic scope</em></strong>. With <strong><em>dynamic scope</em></strong>, as the program runs, the same use of <code>x</code> could refer to any of several different declarations of <code>x</code>.</p>
+<blockquote>
+<p>NOTE:上面关于<strong>scope</strong>的定义所指代的是declaration，而非variable。显然declaration能够指代的范围远远大于variable。</p>
+<p>See also: <a href="https://en.wikipedia.org/wiki/Scope_(computer_science)">Scope (computer science)</a></p>
+</blockquote>
+<p>Most languages, such as C and Java, use <strong>static scope</strong>. We shall discuss <strong>static scoping</strong> in Section 1.6.3.</p>
+<p><strong>Example 1.3</strong> : As another example of the <strong>static/dynamic distinction</strong>, consider the use of the term <strong>"static"</strong> as it applies to data in a Java class declaration. <strong>In Java, a variable is a name for a location in memory used to hold a data value</strong>. Here, <strong>"static"</strong> refers <strong>not</strong> to the <strong>scope</strong> of the variable, but rather to the ability of the <strong>compiler</strong> to determine the location in memory where the declared variable can be found. A declaration like</p>
+<pre><code class="java">public static int x;
+</code></pre>
+
+<p>makes <code>x</code> a <strong>class variable</strong> and says that there is only one copy of <code>x</code>, no matter how many objects of this class are created. Moreover, the compiler can determine a location in memory where this integer <code>x</code> will be held. In contrast, had "<strong>static</strong>" been omitted from this declaration, then each object of the class would have its own location where <code>x</code> would be held, and the compiler could not determine all these places in advance of running the program.</p>
+<blockquote>
+<p>NOTE: 通过关键字<code>static</code>来告诉compiler：你可以在进行编译的时候就给<code>x</code>分配memory；而不是在运行程序的时候使用<code>new</code>来创建对象时再分配<code>x</code>的memory，显然这是所谓的static policy。</p>
+<p>See also: <a href="https://en.wikipedia.org/wiki/Static_%28keyword%29">Static (keyword)</a></p>
+</blockquote>
+<h3 id="162_environments_and_states">1.6.2 Environments and States<a class="headerlink" href="#162_environments_and_states" title="Permanent link">#</a></h3>
+<p>Another important distinction we must make when discussing programming languages is whether changes occurring as the program runs affect the <strong>values</strong> of data elements or affect the interpretation of names for that data. For example,the execution of an assignment such as <code>x = y + 1</code> changes the <strong>value</strong> denoted by
+the <strong>name</strong> <code>x</code>. More specifically, the assignment changes the <strong>value</strong> in whatever <strong>location</strong> is denoted by <code>x</code>.</p>
+<p>It may be less clear that the <strong>location</strong> denoted by <code>x</code> can change at <strong>run time</strong>. For instance, as we discussed in Example 1.3, if <code>x</code> is not a <strong>static</strong> (or "<strong>class</strong>") variable, then every object of the class has its own location for an instance of variable x. In that case, the assignment to <code>x</code> can change any of those "instance" variables, depending on the <strong>object</strong> to which a method containing that assignment is applied.</p>
+<p><img alt="" src="../Figure-1.8-Two-stage-mapping-from-names-to-values.png" /></p>
+<p>The association of <strong>names</strong> with <strong>locations</strong> in memory (the store) and then with <strong>values</strong> can be described by two mappings that change as the program runs (see Fig. 1.8):
+1. The <strong>environment</strong> is a mapping from <strong>names</strong> to <strong>locations</strong> in the store. Since <strong>variables</strong> refer to <strong>locations</strong> ("l-values" in the terminology of C), we could alternatively define an <strong>environment</strong> as a mapping from <strong>names</strong> to <strong>variables</strong>(<strong>location</strong>).
+2. The <strong>state</strong> is a mapping from <strong>locations</strong> in store to their <strong>values</strong>. That is, the state maps <strong>l-values</strong> to their corresponding <strong>r-values</strong>, in the terminology of C.</p>
+<p><strong>Environments</strong> change according to the <strong>scope rules</strong> of a language.</p>
+<blockquote>
+<p>NOTE:  <strong>environments</strong>和<strong>scope</strong> 是不同的概念。</p>
+</blockquote>
+<p><strong>Example 1.4</strong> : Consider the C program fragment in Fig. 1.9. Integer <code>i</code> is declared a global variable, and also declared as a variable local to function <code>f</code> .When <code>f</code> is executing, the <strong>environment</strong> adjusts so that name <code>i</code> refers to the location reserved for the <code>i</code> that is local to <code>f</code> , and any use of <code>i</code>, such as the assignment <code>i = 3</code> shown explicitly, refers to that location. Typically, the local <code>i</code> is given a place on the <strong>run-time stack</strong></p>
+<pre><code class="c">
+int i; /* global i */
+
+void f(...) {
+    int i; /* local i */
+    ...
+    i = 3; /* use of local i */
+    ...
+}
+...
+    x = i + 1; /* use of global i */
+</code></pre>
+
+<p>Whenever a function <code>g</code> other than <code>f</code> is executing, uses of <code>i</code> cannot refer to the <code>i</code> that is local to <code>f</code> . Uses of name <code>i</code> in <code>g</code> must be within the scope of some other declaration of <code>i</code>. An example is the explicitly shown statement <code>x = i+1</code>,which is inside some procedure whose definition is not shown. The <code>i</code> in <code>i + 1</code>
+presumably（大概） refers to the global <code>i</code>. As in most languages, declarations in C must precede their use, so a function that comes before the global <code>i</code> cannot refer to it. </p>
+<p>The <strong>environment</strong> and <strong>state</strong> mappings in Fig. 1.8 are <strong>dynamic</strong>, but there are a few exceptions:</p>
+<ol>
+<li><strong>Static versus dynamic</strong> binding of <strong>names</strong> to <strong>locations</strong>. Most binding of names to locations is <strong>dynamic</strong>, and we discuss several approaches to this binding throughout the section. Some declarations, such as the global <code>i</code> in Fig. 1.9, can be given a location in the store once and for all, as the compiler generates object code(也就是global <code>i</code>是static).</li>
+</ol>
+<blockquote>
+<p>Technically, the C compiler will assign a location in <strong>virtual memory</strong> for the global <code>i</code>,leaving it to the loader and the operating system to determine where in the <strong>physical memory</strong> of the machine <code>i</code> will be located. However, we shall not worry about relocation issues such as these, which have no impact on compiling. Instead, we treat the <strong>address space</strong> that the compiler uses for its output code as if it gave <strong>physical memory locations</strong>.</p>
+</blockquote>
+<ol>
+<li><strong>Static versus dynamic</strong> binding of <strong>locations</strong> to <strong>values</strong>. The binding of locations to values (the second stage in Fig. 1.8), is <strong>generally</strong> dynamic as well, since we cannot tell the value in a location until we run the program. <strong>Declared constants</strong> are an exception. For instance, the C definition</li>
+</ol>
+<p><code>c
+   #define ARRAYSIZE 1000</code></p>
+<p>binds the name <code>ARRAYSIZE</code> to the value 1000 statically. We can determine this binding by looking at the statement, and we know that it is impossible for this binding to change when the program executes.</p>
+<h3 id="163_static_scope_and_block_structure">1.6.3 Static Scope and Block Structure<a class="headerlink" href="#163_static_scope_and_block_structure" title="Permanent link">#</a></h3>
+<p>Most languages, including C and its family, use <a href="#1.6.1 The Static/Dynamic Distinction">static scope</a>_. The <strong>scope rules</strong> for C are based on <strong>program structure</strong>; the scope of a declaration is determined implicitly(隐式地) by where the declaration appears in the program. Later languages,such as C++, Java, and C#, also provide explicit control over scopes through
+the use of keywords like <code>public</code>, <code>private</code>, and <code>protected</code>.</p>
+<p>In this section we consider static-scope rules for a language with <strong>blocks</strong>, where a block is a grouping of <strong>declarations</strong> and <strong>statements</strong>. C uses braces <code>{</code> and <code>}</code> to delimit(定界) a <strong>block</strong>; the alternative use of <code>begin</code> and <code>end</code> for the same purpose dates back to Algol.</p>
+<blockquote>
+<p>NOTE : 在<code>c++</code>中，block除了可以用于确定scope外，block也可以决定<em>storage duration</em> 。以下是摘自cppreference 的 <a href="https://en.cppreference.com/w/cpp/language/storage_duration">Storage class specifiers</a>章节：</p>
+<p><strong><em>automatic</em></strong> storage duration. The storage for the object is allocated at the beginning of the enclosing code block and deallocated at the end. All local objects have this storage duration, except those declared <code>static</code>, <code>extern</code> or <code>thread_local</code>.</p>
+</blockquote>
+<hr />
+<blockquote>
+<p><strong>Names</strong>, <strong>Identifiers</strong>, and <strong>Variables</strong></p>
+<p>Although the terms "name" and "variable," often refer to the same thing,we use them carefully to distinguish between compile-time names and the run-time locations denoted by names.</p>
+<p>An identifier is a string of characters, typically letters or digits, that refers to (identifies) an <strong>entity</strong>, such as a <strong>data object</strong>, a <strong>procedure</strong>, a <strong>class</strong>,or a <strong>type</strong>. All <strong>identifiers</strong> are <strong>names</strong>, but not all <strong>names</strong> are <strong>identifiers</strong>.Names can also be expressions. For example, the name <code>x.y</code> might denote the field <code>y</code> of a structure denoted by <code>x</code>. Here, <code>x</code> and <code>y</code> are identifiers, while <code>x.y</code> is a name, but not an <strong>identifier</strong>. Composite names like <code>x.y</code> are called <strong>qualified names</strong>.</p>
+<p><strong><em>SUMMARY</em></strong>:显然，name是比identifier更加宽泛的概念。</p>
+<p>A <strong>variable</strong> refers to a particular <strong>location</strong> of the store. It is common for the same identifier to be declared more than once; each such <strong>declaration</strong> introduces a new <strong>variable</strong>. Even if each identifier is declared just once, an identifier local to a recursive procedure will refer to different locations of
+the store at different times.</p>
+<p><strong><em>SUMMARY</em></strong>:显然，variable更加倾向于运行时概念</p>
+</blockquote>
+<hr />
+<p><strong>Example 1.5</strong>：C static-scope policy is as follows</p>
+<ol>
+<li>A C program consists of a sequence of top-level declarations of variables and functions</li>
+<li>Functions may have <strong>variable declarations</strong> within them, where <strong>variables</strong> include <strong>local variables</strong> and <strong>parameters</strong>. The scope of each such declaration is restricted to the function in which it appears.</li>
+<li>The <strong>scope</strong> of a top-level declaration of a name <code>x</code> consists of the entire program that follows, with the exception of those statements that lie within a function that also has a declaration of <code>x</code></li>
+</ol>
+<p>The additional detail regarding the C static-scope policy deals with <strong>variable declarations</strong> within <strong>statements</strong>. We examine such declarations next and in Example 1.6. 2</p>
+<hr />
+<blockquote>
+<p>Procedures, Functions, and Methods</p>
+<p>To avoid saying procedures, functions, or methods, each time we want to talk about a subprogram that may be called, we shall usually refer to all of them as <strong>procedures</strong>.The exception is that when talking explicitly of programs in languages like C that have only functions, we shall refer to them as <strong>functions</strong>.Or, if we are discussing a language like Java that has only <strong>methods</strong>, we shall use that term instead.</p>
+<p>A <strong>function</strong> generally returns a value of some type (the return type), while a <strong>procedure</strong> does not return any value. C and similar languages, which have only <strong>functions</strong>, treat <strong>procedures</strong> as <strong>functions</strong> that have a special return type <code>void</code>, to signify no return value. Object-oriented languages like Java and <code>C++</code>use the term <strong>methods</strong>.These can behave like either functions or procedures, but are associated with a particular class.</p>
+</blockquote>
+<hr />
+<p>In C, the syntax of <strong>blocks</strong> is given by</p>
+<ol>
+<li>One type of statement is a block(block是一种statement). Blocks can appear anywhere that other types of statements, such as assignment statements, can appear.</li>
+<li>A block is a sequence of declarations followed by a sequence of statements,all surrounded by braces</li>
+</ol>
+<p>Note that this syntax allows blocks to be nested inside each other. This nesting property is referred to as <strong><em>block structure</em></strong>. The C family of languages has block structure, except that a function may not be defined inside another function.</p>
+<p>We say that a declaration <code>D</code>  belongs to a block <code>B</code> if <code>B</code> is the most closely nested block containing <code>D</code>; that is, <code>D</code> is located within <code>B</code> , but not within any block that is nested within <code>B</code>.</p>
+<p>The <strong>static-scope rule</strong> for variable declarations in <strong>block-structured languages</strong> is as follows. If declaration <code>D</code> of name <code>x</code> belongs to block <code>B</code> , then the scope of <code>D</code> is all of <code>B</code> , except for any blocks <code>B'</code>nested to any depth within B , in which <code>x</code> is redeclared. Here, <code>x</code> is redeclared in <code>B'</code> if some other declaration D of the same name <code>x</code> belongs to <code>B'</code>.</p>
+<p>An equivalent way to express this rule is to focus on a use of a name <code>x</code>.Let $B_1$, $B_2$, ... $B_k$ be all the blocks that surround this use of <code>x</code>, with $B_k$ the smallest, nested within $B_{k-1}$ , which is nested within $B_{k-2}$ , and so on. Search for the largest <code>i</code> such that there is a declaration of <code>x</code> belonging to $B_i$. This use of <code>x</code> refers to the declaration in $B_i$ . Alternatively, this use of <code>x</code> is within the scope of the declaration in $B_i$.</p>
+<h3 id="164_explicit_access_control">1.6.4 Explicit Access Control<a class="headerlink" href="#164_explicit_access_control" title="Permanent link">#</a></h3>
+<p><strong>Classes</strong> and <strong>structures</strong> introduce a new <strong>scope</strong> for their members. If <code>p</code> is an object of a class with a field (member) <code>x</code>, then the use of <code>x</code> in <code>p.x</code> refers to field <code>x</code> in the class definition. In analogy with block structure, the scope of a member declaration <code>x</code> in a class <code>C</code> extends to any subclass <code>C'</code>, except if <code>C'</code>
+has a local declaration of the same name <code>x</code>.</p>
+<p>Through the use of keywords like <code>public</code>, <code>private</code>, and <code>protected</code>, object-oriented languages such as C++ or Java provide explicit control over access to member names in a superclass. These keywords support encapsulation by restricting access. Thus, <strong>private names</strong> are purposely given a scope that includes
+only the method declarations and definitions associated with that class and any <strong>friend classes</strong> (the <code>C++</code> term). <strong>Protected names</strong> are accessible to subclasses. <strong>Public names</strong> are accessible from outside the class.</p>
+<p>In <code>C++</code>, a class definition may be separated from the definitions of some or all of its methods. Therefore, a name <code>x</code> associated with the class <code>C</code> may have a region of the code that is outside its scope, followed by another region (a method definition) that is within its scope. In fact, regions inside and outside the scope may alternate, until all the methods have been defined</p>
+<hr />
+<blockquote>
+<p>Declarations and Definitions</p>
+<p>The apparently similar terms <strong>declaration</strong> and <strong>definition</strong> for programming-language concepts are actually quite different. <strong>Declarations</strong> tell us about the <strong>types</strong> of things, while <strong>definitions</strong> tell us about their <strong>values</strong>. Thus,<code>int i</code> is a <strong>declaration</strong> of <code>i</code>, while <code>i = 1</code> is a <strong>definition</strong> of i.</p>
+<p>The difference is more significant when we deal with <strong>methods</strong> or other procedures. In C++, a <strong>method</strong> is declared in a <strong>class definition</strong>, by giving the types of the arguments and result of the method (often called the <strong>signature</strong> for the method). The method is then defined, i.e., the code for executing the method is given, in another place. Similarly, it is common to <strong>define</strong> a C function in one file and <strong>declare</strong> it in other files where the function is used.</p>
+</blockquote>
+<hr />
+<h3 id="165_dynamic_scope">1.6.5 Dynamic Scope<a class="headerlink" href="#165_dynamic_scope" title="Permanent link">#</a></h3>
+<p>Technically, any scoping policy is dynamic if it is based on factor(s) that can be known only when the program executes. The term <strong>dynamic scope</strong>, however,usually refers to the following policy: a use of a name <code>x</code> refers to the declaration of <code>x</code> in the most recently called, not-yet-terminated, <strong>procedure</strong> with such a declaration. <strong>Dynamic scoping</strong> of this type appears only in special situations.We shall consider two examples of dynamic policies: macro expansion in the C preprocessor and method resolution in object-oriented programming.</p>
+<p><strong>Example 1.7</strong> : In the C program of Fig. 1.12, identifier a is a macro that stands for expression <code>(x + 1)</code>. But what is <code>x</code>? We cannot resolve <code>x</code> statically,that is, in terms of the program text</p>
+<pre><code class="c">#define a (x+1)
+int x = 2;
+void b() { int x = 1; printf(&quot;%d\n&quot;, a); }
+void c() { printf(&quot;%d\n&quot;, a); }
+void main() { b(); c();}
+</code></pre>
+
+<p>In fact, in order to interpret <code>x,</code> we must use the usual dynamic-scope rule.We examine all the function calls that are currently <strong>active</strong>, and we take the most recently called function that has a declaration of x. It is to this declaration that the use of <code>x</code> refers.</p>
+<p>In the example of Fig. 1.12, the function main first calls function <code>b</code>. As <code>b</code> executes, it prints the value of the macro <code>a</code>. Since <code>(x + 1)</code>must be substituted for <code>a</code>, we resolve this use of <code>x</code>to the declaration int <code>x=1</code> in function <code>b</code>. The reason is that <code>b</code> has a declaration of <code>x</code>, so the <code>(x + 1)</code> in the <code>printf</code> in <code>b</code> refers to this <code>x</code>. Thus, the value printed is 2.</p>
+<p>After <code>b</code> finishes, and <code>c</code>is called, we again need to print the value of macro <code>a</code>. However, the only <code>x</code> accessible to <code>c</code> is the global <code>x</code>. The <code>printf</code>statement in <code>c</code> thus refers to this declaration of <code>x</code>, and value 3 is printed. </p>
+<p><strong>Dynamic scope resolution</strong> is also essential for <strong>polymorphic procedures</strong>, those that have two or more definitions for the same <strong>name</strong>, depending only on the <strong>types</strong> of the arguments(inheritance and override).In some languages, such as ML (see Section 7.3.3), it is possible to determine statically types for all uses of names, in which case the compiler can replace each use of a procedure name <code>p</code> by a reference to the code for the proper procedure. However, in other languages, such as Java and C++,there are times when the compiler cannot make that determination.</p>
+<p><strong>Example 1.8</strong> : A distinguishing feature of object-oriented programming is the ability of each object to invoke the appropriate method in response to a message.In other words, the procedure called when <code>x.m()</code> is executed depends on the class of the object denoted by <code>x</code> at that time. A typical example is as follows:</p>
+<ol>
+<li>There is a class C with a method named <code>m()</code>.</li>
+<li><code>D</code> is a subclass of <code>C</code> , and <code>D</code> has its own method named <code>m()</code>.</li>
+<li>There is a use of <code>m</code> of the form <code>x.m()</code>, where <code>x</code> is an object of class <code>C</code></li>
+</ol>
+<p>Normally, it is impossible to tell at compile time whether <code>x</code> will be of class <code>C</code> or of the subclass <code>D</code> . If the method application occurs several times, it is highly likely that some will be on objects denoted by <code>x</code> that are in class <code>C</code> but not <code>D</code> , while others will be in class <code>D</code> . It is not until run-time that it can be decided which definition of <code>m</code> is the right one. Thus, the code generated by the compiler must determine the class of the object <code>x</code>, and call one or the other method named <code>m</code>. </p>
+<hr />
+<blockquote>
+<p>Analogy Between Static and Dynamic Scoping</p>
+<p>While there could be any number of <strong>static</strong> or <strong>dynamic</strong> policies for scoping,there is an interesting relationship between the normal (block-structured) static scoping rule and the normal dynamic policy. <strong>In a sense, the dynamic rule is to time as the static rule is to space</strong>. While the <strong>static rule</strong> asks us to find the <strong>declaration</strong> whose unit (block) most closely surrounds the physical <strong>location</strong> of the use, the dynamic rule asks us to find the declaration whose unit (procedure invocation) most closely surrounds the <strong>time</strong> of the use.</p>
+<p>翻译：动态作用域处理时间的方式类似于静态作用域处理空间的方式。</p>
+</blockquote>
+<hr />
+<h3 id="166_parameter_passing_mechanisms">1.6.6 Parameter Passing Mechanisms<a class="headerlink" href="#166_parameter_passing_mechanisms" title="Permanent link">#</a></h3>
+<p>All programming languages have a notion of a procedure, but they can differ in how these procedures get their <strong>arguments</strong>. In this section, we shall consider how the <strong>actual parameters</strong> (the parameters used in the call of a procedure) are associated with the <strong>formal parameters</strong> (those used in the procedure definition). Which mechanism is used determines how the calling-sequence code treats parameters. The great majority of languages use either <strong>call-by-value</strong>,or <strong>call-by-reference</strong>, or both. We shall explain these terms, and another method known as <strong>call-by-name</strong>,that is primarily of historical interest.</p>
+<h4 id="call-by-value">Call-by-Value<a class="headerlink" href="#call-by-value" title="Permanent link">#</a></h4>
+<p>In <strong>call-by-value</strong>, the actual parameter is evaluated (if it is an <strong>expression</strong>) or copied (if it is a variable). The <strong>value</strong> is placed in the location belonging to the corresponding <strong>formal parameter</strong> of the called procedure. This method is used in C and Java, and is a common option in <code>C++</code>, as well as in most other languages. Call-by-value has the effect that all computation involving the <strong>formal parameters</strong> done by the called procedure is <strong>local</strong> to that procedure, and the actual parameters themselves cannot be changed.</p>
+<p>Note, however, that in C we can pass a pointer to a variable to allow that variable to be changed by the <strong>callee</strong>. Likewise, <strong>array names</strong> passed as parameters in C, <code>C++</code>, or Java give the called procedure what is in effect a pointer or reference to the array itself. Thus, if <code>a</code> is the name of an array of the calling procedure, and it is passed by value to corresponding formal parameter <code>x</code>, then an assignment such as <code>x[i] = 2</code>really changes the array element <code>a[i]</code> to 2. The reason is that, although <code>x</code> gets a copy of the value of a, that value is really a pointer to the beginning of the area of the store where the array named <code>a</code> is located.</p>
+<p>Similarly, in Java, many variables are really references, or pointers, to the things they stand for. This observation(结论) applies to arrays, strings, and objects of all classes. Even though Java uses call-by-value exclusively(仅仅), whenever we pass the name of an object to a called procedure, the value received by that
+procedure is in effect a pointer to the object. Thus, the called procedure is able to affect the value of the object itself.</p>
+<h4 id="call-by-reference">Call-by-Reference<a class="headerlink" href="#call-by-reference" title="Permanent link">#</a></h4>
+<p>In call-by-reference, the <strong>address</strong> of the actual parameter is passed to the <strong>callee</strong> as the value of the   corresponding formal parameter. Uses of the formal parameter in the code of the callee are implemented by following this pointer to the location indicated by the caller. Changes to the formal parameter thus appear as changes to the actual parameter.If the <strong>actual parameter</strong> is an <strong>expression</strong>, however, then the expression is evaluated before the call, and its value stored in a location of its own. Changes to the formal parameter change the value in this location, but can have no effect on the data of the caller.</p>
+<p>Call-by-reference is used for "ref " parameters in <code>C++</code> and is an option in many other languages. It is almost essential when the formal parameter is a large object, array, or structure. The reason is that strict call-by-value requires that the caller copy the entire actual parameter into the space belonging to the corresponding formal parameter. This copying gets expensive when then parameter is large. As we noted when discussing call-by-value, languages such as Java solve the problem of passing arrays, strings, or other objects by copying only a reference to those objects. The effect is that Java behaves as if it used call-by-reference for anything other than a basic type such as an integer or real.</p>
+<h4 id="call-by-name">Call-by-Name<a class="headerlink" href="#call-by-name" title="Permanent link">#</a></h4>
+<p>A third mechanism call-by-name was used in the early programming language Algol 60. It requires that the <strong>callee</strong> execute as if the actual parameter were substituted literally for the formal parameter in the code of the callee, as if the formal parameter were a macro standing for the actual parameter (with renaming of local names in the called procedure, to keep them distinct). When the actual parameter is an expression rather than a variable, some unintuitive behaviors occur, which is one reason this mechanism is not favored to day.</p>
+<h3 id="167_aliasing">1.6.7 Aliasing<a class="headerlink" href="#167_aliasing" title="Permanent link">#</a></h3>
+<p>There is an interesting consequence of call-by-reference parameter passing or its simulation, as in Java, where references to objects are passed by value. It is possible that two formal parameters can refer to the same location; such variables are said to be <strong>aliases</strong> of one another. As a result, any two variables, which may appear to take their values from two distinct formal parameters, can become <strong>aliases</strong> of each other, as well.</p>
+<h4 id="_1"><a class="headerlink" href="#_1" title="Permanent link">#</a></h4>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../../Chapter2-A-Simple-Syntax-Directed-Translator/" class="btn btn-neutral float-right" title="2">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../1.5Applications-of-Compiler-Technology/" class="btn btn-neutral" title="1.5"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+          <a href="https://github.com/dengking/compiler-principle" class="fa fa-github" style="float: left; color: #fcfcfc"> GitHub</a>
+      
+      
+        <span><a href="../1.5Applications-of-Compiler-Technology/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../../Chapter2-A-Simple-Syntax-Directed-Translator/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '../..';</script>
+    <script src="../../js/theme.js" defer></script>
+      <script src="../../search/main.js" defer></script>
+
+</body>
+</html>
