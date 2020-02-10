@@ -161,6 +161,61 @@
      <changefreq>daily</changefreq>
     </url>
     <url>
+     <loc>https://dengking.github.io/compiler-principle/Chapter-7-Run-Time-Environments/ABI/Application-binary-interface/</loc>
+     <lastmod>2020-02-10</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://dengking.github.io/compiler-principle/Chapter-7-Run-Time-Environments/ABI/Function-Call/Call-stack/Call-stack/</loc>
+     <lastmod>2020-02-10</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://dengking.github.io/compiler-principle/Chapter-7-Run-Time-Environments/ABI/Function-Call/Call-stack/Call-stack-summary/</loc>
+     <lastmod>2020-02-10</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://dengking.github.io/compiler-principle/Chapter-7-Run-Time-Environments/ABI/Function-Call/Call-convention/Calling-convention/</loc>
+     <lastmod>2020-02-10</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://dengking.github.io/compiler-principle/Chapter-7-Run-Time-Environments/ABI/Function-Call/Call-convention/Calling-Conventions-Demystified/</loc>
+     <lastmod>2020-02-10</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://dengking.github.io/compiler-principle/Chapter-7-Run-Time-Environments/ABI/Library/Library(computing)/</loc>
+     <lastmod>2020-02-10</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://dengking.github.io/compiler-principle/Chapter-7-Run-Time-Environments/ABI/Library/Position-independent-code/Position-independent-code/</loc>
+     <lastmod>2020-02-10</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://dengking.github.io/compiler-principle/Chapter-7-Run-Time-Environments/ABI/Library/Position-independent-code/Position-Independent-Code(PIC)-in-shared-libraries/</loc>
+     <lastmod>2020-02-10</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://dengking.github.io/compiler-principle/Chapter-7-Run-Time-Environments/ABI/Library/Relocation/Relocation(computing)/</loc>
+     <lastmod>2020-02-10</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://dengking.github.io/compiler-principle/Chapter-7-Run-Time-Environments/ABI/Name-mangling/Name-mangling/</loc>
+     <lastmod>2020-02-10</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://dengking.github.io/compiler-principle/Chapter-7-Run-Time-Environments/ABI/Book-x86-Disassembly/</loc>
+     <lastmod>2020-02-10</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
      <loc>https://dengking.github.io/compiler-principle/Chapter-9-Machine-Independent-Optimizations/</loc>
      <lastmod>2020-02-10</lastmod>
      <changefreq>daily</changefreq>
