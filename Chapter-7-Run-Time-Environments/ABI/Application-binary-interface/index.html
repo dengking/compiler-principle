@@ -1,0 +1,1036 @@
+
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content="Project documentation with Markdown.">
+      
+      
+        <link rel="canonical" href="https://dengking.github.io/compiler-principle/Chapter-7-Run-Time-Environments/ABI/Application-binary-interface/">
+      
+      
+        <meta name="author" content="DengKing">
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.6.0">
+    
+    
+      
+        <title>[Application binary interface](https://en.wikipedia.org/wiki/Application_binary_interface) - compiler principle</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/application.1b62728e.css">
+      
+      
+    
+    
+      <script src="../../../assets/javascripts/modernizr.268332fc.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../../assets/fonts/material-icons.css">
+    
+    
+      <link rel="stylesheet" href="../../../css/extra.css">
+    
+    
+      
+    
+    
+  </head>
+  
+    <body dir="ltr">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="__github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"/></svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#application-binary-interface" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="https://dengking.github.io/compiler-principle" title="compiler principle" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic">
+              compiler principle
+            </span>
+            <span class="md-header-nav__topic">
+              
+                [Application binary interface](https://en.wikipedia.org/wiki/Application_binary_interface)
+              
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+<a href="https://github.com/dengking/compiler-principle" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main" role="main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="https://dengking.github.io/compiler-principle" title="compiler principle" class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </a>
+    compiler principle
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+<a href="https://github.com/dengking/compiler-principle" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../../.." title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
+      Chapter-1-Introduction
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        Chapter-1-Introduction
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../Chapter-1-Introduction/" title="1-Introduction" class="md-nav__link">
+      1-Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../Chapter-1-Introduction/1.1-Language-Processors/" title="1.1-Language-Processors.md" class="md-nav__link">
+      1.1-Language-Processors.md
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../Chapter-1-Introduction/1.2-The-Structure-of-a-Compiler/" title="1.2-The-Structure-of-a-Compiler.md" class="md-nav__link">
+      1.2-The-Structure-of-a-Compiler.md
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../Chapter-1-Introduction/1.5-Applications-of-Compiler-Technology/" title="1.5-Applications-of-Compiler-Technology.md" class="md-nav__link">
+      1.5-Applications-of-Compiler-Technology.md
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../Chapter-1-Introduction/1.6-Programming-Language-Basics/" title="1.6-Programming-Language-Basics.md" class="md-nav__link">
+      1.6-Programming-Language-Basics.md
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      Chapter-2-A-Simple-Syntax-Directed-Translator
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        Chapter-2-A-Simple-Syntax-Directed-Translator
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../Chapter-2-A-Simple-Syntax-Directed-Translator/" title="2" class="md-nav__link">
+      2
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../Chapter-2-A-Simple-Syntax-Directed-Translator/2.1-Introduction/" title="2.1-Introduction" class="md-nav__link">
+      2.1-Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../Chapter-2-A-Simple-Syntax-Directed-Translator/2.2-Syntax-Definition/" title="2.2-Syntax-Definition" class="md-nav__link">
+      2.2-Syntax-Definition
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../Chapter-2-A-Simple-Syntax-Directed-Translator/2.3-Syntax-Directed-Translation/" title="2.3-Syntax-Directed-Translation" class="md-nav__link">
+      2.3-Syntax-Directed-Translation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../Chapter-2-A-Simple-Syntax-Directed-Translator/2.4-Parsing/" title="2.4-Parsing" class="md-nav__link">
+      2.4-Parsing
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      Chapter-3-Lexical-Analysis
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        Chapter-3-Lexical-Analysis
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../Chapter-3-Lexical-Analysis/" title="3" class="md-nav__link">
+      3
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../Chapter-3-Lexical-Analysis/3.1-The-Role-of-the-Lexical-Analyzer/" title="3.1-The-Role-of-the-Lexical-Analyzer" class="md-nav__link">
+      3.1-The-Role-of-the-Lexical-Analyzer
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../Chapter-3-Lexical-Analysis/3.4-Recognition-of-Tokens/" title="3.4-Recognition-of-Tokens" class="md-nav__link">
+      3.4-Recognition-of-Tokens
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../Chapter-3-Lexical-Analysis/3.6-Finite-Automata/" title="3.6-Finite-Automata" class="md-nav__link">
+      3.6-Finite-Automata
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../Chapter-3-Lexical-Analysis/3.7-From-Regular-Expressions-to-Automata/" title="3.7-From-Regular-Expressions-to-Automata" class="md-nav__link">
+      3.7-From-Regular-Expressions-to-Automata
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+    
+    <label class="md-nav__link" for="nav-5">
+      Chapter-4-Syntax-Analysis
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        Chapter-4-Syntax-Analysis
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../Chapter-4-Syntax-Analysis/" title="4" class="md-nav__link">
+      4
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../Chapter-4-Syntax-Analysis/4.2-Context-Free-Grammars/" title="4.2-Context-Free-Grammars" class="md-nav__link">
+      4.2-Context-Free-Grammars
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../Chapter-4-Syntax-Analysis/4.3-Writing-a-Grammar/" title="4.3-Writing-a-Grammar" class="md-nav__link">
+      4.3-Writing-a-Grammar
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../Chapter-4-Syntax-Analysis/4.5-Bottom-Up-Parsing/" title="4.5-Bottom-Up-Parsing" class="md-nav__link">
+      4.5-Bottom-Up-Parsing
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../Chapter-4-Syntax-Analysis/4.6-Introduction-to-LR-Parsing-Simple-LR/" title="4.6-Introduction-to-LR-Parsing-Simple-LR" class="md-nav__link">
+      4.6-Introduction-to-LR-Parsing-Simple-LR
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../Chapter-4-Syntax-Analysis/4.7-More-Powerful-LR-Parsers/" title="4.7-More-Powerful-LR-Parsers" class="md-nav__link">
+      4.7-More-Powerful-LR-Parsers
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../Chapter-4-Syntax-Analysis/VS-LL-parser-VS-LR-parser/" title="VS-LL-parser-VS-LR-parser" class="md-nav__link">
+      VS-LL-parser-VS-LR-parser
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
+    
+    <label class="md-nav__link" for="nav-6">
+      Chapter-5-Syntax-Directed-Translation
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-6">
+        Chapter-5-Syntax-Directed-Translation
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../Chapter-5-Syntax-Directed-Translation/" title="5" class="md-nav__link">
+      5
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../Chapter-5-Syntax-Directed-Translation/5.1-Syntax-Directed-Definitions/" title="5.1-Syntax-Directed-Definitions" class="md-nav__link">
+      5.1-Syntax-Directed-Definitions
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../Chapter-5-Syntax-Directed-Translation/5.2-Evaluation-Orders-for-SDD's/" title="5.2-Evaluation-Orders-for-SDD's" class="md-nav__link">
+      5.2-Evaluation-Orders-for-SDD's
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../Chapter-5-Syntax-Directed-Translation/5.3-Applications-of-Syntax-Directed-Translation/" title="5.3--Applications-of-Syntax-Directed-Translation" class="md-nav__link">
+      5.3--Applications-of-Syntax-Directed-Translation
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
+    
+    <label class="md-nav__link" for="nav-7">
+      Chapter-6-Intermediate-Code-Generation
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-7">
+        Chapter-6-Intermediate-Code-Generation
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../Chapter-6-Intermediate-Code-Generation/" title="6" class="md-nav__link">
+      6
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../Chapter-6-Intermediate-Code-Generation/6.3-Types-and-Declarations/" title="6.3-Types-and-Declarations" class="md-nav__link">
+      6.3-Types-and-Declarations
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-8" type="checkbox" id="nav-8">
+    
+    <label class="md-nav__link" for="nav-8">
+      Chapter-7-Run-Time-Environments
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-8">
+        Chapter-7-Run-Time-Environments
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../" title="7" class="md-nav__link">
+      7
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../7.1-Storage-Organization/" title="7.1-Storage-Organization" class="md-nav__link">
+      7.1-Storage-Organization
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../7.2-Stack-Allocation-of-Space/" title="7.2-Stack-Allocation-of-Space" class="md-nav__link">
+      7.2-Stack-Allocation-of-Space
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-9" type="checkbox" id="nav-9">
+    
+    <label class="md-nav__link" for="nav-9">
+      Chapter-9-Machine-Independent-Optimizations
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-9">
+        Chapter-9-Machine-Independent-Optimizations
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../Chapter-9-Machine-Independent-Optimizations/" title="9" class="md-nav__link">
+      9
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#description" class="md-nav__link">
+    Description
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#complete-abis" class="md-nav__link">
+    Complete ABIs
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#embedded-abis" class="md-nav__link">
+    Embedded ABIs
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <h1 id="application-binary-interface"><a href="https://en.wikipedia.org/wiki/Application_binary_interface">Application binary interface</a><a class="headerlink" href="#application-binary-interface" title="Permanent link">#</a></h1>
+<p>In <a href="https://en.wikipedia.org/wiki/Computer_software">computer software</a>, an <strong>application binary interface</strong> (<strong>ABI</strong>) is an <a href="https://en.wikipedia.org/wiki/Interface_(computing)">interface</a> between two <strong>binary program modules</strong>; often, one of these modules is a <a href="https://en.wikipedia.org/wiki/Library_(computing)">library</a> or <a href="https://en.wikipedia.org/wiki/Operating_system">operating system</a> facility, and the other is a program that is being run by a user.</p>
+<p>An <em>ABI</em> defines how data structures or computational routines are accessed in <a href="https://en.wikipedia.org/wiki/Machine_code">machine code</a>, which is a low-level, hardware-dependent format; in contrast, an <a href="https://en.wikipedia.org/wiki/Application_programming_interface"><em>API</em></a> defines this access in <a href="https://en.wikipedia.org/wiki/Source_code">source code</a>, which is a relatively high-level, hardware-independent, often <a href="https://en.wikipedia.org/wiki/Human-readable">human-readable</a> format. A common aspect of an ABI is the <a href="https://en.wikipedia.org/wiki/Calling_convention">calling convention</a>, which determines how data is provided as input to or read as output from computational routines; examples are the <a href="https://en.wikipedia.org/wiki/X86_calling_conventions">x86 calling conventions</a>.</p>
+<p>Adhering to an ABI (which may or may not be officially standardized) is usually the job of a <a href="https://en.wikipedia.org/wiki/Compiler">compiler</a>, operating system, or library author; however, an application programmer may have to deal with an ABI directly when writing a program in a mix of programming languages, which can be achieved by using <a href="https://en.wikipedia.org/wiki/Foreign_function_call">foreign function calls</a>.</p>
+<h2 id="description">Description<a class="headerlink" href="#description" title="Permanent link">#</a></h2>
+<p>ABIs cover details such as:</p>
+<ul>
+<li>a processor instruction set (with details like register file structure, stack organization, memory access types, ...)</li>
+<li>the sizes, layouts, and <a href="https://en.wikipedia.org/wiki/Data_structure_alignment">alignments</a> of basic <a href="https://en.wikipedia.org/wiki/Data_type">data types</a> that the processor can directly access</li>
+<li>the <a href="https://en.wikipedia.org/wiki/Calling_convention">calling convention</a>, which controls how <a href="https://en.wikipedia.org/wiki/Function_(programming)">functions</a>' arguments are passed and return values are retrieved; for example, whether all parameters are passed on the stack or some are passed in <strong>registers</strong>, which registers are used for which function parameters, and whether the first function parameter passed on the stack is pushed first or last onto the stack</li>
+<li>how an application should make <a href="https://en.wikipedia.org/wiki/System_call">system calls</a> to the operating system and, if the ABI specifies <strong>direct system calls</strong> rather than <strong>procedure calls</strong> to system call stubs, the <strong>system call numbers</strong></li>
+<li>and in the case of a complete operating system ABI, the binary format of <a href="https://en.wikipedia.org/wiki/Object_file">object files</a>, program libraries and so on.</li>
+</ul>
+<h2 id="complete-abis">Complete ABIs<a class="headerlink" href="#complete-abis" title="Permanent link">#</a></h2>
+<p>A complete ABI, such as the <a href="https://en.wikipedia.org/wiki/Intel_Binary_Compatibility_Standard">Intel Binary Compatibility Standard</a> (iBCS),[<a href="https://en.wikipedia.org/wiki/Application_binary_interface#cite_note-1">1]</a> allows a program from one operating system supporting that ABI to run without modifications on any other such system, provided that necessary shared libraries are present, and similar prerequisites are fulfilled.</p>
+<p>Other[<em>which?</em>] ABIs standardize details such as the <a href="https://en.wikipedia.org/wiki/Name_mangling#Name_mangling_in_C++">C++ name mangling</a>,[<a href="https://en.wikipedia.org/wiki/Application_binary_interface#cite_note-2">2]</a> <a href="https://en.wikipedia.org/wiki/Exception_handling">exception</a> propagation,[<a href="https://en.wikipedia.org/wiki/Application_binary_interface#cite_note-3">3]</a> and calling convention between compilers on the same platform, but do not require cross-platform compatibility.</p>
+<h2 id="embedded-abis">Embedded ABIs<a class="headerlink" href="#embedded-abis" title="Permanent link">#</a></h2>
+<p>An <em>embedded-application binary interface</em> (EABI) specifies standard conventions for <a href="https://en.wikipedia.org/wiki/File_format">file formats</a>, data types, register usage, <a href="https://en.wikipedia.org/wiki/Stack_frame">stack frame</a> organization, and function parameter passing of an <a href="https://en.wikipedia.org/wiki/Embedded_system">embedded</a> software program, for use with an <a href="https://en.wikipedia.org/wiki/Embedded_operating_system">embedded operating system</a>.</p>
+<p><a href="https://en.wikipedia.org/wiki/Compiler">Compilers</a> that support the EABI create <a href="https://en.wikipedia.org/wiki/Object_code">object code</a> that is compatible with code generated by other such compilers, allowing developers to link libraries generated with one compiler with object code generated with another compiler. Developers writing their own <a href="https://en.wikipedia.org/wiki/Assembly_language">assembly language</a> code may also interface with assembly generated by a compliant compiler.</p>
+<p>EABIs are designed to optimize for performance within the limited resources of an embedded system. Therefore, EABIs omit most abstractions that are made between kernel and user code in complex operating systems. For example, dynamic linking is avoided to allow smaller executables and faster loading, fixed register usage allows more compact stacks and kernel calls, and running the application in privileged mode allows direct access to custom hardware operation without the indirection of calling a device driver. [<a href="https://en.wikipedia.org/wiki/Application_binary_interface#cite_note-ppc-eabi-4">4]</a> The choice of EABI can affect performance.[<a href="https://en.wikipedia.org/wiki/Application_binary_interface#cite_note-5">5]</a>[<a href="https://en.wikipedia.org/wiki/Application_binary_interface#cite_note-6">6]</a></p>
+<p>Widely used EABIs include <a href="https://en.wikipedia.org/wiki/PowerPC">PowerPC</a>,[<a href="https://en.wikipedia.org/wiki/Application_binary_interface#cite_note-ppc-eabi-4">4]</a> <a href="https://en.wikipedia.org/wiki/ARM_architecture">ARM</a> EABI2[<a href="https://en.wikipedia.org/wiki/Application_binary_interface#cite_note-7">7]</a> and <a href="https://en.wikipedia.org/wiki/MIPS_architecture">MIPS</a> EABI.[<a href="https://en.wikipedia.org/wiki/Application_binary_interface#cite_note-8">8]</a></p>
+<h1 id="difference-between-api-and-abi"><a href="https://stackoverflow.com/questions/3784389/difference-between-api-and-abi">Difference between API and ABI</a><a class="headerlink" href="#difference-between-api-and-abi" title="Permanent link">#</a></h1>
+<p>Q:</p>
+<p>I am new to linux system programming and I came across API and ABI while reading <strong>Linux System Programming</strong>.</p>
+<p><strong>Definition of API :</strong></p>
+<blockquote>
+<p>An API defines the interfaces by which one piece of software communicates with another at the source level.</p>
+</blockquote>
+<p><strong>Definition of ABI :</strong></p>
+<blockquote>
+<p>Whereas an API defines a source interface, an ABI defines the <strong>low-level binary interface</strong> between two or more pieces of software on a particular architecture. It defines how an application interacts with itself, how an application interacts with the <strong>kernel</strong>, and how an application interacts with <strong>libraries</strong>.</p>
+</blockquote>
+<p>How can a program communicate at a source level ? What is a source level ? Is it related to source code in anyway? Or the source of the library gets included in the main program ?</p>
+<p>The only difference I know is API is mostly used by programmers and ABI is mostly used by compiler.</p>
+<p>A:</p>
+<p>by source level they mean something like <strong>include file</strong> to expose function definitions – <a href="https://stackoverflow.com/users/206328/anycorn">Anycorn</a></p>
+<p><a href="https://stackoverflow.com/a/3784697">A</a>:</p>
+<h3 id="api-application-program-interface">API: Application Program Interface<a class="headerlink" href="#api-application-program-interface" title="Permanent link">#</a></h3>
+<p>This is the set of public types/variables/functions that you expose from your application/library.</p>
+<p>In C/C++ this is what you expose in the header files that you ship with the application.</p>
+<h3 id="abi-application-binary-interface">ABI: Application Binary Interface<a class="headerlink" href="#abi-application-binary-interface" title="Permanent link">#</a></h3>
+<p>This is how the compiler builds an application.
+It defines things (but is not limited to):</p>
+<ul>
+<li>How parameters are passed to functions (registers/stack).</li>
+<li>Who cleans parameters from the stack (caller/callee).</li>
+<li>Where the return value is placed for return.</li>
+<li>How exceptions propagate.</li>
+</ul>
+<h1 id="what-is-an-application-binary-interface-abi"><a href="https://stackoverflow.com/questions/2171177/what-is-an-application-binary-interface-abi">What is an application binary interface (ABI)?</a><a class="headerlink" href="#what-is-an-application-binary-interface-abi" title="Permanent link">#</a></h1>
+<p>Q:</p>
+<p>I never clearly understood what an ABI is. Please don't point me to a Wikipedia article. If I could understand it, I wouldn't be here posting such a lengthy post.</p>
+<p>This is my mindset about different interfaces:</p>
+<p>A TV remote(遥控器) is an interface between the user and the TV. It is an existing entity, but useless (doesn't provide any functionality) by itself. All the functionality for each of those buttons on the remote is implemented in the television set.</p>
+<blockquote>
+<p><strong>Interface:</strong> It is an "existing entity" layer between the <code>functionality</code> and <code>consumer</code> of that functionality. An interface by itself is doesn't do anything. It just invokes the functionality lying behind.</p>
+<p>Now depending on who the user is there are different type of interfaces.</p>
+<p><strong>Command Line Interface (CLI)</strong> commands are the existing entities, the consumer is the user and functionality lies behind.</p>
+<p><code>functionality:</code> my software functionality which solves some purpose to which we are describing this interface.</p>
+<p><code>existing entities:</code> commands</p>
+<p><code>consumer:</code> user</p>
+<p><strong>Graphical User Interface(GUI)</strong> window, buttons, etc. are the existing entities, and again the consumer is the user and functionality lies behind.</p>
+<p><code>functionality:</code> my software functionality which solves some purpose to which we are describing this interface.</p>
+<p><code>existing entities:</code> window,buttons etc..</p>
+<p><code>consumer:</code> user</p>
+<p><strong>Application Programming Interface(API)</strong> functions or to be more correct, interfaces (in interfaced based programming) are the existing entities, consumer here is another program not a user, and again functionality lies behind this layer.</p>
+<p><code>functionality:</code> my software functionality which solves some purpose to which we are describing this interface.</p>
+<p><code>existing entities:</code> functions, Interfaces(array of functions).</p>
+<p><code>consumer:</code> another program/application.</p>
+<p><strong>Application Binary Interface (ABI)</strong> Here is where my problem starts.</p>
+<p><code>functionality:</code> ???</p>
+<p><code>existing entities:</code> ???</p>
+<p><code>consumer:</code> ???</p>
+</blockquote>
+<ul>
+<li>I've written software in different languages and provided different kind of <strong>interfaces</strong> (CLI, GUI, and API), but I'm not sure, if I ever, provided any ABI.</li>
+</ul>
+<p><a href="http://en.wikipedia.org/wiki/Application_binary_interface">Wikipedia says:</a></p>
+<blockquote>
+<p>ABIs cover details such as</p>
+<ul>
+<li>data type, size, and alignment;</li>
+<li>the calling convention, which controls how functions' arguments are passed and return values retrieved;</li>
+<li>the system call numbers and how an application should make system calls to the operating system;</li>
+</ul>
+<p>Other ABIs standardize details such as</p>
+<ul>
+<li>the C++ name mangling,</li>
+<li>exception propagation, and</li>
+<li>calling convention between compilers on the same platform, but do not require cross-platform compatibility.</li>
+</ul>
+</blockquote>
+<ul>
+<li>Who needs these details? Please don't say the OS. I know assembly programming. I know how linking &amp; loading works. I know what exactly happens inside.</li>
+<li>Why did C++ name mangling come in? I thought we are talking at the binary level. Why do languages come in?</li>
+</ul>
+<p>Anyway, I've downloaded the [<a href="http://www.sco.com/developers/devspecs/gabi41.pdf">PDF] System V Application Binary Interface <em>Edition 4.1 (1997-03-18)</em></a> to see what exactly it contains. Well, most of it didn't make any sense.</p>
+<ul>
+<li>Why does it contain two chapters (4th &amp; 5th) to describe the <a href="http://en.wikipedia.org/wiki/Executable_and_Linkable_Format">ELF</a> file format? In fact, these are the only two significant chapters of that specification. The rest of the chapters are "processor specific". Anyway, I thought that it is a completely different topic. Please don't say that ELF file format specifications <em>are</em> the ABI. It doesn't qualify to be an <em>interface</em> according to the definition.</li>
+<li>I know, since we are talking at such a low level it must be very specific. But I'm not sure how is it "instruction set architecture (ISA)" specific?</li>
+<li>Where can I find Microsoft Windows' ABI?</li>
+</ul>
+<p>So, these are the major queries that are bugging me.</p>
+<p><a href="https://stackoverflow.com/a/2456882">A</a></p>
+<p>One easy way to understand "ABI" is to compare it to "API".</p>
+<p>You are already familiar with the concept of an API. If you want to use the features of, say, some library or your OS, you will use an API. The API consists of data types/structures, constants, functions, etc that you can use in your code to access the functionality of that external component.</p>
+<p>An ABI is very similar. <strong>Think of it as the compiled version of an API</strong> (or as an API on the machine-language level). When you write source code, you access the library through an <strong>API</strong>. Once the code is compiled, your application accesses the <strong>binary data</strong> in the library through the <strong>ABI</strong>. The <strong>ABI</strong> defines the <strong>structures</strong> and <strong>methods</strong> that your compiled application will use to access the <strong>external library</strong> (just like the API did), only on a lower level.</p>
+<p><strong><em>SUMMARY</em></strong>: 上面这段话概括地非常好：when you code，use API to access library;once the code is compiled,the compiled application access the binary data in the library throuth an ABI.</p>
+<p>ABIs are important when it comes to applications that use <strong>external libraries</strong>. If a program is built to use a particular library and that library is later updated, you don't want to have to re-compile that application (and from the end-user's standpoint, you may not have the source). If the updated library uses the same <strong>ABI</strong>, then your program will not need to change. The <strong>interface</strong> to the <strong>library</strong> (which is all your program really cares about) is the same even though the internal workings may have changed. Two versions of a library that have the same ABI are sometimes called "<strong>binary-compatible</strong>" since they have the same low-level interface (you should be able to replace the old version with the new one and not have any major problems).</p>
+<p><strong><em>SUMMARY</em></strong> : 上面这段话涉及到了 <a href="https://en.wikipedia.org/wiki/Calling_convention">calling convention</a></p>
+<p>Sometimes, <strong>ABI</strong> changes are unavoidable. When this happens, any programs that use that library will not work unless they are re-compiled to use the new version of the library. If the <strong>ABI</strong> changes but the <strong>API</strong> does not(比如某个成员变量的长度改变了), then the old and new library versions are sometimes called "<strong>source compatible</strong>". This implies that while a program compiled for one library version will not work with the other, <strong>source code</strong> written for one will work for the other if re-compiled.</p>
+<p>For this reason, library writers tend to try to keep their ABI stable (to minimize disruption). Keeping an ABI stable means not changing function interfaces (<strong>return type and number, types, and order of arguments</strong>)(参见 <a href="https://en.wikipedia.org/wiki/Calling_convention">calling convention</a> ）, definitions of data types or data structures, defined constants, etc. New functions and data types can be added, but existing ones must stay the same. If you expand, say, a 16-bit data structure field into a 32-bit field, then already-compiled code that uses that data structure will not be accessing that field (or any following it) correctly. Accessing data structure members gets converted into <strong>memory addresses</strong> and <strong>offsets</strong> during compilation and if the data structure changes, then these offsets will not point to what the code is expecting them to point to and the results are unpredictable at best.</p>
+<p>An ABI isn't necessarily something you will explicitly(明确的) provide unless you are expecting people to interface with your code using assembly. It isn't language-specific either, since (for example) a C application and a Pascal application will use the same ABI after they are compiled.</p>
+<p><strong>Edit:</strong> Regarding your question about the chapters regarding the ELF file format in the SysV ABI docs: The reason this information is included is because the <strong>ELF format</strong> defines the <strong>interface</strong> between <strong>operating system</strong> and <strong>application</strong>. When you tell the OS to run a program, it expects the program to be formatted in a certain way and (for example) expects the first section of the binary to be an ELF header containing certain information at specific memory offsets. This is how the application communicates important information about itself to the operating system. If you build a program in a non-ELF binary format (such as a.out or PE), then an OS that expects ELF-formatted applications will not be able to interpret the binary file or run the application. This is one big reason why Windows apps cannot be run directly on a Linux machine (or vice versa) without being either re-compiled or run inside some type of emulation layer that can translate from one binary format to another.</p>
+<p>IIRC, Windows currently uses the <a href="http://en.wikipedia.org/wiki/Portable_Executable">Portable Executable</a> (or, PE) format. There are links in the "external links" section of that Wikipedia page with more information about the PE format.</p>
+<p>Also, regarding your note about C++ name mangling: The ABI can define a "standardized" way for a C++ compiler to do <strong>name mangling</strong> for the purpose of compatibility. That is, if I create a library and you develop a program that uses the library, you should be able to use a <strong>different compiler</strong> than I did and not have to worry about the resulting binaries being incompatible due to different <strong>name mangling schemes</strong>. This is really only of use if you are defining a new binary file format or writing a compiler or linker.</p>
+<p><a href="https://stackoverflow.com/a/2171227">A</a></p>
+<p>If you know assembly and how things work at the OS-level, you are conforming to a certain ABI. The ABI govern things like how parameters are passed, where return values are placed. For many platforms there is only one ABI to choose from, and in those cases the ABI is just "how things work".</p>
+<p>However, the ABI also govern things like how classes/objects are laid out in C++. This is necessary if you want to be able to pass object references across module boundaries or if you want to mix code compiled with different compilers.</p>
+<p>Also, if you have an 64-bit OS which can execute 32-bit binaries, you will have different ABIs for 32- and 64-bit code.</p>
+<p>In general, any code you link into the same executable must conform to the same ABI. If you want to communicate between code using different ABIs, you must use some form of RPC or serialization protocols.</p>
+<p><strong><em>SUMMARY</em></strong> : 上面这段话非常重要</p>
+<p>I think you are trying too hard to squeeze in different types of interfaces into a fixed set of characteristics. For example, an interface doesn't necessarily have to be split into consumers and producers. An interface is just a convention by which two entities interact.</p>
+<p>ABIs can be (partially) ISA-agnostic. Some aspects (such as calling conventions) depend on the <a href="https://en.wikipedia.org/wiki/Industry_Standard_Architecture">ISA</a>, while other aspects (such as C++ class layout) do not.</p>
+<p>A well defined ABI is very important for people writing compilers. Without a well defined ABI, it would be impossible to generate interoperable code.</p>
+<p>EDIT: Some notes to clarify:</p>
+<ul>
+<li>"Binary" in ABI does not exclude the use of strings or text. If you want to link a DLL exporting a C++ class, somewhere in it the methods and type signatures must be encoded. That's where C++ name-mangling comes in.</li>
+<li>The reason why you never provided an ABI is that the vast majority of programmers will never do it. ABIs are provided by the same people designing the platform (i.e. operating system), and very few programmers will ever have the privilege to design a widely-used ABI.</li>
+</ul>
+                
+                  
+                
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../../assets/javascripts/application.808e90bb.js"></script>
+      
+      <script>app.initialize({version:"1.0.4",url:{base:"../../.."}})</script>
+      
+    
+  </body>
+</html>
