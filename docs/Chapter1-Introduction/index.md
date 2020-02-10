@@ -1,5 +1,3 @@
-[TOC]
-
 # Chapter 1 Introduction
 
 How long have you been programming? Have you ever wondered what a programming language is? 

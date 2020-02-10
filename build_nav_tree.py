@@ -226,5 +226,11 @@ class NavBuilder:
         :return: type hint: list of dict
         """
         with open(mkdocs_file_path, encoding='utf-8') as f:
-            child_nodes = yaml_load(f, Loader=Loader)[self.Nav]  # type hint list of dict
-            return child_nodes
+            nav = yaml_load(f, Loader=Loader)  # type hint list of dict
+            if self.Nav in nav:
+                child_nodes = nav[self.Nav]  # type hint list of dict
+                return child_nodes
+            else:
+                log = "文件'{}'中没有nav".format(mkdocs_file_path)
+                raise Exception(log)
+
