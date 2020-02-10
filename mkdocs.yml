@@ -1,10 +1,10 @@
 nav:
     - Home: index.md
-    - Chapter1: Chapter1-Introduction
-    - Chapter2: Chapter2-A-Simple-Syntax-Directed-Translator
-    - Chapter3: Chapter3-Lexical-Analysis
-    - Chapter4: Chapter4-Syntax-Analysis
-    - Chapter5: Chapter5-Syntax-Directed-Translation
-    - Chapter6: Chapter6-Intermediate-Code-Generation
-    - Chapter7: Chapter7-Run-Time-Environments
-    - Chapter9: Chapter9-Machine-Independent-Optimizations
+    - Chapter-1-Introduction: Chapter-1-Introduction
+    - Chapter-2-A-Simple-Syntax-Directed-Translator: Chapter-2-A-Simple-Syntax-Directed-Translator
+    - Chapter-3-Lexical-Analysis: Chapter-3-Lexical-Analysis
+    - Chapter-4-Syntax-Analysis: Chapter-4-Syntax-Analysis
+    - Chapter-5-Syntax-Directed-Translation: Chapter-5-Syntax-Directed-Translation
+    - Chapter-6-Intermediate-Code-Generation: Chapter-6-Intermediate-Code-Generation
+    - Chapter-7-Run-Time-Environments: Chapter-7-Run-Time-Environments
+    - Chapter-9-Machine-Independent-Optimizations: Chapter-9-Machine-Independent-Optimizations

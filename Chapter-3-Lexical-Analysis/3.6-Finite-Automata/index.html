@@ -1,0 +1,1061 @@
+
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content="Project documentation with Markdown.">
+      
+      
+        <link rel="canonical" href="https://dengking.github.io/compiler-principle/Chapter-3-Lexical-Analysis/3.6-Finite-Automata/">
+      
+      
+        <meta name="author" content="DengKing">
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.6.0">
+    
+    
+      
+        <title>3.6-Finite-Automata - compiler principle</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/application.1b62728e.css">
+      
+      
+    
+    
+      <script src="../../assets/javascripts/modernizr.268332fc.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
+    
+    
+      <link rel="stylesheet" href="../../css/extra.css">
+    
+    
+      
+    
+    
+  </head>
+  
+    <body dir="ltr">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="__github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"/></svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#36-finite-automata" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="https://dengking.github.io/compiler-principle" title="compiler principle" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic">
+              compiler principle
+            </span>
+            <span class="md-header-nav__topic">
+              
+                3.6-Finite-Automata
+              
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+<a href="https://github.com/dengking/compiler-principle" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main" role="main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="https://dengking.github.io/compiler-principle" title="compiler principle" class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </a>
+    compiler principle
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+<a href="https://github.com/dengking/compiler-principle" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
+      Chapter-1-Introduction
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        Chapter-1-Introduction
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-1-Introduction/" title="1-Introduction" class="md-nav__link">
+      1-Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-1-Introduction/1.1-Language-Processors/" title="1.1-Language-Processors.md" class="md-nav__link">
+      1.1-Language-Processors.md
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-1-Introduction/1.2-The-Structure-of-a-Compiler/" title="1.2-The-Structure-of-a-Compiler.md" class="md-nav__link">
+      1.2-The-Structure-of-a-Compiler.md
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-1-Introduction/1.5-Applications-of-Compiler-Technology/" title="1.5-Applications-of-Compiler-Technology.md" class="md-nav__link">
+      1.5-Applications-of-Compiler-Technology.md
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-1-Introduction/1.6-Programming-Language-Basics/" title="1.6-Programming-Language-Basics.md" class="md-nav__link">
+      1.6-Programming-Language-Basics.md
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      Chapter-2-A-Simple-Syntax-Directed-Translator
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        Chapter-2-A-Simple-Syntax-Directed-Translator
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-2-A-Simple-Syntax-Directed-Translator/" title="2" class="md-nav__link">
+      2
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-2-A-Simple-Syntax-Directed-Translator/2.1Introduction.md" title="2.1-Introduction" class="md-nav__link">
+      2.1-Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-2-A-Simple-Syntax-Directed-Translator/2.2Syntax-Definition.md" title="2.2-Syntax-Definition" class="md-nav__link">
+      2.2-Syntax-Definition
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-2-A-Simple-Syntax-Directed-Translator/2.3Syntax-Directed-Translation.md" title="2.3-Syntax-Directed-Translation" class="md-nav__link">
+      2.3-Syntax-Directed-Translation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-2-A-Simple-Syntax-Directed-Translator/2.4Parsing.md" title="2.4-Parsing" class="md-nav__link">
+      2.4-Parsing
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4" checked>
+    
+    <label class="md-nav__link" for="nav-4">
+      Chapter-3-Lexical-Analysis
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        Chapter-3-Lexical-Analysis
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../" title="3" class="md-nav__link">
+      3
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../3.1-The-Role-of-the-Lexical-Analyzer/" title="3.1-The-Role-of-the-Lexical-Analyzer" class="md-nav__link">
+      3.1-The-Role-of-the-Lexical-Analyzer
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../3.4-Recognition-of-Tokens/" title="3.4-Recognition-of-Tokens" class="md-nav__link">
+      3.4-Recognition-of-Tokens
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        3.6-Finite-Automata
+      </label>
+    
+    <a href="./" title="3.6-Finite-Automata" class="md-nav__link md-nav__link--active">
+      3.6-Finite-Automata
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#361-nondeterministic-finite-automata" class="md-nav__link">
+    3.6.1 Nondeterministic Finite Automata
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#362-transition-tables" class="md-nav__link">
+    3.6.2 Transition Tables
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#364-deterministic-finite-automata" class="md-nav__link">
+    3.6.4 Deterministic Finite Automata
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../3.7-From-Regular-Expressions-to-Automata/" title="3.7-From-Regular-Expressions-to-Automata" class="md-nav__link">
+      3.7-From-Regular-Expressions-to-Automata
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+    
+    <label class="md-nav__link" for="nav-5">
+      Chapter-4-Syntax-Analysis
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        Chapter-4-Syntax-Analysis
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-4-Syntax-Analysis/" title="4" class="md-nav__link">
+      4
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-4-Syntax-Analysis/4.2-Context-Free-Grammars/" title="4.2-Context-Free-Grammars" class="md-nav__link">
+      4.2-Context-Free-Grammars
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-4-Syntax-Analysis/4.3-Writing-a-Grammar/" title="4.3-Writing-a-Grammar" class="md-nav__link">
+      4.3-Writing-a-Grammar
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-4-Syntax-Analysis/4.5-Bottom-Up-Parsing/" title="4.5-Bottom-Up-Parsing" class="md-nav__link">
+      4.5-Bottom-Up-Parsing
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-4-Syntax-Analysis/4.6-Introduction-to-LR-Parsing-Simple-LR/" title="4.6-Introduction-to-LR-Parsing-Simple-LR" class="md-nav__link">
+      4.6-Introduction-to-LR-Parsing-Simple-LR
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-4-Syntax-Analysis/4.7-More-Powerful-LR-Parsers/" title="4.7-More-Powerful-LR-Parsers" class="md-nav__link">
+      4.7-More-Powerful-LR-Parsers
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-4-Syntax-Analysis/VS-LL-parser-VS-LR-parser/" title="VS-LL-parser-VS-LR-parser" class="md-nav__link">
+      VS-LL-parser-VS-LR-parser
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
+    
+    <label class="md-nav__link" for="nav-6">
+      Chapter-5-Syntax-Directed-Translation
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-6">
+        Chapter-5-Syntax-Directed-Translation
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-5-Syntax-Directed-Translation/" title="5" class="md-nav__link">
+      5
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-5-Syntax-Directed-Translation/5.1-Syntax-Directed-Definitions/" title="5.1-Syntax-Directed-Definitions" class="md-nav__link">
+      5.1-Syntax-Directed-Definitions
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-5-Syntax-Directed-Translation/5.2-Evaluation-Orders-for-SDD's/" title="5.2-Evaluation-Orders-for-SDD's" class="md-nav__link">
+      5.2-Evaluation-Orders-for-SDD's
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-5-Syntax-Directed-Translation/5.3-Applications-of-Syntax-Directed-Translation/" title="5.3--Applications-of-Syntax-Directed-Translation" class="md-nav__link">
+      5.3--Applications-of-Syntax-Directed-Translation
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
+    
+    <label class="md-nav__link" for="nav-7">
+      Chapter-6-Intermediate-Code-Generation
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-7">
+        Chapter-6-Intermediate-Code-Generation
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-6-Intermediate-Code-Generation/" title="6" class="md-nav__link">
+      6
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-6-Intermediate-Code-Generation/6.3-Types-and-Declarations/" title="6.3-Types-and-Declarations" class="md-nav__link">
+      6.3-Types-and-Declarations
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-8" type="checkbox" id="nav-8">
+    
+    <label class="md-nav__link" for="nav-8">
+      Chapter-7-Run-Time-Environments
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-8">
+        Chapter-7-Run-Time-Environments
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-7-Run-Time-Environments/" title="7" class="md-nav__link">
+      7
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-7-Run-Time-Environments/7.1-Storage-Organization/" title="7.1-Storage-Organization" class="md-nav__link">
+      7.1-Storage-Organization
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-7-Run-Time-Environments/7.2-Stack-Allocation-of-Space/" title="7.2-Stack-Allocation-of-Space" class="md-nav__link">
+      7.2-Stack-Allocation-of-Space
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-9" type="checkbox" id="nav-9">
+    
+    <label class="md-nav__link" for="nav-9">
+      Chapter-9-Machine-Independent-Optimizations
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-9">
+        Chapter-9-Machine-Independent-Optimizations
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-9-Machine-Independent-Optimizations/" title="9" class="md-nav__link">
+      9
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#361-nondeterministic-finite-automata" class="md-nav__link">
+    3.6.1 Nondeterministic Finite Automata
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#362-transition-tables" class="md-nav__link">
+    3.6.2 Transition Tables
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#364-deterministic-finite-automata" class="md-nav__link">
+    3.6.4 Deterministic Finite Automata
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <h1 id="36-finite-automata">3.6 Finite Automata<a class="headerlink" href="#36-finite-automata" title="Permanent link">#</a></h1>
+<p>We shall now discover how Lex turns its input program into a lexical analyzer. At the heart of the transition is the formalism known as <a href="https://en.wikipedia.org/wiki/Finite-state_machine"><em>finite automata</em></a>. These are essentially graphs, like transition diagrams, with a few differences:</p>
+<ol>
+<li>
+<p><strong>Finite automata</strong> are recognizers ; they simply say "yes" or "no" about each possible input string.</p>
+</li>
+<li>
+<p><strong>Finite automata</strong> come in two favors:</p>
+</li>
+</ol>
+<p>(a) <a href="https://en.wikipedia.org/wiki/Nondeterministic_finite_automaton">Nondeterministic finite automata (NFA)</a> have no restrictions on the labels of their edges. A symbol can label several edges out of the same state, and $\epsilon$, the empty string, is a possible label.</p>
+<p>(b) <a href="https://en.wikipedia.org/wiki/Deterministic_finite_automaton">Deterministic finite automata (DFA)</a> have, for each state, and for each symbol of its input alphabet exactly one edge with that symbol leaving that state.</p>
+<p>Both deterministic and nondeterministic finite automata are capable of recognizing the same languages. In fact these languages are exactly the same languages, called the <a href="https://en.wikipedia.org/wiki/Regular_language"><strong>regular languages</strong></a>, that regular expressions can describe.</p>
+<blockquote>
+<p>There is a small lacuna: as we defined them, regular expressions cannot describe the empty language, since we would never want to use this pattern in practice. However, finite automata can define the empty language. In the theory, $\phi$ is treated as an additional regular expression for the sole purpose of defining the empty language.</p>
+<p>NOTE: In chapter 3.4 Recognition of Tokens, there are description as below</p>
+<p>A <a href="https://en.wikipedia.org/wiki/Trie">trie</a> is a tree-structured transition diagram or <strong>finite automaton</strong>, </p>
+<p>It is known to us all that tree is graph. In first paragraph, the author also regard <a href="https://en.wikipedia.org/wiki/Finite-state_machine"><em>finite automata</em></a> as graph.</p>
+</blockquote>
+<h2 id="361-nondeterministic-finite-automata">3.6.1 Nondeterministic Finite Automata<a class="headerlink" href="#361-nondeterministic-finite-automata" title="Permanent link">#</a></h2>
+<p>A nondeterministic finite automaton (NFA) consists of:</p>
+<ol>
+<li>A finite set of states <code>S</code> .</li>
+<li>A set of input symbols $ \Sigma $, the <em>input alphabet</em>. We assume that $\epsilon$, which stands for the empty string, is never a member of $ \Sigma $.</li>
+<li>A <em>transition function</em> that gives, for each state, and for each <strong>symbol</strong> in $ \Sigma \cup {\epsilon}$ a set of <em>next states</em>.</li>
+<li>A state $s_0$ from $S$ that is distinguished as the <em>start state</em> (or initial state).</li>
+<li>A set of states $F$ , a subset of $S$ , that is distinguished as the <em>accepting states</em> (or <em>final states</em>).</li>
+</ol>
+<p>We can represent either an NFA or DFA by a <em>transition graph</em>, where the nodes are states and the labeled edges represent the transition function. There is an edge labeled <code>a</code> from state $s$ to state $t$ if and only if $t$ is one of the next states for state $s$ and input $a$. This graph(transition graph) is very much like a <strong>transition diagram</strong>, except:</p>
+<p>a) The same symbol can label edges from one state to several different states, and</p>
+<p>b) An edge may be labeled by $\epsilon$, the empty string, instead of, or in addition to, symbols from the input alphabet.</p>
+<blockquote>
+<p>NOTE: <strong>Transition diagram</strong> is formally described in chapter 3.4.1 Transition Diagrams</p>
+</blockquote>
+<p><strong>Example 3.14</strong> : The transition graph for an NFA recognizing the language of regular expression $(a|b)*abb$ is shown in Fig. 3.24. This abstract example, describing all strings of <code>a</code>'s and <code>b</code>'s ending in the particular string <code>abb</code>, will be used throughout this section. It is similar to regular expressions that describe languages of real interest, however. For instance, an expression describing all files whose name ends in <code>.o</code> is any
+<code>*.o</code>, where any stands for any printable character.</p>
+<p><img alt="" src="../Figure3.24A-nondeterministic-finite-automaton.jpg" /></p>
+<blockquote>
+<p>NOTE: There are two edges labeled with <code>a</code> from state 0 while this is not allowed in DFA. Below is come from <a href="https://en.wikipedia.org/wiki/Finite-state_machine#Determinism">Finite-state machine</a>:</p>
+<p>In a deterministic automaton, every state has exactly one transition for each possible input. In a non-deterministic automaton, an input can lead to one, more than one, or no transition for a given state. The <a href="https://en.wikipedia.org/wiki/Powerset_construction">powerset construction</a> algorithm can transform any nondeterministic automaton into a (usually more complex) deterministic automaton with identical functionality.</p>
+</blockquote>
+<p>Following our convention for transition diagrams, the double circle around state 3 indicates that this state is accepting. Notice that the only ways to get from the start state 0 to the accepting state is to follow some path that stays in state 0 for a while, then go es to states 1, 2, and 3 by reading <code>abb</code> from the input. Thus, the only strings getting to the accepting state are those that end in <code>abb</code>. </p>
+<h2 id="362-transition-tables">3.6.2 Transition Tables<a class="headerlink" href="#362-transition-tables" title="Permanent link">#</a></h2>
+<p>We can also represent an NFA by a <em>transition table</em>, whose rows correspond to states, and whose columns correspond to the input symbols and $\epsilon$. The entry for a given state and input is the value of the transition function applied to those arguments. If the transition function has no information about that state-input
+pair, we put $\phi$ in the table for the pair.</p>
+<p><strong>Example 3.15</strong> : The transition table for the NFA of Fig. 3.24 is shown in Fig. 3.25.</p>
+<p><img alt="" src="../Figure3.25Transition-table-for-the-NFA-of-Fig3.24.jpg" /></p>
+<p>The transition table has the advantage that we can easily find the transitions on a given state and input. Its disadvantage is that it takes a lot of space, when the input alphabet is large, yet most states do not have any moves on most of the input symbols.</p>
+<blockquote>
+<p>NOTE: Transition diagrams and transition table correspond to two kind of data structure describing finite automata</p>
+</blockquote>
+<h2 id="364-deterministic-finite-automata">3.6.4 Deterministic Finite Automata<a class="headerlink" href="#364-deterministic-finite-automata" title="Permanent link">#</a></h2>
+<p>A <em>deterministic finite automaton</em> (DFA) is a special case of an NFA where:</p>
+<ol>
+<li>There are no moves on input $\epsilon$ , and</li>
+<li>For each state <code>s</code> and input symbol <code>a</code>, there is exactly one edge out of <code>s</code> labeled <code>a</code>.</li>
+</ol>
+<p>If we are using a <strong>transition table</strong> to represent a DFA, then each entry is a single state. We may therefore represent this state without the curly braces that we use to form sets.</p>
+<p>While the NFA is an abstract representation of an algorithm to recognize the strings of a certain language, the DFA is a simple, concrete algorithm for recognizing strings. It is fortunate indeed that every regular expression and every NFA can be converted to a DFA accepting the same language, because it is the DFA that we really implement or simulate when building lexical analyzers. The following algorithm shows how to apply a DFA to a string.</p>
+<p><strong>Algorithm 3.18</strong> : Simulating a DFA.</p>
+<p><strong>INPUT</strong>: An input string <code>x</code> terminated by an end-of-file character <strong>eof</strong>. A DFA <code>D</code> with start state $s_0$, accepting states <code>F</code> , and transition function <code>move</code>.</p>
+<p><strong>OUTPUT</strong>: Answer "yes" if <code>D</code> accepts <code>x</code>;"no" otherwise.</p>
+<p><strong>METHOD</strong>: Apply the algorithm in Fig. 3.27 to the input string <code>x</code>. The function <code>move(s, c)</code> gives the state to which there is an edge from state <code>s</code> on input <code>c</code>. The function <code>nextChar</code> returns the next character of the input string <code>x</code>. </p>
+<p><img alt="" src="../Figure3.27Simulating-a-DFA.jpg" /></p>
+<p><strong>Example 3.19</strong> : In Fig. 3.28 we see the transition graph of a DFA accepting the language $(a|b)*abb$ , the same as that accepted by the NFA of Fig. 3.24. Given the input string <code>ababb</code>, this DFA enters the sequence of states 0, 1, 2, 1, 2, 3 and returns  " yes." </p>
+<p><img alt="" src="../Figure3.28DFA-accepting.jpg" /></p>
+                
+                  
+                
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../3.4-Recognition-of-Tokens/" title="3.4-Recognition-of-Tokens" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                3.4-Recognition-of-Tokens
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../3.7-From-Regular-Expressions-to-Automata/" title="3.7-From-Regular-Expressions-to-Automata" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                3.7-From-Regular-Expressions-to-Automata
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/application.808e90bb.js"></script>
+      
+      <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
+      
+    
+  </body>
+</html>

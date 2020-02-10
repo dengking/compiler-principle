@@ -1,0 +1,1103 @@
+
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content="Project documentation with Markdown.">
+      
+      
+        <link rel="canonical" href="https://dengking.github.io/compiler-principle/Chapter-2-A-Simple-Syntax-Directed-Translator/2.2-Syntax-Definition/">
+      
+      
+        <meta name="author" content="DengKing">
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.6.0">
+    
+    
+      
+        <title>2.2 Syntax Definition - compiler principle</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/application.1b62728e.css">
+      
+      
+    
+    
+      <script src="../../assets/javascripts/modernizr.268332fc.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
+    
+    
+      <link rel="stylesheet" href="../../css/extra.css">
+    
+    
+      
+    
+    
+  </head>
+  
+    <body dir="ltr">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="__github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"/></svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#22-syntax-definition" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="https://dengking.github.io/compiler-principle" title="compiler principle" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic">
+              compiler principle
+            </span>
+            <span class="md-header-nav__topic">
+              
+                2.2 Syntax Definition
+              
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+<a href="https://github.com/dengking/compiler-principle" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main" role="main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="https://dengking.github.io/compiler-principle" title="compiler principle" class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </a>
+    compiler principle
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+<a href="https://github.com/dengking/compiler-principle" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
+      Chapter-1-Introduction
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        Chapter-1-Introduction
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-1-Introduction/" title="1-Introduction" class="md-nav__link">
+      1-Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-1-Introduction/1.1-Language-Processors/" title="1.1-Language-Processors.md" class="md-nav__link">
+      1.1-Language-Processors.md
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-1-Introduction/1.2-The-Structure-of-a-Compiler/" title="1.2-The-Structure-of-a-Compiler.md" class="md-nav__link">
+      1.2-The-Structure-of-a-Compiler.md
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-1-Introduction/1.5-Applications-of-Compiler-Technology/" title="1.5-Applications-of-Compiler-Technology.md" class="md-nav__link">
+      1.5-Applications-of-Compiler-Technology.md
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-1-Introduction/1.6-Programming-Language-Basics/" title="1.6-Programming-Language-Basics.md" class="md-nav__link">
+      1.6-Programming-Language-Basics.md
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      Chapter-2-A-Simple-Syntax-Directed-Translator
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        Chapter-2-A-Simple-Syntax-Directed-Translator
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../" title="2" class="md-nav__link">
+      2
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../2.1Introduction.md" title="2.1-Introduction" class="md-nav__link">
+      2.1-Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../2.2Syntax-Definition.md" title="2.2-Syntax-Definition" class="md-nav__link">
+      2.2-Syntax-Definition
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../2.3Syntax-Directed-Translation.md" title="2.3-Syntax-Directed-Translation" class="md-nav__link">
+      2.3-Syntax-Directed-Translation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../2.4Parsing.md" title="2.4-Parsing" class="md-nav__link">
+      2.4-Parsing
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      Chapter-3-Lexical-Analysis
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        Chapter-3-Lexical-Analysis
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-3-Lexical-Analysis/" title="3" class="md-nav__link">
+      3
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-3-Lexical-Analysis/3.1-The-Role-of-the-Lexical-Analyzer/" title="3.1-The-Role-of-the-Lexical-Analyzer" class="md-nav__link">
+      3.1-The-Role-of-the-Lexical-Analyzer
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-3-Lexical-Analysis/3.4-Recognition-of-Tokens/" title="3.4-Recognition-of-Tokens" class="md-nav__link">
+      3.4-Recognition-of-Tokens
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-3-Lexical-Analysis/3.6-Finite-Automata/" title="3.6-Finite-Automata" class="md-nav__link">
+      3.6-Finite-Automata
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-3-Lexical-Analysis/3.7-From-Regular-Expressions-to-Automata/" title="3.7-From-Regular-Expressions-to-Automata" class="md-nav__link">
+      3.7-From-Regular-Expressions-to-Automata
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+    
+    <label class="md-nav__link" for="nav-5">
+      Chapter-4-Syntax-Analysis
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        Chapter-4-Syntax-Analysis
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-4-Syntax-Analysis/" title="4" class="md-nav__link">
+      4
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-4-Syntax-Analysis/4.2-Context-Free-Grammars/" title="4.2-Context-Free-Grammars" class="md-nav__link">
+      4.2-Context-Free-Grammars
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-4-Syntax-Analysis/4.3-Writing-a-Grammar/" title="4.3-Writing-a-Grammar" class="md-nav__link">
+      4.3-Writing-a-Grammar
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-4-Syntax-Analysis/4.5-Bottom-Up-Parsing/" title="4.5-Bottom-Up-Parsing" class="md-nav__link">
+      4.5-Bottom-Up-Parsing
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-4-Syntax-Analysis/4.6-Introduction-to-LR-Parsing-Simple-LR/" title="4.6-Introduction-to-LR-Parsing-Simple-LR" class="md-nav__link">
+      4.6-Introduction-to-LR-Parsing-Simple-LR
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-4-Syntax-Analysis/4.7-More-Powerful-LR-Parsers/" title="4.7-More-Powerful-LR-Parsers" class="md-nav__link">
+      4.7-More-Powerful-LR-Parsers
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-4-Syntax-Analysis/VS-LL-parser-VS-LR-parser/" title="VS-LL-parser-VS-LR-parser" class="md-nav__link">
+      VS-LL-parser-VS-LR-parser
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
+    
+    <label class="md-nav__link" for="nav-6">
+      Chapter-5-Syntax-Directed-Translation
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-6">
+        Chapter-5-Syntax-Directed-Translation
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-5-Syntax-Directed-Translation/" title="5" class="md-nav__link">
+      5
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-5-Syntax-Directed-Translation/5.1-Syntax-Directed-Definitions/" title="5.1-Syntax-Directed-Definitions" class="md-nav__link">
+      5.1-Syntax-Directed-Definitions
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-5-Syntax-Directed-Translation/5.2-Evaluation-Orders-for-SDD's/" title="5.2-Evaluation-Orders-for-SDD's" class="md-nav__link">
+      5.2-Evaluation-Orders-for-SDD's
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-5-Syntax-Directed-Translation/5.3-Applications-of-Syntax-Directed-Translation/" title="5.3--Applications-of-Syntax-Directed-Translation" class="md-nav__link">
+      5.3--Applications-of-Syntax-Directed-Translation
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
+    
+    <label class="md-nav__link" for="nav-7">
+      Chapter-6-Intermediate-Code-Generation
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-7">
+        Chapter-6-Intermediate-Code-Generation
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-6-Intermediate-Code-Generation/" title="6" class="md-nav__link">
+      6
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-6-Intermediate-Code-Generation/6.3-Types-and-Declarations/" title="6.3-Types-and-Declarations" class="md-nav__link">
+      6.3-Types-and-Declarations
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-8" type="checkbox" id="nav-8">
+    
+    <label class="md-nav__link" for="nav-8">
+      Chapter-7-Run-Time-Environments
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-8">
+        Chapter-7-Run-Time-Environments
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-7-Run-Time-Environments/" title="7" class="md-nav__link">
+      7
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-7-Run-Time-Environments/7.1-Storage-Organization/" title="7.1-Storage-Organization" class="md-nav__link">
+      7.1-Storage-Organization
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-7-Run-Time-Environments/7.2-Stack-Allocation-of-Space/" title="7.2-Stack-Allocation-of-Space" class="md-nav__link">
+      7.2-Stack-Allocation-of-Space
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-9" type="checkbox" id="nav-9">
+    
+    <label class="md-nav__link" for="nav-9">
+      Chapter-9-Machine-Independent-Optimizations
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-9">
+        Chapter-9-Machine-Independent-Optimizations
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-9-Machine-Independent-Optimizations/" title="9" class="md-nav__link">
+      9
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#221-definition-of-grammars" class="md-nav__link">
+    2.2.1 Definition of Grammars
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#222-derivations" class="md-nav__link">
+    2.2.2 Derivations
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#223-parse-trees" class="md-nav__link">
+    2.2.3 Parse Trees
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#224-ambiguity" class="md-nav__link">
+    2.2.4 Ambiguity
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#225-associativity-of-operators" class="md-nav__link">
+    2.2.5 Associativity of Operators
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#226-precedence-of-operators" class="md-nav__link">
+    2.2.6 Precedence of Operators
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#generalizing-the-expression-grammar-of-example-26" class="md-nav__link">
+    Generalizing the Expression Grammar of Example 2.6
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <div class="toc">
+<ul>
+<li><a href="#22-syntax-definition">2.2 Syntax Definition</a><ul>
+<li><a href="#221-definition-of-grammars">2.2.1 Definition of Grammars</a></li>
+<li><a href="#222-derivations">2.2.2 Derivations</a></li>
+<li><a href="#223-parse-trees">2.2.3 Parse Trees</a></li>
+<li><a href="#224-ambiguity">2.2.4 Ambiguity</a></li>
+<li><a href="#225-associativity-of-operators">2.2.5 Associativity of Operators</a></li>
+<li><a href="#226-precedence-of-operators">2.2.6 Precedence of Operators</a><ul>
+<li><a href="#generalizing-the-expression-grammar-of-example-26">Generalizing the Expression Grammar of Example 2.6</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</div>
+<h1 id="22-syntax-definition">2.2 Syntax Definition<a class="headerlink" href="#22-syntax-definition" title="Permanent link">#</a></h1>
+<p>In this section, we introduce a notation — the "<a href="https://en.wikipedia.org/wiki/Context-free_grammar">context-free grammar</a>," or "grammar" for short — that is used to specify the syntax of a language. Grammars will be used throughout this book to organize <strong>compiler front ends</strong>.</p>
+<blockquote>
+<p>TIPS: Wikipedia has a good <strong>explanation</strong> of <a href="https://en.wikipedia.org/wiki/Context-free_grammar">context-free grammar</a></p>
+<p>TIPS: It is a convention that there is a section called <strong>language reference</strong> or <strong>language specification</strong> to describe grammar of the programming language in the official document of the programming language , such as</p>
+<ul>
+<li><a href="https://docs.python.org/3/reference/index.html">The Python Language Reference</a> use <a href="https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_Form">extended BNF</a> notation to describe <a href="https://docs.python.org/3/reference/grammar.html">grammar</a> of the language.</li>
+<li><a href="https://docs.oracle.com/javase/specs/jls/se7/html/index.html">The Java® Language Specification</a></li>
+</ul>
+</blockquote>
+<h2 id="221-definition-of-grammars">2.2.1 Definition of Grammars<a class="headerlink" href="#221-definition-of-grammars" title="Permanent link">#</a></h2>
+<p>A <a href="https://en.wikipedia.org/wiki/Context-free_grammar">context-free grammar</a> has four components:
+1. A set of <a href="https://en.wikipedia.org/wiki/Terminal_and_nonterminal_symbols">terminal symbols</a>, sometimes referred to as "tokens." The terminals are the elementary symbols of the language defined by the grammar.
+2. A set of <a href="https://en.wikipedia.org/wiki/Terminal_and_nonterminal_symbols">nonterminals</a>, sometimes called "syntactic variables." Each nonterminal represents a set of strings of terminals, in a manner we shall describe.
+3. A set of <a href="https://en.wikipedia.org/wiki/Production_(computer_science)">productions</a>, where each production consists of a nonterminal, called the <em>head</em> or <em>left</em> side of the production, an arrow, and a sequence of terminals and/or nonterminals, called the <em>body</em> or <em>right</em> side of the production. 
+4. A designation of one of the nonterminals as the <em>start</em> symbol.</p>
+<p><strong>Example 2.1</strong> : 
+$$
+\begin{align}
+list \to list + digit   \tag {2.1}\
+list \to list - digit   \tag {2.2}\
+list \to digit   \tag {2.3}\
+digit \to 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 \tag {2.4}
+\end{align}
+$$</p>
+<blockquote>
+<p>TIPS:  Programmer should be sensitive of <a href="https://en.wikipedia.org/wiki/Recursion_(computer_science)">recursion</a>, it is obvious that <a href="https://en.wikipedia.org/wiki/Context-free_grammar">Context-free grammar</a> above has the property of <a href="https://en.wikipedia.org/wiki/Recursion_(computer_science)">recursion</a>,  a <a href="https://en.wikipedia.org/wiki/Formal_grammar">grammar</a> is informally called a <a href="https://en.wikipedia.org/wiki/Recursive_grammar"><strong>recursive grammar</strong></a> if it contains <a href="https://en.wikipedia.org/wiki/Formal_grammar#The_syntax_of_grammars">production rules</a> that are <a href="https://en.wikipedia.org/wiki/Recursion_(computer_science)">recursive</a>.
+</p>
+</blockquote>
+<h2 id="222-derivations">2.2.2 Derivations<a class="headerlink" href="#222-derivations" title="Permanent link">#</a></h2>
+<blockquote>
+<p>TIPS: In addition to using the word <strong>derivation</strong>/derive,  word <strong>expand</strong> is also used a lot. I think word <strong>expand</strong> can visually reflect the process of expanding an inner nodes of the parse tree describing in 2.2.3.</p>
+</blockquote>
+<p>A grammar derives strings by beginning with the start symbol and repeatedly replacing a nonterminal by the body of a production for that nonterminal. The <strong>terminal strings</strong> that can be derived from the start symbol form the <em>language</em> defined by the grammar.</p>
+<blockquote>
+<p>TIPS: Here is the definition of <em>language</em>, please recall my question in the first introduction that what a programming language is.</p>
+</blockquote>
+<p><em>Parsing</em> is the problem of taking a string of terminals and figuring out how to derive it from the <strong>start symbol</strong> of the grammar, and if it cannot be derived from the start symbol of the grammar, then reporting syntax errors within the string. </p>
+<blockquote>
+<p>TIPS: The process of parsing is the <strong>inverse</strong> of the process of deriving. The process of deriving is to generate terminal strings in the direction of generation while the process of parsing is to find productions in the opposite direction of production. They are like <a href="https://en.wikipedia.org/wiki/Recursion_(computer_science)">recursion</a> and <a href="https://en.wikipedia.org/wiki/Corecursion">corecursion</a>.</p>
+<p>TIPS: Implementation of <em>parsing</em> is described in chapter 2.4.</p>
+</blockquote>
+<h2 id="223-parse-trees">2.2.3 Parse Trees<a class="headerlink" href="#223-parse-trees" title="Permanent link">#</a></h2>
+<blockquote>
+<p>TIPS:  <a href="https://en.wikipedia.org/wiki/Parse_tree">Parse tree</a> reveal us of the power of  <a href="https://en.wikipedia.org/wiki/Tree_(data_structure)">tree</a> structure, and it is an typical application of  <a href="https://en.wikipedia.org/wiki/Tree_(data_structure)">tree</a>. Tree data structures figure prominently in compiling.</p>
+<p>TIPS:  <a href="https://en.wikipedia.org/wiki/Parse_tree">Parse tree</a> is the software implementation of grammar.</p>
+<p>TIPS: Recall what concluded in 2.2.1 Definition of Grammars is that <a href="https://en.wikipedia.org/wiki/Context-free_grammar">Context-free grammar</a> has the property of <a href="https://en.wikipedia.org/wiki/Recursion_(computer_science)">recursion</a>， so do  <a href="https://en.wikipedia.org/wiki/Tree_(data_structure)">tree</a> structure. This is one of reason why <a href="https://en.wikipedia.org/wiki/Tree_(data_structure)">tree</a> structure is selected as  implementation of grammar.</p>
+<p>TIPS: This chapter gives the algorithm of build a parse tree according to the grammar.</p>
+</blockquote>
+<h2 id="224-ambiguity">2.2.4 Ambiguity<a class="headerlink" href="#224-ambiguity" title="Permanent link">#</a></h2>
+<blockquote>
+<p>TIPS: Programming language should be accurate and the designer should be careful to design grammar to avoid ambiguity. Source of ambiguity includes</p>
+<ul>
+<li>precedence of operators</li>
+<li>associativity of operators</li>
+</ul>
+</blockquote>
+<h2 id="225-associativity-of-operators">2.2.5 Associativity of Operators<a class="headerlink" href="#225-associativity-of-operators" title="Permanent link">#</a></h2>
+<blockquote>
+<p>TIPS: We can define associativity by grammar, this reveals us of the power if context free grammar.</p>
+</blockquote>
+<p>By convention, $9+5+2$ is equivalent to $(9+5)+2$ and $9-5-2$ is equivalent to $(9-5)-2$. When an operand like 5 has operators to its left and right, conventions are needed for deciding which operator applies to that operand. We say that the operator + associates to the left, because an operand with plus signs on both sides of it belongs to the operator to its left. In most programming languages the four arithmetic operators, addition, subtraction, multiplication, and division are left-associative.</p>
+<p>Some common operators such as exponentiation are right-associative. As another example, the assignment operator in C and its descendants is right-associative; that is, the expression <code>a=b=c</code>is treated in the same way as the expression <code>a=(b=c)</code>.</p>
+<blockquote>
+<p>For clarity, sample grammar for left-associative operator and sample grammar for right-associative operator are listed below along their parse tree.</p>
+</blockquote>
+<p>Strings like <code>a=b=c</code> with a right-associative operator are generated by the following grammar:
+$$
+\begin{align}
+right \to letter=right|letter \
+letter \to a|b| \dots |z
+\end{align}
+$$
+Strings like <code>1+2</code>, <code>1-2</code> with a left-associative operator are generated by the following grammar:
+$$
+\begin{align}
+list \to list + digit   \
+list \to list - digit   \
+list \to digit  \
+digit \to 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
+\end{align}
+$$
+<img alt="" src="../Figure2.7Parse-trees-for-left-and-right-associative-grammars.jpg" /></p>
+<p>The contrast between a parse tree for a left-associative operator like <code>-</code> and a parse tree for a right-associative operator like <code>= is</code> shown by Fig. 2.7. Note that the parse tree for <code>9-5-2</code> grows down towards the left, whereas the parse tree for <code>a=b=c</code> grows down towards the right.</p>
+<blockquote>
+<p>TIPS: Recall what concluded in 2.2.1 Definition of Grammars is that <a href="https://en.wikipedia.org/wiki/Context-free_grammar">Context-free grammar</a> has the property of <a href="https://en.wikipedia.org/wiki/Recursion_(computer_science)">recursion</a>，a <a href="https://en.wikipedia.org/wiki/Formal_grammar">grammar</a> is informally called a <a href="https://en.wikipedia.org/wiki/Recursive_grammar"><strong>recursive grammar</strong></a> if it contains <a href="https://en.wikipedia.org/wiki/Formal_grammar#The_syntax_of_grammars">production rules</a> that are <a href="https://en.wikipedia.org/wiki/Recursion_(computer_science)">recursive</a>. Here we can further subdivide, a grammar for a <a href="https://en.wikipedia.org/wiki/Context-free_language">context-free language</a> is <a href="https://en.wikipedia.org/wiki/Left_recursion">left recursive</a> if there exists a non-terminal symbol <em>A</em> that can be put through the production rules to produce a string with <em>A</em> (as the leftmost symbol), so grammars for left-associative operator are <a href="https://en.wikipedia.org/wiki/Left_recursion">left recursive</a>  while grammars for right-associative operator are <a href="https://en.wikipedia.org/wiki/Left_recursion">right recursive</a>. </p>
+</blockquote>
+<p>For comparison, here are the ambiguous grammars and its parse tree.
+$$
+list \to list + digit | list - digit | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
+$$
+<img alt="" src="../Figure2.6Two-parse-trees-for-9-5+2.jpg" /></p>
+<h2 id="226-precedence-of-operators">2.2.6 Precedence of Operators<a class="headerlink" href="#226-precedence-of-operators" title="Permanent link">#</a></h2>
+<p>We say that <code>*</code> has higher precedence than <code>+</code> if <code>*</code> takes its operands before <code>+</code> does. In ordinary arithmetic, multiplication and division have higher precedence than addition and subtraction. Therefore, 5 is taken by <code>*</code> in b oth <code>9+5*2</code> and <code>9*5+2</code>; i.e., the expressions are equivalent to <code>9+(5*2)</code> and <code>(9*5)+2</code>, respectively.</p>
+<p><strong>Example 2.6</strong> : A grammar for arithmetic expressions can be constructed from a table showing the <strong>associativity</strong> and <strong>precedence</strong> of operators. We start with the four common arithmetic operators and a precedence table, showing the operators in order of increasing precedence. Operators on the same line have the same associativity and precedence:</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>left-associative</td>
+<td><code>+ -</code></td>
+</tr>
+<tr>
+<td>left-associative:</td>
+<td><code>* /</code></td>
+</tr>
+</tbody>
+</table>
+<p>We create two <strong>nonterminals</strong> <code>expr</code> and <code>term</code> for the two levels of precedence(<code>expr</code>  for <code>+ -</code> and <code>term</code> for <code>* /</code>), and an extra <strong>nonterminal</strong> <code>factor</code> for generating basic units in expressions. The basic units in expressions are presently digits and parenthesized expressions.
+$$
+factor \to digit | ( expr )
+$$
+Now consider the binary operators, <code>*</code> and <code>/</code>, that have the highest precedence. Since these operators associate to the left, the productions are similar to those for lists that associate to the left.
+$$
+term \to term * factor \
+| term / factor \
+| factor
+$$
+Similarly, <code>expr</code> generates lists of terms separated by the additive operators.
+$$
+expr \to expr + term \
+| expr - term \
+| term
+$$
+The resulting grammar is therefore
+$$
+expr \to expr + term | expr - term | term \
+term \to term * factor | term / factor | factor \
+factor \to digit | ( expr )
+$$</p>
+<blockquote>
+<p>TIPS: The priorities decrease from bottom to top</p>
+</blockquote>
+<h3 id="generalizing-the-expression-grammar-of-example-26">Generalizing the Expression Grammar of Example 2.6<a class="headerlink" href="#generalizing-the-expression-grammar-of-example-26" title="Permanent link">#</a></h3>
+<p>We can think of a <strong>factor</strong> as an expression that cannot b e "torn apart" by any operator. By "torn apart," we mean that placing an operator next to any factor, on either side, does not cause any piece of the <strong>factor</strong>, other than the <strong>whole</strong>, to become an operand of that operator. If the <strong>factor</strong> is a <strong>parenthesized expression</strong>, the parentheses protect against such "tearing," while if the factor is a single operand, it cannot be torn apart.</p>
+<p>A <strong>term</strong> (that is not also a factor) is an expression that can be torn apart by operators of the highest precedence: <code>*</code> and <code>/</code>, but not by the lower-precedence operators. An expression (that is not a term or factor) can be torn apart by any operator.</p>
+<p>We can generalize this idea to any number <code>n</code> of precedence levels. We need <code>n + 1</code> nonterminals. The first, like factor in Example 2.6, can never be torn apart. Typically, the production bodies for this nonterminal are only single operands and <strong>parenthesized expressions</strong>. Then, for each precedence level, there is one nonterminal representing expressions that can be torn apart only by operators at that level or higher. Typically, the productions for this nonterminal have bodies representing uses of the operators at that
+level, plus one body that is just the nonterminal for the next higher level.</p>
+<blockquote>
+<p>TIPS:  The reason one more is needed is that it is for  <strong>factor</strong></p>
+<p>TIPS:  When generating a parse tree from a grammar for expression, the higher the priority of operator, the earlier it is built, and the deeper it is</p>
+</blockquote>
+                
+                  
+                
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/application.808e90bb.js"></script>
+      
+      <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
+      
+    
+  </body>
+</html>

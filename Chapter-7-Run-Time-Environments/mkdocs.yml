@@ -1,0 +1,4 @@
+nav:
+    - 7: index.md
+    - 7.1-Storage-Organization: 7.1-Storage-Organization.md
+    - 7.2-Stack-Allocation-of-Space: 7.2-Stack-Allocation-of-Space.md

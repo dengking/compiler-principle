@@ -1,0 +1,1078 @@
+
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content="Project documentation with Markdown.">
+      
+      
+        <link rel="canonical" href="https://dengking.github.io/compiler-principle/Chapter-4-Syntax-Analysis/4.5-Bottom-Up-Parsing/">
+      
+      
+        <meta name="author" content="DengKing">
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.6.0">
+    
+    
+      
+        <title>4.5-Bottom-Up-Parsing - compiler principle</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/application.1b62728e.css">
+      
+      
+    
+    
+      <script src="../../assets/javascripts/modernizr.268332fc.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
+    
+    
+      <link rel="stylesheet" href="../../css/extra.css">
+    
+    
+      
+    
+    
+  </head>
+  
+    <body dir="ltr">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="__github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"/></svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#45-bottom-up-parsing" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="https://dengking.github.io/compiler-principle" title="compiler principle" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic">
+              compiler principle
+            </span>
+            <span class="md-header-nav__topic">
+              
+                4.5-Bottom-Up-Parsing
+              
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+<a href="https://github.com/dengking/compiler-principle" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main" role="main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="https://dengking.github.io/compiler-principle" title="compiler principle" class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </a>
+    compiler principle
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+<a href="https://github.com/dengking/compiler-principle" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
+      Chapter-1-Introduction
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        Chapter-1-Introduction
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-1-Introduction/" title="1-Introduction" class="md-nav__link">
+      1-Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-1-Introduction/1.1-Language-Processors/" title="1.1-Language-Processors.md" class="md-nav__link">
+      1.1-Language-Processors.md
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-1-Introduction/1.2-The-Structure-of-a-Compiler/" title="1.2-The-Structure-of-a-Compiler.md" class="md-nav__link">
+      1.2-The-Structure-of-a-Compiler.md
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-1-Introduction/1.5-Applications-of-Compiler-Technology/" title="1.5-Applications-of-Compiler-Technology.md" class="md-nav__link">
+      1.5-Applications-of-Compiler-Technology.md
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-1-Introduction/1.6-Programming-Language-Basics/" title="1.6-Programming-Language-Basics.md" class="md-nav__link">
+      1.6-Programming-Language-Basics.md
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      Chapter-2-A-Simple-Syntax-Directed-Translator
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        Chapter-2-A-Simple-Syntax-Directed-Translator
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-2-A-Simple-Syntax-Directed-Translator/" title="2" class="md-nav__link">
+      2
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-2-A-Simple-Syntax-Directed-Translator/2.1Introduction.md" title="2.1-Introduction" class="md-nav__link">
+      2.1-Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-2-A-Simple-Syntax-Directed-Translator/2.2Syntax-Definition.md" title="2.2-Syntax-Definition" class="md-nav__link">
+      2.2-Syntax-Definition
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-2-A-Simple-Syntax-Directed-Translator/2.3Syntax-Directed-Translation.md" title="2.3-Syntax-Directed-Translation" class="md-nav__link">
+      2.3-Syntax-Directed-Translation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-2-A-Simple-Syntax-Directed-Translator/2.4Parsing.md" title="2.4-Parsing" class="md-nav__link">
+      2.4-Parsing
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      Chapter-3-Lexical-Analysis
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        Chapter-3-Lexical-Analysis
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-3-Lexical-Analysis/" title="3" class="md-nav__link">
+      3
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-3-Lexical-Analysis/3.1-The-Role-of-the-Lexical-Analyzer/" title="3.1-The-Role-of-the-Lexical-Analyzer" class="md-nav__link">
+      3.1-The-Role-of-the-Lexical-Analyzer
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-3-Lexical-Analysis/3.4-Recognition-of-Tokens/" title="3.4-Recognition-of-Tokens" class="md-nav__link">
+      3.4-Recognition-of-Tokens
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-3-Lexical-Analysis/3.6-Finite-Automata/" title="3.6-Finite-Automata" class="md-nav__link">
+      3.6-Finite-Automata
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-3-Lexical-Analysis/3.7-From-Regular-Expressions-to-Automata/" title="3.7-From-Regular-Expressions-to-Automata" class="md-nav__link">
+      3.7-From-Regular-Expressions-to-Automata
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5" checked>
+    
+    <label class="md-nav__link" for="nav-5">
+      Chapter-4-Syntax-Analysis
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        Chapter-4-Syntax-Analysis
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../" title="4" class="md-nav__link">
+      4
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../4.2-Context-Free-Grammars/" title="4.2-Context-Free-Grammars" class="md-nav__link">
+      4.2-Context-Free-Grammars
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../4.3-Writing-a-Grammar/" title="4.3-Writing-a-Grammar" class="md-nav__link">
+      4.3-Writing-a-Grammar
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        4.5-Bottom-Up-Parsing
+      </label>
+    
+    <a href="./" title="4.5-Bottom-Up-Parsing" class="md-nav__link md-nav__link--active">
+      4.5-Bottom-Up-Parsing
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#451-reductions" class="md-nav__link">
+    4.5.1 Reductions
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#452-handle-pruning" class="md-nav__link">
+    4.5.2 Handle Pruning
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#453-shift-reduce-parsing" class="md-nav__link">
+    4.5.3 Shift-Reduce Parsing
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#454-conflicts-during-shift-reduce-parsing" class="md-nav__link">
+    4.5.4 Conflicts During Shift-Reduce Parsing
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../4.6-Introduction-to-LR-Parsing-Simple-LR/" title="4.6-Introduction-to-LR-Parsing-Simple-LR" class="md-nav__link">
+      4.6-Introduction-to-LR-Parsing-Simple-LR
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../4.7-More-Powerful-LR-Parsers/" title="4.7-More-Powerful-LR-Parsers" class="md-nav__link">
+      4.7-More-Powerful-LR-Parsers
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../VS-LL-parser-VS-LR-parser/" title="VS-LL-parser-VS-LR-parser" class="md-nav__link">
+      VS-LL-parser-VS-LR-parser
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
+    
+    <label class="md-nav__link" for="nav-6">
+      Chapter-5-Syntax-Directed-Translation
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-6">
+        Chapter-5-Syntax-Directed-Translation
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-5-Syntax-Directed-Translation/" title="5" class="md-nav__link">
+      5
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-5-Syntax-Directed-Translation/5.1-Syntax-Directed-Definitions/" title="5.1-Syntax-Directed-Definitions" class="md-nav__link">
+      5.1-Syntax-Directed-Definitions
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-5-Syntax-Directed-Translation/5.2-Evaluation-Orders-for-SDD's/" title="5.2-Evaluation-Orders-for-SDD's" class="md-nav__link">
+      5.2-Evaluation-Orders-for-SDD's
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-5-Syntax-Directed-Translation/5.3-Applications-of-Syntax-Directed-Translation/" title="5.3--Applications-of-Syntax-Directed-Translation" class="md-nav__link">
+      5.3--Applications-of-Syntax-Directed-Translation
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
+    
+    <label class="md-nav__link" for="nav-7">
+      Chapter-6-Intermediate-Code-Generation
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-7">
+        Chapter-6-Intermediate-Code-Generation
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-6-Intermediate-Code-Generation/" title="6" class="md-nav__link">
+      6
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-6-Intermediate-Code-Generation/6.3-Types-and-Declarations/" title="6.3-Types-and-Declarations" class="md-nav__link">
+      6.3-Types-and-Declarations
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-8" type="checkbox" id="nav-8">
+    
+    <label class="md-nav__link" for="nav-8">
+      Chapter-7-Run-Time-Environments
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-8">
+        Chapter-7-Run-Time-Environments
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-7-Run-Time-Environments/" title="7" class="md-nav__link">
+      7
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-7-Run-Time-Environments/7.1-Storage-Organization/" title="7.1-Storage-Organization" class="md-nav__link">
+      7.1-Storage-Organization
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-7-Run-Time-Environments/7.2-Stack-Allocation-of-Space/" title="7.2-Stack-Allocation-of-Space" class="md-nav__link">
+      7.2-Stack-Allocation-of-Space
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-9" type="checkbox" id="nav-9">
+    
+    <label class="md-nav__link" for="nav-9">
+      Chapter-9-Machine-Independent-Optimizations
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-9">
+        Chapter-9-Machine-Independent-Optimizations
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-9-Machine-Independent-Optimizations/" title="9" class="md-nav__link">
+      9
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#451-reductions" class="md-nav__link">
+    4.5.1 Reductions
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#452-handle-pruning" class="md-nav__link">
+    4.5.2 Handle Pruning
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#453-shift-reduce-parsing" class="md-nav__link">
+    4.5.3 Shift-Reduce Parsing
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#454-conflicts-during-shift-reduce-parsing" class="md-nav__link">
+    4.5.4 Conflicts During Shift-Reduce Parsing
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <h1 id="45-bottom-up-parsing">4.5 Bottom-Up Parsing<a class="headerlink" href="#45-bottom-up-parsing" title="Permanent link">#</a></h1>
+<p>A bottom-up parse corresponds to the construction of a parse tree for an input string beginning at the leaves (the bottom) and working up towards the root(the top). It is convenient to describe parsing as the process of building parse trees, although a front end may in fact carry out a translation directly without
+building an explicit tree. The sequence of tree snapshots in Fig. 4.25 illustrates a bottom-up parse of the token stream $id \ast id$, with respect to the expression grammar (4.1).</p>
+<blockquote>
+<p>NOTE: Thinking of parsing as the process of building parse trees can help us grasp the content more easily.</p>
+</blockquote>
+<p><img alt="" src="../Figure4.25A-bottom-up-parse-for-id-product-id.jpg" /></p>
+<p>This section introduces a general style of <strong>bottom-up parsing</strong> known as <strong>shift-reduce parsing</strong>. The largest class of grammars for which <strong>shift-reduce parsers</strong> can be built, the <strong>LR grammars</strong>, will be discussed in Sections 4.6 and 4.7. Although it is too much work to build an <strong>LR parser</strong> by hand, tools called automatic parser generators make it easy to construct efficient <strong>LR parsers</strong> from suitable grammars. The concepts in this section are helpful for writing suitable grammars to make effective use of an LR parser generator. Algorithms for implementing parser generators appear in Section 4.7.</p>
+<blockquote>
+<p>NOTE:  <strong>LR parser</strong> uses <strong>shift-reduce parsing</strong>.</p>
+</blockquote>
+<h2 id="451-reductions">4.5.1 Reductions<a class="headerlink" href="#451-reductions" title="Permanent link">#</a></h2>
+<blockquote>
+<p>NOTE: Reduction is the reverse of derivation.</p>
+</blockquote>
+<p>We can think of <strong>bottom-up parsing</strong> as the process of  "reducing" a string $w$ to the <strong>start symbol</strong> of the grammar. At each reduction step, a specific substring matching the body of a production is replaced by the nonterminal at the head of that production.</p>
+<p>The key decisions during bottom-up parsing are about when to reduce and about what production to apply, as the parse proceeds.</p>
+<p><strong>Example 4.37 :</strong> The snapshots in Fig. 4.25 illustrate a sequence of reductions; the grammar is the expression grammar (4.1). The reductions will be discussed in terms of the sequence of strings
+$$
+id \ast id, F \ast id, T \ast id, T \ast F, T, E
+$$
+The strings in this sequence are formed from the roots of all the subtrees in the snapshots. The sequence starts with the input string $id \ast id$. The first reduction produces $F \ast id$ by reducing the leftmost $id$ to $F$ , using the production $F \to id$. The second reduction produces $T \ast id$ by reducing $F$ to $T$ .</p>
+<p>By definition, a reduction is the reverse of a step in a derivation (recall that in a derivation, a nonterminal in a sentential form is replaced by the body of one of its productions). The goal of bottom-up parsing is therefore to construct a derivation in reverse. The following corresponds to the parse in Fig. 4.25:
+$$
+E \Rightarrow T \Rightarrow T \ast F \Rightarrow T \ast id \Rightarrow F \ast id \Rightarrow id \ast id
+$$
+This derivation is in fact a <strong>rightmost derivation</strong>.</p>
+<blockquote>
+<p>NOTE:  We know that Reduction is the reverse of derivation, so what is done first in reduction is done later in production. </p>
+<p>The last paragraph concludes with a very important conclusion but the reasoning is a bit murky. I didn't get it right the first time I read it. Here is my analysis of the conclusion.</p>
+<p>Given grammar, we can choose <strong>leftmost derivation</strong> or <strong>rightmost derivation</strong> to derivate the parse tree. No matter order of derivation, the resulting <strong>parse tree</strong>  and the resulting <strong>sentence</strong> is the same, but the derivation process is different. This is equivalent to that the shape of the <strong>parse tree</strong> is the same but the process of construction is different. In <strong>leftmost derivation</strong>, the left subtree is always constructed first and then the right subtree, so the right of the sentence is always derivated first while in rightmost derivation the order is reverse. </p>
+<p>Now let's turn our attention to reduction. A bottom-up parse corresponds to the construction of a parse tree for an input string beginning at the leaves (the bottom) and working up towards the root(the top). Fig. 4.25 illustrate the process of bottom-up construction of the parse tree. Given a sentence,  bottom-up parser choose to reduce from left symbol to right symbol, so it always construct the subtree from lower left corner to upper right corner until the complete parse tree. It is obvious that eventually it will be able to construct a complete parse tree. The order of productions used in its construction is the exact opposite of the rightmost derivation. </p>
+<p>parsing是根据input symbol来逆推其derivation的过程，parser对input symbol的处理是固定从左至右的，一次处理一个字符，因此它只能够将input symbol中左侧的terminal逐个规约为non-terminal，然后再跟input symbol中余下的terminal一起进行规约。显然这个过程是从左至右的，规约是derivation的逆过程，从左至右的reduction对应的是从右至左的derivation，所以right-most derivation被称为canonical derivation。</p>
+<p>为什么right-most derivation的过程可以通过input symbol倒推出来呢？而left-most derivation的过程无法通过input symbol倒推出来呢？还是要把握一点：parser对input symbol是从左至右进行处理的，所以它只能够仅仅根据已经读到的terminal symbol来进行reduction，而无需依赖于后面的未读入的字符。在left-most derivation中，优先derivate 的是left-most的non-terminal。</p>
+</blockquote>
+<h2 id="452-handle-pruning">4.5.2 Handle Pruning<a class="headerlink" href="#452-handle-pruning" title="Permanent link">#</a></h2>
+<p>Bottom-up parsing during a left-to-right scan of the input constructs a right-most derivation in reverse.</p>
+<p>Formally, if $S \xrightarrow [rm]{\ast} \alpha A w \xrightarrow [rm]{\ast}  \alpha \beta w $ , as in Fig. 4.27, then production $A \to \beta $ in the position following $\alpha$ is a <em>handle</em> of $\alpha \beta w$ .  Alternatively, a <strong>handle</strong> of a right-sentential form $\gamma $ is a production $A \to \beta$ and a position of $\gamma$ where the string $\beta$ may be found, such that replacing $\beta$ at that position by $A$ produces the previous right-sentential form in a rightmost derivation of $\gamma$ .</p>
+<p>Notice that the string $w$ to the right of the <strong>handle</strong> must contain only terminal symbols. </p>
+<blockquote>
+<p>NOTE: This is because rightmost derivation always choose the rightmost nonterminal to expand;</p>
+</blockquote>
+<p>A rightmost derivation in reverse can be obtained by "handle pruning." That is, we start with a string of terminals $w$ to be parsed. If $w$ is a sentence of the grammar at hand, then let $w = \gamma <em>n$, where $\gamma _n$
+is the $n$th right-sentential form of some as yet unknown rightmost derivation
+$$
+S = \gamma 0 \xrightarrow [rm] {} \gamma 1 \xrightarrow [rm] {}
+\gamma 2 \xrightarrow [rm] {} \ldots \xrightarrow [rm] {}\gamma </em>{n-1} \xrightarrow [rm] {} \gamma <em>n
+= w
+$$
+To reconstruct this derivation in reverse order, we locate the <strong>handle</strong> $\beta_n$ in $\gamma_n$ and replace $\beta_n$ by the head of the relevant production $A_n \to \beta_n $ to obtain the previous right-sentential form $\gamma</em>{n-1}$. Note that we do not yet know how handles are to be found, but we shall see methods of doing so shortly. We then repeat this process. That is, we locate the handle $\beta_{n-1}$ in $\gamma_{n-1}$ and reduce this handle to obtain the right-sentential form $\gamma_{n-2}$. If by continuing this process we produce a right-sentential form consisting only of the start symbol $S$ , then we halt and announce successful completion of parsing. The reverse of the sequence of productions used in the reductions is a rightmost derivation for the input string.</p>
+<h2 id="453-shift-reduce-parsing">4.5.3 Shift-Reduce Parsing<a class="headerlink" href="#453-shift-reduce-parsing" title="Permanent link">#</a></h2>
+<p><strong>Shift-reduce parsing</strong> is a form of bottom-up parsing in which a stack holds grammar symbols and an input buffer holds the rest of the string to be parsed. As we shall see, the <strong>handle</strong> always appears at the top of the stack just before it is identified as the <strong>handle</strong>.</p>
+<p>Up on entering this <strong>configuration</strong>, the parser halts and announces successful completion of parsing. Figure 4.28 steps through the actions a shift-reduce parser might take in parsing the input string $id \ast id$ according to the expression grammar (4.1).</p>
+<p><img alt="" src="../Figure4.28Configurations-of-a-shift-reduce-parser-on-input-id-product-id.jpg" /></p>
+<p>While the primary operations are shift and reduce, there are actually four possible actions a shift-reduce parser can make: (1) shift, (2) reduce, (3) accept, and (4) error.</p>
+<ol>
+<li><em>Shift</em>. Shift the next input symbol onto the top of the stack.</li>
+<li><em>Reduce</em>. The right end of the string to be reduced must be at the top of the stack. Locate the left end of the string within the stack and decide with what nonterminal to replace the string.</li>
+<li><em>Accept</em>. Announce successful completion of parsing.</li>
+<li><em>Error</em>. Discover a syntax error and call an error recovery routine.</li>
+</ol>
+<p>The use of a <strong>stack</strong> in <strong>shift-reduce parsing</strong> is justified by an important fact: the <strong>handle</strong> will always eventually appear on top of the stack, never inside. This fact can be shown by considering the possible forms of two successive steps in any <strong>rightmost derivation</strong>. Figure 4.29 illustrates the two possible cases. In case (1), $A$ is replaced by $\beta B y$ , and then the rightmost nonterminal $B$ in the body  $\beta B y$ is replaced by $gamma$ .</p>
+<p>In case (2), $A$ is again expanded first, but this time the body is a string $y$ of terminals only. The next rightmost nonterminal $B$ will be somewhere to the left of $y$ .</p>
+<p><img alt="" src="../Figure4.29Cases-for-two-successive-steps-of-a-rightmost-derivation.jpg" /></p>
+<blockquote>
+<p>NOTE: The proof is omitted because I think it's a natural conclusion. If you read the note in 4.5.1 Reductions, you will find the conclusion is easy to understand. Here the author enumerates one example to support this.</p>
+</blockquote>
+<h2 id="454-conflicts-during-shift-reduce-parsing">4.5.4 Conflicts During Shift-Reduce Parsing<a class="headerlink" href="#454-conflicts-during-shift-reduce-parsing" title="Permanent link">#</a></h2>
+<p>There are context-free grammars for which shift-reduce parsing cannot be used. Every shift-reduce parser for such a grammar can reach a configuration in which the parser, knowing the entire stack and also the next k input symbols, cannot decide whether to shift or to reduce (a <em>shift/reduce conflict</em>), or cannot decide which of several reductions to make (a <em>reduce/reduce conflict</em>). We now give some examples of syntactic constructs that give rise to such grammars. Technically, these grammars are not in the <em>LR(k)</em> class of grammars defined in Section 4.7; we refer to them as <strong>non-LR grammars</strong>. The k in LR(k) refers to the number of symbols of lookahead on the input. Grammars used in compiling usually fall in the LR(1) class, with one symbol of lookahead at most.</p>
+                
+                  
+                
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../4.3-Writing-a-Grammar/" title="4.3-Writing-a-Grammar" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                4.3-Writing-a-Grammar
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../4.6-Introduction-to-LR-Parsing-Simple-LR/" title="4.6-Introduction-to-LR-Parsing-Simple-LR" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                4.6-Introduction-to-LR-Parsing-Simple-LR
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/application.808e90bb.js"></script>
+      
+      <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,1277 @@
+
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content="Project documentation with Markdown.">
+      
+      
+        <link rel="canonical" href="https://dengking.github.io/compiler-principle/Chapter-1-Introduction/1.2-The-Structure-of-a-Compiler/">
+      
+      
+        <meta name="author" content="DengKing">
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.6.0">
+    
+    
+      
+        <title>1.2-The-Structure-of-a-Compiler.md - compiler principle</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/application.1b62728e.css">
+      
+      
+    
+    
+      <script src="../../assets/javascripts/modernizr.268332fc.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
+    
+    
+      <link rel="stylesheet" href="../../css/extra.css">
+    
+    
+      
+    
+    
+  </head>
+  
+    <body dir="ltr">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="__github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"/></svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#12-the-structure-of-a-compiler" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="https://dengking.github.io/compiler-principle" title="compiler principle" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic">
+              compiler principle
+            </span>
+            <span class="md-header-nav__topic">
+              
+                1.2-The-Structure-of-a-Compiler.md
+              
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+<a href="https://github.com/dengking/compiler-principle" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main" role="main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="https://dengking.github.io/compiler-principle" title="compiler principle" class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </a>
+    compiler principle
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+<a href="https://github.com/dengking/compiler-principle" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" checked>
+    
+    <label class="md-nav__link" for="nav-2">
+      Chapter-1-Introduction
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        Chapter-1-Introduction
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../" title="1-Introduction" class="md-nav__link">
+      1-Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../1.1-Language-Processors/" title="1.1-Language-Processors.md" class="md-nav__link">
+      1.1-Language-Processors.md
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        1.2-The-Structure-of-a-Compiler.md
+      </label>
+    
+    <a href="./" title="1.2-The-Structure-of-a-Compiler.md" class="md-nav__link md-nav__link--active">
+      1.2-The-Structure-of-a-Compiler.md
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#121-lexical-analysis" class="md-nav__link">
+    1.2.1 Lexical Analysis
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#122-syntax-analysis" class="md-nav__link">
+    1.2.2 Syntax Analysis
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#123-semantic-analysis" class="md-nav__link">
+    1.2.3 Semantic Analysis
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#124-intermediate-code-generation" class="md-nav__link">
+    1.2.4 Intermediate Code Generation
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#125-code-optimization" class="md-nav__link">
+    1.2.5 Code Optimization
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#126-code-generation" class="md-nav__link">
+    1.2.6 Code Generation
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#127-symbol-table-management" class="md-nav__link">
+    1.2.7 Symbol-Table Management
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#128-the-grouping-of-phases-into-passes" class="md-nav__link">
+    1.2.8 The Grouping of Phases into Passes
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#129-compiler-construction-tools" class="md-nav__link">
+    1.2.9 Compiler-Construction Tools
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../1.5-Applications-of-Compiler-Technology/" title="1.5-Applications-of-Compiler-Technology.md" class="md-nav__link">
+      1.5-Applications-of-Compiler-Technology.md
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../1.6-Programming-Language-Basics/" title="1.6-Programming-Language-Basics.md" class="md-nav__link">
+      1.6-Programming-Language-Basics.md
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      Chapter-2-A-Simple-Syntax-Directed-Translator
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        Chapter-2-A-Simple-Syntax-Directed-Translator
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-2-A-Simple-Syntax-Directed-Translator/" title="2" class="md-nav__link">
+      2
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-2-A-Simple-Syntax-Directed-Translator/2.1Introduction.md" title="2.1-Introduction" class="md-nav__link">
+      2.1-Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-2-A-Simple-Syntax-Directed-Translator/2.2Syntax-Definition.md" title="2.2-Syntax-Definition" class="md-nav__link">
+      2.2-Syntax-Definition
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-2-A-Simple-Syntax-Directed-Translator/2.3Syntax-Directed-Translation.md" title="2.3-Syntax-Directed-Translation" class="md-nav__link">
+      2.3-Syntax-Directed-Translation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-2-A-Simple-Syntax-Directed-Translator/2.4Parsing.md" title="2.4-Parsing" class="md-nav__link">
+      2.4-Parsing
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      Chapter-3-Lexical-Analysis
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        Chapter-3-Lexical-Analysis
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-3-Lexical-Analysis/" title="3" class="md-nav__link">
+      3
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-3-Lexical-Analysis/3.1-The-Role-of-the-Lexical-Analyzer/" title="3.1-The-Role-of-the-Lexical-Analyzer" class="md-nav__link">
+      3.1-The-Role-of-the-Lexical-Analyzer
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-3-Lexical-Analysis/3.4-Recognition-of-Tokens/" title="3.4-Recognition-of-Tokens" class="md-nav__link">
+      3.4-Recognition-of-Tokens
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-3-Lexical-Analysis/3.6-Finite-Automata/" title="3.6-Finite-Automata" class="md-nav__link">
+      3.6-Finite-Automata
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-3-Lexical-Analysis/3.7-From-Regular-Expressions-to-Automata/" title="3.7-From-Regular-Expressions-to-Automata" class="md-nav__link">
+      3.7-From-Regular-Expressions-to-Automata
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+    
+    <label class="md-nav__link" for="nav-5">
+      Chapter-4-Syntax-Analysis
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        Chapter-4-Syntax-Analysis
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-4-Syntax-Analysis/" title="4" class="md-nav__link">
+      4
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-4-Syntax-Analysis/4.2-Context-Free-Grammars/" title="4.2-Context-Free-Grammars" class="md-nav__link">
+      4.2-Context-Free-Grammars
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-4-Syntax-Analysis/4.3-Writing-a-Grammar/" title="4.3-Writing-a-Grammar" class="md-nav__link">
+      4.3-Writing-a-Grammar
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-4-Syntax-Analysis/4.5-Bottom-Up-Parsing/" title="4.5-Bottom-Up-Parsing" class="md-nav__link">
+      4.5-Bottom-Up-Parsing
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-4-Syntax-Analysis/4.6-Introduction-to-LR-Parsing-Simple-LR/" title="4.6-Introduction-to-LR-Parsing-Simple-LR" class="md-nav__link">
+      4.6-Introduction-to-LR-Parsing-Simple-LR
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-4-Syntax-Analysis/4.7-More-Powerful-LR-Parsers/" title="4.7-More-Powerful-LR-Parsers" class="md-nav__link">
+      4.7-More-Powerful-LR-Parsers
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-4-Syntax-Analysis/VS-LL-parser-VS-LR-parser/" title="VS-LL-parser-VS-LR-parser" class="md-nav__link">
+      VS-LL-parser-VS-LR-parser
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
+    
+    <label class="md-nav__link" for="nav-6">
+      Chapter-5-Syntax-Directed-Translation
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-6">
+        Chapter-5-Syntax-Directed-Translation
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-5-Syntax-Directed-Translation/" title="5" class="md-nav__link">
+      5
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-5-Syntax-Directed-Translation/5.1-Syntax-Directed-Definitions/" title="5.1-Syntax-Directed-Definitions" class="md-nav__link">
+      5.1-Syntax-Directed-Definitions
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-5-Syntax-Directed-Translation/5.2-Evaluation-Orders-for-SDD's/" title="5.2-Evaluation-Orders-for-SDD's" class="md-nav__link">
+      5.2-Evaluation-Orders-for-SDD's
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-5-Syntax-Directed-Translation/5.3-Applications-of-Syntax-Directed-Translation/" title="5.3--Applications-of-Syntax-Directed-Translation" class="md-nav__link">
+      5.3--Applications-of-Syntax-Directed-Translation
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
+    
+    <label class="md-nav__link" for="nav-7">
+      Chapter-6-Intermediate-Code-Generation
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-7">
+        Chapter-6-Intermediate-Code-Generation
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-6-Intermediate-Code-Generation/" title="6" class="md-nav__link">
+      6
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-6-Intermediate-Code-Generation/6.3-Types-and-Declarations/" title="6.3-Types-and-Declarations" class="md-nav__link">
+      6.3-Types-and-Declarations
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-8" type="checkbox" id="nav-8">
+    
+    <label class="md-nav__link" for="nav-8">
+      Chapter-7-Run-Time-Environments
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-8">
+        Chapter-7-Run-Time-Environments
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-7-Run-Time-Environments/" title="7" class="md-nav__link">
+      7
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-7-Run-Time-Environments/7.1-Storage-Organization/" title="7.1-Storage-Organization" class="md-nav__link">
+      7.1-Storage-Organization
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-7-Run-Time-Environments/7.2-Stack-Allocation-of-Space/" title="7.2-Stack-Allocation-of-Space" class="md-nav__link">
+      7.2-Stack-Allocation-of-Space
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-9" type="checkbox" id="nav-9">
+    
+    <label class="md-nav__link" for="nav-9">
+      Chapter-9-Machine-Independent-Optimizations
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-9">
+        Chapter-9-Machine-Independent-Optimizations
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-9-Machine-Independent-Optimizations/" title="9" class="md-nav__link">
+      9
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#121-lexical-analysis" class="md-nav__link">
+    1.2.1 Lexical Analysis
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#122-syntax-analysis" class="md-nav__link">
+    1.2.2 Syntax Analysis
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#123-semantic-analysis" class="md-nav__link">
+    1.2.3 Semantic Analysis
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#124-intermediate-code-generation" class="md-nav__link">
+    1.2.4 Intermediate Code Generation
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#125-code-optimization" class="md-nav__link">
+    1.2.5 Code Optimization
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#126-code-generation" class="md-nav__link">
+    1.2.6 Code Generation
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#127-symbol-table-management" class="md-nav__link">
+    1.2.7 Symbol-Table Management
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#128-the-grouping-of-phases-into-passes" class="md-nav__link">
+    1.2.8 The Grouping of Phases into Passes
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#129-compiler-construction-tools" class="md-nav__link">
+    1.2.9 Compiler-Construction Tools
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <div class="toc">
+<ul>
+<li><a href="#12-the-structure-of-a-compiler">1.2 The Structure of a Compiler</a><ul>
+<li><a href="#121-lexical-analysis">1.2.1 Lexical Analysis</a></li>
+<li><a href="#122-syntax-analysis">1.2.2 Syntax Analysis</a></li>
+<li><a href="#123-semantic-analysis">1.2.3 Semantic Analysis</a></li>
+<li><a href="#124-intermediate-code-generation">1.2.4 Intermediate Code Generation</a></li>
+<li><a href="#125-code-optimization">1.2.5 Code Optimization</a></li>
+<li><a href="#126-code-generation">1.2.6 Code Generation</a></li>
+<li><a href="#127-symbol-table-management">1.2.7 Symbol-Table Management</a></li>
+<li><a href="#128-the-grouping-of-phases-into-passes">1.2.8 The Grouping of Phases into Passes</a></li>
+<li><a href="#129-compiler-construction-tools">1.2.9 Compiler-Construction Tools</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<h1 id="12-the-structure-of-a-compiler">1.2 The Structure of a Compiler<a class="headerlink" href="#12-the-structure-of-a-compiler" title="Permanent link">#</a></h1>
+<p>Up to this point we have treated a compiler as a single box that maps a source program into a semantically equivalent target program. If we open up this box a little, we see that there are two parts to this mapping: </p>
+<ul>
+<li>analysis</li>
+<li>synthesis</li>
+</ul>
+<p>The <em>analysis</em> part breaks up the source program into constituent pieces and imposes a grammatical structure on them. It then uses this structure to create an <strong>intermediate representation</strong> of the source program. If the analysis part detects that the source program is either syntactically ill formed or semantically unsound, then it must provide informative messages, so the user can take corrective action. The analysis part also collects information about the source program and stores it in a data structure called a <em>symbol table</em>, which is passed along with the <strong>intermediate representation</strong> to the <strong>synthesis part</strong>.</p>
+<p>The <em>synthesis</em> part constructs the desired target program from the <strong>intermediate representation</strong> and the information in the symbol table. </p>
+<p>The <strong>analysis part</strong> is often called the <em>front end</em> of the compiler; the <strong>synthesis part</strong> is the <strong>back end</strong>.</p>
+<p>If we examine the compilation process in more detail, we see that it operates as a sequence of <em>phases</em>, each of which transforms one representation of the source program to another. A typical decomposition of a compiler into phases is shown in Fig. 1.6. In practice, several phases may be grouped together, and the intermediate representations between the grouped phases need not be constructed explicitly. </p>
+<p>The <strong>symbol table</strong>, which stores information about the entire source program, is used by all phases of the compiler.</p>
+<blockquote>
+<p>NOTE: 符号表也是一门科学，需要对它仔细研究，本书中涉及符号表的章节有：</p>
+<ul>
+<li>
+<p>1.2.1 Lexical Analysis</p>
+</li>
+<li>
+<p>1.2.7 Symbol-Table Management</p>
+</li>
+<li>2.7 Symbol Tables</li>
+</ul>
+<p>除此之外，下面是关于符号表的一些扩展知识：</p>
+<ul>
+<li>维基百科的<a href="https://en.wikipedia.org/wiki/Symbol_table">Symbol table</a>，内容非常好，本章节中收录了这篇文章。</li>
+</ul>
+<p>Questions:</p>
+<ul>
+<li>CPython symbol table</li>
+<li>Clang symbol table</li>
+</ul>
+</blockquote>
+<p><img alt="" src="../Figure1.6Phases-of-a-compiler.jpg" /></p>
+<p>Some compilers have a <strong>machine-independent optimization</strong> phase between the <strong>front end</strong> and the <strong>back end</strong>. The purpose of this optimization phase is to perform transformations on the <strong>intermediate representation</strong>, so that the back end can produce a better target program than it would have otherwise produced from an unoptimized intermediate representation. Since optimization is optional, one or the other of the two optimization phases shown in Fig. 1.6 may be missing.</p>
+<blockquote>
+<p>NOTE: 图1.6给出了一个compiler的架构，这个架构是清晰的，作为一名软件工程师，我们可以尝试思考一下如何来实现一个编译器，如下是两种策略：</p>
+<ul>
+<li>分开实现各个部件然后将它们组装成一个完整的编译器，每个部件可以独立工作（耦合度低）</li>
+<li>所有功能集成起来形成一个monolithic compiler，不能独立地使用其中某个部件（耦合度高）</li>
+</ul>
+<p>目前c系语言中最流行的两款编译器：<a href="https://gcc.gnu.org/">gcc</a>和<a href="https://llvm.org/">clang</a>。在clang的官方网站的文章<a href="https://clang.llvm.org/comparison.html">Clang vs Other Open Source Compilers</a>中，给出了这两款编译器的对比（各自的长处与短处），下面是两种的差异之一：</p>
+<blockquote>
+<p>Clang is designed as an API from its inception, allowing it to be reused by source analysis tools, refactoring, IDEs (etc) as well as for code generation. GCC is built as a monolithic static compiler, which makes it extremely difficult to use as an API and integrate into other tools. Further, its historic design and <a href="https://gcc.gnu.org/ml/gcc/2007-11/msg00460.html">current</a> <a href="https://gcc.gnu.org/ml/gcc/2004-12/msg00888.html">policy</a> makes it difficult to decouple the front-end from the rest of the compiler.</p>
+</blockquote>
+<p>显然，clang所采取的是第一种策略，gcc所采取的是第二种策略，正如在这篇文章中作者提出的观点</p>
+<blockquote>
+<p><strong>differences in goals lead to different strengths and weaknesses</strong></p>
+</blockquote>
+<p>我觉得是非常正确的。在clang的官方文档中，将clang的这种设计策略称为：<a href="https://clang.llvm.org/features.html#libraryarch">Library Based Architecture</a>。</p>
+<p>这两款编译器的架构所采取的截然不同的两种策略是软件设计领域一个非常典型的问题。</p>
+<p>抛开软件设计不谈，回归本书。本书所讲述的是编译器的设计原理，是纯理论上的，如图1.6所展示的编译器的构成，本书会分章节来介绍编译器各个部分的设计原理，从前端到后端。实践是有助于理论的理解的，所以我们必须要使用一些工具来验证这些理论。clang作为一个工业级别的完整的、成熟的编译器，它实现了图1.6所展示的编译器的各个部分，而且它的<a href="https://clang.llvm.org/features.html#libraryarch">Library Based Architecture</a>，使得基本上编译器的每个部分都对应为它的一个库，这些库有着简洁的API，并且文档详尽，所以我们可以使用clang来作为学习编译器各个部件的好工具。</p>
+<p>除此之外，<a href="https://docs.python.org/3/">python</a>也可以作为学习编译原理的非常好的工具：</p>
+<ul>
+<li>Design of CPython’s Compiler<a href="https://devguide.python.org/compiler/#design-of-cpython-s-compiler">¶</a>，其中给出cpython编译器的设计</li>
+<li>Python Language Services<a href="https://docs.python.org/3/library/language.html#python-language-services">¶</a>，这是python标准库提供的module，these modules support tokenizing, parsing, syntax analysis, bytecode disassembly, and various other facilities.</li>
+</ul>
+<p>结合这些工具，我们能够详尽地观察编译器各个部件的工作原理。</p>
+</blockquote>
+<h2 id="121-lexical-analysis">1.2.1 Lexical Analysis<a class="headerlink" href="#121-lexical-analysis" title="Permanent link">#</a></h2>
+<p>The first phase of a compiler is called <em>lexical analysis</em> or <em>scanning</em>. The <strong>lexical analyzer</strong> reads the stream of characters making up the source program and groups the characters into meaningful sequences called <em>lexemes</em>. For each <strong>lexeme</strong>, the lexical analyzer produces as output a <em>token</em> of the form</p>
+<pre><code>&lt;token-name, attribute-value&gt;
+</code></pre>
+
+<p>that it passes on to the subsequent phase, <strong>syntax analysis</strong>. In the token, the first component <strong>token-name</strong> is an abstract symbol that is used during <strong>syntax analysis</strong>, and the second component <strong>attribute-value</strong> points to an entry in the <strong>symbol table</strong> for this token. Information from the symbol-table entry is needed
+for <strong>semantic analysis</strong> and <strong>code generation</strong>.</p>
+<p>For example, suppose a source program contains the assignment statement</p>
+<pre><code>position = initial + rate * 60                                                      (1.1)
+</code></pre>
+
+<p>The characters in this assignment could be grouped into the following <strong>lexemes</strong> and mapped into the following tokens passed on to the <strong>syntax analyzer</strong>:</p>
+<ol>
+<li>
+<p><code>position</code> is a <strong>lexeme</strong> that would be mapped into a token <code>&lt;id, 1&gt;</code>, where <code>id</code> is an abstract symbol standing for identifier and <code>1</code> points to the <strong>symbol-table entry</strong> for <code>position</code>. The symbol-table entry for an identifier holds information about the identifier, such as its <strong>name</strong> and <strong>type</strong>.</p>
+</li>
+<li>
+<p>The assignment symbol <code>=</code> is a <strong>lexeme</strong> that is mapped into the token <code>&lt;=&gt;</code>. Since this token needs no attribute-value, we have omitted the second component. We could have used any abstract symbol such as assign for the token-name, but for notational convenience we have chosen to use the lexeme itself as the name of the abstract symbol.</p>
+</li>
+<li>
+<p><code>initial</code> is a lexeme that is mapped into the token <code>&lt;id, 2&gt;</code>, where <code>2</code> points to the symbol-table entry for <code>initial</code>.</p>
+</li>
+<li>
+<p><code>+</code> is a lexeme that is mapped into the token <code>&lt;+&gt;</code>.</p>
+</li>
+<li>
+<p><code>rate</code> is a lexeme that is mapped into the token <code>&lt;id, 3&gt;</code>, where 3 points to the symbol-table entry for <code>rate</code>.</p>
+</li>
+<li>
+<p><code>*</code> is a lexeme that is mapped into the token <code>&lt;*&gt;</code>.</p>
+</li>
+<li>
+<p><code>60</code> is a lexeme that is mapped into the token <code>&lt;60&gt;</code>.</p>
+</li>
+</ol>
+<blockquote>
+<p>Technically speaking, for the lexeme <code>60</code> we should make up a token like <code>&lt;number, 4&gt;</code>,
+where 4 points to the symbol table for the internal representation of integer <code>60</code> but we shall
+defer the discussion of tokens for numbers until Chapter 2. Chapter 3 discusses techniques
+for building lexical analyzers.</p>
+</blockquote>
+<p>Blanks separating the lexemes would b e discarded by the lexical analyzer.</p>
+<p>Figure 1.7 shows the representation of the assignment statement (1.1) after lexical analysis as the sequence of tokens</p>
+<pre><code>&lt;id, 1&gt; &lt;=&gt; &lt;id, 2&gt; &lt;+&gt; &lt;id, 3&gt; &lt;?&gt; &lt;60&gt;                                            (1.2)
+</code></pre>
+
+<p><img alt="" src="../Figure-1.7Translation-of-an-assignment-statement.jpg" /></p>
+<blockquote>
+<p>NOTE: Lexical Analysis主要在Chapter 3 Lexical Analysis中讲述。</p>
+<p>NOTE: <a href="http://clang.llvm.org/">Clang</a>中由<a href="http://clang.llvm.org/features.html#libraryarch"><strong>liblex</strong></a>来实现Lexical Analysis，如下是文档:</p>
+<ul>
+<li><a href="http://clang.llvm.org/docs/InternalsManual.html#id19">The Lexer and Preprocessor Library</a><a href="http://clang.llvm.org/docs/InternalsManual.html#the-lexer-and-preprocessor-library">¶</a></li>
+</ul>
+</blockquote>
+<h2 id="122-syntax-analysis">1.2.2 Syntax Analysis<a class="headerlink" href="#122-syntax-analysis" title="Permanent link">#</a></h2>
+<p>The second phase of the compiler is <em>syntax analysis</em> or <em>parsing</em>. The parser uses the first components of the tokens produced by the <strong>lexical analyzer</strong> to create a tree-like intermediate representation that depicts the grammatical structure of the token stream. A typical representation is a <em>syntax tree</em> in which each interior node represents an operation and the children of the node represent the arguments of the operation. A syntax tree for the token stream (1.2) is shown as the output of the syntactic analyzer in Fig. 1.7.</p>
+<p>This tree shows the order in which the operations in the assignment <code>position = initial + rate * 60</code> are to be performed. The tree has an interior node labeled <code>*</code> with <code>&lt;id, 3&gt;</code> as its left child and the integer <code>60</code> as its right child. The node <code>&lt;id, 3&gt;</code> represents the identifier <code>rate</code>. The node labeled <code>*</code> makes it explicit that we must first multiply the value of <code>rate</code> by <code>60</code>. The node labeled <code>+</code> indicates that we must
+add the result of this multiplication to the value of initial. The <code>root</code> of the tree, labeled <code>=</code>, indicates that we must store the result of this addition into the location for the identifier <code>position</code>. This ordering of operations is consistent with the usual conventions of arithmetic which tell us that multiplication has
+higher precedence than addition, and hence that the multiplication is to be performed before the addition.</p>
+<p>The subsequent phases of the compiler use the grammatical structure to help analyze the source program and generate the target program. In Chapter 4 we shall use context-free grammars to specify the grammatical structure of programming languages and discuss algorithms for constructing efficient syntax
+analyzers automatically from certain classes of grammars. In Chapters 2 and 5 we shall see that <strong>syntax-directed definitions</strong> can help specify the translation of programming language constructs.</p>
+<blockquote>
+<p>NOTE:  <a href="http://clang.llvm.org/">Clang</a>中由<a href="http://clang.llvm.org/features.html#libraryarch"><strong>libparse</strong></a>来实现Syntax Analysis，如下是文档:</p>
+<ul>
+<li><a href="http://clang.llvm.org/docs/InternalsManual.html#id25">The Parser Library</a><a href="http://clang.llvm.org/docs/InternalsManual.html#the-parser-library">¶</a></li>
+</ul>
+</blockquote>
+<h2 id="123-semantic-analysis">1.2.3 Semantic Analysis<a class="headerlink" href="#123-semantic-analysis" title="Permanent link">#</a></h2>
+<p>The <em>semantic analyzer</em> uses the <strong>syntax tree</strong> and the information in the symbol table to check the source program for semantic consistency with the language definition. It also gathers type information and saves it in either the syntax tree or the symbol table, for subsequent use during intermediate-code generation.</p>
+<p>An important part of <strong>semantic analysis</strong> is <em>type checking</em>, where the compiler checks that each operator has matching operands. For example, many programming language definitions require an array index to be an integer; the compiler must report an error if a floating-point number is used to index an array.</p>
+<p>The language specification may permit some type conversions called <em>coercions</em>. For example, a binary arithmetic operator may be applied to either a pair of integers or to a pair of floating-point numbers. If the operator is applied to a floating-point number and an integer, the compiler may convert or coerce the integer into a floating-point number.</p>
+<p>In Fig. 1.7, notice that the output of the semantic analyzer has an extra node for the operator <strong>inttofloat</strong>, which explicitly converts its integer argument into a floating-point number.  <strong>Type checking</strong> and <strong>semantic analysis</strong> are discussed in Chapter 6.</p>
+<blockquote>
+<p>NOTE:  <a href="http://clang.llvm.org/">Clang</a>中由<a href="http://clang.llvm.org/features.html#libraryarch"><strong>libsema </strong></a>来实现Semantic Analysis，如下是文档:</p>
+<ul>
+<li><a href="http://clang.llvm.org/docs/InternalsManual.html#id57">The Sema Library</a><a href="http://clang.llvm.org/docs/InternalsManual.html#the-sema-library">¶</a></li>
+</ul>
+</blockquote>
+<h2 id="124-intermediate-code-generation">1.2.4 Intermediate Code Generation<a class="headerlink" href="#124-intermediate-code-generation" title="Permanent link">#</a></h2>
+<p>In the process of translating a source program into target code, a compiler may construct one or more <strong>intermediate representations</strong>, which can have a variety of forms. <strong>Syntax trees</strong> are a form of <strong>intermediate representation</strong>; they are commonly used during syntax and semantic analysis.</p>
+<p>After syntax and semantic analysis of the source program, many compilers generate an explicit low-level or machine-like intermediate representation, which we can think of as a program for an abstract machine. This intermediate representation should have two important properties: it should be easy to produce and it should be easy to translate into the target machine.</p>
+<p>In Chapter 6, we consider an intermediate form called three-address code, which consists of a sequence of assembly-like instructions with three operands per instruction. Each operand can act like a register. The output of the intermediate code generator in Fig. 1.7 consists of the three-address code sequence</p>
+<p>In Chapter 6, we cover the principal intermediate representations used in compilers. Chapter 5 introduces techniques for <strong>syntax-directed translation</strong> that are applied in Chapter 6 to <strong>type checking</strong> and intermediate-code generation for typical programming language constructs such as expressions, flow-of-control constructs, and procedure calls.</p>
+<h2 id="125-code-optimization">1.2.5 Code Optimization<a class="headerlink" href="#125-code-optimization" title="Permanent link">#</a></h2>
+<p>The machine-independent code-optimization phase attempts to improve the intermediate code so that better target code will result. Usually better means faster, but other objectives may be desired, such as shorter code, or target code that consumes less power. For example, a straightforward algorithm generates
+the intermediate code (1.3), using an instruction for each operator in the tree representation that comes from the semantic analyzer.</p>
+<p>A simple intermediate code generation algorithm followed by code optimization is a reasonable way to generate good target code. The optimizer can deduce that the conversion of 60 from integer to floating point can be done once and for all at compile time, so the inttofloat operation can be eliminated by replacing the integer 60 by the floating-point number 60.0. Moreover, <code>t3</code> is used only once to transmit its value to <code>id1</code> so the optimizer can transform (1.3) into the shorter sequence</p>
+<pre><code>t1 = id3 * 60.0
+id1 = id2 + t1                                                  (1.4)
+</code></pre>
+
+<p>There is a great variation in the amount of code optimization different compilers perform. In those that do the most, the so-called "optimizing compilers," a significant amount of time is spent on this phase. There are simple optimizations that significantly improve the running time of the target program without slowing down compilation too much. The chapters from 8 on discuss machine-independent and machine-dependent optimizations in detail.</p>
+<h2 id="126-code-generation">1.2.6 Code Generation<a class="headerlink" href="#126-code-generation" title="Permanent link">#</a></h2>
+<p>The code generator takes as input an intermediate representation of the source program and maps it into the target language. If the target language is machine code, registers or memory locations are selected for each of the variables used by the program. Then, the intermediate instructions are translated into sequences of machine instructions that perform the same task. A crucial aspect of code generation is the judicious assignment of registers to hold variables.</p>
+<p>For example, using registers <code>R1</code> and <code>R2</code>, the intermediate code in (1.4) might get translated into the machine code</p>
+<pre><code>LDF R2, id3
+MULF R2, R2, #60.0
+LDF R1, id2
+ADDF R1, R1, R2
+STF id1, R1                                                     (1.5)
+</code></pre>
+
+<h2 id="127-symbol-table-management">1.2.7 Symbol-Table Management<a class="headerlink" href="#127-symbol-table-management" title="Permanent link">#</a></h2>
+<p>An essential function of a compiler is to record the variable names used in the source program and collect information about various attributes of each name. These attributes may provide information about the storage allocated for a name, its type, its scope (where in the program its value may b e used), and in the case of procedure names, such things as the number and types of its arguments, the method of passing each argument (for example, by value or by reference), and the type returned.</p>
+<p>The symbol table is a data structure containing a record for each variable name, with fields for the attributes of the name. The data structure should be designed to allow the compiler to find the record for each name quickly and to store or retrieve data from that record quickly. Symbol tables are discussed in
+Chapter 2.</p>
+<h2 id="128-the-grouping-of-phases-into-passes">1.2.8 The Grouping of Phases into Passes<a class="headerlink" href="#128-the-grouping-of-phases-into-passes" title="Permanent link">#</a></h2>
+<h2 id="129-compiler-construction-tools">1.2.9 Compiler-Construction Tools<a class="headerlink" href="#129-compiler-construction-tools" title="Permanent link">#</a></h2>
+<p>The compiler writer, like any software developer, can profitably use modern software development environments containing tools such as language editors, debuggers, version managers, profilers, test harnesses, and so on. In addition to these general software-development tools, other more specialized tools have been created to help implement various phases of a compiler.</p>
+<p>These tools use specialized languages for specifying and implementing specific components, and many use quite sophisticated algorithms. The most successful tools are those that hide the details of the generation algorithm and produce components that can be easily integrated into the remainder of the compiler. Some commonly used compiler-construction tools include</p>
+<ol>
+<li><em>Parser generators</em> that automatically produce syntax analyzers from a grammatical description of a programming language.</li>
+<li><em>Scanner generators</em> that produce lexical analyzers from a regular-expression description of the tokens of a language.</li>
+<li><em>Syntax-directed translation engines</em> that produce collections of routines for walking a parse tree and generating <strong>intermediate code</strong>.</li>
+<li><em>Code-generator generators</em> that produce a code generator from a collection of rules for translating each operation of the intermediate language into the machine language for a target machine.</li>
+<li><em>Data-flow analysis engines</em> that facilitate the gathering of information about how values are transmitted from one part of a program to each other part. Data-flow analysis is a key part of code optimization.</li>
+<li>Compiler-construction toolkits that provide an integrated set of routines for constructing various phases of a compiler.</li>
+</ol>
+<p>We shall describe many of these tools throughout this book.</p>
+<blockquote>
+<p>NOTE: </p>
+<p>Wikipedia的<a href="https://en.wikipedia.org/wiki/Comparison_of_parser_generators">Comparison of parser generators</a>总结了parser generator和scanner generator。
+</p>
+</blockquote>
+                
+                  
+                
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../1.1-Language-Processors/" title="1.1-Language-Processors.md" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                1.1-Language-Processors.md
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../1.5-Applications-of-Compiler-Technology/" title="1.5-Applications-of-Compiler-Technology.md" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                1.5-Applications-of-Compiler-Technology.md
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/application.808e90bb.js"></script>
+      
+      <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,5 @@
+nav:
+    - 5: index.md
+    - 5.1-Syntax-Directed-Definitions: 5.1-Syntax-Directed-Definitions.md
+    - 5.2-Evaluation-Orders-for-SDD's: 5.2-Evaluation-Orders-for-SDD's.md
+    - 5.3--Applications-of-Syntax-Directed-Translation: 5.3-Applications-of-Syntax-Directed-Translation.md

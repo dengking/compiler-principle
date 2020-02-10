@@ -1,0 +1,1105 @@
+
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content="Project documentation with Markdown.">
+      
+      
+        <link rel="canonical" href="https://dengking.github.io/compiler-principle/Chapter-3-Lexical-Analysis/3.7-From-Regular-Expressions-to-Automata/">
+      
+      
+        <meta name="author" content="DengKing">
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.6.0">
+    
+    
+      
+        <title>3.7-From-Regular-Expressions-to-Automata - compiler principle</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/application.1b62728e.css">
+      
+      
+    
+    
+      <script src="../../assets/javascripts/modernizr.268332fc.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
+    
+    
+      <link rel="stylesheet" href="../../css/extra.css">
+    
+    
+      
+    
+    
+  </head>
+  
+    <body dir="ltr">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="__github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"/></svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#37-from-regular-expressions-to-automata" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="https://dengking.github.io/compiler-principle" title="compiler principle" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic">
+              compiler principle
+            </span>
+            <span class="md-header-nav__topic">
+              
+                3.7-From-Regular-Expressions-to-Automata
+              
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+<a href="https://github.com/dengking/compiler-principle" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main" role="main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="https://dengking.github.io/compiler-principle" title="compiler principle" class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </a>
+    compiler principle
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+<a href="https://github.com/dengking/compiler-principle" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
+      Chapter-1-Introduction
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        Chapter-1-Introduction
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-1-Introduction/" title="1-Introduction" class="md-nav__link">
+      1-Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-1-Introduction/1.1-Language-Processors/" title="1.1-Language-Processors.md" class="md-nav__link">
+      1.1-Language-Processors.md
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-1-Introduction/1.2-The-Structure-of-a-Compiler/" title="1.2-The-Structure-of-a-Compiler.md" class="md-nav__link">
+      1.2-The-Structure-of-a-Compiler.md
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-1-Introduction/1.5-Applications-of-Compiler-Technology/" title="1.5-Applications-of-Compiler-Technology.md" class="md-nav__link">
+      1.5-Applications-of-Compiler-Technology.md
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-1-Introduction/1.6-Programming-Language-Basics/" title="1.6-Programming-Language-Basics.md" class="md-nav__link">
+      1.6-Programming-Language-Basics.md
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      Chapter-2-A-Simple-Syntax-Directed-Translator
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        Chapter-2-A-Simple-Syntax-Directed-Translator
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-2-A-Simple-Syntax-Directed-Translator/" title="2" class="md-nav__link">
+      2
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-2-A-Simple-Syntax-Directed-Translator/2.1Introduction.md" title="2.1-Introduction" class="md-nav__link">
+      2.1-Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-2-A-Simple-Syntax-Directed-Translator/2.2Syntax-Definition.md" title="2.2-Syntax-Definition" class="md-nav__link">
+      2.2-Syntax-Definition
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-2-A-Simple-Syntax-Directed-Translator/2.3Syntax-Directed-Translation.md" title="2.3-Syntax-Directed-Translation" class="md-nav__link">
+      2.3-Syntax-Directed-Translation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-2-A-Simple-Syntax-Directed-Translator/2.4Parsing.md" title="2.4-Parsing" class="md-nav__link">
+      2.4-Parsing
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4" checked>
+    
+    <label class="md-nav__link" for="nav-4">
+      Chapter-3-Lexical-Analysis
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        Chapter-3-Lexical-Analysis
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../" title="3" class="md-nav__link">
+      3
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../3.1-The-Role-of-the-Lexical-Analyzer/" title="3.1-The-Role-of-the-Lexical-Analyzer" class="md-nav__link">
+      3.1-The-Role-of-the-Lexical-Analyzer
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../3.4-Recognition-of-Tokens/" title="3.4-Recognition-of-Tokens" class="md-nav__link">
+      3.4-Recognition-of-Tokens
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../3.6-Finite-Automata/" title="3.6-Finite-Automata" class="md-nav__link">
+      3.6-Finite-Automata
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        3.7-From-Regular-Expressions-to-Automata
+      </label>
+    
+    <a href="./" title="3.7-From-Regular-Expressions-to-Automata" class="md-nav__link md-nav__link--active">
+      3.7-From-Regular-Expressions-to-Automata
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#371-conversion-of-an-nfa-to-a-dfa" class="md-nav__link">
+    3.7.1 Conversion of an NFA to a DFA
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#374-construction-of-an-nfa-from-a-regular-expression" class="md-nav__link">
+    3.7.4 Construction of an NFA from a Regular Expression
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+    
+    <label class="md-nav__link" for="nav-5">
+      Chapter-4-Syntax-Analysis
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        Chapter-4-Syntax-Analysis
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-4-Syntax-Analysis/" title="4" class="md-nav__link">
+      4
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-4-Syntax-Analysis/4.2-Context-Free-Grammars/" title="4.2-Context-Free-Grammars" class="md-nav__link">
+      4.2-Context-Free-Grammars
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-4-Syntax-Analysis/4.3-Writing-a-Grammar/" title="4.3-Writing-a-Grammar" class="md-nav__link">
+      4.3-Writing-a-Grammar
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-4-Syntax-Analysis/4.5-Bottom-Up-Parsing/" title="4.5-Bottom-Up-Parsing" class="md-nav__link">
+      4.5-Bottom-Up-Parsing
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-4-Syntax-Analysis/4.6-Introduction-to-LR-Parsing-Simple-LR/" title="4.6-Introduction-to-LR-Parsing-Simple-LR" class="md-nav__link">
+      4.6-Introduction-to-LR-Parsing-Simple-LR
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-4-Syntax-Analysis/4.7-More-Powerful-LR-Parsers/" title="4.7-More-Powerful-LR-Parsers" class="md-nav__link">
+      4.7-More-Powerful-LR-Parsers
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-4-Syntax-Analysis/VS-LL-parser-VS-LR-parser/" title="VS-LL-parser-VS-LR-parser" class="md-nav__link">
+      VS-LL-parser-VS-LR-parser
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
+    
+    <label class="md-nav__link" for="nav-6">
+      Chapter-5-Syntax-Directed-Translation
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-6">
+        Chapter-5-Syntax-Directed-Translation
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-5-Syntax-Directed-Translation/" title="5" class="md-nav__link">
+      5
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-5-Syntax-Directed-Translation/5.1-Syntax-Directed-Definitions/" title="5.1-Syntax-Directed-Definitions" class="md-nav__link">
+      5.1-Syntax-Directed-Definitions
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-5-Syntax-Directed-Translation/5.2-Evaluation-Orders-for-SDD's/" title="5.2-Evaluation-Orders-for-SDD's" class="md-nav__link">
+      5.2-Evaluation-Orders-for-SDD's
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-5-Syntax-Directed-Translation/5.3-Applications-of-Syntax-Directed-Translation/" title="5.3--Applications-of-Syntax-Directed-Translation" class="md-nav__link">
+      5.3--Applications-of-Syntax-Directed-Translation
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
+    
+    <label class="md-nav__link" for="nav-7">
+      Chapter-6-Intermediate-Code-Generation
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-7">
+        Chapter-6-Intermediate-Code-Generation
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-6-Intermediate-Code-Generation/" title="6" class="md-nav__link">
+      6
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-6-Intermediate-Code-Generation/6.3-Types-and-Declarations/" title="6.3-Types-and-Declarations" class="md-nav__link">
+      6.3-Types-and-Declarations
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-8" type="checkbox" id="nav-8">
+    
+    <label class="md-nav__link" for="nav-8">
+      Chapter-7-Run-Time-Environments
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-8">
+        Chapter-7-Run-Time-Environments
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-7-Run-Time-Environments/" title="7" class="md-nav__link">
+      7
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-7-Run-Time-Environments/7.1-Storage-Organization/" title="7.1-Storage-Organization" class="md-nav__link">
+      7.1-Storage-Organization
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-7-Run-Time-Environments/7.2-Stack-Allocation-of-Space/" title="7.2-Stack-Allocation-of-Space" class="md-nav__link">
+      7.2-Stack-Allocation-of-Space
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-9" type="checkbox" id="nav-9">
+    
+    <label class="md-nav__link" for="nav-9">
+      Chapter-9-Machine-Independent-Optimizations
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-9">
+        Chapter-9-Machine-Independent-Optimizations
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-9-Machine-Independent-Optimizations/" title="9" class="md-nav__link">
+      9
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#371-conversion-of-an-nfa-to-a-dfa" class="md-nav__link">
+    3.7.1 Conversion of an NFA to a DFA
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#374-construction-of-an-nfa-from-a-regular-expression" class="md-nav__link">
+    3.7.4 Construction of an NFA from a Regular Expression
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <h1 id="37-from-regular-expressions-to-automata">3.7 From Regular Expressions to Automata<a class="headerlink" href="#37-from-regular-expressions-to-automata" title="Permanent link">#</a></h1>
+<blockquote>
+<p>NOTE: What this chapter describe is mainly three algorithms</p>
+<table>
+<thead>
+<tr>
+<th>Name</th>
+<th>Function</th>
+<th>chapter</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://en.wikipedia.org/wiki/Thompson%27s_construction">Thompson's construction algorithm</a></td>
+<td>transforming a <a href="https://en.wikipedia.org/wiki/Regular_expression">regular expression</a> into an equivalent <a href="https://en.wikipedia.org/wiki/Nondeterministic_finite_automaton">nondeterministic finite automaton</a> (NFA)</td>
+<td>3.7.4 Construction of an NFA from a Regular Expression</td>
+</tr>
+<tr>
+<td><a href="https://en.wikipedia.org/wiki/Subset_construction_algorithm">subset construction algorithm</a></td>
+<td><a href="https://en.wikipedia.org/wiki/Automata_construction">converting</a> a <a href="https://en.wikipedia.org/wiki/Nondeterministic_finite_automaton">nondeterministic finite automaton</a> (NFA) into a <a href="https://en.wikipedia.org/wiki/Deterministic_finite_automaton">deterministic finite automaton</a> (DFA) which recognizes the same <a href="https://en.wikipedia.org/wiki/Formal_language">formal language</a></td>
+<td>3.7.1 Conversion of an NFA to a DFA</td>
+</tr>
+<tr>
+<td><a href="https://en.wikipedia.org/wiki/DFA_minimization">DFA minimization</a></td>
+<td>transforming a given <a href="https://en.wikipedia.org/wiki/Deterministic_finite_automaton">deterministic finite automaton</a> (DFA) into an equivalent DFA that has a minimum number of states.</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>Using the algorithms above, a regular expression can be converted to the corresponding best DFA. </p>
+</blockquote>
+<p>The regular expression is the notation of choice for describing lexical analyzers and other pattern-processing software, as was reflected in Section 3.5. However, implementation of that software requires the simulation of a DFA, as in Algorithm 3.18, or perhaps simulation of an NFA. Because an NFA often has a choice of move on an input symbol (as Fig. 3.24 does on input a from state 0) or on $\epsilon$ (as Fig. 3.26 does from state 0), or even a choice of making a transition on $\epsilon$  or on a real input symbol, its simulation is less straightforward than for a DFA. Thus often it is important to convert an NFA to a DFA that accepts the
+same language.</p>
+<h2 id="371-conversion-of-an-nfa-to-a-dfa">3.7.1 Conversion of an NFA to a DFA<a class="headerlink" href="#371-conversion-of-an-nfa-to-a-dfa" title="Permanent link">#</a></h2>
+<blockquote>
+<p>NOTE: The subset construction explained in this book is too abstract to grasp, <a href="https://en.wikipedia.org/wiki/Powerset_construction">wikipedia's explanation about this algorithm</a> is more intuitionistic.</p>
+</blockquote>
+<p>The general idea behind the subset construction is that each state of the constructed DFA corresponds to a set of NFA states. After reading input $a_1 a_2 \dots a_n$, the DFA is in that state which corresponds to the set of states that the NFA can reach, from its start state, following paths labeled $a_1 a_2 \dots a_n$.</p>
+<p>It is p ossible that the number of DFA states is exponential in the number of NFA states, which could lead to difficulties when we try to implement this DFA. However, part of the p ower of the automaton-based approach to lexical analysis is that for real languages, the NFA and DFA have approximately the same number of states, and the exponential behavior is not seen.</p>
+<p><strong>Algorithm 3.20</strong> : The <em>subset construction</em> of a DFA from an NFA.</p>
+<p><strong>INPUT</strong>: An <strong>NFA</strong> <code>N</code> .</p>
+<p><strong>OUTPUT</strong>: A DFA <code>D</code> accepting the same language as <code>N</code> .</p>
+<p><strong>METHOD</strong>: Our algorithm constructs a transition table $D_{tran}$ for <code>D</code> . Each state of <code>D</code> is a set of NFA states, and we construct $D_{tran}$ so <code>D</code> will simulate "in parallel" all possible moves <code>N</code> can make on a given input string. Our first problem is to deal with $\epsilon$-transitions of <code>N</code> properly. In Fig. 3.31 we see the definitions of several functions that describe basic computations on the states of <code>N</code> that are needed in the algorithm. Note that <code>s</code> is a single state of <code>N</code> , while <code>T</code>  is a set of states of <code>N</code> .</p>
+<table>
+<thead>
+<tr>
+<th>OPERATION</th>
+<th>DESCRIPTION</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>$\epsilon-closure(s)$</td>
+<td>Set of NFA states reachable from NFA state <code>s</code> on $\epsilon$-transitions alone.</td>
+</tr>
+<tr>
+<td>$\epsilon-closure(T)$</td>
+<td>Set of NFA states reachable from some NFA state <code>s</code> in set <code>T</code> on $\epsilon$-transitions alone; $= \cup _{s \in T} {\epsilon-closure(s)}$</td>
+</tr>
+<tr>
+<td><code>move(T, a)</code></td>
+<td>Set of NFA states to which there is a transition on input symbol a from some state <code>s</code> in <code>T</code> .</td>
+</tr>
+</tbody>
+</table>
+<p>Figure 3.31: Operations on NFA states</p>
+<p>We must explore those sets of states that <code>N</code> can be in after seeing some input string. As a basis, before reading the first input symbol, <code>N</code> can be in any of the states of $\epsilon-closure(s_0)$, where $s_0$ is its <strong>start state</strong>. For the induction, suppose that <code>N</code> can be in set of states <code>T</code> after reading input string <code>x</code>. If it next reads
+input <code>a</code>, then <code>N</code> can immediately go to any of the states in $move (T , a)$. However, after reading <code>a</code>, it may also make several $\epsilon-transitions$; thus <code>N</code> could be in any state of $\epsilon-closure(move(T, a))$ after reading input <code>xa</code>. Following these ideas, the construction of the set of <code>D</code> 's states, $D_{states}$, and its transition function $D_{tran}$, is shown in Fig. 3.32.</p>
+<p><img alt="" src="../Figure3.32The-subset-construction.jpg" /></p>
+<p>The <strong>start state</strong> of <code>D</code> is $\epsilon-closure(s_0)$, and the accepting states of <code>D</code> are all those sets of <code>N</code> 's states that include at least one accepting state of N . To complete our description of the subset construction, we need only to show how $\epsilon-closure(T)$ is computed for any set of NFA states <code>T</code> .  This process, shown in
+Fig. 3.33, is a straightforward search in a graph from a set of states. In this case, imagine that only the $\epsilon$-labeled edges are available in the graph. </p>
+<p><img alt="" src="../Figure3.33Computing-closure(T).jpg" /></p>
+<h2 id="374-construction-of-an-nfa-from-a-regular-expression">3.7.4 Construction of an NFA from a Regular Expression<a class="headerlink" href="#374-construction-of-an-nfa-from-a-regular-expression" title="Permanent link">#</a></h2>
+<p>We now give an algorithm for converting any regular expression to an NFA that defines the same language. The algorithm is <strong>syntax-directed</strong>, in the sense that it works recursively up the <strong>parse tree</strong> for the regular expression. For each sub expression the algorithm constructs an NFA with a single accepting state.</p>
+<blockquote>
+<p>NOTE: bottom-up</p>
+<p>NOTE: How to build a parse tree for a regular expression? </p>
+<ul>
+<li><a href="http://www.iro.umontreal.ca/~feeley/papers/DubeFeeleyACTAINFORMATICA00.pdf">Efficiently building a parse tree from a regular expression</a></li>
+</ul>
+</blockquote>
+<p><strong>Algorithm 3.23</strong> : The <a href="https://en.wikipedia.org/wiki/Thompson%27s_construction">McNaughton-Yamada-Thompson algorithm</a> to convert a regular expression to an NFA.</p>
+<p><strong>INPUT</strong>: A regular expression <code>r</code> over alphabet $\Sigma$.</p>
+<p><strong>OUTPUT</strong>: An NFA <code>N</code> accepting <code>L(r )</code>.</p>
+<p>METHOD: Begin by parsing <code>r</code> into its constituent subexpressions. The rules for constructing an NFA consist of <strong>basis rules</strong> for handling subexpressions with no operators, and <strong>inductive rules</strong> for constructing larger NFA's from the NFA's for the immediate subexpressions of a given expression.</p>
+<p><strong>BASIS</strong>: For expression $\epsilon$ construct the NFA</p>
+<p><img alt="" src="../Figure-epsilon-NFA.jpg" /></p>
+<p>Here, <code>i</code> is a new state, the <strong>start state</strong> of this NFA, and <code>f</code> is another new state, the <strong>accepting state</strong> for the NFA.</p>
+<p>For any subexpression a in $\Sigma$, construct the NFA</p>
+<p><img alt="" src="../Figure-a-NFA.jpg" /></p>
+<p>where again <code>i</code> and <code>f</code> are new states, the start and accepting states, respectively. Note that in both of the basis constructions, we construct a distinct NFA, with new states, for every occurrence of $\epsilon$ or some <code>a</code> as a subexpression of <code>r</code>.</p>
+<p><strong>INDUCTION</strong>: Suppose <code>N (s)</code> and <code>N (t)</code> are NFA's for regular expressions <code>s</code> and <code>t</code>, respectively.</p>
+<p>a) Suppose <code>r = s|t</code>. Then <code>N (r )</code>, the NFA for <code>r</code> , is constructed as in Fig. 3.40. Here, <code>i</code> and <code>f</code> are new states, the start and accepting states of <code>N (r )</code>, respectively. There are $\epsilon$-transitions from <code>i</code> to the start states of <code>N (s)</code> and <code>N (t)</code>, and each of their accepting states have $\epsilon$-transitions to the accepting state <code>f</code> . Note that the accepting states of <code>N (s)</code> and <code>N (t)</code> are not accepting in <code>N (r)</code>. Since any path from <code>i</code> to <code>f</code> must pass through either <code>N (s)</code> or <code>N (t)</code> exclusively, and since the label of that path is not changed by the $\epsilon$'s leaving <code>i</code> or entering <code>f</code> , we conclude that <code>N (r )</code> accepts $L(s) \cup L(t)$, which is the same as <code>L(r )</code>. That is, Fig. 3.40 is a correct construction for the union operator.</p>
+<p><img alt="" src="../Figure3.40NFA-for-the-union-of-two-regular-expressions.jpg" /></p>
+<p>b) Suppose <code>r = st</code>. Then construct <code>N (r )</code> as in Fig. 3.41. The <strong>start state</strong> of <code>N (s)</code> becomes the <strong>start state</strong> of <code>N (r )</code>, and the <strong>accepting state</strong> of <code>N (t)</code> is the only accepting state of <code>N (r )</code>. The <strong>accepting state</strong> of <code>N(s)</code> and the <strong>start state</strong> of <code>N (t)</code> are merged into a single state, with all the transitions in or out of either state. A path from <code>i</code> to <code>f</code> in Fig. 3.41 must go first through <code>N (s)</code>, and therefore its label will begin with some string in <code>L(s)</code>. The path then continues through <code>N (t)</code>, so the path's label finishes with a
+string in <code>L(t)</code>. As we shall so on argue, <strong>accepting states</strong> never have edges out and start states never have edges in, so it is not possible for a path to re-enter <code>N (s)</code> after leaving it. Thus, <code>N (r )</code> accepts exactly <code>L(s)L(t)</code>, and is a correct NFA for <code>r = st</code>.</p>
+<p><img alt="" src="../Figure3.41NFA-for-the-concatenation-of-two-regular-expressions.jpg" /></p>
+<p>c) Suppose $r = s^<em>$. Then for <code>r</code> we construct the NFA <code>N (r )</code> shown in Fig. 3.42. Here, <code>i</code> and <code>f</code> are new states, the start state and lone accepting state of <code>N (r )</code>. To get from <code>i</code> to <code>f</code> , we can either follow the introduced path labeled $\epsilon$, which takes care of the one string in $L(s)^0$ , or we can go to the start state of <code>N(s)</code>, through that NFA, then from its accepting state back to its start state zero or more times. These options allow <code>N (r )</code> to accept all the strings in $L(s)^1$, $L(s)^2$, and so on, so the entire set of strings accepted by <code>N (r )</code> is $L(s^</em>)$.</p>
+<p><img alt="" src="../Figure3.42NFA-for-the-closure-of-a-regular-expression.jpg" /></p>
+<p>d) Finally, suppose <code>r = (s)</code>. Then <code>L(r ) = L(s)</code>, and we can use the NFA <code>N (s)</code> as <code>N (r )</code>.</p>
+<blockquote>
+<p>NOTE: Implementing a <a href="https://en.wikipedia.org/wiki/Comparison_of_regular_expression_engines">regular expression engine</a> is far more complex than the algorithm described here.</p>
+</blockquote>
+<p>The method description in Algorithm 3.23 contains hints as to why the <strong>inductive construction</strong> works as it should. We shall not give a formal correctness proof, but we shall list several properties of the constructed NFA's, in addition to the all-important fact that <code>N (r )</code> accepts language <code>L(r )</code>. These properties are interesting in their own right, and helpful in making a formal proof.</p>
+<ol>
+<li><code>N (r )</code> has at most twice as many states as there are operators and operands in <code>r</code> . This bound follows from the fact that each step of the algorithm creates at most two new states.</li>
+<li><code>N (r )</code> has one <strong>start state</strong> and one <strong>accepting state</strong>. The accepting state has no outgoing transitions, and the start state has no incoming transitions.</li>
+<li>Each state of <code>N (r )</code> other than the accepting state has either one outgoing transition on a symbol in $\Sigma$ or two outgoing transitions, both on $\epsilon$.</li>
+</ol>
+<p><strong>Example 3.24</strong> : Let us use Algorithm 3.23 to construct an NFA for $r = (a | b) ^*abb$. Figure 3.43 shows a <strong>parse tree</strong> for <code>r</code> that is analogous to the <strong>parse trees</strong> constructed for arithmetic expressions in Section 2.2.3. For subexpression $r_1$ , the first <code>a</code>, we construct the NFA:</p>
+<p><img alt="" src="../Figure3.43Parse-tree-for.jpg" /></p>
+<p><img alt="" src="../Figure-a-NFA-example3.24.jpg" /></p>
+<p>State numbers have been chosen for consistency with what follows. For $r_2$ we construct:</p>
+<p><img alt="" src="../Figure-b-NFA-example3.24.jpg" /></p>
+<p>We can now combine $N (r_1)$ and $N (r_2)$, using the construction of Fig. 3.40 to obtain the NFA for $r_3
+=r_1|r_2$; this NFA is shown in Fig. 3.44.</p>
+<p><img alt="" src="../Figure3.44NFA-for-r3.jpg" /></p>
+<p>The NFA for $r_4= (r_3)$ is the same as that for $r_3$. The NFA for $r_5= (r_3)$ is then as shown in Fig. 3.45. We have used the construction in Fig. 3.42 to build this NFA from the NFA in Fig. 3.44.</p>
+<p><img alt="" src="../Figure-3.45-NFA-for-r5.jpg" /></p>
+<p>Now, consider subexpression $r_6$, which is another <code>a</code>. We use the basis construction for <code>a</code> again, but we must use new states. It is not permissible to reuse the NFA we constructed for $r_1$, even though $r_1$ and $r_6$ are the same expression. The NFA for $r_6$ is:</p>
+<p><img alt="" src="../Figure-a-NFA-example3.24-state7.jpg" /></p>
+<p>To obtain the NFA for $r_7= r_5r_6$, we apply the construction of Fig. 3.41. We merge states 7 and $7^{'}$, yielding the NFA of Fig. 3.46. Continuing in this fashion with new NFA's for the two subexpressions <code>b</code> called $r_8$
+and $r_{10}$, we eventually construct the NFA for  tha$r = (a | b) ^*abb$ that we first met in Fig. 3.34. </p>
+<p><img alt="" src="../Figure3.46-NFA-for-r7.jpg" /></p>
+                
+                  
+                
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../3.6-Finite-Automata/" title="3.6-Finite-Automata" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                3.6-Finite-Automata
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../../Chapter-4-Syntax-Analysis/" title="4" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                4
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/application.808e90bb.js"></script>
+      
+      <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
+      
+    
+  </body>
+</html>

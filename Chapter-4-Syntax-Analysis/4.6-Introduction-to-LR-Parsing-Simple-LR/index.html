@@ -1,0 +1,1106 @@
+
+
+
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      <meta http-equiv="x-ua-compatible" content="ie=edge">
+      
+        <meta name="description" content="Project documentation with Markdown.">
+      
+      
+        <link rel="canonical" href="https://dengking.github.io/compiler-principle/Chapter-4-Syntax-Analysis/4.6-Introduction-to-LR-Parsing-Simple-LR/">
+      
+      
+        <meta name="author" content="DengKing">
+      
+      
+        <meta name="lang:clipboard.copy" content="Copy to clipboard">
+      
+        <meta name="lang:clipboard.copied" content="Copied to clipboard">
+      
+        <meta name="lang:search.language" content="en">
+      
+        <meta name="lang:search.pipeline.stopwords" content="True">
+      
+        <meta name="lang:search.pipeline.trimmer" content="True">
+      
+        <meta name="lang:search.result.none" content="No matching documents">
+      
+        <meta name="lang:search.result.one" content="1 matching document">
+      
+        <meta name="lang:search.result.other" content="# matching documents">
+      
+        <meta name="lang:search.tokenizer" content="[\s\-]+">
+      
+      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.6.0">
+    
+    
+      
+        <title>4.6-Introduction-to-LR-Parsing-Simple-LR - compiler principle</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/application.1b62728e.css">
+      
+      
+    
+    
+      <script src="../../assets/javascripts/modernizr.268332fc.js"></script>
+    
+    
+      
+        <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
+      
+    
+    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
+    
+    
+      <link rel="stylesheet" href="../../css/extra.css">
+    
+    
+      
+    
+    
+  </head>
+  
+    <body dir="ltr">
+  
+    <svg class="md-svg">
+      <defs>
+        
+        
+          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="__github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"/></svg>
+        
+      </defs>
+    </svg>
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+    
+      <a href="#46-introduction-to-lr-parsing-simple-lr" tabindex="1" class="md-skip">
+        Skip to content
+      </a>
+    
+    
+      <header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid">
+    <div class="md-flex">
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <a href="https://dengking.github.io/compiler-principle" title="compiler principle" class="md-header-nav__button md-logo">
+          
+            <i class="md-icon"></i>
+          
+        </a>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
+      </div>
+      <div class="md-flex__cell md-flex__cell--stretch">
+        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
+          
+            <span class="md-header-nav__topic">
+              compiler principle
+            </span>
+            <span class="md-header-nav__topic">
+              
+                4.6-Introduction-to-LR-Parsing-Simple-LR
+              
+            </span>
+          
+        </div>
+      </div>
+      <div class="md-flex__cell md-flex__cell--shrink">
+        
+          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
+          
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
+      <label class="md-icon md-search__icon" for="__search"></label>
+      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
+        &#xE5CD;
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="result">
+          <div class="md-search-result__meta">
+            Type to start searching
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+        
+      </div>
+      
+        <div class="md-flex__cell md-flex__cell--shrink">
+          <div class="md-header-nav__source">
+            
+
+
+  
+
+<a href="https://github.com/dengking/compiler-principle" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+          </div>
+        </div>
+      
+    </div>
+  </nav>
+</header>
+    
+    <div class="md-container">
+      
+        
+      
+      
+      <main class="md-main" role="main">
+        <div class="md-main__inner md-grid" data-md-component="container">
+          
+            
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    <nav class="md-nav md-nav--primary" data-md-level="0">
+  <label class="md-nav__title md-nav__title--site" for="__drawer">
+    <a href="https://dengking.github.io/compiler-principle" title="compiler principle" class="md-nav__button md-logo">
+      
+        <i class="md-icon"></i>
+      
+    </a>
+    compiler principle
+  </label>
+  
+    <div class="md-nav__source">
+      
+
+
+  
+
+<a href="https://github.com/dengking/compiler-principle" title="Go to repository" class="md-source" data-md-source="github">
+  
+    <div class="md-source__icon">
+      <svg viewBox="0 0 24 24" width="24" height="24">
+        <use xlink:href="#__github" width="24" height="24"></use>
+      </svg>
+    </div>
+  
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+  <li class="md-nav__item">
+    <a href="../.." title="Home" class="md-nav__link">
+      Home
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+    
+    <label class="md-nav__link" for="nav-2">
+      Chapter-1-Introduction
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-2">
+        Chapter-1-Introduction
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-1-Introduction/" title="1-Introduction" class="md-nav__link">
+      1-Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-1-Introduction/1.1-Language-Processors/" title="1.1-Language-Processors.md" class="md-nav__link">
+      1.1-Language-Processors.md
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-1-Introduction/1.2-The-Structure-of-a-Compiler/" title="1.2-The-Structure-of-a-Compiler.md" class="md-nav__link">
+      1.2-The-Structure-of-a-Compiler.md
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-1-Introduction/1.5-Applications-of-Compiler-Technology/" title="1.5-Applications-of-Compiler-Technology.md" class="md-nav__link">
+      1.5-Applications-of-Compiler-Technology.md
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-1-Introduction/1.6-Programming-Language-Basics/" title="1.6-Programming-Language-Basics.md" class="md-nav__link">
+      1.6-Programming-Language-Basics.md
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      Chapter-2-A-Simple-Syntax-Directed-Translator
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        Chapter-2-A-Simple-Syntax-Directed-Translator
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-2-A-Simple-Syntax-Directed-Translator/" title="2" class="md-nav__link">
+      2
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-2-A-Simple-Syntax-Directed-Translator/2.1Introduction.md" title="2.1-Introduction" class="md-nav__link">
+      2.1-Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-2-A-Simple-Syntax-Directed-Translator/2.2Syntax-Definition.md" title="2.2-Syntax-Definition" class="md-nav__link">
+      2.2-Syntax-Definition
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-2-A-Simple-Syntax-Directed-Translator/2.3Syntax-Directed-Translation.md" title="2.3-Syntax-Directed-Translation" class="md-nav__link">
+      2.3-Syntax-Directed-Translation
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-2-A-Simple-Syntax-Directed-Translator/2.4Parsing.md" title="2.4-Parsing" class="md-nav__link">
+      2.4-Parsing
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+    
+    <label class="md-nav__link" for="nav-4">
+      Chapter-3-Lexical-Analysis
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-4">
+        Chapter-3-Lexical-Analysis
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-3-Lexical-Analysis/" title="3" class="md-nav__link">
+      3
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-3-Lexical-Analysis/3.1-The-Role-of-the-Lexical-Analyzer/" title="3.1-The-Role-of-the-Lexical-Analyzer" class="md-nav__link">
+      3.1-The-Role-of-the-Lexical-Analyzer
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-3-Lexical-Analysis/3.4-Recognition-of-Tokens/" title="3.4-Recognition-of-Tokens" class="md-nav__link">
+      3.4-Recognition-of-Tokens
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-3-Lexical-Analysis/3.6-Finite-Automata/" title="3.6-Finite-Automata" class="md-nav__link">
+      3.6-Finite-Automata
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-3-Lexical-Analysis/3.7-From-Regular-Expressions-to-Automata/" title="3.7-From-Regular-Expressions-to-Automata" class="md-nav__link">
+      3.7-From-Regular-Expressions-to-Automata
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5" checked>
+    
+    <label class="md-nav__link" for="nav-5">
+      Chapter-4-Syntax-Analysis
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-5">
+        Chapter-4-Syntax-Analysis
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../" title="4" class="md-nav__link">
+      4
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../4.2-Context-Free-Grammars/" title="4.2-Context-Free-Grammars" class="md-nav__link">
+      4.2-Context-Free-Grammars
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../4.3-Writing-a-Grammar/" title="4.3-Writing-a-Grammar" class="md-nav__link">
+      4.3-Writing-a-Grammar
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../4.5-Bottom-Up-Parsing/" title="4.5-Bottom-Up-Parsing" class="md-nav__link">
+      4.5-Bottom-Up-Parsing
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        4.6-Introduction-to-LR-Parsing-Simple-LR
+      </label>
+    
+    <a href="./" title="4.6-Introduction-to-LR-Parsing-Simple-LR" class="md-nav__link md-nav__link--active">
+      4.6-Introduction-to-LR-Parsing-Simple-LR
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#461-why-lr-parsers" class="md-nav__link">
+    4.6.1 Why LR Parsers?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#462-items-and-the-lr0-automaton" class="md-nav__link">
+    4.6.2 Items and the LR(0) Automaton
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#closure-of-item-sets" class="md-nav__link">
+    Closure of Item Sets
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-function-goto" class="md-nav__link">
+    The Function GOTO
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#use-of-the-lr0-automaton" class="md-nav__link">
+    Use of the LR(0) Automaton
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../4.7-More-Powerful-LR-Parsers/" title="4.7-More-Powerful-LR-Parsers" class="md-nav__link">
+      4.7-More-Powerful-LR-Parsers
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../VS-LL-parser-VS-LR-parser/" title="VS-LL-parser-VS-LR-parser" class="md-nav__link">
+      VS-LL-parser-VS-LR-parser
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
+    
+    <label class="md-nav__link" for="nav-6">
+      Chapter-5-Syntax-Directed-Translation
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-6">
+        Chapter-5-Syntax-Directed-Translation
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-5-Syntax-Directed-Translation/" title="5" class="md-nav__link">
+      5
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-5-Syntax-Directed-Translation/5.1-Syntax-Directed-Definitions/" title="5.1-Syntax-Directed-Definitions" class="md-nav__link">
+      5.1-Syntax-Directed-Definitions
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-5-Syntax-Directed-Translation/5.2-Evaluation-Orders-for-SDD's/" title="5.2-Evaluation-Orders-for-SDD's" class="md-nav__link">
+      5.2-Evaluation-Orders-for-SDD's
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-5-Syntax-Directed-Translation/5.3-Applications-of-Syntax-Directed-Translation/" title="5.3--Applications-of-Syntax-Directed-Translation" class="md-nav__link">
+      5.3--Applications-of-Syntax-Directed-Translation
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
+    
+    <label class="md-nav__link" for="nav-7">
+      Chapter-6-Intermediate-Code-Generation
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-7">
+        Chapter-6-Intermediate-Code-Generation
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-6-Intermediate-Code-Generation/" title="6" class="md-nav__link">
+      6
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-6-Intermediate-Code-Generation/6.3-Types-and-Declarations/" title="6.3-Types-and-Declarations" class="md-nav__link">
+      6.3-Types-and-Declarations
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-8" type="checkbox" id="nav-8">
+    
+    <label class="md-nav__link" for="nav-8">
+      Chapter-7-Run-Time-Environments
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-8">
+        Chapter-7-Run-Time-Environments
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-7-Run-Time-Environments/" title="7" class="md-nav__link">
+      7
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-7-Run-Time-Environments/7.1-Storage-Organization/" title="7.1-Storage-Organization" class="md-nav__link">
+      7.1-Storage-Organization
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-7-Run-Time-Environments/7.2-Stack-Allocation-of-Space/" title="7.2-Stack-Allocation-of-Space" class="md-nav__link">
+      7.2-Stack-Allocation-of-Space
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-9" type="checkbox" id="nav-9">
+    
+    <label class="md-nav__link" for="nav-9">
+      Chapter-9-Machine-Independent-Optimizations
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-9">
+        Chapter-9-Machine-Independent-Optimizations
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-9-Machine-Independent-Optimizations/" title="9" class="md-nav__link">
+      9
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#461-why-lr-parsers" class="md-nav__link">
+    4.6.1 Why LR Parsers?
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#462-items-and-the-lr0-automaton" class="md-nav__link">
+    4.6.2 Items and the LR(0) Automaton
+  </a>
+  
+    <nav class="md-nav">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#closure-of-item-sets" class="md-nav__link">
+    Closure of Item Sets
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#the-function-goto" class="md-nav__link">
+    The Function GOTO
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#use-of-the-lr0-automaton" class="md-nav__link">
+    Use of the LR(0) Automaton
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <h1 id="46-introduction-to-lr-parsing-simple-lr">4.6 Introduction to LR Parsing: Simple LR<a class="headerlink" href="#46-introduction-to-lr-parsing-simple-lr" title="Permanent link">#</a></h1>
+<p>The most prevalent type of bottom-up parser to day is based on a concept called <strong>LR(k )</strong> parsing; the "L" is for left-to-right scanning of the input, the "R" for constructing a rightmost derivation in reverse, and the k for the number of input symbols of lookahead that are used in making parsing decisions. The cases k = 0 or k = 1 are of practical interest, and we shall only consider LR parsers with $k \le 1$ here. When (k ) is omitted, k is assumed to be 1.</p>
+<p>This section introduces the basic concepts of LR parsing and the easiest method for constructing shift-reduce parsers, called "simple LR" (or SLR, for short). Some familiarity with the basic concepts is helpful even if the LR parser itself is constructed using an automatic parser generator. We begin with "items" and "parser states;" the diagnostic output from an LR parser generator typically includes <strong>parser states</strong>, which can be used to isolate the sources of parsing conflicts.</p>
+<p>Section 4.7 introduces two, more complex methods canonical-LR and LALR that are used in the majority of LR parsers.</p>
+<h2 id="461-why-lr-parsers">4.6.1 Why LR Parsers?<a class="headerlink" href="#461-why-lr-parsers" title="Permanent link">#</a></h2>
+<p>LR parsers are table-driven, much like the nonrecursive LL parsers of Section 4.4.4. A grammar for which we can construct a parsing table using one of  the methods in this section and the next is said to be an <strong>LR grammar</strong>. Intuitively, for a grammar to be LR it is sufficient that a left-to-right shift-reduce parser be able to recognize handles of right-sentential forms when they appear on top of the stack.</p>
+<h2 id="462-items-and-the-lr0-automaton">4.6.2 Items and the LR(0) Automaton<a class="headerlink" href="#462-items-and-the-lr0-automaton" title="Permanent link">#</a></h2>
+<p>How do es a shift-reduce parser know when to shift and when to reduce? For example, with stack contents <code>$T</code>  and next input symbol <code>*</code> in Fig. 4.28, how does the parser know that <code>T</code> on the top of the stack is not a handle, so the appropriate action is to shift and not to reduce <code>T</code> to <code>E</code>?</p>
+<p>An <strong>LR parser</strong> makes shift-reduce decisions by maintaining <strong>states</strong> to keep track of where we are in a parse. States represent sets of "items." An <em>LR(0) item</em> (<em>item</em> for short) of a grammar G is a production of G with a dot at some position of the body. Thus, production $A \to XYZ$ yields the four items</p>
+<p><img alt="" src="../A-to-XYZ.jpg" /></p>
+<p>The production $A \to \epsilon$ generates only one item, $A \to \bullet$ .</p>
+<p>Intuitively, an item indicates how much of a production we have seen at a given point in the parsing process. For example, the item $A \to X Y Z$ indicates that we hope to see a string derivable from $X Y Z$ next on the input. Item $A \to X \cdot Y Z$ indicates that we have just seen on the input a string derivable from $X$ and that we hope next to see a string derivable from $Y Z$ . Item $A \to  X Y Z$ indicates that we have seen the body $X Y Z$ and that it may b e time to reduce $X Y Z$ to $A$.</p>
+<p>One collection of sets of LR(0) items, called the <em>canonical</em> LR(0) collection, provides the basis for constructing a <strong>deterministic finite automaton</strong> that is used to make parsing decisions. Such an automaton is called an <em>LR(0) automaton</em>. In particular, each state of the LR(0) automaton represents a set of items in the <strong>canonical LR(0) collection</strong>. The automaton for the expression grammar (4.1), shown in Fig. 4.31, will serve as the running example for discussing the <strong>canonical LR(0) collection</strong> for a grammar.</p>
+<p>To construct the <strong>canonical LR(0) collection</strong> for a grammar, we define an <strong>augmented grammar</strong> and two functions, CLOSURE and GOTO. </p>
+<p>If $G$ is a grammar with start symbol $S$ , then $\acute{G}$ , the augmented grammar for G, is $G$ with a new start symbol $\acute{S}$ and production $\acute{S} \to S $. The purpose of this new starting production is to indicate to the parser when it should stop parsing and announce acceptance of the input. That is, acceptance occurs when and only when the parser is about to reduce by $\acute{S} \to S $.</p>
+<p><img alt="" src="../Figure4.31-LR(0)-automaton-for-the-expression-grammar(4.1).jpg" /></p>
+<h3 id="closure-of-item-sets">Closure of Item Sets<a class="headerlink" href="#closure-of-item-sets" title="Permanent link">#</a></h3>
+<h3 id="the-function-goto">The Function GOTO<a class="headerlink" href="#the-function-goto" title="Permanent link">#</a></h3>
+<h3 id="use-of-the-lr0-automaton">Use of the LR(0) Automaton<a class="headerlink" href="#use-of-the-lr0-automaton" title="Permanent link">#</a></h3>
+<p>The central idea behind “Simple LR," or SLR, parsing is the construction from the grammar of the LR(0) automaton. The states of this automaton are the sets of items from the canonical LR(0) collection, and the transitions are given by the GOTO function. The LR(0) automaton for the expression grammar (4.1) appeared earlier in Fig. 4.31.</p>
+<p>The <strong>start state</strong> of the <strong>LR(0) automaton</strong> is $CLOSURE({[ \acute{S} \to S]})$, where $\acute{S}$ is the <strong>start symbol</strong> of the augmented grammar. All states are accepting states. We say "state j " to refer to the state corresponding to the set of items $I_j$.</p>
+<blockquote>
+<h1 id="lr0">文法和LR(0)自动机<a class="headerlink" href="#lr0" title="Permanent link">#</a></h1>
+<p>一个产生式可能有多个状态，它们被成为项。根据项的定义，可以看出它是为reduction而生的，它表示了分析器在分析的过程中已经看到了<strong>产生式体</strong>的哪些部分，以及它所期望看到的合乎它的文法的符号串。已经看到的位于点的左边，期望看到的位于点的右边。显然，当已经看到了一个产生式体的全部符号后，就可以进行规约了。</p>
+<p>既然定义了状态，那么肯定就会涉及到状态的转换：状态的转换或者说项的转换是由分析器在分析过程中看到的文法符号而触发的，每次看到一个文法符号，它就可以将产生式体中的$\bullet$向右移动一次，从而进入到了一个新的状态。</p>
+<p>那给定文法，我们能否提前就分析出它会有哪些状态，哪些转换呢？答案是肯定的，这就是我们构造出的LR(0)自动机。显然，一个LR(0)自动机给出了给定文法中的所有的可能的有效的转换。</p>
+<h1 id="lr0lr">从LR(0)自动机来看待LR语法分析算法<a class="headerlink" href="#lr0lr" title="Permanent link">#</a></h1>
+<p>LR(0)自动机是<strong>确定有穷状态机</strong>，它从<strong>状态0</strong>开始在每个符号上都有转换。如果一个状态表示的产生式的体已经全部都看到了，那么显然这个状态就不会再有转换了，因此在这种情况下可以选择对它进行<strong>规约</strong>。Example 4.43 中给出的LR parser可以认为有两个栈:</p>
+<ul>
+<li>字符栈</li>
+<li>状态栈</li>
+</ul>
+<p><strong>移入操作</strong>对应的是在LR(0)状态机进行状态转换，即从一个状态转移到另外一个状态，这个过程中，会将INPUT中的symbol移入到字符栈中，相应的，也会将新到达的状态压入到状态栈中。显然，状态栈记录了状态转换的路径，即栈中每条记录是从它后面的一条记录转换而来的。</p>
+<p>那么规约意味着对上述两个栈执行什么操作呢？规约意味着将字符栈中<strong>产生式的体</strong>弹出栈，相应的也要从状态栈中弹出相应数量的状态，并且将产生式的头压入栈中，那么此时要压入什么状态呢？</p>
+<p>移入是沿着自动机的某条路径进行转换，规约则是回到这条路径的起点，显然规约会得到一个non-terminal（其实这就相当于已经构造好了子树了）。然后在当前栈顶的状态基于前面规约的符号进行转换，然后将转换得到的新状态压入栈中。为什么要这样呢？因为parser已经看到了这个non-terminal了，所以必然要进行状态的转换；</p>
+<h1 id="_1">树与栈<a class="headerlink" href="#_1" title="Permanent link">#</a></h1>
+<p>从Figure 4.31: LR(0) automaton for the expression grammar (4.1)中可以看出，LR(0) automaton也是树形的，LR语法分析器在这棵树上的操作也是基于<strong>栈</strong>的。其实在思考LR(0) parser的时候，我想到了程序的执行过程，如果将程序执行过程精简成函数调用的话，其实整个程序的执行过程也可以画成树形的，即程序的<strong>函数调用树</strong>：这棵树的 root节点就是main函数，main函数所调用的函数处于这棵树的第一层，第一层函数所调用的函数处于第二层，依次递推，就可以得到一棵完整的树了；并且和LR(0) parser一样，程序的执行过程也是使用的stack。显然，两种情况都涉及了tree和stack：</p>
+<ul>
+<li>
+<p>在LR parser中，需要不断地将符号压栈直至看到了完整的产生式体才将产生式体弹出栈、规约得到产生式的头部-&gt;规约得到产生头依赖于得到所有的产生体-&gt;不断地将产生式体符号压栈，直到见到全部的产生式体符号就出栈</p>
+</li>
+<li>
+<p>在函数调用中，需要不断地将子函数压入call stack中，直至所有的子函数都返回主函数才得以执行完成</p>
+</li>
+</ul>
+<p>-&gt;主函数的值依赖于所有的子函数-&gt;不断地将子函数压栈，知道最底层的子函数求解，才依次出栈</p>
+<p>看，两者的执行过程是多么地类似；</p>
+<p>从树的构造的角度来看待LR parser中的tree和函数调用中的树：LR parser中，tree的构造是自底向上的，而函数调用中树的构造是自定向下的，函数调用中树的构造是比较类似于LR(0) parser中树的构造。</p>
+<p>无论是<strong>LR(0)自动机</strong>以及<strong>函数调用树</strong>，它们都是是我们从全局的角度（整体的角度，分析的角度）来分析这个问题，它们是理论层面的分析，而不是实际的实现，实际的执行过程中，压根就不需要显式地构造出这样的一棵树，并且压根就无需知道整个树是怎样的。比如在LR parser中，parser是从左至右对输入串进行分析，一次只会取一个符号，函数的执行是顺序执行的，一次只会执行一个函数；为什么要这样呢？我觉得这是由计算机的体系结构所决定的，正如各种automaton模型所展示的那样，计算机就是这样的规则，就是这样的顺序，所以我们的算法设计也是需要寻找规则，顺序，这是一种计算思维；</p>
+<p>所以实际的执行过程仅仅对应的是树中的一条路径（有起点，有终点），显然这条路径是<strong>线性的</strong>，是<strong>连续的</strong>（能够从终点再返回到起点）。如果我们将执行的路径连接起来（因为这些路径是连续的，所以能够将它们连接起来），以适当的方式画出了（正如Fig. 4.31），那么它就能够展现出我们的在理论层面分析的形态。</p>
+<p>如果从树的构造来看的话，在parser是从左至右对输入串进行分析，一次只会取一个符号，从子树开始构造，然后将一棵一棵的子树结合起来构造更大的树。在data structure中，树是有一个一个的node连接而成的，所以访问一棵树只需要得到这棵树的根结点即可，所以可以使用node来代替一棵树。所以在树的构造过程中，所操作的是一个一个的node，所以使用使用stack就可以完成一棵树的构造。</p>
+<p>在计算机科学中，对理论模型的实现时往往选择的是通用的，简单的方式（节约内存等），"实际的执行过程仅仅对应的是树中的一条路径"，所以我们仅仅需要的是能够满足这条路径的结构即可。而栈这种结构就正好符合这些要求：</p>
+<ul>
+<li>栈是线性的</li>
+<li>栈是连续的，所以能够实现从终点回到起点</li>
+</ul>
+<p>再回到理论分析层面，实际执行过程和理论层面的模型之间是怎样的关联呢？实际执行流程对应的是对树执行深度优先后序遍历；</p>
+</blockquote>
+<h2 id="465-viable-prefixes">4.6.5 Viable Prefixes<a class="headerlink" href="#465-viable-prefixes" title="Permanent link">#</a></h2>
+<p>Why can LR(0) automata be used to make shift-reduce decisions? The LR(0) automaton for a grammar characterizes the strings of grammar symbols that can appear on the stack of a shift-reduce parser for the grammar. The stack contents must be a <strong>prefix</strong> of a <strong>right-sentential form</strong>. If the stack holds $\alpha$ and the rest of the input is $x$, then a sequence of reductions will take $\alpha x$ to $S$ . In terms of derivations, $S \xrightarrow[rm]{*}  \alpha x$.</p>
+<p>Not all prefixes of right-sentential forms can appear on the stack, however, since the parser must not shift past the <strong>handle</strong>. For example, suppose</p>
+<p>$E \xrightarrow[rm]{ \ast } F \ast id \xrightarrow[rm]{} (E) \ast id$</p>
+<p>Then, at various times during the parse, the stack will hold $($; $(E$ , and $(E )$, but it must not hold $(E ) \ast$, since $(E )$ is a handle, which the parser must reduce to $F$  before shifting $\ast$.</p>
+<p>The prefixes of right sentential forms that can appear on the stack of a shift-reduce parser are called <em>viable prefixes</em>. They are defined as follows: a viable prefix is a prefix of a right-sentential form that does not continue past the right end of the <strong>rightmost handle</strong> of that <strong>sentential form</strong>. By this definition, it is always possible to add terminal symbols to the end of a viable prefix to obtain a right-sentential form.</p>
+<blockquote>
+<p>NOTE: In simple terms, a prefix cannot contain a handle. Once it does, it should be reduced.</p>
+</blockquote>
+<p>SLR parsing is based on the fact that LR(0) automata recognize <strong>viable prefixes</strong>. We say item $A \to \beta _1 \beta _2$ is <em>valid</em> for a viable prefix $\alpha \beta _1$ if there is a derivation $S \xrightarrow [rm] {<em>} \alpha Aw \xrightarrow [rm]{</em>} \alpha \beta _1 \beta _2 w$ . In general, an <strong>item</strong> will be valid for many viable prefixes.</p>
+<blockquote>
+<p>NOTE: viable prefix和</p>
+</blockquote>
+                
+                  
+                
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../4.5-Bottom-Up-Parsing/" title="4.5-Bottom-Up-Parsing" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                4.5-Bottom-Up-Parsing
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../4.7-More-Powerful-LR-Parsers/" title="4.7-More-Powerful-LR-Parsers" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                4.7-More-Powerful-LR-Parsers
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        powered by
+        <a href="https://www.mkdocs.org">MkDocs</a>
+        and
+        <a href="https://squidfunk.github.io/mkdocs-material/">
+          Material for MkDocs</a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/application.808e90bb.js"></script>
+      
+      <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
+      
+    
+  </body>
+</html>
