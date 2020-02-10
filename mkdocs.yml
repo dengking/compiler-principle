@@ -3,14 +3,7 @@ extra_css:
 - css/extra.css
 markdown_extensions:
 - toc:
-    baselevel: 2
     permalink: '#'
-    separator: _
-- admonition
-- def_list
-- mdx_gh_links:
-    repo: mkdocs
-    user: mkdocs
 nav:
 - Home: index.md
 - Chapter-1-Introduction:
@@ -61,8 +54,4 @@ site_description: Project documentation with Markdown.
 site_name: compiler principle
 site_url: https://dengking.github.io/compiler-principle
 theme:
-  highlightjs: true
-  hljs_languages:
-  - yaml
-  - django
-  name: readthedocs
+  name: material

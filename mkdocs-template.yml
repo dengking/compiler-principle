@@ -10,11 +10,8 @@ edit_uri: ""
 
 
 theme:
-    name: readthedocs
-    highlightjs: true
-    hljs_languages:
-        - yaml
-        - django
+    name: material
+    
         
 nav: None
     
@@ -24,13 +21,7 @@ extra_css:
 markdown_extensions:
     - toc:
         permalink: "#"
-        baselevel: 2
-        separator: "_"
-    - admonition
-    - def_list
-    - mdx_gh_links:
-        user: mkdocs
-        repo: mkdocs
+        
         
 plugins:
     - search
