@@ -14,10 +14,10 @@ nav:
   - 1.6-Programming-Language-Basics.md: Chapter-1-Introduction/1.6-Programming-Language-Basics.md
 - Chapter-2-A-Simple-Syntax-Directed-Translator:
   - 2: Chapter-2-A-Simple-Syntax-Directed-Translator/index.md
-  - 2.1-Introduction: Chapter-2-A-Simple-Syntax-Directed-Translator/2.1Introduction.md
-  - 2.2-Syntax-Definition: Chapter-2-A-Simple-Syntax-Directed-Translator/2.2Syntax-Definition.md
-  - 2.3-Syntax-Directed-Translation: Chapter-2-A-Simple-Syntax-Directed-Translator/2.3Syntax-Directed-Translation.md
-  - 2.4-Parsing: Chapter-2-A-Simple-Syntax-Directed-Translator/2.4Parsing.md
+  - 2.1-Introduction: Chapter-2-A-Simple-Syntax-Directed-Translator/2.1-Introduction.md
+  - 2.2-Syntax-Definition: Chapter-2-A-Simple-Syntax-Directed-Translator/2.2-Syntax-Definition.md
+  - 2.3-Syntax-Directed-Translation: Chapter-2-A-Simple-Syntax-Directed-Translator/2.3-Syntax-Directed-Translation.md
+  - 2.4-Parsing: Chapter-2-A-Simple-Syntax-Directed-Translator/2.4-Parsing.md
 - Chapter-3-Lexical-Analysis:
   - 3: Chapter-3-Lexical-Analysis/index.md
   - 3.1-The-Role-of-the-Lexical-Analyzer: Chapter-3-Lexical-Analysis/3.1-The-Role-of-the-Lexical-Analyzer.md
