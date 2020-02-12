@@ -18,9 +18,9 @@ ABIs cover details such as:
 
 ## Complete ABIs
 
-A complete ABI, such as the [Intel Binary Compatibility Standard](https://en.wikipedia.org/wiki/Intel_Binary_Compatibility_Standard) (iBCS),[[1\]](https://en.wikipedia.org/wiki/Application_binary_interface#cite_note-1) allows a program from one operating system supporting that ABI to run without modifications on any other such system, provided that necessary shared libraries are present, and similar prerequisites are fulfilled.
+A complete ABI, such as the [Intel Binary Compatibility Standard](https://en.wikipedia.org/wiki/Intel_Binary_Compatibility_Standard) (iBCS), allows a program from one operating system supporting that ABI to run without modifications on any other such system, provided that necessary shared libraries are present, and similar prerequisites are fulfilled.
 
-Other[*which?*] ABIs standardize details such as the [C++ name mangling](https://en.wikipedia.org/wiki/Name_mangling#Name_mangling_in_C++),[[2\]](https://en.wikipedia.org/wiki/Application_binary_interface#cite_note-2) [exception](https://en.wikipedia.org/wiki/Exception_handling) propagation,[[3\]](https://en.wikipedia.org/wiki/Application_binary_interface#cite_note-3) and calling convention between compilers on the same platform, but do not require cross-platform compatibility.
+Other[*which?*] ABIs standardize details such as the [C++ name mangling](https://en.wikipedia.org/wiki/Name_mangling#Name_mangling_in_C++),  [exception](https://en.wikipedia.org/wiki/Exception_handling) propagation, and calling convention between compilers on the same platform, but do not require cross-platform compatibility.
 
 ## Embedded ABIs
 
@@ -36,7 +36,7 @@ Widely used EABIs include [PowerPC](https://en.wikipedia.org/wiki/PowerPC),[[4\]
 
 
 
-# [Difference between API and ABI](https://stackoverflow.com/questions/3784389/difference-between-api-and-abi)
+## [Difference between API and ABI](https://stackoverflow.com/questions/3784389/difference-between-api-and-abi)
 
 Q:
 
@@ -76,128 +76,3 @@ It defines things (but is not limited to):
 - Where the return value is placed for return.
 - How exceptions propagate.
 
-# [What is an application binary interface (ABI)?](https://stackoverflow.com/questions/2171177/what-is-an-application-binary-interface-abi)
-
-Q:
-
-I never clearly understood what an ABI is. Please don't point me to a Wikipedia article. If I could understand it, I wouldn't be here posting such a lengthy post.
-
-This is my mindset about different interfaces:
-
-A TV remote(遥控器) is an interface between the user and the TV. It is an existing entity, but useless (doesn't provide any functionality) by itself. All the functionality for each of those buttons on the remote is implemented in the television set.
-
-> **Interface:** It is an "existing entity" layer between the `functionality` and `consumer` of that functionality. An interface by itself is doesn't do anything. It just invokes the functionality lying behind.
->
-> Now depending on who the user is there are different type of interfaces.
->
-> **Command Line Interface (CLI)** commands are the existing entities, the consumer is the user and functionality lies behind.
->
-> `functionality:` my software functionality which solves some purpose to which we are describing this interface.
->
-> `existing entities:` commands
->
-> `consumer:` user
->
-> **Graphical User Interface(GUI)** window, buttons, etc. are the existing entities, and again the consumer is the user and functionality lies behind.
->
-> `functionality:` my software functionality which solves some purpose to which we are describing this interface.
->
-> `existing entities:` window,buttons etc..
->
-> `consumer:` user
->
-> **Application Programming Interface(API)** functions or to be more correct, interfaces (in interfaced based programming) are the existing entities, consumer here is another program not a user, and again functionality lies behind this layer.
->
-> `functionality:` my software functionality which solves some purpose to which we are describing this interface.
->
-> `existing entities:` functions, Interfaces(array of functions).
->
-> `consumer:` another program/application.
->
-> **Application Binary Interface (ABI)** Here is where my problem starts.
->
-> `functionality:` ???
->
-> `existing entities:` ???
->
-> `consumer:` ???
-
-- I've written software in different languages and provided different kind of **interfaces** (CLI, GUI, and API), but I'm not sure, if I ever, provided any ABI.
-
-[Wikipedia says:](http://en.wikipedia.org/wiki/Application_binary_interface)
-
-> ABIs cover details such as
->
-> - data type, size, and alignment;
-> - the calling convention, which controls how functions' arguments are passed and return values retrieved;
-> - the system call numbers and how an application should make system calls to the operating system;
->
-> Other ABIs standardize details such as
->
-> - the C++ name mangling,
-> - exception propagation, and
-> - calling convention between compilers on the same platform, but do not require cross-platform compatibility.
-
-- Who needs these details? Please don't say the OS. I know assembly programming. I know how linking & loading works. I know what exactly happens inside.
-- Why did C++ name mangling come in? I thought we are talking at the binary level. Why do languages come in?
-
-Anyway, I've downloaded the [[PDF\] System V Application Binary Interface *Edition 4.1 (1997-03-18)*](http://www.sco.com/developers/devspecs/gabi41.pdf) to see what exactly it contains. Well, most of it didn't make any sense.
-
-- Why does it contain two chapters (4th & 5th) to describe the [ELF](http://en.wikipedia.org/wiki/Executable_and_Linkable_Format) file format? In fact, these are the only two significant chapters of that specification. The rest of the chapters are "processor specific". Anyway, I thought that it is a completely different topic. Please don't say that ELF file format specifications *are* the ABI. It doesn't qualify to be an *interface* according to the definition.
-- I know, since we are talking at such a low level it must be very specific. But I'm not sure how is it "instruction set architecture (ISA)" specific?
-- Where can I find Microsoft Windows' ABI?
-
-So, these are the major queries that are bugging me.
-
-
-
-[A](https://stackoverflow.com/a/2456882)
-
-One easy way to understand "ABI" is to compare it to "API".
-
-You are already familiar with the concept of an API. If you want to use the features of, say, some library or your OS, you will use an API. The API consists of data types/structures, constants, functions, etc that you can use in your code to access the functionality of that external component.
-
-An ABI is very similar. **Think of it as the compiled version of an API** (or as an API on the machine-language level). When you write source code, you access the library through an **API**. Once the code is compiled, your application accesses the **binary data** in the library through the **ABI**. The **ABI** defines the **structures** and **methods** that your compiled application will use to access the **external library** (just like the API did), only on a lower level.
-
-***SUMMARY***: 上面这段话概括地非常好：when you code，use API to access library;once the code is compiled,the compiled application access the binary data in the library throuth an ABI.
-
-ABIs are important when it comes to applications that use **external libraries**. If a program is built to use a particular library and that library is later updated, you don't want to have to re-compile that application (and from the end-user's standpoint, you may not have the source). If the updated library uses the same **ABI**, then your program will not need to change. The **interface** to the **library** (which is all your program really cares about) is the same even though the internal workings may have changed. Two versions of a library that have the same ABI are sometimes called "**binary-compatible**" since they have the same low-level interface (you should be able to replace the old version with the new one and not have any major problems).
-
-***SUMMARY*** : 上面这段话涉及到了 [calling convention](https://en.wikipedia.org/wiki/Calling_convention)
-
-Sometimes, **ABI** changes are unavoidable. When this happens, any programs that use that library will not work unless they are re-compiled to use the new version of the library. If the **ABI** changes but the **API** does not(比如某个成员变量的长度改变了), then the old and new library versions are sometimes called "**source compatible**". This implies that while a program compiled for one library version will not work with the other, **source code** written for one will work for the other if re-compiled.
-
-For this reason, library writers tend to try to keep their ABI stable (to minimize disruption). Keeping an ABI stable means not changing function interfaces (**return type and number, types, and order of arguments**)(参见 [calling convention](https://en.wikipedia.org/wiki/Calling_convention) ）, definitions of data types or data structures, defined constants, etc. New functions and data types can be added, but existing ones must stay the same. If you expand, say, a 16-bit data structure field into a 32-bit field, then already-compiled code that uses that data structure will not be accessing that field (or any following it) correctly. Accessing data structure members gets converted into **memory addresses** and **offsets** during compilation and if the data structure changes, then these offsets will not point to what the code is expecting them to point to and the results are unpredictable at best.
-
-An ABI isn't necessarily something you will explicitly(明确的) provide unless you are expecting people to interface with your code using assembly. It isn't language-specific either, since (for example) a C application and a Pascal application will use the same ABI after they are compiled.
-
-**Edit:** Regarding your question about the chapters regarding the ELF file format in the SysV ABI docs: The reason this information is included is because the **ELF format** defines the **interface** between **operating system** and **application**. When you tell the OS to run a program, it expects the program to be formatted in a certain way and (for example) expects the first section of the binary to be an ELF header containing certain information at specific memory offsets. This is how the application communicates important information about itself to the operating system. If you build a program in a non-ELF binary format (such as a.out or PE), then an OS that expects ELF-formatted applications will not be able to interpret the binary file or run the application. This is one big reason why Windows apps cannot be run directly on a Linux machine (or vice versa) without being either re-compiled or run inside some type of emulation layer that can translate from one binary format to another.
-
-IIRC, Windows currently uses the [Portable Executable](http://en.wikipedia.org/wiki/Portable_Executable) (or, PE) format. There are links in the "external links" section of that Wikipedia page with more information about the PE format.
-
-Also, regarding your note about C++ name mangling: The ABI can define a "standardized" way for a C++ compiler to do **name mangling** for the purpose of compatibility. That is, if I create a library and you develop a program that uses the library, you should be able to use a **different compiler** than I did and not have to worry about the resulting binaries being incompatible due to different **name mangling schemes**. This is really only of use if you are defining a new binary file format or writing a compiler or linker.
-
-
-
-[A](https://stackoverflow.com/a/2171227)
-
-If you know assembly and how things work at the OS-level, you are conforming to a certain ABI. The ABI govern things like how parameters are passed, where return values are placed. For many platforms there is only one ABI to choose from, and in those cases the ABI is just "how things work".
-
-However, the ABI also govern things like how classes/objects are laid out in C++. This is necessary if you want to be able to pass object references across module boundaries or if you want to mix code compiled with different compilers.
-
-Also, if you have an 64-bit OS which can execute 32-bit binaries, you will have different ABIs for 32- and 64-bit code.
-
-In general, any code you link into the same executable must conform to the same ABI. If you want to communicate between code using different ABIs, you must use some form of RPC or serialization protocols.
-
-***SUMMARY*** : 上面这段话非常重要
-
-I think you are trying too hard to squeeze in different types of interfaces into a fixed set of characteristics. For example, an interface doesn't necessarily have to be split into consumers and producers. An interface is just a convention by which two entities interact.
-
-ABIs can be (partially) ISA-agnostic. Some aspects (such as calling conventions) depend on the [ISA](https://en.wikipedia.org/wiki/Industry_Standard_Architecture), while other aspects (such as C++ class layout) do not.
-
-A well defined ABI is very important for people writing compilers. Without a well defined ABI, it would be impossible to generate interoperable code.
-
-EDIT: Some notes to clarify:
-
-- "Binary" in ABI does not exclude the use of strings or text. If you want to link a DLL exporting a C++ class, somewhere in it the methods and type signatures must be encoded. That's where C++ name-mangling comes in.
-- The reason why you never provided an ABI is that the vast majority of programmers will never do it. ABIs are provided by the same people designing the platform (i.e. operating system), and very few programmers will ever have the privilege to design a widely-used ABI.
