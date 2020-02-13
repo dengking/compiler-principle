@@ -13,7 +13,7 @@
         <meta name="description" content="Project documentation with Markdown.">
       
       
-        <link rel="canonical" href="https://dengking.github.io/compiler-principle/Chapter-1-Introduction/wikipedia-Semantic-analysis(compilers)/">
+        <link rel="canonical" href="https://dengking.github.io/compiler-principle/Guide/Parse-tree-VS-syntax-tree-VS-DFA/parse-tree-VS-DFA/">
       
       
         <meta name="author" content="DengKing">
@@ -37,21 +37,21 @@
       
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
-      <link rel="shortcut icon" href="../../assets/images/favicon.png">
+      <link rel="shortcut icon" href="../../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.6.0">
     
     
       
-        <title>wikipedia Semantic analysis(compilers) - compiler principle</title>
+        <title>parse tree VS DFA - compiler principle</title>
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/application.1b62728e.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/application.1b62728e.css">
       
       
     
     
-      <script src="../../assets/javascripts/modernizr.268332fc.js"></script>
+      <script src="../../../assets/javascripts/modernizr.268332fc.js"></script>
     
     
       
@@ -60,10 +60,10 @@
         <style>body,input{font-family:"Roboto","Helvetica Neue",Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono","Courier New",Courier,monospace}</style>
       
     
-    <link rel="stylesheet" href="../../assets/fonts/material-icons.css">
+    <link rel="stylesheet" href="../../../assets/fonts/material-icons.css">
     
     
-      <link rel="stylesheet" href="../../css/extra.css">
+      <link rel="stylesheet" href="../../../css/extra.css">
     
     
       
@@ -85,7 +85,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="#semantic-analysis-compilers" tabindex="1" class="md-skip">
+      <a href="#parse-tree-vs-dfa" tabindex="1" class="md-skip">
         Skip to content
       </a>
     
@@ -111,7 +111,7 @@
             </span>
             <span class="md-header-nav__topic">
               
-                wikipedia Semantic analysis(compilers)
+                parse tree VS DFA
               
             </span>
           
@@ -222,7 +222,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../.." title="Home" class="md-nav__link">
+    <a href="../../.." title="Home" class="md-nav__link">
       Home
     </a>
   </li>
@@ -238,11 +238,11 @@
       <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
     
     <label class="md-nav__link" for="nav-2">
-      Chapter-1-Introduction
+      Guide
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
       <label class="md-nav__title" for="nav-2">
-        Chapter-1-Introduction
+        Guide
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
         
@@ -253,8 +253,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../" title="1-Introduction" class="md-nav__link">
-      1-Introduction
+    <a href="../../" title="Introduction" class="md-nav__link">
+      Introduction
     </a>
   </li>
 
@@ -265,44 +265,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../1.1-Language-Processors/" title="1.1-Language-Processors.md" class="md-nav__link">
-      1.1-Language-Processors.md
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../1.2-The-Structure-of-a-Compiler/" title="1.2-The-Structure-of-a-Compiler.md" class="md-nav__link">
-      1.2-The-Structure-of-a-Compiler.md
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../1.5-Applications-of-Compiler-Technology/" title="1.5-Applications-of-Compiler-Technology.md" class="md-nav__link">
-      1.5-Applications-of-Compiler-Technology.md
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../1.6-Programming-Language-Basics/" title="1.6-Programming-Language-Basics.md" class="md-nav__link">
-      1.6-Programming-Language-Basics.md
+    <a href="../../VS-LL-parser-VS-LR-parser/" title="VS-LL-parser-VS-LR-parser" class="md-nav__link">
+      VS-LL-parser-VS-LR-parser
     </a>
   </li>
 
@@ -322,11 +286,11 @@
       <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
     
     <label class="md-nav__link" for="nav-3">
-      Chapter-2-A-Simple-Syntax-Directed-Translator
+      Chapter-1-Introduction
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
       <label class="md-nav__title" for="nav-3">
-        Chapter-2-A-Simple-Syntax-Directed-Translator
+        Chapter-1-Introduction
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
         
@@ -337,8 +301,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../Chapter-2-A-Simple-Syntax-Directed-Translator/" title="2" class="md-nav__link">
-      2
+    <a href="../../../Chapter-1-Introduction/" title="1-Introduction" class="md-nav__link">
+      1-Introduction
     </a>
   </li>
 
@@ -349,8 +313,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../Chapter-2-A-Simple-Syntax-Directed-Translator/2.1-Introduction/" title="2.1-Introduction" class="md-nav__link">
-      2.1-Introduction
+    <a href="../../../Chapter-1-Introduction/1.1-Language-Processors/" title="1.1-Language-Processors.md" class="md-nav__link">
+      1.1-Language-Processors.md
     </a>
   </li>
 
@@ -361,8 +325,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../Chapter-2-A-Simple-Syntax-Directed-Translator/2.2-Syntax-Definition/" title="2.2-Syntax-Definition" class="md-nav__link">
-      2.2-Syntax-Definition
+    <a href="../../../Chapter-1-Introduction/1.2-The-Structure-of-a-Compiler/" title="1.2-The-Structure-of-a-Compiler.md" class="md-nav__link">
+      1.2-The-Structure-of-a-Compiler.md
     </a>
   </li>
 
@@ -373,8 +337,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../Chapter-2-A-Simple-Syntax-Directed-Translator/2.3-Syntax-Directed-Translation/" title="2.3-Syntax-Directed-Translation" class="md-nav__link">
-      2.3-Syntax-Directed-Translation
+    <a href="../../../Chapter-1-Introduction/1.5-Applications-of-Compiler-Technology/" title="1.5-Applications-of-Compiler-Technology.md" class="md-nav__link">
+      1.5-Applications-of-Compiler-Technology.md
     </a>
   </li>
 
@@ -385,8 +349,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../Chapter-2-A-Simple-Syntax-Directed-Translator/2.4-Parsing/" title="2.4-Parsing" class="md-nav__link">
-      2.4-Parsing
+    <a href="../../../Chapter-1-Introduction/1.6-Programming-Language-Basics/" title="1.6-Programming-Language-Basics.md" class="md-nav__link">
+      1.6-Programming-Language-Basics.md
     </a>
   </li>
 
@@ -406,11 +370,11 @@
       <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
     
     <label class="md-nav__link" for="nav-4">
-      Chapter-3-Lexical-Analysis
+      Chapter-2-A-Simple-Syntax-Directed-Translator
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
       <label class="md-nav__title" for="nav-4">
-        Chapter-3-Lexical-Analysis
+        Chapter-2-A-Simple-Syntax-Directed-Translator
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
         
@@ -421,8 +385,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../Chapter-3-Lexical-Analysis/" title="3" class="md-nav__link">
-      3
+    <a href="../../../Chapter-2-A-Simple-Syntax-Directed-Translator/" title="2" class="md-nav__link">
+      2
     </a>
   </li>
 
@@ -433,8 +397,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../Chapter-3-Lexical-Analysis/3.1-The-Role-of-the-Lexical-Analyzer/" title="3.1-The-Role-of-the-Lexical-Analyzer" class="md-nav__link">
-      3.1-The-Role-of-the-Lexical-Analyzer
+    <a href="../../../Chapter-2-A-Simple-Syntax-Directed-Translator/2.1-Introduction/" title="2.1-Introduction" class="md-nav__link">
+      2.1-Introduction
     </a>
   </li>
 
@@ -445,8 +409,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../Chapter-3-Lexical-Analysis/3.4-Recognition-of-Tokens/" title="3.4-Recognition-of-Tokens" class="md-nav__link">
-      3.4-Recognition-of-Tokens
+    <a href="../../../Chapter-2-A-Simple-Syntax-Directed-Translator/2.2-Syntax-Definition/" title="2.2-Syntax-Definition" class="md-nav__link">
+      2.2-Syntax-Definition
     </a>
   </li>
 
@@ -457,8 +421,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../Chapter-3-Lexical-Analysis/3.6-Finite-Automata/" title="3.6-Finite-Automata" class="md-nav__link">
-      3.6-Finite-Automata
+    <a href="../../../Chapter-2-A-Simple-Syntax-Directed-Translator/2.3-Syntax-Directed-Translation/" title="2.3-Syntax-Directed-Translation" class="md-nav__link">
+      2.3-Syntax-Directed-Translation
     </a>
   </li>
 
@@ -469,8 +433,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../Chapter-3-Lexical-Analysis/3.7-From-Regular-Expressions-to-Automata/" title="3.7-From-Regular-Expressions-to-Automata" class="md-nav__link">
-      3.7-From-Regular-Expressions-to-Automata
+    <a href="../../../Chapter-2-A-Simple-Syntax-Directed-Translator/2.4-Parsing/" title="2.4-Parsing" class="md-nav__link">
+      2.4-Parsing
     </a>
   </li>
 
@@ -490,11 +454,11 @@
       <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
     
     <label class="md-nav__link" for="nav-5">
-      Chapter-4-Syntax-Analysis
+      Chapter-3-Lexical-Analysis
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
       <label class="md-nav__title" for="nav-5">
-        Chapter-4-Syntax-Analysis
+        Chapter-3-Lexical-Analysis
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
         
@@ -505,8 +469,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../Chapter-4-Syntax-Analysis/" title="4" class="md-nav__link">
-      4
+    <a href="../../../Chapter-3-Lexical-Analysis/" title="3" class="md-nav__link">
+      3
     </a>
   </li>
 
@@ -517,8 +481,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../Chapter-4-Syntax-Analysis/4.2-Context-Free-Grammars/" title="4.2-Context-Free-Grammars" class="md-nav__link">
-      4.2-Context-Free-Grammars
+    <a href="../../../Chapter-3-Lexical-Analysis/3.1-The-Role-of-the-Lexical-Analyzer/" title="3.1-The-Role-of-the-Lexical-Analyzer" class="md-nav__link">
+      3.1-The-Role-of-the-Lexical-Analyzer
     </a>
   </li>
 
@@ -529,8 +493,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../Chapter-4-Syntax-Analysis/4.3-Writing-a-Grammar/" title="4.3-Writing-a-Grammar" class="md-nav__link">
-      4.3-Writing-a-Grammar
+    <a href="../../../Chapter-3-Lexical-Analysis/3.4-Recognition-of-Tokens/" title="3.4-Recognition-of-Tokens" class="md-nav__link">
+      3.4-Recognition-of-Tokens
     </a>
   </li>
 
@@ -541,8 +505,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../Chapter-4-Syntax-Analysis/4.5-Bottom-Up-Parsing/" title="4.5-Bottom-Up-Parsing" class="md-nav__link">
-      4.5-Bottom-Up-Parsing
+    <a href="../../../Chapter-3-Lexical-Analysis/3.6-Finite-Automata/" title="3.6-Finite-Automata" class="md-nav__link">
+      3.6-Finite-Automata
     </a>
   </li>
 
@@ -553,32 +517,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../Chapter-4-Syntax-Analysis/4.6-Introduction-to-LR-Parsing-Simple-LR/" title="4.6-Introduction-to-LR-Parsing-Simple-LR" class="md-nav__link">
-      4.6-Introduction-to-LR-Parsing-Simple-LR
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../Chapter-4-Syntax-Analysis/4.7-More-Powerful-LR-Parsers/" title="4.7-More-Powerful-LR-Parsers" class="md-nav__link">
-      4.7-More-Powerful-LR-Parsers
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../Chapter-4-Syntax-Analysis/VS-LL-parser-VS-LR-parser/" title="VS-LL-parser-VS-LR-parser" class="md-nav__link">
-      VS-LL-parser-VS-LR-parser
+    <a href="../../../Chapter-3-Lexical-Analysis/3.7-From-Regular-Expressions-to-Automata/" title="3.7-From-Regular-Expressions-to-Automata" class="md-nav__link">
+      3.7-From-Regular-Expressions-to-Automata
     </a>
   </li>
 
@@ -598,11 +538,11 @@
       <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
     
     <label class="md-nav__link" for="nav-6">
-      Chapter-5-Syntax-Directed-Translation
+      Chapter-4-Syntax-Analysis
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
       <label class="md-nav__title" for="nav-6">
-        Chapter-5-Syntax-Directed-Translation
+        Chapter-4-Syntax-Analysis
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
         
@@ -613,8 +553,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../Chapter-5-Syntax-Directed-Translation/" title="5" class="md-nav__link">
-      5
+    <a href="../../../Chapter-4-Syntax-Analysis/" title="4" class="md-nav__link">
+      4
     </a>
   </li>
 
@@ -625,8 +565,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../Chapter-5-Syntax-Directed-Translation/5.1-Syntax-Directed-Definitions/" title="5.1-Syntax-Directed-Definitions" class="md-nav__link">
-      5.1-Syntax-Directed-Definitions
+    <a href="../../../Chapter-4-Syntax-Analysis/4.2-Context-Free-Grammars/" title="4.2-Context-Free-Grammars" class="md-nav__link">
+      4.2-Context-Free-Grammars
     </a>
   </li>
 
@@ -637,8 +577,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../Chapter-5-Syntax-Directed-Translation/5.2-Evaluation-Orders-for-SDD's/" title="5.2-Evaluation-Orders-for-SDD's" class="md-nav__link">
-      5.2-Evaluation-Orders-for-SDD's
+    <a href="../../../Chapter-4-Syntax-Analysis/4.3-Writing-a-Grammar/" title="4.3-Writing-a-Grammar" class="md-nav__link">
+      4.3-Writing-a-Grammar
     </a>
   </li>
 
@@ -649,8 +589,32 @@
 
 
   <li class="md-nav__item">
-    <a href="../../Chapter-5-Syntax-Directed-Translation/5.3-Applications-of-Syntax-Directed-Translation/" title="5.3--Applications-of-Syntax-Directed-Translation" class="md-nav__link">
-      5.3--Applications-of-Syntax-Directed-Translation
+    <a href="../../../Chapter-4-Syntax-Analysis/4.5-Bottom-Up-Parsing/" title="4.5-Bottom-Up-Parsing" class="md-nav__link">
+      4.5-Bottom-Up-Parsing
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../Chapter-4-Syntax-Analysis/4.6-Introduction-to-LR-Parsing-Simple-LR/" title="4.6-Introduction-to-LR-Parsing-Simple-LR" class="md-nav__link">
+      4.6-Introduction-to-LR-Parsing-Simple-LR
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../Chapter-4-Syntax-Analysis/4.7-More-Powerful-LR-Parsers/" title="4.7-More-Powerful-LR-Parsers" class="md-nav__link">
+      4.7-More-Powerful-LR-Parsers
     </a>
   </li>
 
@@ -670,11 +634,11 @@
       <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
     
     <label class="md-nav__link" for="nav-7">
-      Chapter-6-Intermediate-Code-Generation
+      Chapter-5-Syntax-Directed-Translation
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
       <label class="md-nav__title" for="nav-7">
-        Chapter-6-Intermediate-Code-Generation
+        Chapter-5-Syntax-Directed-Translation
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
         
@@ -685,8 +649,8 @@
 
 
   <li class="md-nav__item">
-    <a href="../../Chapter-6-Intermediate-Code-Generation/" title="6" class="md-nav__link">
-      6
+    <a href="../../../Chapter-5-Syntax-Directed-Translation/" title="5" class="md-nav__link">
+      5
     </a>
   </li>
 
@@ -697,8 +661,32 @@
 
 
   <li class="md-nav__item">
-    <a href="../../Chapter-6-Intermediate-Code-Generation/6.3-Types-and-Declarations/" title="6.3-Types-and-Declarations" class="md-nav__link">
-      6.3-Types-and-Declarations
+    <a href="../../../Chapter-5-Syntax-Directed-Translation/5.1-Syntax-Directed-Definitions/" title="5.1-Syntax-Directed-Definitions" class="md-nav__link">
+      5.1-Syntax-Directed-Definitions
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../Chapter-5-Syntax-Directed-Translation/5.2-Evaluation-Orders-for-SDD's/" title="5.2-Evaluation-Orders-for-SDD's" class="md-nav__link">
+      5.2-Evaluation-Orders-for-SDD's
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../Chapter-5-Syntax-Directed-Translation/5.3-Applications-of-Syntax-Directed-Translation/" title="5.3--Applications-of-Syntax-Directed-Translation" class="md-nav__link">
+      5.3--Applications-of-Syntax-Directed-Translation
     </a>
   </li>
 
@@ -718,10 +706,58 @@
       <input class="md-toggle md-nav__toggle" data-md-toggle="nav-8" type="checkbox" id="nav-8">
     
     <label class="md-nav__link" for="nav-8">
-      Chapter-7-Run-Time-Environments
+      Chapter-6-Intermediate-Code-Generation
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
       <label class="md-nav__title" for="nav-8">
+        Chapter-6-Intermediate-Code-Generation
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../Chapter-6-Intermediate-Code-Generation/" title="6" class="md-nav__link">
+      6
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../Chapter-6-Intermediate-Code-Generation/6.3-Types-and-Declarations/" title="6.3-Types-and-Declarations" class="md-nav__link">
+      6.3-Types-and-Declarations
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-9" type="checkbox" id="nav-9">
+    
+    <label class="md-nav__link" for="nav-9">
+      Chapter-7-Run-Time-Environments
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-9">
         Chapter-7-Run-Time-Environments
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -733,7 +769,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../Chapter-7-Run-Time-Environments/" title="7" class="md-nav__link">
+    <a href="../../../Chapter-7-Run-Time-Environments/" title="7" class="md-nav__link">
       7
     </a>
   </li>
@@ -745,7 +781,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../Chapter-7-Run-Time-Environments/7.1-Storage-Organization/" title="7.1-Storage-Organization" class="md-nav__link">
+    <a href="../../../Chapter-7-Run-Time-Environments/7.1-Storage-Organization/" title="7.1-Storage-Organization" class="md-nav__link">
       7.1-Storage-Organization
     </a>
   </li>
@@ -757,7 +793,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../Chapter-7-Run-Time-Environments/7.2-Stack-Allocation-of-Space/" title="7.2-Stack-Allocation-of-Space" class="md-nav__link">
+    <a href="../../../Chapter-7-Run-Time-Environments/7.2-Stack-Allocation-of-Space/" title="7.2-Stack-Allocation-of-Space" class="md-nav__link">
       7.2-Stack-Allocation-of-Space
     </a>
   </li>
@@ -770,13 +806,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-8-4" type="checkbox" id="nav-8-4">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-9-4" type="checkbox" id="nav-9-4">
     
-    <label class="md-nav__link" for="nav-8-4">
+    <label class="md-nav__link" for="nav-9-4">
       ABI
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
-      <label class="md-nav__title" for="nav-8-4">
+      <label class="md-nav__title" for="nav-9-4">
         ABI
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -788,7 +824,19 @@
 
 
   <li class="md-nav__item">
-    <a href="../../Chapter-7-Run-Time-Environments/ABI/Application-binary-interface/" title="Application-binary-interface" class="md-nav__link">
+    <a href="../../../Chapter-7-Run-Time-Environments/ABI/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../../Chapter-7-Run-Time-Environments/ABI/Application-binary-interface/" title="Application-binary-interface" class="md-nav__link">
       Application-binary-interface
     </a>
   </li>
@@ -801,13 +849,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-8-4-2" type="checkbox" id="nav-8-4-2">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-9-4-3" type="checkbox" id="nav-9-4-3">
     
-    <label class="md-nav__link" for="nav-8-4-2">
+    <label class="md-nav__link" for="nav-9-4-3">
       Function-Call
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
-      <label class="md-nav__title" for="nav-8-4-2">
+      <label class="md-nav__title" for="nav-9-4-3">
         Function-Call
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -820,13 +868,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-8-4-2-1" type="checkbox" id="nav-8-4-2-1">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-9-4-3-1" type="checkbox" id="nav-9-4-3-1">
     
-    <label class="md-nav__link" for="nav-8-4-2-1">
+    <label class="md-nav__link" for="nav-9-4-3-1">
       Call-stack
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
-      <label class="md-nav__title" for="nav-8-4-2-1">
+      <label class="md-nav__title" for="nav-9-4-3-1">
         Call-stack
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -838,7 +886,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../Chapter-7-Run-Time-Environments/ABI/Function-Call/Call-stack/Call-stack/" title="Call-stack" class="md-nav__link">
+    <a href="../../../Chapter-7-Run-Time-Environments/ABI/Function-Call/Call-stack/Call-stack/" title="Call-stack" class="md-nav__link">
       Call-stack
     </a>
   </li>
@@ -850,7 +898,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../Chapter-7-Run-Time-Environments/ABI/Function-Call/Call-stack/Call-stack-summary/" title="Call-stack-summary" class="md-nav__link">
+    <a href="../../../Chapter-7-Run-Time-Environments/ABI/Function-Call/Call-stack/Call-stack-summary/" title="Call-stack-summary" class="md-nav__link">
       Call-stack-summary
     </a>
   </li>
@@ -868,13 +916,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-8-4-2-2" type="checkbox" id="nav-8-4-2-2">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-9-4-3-2" type="checkbox" id="nav-9-4-3-2">
     
-    <label class="md-nav__link" for="nav-8-4-2-2">
+    <label class="md-nav__link" for="nav-9-4-3-2">
       Call-convention
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
-      <label class="md-nav__title" for="nav-8-4-2-2">
+      <label class="md-nav__title" for="nav-9-4-3-2">
         Call-convention
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -886,7 +934,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../Chapter-7-Run-Time-Environments/ABI/Function-Call/Call-convention/Calling-convention/" title="Calling-convention" class="md-nav__link">
+    <a href="../../../Chapter-7-Run-Time-Environments/ABI/Function-Call/Call-convention/Calling-convention/" title="Calling-convention" class="md-nav__link">
       Calling-convention
     </a>
   </li>
@@ -898,7 +946,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../Chapter-7-Run-Time-Environments/ABI/Function-Call/Call-convention/Calling-Conventions-Demystified/" title="Calling-Conventions-Demystified" class="md-nav__link">
+    <a href="../../../Chapter-7-Run-Time-Environments/ABI/Function-Call/Call-convention/Calling-Conventions-Demystified/" title="Calling-Conventions-Demystified" class="md-nav__link">
       Calling-Conventions-Demystified
     </a>
   </li>
@@ -921,13 +969,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-8-4-3" type="checkbox" id="nav-8-4-3">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-9-4-4" type="checkbox" id="nav-9-4-4">
     
-    <label class="md-nav__link" for="nav-8-4-3">
+    <label class="md-nav__link" for="nav-9-4-4">
       Library
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
-      <label class="md-nav__title" for="nav-8-4-3">
+      <label class="md-nav__title" for="nav-9-4-4">
         Library
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -939,7 +987,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../Chapter-7-Run-Time-Environments/ABI/Library/Library(computing)/" title="Library(computing)" class="md-nav__link">
+    <a href="../../../Chapter-7-Run-Time-Environments/ABI/Library/Library(computing)/" title="Library(computing)" class="md-nav__link">
       Library(computing)
     </a>
   </li>
@@ -952,13 +1000,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-8-4-3-2" type="checkbox" id="nav-8-4-3-2">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-9-4-4-2" type="checkbox" id="nav-9-4-4-2">
     
-    <label class="md-nav__link" for="nav-8-4-3-2">
+    <label class="md-nav__link" for="nav-9-4-4-2">
       Position-independent-code
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
-      <label class="md-nav__title" for="nav-8-4-3-2">
+      <label class="md-nav__title" for="nav-9-4-4-2">
         Position-independent-code
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -970,7 +1018,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../Chapter-7-Run-Time-Environments/ABI/Library/Position-independent-code/Position-independent-code/" title="Position-independent-code" class="md-nav__link">
+    <a href="../../../Chapter-7-Run-Time-Environments/ABI/Library/Position-independent-code/Position-independent-code/" title="Position-independent-code" class="md-nav__link">
       Position-independent-code
     </a>
   </li>
@@ -982,7 +1030,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../Chapter-7-Run-Time-Environments/ABI/Library/Position-independent-code/Position-Independent-Code(PIC)-in-shared-libraries/" title="Position-Independent-Code(PIC)-in-shared-libraries" class="md-nav__link">
+    <a href="../../../Chapter-7-Run-Time-Environments/ABI/Library/Position-independent-code/Position-Independent-Code(PIC)-in-shared-libraries/" title="Position-Independent-Code(PIC)-in-shared-libraries" class="md-nav__link">
       Position-Independent-Code(PIC)-in-shared-libraries
     </a>
   </li>
@@ -1000,13 +1048,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-8-4-3-3" type="checkbox" id="nav-8-4-3-3">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-9-4-4-3" type="checkbox" id="nav-9-4-4-3">
     
-    <label class="md-nav__link" for="nav-8-4-3-3">
+    <label class="md-nav__link" for="nav-9-4-4-3">
       Relocation
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
-      <label class="md-nav__title" for="nav-8-4-3-3">
+      <label class="md-nav__title" for="nav-9-4-4-3">
         Relocation
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -1018,7 +1066,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../Chapter-7-Run-Time-Environments/ABI/Library/Relocation/Relocation(computing)/" title="Relocation(computing)" class="md-nav__link">
+    <a href="../../../Chapter-7-Run-Time-Environments/ABI/Library/Relocation/Relocation(computing)/" title="Relocation(computing)" class="md-nav__link">
       Relocation(computing)
     </a>
   </li>
@@ -1041,13 +1089,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-8-4-4" type="checkbox" id="nav-8-4-4">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-9-4-5" type="checkbox" id="nav-9-4-5">
     
-    <label class="md-nav__link" for="nav-8-4-4">
+    <label class="md-nav__link" for="nav-9-4-5">
       Name-mangling
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
-      <label class="md-nav__title" for="nav-8-4-4">
+      <label class="md-nav__title" for="nav-9-4-5">
         Name-mangling
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -1059,7 +1107,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../Chapter-7-Run-Time-Environments/ABI/Name-mangling/Name-mangling/" title="Name-mangling" class="md-nav__link">
+    <a href="../../../Chapter-7-Run-Time-Environments/ABI/Name-mangling/Name-mangling/" title="Name-mangling" class="md-nav__link">
       Name-mangling
     </a>
   </li>
@@ -1077,13 +1125,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-8-4-5" type="checkbox" id="nav-8-4-5">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-9-4-6" type="checkbox" id="nav-9-4-6">
     
-    <label class="md-nav__link" for="nav-8-4-5">
+    <label class="md-nav__link" for="nav-9-4-6">
       Book-x86-Disassembly
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
-      <label class="md-nav__title" for="nav-8-4-5">
+      <label class="md-nav__title" for="nav-9-4-6">
         Book-x86-Disassembly
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -1095,7 +1143,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../Chapter-7-Run-Time-Environments/ABI/Book-x86-Disassembly/" title="Introduction" class="md-nav__link">
+    <a href="../../../Chapter-7-Run-Time-Environments/ABI/Book-x86-Disassembly/" title="Introduction" class="md-nav__link">
       Introduction
     </a>
   </li>
@@ -1123,13 +1171,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-9" type="checkbox" id="nav-9">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-10" type="checkbox" id="nav-10">
     
-    <label class="md-nav__link" for="nav-9">
+    <label class="md-nav__link" for="nav-10">
       Chapter-9-Machine-Independent-Optimizations
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
-      <label class="md-nav__title" for="nav-9">
+      <label class="md-nav__title" for="nav-10">
         Chapter-9-Machine-Independent-Optimizations
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -1141,7 +1189,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../Chapter-9-Machine-Independent-Optimizations/" title="9" class="md-nav__link">
+    <a href="../../../Chapter-9-Machine-Independent-Optimizations/" title="9" class="md-nav__link">
       9
     </a>
   </li>
@@ -1180,13 +1228,9 @@
               
                 
                 
-                <div class="toc">
-<ul>
-<li><a href="#semantic-analysis-compilers">Semantic analysis (compilers)</a></li>
-</ul>
-</div>
-<h1 id="semantic-analysis-compilers"><a href="https://en.wikipedia.org/wiki/Semantic_analysis_(compilers)">Semantic analysis (compilers)</a><a class="headerlink" href="#semantic-analysis-compilers" title="Permanent link">#</a></h1>
-<p><strong>Semantic analysis</strong> or <strong>context sensitive analysis</strong> is a process in <a href="https://en.wikipedia.org/wiki/Compiler">compiler</a> construction, usually after <a href="https://en.wikipedia.org/wiki/Parsing">parsing</a>, to gather necessary semantic information from the <a href="https://en.wikipedia.org/wiki/Source_code">source code</a>.[<a href="https://en.wikipedia.org/wiki/Semantic_analysis_(compilers)#cite_note-WilhelmSeidl2013-1">1]</a> It usually includes <a href="https://en.wikipedia.org/wiki/Type_checking">type checking</a>, or makes sure a variable is declared before use which is impossible to describe in the <a href="https://en.wikipedia.org/wiki/Extended_Backus–Naur_form">extended Backus–Naur form</a> and thus not easily detected during parsing.</p>
+                <h1 id="parse-tree-vs-dfa">parse tree VS DFA<a class="headerlink" href="#parse-tree-vs-dfa" title="Permanent link">#</a></h1>
+<p>在cpython的<code>pgen</code>中，使用DFA来表示production的body，这是因为python的grammar所使用的是EBNF，其中扩展了对regular expression的支持。</p>
+<p>在<a href="http://www.nltk.org/book/">Natural Language Processing with Python</a>的<a href="http://www.nltk.org/book/ch08.html">8. Analyzing Sentence Structure</a>中给我们演示了定义CFG，并按照这个CFG来对文本进行解析得到parse tree。那在nltk中是如何来表示它的grammar的呢？nltk的parser是如何运用它的grammar的来实现parse的呢？</p>
                 
                   
                 
@@ -1222,9 +1266,9 @@
       
     </div>
     
-      <script src="../../assets/javascripts/application.808e90bb.js"></script>
+      <script src="../../../assets/javascripts/application.808e90bb.js"></script>
       
-      <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
+      <script>app.initialize({version:"1.0.4",url:{base:"../../.."}})</script>
       
     
   </body>

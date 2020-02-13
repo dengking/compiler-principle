@@ -13,7 +13,7 @@
         <meta name="description" content="Project documentation with Markdown.">
       
       
-        <link rel="canonical" href="https://dengking.github.io/compiler-principle/parse-tree-VS-syntax-tree-VS-DFA/wikipedia-Parse-tree/">
+        <link rel="canonical" href="https://dengking.github.io/compiler-principle/Guide/VS-LL-parser-VS-LR-parser/">
       
       
         <meta name="author" content="DengKing">
@@ -42,7 +42,7 @@
     
     
       
-        <title>wikipedia Parse tree - compiler principle</title>
+        <title>VS-LL-parser-VS-LR-parser - compiler principle</title>
       
     
     
@@ -85,7 +85,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="#parse-tree" tabindex="1" class="md-skip">
+      <a href="#what-is-the-difference-between-ll-and-lr-parsing" tabindex="1" class="md-skip">
         Skip to content
       </a>
     
@@ -111,7 +111,7 @@
             </span>
             <span class="md-header-nav__topic">
               
-                wikipedia Parse tree
+                VS-LL-parser-VS-LR-parser
               
             </span>
           
@@ -232,16 +232,111 @@
       
       
 
+  
 
-  <li class="md-nav__item md-nav__item--nested">
+
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-2" type="checkbox" id="nav-2" checked>
     
     <label class="md-nav__link" for="nav-2">
-      Chapter-1-Introduction
+      Guide
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
       <label class="md-nav__title" for="nav-2">
+        Guide
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        VS-LL-parser-VS-LR-parser
+      </label>
+    
+    <a href="./" title="VS-LL-parser-VS-LR-parser" class="md-nav__link md-nav__link--active">
+      VS-LL-parser-VS-LR-parser
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#a" class="md-nav__link">
+    A
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#a_1" class="md-nav__link">
+    A
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+  <li class="md-nav__item md-nav__item--nested">
+    
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+    
+    <label class="md-nav__link" for="nav-3">
+      Chapter-1-Introduction
+    </label>
+    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
         Chapter-1-Introduction
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -319,13 +414,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
     
-    <label class="md-nav__link" for="nav-3">
+    <label class="md-nav__link" for="nav-4">
       Chapter-2-A-Simple-Syntax-Directed-Translator
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
-      <label class="md-nav__title" for="nav-3">
+      <label class="md-nav__title" for="nav-4">
         Chapter-2-A-Simple-Syntax-Directed-Translator
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -403,13 +498,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
     
-    <label class="md-nav__link" for="nav-4">
+    <label class="md-nav__link" for="nav-5">
       Chapter-3-Lexical-Analysis
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
-      <label class="md-nav__title" for="nav-4">
+      <label class="md-nav__title" for="nav-5">
         Chapter-3-Lexical-Analysis
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -487,13 +582,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
     
-    <label class="md-nav__link" for="nav-5">
+    <label class="md-nav__link" for="nav-6">
       Chapter-4-Syntax-Analysis
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
-      <label class="md-nav__title" for="nav-5">
+      <label class="md-nav__title" for="nav-6">
         Chapter-4-Syntax-Analysis
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -571,18 +666,6 @@
   </li>
 
         
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../../Chapter-4-Syntax-Analysis/VS-LL-parser-VS-LR-parser/" title="VS-LL-parser-VS-LR-parser" class="md-nav__link">
-      VS-LL-parser-VS-LR-parser
-    </a>
-  </li>
-
-        
       </ul>
     </nav>
   </li>
@@ -595,13 +678,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
     
-    <label class="md-nav__link" for="nav-6">
+    <label class="md-nav__link" for="nav-7">
       Chapter-5-Syntax-Directed-Translation
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
-      <label class="md-nav__title" for="nav-6">
+      <label class="md-nav__title" for="nav-7">
         Chapter-5-Syntax-Directed-Translation
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -667,13 +750,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-7" type="checkbox" id="nav-7">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-8" type="checkbox" id="nav-8">
     
-    <label class="md-nav__link" for="nav-7">
+    <label class="md-nav__link" for="nav-8">
       Chapter-6-Intermediate-Code-Generation
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
-      <label class="md-nav__title" for="nav-7">
+      <label class="md-nav__title" for="nav-8">
         Chapter-6-Intermediate-Code-Generation
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -715,13 +798,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-8" type="checkbox" id="nav-8">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-9" type="checkbox" id="nav-9">
     
-    <label class="md-nav__link" for="nav-8">
+    <label class="md-nav__link" for="nav-9">
       Chapter-7-Run-Time-Environments
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
-      <label class="md-nav__title" for="nav-8">
+      <label class="md-nav__title" for="nav-9">
         Chapter-7-Run-Time-Environments
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -770,17 +853,29 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-8-4" type="checkbox" id="nav-8-4">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-9-4" type="checkbox" id="nav-9-4">
     
-    <label class="md-nav__link" for="nav-8-4">
+    <label class="md-nav__link" for="nav-9-4">
       ABI
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
-      <label class="md-nav__title" for="nav-8-4">
+      <label class="md-nav__title" for="nav-9-4">
         ABI
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
         
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../../Chapter-7-Run-Time-Environments/ABI/" title="Introduction" class="md-nav__link">
+      Introduction
+    </a>
+  </li>
+
         
           
           
@@ -801,13 +896,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-8-4-2" type="checkbox" id="nav-8-4-2">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-9-4-3" type="checkbox" id="nav-9-4-3">
     
-    <label class="md-nav__link" for="nav-8-4-2">
+    <label class="md-nav__link" for="nav-9-4-3">
       Function-Call
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
-      <label class="md-nav__title" for="nav-8-4-2">
+      <label class="md-nav__title" for="nav-9-4-3">
         Function-Call
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -820,13 +915,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-8-4-2-1" type="checkbox" id="nav-8-4-2-1">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-9-4-3-1" type="checkbox" id="nav-9-4-3-1">
     
-    <label class="md-nav__link" for="nav-8-4-2-1">
+    <label class="md-nav__link" for="nav-9-4-3-1">
       Call-stack
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
-      <label class="md-nav__title" for="nav-8-4-2-1">
+      <label class="md-nav__title" for="nav-9-4-3-1">
         Call-stack
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -868,13 +963,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-8-4-2-2" type="checkbox" id="nav-8-4-2-2">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-9-4-3-2" type="checkbox" id="nav-9-4-3-2">
     
-    <label class="md-nav__link" for="nav-8-4-2-2">
+    <label class="md-nav__link" for="nav-9-4-3-2">
       Call-convention
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
-      <label class="md-nav__title" for="nav-8-4-2-2">
+      <label class="md-nav__title" for="nav-9-4-3-2">
         Call-convention
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -921,13 +1016,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-8-4-3" type="checkbox" id="nav-8-4-3">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-9-4-4" type="checkbox" id="nav-9-4-4">
     
-    <label class="md-nav__link" for="nav-8-4-3">
+    <label class="md-nav__link" for="nav-9-4-4">
       Library
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
-      <label class="md-nav__title" for="nav-8-4-3">
+      <label class="md-nav__title" for="nav-9-4-4">
         Library
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -952,13 +1047,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-8-4-3-2" type="checkbox" id="nav-8-4-3-2">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-9-4-4-2" type="checkbox" id="nav-9-4-4-2">
     
-    <label class="md-nav__link" for="nav-8-4-3-2">
+    <label class="md-nav__link" for="nav-9-4-4-2">
       Position-independent-code
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
-      <label class="md-nav__title" for="nav-8-4-3-2">
+      <label class="md-nav__title" for="nav-9-4-4-2">
         Position-independent-code
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -1000,13 +1095,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-8-4-3-3" type="checkbox" id="nav-8-4-3-3">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-9-4-4-3" type="checkbox" id="nav-9-4-4-3">
     
-    <label class="md-nav__link" for="nav-8-4-3-3">
+    <label class="md-nav__link" for="nav-9-4-4-3">
       Relocation
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
-      <label class="md-nav__title" for="nav-8-4-3-3">
+      <label class="md-nav__title" for="nav-9-4-4-3">
         Relocation
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -1041,13 +1136,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-8-4-4" type="checkbox" id="nav-8-4-4">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-9-4-5" type="checkbox" id="nav-9-4-5">
     
-    <label class="md-nav__link" for="nav-8-4-4">
+    <label class="md-nav__link" for="nav-9-4-5">
       Name-mangling
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
-      <label class="md-nav__title" for="nav-8-4-4">
+      <label class="md-nav__title" for="nav-9-4-5">
         Name-mangling
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -1077,13 +1172,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-8-4-5" type="checkbox" id="nav-8-4-5">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-9-4-6" type="checkbox" id="nav-9-4-6">
     
-    <label class="md-nav__link" for="nav-8-4-5">
+    <label class="md-nav__link" for="nav-9-4-6">
       Book-x86-Disassembly
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
-      <label class="md-nav__title" for="nav-8-4-5">
+      <label class="md-nav__title" for="nav-9-4-6">
         Book-x86-Disassembly
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -1123,13 +1218,13 @@
 
   <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-9" type="checkbox" id="nav-9">
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-10" type="checkbox" id="nav-10">
     
-    <label class="md-nav__link" for="nav-9">
+    <label class="md-nav__link" for="nav-10">
       Chapter-9-Machine-Independent-Optimizations
     </label>
     <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
-      <label class="md-nav__title" for="nav-9">
+      <label class="md-nav__title" for="nav-10">
         Chapter-9-Machine-Independent-Optimizations
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
@@ -1173,8 +1268,15 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#constituency-based-parse-trees" class="md-nav__link">
-    Constituency-based parse trees
+  <a href="#a" class="md-nav__link">
+    A
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#a_1" class="md-nav__link">
+    A
   </a>
   
 </li>
@@ -1198,18 +1300,114 @@
                 
                 <div class="toc">
 <ul>
-<li><a href="#parse-tree">Parse tree</a><ul>
-<li><a href="#constituency-based-parse-trees">Constituency-based parse trees</a></li>
+<li><a href="#what-is-the-difference-between-ll-and-lr-parsing">What is the difference between LL and LR parsing?</a><ul>
+<li><a href="#a">A</a></li>
+<li><a href="#a_1">A</a></li>
+</ul>
+</li>
+<li><a href="#vs-lr">预测分析表 VS LR语法分析表</a></li>
+<li><a href="#lr0lr">从LR(0)自动机到LR语法分析表</a><ul>
+<li><a href="#lrconfiguration-vs-lr0">LR语法分析器的格局configuration VS LR(0)自动机的状态</a></li>
 </ul>
 </li>
 </ul>
 </div>
-<h1 id="parse-tree"><a href="https://en.wikipedia.org/wiki/Parse_tree">Parse tree</a><a class="headerlink" href="#parse-tree" title="Permanent link">#</a></h1>
-<p>A <strong>parse tree</strong> or <strong>parsing tree</strong>[<a href="https://en.wikipedia.org/wiki/Parse_tree#cite_note-1">1]</a> or <strong>derivation tree</strong> or <strong>concrete syntax tree</strong> is an ordered, rooted <a href="https://en.wikipedia.org/wiki/Tree_(data_structure)">tree</a> that represents the <a href="https://en.wikipedia.org/wiki/Syntax">syntactic</a> structure of a <a href="https://en.wikipedia.org/wiki/String_(computer_science)">string</a> according to some <a href="https://en.wikipedia.org/wiki/Context-free_grammar">context-free grammar</a>. The term <em>parse tree</em> itself is used primarily in <a href="https://en.wikipedia.org/wiki/Computational_linguistics">computational linguistics</a>; in theoretical syntax, the term <em>syntax tree</em> is more common.</p>
-<p>Parse trees concretely[<em><a href="https://en.wikipedia.org/wiki/Wikipedia:Please_clarify">clarification needed</a></em>] reflect the <strong>syntax</strong> of the input language, making them distinct from the <a href="https://en.wikipedia.org/wiki/Abstract_syntax_tree">abstract syntax trees</a> used in computer programming. Unlike Reed-Kellogg <a href="https://en.wikipedia.org/wiki/Sentence_diagram">sentence diagrams</a> used for teaching grammar, <strong>parse trees</strong> do not use distinct symbol shapes for different types of <a href="https://en.wikipedia.org/wiki/Constituent_(linguistics)">constituents</a>（成分）.</p>
-<p>Parse trees are usually constructed based on either the constituency relation of constituency grammars (<a href="https://en.wikipedia.org/wiki/Phrase_structure_grammar">phrase structure grammars</a>) or the dependency relation of <a href="https://en.wikipedia.org/wiki/Dependency_grammar">dependency grammars</a>. Parse trees may be generated for <a href="https://en.wikipedia.org/wiki/Sentence_(linguistics)">sentences</a> in <a href="https://en.wikipedia.org/wiki/Natural_language">natural languages</a> (see <a href="https://en.wikipedia.org/wiki/Natural_language_processing">natural language processing</a>), as well as during <a href="https://en.wikipedia.org/wiki/Compiler">processing</a> of computer languages, such as <a href="https://en.wikipedia.org/wiki/Programming_language">programming languages</a>.[<em><a href="https://en.wikipedia.org/wiki/Wikipedia:Citation_needed">citation needed</a></em>]</p>
-<p>A related concept is that of <strong>phrase marker</strong> or <strong>P-marker</strong>, as used in <a href="https://en.wikipedia.org/wiki/Transformational_generative_grammar">transformational generative grammar</a>. A phrase marker is a linguistic expression marked as to its phrase structure. This may be presented in the form of a tree, or as a bracketed expression. Phrase markers are generated by applying <a href="https://en.wikipedia.org/wiki/Phrase_structure_rules">phrase structure rules</a>, and themselves are subject to further transformational rules.[<a href="https://en.wikipedia.org/wiki/Parse_tree#cite_note-Chomsky2014-2">2]</a> A set of possible parse trees for a <a href="https://en.wikipedia.org/wiki/Syntactic_ambiguity">syntactically ambiguous</a> sentence is called a "parse forest."[<a href="https://en.wikipedia.org/wiki/Parse_tree#cite_note-3">3]</a></p>
-<h2 id="constituency-based-parse-trees">Constituency-based parse trees<a class="headerlink" href="#constituency-based-parse-trees" title="Permanent link">#</a></h2>
+<h1 id="what-is-the-difference-between-ll-and-lr-parsing"><a href="https://stackoverflow.com/questions/5975741/what-is-the-difference-between-ll-and-lr-parsing">What is the difference between LL and LR parsing?</a><a class="headerlink" href="#what-is-the-difference-between-ll-and-lr-parsing" title="Permanent link">#</a></h1>
+<h2 id="a"><a href="https://stackoverflow.com/a/6824545">A</a><a class="headerlink" href="#a" title="Permanent link">#</a></h2>
+<p>At a high level, the difference between LL parsing and LR parsing is that LL parsers begin at the start symbol and try to apply productions to arrive at the <strong>target string</strong>, whereas LR parsers begin at the target string and try to arrive back at the <strong>start symbol</strong>.</p>
+<p>An LL parse is a left-to-right, leftmost derivation. That is, we consider the input symbols from the left to the right and attempt to construct a leftmost derivation. This is done by beginning at the start symbol and repeatedly expanding out the leftmost nonterminal until we arrive at the <strong>target string</strong>. An LR parse is a left-to-right, rightmost derivation, meaning that we scan from the left to right and attempt to construct a rightmost derivation. The parser continuously picks a substring of the input and attempts to reverse it back to a nonterminal.</p>
+<p>During an LL parse, the parser continuously chooses between two actions:</p>
+<ol>
+<li><strong>Predict</strong>: Based on the leftmost nonterminal and some number of lookahead tokens, choose which production ought to be applied to get closer to the input string.</li>
+<li><strong>Match</strong>: Match the leftmost guessed terminal symbol with the leftmost unconsumed symbol of input.</li>
+</ol>
+<p>As an example, given this grammar:</p>
+<ul>
+<li>S → E</li>
+<li>E → T + E</li>
+<li>E → T</li>
+<li>T → <code>int</code></li>
+</ul>
+<p>Then given the string <code>int + int + int</code>, an LL(2) parser (which uses two tokens of lookahead) would parse the string as follows:</p>
+<pre><code>Production       Input              Action
+---------------------------------------------------------
+S                int + int + int    Predict S -&gt; E
+E                int + int + int    Predict E -&gt; T + E
+T + E            int + int + int    Predict T -&gt; int
+int + E          int + int + int    Match int
++ E              + int + int        Match +
+E                int + int          Predict E -&gt; T + E
+T + E            int + int          Predict T -&gt; int
+int + E          int + int          Match int
++ E              + int              Match +
+E                int                Predict E -&gt; T
+T                int                Predict T -&gt; int
+int              int                Match int
+                                    Accept
+</code></pre>
+
+<p>Notice that in each step we look at the leftmost symbol in our production. If it's a terminal, we match it, and if it's a nonterminal, we predict what it's going to be by choosing one of the rules.</p>
+<p>In an LR parser, there are two actions:</p>
+<ol>
+<li><strong>Shift</strong>: Add the next token of input to a buffer for consideration.</li>
+<li><strong>Reduce</strong>: Reduce a collection of terminals and nonterminals in this buffer back to some nonterminal by reversing a production.</li>
+</ol>
+<p>As an example, an LR(1) parser (with one token of lookahead) might parse that same string as follows:</p>
+<pre><code>Workspace        Input              Action
+---------------------------------------------------------
+                 int + int + int    Shift
+int              + int + int        Reduce T -&gt; int
+T                + int + int        Shift
+T +              int + int          Shift
+T + int          + int              Reduce T -&gt; int
+T + T            + int              Shift
+T + T +          int                Shift
+T + T + int                         Reduce T -&gt; int
+T + T + T                           Reduce E -&gt; T
+T + T + E                           Reduce E -&gt; T + E
+T + E                               Reduce E -&gt; T + E
+E                                   Reduce S -&gt; E
+S                                   Accept
+</code></pre>
+
+<p>The two parsing algorithms you mentioned (LL and LR) are known to have different characteristics. LL parsers tend to be easier to write by hand, but they are less powerful than LR parsers and accept a much smaller set of grammars than LR parsers do. LR parsers come in many flavors (LR(0), SLR(1), LALR(1), LR(1), IELR(1), GLR(0), etc.) and are far more powerful. They also tend to have much more complex and are almost always generated by tools like <code>yacc</code> or <code>bison</code>. LL parsers also come in many flavors (including LL(*), which is used by the <a href="http://www.antlr.org/"><code>ANTLR</code></a> tool), though in practice LL(1) is the most-widely used.</p>
+<p>As a shameless plug, if you'd like to learn more about LL and LR parsing, I just finished teaching a compilers course and have <a href="http://www.stanford.edu/class/archive/cs/cs143/cs143.1128/">some handouts and lecture slides on parsing</a> on the course website. I'd be glad to elaborate on any of them if you think it would be useful.</p>
+<h2 id="a_1"><a href="https://stackoverflow.com/a/18239653">A</a><a class="headerlink" href="#a_1" title="Permanent link">#</a></h2>
+<p>Josh Haberman in his article <a href="http://blog.reverberate.org/2013/07/ll-and-lr-parsing-demystified.html">LL and LR Parsing Demystified</a> claims that LL parsing directly corresponds with the <a href="http://en.wikipedia.org/wiki/Polish_notation">Polish Notation</a>, whereas LR corresponds to <a href="http://en.wikipedia.org/wiki/Reverse_Polish_notation">Reverse Polish Notation</a>. The difference between PN and RPN is the order of traversing the binary tree of the equation:</p>
+<p><img alt="binary tree of an equation" src="https://i.stack.imgur.com/QLYBe.png" /></p>
+<pre><code>+ 1 * 2 3  // Polish (prefix) expression; pre-order traversal.
+1 2 3 * +  // Reverse Polish (postfix) expression; post-order traversal.
+</code></pre>
+
+<p>According to Haberman, this illustrates the main difference between LL and LR parsers:</p>
+<blockquote>
+<p>The primary difference between how LL and LR parsers operate is that an LL parser outputs a pre-order traversal of the parse tree and an LR parser outputs a post-order traversal.</p>
+</blockquote>
+<p>For the in-depth explanation, examples and conclusions check out Haberman's <a href="http://blog.reverberate.org/2013/07/ll-and-lr-parsing-demystified.html">article</a>.</p>
+<h1 id="vs-lr">预测分析表 VS LR语法分析表<a class="headerlink" href="#vs-lr" title="Permanent link">#</a></h1>
+<p>LL和LR都是表驱动的，这两个表就是分别驱动两者的表。</p>
+<p>语法分析的过程是不断根据产生式进行转换的过程。</p>
+<p>两者的构造都是基于对grammar的分析，两者的构造过程都是沿着产生式进行derive，所不同的是，预测分析表一直derive到了terminal；而LR语法分析表则是将所有的可能的转换全部包含了：</p>
+<p>预测分析表的构造使用是non-terminal symbol的FIRST和FOLLOW，FIRST和FOLLOW所包含的都是terminal，其实它的目的是知道当遇到某个terminal的时候，使用哪个production可以得到这个terminal。即它侧重的是对于一个non-terminal的production，它能够推导出什么，这样它就能够据此来决定是否使用这个production。</p>
+<p>LR语法分析表正如其名称所揭示地，它其实是对语法的分析，对语法中所有的可能的转换进行分析，构造出来它的转换所对应的automaton。显然，因为它的转换都是基于grammar所构造出来的，因此，它的所有的转换都是有效的转换，因此只要待分析的串不符合这个automaton的转换，那么它就是无效的了。因此我们的待分析的串一定是对应了automaton中的一条路径。使用我们的文法，按照某种推导方式是一定能够derive这个串的。在待分析的串中，仅仅包含的是terminal，而grammar中，是两者都包含的，所以在进行分析的时候，一定要将terminal规约为non-terminal，这样才能够使分析继续下去。LR语法分析是推导的逆过程，显然我们是要沿着推导方向逆流而上，因为推导的过程的中间过程肯定是会存在non-terminal的，而我们是逆向进行推导，所以肯定需要将一些terminal规约为non-terminal。</p>
+<p>为什么LR是right-most derivation？</p>
+<p>预测分析表其实也是一个转换函数，要使用哪个产生式进行derivate</p>
+<p>LR是一个automaton，状态，转换</p>
+<p>语法分析表由两个部分组成：</p>
+<ul>
+<li>action</li>
+<li>goto</li>
+</ul>
+<h1 id="lr0lr">从LR(0)自动机到LR语法分析表<a class="headerlink" href="#lr0lr" title="Permanent link">#</a></h1>
+<p>LR语法分析表的构造是基于LR(0)自动机的</p>
+<p>本质还是转换，无论是在terminal上的转换还是在non-terminal上的转换</p>
+<p>action主要定义的是在terminal上的转换，而goto则定义的是在non-terminal上的转换。</p>
+<p>SLR语法分析表的构造过程主要让我感到困惑的是它将action定义成了 状态和terminal的函数？</p>
+<p>SLR语法分析表的ACTION的构造过程中有这样的规则：</p>
+<ul>
+<li></li>
+</ul>
+<h2 id="lrconfiguration-vs-lr0">LR语法分析器的格局configuration VS LR(0)自动机的状态<a class="headerlink" href="#lrconfiguration-vs-lr0" title="Permanent link">#</a></h2>
                 
                   
                 
@@ -1227,6 +1425,41 @@
       
         
 <footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid">
+        
+          <a href="../" title="Introduction" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
+            </div>
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Introduction
+              </span>
+            </div>
+          </a>
+        
+        
+          <a href="../../Chapter-1-Introduction/" title="1-Introduction" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
+              <span class="md-flex__ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                1-Introduction
+              </span>
+            </div>
+            <div class="md-flex__cell md-flex__cell--shrink">
+              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
