@@ -6,6 +6,9 @@ markdown_extensions:
     permalink: '#'
 nav:
 - Home: index.md
+- Guide:
+  - Introduction: Guide/index.md
+  - VS-LL-parser-VS-LR-parser: Guide/VS-LL-parser-VS-LR-parser.md
 - Chapter-1-Introduction:
   - 1-Introduction: Chapter-1-Introduction/index.md
   - 1.1-Language-Processors.md: Chapter-1-Introduction/1.1-Language-Processors.md
@@ -31,7 +34,6 @@ nav:
   - 4.5-Bottom-Up-Parsing: Chapter-4-Syntax-Analysis/4.5-Bottom-Up-Parsing.md
   - 4.6-Introduction-to-LR-Parsing-Simple-LR: Chapter-4-Syntax-Analysis/4.6-Introduction-to-LR-Parsing-Simple-LR.md
   - 4.7-More-Powerful-LR-Parsers: Chapter-4-Syntax-Analysis/4.7-More-Powerful-LR-Parsers.md
-  - VS-LL-parser-VS-LR-parser: Chapter-4-Syntax-Analysis/VS-LL-parser-VS-LR-parser.md
 - Chapter-5-Syntax-Directed-Translation:
   - 5: Chapter-5-Syntax-Directed-Translation/index.md
   - 5.1-Syntax-Directed-Definitions: Chapter-5-Syntax-Directed-Translation/5.1-Syntax-Directed-Definitions.md
@@ -45,6 +47,7 @@ nav:
   - 7.1-Storage-Organization: Chapter-7-Run-Time-Environments/7.1-Storage-Organization.md
   - 7.2-Stack-Allocation-of-Space: Chapter-7-Run-Time-Environments/7.2-Stack-Allocation-of-Space.md
   - ABI:
+    - Introduction: Chapter-7-Run-Time-Environments/ABI/index.md
     - Application-binary-interface: Chapter-7-Run-Time-Environments/ABI/Application-binary-interface.md
     - Function-Call:
       - Call-stack:
