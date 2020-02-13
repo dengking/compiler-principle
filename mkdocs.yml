@@ -46,6 +46,8 @@ nav:
   - 7: Chapter-7-Run-Time-Environments/index.md
   - 7.1-Storage-Organization: Chapter-7-Run-Time-Environments/7.1-Storage-Organization.md
   - 7.2-Stack-Allocation-of-Space: Chapter-7-Run-Time-Environments/7.2-Stack-Allocation-of-Space.md
+  - 7.3-Access-to-Non-local-Data-on-the-Stack: Chapter-7-Run-Time-Environments/7.3-Access-to-Non-local-Data-on-the-Stack.md
+  - 7.4-Heap-Management: Chapter-7-Run-Time-Environments/7.4-Heap-Management.md
   - ABI:
     - Introduction: Chapter-7-Run-Time-Environments/ABI/index.md
     - Application-binary-interface: Chapter-7-Run-Time-Environments/ABI/Application-binary-interface.md
