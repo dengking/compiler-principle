@@ -166,6 +166,16 @@
      <changefreq>daily</changefreq>
     </url>
     <url>
+     <loc>https://dengking.github.io/compiler-principle/Chapter-7-Run-Time-Environments/7.3-Access-to-Non-local-Data-on-the-Stack/</loc>
+     <lastmod>2020-02-13</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
+     <loc>https://dengking.github.io/compiler-principle/Chapter-7-Run-Time-Environments/7.4-Heap-Management/</loc>
+     <lastmod>2020-02-13</lastmod>
+     <changefreq>daily</changefreq>
+    </url>
+    <url>
      <loc>https://dengking.github.io/compiler-principle/Chapter-7-Run-Time-Environments/ABI/</loc>
      <lastmod>2020-02-13</lastmod>
      <changefreq>daily</changefreq>
