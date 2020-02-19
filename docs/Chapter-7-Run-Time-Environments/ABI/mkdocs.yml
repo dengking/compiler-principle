@@ -1,7 +1,0 @@
-nav:
-    - Introduction: index.md
-    - Application-binary-interface: Application-binary-interface.md
-    - Function-Call: Function-Call
-    - Library: Library
-    - Name-mangling: Name-mangling
-    - Book-x86-Disassembly: Book-x86-Disassembly
