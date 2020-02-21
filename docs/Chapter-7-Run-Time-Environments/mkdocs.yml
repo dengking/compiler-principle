@@ -4,4 +4,3 @@ nav:
     - 7.2-Stack-Allocation-of-Space: 7.2-Stack-Allocation-of-Space.md
     - 7.3-Access-to-Non-local-Data-on-the-Stack: 7.3-Access-to-Non-local-Data-on-the-Stack.md
     - 7.4-Heap-Management: 7.4-Heap-Management.md
-    - ABI: ABI
