@@ -1,3 +1,4 @@
 nav:
     - Introduction: index.md
+    - Compile-time-and-run-time: Compile-time-and-run-time.md
     - VS-LL-parser-VS-LR-parser: VS-LL-parser-VS-LR-parser.md

@@ -13,7 +13,7 @@
         <meta name="description" content="Project documentation with Markdown.">
       
       
-        <link rel="canonical" href="https://dengking.github.io/compiler-principle/Chapter-7-Run-Time-Environments/ABI/">
+        <link rel="canonical" href="https://dengking.github.io/compiler-principle/Guide/Compiler-front-end/">
       
       
         <meta name="author" content="DengKing">
@@ -42,7 +42,7 @@
     
     
       
-        <title>Introduction - compiler principle</title>
+        <title>编译器前端 - compiler principle</title>
       
     
     
@@ -111,7 +111,7 @@
             </span>
             <span class="md-header-nav__topic">
               
-                Introduction
+                编译器前端
               
             </span>
           
@@ -253,7 +253,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../../Guide/" title="Introduction" class="md-nav__link">
+    <a href="../" title="Introduction" class="md-nav__link">
       Introduction
     </a>
   </li>
@@ -265,7 +265,19 @@
 
 
   <li class="md-nav__item">
-    <a href="../../Guide/VS-LL-parser-VS-LR-parser/" title="VS-LL-parser-VS-LR-parser" class="md-nav__link">
+    <a href="../Compile-time-and-run-time/" title="Compile-time-and-run-time" class="md-nav__link">
+      Compile-time-and-run-time
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../VS-LL-parser-VS-LR-parser/" title="VS-LL-parser-VS-LR-parser" class="md-nav__link">
       VS-LL-parser-VS-LR-parser
     </a>
   </li>
@@ -748,12 +760,10 @@
       
       
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+  <li class="md-nav__item md-nav__item--nested">
     
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-9" type="checkbox" id="nav-9" checked>
+      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-9" type="checkbox" id="nav-9">
     
     <label class="md-nav__link" for="nav-9">
       Chapter-7-Run-Time-Environments
@@ -771,7 +781,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../" title="7" class="md-nav__link">
+    <a href="../../Chapter-7-Run-Time-Environments/" title="7" class="md-nav__link">
       7
     </a>
   </li>
@@ -783,7 +793,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../7.1-Storage-Organization/" title="7.1-Storage-Organization" class="md-nav__link">
+    <a href="../../Chapter-7-Run-Time-Environments/7.1-Storage-Organization/" title="7.1-Storage-Organization" class="md-nav__link">
       7.1-Storage-Organization
     </a>
   </li>
@@ -795,7 +805,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../7.2-Stack-Allocation-of-Space/" title="7.2-Stack-Allocation-of-Space" class="md-nav__link">
+    <a href="../../Chapter-7-Run-Time-Environments/7.2-Stack-Allocation-of-Space/" title="7.2-Stack-Allocation-of-Space" class="md-nav__link">
       7.2-Stack-Allocation-of-Space
     </a>
   </li>
@@ -807,7 +817,7 @@
 
 
   <li class="md-nav__item">
-    <a href="../7.3-Access-to-Non-local-Data-on-the-Stack/" title="7.3-Access-to-Non-local-Data-on-the-Stack" class="md-nav__link">
+    <a href="../../Chapter-7-Run-Time-Environments/7.3-Access-to-Non-local-Data-on-the-Stack/" title="7.3-Access-to-Non-local-Data-on-the-Stack" class="md-nav__link">
       7.3-Access-to-Non-local-Data-on-the-Stack
     </a>
   </li>
@@ -819,429 +829,9 @@
 
 
   <li class="md-nav__item">
-    <a href="../7.4-Heap-Management/" title="7.4-Heap-Management" class="md-nav__link">
+    <a href="../../Chapter-7-Run-Time-Environments/7.4-Heap-Management/" title="7.4-Heap-Management" class="md-nav__link">
       7.4-Heap-Management
     </a>
-  </li>
-
-        
-          
-          
-          
-
-  
-
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
-    
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-9-6" type="checkbox" id="nav-9-6" checked>
-    
-    <label class="md-nav__link" for="nav-9-6">
-      ABI
-    </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="2">
-      <label class="md-nav__title" for="nav-9-6">
-        ABI
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-  
-
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-      
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="__toc">
-        Introduction
-      </label>
-    
-    <a href="./" title="Introduction" class="md-nav__link md-nav__link--active">
-      Introduction
-    </a>
-    
-      
-<nav class="md-nav md-nav--secondary">
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">Table of contents</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    如何实现控制流
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#control-flowprogram-counter" class="md-nav__link">
-    所谓的Control flow其实就是program counter
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
-    如何实现函数调用
-  </a>
-  
-</li>
-      
-      
-      
-      
-      
-    </ul>
-  
-</nav>
-    
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="Application-binary-interface/" title="Application-binary-interface" class="md-nav__link">
-      Application-binary-interface
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item md-nav__item--nested">
-    
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-9-6-3" type="checkbox" id="nav-9-6-3">
-    
-    <label class="md-nav__link" for="nav-9-6-3">
-      Function-Call
-    </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
-      <label class="md-nav__title" for="nav-9-6-3">
-        Function-Call
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item md-nav__item--nested">
-    
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-9-6-3-1" type="checkbox" id="nav-9-6-3-1">
-    
-    <label class="md-nav__link" for="nav-9-6-3-1">
-      Call-stack
-    </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
-      <label class="md-nav__title" for="nav-9-6-3-1">
-        Call-stack
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="Function-Call/Call-stack/Call-stack/" title="Call-stack" class="md-nav__link">
-      Call-stack
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="Function-Call/Call-stack/Call-stack-summary/" title="Call-stack-summary" class="md-nav__link">
-      Call-stack-summary
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item md-nav__item--nested">
-    
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-9-6-3-2" type="checkbox" id="nav-9-6-3-2">
-    
-    <label class="md-nav__link" for="nav-9-6-3-2">
-      Call-convention
-    </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
-      <label class="md-nav__title" for="nav-9-6-3-2">
-        Call-convention
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="Function-Call/Call-convention/Calling-convention/" title="Calling-convention" class="md-nav__link">
-      Calling-convention
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="Function-Call/Call-convention/Calling-Conventions-Demystified/" title="Calling-Conventions-Demystified" class="md-nav__link">
-      Calling-Conventions-Demystified
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item md-nav__item--nested">
-    
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-9-6-4" type="checkbox" id="nav-9-6-4">
-    
-    <label class="md-nav__link" for="nav-9-6-4">
-      Library
-    </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
-      <label class="md-nav__title" for="nav-9-6-4">
-        Library
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="Library/Library(computing)/" title="Library(computing)" class="md-nav__link">
-      Library(computing)
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item md-nav__item--nested">
-    
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-9-6-4-2" type="checkbox" id="nav-9-6-4-2">
-    
-    <label class="md-nav__link" for="nav-9-6-4-2">
-      Position-independent-code
-    </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
-      <label class="md-nav__title" for="nav-9-6-4-2">
-        Position-independent-code
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="Library/Position-independent-code/Position-independent-code/" title="Position-independent-code" class="md-nav__link">
-      Position-independent-code
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="Library/Position-independent-code/Position-Independent-Code(PIC)-in-shared-libraries/" title="Position-Independent-Code(PIC)-in-shared-libraries" class="md-nav__link">
-      Position-Independent-Code(PIC)-in-shared-libraries
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item md-nav__item--nested">
-    
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-9-6-4-3" type="checkbox" id="nav-9-6-4-3">
-    
-    <label class="md-nav__link" for="nav-9-6-4-3">
-      Relocation
-    </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="4">
-      <label class="md-nav__title" for="nav-9-6-4-3">
-        Relocation
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="Library/Relocation/Relocation(computing)/" title="Relocation(computing)" class="md-nav__link">
-      Relocation(computing)
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item md-nav__item--nested">
-    
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-9-6-5" type="checkbox" id="nav-9-6-5">
-    
-    <label class="md-nav__link" for="nav-9-6-5">
-      Name-mangling
-    </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
-      <label class="md-nav__title" for="nav-9-6-5">
-        Name-mangling
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="Name-mangling/Name-mangling/" title="Name-mangling" class="md-nav__link">
-      Name-mangling
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item md-nav__item--nested">
-    
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-9-6-6" type="checkbox" id="nav-9-6-6">
-    
-    <label class="md-nav__link" for="nav-9-6-6">
-      Book-x86-Disassembly
-    </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="3">
-      <label class="md-nav__title" for="nav-9-6-6">
-        Book-x86-Disassembly
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="Book-x86-Disassembly/" title="Introduction" class="md-nav__link">
-      Introduction
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-        
-      </ul>
-    </nav>
   </li>
 
         
@@ -1303,42 +893,6 @@
     
   
   
-    <label class="md-nav__title" for="__toc">Table of contents</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#_2" class="md-nav__link">
-    如何实现控制流
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#control-flowprogram-counter" class="md-nav__link">
-    所谓的Control flow其实就是program counter
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#_3" class="md-nav__link">
-    如何实现函数调用
-  </a>
-  
-</li>
-      
-      
-      
-      
-      
-    </ul>
-  
 </nav>
                   </div>
                 </div>
@@ -1350,23 +904,8 @@
               
                 
                 
-                <h1 id="_1">关于本章<a class="headerlink" href="#_1" title="Permanent link">#</a></h1>
-<p>在<strong>指令层</strong>压根就没有函数、函数参数等概念，这些概念都是high level program language建立起来的，它们的实现都是建立在<strong>指令层</strong>之上，连接函数调用和指令层的正是所谓的calling convention，它由compiler来实现的。</p>
-<p>本章所将探索各种在high level program language中建立的概念是如何通过指令来进行实现的。</p>
-<h2 id="_2">如何实现控制流<a class="headerlink" href="#_2" title="Permanent link">#</a></h2>
-<h3 id="control-flowprogram-counter">所谓的<a href="https://en.wikipedia.org/wiki/Control_flow">Control flow</a>其实就是<a href="https://en.wikipedia.org/wiki/Program_counter"><code>program counter</code></a><a class="headerlink" href="#control-flowprogram-counter" title="Permanent link">#</a></h3>
-<p>我们常常听到Control flow，维基百科的<a href="https://en.wikipedia.org/wiki/Control_flow">Control flow</a>对它的总结是非常全面的，从high-level programming language级别（在high-level programming language中有control flow statement，比如return、goto等），到<a href="https://en.wikipedia.org/wiki/Machine_language">machine language</a>级别（这是最底层了；以x86 为例，<a href="https://en.wikipedia.org/wiki/JMP_(x86_instruction)">JMP</a> 指令，更多参见<a href="https://en.wikibooks.org/wiki/X86_Assembly/Control_Flow">X86 Assembly/Control Flow</a>）。在本文中，我们重点关注的是<a href="https://en.wikipedia.org/wiki/Machine_language">machine language</a>级别，正如其所总结的：</p>
-<blockquote>
-<p>At the level of <a href="https://en.wikipedia.org/wiki/Machine_language">machine language</a> or <a href="https://en.wikipedia.org/wiki/Assembly_language">assembly language</a>, control flow instructions usually work by altering the <a href="https://en.wikipedia.org/wiki/Program_counter">program counter</a>. For some <a href="https://en.wikipedia.org/wiki/Central_processing_unit">central processing units</a> (CPUs), the only control flow instructions available are conditional or unconditional <a href="https://en.wikipedia.org/wiki/Branch_(computer_science)">branch</a> instructions, also termed jumps.</p>
-</blockquote>
-<p>CPU的<a href="https://en.wikipedia.org/wiki/Program_counter">program counter</a>默认行为是：自加1的，所以程序默认是顺序执行即可（编译器编译生成的machine language program其实是顺序的），通过control flow instruction，可用改变这种默认行为，从而实现各种执行flow。</p>
-<p>一个例子是在OS书的4.1. The Role of Interrupt Signals</p>
-<blockquote>
-<p>As the name suggests, interrupt signals provide a way to divert the processor to code outside the
-normal<strong> flow of control</strong>. When an interrupt signal arrives, the CPU must stop what it's currently doing and switch to a new activity; it does this by saving the current value of the program counter (i.e., the content of the  eip and  cs registers) in the Kernel Mode stack and by placing an address related to the interrupt type into the program counter.</p>
-</blockquote>
-<p>正在不同的层次来看待本质上相同的事情，在program language层，我们把它叫做flow of control，在指令层，我们它其实是program counter。</p>
-<h2 id="_3">如何实现函数调用<a class="headerlink" href="#_3" title="Permanent link">#</a></h2>
+                <h1 id="_1">编译器前端<a class="headerlink" href="#_1" title="Permanent link">#</a></h1>
+<p>编译器前端可以看做是两棵树（parse tree和abstract syntax tree），一个图（控制流图）。</p>
                 
                   
                 
@@ -1384,41 +923,6 @@ normal<strong> flow of control</strong>. When an interrupt signal arrives, the C
       
         
 <footer class="md-footer">
-  
-    <div class="md-footer-nav">
-      <nav class="md-footer-nav__inner md-grid">
-        
-          <a href="../7.4-Heap-Management/" title="7.4-Heap-Management" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
-            <div class="md-flex__cell md-flex__cell--shrink">
-              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
-            </div>
-            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
-              <span class="md-flex__ellipsis">
-                <span class="md-footer-nav__direction">
-                  Previous
-                </span>
-                7.4-Heap-Management
-              </span>
-            </div>
-          </a>
-        
-        
-          <a href="Application-binary-interface/" title="Application-binary-interface" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
-            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
-              <span class="md-flex__ellipsis">
-                <span class="md-footer-nav__direction">
-                  Next
-                </span>
-                Application-binary-interface
-              </span>
-            </div>
-            <div class="md-flex__cell md-flex__cell--shrink">
-              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
-            </div>
-          </a>
-        
-      </nav>
-    </div>
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
