@@ -993,10 +993,10 @@ Figure 3.10: A grammar for branching statements</p>
 <blockquote>
 <p>NOTE: A <a href="https://en.wikipedia.org/wiki/Trie">trie</a> is a tree-structured transition diagram or <strong>finite automaton</strong>, do you see the power of tree structure here as I do</p>
 </blockquote>
-<p>Knuth, Morris, and Pratt presented an algorithm for recognizing a single keyword $b_1 b_2 \dots b_n$(length of the word is n) in a text string. Here the trie is a transition diagram with n+ 1 states, 0 through n. State 0 is the initial state, and state n represents acceptance, that is, discovery of the keyword. From each state s from 0 through n - 1, there is a transition to state s + 1, labeled by symbol $b_{s+1}$ . For example, the trie for the keyword <code>ababaa</code> is:</p>
+<p>Knuth, Morris, and Pratt presented an algorithm for recognizing a single keyword <span><span class="MathJax_Preview">b_1 b_2 \dots b_n</span><script type="math/tex">b_1 b_2 \dots b_n</script></span>(length of the word is n) in a text string. Here the trie is a transition diagram with n+ 1 states, 0 through n. State 0 is the initial state, and state n represents acceptance, that is, discovery of the keyword. From each state s from 0 through n - 1, there is a transition to state s + 1, labeled by symbol <span><span class="MathJax_Preview">b_{s+1}</span><script type="math/tex">b_{s+1}</script></span> . For example, the trie for the keyword <code>ababaa</code> is:</p>
 <p><img alt="" src="../Figure-trie.jpg" /></p>
-<p>In order to process text strings rapidly and search those strings for a keyword, it is useful to define, for keyword $b_1 b_2 \dots b_n$ and position <code>s</code> in that keyword (corresponding to state <code>s</code> of its trie),  a <em>failure function</em>, <code>f(s)</code>, computed as in Fig. 3.19.  The objective is that $b_1 b_2 \dots b_{f(s)}$ is the longest proper prefix of $b_1 b_2 \dots b_s$ that is also a suffix of $b_1 b_2 \dots b_s$.  The reason $f (s)$ is important is that if we are trying to match a text string for $b_1 b_2 \dots b_n$,  and we have matched the first <code>s</code> positions, but we then fail (i.e., the next position of the text string does not hold $b_{s+1}$ ), then $f (s)$ is the longest prefix of  $b_1 b_2 \dots b_n$ that could possibly match the text string up to the point we are at. Of course, the next character of the text string must be $b_{f (s)+1}$, or else we still have problems and must consider a yet shorter prefix, which will be $b_{f (f (s))}$.</p>
-<pre><code class="pseudocode"> t = 0;
+<p>In order to process text strings rapidly and search those strings for a keyword, it is useful to define, for keyword <span><span class="MathJax_Preview">b_1 b_2 \dots b_n</span><script type="math/tex">b_1 b_2 \dots b_n</script></span> and position <code>s</code> in that keyword (corresponding to state <code>s</code> of its trie),  a <em>failure function</em>, <code>f(s)</code>, computed as in Fig. 3.19.  The objective is that <span><span class="MathJax_Preview">b_1 b_2 \dots b_{f(s)}</span><script type="math/tex">b_1 b_2 \dots b_{f(s)}</script></span> is the longest proper prefix of <span><span class="MathJax_Preview">b_1 b_2 \dots b_s</span><script type="math/tex">b_1 b_2 \dots b_s</script></span> that is also a suffix of <span><span class="MathJax_Preview">b_1 b_2 \dots b_s</span><script type="math/tex">b_1 b_2 \dots b_s</script></span>.  The reason <span><span class="MathJax_Preview">f (s)</span><script type="math/tex">f (s)</script></span> is important is that if we are trying to match a text string for <span><span class="MathJax_Preview">b_1 b_2 \dots b_n</span><script type="math/tex">b_1 b_2 \dots b_n</script></span>,  and we have matched the first <code>s</code> positions, but we then fail (i.e., the next position of the text string does not hold <span><span class="MathJax_Preview">b_{s+1}</span><script type="math/tex">b_{s+1}</script></span> ), then <span><span class="MathJax_Preview">f (s)</span><script type="math/tex">f (s)</script></span> is the longest prefix of  <span><span class="MathJax_Preview">b_1 b_2 \dots b_n</span><script type="math/tex">b_1 b_2 \dots b_n</script></span> that could possibly match the text string up to the point we are at. Of course, the next character of the text string must be <span><span class="MathJax_Preview">b_{f (s)+1}</span><script type="math/tex">b_{f (s)+1}</script></span>, or else we still have problems and must consider a yet shorter prefix, which will be <span><span class="MathJax_Preview">b_{f (f (s))}</span><script type="math/tex">b_{f (f (s))}</script></span>.</p>
+<div class="highlight"><pre><span></span> t = 0;
  f (1) = 0;
  for (s = 1; s &lt; n; s + +) f
     while (t &gt; 0 &amp;&amp; b[s+1] ! = b[t+1]) t = f (t);
@@ -1006,9 +1006,9 @@ Figure 3.10: A grammar for branching statements</p>
     }
     else f (s + 1) = 0;
 }
-</code></pre>
+</pre></div>
 
-<p>Figure 3.19: Algorithm to compute the failure function for keyword $b_1 b_2 \dots b_n$</p>
+<p>Figure 3.19: Algorithm to compute the failure function for keyword <span><span class="MathJax_Preview">b_1 b_2 \dots b_n</span><script type="math/tex">b_1 b_2 \dots b_n</script></span></p>
 <p>As an example, the failure function for the trie constructed above for <code>ababaa</code> is:</p>
 <table>
 <thead>
@@ -1044,7 +1044,7 @@ Figure 3.10: A grammar for branching statements</p>
 </tbody>
 </table>
 <p>For instance, states 3 and 1 represent prefixes <code>aba</code> and <code>a</code>, respectively. <code>f (3) = 1</code> because <code>a</code> is the longest proper prefix of <code>aba</code> that is also a suffix of <code>aba</code>. Also, <code>f (2) = 0</code>, because the longest proper prefix of <code>ab</code> that is also a suffix is the empty string.</p>
-<p>Aho and Corasick generalized the KMP algorithm to recognize any of a set of keywords in a text string. In this case, the trie is a true tree, with branching from the root. There is one state for every string that is a prefix (not necessarily proper) of any keyword. The parent of a state corresponding to string $b_1 b_2 \dots b_n$ is the state that corresponds to $b_1 b_2 \dots b_k$. A state is accepting if it corresponds to a complete keyword. For example, Fig. 3.21 shows the trie for the keywords <code>he</code>, <code>she</code>, <code>his</code>, and <code>hers</code>.</p>
+<p>Aho and Corasick generalized the KMP algorithm to recognize any of a set of keywords in a text string. In this case, the trie is a true tree, with branching from the root. There is one state for every string that is a prefix (not necessarily proper) of any keyword. The parent of a state corresponding to string <span><span class="MathJax_Preview">b_1 b_2 \dots b_n</span><script type="math/tex">b_1 b_2 \dots b_n</script></span> is the state that corresponds to <span><span class="MathJax_Preview">b_1 b_2 \dots b_k</span><script type="math/tex">b_1 b_2 \dots b_k</script></span>. A state is accepting if it corresponds to a complete keyword. For example, Fig. 3.21 shows the trie for the keywords <code>he</code>, <code>she</code>, <code>his</code>, and <code>hers</code>.</p>
 <p><img alt="" src="../Figure3.21Trie-for-keywords-he-she-his-hers.jpg" /></p>
                 
                   
@@ -1119,6 +1119,8 @@ Figure 3.10: A grammar for branching statements</p>
       <script src="../../assets/javascripts/application.808e90bb.js"></script>
       
       <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
       
     
   </body>

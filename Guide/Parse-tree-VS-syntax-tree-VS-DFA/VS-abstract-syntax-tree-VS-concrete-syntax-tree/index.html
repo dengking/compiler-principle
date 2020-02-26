@@ -978,11 +978,11 @@
 <p>But having such ASTs creates a problem that wasn't there: it doesn't match the grammar, and now you have to mentally track both of them. And when there are 1500 AST nodes for a 3500 rule grammar, this matters a lot. And if the grammar evolves (they always do!), now you have two giant sets of things to keep in synch.</p>
 <p>Another solution is to let the parser simply build CST nodes for you and just use those. This is a huge advantage when building the grammars: there's no need to invent 1500 special AST nodes to model 3500 grammar rules. Just think about the tree being isomorphic to the grammar. From the point of view of the grammar engineer this is completely brainless, which lets him focus on getting the grammar right and hacking at it to his heart's content. Arguably you have to write more node visitor rules, but that can be managed. More on this later.</p>
 <p>What we do with the <a href="http://www.semanticdesigns.com/Products/DMS/DMSToolkit.html">DMS Software Reengineering Toolkit</a> is to automatically build a CST based on the results of a (GLR) parsing process. DMS then automatically constructs an "compressed" CST for space efficiency reasons, by eliminating non-value carrying terminals (keywords, punctation), semantically useless unary productions, and forming lists for grammar rule pairs that are list like:</p>
-<pre><code>    L = e ;
+<div class="highlight"><pre><span></span>    L = e ;
     L = L e ;
     L2 = e2 ;
-    L2 = L2  ','  e2 ;
-</code></pre>
+    L2 = L2  &#39;,&#39;  e2 ;
+</pre></div>
 
 <p>and a wide variety of variations of such forms. You think in terms of the grammar rules and the virtual CST; the tool operates on the compressed representation. Easy on your brain, faster/smaller at runtime.</p>
 <p>Remarkably, the compressed CST built this way looks a lot an AST that you might have designed by hand (see link at end to examples). In particular, the compressed CST doesn't carry any nodes that are just concrete syntax. There are minor bits of awkwardness: for example while the concrete nodes for '(' and ')' classically found in expression subgrammars are not in the tree, a "parentheses node" <em>does</em> appear in the compressed CST and has to be handled. A true AST would not have this. This seems like a pretty small price to pay for the convenience of not have to specify the AST construction, ever. And the documentation for the tree is always available and correct: the grammar <em>is</em> the documentation.</p>
@@ -1000,7 +1000,7 @@
 <h2 id="a_3"><a href="https://stackoverflow.com/a/9864571">A</a><a class="headerlink" href="#a_3" title="Permanent link">#</a></h2>
 <p>This is based on the <a href="http://www.antlr3.org/works/help/tutorial/calculator.html">Expression Evaluator</a> grammar by Terrence Parr.</p>
 <p>The grammar for this example:</p>
-<pre><code>grammar Expr002;
+<div class="highlight"><pre><span></span>grammar Expr002;
 
 options 
 {
@@ -1011,33 +1011,33 @@ options
 prog    :   ( stat )+ ;
 
 stat    :   expr NEWLINE        -&gt; expr
-        |   ID '=' expr NEWLINE -&gt; ^('=' ID expr)
+        |   ID &#39;=&#39; expr NEWLINE -&gt; ^(&#39;=&#39; ID expr)
         |   NEWLINE             -&gt;
         ;
 
-expr    :   multExpr (( '+'^ | '-'^ ) multExpr)*
+expr    :   multExpr (( &#39;+&#39;^ | &#39;-&#39;^ ) multExpr)*
         ; 
 
 multExpr
-        :   atom ('*'^ atom)*
+        :   atom (&#39;*&#39;^ atom)*
         ; 
 
 atom    :   INT 
         |   ID
-        |   '('! expr ')'!
+        |   &#39;(&#39;! expr &#39;)&#39;!
         ;
 
-ID      : ('a'..'z' | 'A'..'Z' )+ ;
-INT     : '0'..'9'+ ;
-NEWLINE : '\r'? '\n' ;
-WS      : ( ' ' | '\t' )+ { skip(); } ;
-</code></pre>
+ID      : (&#39;a&#39;..&#39;z&#39; | &#39;A&#39;..&#39;Z&#39; )+ ;
+INT     : &#39;0&#39;..&#39;9&#39;+ ;
+NEWLINE : &#39;\r&#39;? &#39;\n&#39; ;
+WS      : ( &#39; &#39; | &#39;\t&#39; )+ { skip(); } ;
+</pre></div>
 
 <p>Input</p>
-<pre><code>x=1
+<div class="highlight"><pre><span></span>x=1
 y=2
 3*(x+y)
-</code></pre>
+</pre></div>
 
 <p><strong>Parse Tree</strong></p>
 <p>The parse tree is a concrete representation of the input. The parse tree retains all of the information of the input. The empty boxes represent whitespace, i.e. end of line.</p>
@@ -1064,319 +1064,319 @@ or <a href="http://homepage.divms.uiowa.edu/~slonnegr/plf/Book/Chapter1.pdf">Abs
 <p>Also note that the pascal syntax disappears. Thus it is possible to have more than one language generate the same AST. This is useful for cross language script engines.</p>
 <h1 id="what-would-an-ast-abstract-syntax-tree-for-an-object-oriented-programming-language-look-like"><a href="https://stackoverflow.com/questions/6376662/what-would-an-ast-abstract-syntax-tree-for-an-object-oriented-programming-lang">What would an AST (abstract syntax tree) for an object-oriented programming language look like?</a><a class="headerlink" href="#what-would-an-ast-abstract-syntax-tree-for-an-object-oriented-programming-language-look-like" title="Permanent link">#</a></h1>
 <p>I'm reading about AST (abstract syntax trees) but all the samples I see use expressions such as:</p>
-<pre><code class="java">a + b * c 
-</code></pre>
+<div class="highlight"><pre><span></span><span class="n">a</span> <span class="o">+</span> <span class="n">b</span> <span class="o">*</span> <span class="n">c</span> 
+</pre></div>
 
 <p>Which could be represented in a lispy like syntax as:</p>
-<pre><code class="java">(+ a (* b c) )
-</code></pre>
+<div class="highlight"><pre><span></span><span class="o">(+</span> <span class="n">a</span> <span class="o">(*</span> <span class="n">b</span> <span class="n">c</span><span class="o">)</span> <span class="o">)</span>
+</pre></div>
 
 <p>Which will be the equivalent to:</p>
-<pre><code class="java">  +
- / \
-a   * 
-   / \
-  b   c
-</code></pre>
+<div class="highlight"><pre><span></span>  <span class="o">+</span>
+ <span class="o">/</span> <span class="err">\</span>
+<span class="n">a</span>   <span class="o">*</span> 
+   <span class="o">/</span> <span class="err">\</span>
+  <span class="n">b</span>   <span class="n">c</span>
+</pre></div>
 
 <p>My question is How an AST for a class in a OOPL would look like?</p>
 <p>My naive attempt is for this Java code:</p>
-<pre><code class="java"> class Person { 
-     String name;
-     int    age;
-     public String toString() { 
-        return &quot;name&quot;;
-     }
- }
-</code></pre>
+<div class="highlight"><pre><span></span> <span class="kd">class</span> <span class="nc">Person</span> <span class="o">{</span> 
+     <span class="n">String</span> <span class="n">name</span><span class="o">;</span>
+     <span class="kt">int</span>    <span class="n">age</span><span class="o">;</span>
+     <span class="kd">public</span> <span class="n">String</span> <span class="nf">toString</span><span class="o">()</span> <span class="o">{</span> 
+        <span class="k">return</span> <span class="s">&quot;name&quot;</span><span class="o">;</span>
+     <span class="o">}</span>
+ <span class="o">}</span>
+</pre></div>
 
 <p>Is:</p>
-<pre><code class="java">;Hand written
-(classDeclaration Person 
-     (varDeclaration String name)
-     (varDeclaration int    age )
-     (funcDeclaration String toString 
-           (return &quot;name&quot;)
-     )
- )
-</code></pre>
+<div class="highlight"><pre><span></span><span class="o">;</span><span class="n">Hand</span> <span class="nf">written</span>
+<span class="o">(</span><span class="n">classDeclaration</span> <span class="nf">Person</span> 
+     <span class="o">(</span><span class="n">varDeclaration</span> <span class="n">String</span> <span class="n">name</span><span class="o">)</span>
+     <span class="o">(</span><span class="n">varDeclaration</span> <span class="kt">int</span>    <span class="n">age</span> <span class="o">)</span>
+     <span class="o">(</span><span class="n">funcDeclaration</span> <span class="n">String</span> <span class="nf">toString</span> 
+           <span class="o">(</span><span class="k">return</span> <span class="s">&quot;name&quot;</span><span class="o">)</span>
+     <span class="o">)</span>
+ <span class="o">)</span>
+</pre></div>
 
 <p>But I'm not quite sure how close or far am I to a real AST representation.</p>
 <p>Does it depends on the language I choose. How much detail is needed? Are those "xyzDeclaraction" needed or could be as:</p>
-<pre><code class="java"> (Person (String name) (int age))
-</code></pre>
+<div class="highlight"><pre><span></span> <span class="o">(</span><span class="n">Person</span> <span class="o">(</span><span class="n">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">(</span><span class="kt">int</span> <span class="n">age</span><span class="o">))</span>
+</pre></div>
 
 <p>Where can I see a "real" representation of an actual programming language to learn more.</p>
 <h2 id="a_7"><a href="https://stackoverflow.com/a/6376707">A</a><a class="headerlink" href="#a_7" title="Permanent link">#</a></h2>
 <p>AST is an abstraction of the CST (<a href="http://en.wikipedia.org/wiki/Parse_tree">concrete syntax tree</a>, or, parse tree). The concrete syntax tree is the tree resulting from the productions (in the grammar) used to parse the file. So your AST is basically derived from your grammar definition, but has for transformed</p>
-<pre><code class="java">                        Exp                    
-                      /  |  \                   
-                     /   |   \                       *
-                 Ident BinOp Ident       into       / \
-                  /      |     \                  &quot;x&quot; &quot;y&quot;
-                 /       |      \
-               &quot;x&quot;       *      &quot;y&quot;
-</code></pre>
+<div class="highlight"><pre><span></span>                        <span class="n">Exp</span>                    
+                      <span class="o">/</span>  <span class="o">|</span>  <span class="err">\</span>                   
+                     <span class="o">/</span>   <span class="o">|</span>   <span class="err">\</span>                       <span class="o">*</span>
+                 <span class="n">Ident</span> <span class="n">BinOp</span> <span class="n">Ident</span>       <span class="n">into</span>       <span class="o">/</span> <span class="err">\</span>
+                  <span class="o">/</span>      <span class="o">|</span>     <span class="err">\</span>                  <span class="s">&quot;x&quot;</span> <span class="s">&quot;y&quot;</span>
+                 <span class="o">/</span>       <span class="o">|</span>      <span class="err">\</span>
+               <span class="s">&quot;x&quot;</span>       <span class="o">*</span>      <span class="s">&quot;y&quot;</span>
+</pre></div>
 
 <p>All in all I think the example in your post looks fine. I would probably wrap the variable declarations in a <code>varDeclList</code> and the function declaration in a <code>methDeclList</code>, and the return statement in a <code>stmtList</code>. (See below.)</p>
 <p>One more or less "real" representation of an AST is described by Apple in his book "Modern Compiler Implementation in Java". (Resources can be found <a href="http://www.cambridge.org/resources/052182060X/">here</a>.)</p>
 <p>Using those classes, your program would be represented as follows:</p>
-<pre><code class="java">Program
-    ClassDeclList
-        ClassDecl
-            Identifier
-                id: Person
-            VarDeclList
-                VarDecl
-                    type: String
-                    id: name
-                VarDecl
-                    type: int
-                    id: age
-            MethDeclList
-                MethodDecl
-                    modifiers: public
-                    returnType: String
-                    id: toString
-                    Formals
-                        (empty)
-                    StmtList
-                        returnStmt
-                            Identifier
-                                id: name
-</code></pre>
+<div class="highlight"><pre><span></span><span class="n">Program</span>
+    <span class="n">ClassDeclList</span>
+        <span class="n">ClassDecl</span>
+            <span class="n">Identifier</span>
+                <span class="n">id</span><span class="o">:</span> <span class="n">Person</span>
+            <span class="n">VarDeclList</span>
+                <span class="n">VarDecl</span>
+                    <span class="n">type</span><span class="o">:</span> <span class="n">String</span>
+                    <span class="n">id</span><span class="o">:</span> <span class="n">name</span>
+                <span class="n">VarDecl</span>
+                    <span class="n">type</span><span class="o">:</span> <span class="kt">int</span>
+                    <span class="n">id</span><span class="o">:</span> <span class="n">age</span>
+            <span class="n">MethDeclList</span>
+                <span class="n">MethodDecl</span>
+                    <span class="n">modifiers</span><span class="o">:</span> <span class="kd">public</span>
+                    <span class="n">returnType</span><span class="o">:</span> <span class="n">String</span>
+                    <span class="n">id</span><span class="o">:</span> <span class="n">toString</span>
+                    <span class="nf">Formals</span>
+                        <span class="o">(</span><span class="n">empty</span><span class="o">)</span>
+                    <span class="n">StmtList</span>
+                        <span class="n">returnStmt</span>
+                            <span class="n">Identifier</span>
+                                <span class="n">id</span><span class="o">:</span> <span class="n">name</span>
+</pre></div>
 
 <h2 id="a_8"><a href="https://stackoverflow.com/a/6378997">A</a><a class="headerlink" href="#a_8" title="Permanent link">#</a></h2>
 <p>OP: <em>Where can I see a real representation of an actual programming language to learn more?</em></p>
 <p>For your source text as a file Person.java:</p>
-<pre><code class="java">class Person {  
-    String name;
-    int    age;
-    public String toString()
-      { return &quot;name&quot;;     } 
-}
-</code></pre>
+<div class="highlight"><pre><span></span><span class="kd">class</span> <span class="nc">Person</span> <span class="o">{</span>  
+    <span class="n">String</span> <span class="n">name</span><span class="o">;</span>
+    <span class="kt">int</span>    <span class="n">age</span><span class="o">;</span>
+    <span class="kd">public</span> <span class="n">String</span> <span class="nf">toString</span><span class="o">()</span>
+      <span class="o">{</span> <span class="k">return</span> <span class="s">&quot;name&quot;</span><span class="o">;</span>     <span class="o">}</span> 
+<span class="o">}</span>
+</pre></div>
 
 <p>what follows are both Concrete and Abstract Syntax Tree in an S-expression-style dump of the parser tree from our <a href="http://www.semanticdesigns.com/Products/DMS/DMSToolkit.html">DMS Software Reengineering Toolkit</a>, using its Java1.6 parser. All the apparant complexity is pretty much caused by the real complexity of the language (e.g., of Java itself).</p>
 <p>The CST clearly contains more stuff (139 nodes) than the AST (54 nodes). The AST drops everything that can be automatically inferred from the grammar, given the AST. This includes removing non-value-carrying leaves, unary productions, and compressing spines caused by left or right recursive grammar rules into explicit list nodes.</p>
 <p>A left paren signals a new subtree. Following the left paren is the name of the node type; @Java~Java1_.6 might seem unnecessary until you understand DMS can handle many languages at once, including langauges nested inside one another. The #nnnnnn is the memory address of the node. ^M means "this node has M parents and is left off when M==1. Things inside [...] are the node value. A { M } means this list node has M list-children. Each node is stamped with position information.</p>
 <p>This is the Concrete Syntax tree (see further down for AST):</p>
-<pre><code class="java">(compilation_unit@Java~Java1_6=1#4885d00^0 Line 1 Column 1 File C:/temp/Person.java
- (type_declarations@Java~Java1_6=15#4885cc0 Line 1 Column 1 File C:/temp/Person.java
-  (type_declarations@Java~Java1_6=16#4884d80 Line 1 Column 1 File C:/temp/Person.java)type_declarations
-  (type_declaration@Java~Java1_6=17#4885ca0 Line 1 Column 1 File C:/temp/Person.java
-   (type_class_modifiers@Java~Java1_6=77#4884dc0 Line 1 Column 1 File C:/temp/Person.java)type_class_modifiers
-   (class_header@Java~Java1_6=89#4884ec0 Line 1 Column 1 File C:/temp/Person.java
-   |('class'@Java~Java1_6=459#4884c60[Keyword:0] Line 1 Column 1 File C:/temp/Person.java)'class'
-   |(IDENTIFIER@Java~Java1_6=447#4884e20[`Person'] Line 1 Column 7 File C:/temp/Person.java)IDENTIFIER
-   |(type_parameters@Java~Java1_6=408#4884e80 Line 1 Column 14 File C:/temp/Person.java)type_parameters
-   )class_header
-   (class_body@Java~Java1_6=94#4885c80 Line 1 Column 14 File C:/temp/Person.java
-   |('{'@Java~Java1_6=448#4884e60[Keyword:0] Line 1 Column 14 File C:/temp/Person.java)'{'
-   |(class_body_declarations@Java~Java1_6=111#4885c60 Line 2 Column 5 File C:/temp/Person.java
-   | (class_body_declarations@Java~Java1_6=111#4885380 Line 2 Column 5 File C:/temp/Person.java
-   |  (class_body_declarations@Java~Java1_6=110#4885400 Line 2 Column 5 File C:/temp/Person.java
-   |   (class_body_declaration@Java~Java1_6=118#4885360 Line 2 Column 5 File C:/temp/Person.java
-   |   |(field_declaration@Java~Java1_6=168#4885440 Line 2 Column 5 File C:/temp/Person.java
-   |   | (field_modifiers@Java~Java1_6=170#4884f40 Line 2 Column 5 File C:/temp/Person.java)field_modifiers
-   |   | (type@Java~Java1_6=191#48852c0 Line 2 Column 5 File C:/temp/Person.java
-   |   |  (name@Java~Java1_6=406#48851e0 Line 2 Column 5 File C:/temp/Person.java
-   |   |   (IDENTIFIER@Java~Java1_6=447#4884f20[`String'] Line 2 Column 5 File C:/temp/Person.java)IDENTIFIER
-   |   |   (type_arguments@Java~Java1_6=407#4885160 Line 2 Column 12 File C:/temp/Person.java)type_arguments
-   |   |  )name
-   |   |  (brackets@Java~Java1_6=157#4885260 Line 2 Column 12 File C:/temp/Person.java)brackets
-   |   | )type
-   |   | (variable_declarator_list@Java~Java1_6=179#4884e00 Line 2 Column 12 File C:/temp/Person.java
-   |   |  (variable_declarator@Java~Java1_6=181#4885300 Line 2 Column 12 File C:/temp/Person.java
-   |   |   (variable_declarator_id@Java~Java1_6=167#4885320 Line 2 Column 12 File C:/temp/Person.java
-   |   |   |(IDENTIFIER@Java~Java1_6=447#4885140[`name'] Line 2 Column 12 File C:/temp/Person.java)IDENTIFIER
-   |   |   |(brackets@Java~Java1_6=157#4885040 Line 2 Column 16 File C:/temp/Person.java)brackets
-   |   |   )variable_declarator_id
-   |   |  )variable_declarator
-   |   | )variable_declarator_list
-   |   | (';'@Java~Java1_6=440#4885100[Keyword:0] Line 2 Column 16 File C:/temp/Person.java)';'
-   |   |)field_declaration
-   |   )class_body_declaration
-   |  )class_body_declarations
-   |  (class_body_declaration@Java~Java1_6=118#48852e0 Line 3 Column 5 File C:/temp/Person.java
-   |   (field_declaration@Java~Java1_6=168#4885480 Line 3 Column 5 File C:/temp/Person.java
-   |   |(field_modifiers@Java~Java1_6=170#4885340 Line 3 Column 5 File C:/temp/Person.java)field_modifiers
-   |   |(type@Java~Java1_6=192#4885220 Line 3 Column 5 File C:/temp/Person.java
-   |   | (primitive_type@Java~Java1_6=198#4885420 Line 3 Column 5 File C:/temp/Person.java
-   |   |  ('int'@Java~Java1_6=479#48853e0[Keyword:0] Line 3 Column 5 File C:/temp/Person.java)'int'
-   |   | )primitive_type
-   |   | (brackets@Java~Java1_6=157#4885200 Line 3 Column 12 File C:/temp/Person.java)brackets
-   |   |)type
-   |   |(variable_declarator_list@Java~Java1_6=179#4885540 Line 3 Column 12 File C:/temp/Person.java
-   |   | (variable_declarator@Java~Java1_6=181#4885520 Line 3 Column 12 File C:/temp/Person.java
-   |   |  (variable_declarator_id@Java~Java1_6=167#4885500 Line 3 Column 12 File C:/temp/Person.java
-   |   |   (IDENTIFIER@Java~Java1_6=447#4884fc0[`age'] Line 3 Column 12 File C:/temp/Person.java)IDENTIFIER
-   |   |   (brackets@Java~Java1_6=157#48854e0 Line 3 Column 15 File C:/temp/Person.java)brackets
-   |   |  )variable_declarator_id
-   |   | )variable_declarator
-   |   |)variable_declarator_list
-   |   |(';'@Java~Java1_6=440#48854c0[Keyword:0] Line 3 Column 15 File C:/temp/Person.java)';'
-   |   )field_declaration
-   |  )class_body_declaration
-   | )class_body_declarations
-   | (class_body_declaration@Java~Java1_6=117#4885c40 Line 4 Column 5 File C:/temp/Person.java
-   |  (method_declaration@Java~Java1_6=135#4885c00 Line 4 Column 5 File C:/temp/Person.java
-   |   (method_modifiers@Java~Java1_6=141#4885700 Line 4 Column 5 File C:/temp/Person.java
-   |   |(method_modifiers@Java~Java1_6=142#4884e40 Line 4 Column 5 File C:/temp/Person.java)method_modifiers
-   |   |(method_modifier@Java~Java1_6=147#48856a0 Line 4 Column 5 File C:/temp/Person.java
-   |   | ('public'@Java~Java1_6=453#48853a0[Keyword:0] Line 4 Column 5 File C:/temp/Person.java)'public'
-   |   |)method_modifier
-   |   )method_modifiers
-   |   (type_parameters@Java~Java1_6=408#4885740 Line 4 Column 12 File C:/temp/Person.java)type_parameters
-   |   (type@Java~Java1_6=191#4885900 Line 4 Column 12 File C:/temp/Person.java
-   |   |(name@Java~Java1_6=406#48852a0 Line 4 Column 12 File C:/temp/Person.java
-   |   | (IDENTIFIER@Java~Java1_6=447#4885660[`String'] Line 4 Column 12 File C:/temp/Person.java)IDENTIFIER
-   |   | (type_arguments@Java~Java1_6=407#48851a0 Line 4 Column 19 File C:/temp/Person.java)type_arguments
-   |   |)name
-   |   |(brackets@Java~Java1_6=157#48858c0 Line 4 Column 19 File C:/temp/Person.java)brackets
-   |   )type
-   |   (IDENTIFIER@Java~Java1_6=447#48855c0[`toString'] Line 4 Column 19 File C:/temp/Person.java)IDENTIFIER
-   |   (parameters@Java~Java1_6=158#48858e0 Line 4 Column 27 File C:/temp/Person.java
-   |   |('('@Java~Java1_6=450#4885840[Keyword:0] Line 4 Column 27 File C:/temp/Person.java)'('
-   |   |(')'@Java~Java1_6=451#4885620[Keyword:0] Line 4 Column 28 File C:/temp/Person.java)')'
-   |   )parameters
-   |   (brackets@Java~Java1_6=157#4885060 Line 5 Column 7 File C:/temp/Person.java)brackets
-   |   (block@Java~Java1_6=217#4885be0 Line 5 Column 7 File C:/temp/Person.java
-   |   |('{'@Java~Java1_6=448#48851c0[Keyword:0] Line 5 Column 7 File C:/temp/Person.java)'{'
-   |   |(statement_sequence@Java~Java1_6=218#4885ba0 Line 5 Column 9 File C:/temp/Person.java
-   |   | (statement_sequence_member@Java~Java1_6=223#4885b80 Line 5 Column 9 File C:/temp/Person.java
-   |   |  (executable_statement@Java~Java1_6=243#4885b60 Line 5 Column 9 File C:/temp/Person.java
-   |   |   ('return'@Java~Java1_6=491#4884f60[Keyword:0] Line 5 Column 9 File C:/temp/Person.java)'return'
-   |   |   (expression@Java~Java1_6=332#4885ac0 Line 5 Column 16 File C:/temp/Person.java
-   |   |   |(conditional_expression@Java~Java1_6=345#4885a60 Line 5 Column 16 File C:/temp/Person.java
-   |   |   | (conditional_or_expression@Java~Java1_6=347#4885a20 Line 5 Column 16 File C:/temp/Person.java
-   |   |   |  (conditional_and_expression@Java~Java1_6=349#48859e0 Line 5 Column 16 File C:/temp/Person.java
-   |   |   |   (inclusive_or_expression@Java~Java1_6=351#48857e0 Line 5 Column 16 File C:/temp/Person.java
-   |   |   |   |(exclusive_or_expression@Java~Java1_6=353#48855a0 Line 5 Column 16 File C:/temp/Person.java
-   |   |   |   | (and_expression@Java~Java1_6=355#4885940 Line 5 Column 16 File C:/temp/Person.java
-   |   |   |   |  (equality_expression@Java~Java1_6=357#4885880 Line 5 Column 16 File C:/temp/Person.java
-   |   |   |   |   (relational_expression@Java~Java1_6=360#4885800 Line 5 Column 16 File C:/temp/Person.java
-   |   |   |   |   |(shift_expression@Java~Java1_6=366#48856c0 Line 5 Column 16 File C:/temp/Person.java
-   |   |   |   |   | (additive_expression@Java~Java1_6=370#4885180 Line 5 Column 16 File C:/temp/Person.java
-   |   |   |   |   |  (multiplicative_expression@Java~Java1_6=373#4885780 Line 5 Column 16 File C:/temp/Person.java
-   |   |   |   |   |   (unary_expression@Java~Java1_6=383#4885600 Line 5 Column 16 File C:/temp/Person.java
-   |   |   |   |   |   |(unary_expression_not_plus_minus@Java~Java1_6=389#4885680 Line 5 Column 16 File C:/temp/Person.java
-   |   |   |   |   |   | (literal@Java~Java1_6=390#4884f80 Line 5 Column 16 File C:/temp/Person.java
-   |   |   |   |   |   |  (STRING@Java~Java1_6=536#4885120[`name'] Line 5 Column 16 File C:/temp/Person.java)STRING
-   |   |   |   |   |   | )literal
-   |   |   |   |   |   |)unary_expression_not_plus_minus
-   |   |   |   |   |   )unary_expression
-   |   |   |   |   |  )multiplicative_expression
-   |   |   |   |   | )additive_expression
-   |   |   |   |   |)shift_expression
-   |   |   |   |   )relational_expression
-   |   |   |   |  )equality_expression
-   |   |   |   | )and_expression
-   |   |   |   |)exclusive_or_expression
-   |   |   |   )inclusive_or_expression
-   |   |   |  )conditional_and_expression
-   |   |   | )conditional_or_expression
-   |   |   |)conditional_expression
-   |   |   )expression
-   |   |   (';'@Java~Java1_6=440#48856e0[Keyword:0] Line 5 Column 22 File C:/temp/Person.java)';'
-   |   |  )executable_statement
-   |   | )statement_sequence_member
-   |   |)statement_sequence
-   |   |('}'@Java~Java1_6=449#4885b40[Keyword:0] Line 5 Column 28 File C:/temp/Person.java)'}'
-   |   )block
-   |  )method_declaration
-   | )class_body_declaration
-   |)class_body_declarations
-   |('}'@Java~Java1_6=449#4885bc0[Keyword:0] Line 6 Column 1 File C:/temp/Person.java)'}'
-   )class_body
-  )type_declaration
- )type_declarations
- (optional_CONTROL_Z@Java~Java1_6=5#4885ce0 Line 7 Column 1 File C:/temp/Person.java)optional_CONTROL_Z
-)compilation_unit
-</code></pre>
+<div class="highlight"><pre><span></span><span class="o">(</span><span class="n">compilation_unit</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">1</span><span class="err">#</span><span class="mi">4885</span><span class="n">d00</span><span class="o">^</span><span class="mi">0</span> <span class="n">Line</span> <span class="mi">1</span> <span class="n">Column</span> <span class="mi">1</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span>
+ <span class="o">(</span><span class="n">type_declarations</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">15</span><span class="err">#</span><span class="mi">4885</span><span class="n">cc0</span> <span class="n">Line</span> <span class="mi">1</span> <span class="n">Column</span> <span class="mi">1</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span>
+  <span class="o">(</span><span class="n">type_declarations</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">16</span><span class="err">#</span><span class="mi">4884</span><span class="n">d80</span> <span class="n">Line</span> <span class="mi">1</span> <span class="n">Column</span> <span class="mi">1</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span><span class="o">)</span><span class="n">type_declarations</span>
+  <span class="o">(</span><span class="n">type_declaration</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">17</span><span class="err">#</span><span class="mi">4885</span><span class="n">ca0</span> <span class="n">Line</span> <span class="mi">1</span> <span class="n">Column</span> <span class="mi">1</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span>
+   <span class="o">(</span><span class="n">type_class_modifiers</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">77</span><span class="err">#</span><span class="mi">4884</span><span class="n">dc0</span> <span class="n">Line</span> <span class="mi">1</span> <span class="n">Column</span> <span class="mi">1</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span><span class="o">)</span><span class="n">type_class_modifiers</span>
+   <span class="o">(</span><span class="n">class_header</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">89</span><span class="err">#</span><span class="mi">4884</span><span class="n">ec0</span> <span class="n">Line</span> <span class="mi">1</span> <span class="n">Column</span> <span class="mi">1</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span>
+   <span class="o">|(</span><span class="err">&#39;</span><span class="n">class</span><span class="err">&#39;</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">459</span><span class="err">#</span><span class="mi">4884</span><span class="n">c60</span><span class="o">[</span><span class="n">Keyword</span><span class="o">:</span><span class="mi">0</span><span class="o">]</span> <span class="n">Line</span> <span class="mi">1</span> <span class="n">Column</span> <span class="mi">1</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span><span class="o">)</span><span class="err">&#39;</span><span class="n">class</span><span class="err">&#39;</span>
+   <span class="o">|(</span><span class="n">IDENTIFIER</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">447</span><span class="err">#</span><span class="mi">4884</span><span class="n">e20</span><span class="o">[</span><span class="err">`</span><span class="n">Person</span><span class="err">&#39;</span><span class="o">]</span> <span class="n">Line</span> <span class="mi">1</span> <span class="n">Column</span> <span class="mi">7</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span><span class="o">)</span><span class="n">IDENTIFIER</span>
+   <span class="o">|(</span><span class="n">type_parameters</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">408</span><span class="err">#</span><span class="mi">4884</span><span class="n">e80</span> <span class="n">Line</span> <span class="mi">1</span> <span class="n">Column</span> <span class="mi">14</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span><span class="o">)</span><span class="n">type_parameters</span>
+   <span class="o">)</span><span class="n">class_header</span>
+   <span class="o">(</span><span class="n">class_body</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">94</span><span class="err">#</span><span class="mi">4885</span><span class="n">c80</span> <span class="n">Line</span> <span class="mi">1</span> <span class="n">Column</span> <span class="mi">14</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span>
+   <span class="o">|(</span><span class="sc">&#39;{&#39;</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">448</span><span class="err">#</span><span class="mi">4884</span><span class="n">e60</span><span class="o">[</span><span class="n">Keyword</span><span class="o">:</span><span class="mi">0</span><span class="o">]</span> <span class="n">Line</span> <span class="mi">1</span> <span class="n">Column</span> <span class="mi">14</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span><span class="o">)</span><span class="sc">&#39;{&#39;</span>
+   <span class="o">|(</span><span class="n">class_body_declarations</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">111</span><span class="err">#</span><span class="mi">4885</span><span class="n">c60</span> <span class="n">Line</span> <span class="mi">2</span> <span class="n">Column</span> <span class="mi">5</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span>
+   <span class="o">|</span> <span class="o">(</span><span class="n">class_body_declarations</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">111</span><span class="err">#</span><span class="mi">4885380</span> <span class="n">Line</span> <span class="mi">2</span> <span class="n">Column</span> <span class="mi">5</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span>
+   <span class="o">|</span>  <span class="o">(</span><span class="n">class_body_declarations</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">110</span><span class="err">#</span><span class="mi">4885400</span> <span class="n">Line</span> <span class="mi">2</span> <span class="n">Column</span> <span class="mi">5</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span>
+   <span class="o">|</span>   <span class="o">(</span><span class="n">class_body_declaration</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">118</span><span class="err">#</span><span class="mi">4885360</span> <span class="n">Line</span> <span class="mi">2</span> <span class="n">Column</span> <span class="mi">5</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span>
+   <span class="o">|</span>   <span class="o">|(</span><span class="n">field_declaration</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">168</span><span class="err">#</span><span class="mi">4885440</span> <span class="n">Line</span> <span class="mi">2</span> <span class="n">Column</span> <span class="mi">5</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span>
+   <span class="o">|</span>   <span class="o">|</span> <span class="o">(</span><span class="n">field_modifiers</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">170</span><span class="err">#</span><span class="mi">4884</span><span class="n">f40</span> <span class="n">Line</span> <span class="mi">2</span> <span class="n">Column</span> <span class="mi">5</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span><span class="o">)</span><span class="n">field_modifiers</span>
+   <span class="o">|</span>   <span class="o">|</span> <span class="o">(</span><span class="n">type</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">191</span><span class="err">#</span><span class="mi">48852</span><span class="n">c0</span> <span class="n">Line</span> <span class="mi">2</span> <span class="n">Column</span> <span class="mi">5</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span>
+   <span class="o">|</span>   <span class="o">|</span>  <span class="o">(</span><span class="n">name</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">406</span><span class="err">#</span><span class="mi">48851</span><span class="n">e0</span> <span class="n">Line</span> <span class="mi">2</span> <span class="n">Column</span> <span class="mi">5</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span>
+   <span class="o">|</span>   <span class="o">|</span>   <span class="o">(</span><span class="n">IDENTIFIER</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">447</span><span class="err">#</span><span class="mi">4884</span><span class="n">f20</span><span class="o">[</span><span class="err">`</span><span class="n">String</span><span class="err">&#39;</span><span class="o">]</span> <span class="n">Line</span> <span class="mi">2</span> <span class="n">Column</span> <span class="mi">5</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span><span class="o">)</span><span class="n">IDENTIFIER</span>
+   <span class="o">|</span>   <span class="o">|</span>   <span class="o">(</span><span class="n">type_arguments</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">407</span><span class="err">#</span><span class="mi">4885160</span> <span class="n">Line</span> <span class="mi">2</span> <span class="n">Column</span> <span class="mi">12</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span><span class="o">)</span><span class="n">type_arguments</span>
+   <span class="o">|</span>   <span class="o">|</span>  <span class="o">)</span><span class="n">name</span>
+   <span class="o">|</span>   <span class="o">|</span>  <span class="o">(</span><span class="n">brackets</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">157</span><span class="err">#</span><span class="mi">4885260</span> <span class="n">Line</span> <span class="mi">2</span> <span class="n">Column</span> <span class="mi">12</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span><span class="o">)</span><span class="n">brackets</span>
+   <span class="o">|</span>   <span class="o">|</span> <span class="o">)</span><span class="n">type</span>
+   <span class="o">|</span>   <span class="o">|</span> <span class="o">(</span><span class="n">variable_declarator_list</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">179</span><span class="err">#</span><span class="mi">4884</span><span class="n">e00</span> <span class="n">Line</span> <span class="mi">2</span> <span class="n">Column</span> <span class="mi">12</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span>
+   <span class="o">|</span>   <span class="o">|</span>  <span class="o">(</span><span class="n">variable_declarator</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">181</span><span class="err">#</span><span class="mi">4885300</span> <span class="n">Line</span> <span class="mi">2</span> <span class="n">Column</span> <span class="mi">12</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span>
+   <span class="o">|</span>   <span class="o">|</span>   <span class="o">(</span><span class="n">variable_declarator_id</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">167</span><span class="err">#</span><span class="mi">4885320</span> <span class="n">Line</span> <span class="mi">2</span> <span class="n">Column</span> <span class="mi">12</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span>
+   <span class="o">|</span>   <span class="o">|</span>   <span class="o">|(</span><span class="n">IDENTIFIER</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">447</span><span class="err">#</span><span class="mi">4885140</span><span class="o">[</span><span class="err">`</span><span class="n">name</span><span class="err">&#39;</span><span class="o">]</span> <span class="n">Line</span> <span class="mi">2</span> <span class="n">Column</span> <span class="mi">12</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span><span class="o">)</span><span class="n">IDENTIFIER</span>
+   <span class="o">|</span>   <span class="o">|</span>   <span class="o">|(</span><span class="n">brackets</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">157</span><span class="err">#</span><span class="mi">4885040</span> <span class="n">Line</span> <span class="mi">2</span> <span class="n">Column</span> <span class="mi">16</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span><span class="o">)</span><span class="n">brackets</span>
+   <span class="o">|</span>   <span class="o">|</span>   <span class="o">)</span><span class="n">variable_declarator_id</span>
+   <span class="o">|</span>   <span class="o">|</span>  <span class="o">)</span><span class="n">variable_declarator</span>
+   <span class="o">|</span>   <span class="o">|</span> <span class="o">)</span><span class="n">variable_declarator_list</span>
+   <span class="o">|</span>   <span class="o">|</span> <span class="o">(</span><span class="sc">&#39;;&#39;</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">440</span><span class="err">#</span><span class="mi">4885100</span><span class="o">[</span><span class="n">Keyword</span><span class="o">:</span><span class="mi">0</span><span class="o">]</span> <span class="n">Line</span> <span class="mi">2</span> <span class="n">Column</span> <span class="mi">16</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span><span class="o">)</span><span class="sc">&#39;;&#39;</span>
+   <span class="o">|</span>   <span class="o">|)</span><span class="n">field_declaration</span>
+   <span class="o">|</span>   <span class="o">)</span><span class="n">class_body_declaration</span>
+   <span class="o">|</span>  <span class="o">)</span><span class="n">class_body_declarations</span>
+   <span class="o">|</span>  <span class="o">(</span><span class="n">class_body_declaration</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">118</span><span class="err">#</span><span class="mi">48852</span><span class="n">e0</span> <span class="n">Line</span> <span class="mi">3</span> <span class="n">Column</span> <span class="mi">5</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span>
+   <span class="o">|</span>   <span class="o">(</span><span class="n">field_declaration</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">168</span><span class="err">#</span><span class="mi">4885480</span> <span class="n">Line</span> <span class="mi">3</span> <span class="n">Column</span> <span class="mi">5</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span>
+   <span class="o">|</span>   <span class="o">|(</span><span class="n">field_modifiers</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">170</span><span class="err">#</span><span class="mi">4885340</span> <span class="n">Line</span> <span class="mi">3</span> <span class="n">Column</span> <span class="mi">5</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span><span class="o">)</span><span class="n">field_modifiers</span>
+   <span class="o">|</span>   <span class="o">|(</span><span class="n">type</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">192</span><span class="err">#</span><span class="mi">4885220</span> <span class="n">Line</span> <span class="mi">3</span> <span class="n">Column</span> <span class="mi">5</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span>
+   <span class="o">|</span>   <span class="o">|</span> <span class="o">(</span><span class="n">primitive_type</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">198</span><span class="err">#</span><span class="mi">4885420</span> <span class="n">Line</span> <span class="mi">3</span> <span class="n">Column</span> <span class="mi">5</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span>
+   <span class="o">|</span>   <span class="o">|</span>  <span class="o">(</span><span class="err">&#39;</span><span class="kt">int</span><span class="err">&#39;</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">479</span><span class="err">#</span><span class="mi">48853</span><span class="n">e0</span><span class="o">[</span><span class="n">Keyword</span><span class="o">:</span><span class="mi">0</span><span class="o">]</span> <span class="n">Line</span> <span class="mi">3</span> <span class="n">Column</span> <span class="mi">5</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span><span class="o">)</span><span class="err">&#39;</span><span class="kt">int</span><span class="err">&#39;</span>
+   <span class="o">|</span>   <span class="o">|</span> <span class="o">)</span><span class="n">primitive_type</span>
+   <span class="o">|</span>   <span class="o">|</span> <span class="o">(</span><span class="n">brackets</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">157</span><span class="err">#</span><span class="mi">4885200</span> <span class="n">Line</span> <span class="mi">3</span> <span class="n">Column</span> <span class="mi">12</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span><span class="o">)</span><span class="n">brackets</span>
+   <span class="o">|</span>   <span class="o">|)</span><span class="n">type</span>
+   <span class="o">|</span>   <span class="o">|(</span><span class="n">variable_declarator_list</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">179</span><span class="err">#</span><span class="mi">4885540</span> <span class="n">Line</span> <span class="mi">3</span> <span class="n">Column</span> <span class="mi">12</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span>
+   <span class="o">|</span>   <span class="o">|</span> <span class="o">(</span><span class="n">variable_declarator</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">181</span><span class="err">#</span><span class="mi">4885520</span> <span class="n">Line</span> <span class="mi">3</span> <span class="n">Column</span> <span class="mi">12</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span>
+   <span class="o">|</span>   <span class="o">|</span>  <span class="o">(</span><span class="n">variable_declarator_id</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">167</span><span class="err">#</span><span class="mi">4885500</span> <span class="n">Line</span> <span class="mi">3</span> <span class="n">Column</span> <span class="mi">12</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span>
+   <span class="o">|</span>   <span class="o">|</span>   <span class="o">(</span><span class="n">IDENTIFIER</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">447</span><span class="err">#</span><span class="mi">4884</span><span class="n">fc0</span><span class="o">[</span><span class="err">`</span><span class="n">age</span><span class="err">&#39;</span><span class="o">]</span> <span class="n">Line</span> <span class="mi">3</span> <span class="n">Column</span> <span class="mi">12</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span><span class="o">)</span><span class="n">IDENTIFIER</span>
+   <span class="o">|</span>   <span class="o">|</span>   <span class="o">(</span><span class="n">brackets</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">157</span><span class="err">#</span><span class="mi">48854</span><span class="n">e0</span> <span class="n">Line</span> <span class="mi">3</span> <span class="n">Column</span> <span class="mi">15</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span><span class="o">)</span><span class="n">brackets</span>
+   <span class="o">|</span>   <span class="o">|</span>  <span class="o">)</span><span class="n">variable_declarator_id</span>
+   <span class="o">|</span>   <span class="o">|</span> <span class="o">)</span><span class="n">variable_declarator</span>
+   <span class="o">|</span>   <span class="o">|)</span><span class="n">variable_declarator_list</span>
+   <span class="o">|</span>   <span class="o">|(</span><span class="sc">&#39;;&#39;</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">440</span><span class="err">#</span><span class="mi">48854</span><span class="n">c0</span><span class="o">[</span><span class="n">Keyword</span><span class="o">:</span><span class="mi">0</span><span class="o">]</span> <span class="n">Line</span> <span class="mi">3</span> <span class="n">Column</span> <span class="mi">15</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span><span class="o">)</span><span class="sc">&#39;;&#39;</span>
+   <span class="o">|</span>   <span class="o">)</span><span class="n">field_declaration</span>
+   <span class="o">|</span>  <span class="o">)</span><span class="n">class_body_declaration</span>
+   <span class="o">|</span> <span class="o">)</span><span class="n">class_body_declarations</span>
+   <span class="o">|</span> <span class="o">(</span><span class="n">class_body_declaration</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">117</span><span class="err">#</span><span class="mi">4885</span><span class="n">c40</span> <span class="n">Line</span> <span class="mi">4</span> <span class="n">Column</span> <span class="mi">5</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span>
+   <span class="o">|</span>  <span class="o">(</span><span class="n">method_declaration</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">135</span><span class="err">#</span><span class="mi">4885</span><span class="n">c00</span> <span class="n">Line</span> <span class="mi">4</span> <span class="n">Column</span> <span class="mi">5</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span>
+   <span class="o">|</span>   <span class="o">(</span><span class="n">method_modifiers</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">141</span><span class="err">#</span><span class="mi">4885700</span> <span class="n">Line</span> <span class="mi">4</span> <span class="n">Column</span> <span class="mi">5</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span>
+   <span class="o">|</span>   <span class="o">|(</span><span class="n">method_modifiers</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">142</span><span class="err">#</span><span class="mi">4884</span><span class="n">e40</span> <span class="n">Line</span> <span class="mi">4</span> <span class="n">Column</span> <span class="mi">5</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span><span class="o">)</span><span class="n">method_modifiers</span>
+   <span class="o">|</span>   <span class="o">|(</span><span class="n">method_modifier</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">147</span><span class="err">#</span><span class="mi">48856</span><span class="n">a0</span> <span class="n">Line</span> <span class="mi">4</span> <span class="n">Column</span> <span class="mi">5</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span>
+   <span class="o">|</span>   <span class="o">|</span> <span class="o">(</span><span class="err">&#39;</span><span class="kd">public</span><span class="err">&#39;</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">453</span><span class="err">#</span><span class="mi">48853</span><span class="n">a0</span><span class="o">[</span><span class="n">Keyword</span><span class="o">:</span><span class="mi">0</span><span class="o">]</span> <span class="n">Line</span> <span class="mi">4</span> <span class="n">Column</span> <span class="mi">5</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span><span class="o">)</span><span class="err">&#39;</span><span class="kd">public</span><span class="err">&#39;</span>
+   <span class="o">|</span>   <span class="o">|)</span><span class="n">method_modifier</span>
+   <span class="o">|</span>   <span class="o">)</span><span class="n">method_modifiers</span>
+   <span class="o">|</span>   <span class="o">(</span><span class="n">type_parameters</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">408</span><span class="err">#</span><span class="mi">4885740</span> <span class="n">Line</span> <span class="mi">4</span> <span class="n">Column</span> <span class="mi">12</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span><span class="o">)</span><span class="n">type_parameters</span>
+   <span class="o">|</span>   <span class="o">(</span><span class="n">type</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">191</span><span class="err">#</span><span class="mi">4885900</span> <span class="n">Line</span> <span class="mi">4</span> <span class="n">Column</span> <span class="mi">12</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span>
+   <span class="o">|</span>   <span class="o">|(</span><span class="n">name</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">406</span><span class="err">#</span><span class="mi">48852</span><span class="n">a0</span> <span class="n">Line</span> <span class="mi">4</span> <span class="n">Column</span> <span class="mi">12</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span>
+   <span class="o">|</span>   <span class="o">|</span> <span class="o">(</span><span class="n">IDENTIFIER</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">447</span><span class="err">#</span><span class="mi">4885660</span><span class="o">[</span><span class="err">`</span><span class="n">String</span><span class="err">&#39;</span><span class="o">]</span> <span class="n">Line</span> <span class="mi">4</span> <span class="n">Column</span> <span class="mi">12</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span><span class="o">)</span><span class="n">IDENTIFIER</span>
+   <span class="o">|</span>   <span class="o">|</span> <span class="o">(</span><span class="n">type_arguments</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">407</span><span class="err">#</span><span class="mi">48851</span><span class="n">a0</span> <span class="n">Line</span> <span class="mi">4</span> <span class="n">Column</span> <span class="mi">19</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span><span class="o">)</span><span class="n">type_arguments</span>
+   <span class="o">|</span>   <span class="o">|)</span><span class="n">name</span>
+   <span class="o">|</span>   <span class="o">|(</span><span class="n">brackets</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">157</span><span class="err">#</span><span class="mi">48858</span><span class="n">c0</span> <span class="n">Line</span> <span class="mi">4</span> <span class="n">Column</span> <span class="mi">19</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span><span class="o">)</span><span class="n">brackets</span>
+   <span class="o">|</span>   <span class="o">)</span><span class="n">type</span>
+   <span class="o">|</span>   <span class="o">(</span><span class="n">IDENTIFIER</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">447</span><span class="err">#</span><span class="mi">48855</span><span class="n">c0</span><span class="o">[</span><span class="err">`</span><span class="n">toString</span><span class="err">&#39;</span><span class="o">]</span> <span class="n">Line</span> <span class="mi">4</span> <span class="n">Column</span> <span class="mi">19</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span><span class="o">)</span><span class="n">IDENTIFIER</span>
+   <span class="o">|</span>   <span class="o">(</span><span class="n">parameters</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">158</span><span class="err">#</span><span class="mi">48858</span><span class="n">e0</span> <span class="n">Line</span> <span class="mi">4</span> <span class="n">Column</span> <span class="mi">27</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span>
+   <span class="o">|</span>   <span class="o">|(</span><span class="sc">&#39;(&#39;</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">450</span><span class="err">#</span><span class="mi">4885840</span><span class="o">[</span><span class="n">Keyword</span><span class="o">:</span><span class="mi">0</span><span class="o">]</span> <span class="n">Line</span> <span class="mi">4</span> <span class="n">Column</span> <span class="mi">27</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span><span class="o">)</span><span class="sc">&#39;(&#39;</span>
+   <span class="o">|</span>   <span class="o">|(</span><span class="sc">&#39;)&#39;</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">451</span><span class="err">#</span><span class="mi">4885620</span><span class="o">[</span><span class="n">Keyword</span><span class="o">:</span><span class="mi">0</span><span class="o">]</span> <span class="n">Line</span> <span class="mi">4</span> <span class="n">Column</span> <span class="mi">28</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span><span class="o">)</span><span class="sc">&#39;)&#39;</span>
+   <span class="o">|</span>   <span class="o">)</span><span class="n">parameters</span>
+   <span class="o">|</span>   <span class="o">(</span><span class="n">brackets</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">157</span><span class="err">#</span><span class="mi">4885060</span> <span class="n">Line</span> <span class="mi">5</span> <span class="n">Column</span> <span class="mi">7</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span><span class="o">)</span><span class="n">brackets</span>
+   <span class="o">|</span>   <span class="o">(</span><span class="n">block</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">217</span><span class="err">#</span><span class="mi">4885</span><span class="n">be0</span> <span class="n">Line</span> <span class="mi">5</span> <span class="n">Column</span> <span class="mi">7</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span>
+   <span class="o">|</span>   <span class="o">|(</span><span class="sc">&#39;{&#39;</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">448</span><span class="err">#</span><span class="mi">48851</span><span class="n">c0</span><span class="o">[</span><span class="n">Keyword</span><span class="o">:</span><span class="mi">0</span><span class="o">]</span> <span class="n">Line</span> <span class="mi">5</span> <span class="n">Column</span> <span class="mi">7</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span><span class="o">)</span><span class="sc">&#39;{&#39;</span>
+   <span class="o">|</span>   <span class="o">|(</span><span class="n">statement_sequence</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">218</span><span class="err">#</span><span class="mi">4885</span><span class="n">ba0</span> <span class="n">Line</span> <span class="mi">5</span> <span class="n">Column</span> <span class="mi">9</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span>
+   <span class="o">|</span>   <span class="o">|</span> <span class="o">(</span><span class="n">statement_sequence_member</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">223</span><span class="err">#</span><span class="mi">4885</span><span class="n">b80</span> <span class="n">Line</span> <span class="mi">5</span> <span class="n">Column</span> <span class="mi">9</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span>
+   <span class="o">|</span>   <span class="o">|</span>  <span class="o">(</span><span class="n">executable_statement</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">243</span><span class="err">#</span><span class="mi">4885</span><span class="n">b60</span> <span class="n">Line</span> <span class="mi">5</span> <span class="n">Column</span> <span class="mi">9</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span>
+   <span class="o">|</span>   <span class="o">|</span>   <span class="o">(</span><span class="err">&#39;</span><span class="k">return</span><span class="err">&#39;</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">491</span><span class="err">#</span><span class="mi">4884</span><span class="n">f60</span><span class="o">[</span><span class="n">Keyword</span><span class="o">:</span><span class="mi">0</span><span class="o">]</span> <span class="n">Line</span> <span class="mi">5</span> <span class="n">Column</span> <span class="mi">9</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span><span class="o">)</span><span class="err">&#39;</span><span class="k">return</span><span class="err">&#39;</span>
+   <span class="o">|</span>   <span class="o">|</span>   <span class="o">(</span><span class="n">expression</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">332</span><span class="err">#</span><span class="mi">4885</span><span class="n">ac0</span> <span class="n">Line</span> <span class="mi">5</span> <span class="n">Column</span> <span class="mi">16</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span>
+   <span class="o">|</span>   <span class="o">|</span>   <span class="o">|(</span><span class="n">conditional_expression</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">345</span><span class="err">#</span><span class="mi">4885</span><span class="n">a60</span> <span class="n">Line</span> <span class="mi">5</span> <span class="n">Column</span> <span class="mi">16</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span>
+   <span class="o">|</span>   <span class="o">|</span>   <span class="o">|</span> <span class="o">(</span><span class="n">conditional_or_expression</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">347</span><span class="err">#</span><span class="mi">4885</span><span class="n">a20</span> <span class="n">Line</span> <span class="mi">5</span> <span class="n">Column</span> <span class="mi">16</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span>
+   <span class="o">|</span>   <span class="o">|</span>   <span class="o">|</span>  <span class="o">(</span><span class="n">conditional_and_expression</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">349</span><span class="err">#</span><span class="mi">48859</span><span class="n">e0</span> <span class="n">Line</span> <span class="mi">5</span> <span class="n">Column</span> <span class="mi">16</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span>
+   <span class="o">|</span>   <span class="o">|</span>   <span class="o">|</span>   <span class="o">(</span><span class="n">inclusive_or_expression</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">351</span><span class="err">#</span><span class="mi">48857</span><span class="n">e0</span> <span class="n">Line</span> <span class="mi">5</span> <span class="n">Column</span> <span class="mi">16</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span>
+   <span class="o">|</span>   <span class="o">|</span>   <span class="o">|</span>   <span class="o">|(</span><span class="n">exclusive_or_expression</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">353</span><span class="err">#</span><span class="mi">48855</span><span class="n">a0</span> <span class="n">Line</span> <span class="mi">5</span> <span class="n">Column</span> <span class="mi">16</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span>
+   <span class="o">|</span>   <span class="o">|</span>   <span class="o">|</span>   <span class="o">|</span> <span class="o">(</span><span class="n">and_expression</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">355</span><span class="err">#</span><span class="mi">4885940</span> <span class="n">Line</span> <span class="mi">5</span> <span class="n">Column</span> <span class="mi">16</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span>
+   <span class="o">|</span>   <span class="o">|</span>   <span class="o">|</span>   <span class="o">|</span>  <span class="o">(</span><span class="n">equality_expression</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">357</span><span class="err">#</span><span class="mi">4885880</span> <span class="n">Line</span> <span class="mi">5</span> <span class="n">Column</span> <span class="mi">16</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span>
+   <span class="o">|</span>   <span class="o">|</span>   <span class="o">|</span>   <span class="o">|</span>   <span class="o">(</span><span class="n">relational_expression</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">360</span><span class="err">#</span><span class="mi">4885800</span> <span class="n">Line</span> <span class="mi">5</span> <span class="n">Column</span> <span class="mi">16</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span>
+   <span class="o">|</span>   <span class="o">|</span>   <span class="o">|</span>   <span class="o">|</span>   <span class="o">|(</span><span class="n">shift_expression</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">366</span><span class="err">#</span><span class="mi">48856</span><span class="n">c0</span> <span class="n">Line</span> <span class="mi">5</span> <span class="n">Column</span> <span class="mi">16</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span>
+   <span class="o">|</span>   <span class="o">|</span>   <span class="o">|</span>   <span class="o">|</span>   <span class="o">|</span> <span class="o">(</span><span class="n">additive_expression</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">370</span><span class="err">#</span><span class="mi">4885180</span> <span class="n">Line</span> <span class="mi">5</span> <span class="n">Column</span> <span class="mi">16</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span>
+   <span class="o">|</span>   <span class="o">|</span>   <span class="o">|</span>   <span class="o">|</span>   <span class="o">|</span>  <span class="o">(</span><span class="n">multiplicative_expression</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">373</span><span class="err">#</span><span class="mi">4885780</span> <span class="n">Line</span> <span class="mi">5</span> <span class="n">Column</span> <span class="mi">16</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span>
+   <span class="o">|</span>   <span class="o">|</span>   <span class="o">|</span>   <span class="o">|</span>   <span class="o">|</span>   <span class="o">(</span><span class="n">unary_expression</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">383</span><span class="err">#</span><span class="mi">4885600</span> <span class="n">Line</span> <span class="mi">5</span> <span class="n">Column</span> <span class="mi">16</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span>
+   <span class="o">|</span>   <span class="o">|</span>   <span class="o">|</span>   <span class="o">|</span>   <span class="o">|</span>   <span class="o">|(</span><span class="n">unary_expression_not_plus_minus</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">389</span><span class="err">#</span><span class="mi">4885680</span> <span class="n">Line</span> <span class="mi">5</span> <span class="n">Column</span> <span class="mi">16</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span>
+   <span class="o">|</span>   <span class="o">|</span>   <span class="o">|</span>   <span class="o">|</span>   <span class="o">|</span>   <span class="o">|</span> <span class="o">(</span><span class="n">literal</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">390</span><span class="err">#</span><span class="mi">4884</span><span class="n">f80</span> <span class="n">Line</span> <span class="mi">5</span> <span class="n">Column</span> <span class="mi">16</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span>
+   <span class="o">|</span>   <span class="o">|</span>   <span class="o">|</span>   <span class="o">|</span>   <span class="o">|</span>   <span class="o">|</span>  <span class="o">(</span><span class="n">STRING</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">536</span><span class="err">#</span><span class="mi">4885120</span><span class="o">[</span><span class="err">`</span><span class="n">name</span><span class="err">&#39;</span><span class="o">]</span> <span class="n">Line</span> <span class="mi">5</span> <span class="n">Column</span> <span class="mi">16</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span><span class="o">)</span><span class="n">STRING</span>
+   <span class="o">|</span>   <span class="o">|</span>   <span class="o">|</span>   <span class="o">|</span>   <span class="o">|</span>   <span class="o">|</span> <span class="o">)</span><span class="n">literal</span>
+   <span class="o">|</span>   <span class="o">|</span>   <span class="o">|</span>   <span class="o">|</span>   <span class="o">|</span>   <span class="o">|)</span><span class="n">unary_expression_not_plus_minus</span>
+   <span class="o">|</span>   <span class="o">|</span>   <span class="o">|</span>   <span class="o">|</span>   <span class="o">|</span>   <span class="o">)</span><span class="n">unary_expression</span>
+   <span class="o">|</span>   <span class="o">|</span>   <span class="o">|</span>   <span class="o">|</span>   <span class="o">|</span>  <span class="o">)</span><span class="n">multiplicative_expression</span>
+   <span class="o">|</span>   <span class="o">|</span>   <span class="o">|</span>   <span class="o">|</span>   <span class="o">|</span> <span class="o">)</span><span class="n">additive_expression</span>
+   <span class="o">|</span>   <span class="o">|</span>   <span class="o">|</span>   <span class="o">|</span>   <span class="o">|)</span><span class="n">shift_expression</span>
+   <span class="o">|</span>   <span class="o">|</span>   <span class="o">|</span>   <span class="o">|</span>   <span class="o">)</span><span class="n">relational_expression</span>
+   <span class="o">|</span>   <span class="o">|</span>   <span class="o">|</span>   <span class="o">|</span>  <span class="o">)</span><span class="n">equality_expression</span>
+   <span class="o">|</span>   <span class="o">|</span>   <span class="o">|</span>   <span class="o">|</span> <span class="o">)</span><span class="n">and_expression</span>
+   <span class="o">|</span>   <span class="o">|</span>   <span class="o">|</span>   <span class="o">|)</span><span class="n">exclusive_or_expression</span>
+   <span class="o">|</span>   <span class="o">|</span>   <span class="o">|</span>   <span class="o">)</span><span class="n">inclusive_or_expression</span>
+   <span class="o">|</span>   <span class="o">|</span>   <span class="o">|</span>  <span class="o">)</span><span class="n">conditional_and_expression</span>
+   <span class="o">|</span>   <span class="o">|</span>   <span class="o">|</span> <span class="o">)</span><span class="n">conditional_or_expression</span>
+   <span class="o">|</span>   <span class="o">|</span>   <span class="o">|)</span><span class="n">conditional_expression</span>
+   <span class="o">|</span>   <span class="o">|</span>   <span class="o">)</span><span class="n">expression</span>
+   <span class="o">|</span>   <span class="o">|</span>   <span class="o">(</span><span class="sc">&#39;;&#39;</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">440</span><span class="err">#</span><span class="mi">48856</span><span class="n">e0</span><span class="o">[</span><span class="n">Keyword</span><span class="o">:</span><span class="mi">0</span><span class="o">]</span> <span class="n">Line</span> <span class="mi">5</span> <span class="n">Column</span> <span class="mi">22</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span><span class="o">)</span><span class="sc">&#39;;&#39;</span>
+   <span class="o">|</span>   <span class="o">|</span>  <span class="o">)</span><span class="n">executable_statement</span>
+   <span class="o">|</span>   <span class="o">|</span> <span class="o">)</span><span class="n">statement_sequence_member</span>
+   <span class="o">|</span>   <span class="o">|)</span><span class="n">statement_sequence</span>
+   <span class="o">|</span>   <span class="o">|(</span><span class="sc">&#39;}&#39;</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">449</span><span class="err">#</span><span class="mi">4885</span><span class="n">b40</span><span class="o">[</span><span class="n">Keyword</span><span class="o">:</span><span class="mi">0</span><span class="o">]</span> <span class="n">Line</span> <span class="mi">5</span> <span class="n">Column</span> <span class="mi">28</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span><span class="o">)</span><span class="sc">&#39;}&#39;</span>
+   <span class="o">|</span>   <span class="o">)</span><span class="n">block</span>
+   <span class="o">|</span>  <span class="o">)</span><span class="n">method_declaration</span>
+   <span class="o">|</span> <span class="o">)</span><span class="n">class_body_declaration</span>
+   <span class="o">|)</span><span class="n">class_body_declarations</span>
+   <span class="o">|(</span><span class="sc">&#39;}&#39;</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">449</span><span class="err">#</span><span class="mi">4885</span><span class="n">bc0</span><span class="o">[</span><span class="n">Keyword</span><span class="o">:</span><span class="mi">0</span><span class="o">]</span> <span class="n">Line</span> <span class="mi">6</span> <span class="n">Column</span> <span class="mi">1</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span><span class="o">)</span><span class="sc">&#39;}&#39;</span>
+   <span class="o">)</span><span class="n">class_body</span>
+  <span class="o">)</span><span class="n">type_declaration</span>
+ <span class="o">)</span><span class="n">type_declarations</span>
+ <span class="o">(</span><span class="n">optional_CONTROL_Z</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">5</span><span class="err">#</span><span class="mi">4885</span><span class="n">ce0</span> <span class="n">Line</span> <span class="mi">7</span> <span class="n">Column</span> <span class="mi">1</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span><span class="o">)</span><span class="n">optional_CONTROL_Z</span>
+<span class="o">)</span><span class="n">compilation_unit</span>
+</pre></div>
 
 <p>This is the AST (automatically generated by DMS from the CST):</p>
-<pre><code class="java">(compilation_unit@Java~Java1_6=1#486f900^0 Line 1 Column 1 File C:/temp/Person.java
- (type_declarations@Java~Java1_6=15#486f4c0 {1} Line 1 Column 1 File C:/temp/Person.java
-  (type_declaration@Java~Java1_6=17#486f5e0 Line 1 Column 1 File C:/temp/Person.java
-   (type_class_modifiers@Java~Java1_6=77#486eda0 Line 1 Column 1 File C:/temp/Person.java)type_class_modifiers
-   (class_header@Java~Java1_6=89#486ee60 Line 1 Column 1 File C:/temp/Person.java
-   |(IDENTIFIER@Java~Java1_6=447#486ede0[`Person'] Line 1 Column 7 File C:/temp/Person.java)IDENTIFIER
-   |(type_parameters@Java~Java1_6=408#486ee20 Line 1 Column 14 File C:/temp/Person.java)type_parameters
-   )class_header
-   (class_body@Java~Java1_6=94#486f040 Line 1 Column 14 File C:/temp/Person.java
-   |(class_body_declarations@Java~Java1_6=111#486ee40 {3} Line 2 Column 5 File C:/temp/Person.java
-   | (class_body_declaration@Java~Java1_6=118#486f300 Line 2 Column 5 File C:/temp/Person.java
-   |  (field_declaration@Java~Java1_6=168#486f380 Line 2 Column 5 File C:/temp/Person.java
-   |   (field_modifiers@Java~Java1_6=170#486eec0 Line 2 Column 5 File C:/temp/Person.java)field_modifiers
-   |   (type@Java~Java1_6=191#486f240 Line 2 Column 5 File C:/temp/Person.java
-   |   |(name@Java~Java1_6=406#486f180 Line 2 Column 5 File C:/temp/Person.java
-   |   | (IDENTIFIER@Java~Java1_6=447#486eea0[`String'] Line 2 Column 5 File C:/temp/Person.java)IDENTIFIER
-   |   | (type_arguments@Java~Java1_6=407#486f0e0 Line 2 Column 12 File C:/temp/Person.java)type_arguments
-   |   |)name
-   |   |(brackets@Java~Java1_6=157#486f200 Line 2 Column 12 File C:/temp/Person.java)brackets
-   |   )type
-   |   (variable_declarator@Java~Java1_6=181#486ef20 Line 2 Column 12 File C:/temp/Person.java
-   |   |(variable_declarator_id@Java~Java1_6=167#486efe0 Line 2 Column 12 File C:/temp/Person.java
-   |   | (IDENTIFIER@Java~Java1_6=447#486f0c0[`name'] Line 2 Column 12 File C:/temp/Person.java)IDENTIFIER
-   |   | (brackets@Java~Java1_6=157#486f060 Line 2 Column 16 File C:/temp/Person.java)brackets
-   |   |)variable_declarator_id
-   |   )variable_declarator
-   |  )field_declaration
-   | )class_body_declaration
-   | (class_body_declaration@Java~Java1_6=118#486f000 Line 3 Column 5 File C:/temp/Person.java
-   |  (field_declaration@Java~Java1_6=168#486f320 Line 3 Column 5 File C:/temp/Person.java
-   |   (field_modifiers@Java~Java1_6=170#486f2a0 Line 3 Column 5 File C:/temp/Person.java)field_modifiers
-   |   (type@Java~Java1_6=192#486eee0 Line 3 Column 5 File C:/temp/Person.java
-   |   |(primitive_type@Java~Java1_6=198#486ef60 Line 3 Column 5 File C:/temp/Person.java)primitive_type
-   |   |(brackets@Java~Java1_6=157#486ee00 Line 3 Column 12 File C:/temp/Person.java)brackets
-   |   )type
-   |   (variable_declarator@Java~Java1_6=181#486f2c0 Line 3 Column 12 File C:/temp/Person.java
-   |   |(variable_declarator_id@Java~Java1_6=167#486f3a0 Line 3 Column 12 File C:/temp/Person.java
-   |   | (IDENTIFIER@Java~Java1_6=447#486f120[`age'] Line 3 Column 12 File C:/temp/Person.java)IDENTIFIER
-   |   | (brackets@Java~Java1_6=157#486ef00 Line 3 Column 15 File C:/temp/Person.java)brackets
-   |   |)variable_declarator_id
-   |   )variable_declarator
-   |  )field_declaration
-   | )class_body_declaration
-   | (class_body_declaration@Java~Java1_6=117#486f7a0 Line 4 Column 5 File C:/temp/Person.java
-   |  (method_declaration@Java~Java1_6=135#486f480 Line 4 Column 5 File C:/temp/Person.java
-   |   (method_modifiers@Java~Java1_6=141#486f460 {1} Line 4 Column 5 File C:/temp/Person.java
-   |   |(method_modifier@Java~Java1_6=147#486f400 Line 4 Column 5 File C:/temp/Person.java)method_modifier
-   |   )method_modifiers
-   |   (type_parameters@Java~Java1_6=408#486f540 Line 4 Column 12 File C:/temp/Person.java)type_parameters
-   |   (type@Java~Java1_6=191#486f740 Line 4 Column 12 File C:/temp/Person.java
-   |   |(name@Java~Java1_6=406#486f620 Line 4 Column 12 File C:/temp/Person.java
-   |   | (IDENTIFIER@Java~Java1_6=447#486f080[`String'] Line 4 Column 12 File C:/temp/Person.java)IDENTIFIER
-   |   | (type_arguments@Java~Java1_6=407#486f640 Line 4 Column 19 File C:/temp/Person.java)type_arguments
-   |   |)name
-   |   |(brackets@Java~Java1_6=157#486f700 Line 4 Column 19 File C:/temp/Person.java)brackets
-   |   )type
-   |   (IDENTIFIER@Java~Java1_6=447#486f140[`toString'] Line 4 Column 19 File C:/temp/Person.java)IDENTIFIER
-   |   (parameters@Java~Java1_6=158#486f760 Line 4 Column 27 File C:/temp/Person.java)parameters
-   |   (brackets@Java~Java1_6=157#486f820 Line 5 Column 7 File C:/temp/Person.java)brackets
-   |   (block@Java~Java1_6=217#486f780 Line 5 Column 7 File C:/temp/Person.java
-   |   |(statement_sequence@Java~Java1_6=218#486f6e0 Line 5 Column 9 File C:/temp/Person.java
-   |   | (statement_sequence_member@Java~Java1_6=223#486f6c0 Line 5 Column 9 File C:/temp/Person.java
-   |   |  (executable_statement@Java~Java1_6=243#486f6a0 Line 5 Column 9 File C:/temp/Person.java
-   |   |   (unary_expression_not_plus_minus@Java~Java1_6=389#486f720 Line 5 Column 16 File C:/temp/Person.java
-   |   |   |(literal@Java~Java1_6=390#486f280 Line 5 Column 16 File C:/temp/Person.java
-   |   |   | (STRING@Java~Java1_6=536#486f160[`name'] Line 5 Column 16 File C:/temp/Person.java)STRING
-   |   |   |)literal
-   |   |   )unary_expression_not_plus_minus
-   |   |  )executable_statement
-   |   | )statement_sequence_member
-   |   |)statement_sequence
-   |   )block
-   |  )method_declaration
-   | )class_body_declaration
-   |)class_body_declarations
-   )class_body
-  )type_declaration
- )type_declarations
- (optional_CONTROL_Z@Java~Java1_6=5#486f4e0 Line 7 Column 1 File C:/temp/Person.java)optional_CONTROL_Z
-)compilation_unit
-</code></pre>
+<div class="highlight"><pre><span></span><span class="o">(</span><span class="n">compilation_unit</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">1</span><span class="err">#</span><span class="mi">486</span><span class="n">f900</span><span class="o">^</span><span class="mi">0</span> <span class="n">Line</span> <span class="mi">1</span> <span class="n">Column</span> <span class="mi">1</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span>
+ <span class="o">(</span><span class="n">type_declarations</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">15</span><span class="err">#</span><span class="mi">486</span><span class="n">f4c0</span> <span class="o">{</span><span class="mi">1</span><span class="o">}</span> <span class="n">Line</span> <span class="mi">1</span> <span class="n">Column</span> <span class="mi">1</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span>
+  <span class="o">(</span><span class="n">type_declaration</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">17</span><span class="err">#</span><span class="mi">486</span><span class="n">f5e0</span> <span class="n">Line</span> <span class="mi">1</span> <span class="n">Column</span> <span class="mi">1</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span>
+   <span class="o">(</span><span class="n">type_class_modifiers</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">77</span><span class="err">#</span><span class="mi">486</span><span class="n">eda0</span> <span class="n">Line</span> <span class="mi">1</span> <span class="n">Column</span> <span class="mi">1</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span><span class="o">)</span><span class="n">type_class_modifiers</span>
+   <span class="o">(</span><span class="n">class_header</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">89</span><span class="err">#</span><span class="mi">486</span><span class="n">ee60</span> <span class="n">Line</span> <span class="mi">1</span> <span class="n">Column</span> <span class="mi">1</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span>
+   <span class="o">|(</span><span class="n">IDENTIFIER</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">447</span><span class="err">#</span><span class="mi">486</span><span class="n">ede0</span><span class="o">[</span><span class="err">`</span><span class="n">Person</span><span class="err">&#39;</span><span class="o">]</span> <span class="n">Line</span> <span class="mi">1</span> <span class="n">Column</span> <span class="mi">7</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span><span class="o">)</span><span class="n">IDENTIFIER</span>
+   <span class="o">|(</span><span class="n">type_parameters</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">408</span><span class="err">#</span><span class="mi">486</span><span class="n">ee20</span> <span class="n">Line</span> <span class="mi">1</span> <span class="n">Column</span> <span class="mi">14</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span><span class="o">)</span><span class="n">type_parameters</span>
+   <span class="o">)</span><span class="n">class_header</span>
+   <span class="o">(</span><span class="n">class_body</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">94</span><span class="err">#</span><span class="mi">486</span><span class="n">f040</span> <span class="n">Line</span> <span class="mi">1</span> <span class="n">Column</span> <span class="mi">14</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span>
+   <span class="o">|(</span><span class="n">class_body_declarations</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">111</span><span class="err">#</span><span class="mi">486</span><span class="n">ee40</span> <span class="o">{</span><span class="mi">3</span><span class="o">}</span> <span class="n">Line</span> <span class="mi">2</span> <span class="n">Column</span> <span class="mi">5</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span>
+   <span class="o">|</span> <span class="o">(</span><span class="n">class_body_declaration</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">118</span><span class="err">#</span><span class="mi">486</span><span class="n">f300</span> <span class="n">Line</span> <span class="mi">2</span> <span class="n">Column</span> <span class="mi">5</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span>
+   <span class="o">|</span>  <span class="o">(</span><span class="n">field_declaration</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">168</span><span class="err">#</span><span class="mi">486</span><span class="n">f380</span> <span class="n">Line</span> <span class="mi">2</span> <span class="n">Column</span> <span class="mi">5</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span>
+   <span class="o">|</span>   <span class="o">(</span><span class="n">field_modifiers</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">170</span><span class="err">#</span><span class="mi">486</span><span class="n">eec0</span> <span class="n">Line</span> <span class="mi">2</span> <span class="n">Column</span> <span class="mi">5</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span><span class="o">)</span><span class="n">field_modifiers</span>
+   <span class="o">|</span>   <span class="o">(</span><span class="n">type</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">191</span><span class="err">#</span><span class="mi">486</span><span class="n">f240</span> <span class="n">Line</span> <span class="mi">2</span> <span class="n">Column</span> <span class="mi">5</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span>
+   <span class="o">|</span>   <span class="o">|(</span><span class="n">name</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">406</span><span class="err">#</span><span class="mi">486</span><span class="n">f180</span> <span class="n">Line</span> <span class="mi">2</span> <span class="n">Column</span> <span class="mi">5</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span>
+   <span class="o">|</span>   <span class="o">|</span> <span class="o">(</span><span class="n">IDENTIFIER</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">447</span><span class="err">#</span><span class="mi">486</span><span class="n">eea0</span><span class="o">[</span><span class="err">`</span><span class="n">String</span><span class="err">&#39;</span><span class="o">]</span> <span class="n">Line</span> <span class="mi">2</span> <span class="n">Column</span> <span class="mi">5</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span><span class="o">)</span><span class="n">IDENTIFIER</span>
+   <span class="o">|</span>   <span class="o">|</span> <span class="o">(</span><span class="n">type_arguments</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">407</span><span class="err">#</span><span class="mi">486</span><span class="n">f0e0</span> <span class="n">Line</span> <span class="mi">2</span> <span class="n">Column</span> <span class="mi">12</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span><span class="o">)</span><span class="n">type_arguments</span>
+   <span class="o">|</span>   <span class="o">|)</span><span class="n">name</span>
+   <span class="o">|</span>   <span class="o">|(</span><span class="n">brackets</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">157</span><span class="err">#</span><span class="mi">486</span><span class="n">f200</span> <span class="n">Line</span> <span class="mi">2</span> <span class="n">Column</span> <span class="mi">12</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span><span class="o">)</span><span class="n">brackets</span>
+   <span class="o">|</span>   <span class="o">)</span><span class="n">type</span>
+   <span class="o">|</span>   <span class="o">(</span><span class="n">variable_declarator</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">181</span><span class="err">#</span><span class="mi">486</span><span class="n">ef20</span> <span class="n">Line</span> <span class="mi">2</span> <span class="n">Column</span> <span class="mi">12</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span>
+   <span class="o">|</span>   <span class="o">|(</span><span class="n">variable_declarator_id</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">167</span><span class="err">#</span><span class="mi">486</span><span class="n">efe0</span> <span class="n">Line</span> <span class="mi">2</span> <span class="n">Column</span> <span class="mi">12</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span>
+   <span class="o">|</span>   <span class="o">|</span> <span class="o">(</span><span class="n">IDENTIFIER</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">447</span><span class="err">#</span><span class="mi">486</span><span class="n">f0c0</span><span class="o">[</span><span class="err">`</span><span class="n">name</span><span class="err">&#39;</span><span class="o">]</span> <span class="n">Line</span> <span class="mi">2</span> <span class="n">Column</span> <span class="mi">12</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span><span class="o">)</span><span class="n">IDENTIFIER</span>
+   <span class="o">|</span>   <span class="o">|</span> <span class="o">(</span><span class="n">brackets</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">157</span><span class="err">#</span><span class="mi">486</span><span class="n">f060</span> <span class="n">Line</span> <span class="mi">2</span> <span class="n">Column</span> <span class="mi">16</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span><span class="o">)</span><span class="n">brackets</span>
+   <span class="o">|</span>   <span class="o">|)</span><span class="n">variable_declarator_id</span>
+   <span class="o">|</span>   <span class="o">)</span><span class="n">variable_declarator</span>
+   <span class="o">|</span>  <span class="o">)</span><span class="n">field_declaration</span>
+   <span class="o">|</span> <span class="o">)</span><span class="n">class_body_declaration</span>
+   <span class="o">|</span> <span class="o">(</span><span class="n">class_body_declaration</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">118</span><span class="err">#</span><span class="mi">486</span><span class="n">f000</span> <span class="n">Line</span> <span class="mi">3</span> <span class="n">Column</span> <span class="mi">5</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span>
+   <span class="o">|</span>  <span class="o">(</span><span class="n">field_declaration</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">168</span><span class="err">#</span><span class="mi">486</span><span class="n">f320</span> <span class="n">Line</span> <span class="mi">3</span> <span class="n">Column</span> <span class="mi">5</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span>
+   <span class="o">|</span>   <span class="o">(</span><span class="n">field_modifiers</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">170</span><span class="err">#</span><span class="mi">486</span><span class="n">f2a0</span> <span class="n">Line</span> <span class="mi">3</span> <span class="n">Column</span> <span class="mi">5</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span><span class="o">)</span><span class="n">field_modifiers</span>
+   <span class="o">|</span>   <span class="o">(</span><span class="n">type</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">192</span><span class="err">#</span><span class="mi">486</span><span class="n">eee0</span> <span class="n">Line</span> <span class="mi">3</span> <span class="n">Column</span> <span class="mi">5</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span>
+   <span class="o">|</span>   <span class="o">|(</span><span class="n">primitive_type</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">198</span><span class="err">#</span><span class="mi">486</span><span class="n">ef60</span> <span class="n">Line</span> <span class="mi">3</span> <span class="n">Column</span> <span class="mi">5</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span><span class="o">)</span><span class="n">primitive_type</span>
+   <span class="o">|</span>   <span class="o">|(</span><span class="n">brackets</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">157</span><span class="err">#</span><span class="mi">486</span><span class="n">ee00</span> <span class="n">Line</span> <span class="mi">3</span> <span class="n">Column</span> <span class="mi">12</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span><span class="o">)</span><span class="n">brackets</span>
+   <span class="o">|</span>   <span class="o">)</span><span class="n">type</span>
+   <span class="o">|</span>   <span class="o">(</span><span class="n">variable_declarator</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">181</span><span class="err">#</span><span class="mi">486</span><span class="n">f2c0</span> <span class="n">Line</span> <span class="mi">3</span> <span class="n">Column</span> <span class="mi">12</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span>
+   <span class="o">|</span>   <span class="o">|(</span><span class="n">variable_declarator_id</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">167</span><span class="err">#</span><span class="mi">486</span><span class="n">f3a0</span> <span class="n">Line</span> <span class="mi">3</span> <span class="n">Column</span> <span class="mi">12</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span>
+   <span class="o">|</span>   <span class="o">|</span> <span class="o">(</span><span class="n">IDENTIFIER</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">447</span><span class="err">#</span><span class="mi">486</span><span class="n">f120</span><span class="o">[</span><span class="err">`</span><span class="n">age</span><span class="err">&#39;</span><span class="o">]</span> <span class="n">Line</span> <span class="mi">3</span> <span class="n">Column</span> <span class="mi">12</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span><span class="o">)</span><span class="n">IDENTIFIER</span>
+   <span class="o">|</span>   <span class="o">|</span> <span class="o">(</span><span class="n">brackets</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">157</span><span class="err">#</span><span class="mi">486</span><span class="n">ef00</span> <span class="n">Line</span> <span class="mi">3</span> <span class="n">Column</span> <span class="mi">15</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span><span class="o">)</span><span class="n">brackets</span>
+   <span class="o">|</span>   <span class="o">|)</span><span class="n">variable_declarator_id</span>
+   <span class="o">|</span>   <span class="o">)</span><span class="n">variable_declarator</span>
+   <span class="o">|</span>  <span class="o">)</span><span class="n">field_declaration</span>
+   <span class="o">|</span> <span class="o">)</span><span class="n">class_body_declaration</span>
+   <span class="o">|</span> <span class="o">(</span><span class="n">class_body_declaration</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">117</span><span class="err">#</span><span class="mi">486</span><span class="n">f7a0</span> <span class="n">Line</span> <span class="mi">4</span> <span class="n">Column</span> <span class="mi">5</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span>
+   <span class="o">|</span>  <span class="o">(</span><span class="n">method_declaration</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">135</span><span class="err">#</span><span class="mi">486</span><span class="n">f480</span> <span class="n">Line</span> <span class="mi">4</span> <span class="n">Column</span> <span class="mi">5</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span>
+   <span class="o">|</span>   <span class="o">(</span><span class="n">method_modifiers</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">141</span><span class="err">#</span><span class="mi">486</span><span class="n">f460</span> <span class="o">{</span><span class="mi">1</span><span class="o">}</span> <span class="n">Line</span> <span class="mi">4</span> <span class="n">Column</span> <span class="mi">5</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span>
+   <span class="o">|</span>   <span class="o">|(</span><span class="n">method_modifier</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">147</span><span class="err">#</span><span class="mi">486</span><span class="n">f400</span> <span class="n">Line</span> <span class="mi">4</span> <span class="n">Column</span> <span class="mi">5</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span><span class="o">)</span><span class="n">method_modifier</span>
+   <span class="o">|</span>   <span class="o">)</span><span class="n">method_modifiers</span>
+   <span class="o">|</span>   <span class="o">(</span><span class="n">type_parameters</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">408</span><span class="err">#</span><span class="mi">486</span><span class="n">f540</span> <span class="n">Line</span> <span class="mi">4</span> <span class="n">Column</span> <span class="mi">12</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span><span class="o">)</span><span class="n">type_parameters</span>
+   <span class="o">|</span>   <span class="o">(</span><span class="n">type</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">191</span><span class="err">#</span><span class="mi">486</span><span class="n">f740</span> <span class="n">Line</span> <span class="mi">4</span> <span class="n">Column</span> <span class="mi">12</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span>
+   <span class="o">|</span>   <span class="o">|(</span><span class="n">name</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">406</span><span class="err">#</span><span class="mi">486</span><span class="n">f620</span> <span class="n">Line</span> <span class="mi">4</span> <span class="n">Column</span> <span class="mi">12</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span>
+   <span class="o">|</span>   <span class="o">|</span> <span class="o">(</span><span class="n">IDENTIFIER</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">447</span><span class="err">#</span><span class="mi">486</span><span class="n">f080</span><span class="o">[</span><span class="err">`</span><span class="n">String</span><span class="err">&#39;</span><span class="o">]</span> <span class="n">Line</span> <span class="mi">4</span> <span class="n">Column</span> <span class="mi">12</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span><span class="o">)</span><span class="n">IDENTIFIER</span>
+   <span class="o">|</span>   <span class="o">|</span> <span class="o">(</span><span class="n">type_arguments</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">407</span><span class="err">#</span><span class="mi">486</span><span class="n">f640</span> <span class="n">Line</span> <span class="mi">4</span> <span class="n">Column</span> <span class="mi">19</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span><span class="o">)</span><span class="n">type_arguments</span>
+   <span class="o">|</span>   <span class="o">|)</span><span class="n">name</span>
+   <span class="o">|</span>   <span class="o">|(</span><span class="n">brackets</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">157</span><span class="err">#</span><span class="mi">486</span><span class="n">f700</span> <span class="n">Line</span> <span class="mi">4</span> <span class="n">Column</span> <span class="mi">19</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span><span class="o">)</span><span class="n">brackets</span>
+   <span class="o">|</span>   <span class="o">)</span><span class="n">type</span>
+   <span class="o">|</span>   <span class="o">(</span><span class="n">IDENTIFIER</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">447</span><span class="err">#</span><span class="mi">486</span><span class="n">f140</span><span class="o">[</span><span class="err">`</span><span class="n">toString</span><span class="err">&#39;</span><span class="o">]</span> <span class="n">Line</span> <span class="mi">4</span> <span class="n">Column</span> <span class="mi">19</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span><span class="o">)</span><span class="n">IDENTIFIER</span>
+   <span class="o">|</span>   <span class="o">(</span><span class="n">parameters</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">158</span><span class="err">#</span><span class="mi">486</span><span class="n">f760</span> <span class="n">Line</span> <span class="mi">4</span> <span class="n">Column</span> <span class="mi">27</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span><span class="o">)</span><span class="n">parameters</span>
+   <span class="o">|</span>   <span class="o">(</span><span class="n">brackets</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">157</span><span class="err">#</span><span class="mi">486</span><span class="n">f820</span> <span class="n">Line</span> <span class="mi">5</span> <span class="n">Column</span> <span class="mi">7</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span><span class="o">)</span><span class="n">brackets</span>
+   <span class="o">|</span>   <span class="o">(</span><span class="n">block</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">217</span><span class="err">#</span><span class="mi">486</span><span class="n">f780</span> <span class="n">Line</span> <span class="mi">5</span> <span class="n">Column</span> <span class="mi">7</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span>
+   <span class="o">|</span>   <span class="o">|(</span><span class="n">statement_sequence</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">218</span><span class="err">#</span><span class="mi">486</span><span class="n">f6e0</span> <span class="n">Line</span> <span class="mi">5</span> <span class="n">Column</span> <span class="mi">9</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span>
+   <span class="o">|</span>   <span class="o">|</span> <span class="o">(</span><span class="n">statement_sequence_member</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">223</span><span class="err">#</span><span class="mi">486</span><span class="n">f6c0</span> <span class="n">Line</span> <span class="mi">5</span> <span class="n">Column</span> <span class="mi">9</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span>
+   <span class="o">|</span>   <span class="o">|</span>  <span class="o">(</span><span class="n">executable_statement</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">243</span><span class="err">#</span><span class="mi">486</span><span class="n">f6a0</span> <span class="n">Line</span> <span class="mi">5</span> <span class="n">Column</span> <span class="mi">9</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span>
+   <span class="o">|</span>   <span class="o">|</span>   <span class="o">(</span><span class="n">unary_expression_not_plus_minus</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">389</span><span class="err">#</span><span class="mi">486</span><span class="n">f720</span> <span class="n">Line</span> <span class="mi">5</span> <span class="n">Column</span> <span class="mi">16</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span>
+   <span class="o">|</span>   <span class="o">|</span>   <span class="o">|(</span><span class="n">literal</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">390</span><span class="err">#</span><span class="mi">486</span><span class="n">f280</span> <span class="n">Line</span> <span class="mi">5</span> <span class="n">Column</span> <span class="mi">16</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span>
+   <span class="o">|</span>   <span class="o">|</span>   <span class="o">|</span> <span class="o">(</span><span class="n">STRING</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">536</span><span class="err">#</span><span class="mi">486</span><span class="n">f160</span><span class="o">[</span><span class="err">`</span><span class="n">name</span><span class="err">&#39;</span><span class="o">]</span> <span class="n">Line</span> <span class="mi">5</span> <span class="n">Column</span> <span class="mi">16</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span><span class="o">)</span><span class="n">STRING</span>
+   <span class="o">|</span>   <span class="o">|</span>   <span class="o">|)</span><span class="n">literal</span>
+   <span class="o">|</span>   <span class="o">|</span>   <span class="o">)</span><span class="n">unary_expression_not_plus_minus</span>
+   <span class="o">|</span>   <span class="o">|</span>  <span class="o">)</span><span class="n">executable_statement</span>
+   <span class="o">|</span>   <span class="o">|</span> <span class="o">)</span><span class="n">statement_sequence_member</span>
+   <span class="o">|</span>   <span class="o">|)</span><span class="n">statement_sequence</span>
+   <span class="o">|</span>   <span class="o">)</span><span class="n">block</span>
+   <span class="o">|</span>  <span class="o">)</span><span class="n">method_declaration</span>
+   <span class="o">|</span> <span class="o">)</span><span class="n">class_body_declaration</span>
+   <span class="o">|)</span><span class="n">class_body_declarations</span>
+   <span class="o">)</span><span class="n">class_body</span>
+  <span class="o">)</span><span class="n">type_declaration</span>
+ <span class="o">)</span><span class="n">type_declarations</span>
+ <span class="o">(</span><span class="n">optional_CONTROL_Z</span><span class="nd">@Java</span><span class="o">~</span><span class="n">Java1_6</span><span class="o">=</span><span class="mi">5</span><span class="err">#</span><span class="mi">486</span><span class="n">f4e0</span> <span class="n">Line</span> <span class="mi">7</span> <span class="n">Column</span> <span class="mi">1</span> <span class="n">File</span> <span class="n">C</span><span class="o">:/</span><span class="n">temp</span><span class="o">/</span><span class="n">Person</span><span class="o">.</span><span class="na">java</span><span class="o">)</span><span class="n">optional_CONTROL_Z</span>
+<span class="o">)</span><span class="n">compilation_unit</span>
+</pre></div>
 
 <p>EDIT March 2015: <a href="https://stackoverflow.com/a/17393852/120163">Here's a link to some C++ AST examples</a></p>
 <p>Edit May 2015: DMS has long done Java 1.7 and 1.8, too.</p>
@@ -1421,6 +1421,8 @@ a   *
       <script src="../../../assets/javascripts/application.808e90bb.js"></script>
       
       <script>app.initialize({version:"1.0.4",url:{base:"../../.."}})</script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
       
     
   </body>

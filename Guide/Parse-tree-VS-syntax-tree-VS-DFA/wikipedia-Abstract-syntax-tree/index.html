@@ -979,13 +979,13 @@
 <p>Abstract syntax trees are also used in <a href="https://en.wikipedia.org/wiki/Program_analysis">program analysis</a> and <a href="https://en.wikipedia.org/wiki/Program_transformation">program transformation</a> systems.</p>
 <p><a href="https://en.wikipedia.org/wiki/File:Abstract_syntax_tree_for_Euclidean_algorithm.svg"><img alt="img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/c/c7/Abstract_syntax_tree_for_Euclidean_algorithm.svg/400px-Abstract_syntax_tree_for_Euclidean_algorithm.svg.png" /></a></p>
 <p>An abstract syntax tree for the following code for the <a href="https://en.wikipedia.org/wiki/Euclidean_algorithm">Euclidean algorithm</a></p>
-<pre><code class="pseudocode">while b ≠ 0
+<div class="highlight"><pre><span></span>while b ≠ 0
   if a &gt; b
     a := a − b
   else
     b := b − a
 return a
-</code></pre>
+</pre></div>
 
 <h2 id="application-in-compilers">Application in compilers<a class="headerlink" href="#application-in-compilers" title="Permanent link">#</a></h2>
 <p><strong>Abstract syntax trees</strong> are <a href="https://en.wikipedia.org/wiki/Data_structures">data structures</a> widely used in <a href="https://en.wikipedia.org/wiki/Compilers">compilers</a> to represent the structure of program code. An AST is usually the result of the <a href="https://en.wikipedia.org/wiki/Syntax_analysis">syntax analysis</a> phase of a compiler. It often serves as an intermediate representation of the program through several stages that the compiler requires, and has a strong impact on the final output of the compiler. </p>
@@ -997,7 +997,7 @@ return a
 <li>An AST usually contains extra information about the program, due to the consecutive stages of analysis by the compiler. For example, it may store the position of each element in the source code, allowing the compiler to print useful <strong>error messages</strong>.</li>
 </ul>
 <p>ASTs are needed because of the inherent nature of programming languages and their documentation. Languages are often ambiguous by nature. In order to avoid this ambiguity, programming languages are often specified as a <a href="https://en.wikipedia.org/wiki/Context-free_grammar">context-free grammar</a> (CFG). However, there are often aspects of programming languages that a CFG can't express, but are part of the language and are documented in its specification. These are details that require a context to determine their validity and behaviour. For example, if a language allows new types to be declared, a CFG cannot predict the names of such types nor the way in which they should be used. Even if a language has a predefined set of types, enforcing proper usage usually requires some context. Another example is <a href="https://en.wikipedia.org/wiki/Duck_typing">duck typing</a>, where the type of an element can change depending on context. <a href="https://en.wikipedia.org/wiki/Operator_overloading">Operator overloading</a> is yet another case where correct usage and final function are determined based on the context. Java provides an excellent example, where the '+' operator is both numerical addition and concatenation of strings.</p>
-<p>Although there are other <a href="https://en.wikipedia.org/wiki/Data_structure">data structures</a> involved in the inner workings of a compiler, the AST performs a unique function. During the first stage, the <a href="https://en.wikipedia.org/wiki/Syntax_analysis">syntax analysis</a> stage, a compiler produces a parse tree. This parse tree can be used to perform almost all functions of a compiler by means of s<strong>yntax-directed translation</strong>. Although this method can lead to a more efficient compiler, it goes against the software engineering principles of writing and maintaining programs[<em><a href="https://en.wikipedia.org/wiki/Wikipedia:Citation_needed">citation needed</a></em>]. Another advantage that the AST has over a parse tree is the size, particularly the smaller height of the AST and the smaller number of elements.</p>
+<p>Although there are other <a href="https://en.wikipedia.org/wiki/Data_structure">data structures</a> involved in the inner workings of a compiler, the AST performs a unique function. During the first stage, the <a href="https://en.wikipedia.org/wiki/Syntax_analysis">syntax analysis</a> stage, a compiler produces a parse tree. This parse tree can be used to perform almost all functions of a compiler by means of s**yntax-directed translation**. Although this method can lead to a more efficient compiler, it goes against the software engineering principles of writing and maintaining programs[<em><a href="https://en.wikipedia.org/wiki/Wikipedia:Citation_needed">citation needed</a></em>]. Another advantage that the AST has over a parse tree is the size, particularly the smaller height of the AST and the smaller number of elements.</p>
 <h3 id="design">Design<a class="headerlink" href="#design" title="Permanent link">#</a></h3>
 <p>The design of an AST is often closely linked with the design of a compiler and its expected features.</p>
 <p>Core requirements include the following:</p>
@@ -1055,6 +1055,8 @@ return a
       <script src="../../../assets/javascripts/application.808e90bb.js"></script>
       
       <script>app.initialize({version:"1.0.4",url:{base:"../../.."}})</script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
       
     
   </body>

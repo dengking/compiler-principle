@@ -488,8 +488,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#243-when-to-use-epsilon-productions" class="md-nav__link">
-    2.4.3 When to Use $\epsilon$-Productions
+  <a href="#243-when-to-use-epsilonepsilon-productions" class="md-nav__link">
+    2.4.3 When to Use \epsilon\epsilon-Productions
   </a>
   
 </li>
@@ -965,8 +965,8 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#243-when-to-use-epsilon-productions" class="md-nav__link">
-    2.4.3 When to Use $\epsilon$-Productions
+  <a href="#243-when-to-use-epsilonepsilon-productions" class="md-nav__link">
+    2.4.3 When to Use \epsilon\epsilon-Productions
   </a>
   
 </li>
@@ -993,7 +993,7 @@
 <li><a href="#24-parsing">2.4 Parsing</a><ul>
 <li><a href="#241-top-down-parsing">2.4.1 Top-Down Parsing</a></li>
 <li><a href="#242-predictive-parsing">2.4.2 Predictive Parsing</a></li>
-<li><a href="#243-when-to-use-epsilon-productions">2.4.3 When to Use $\epsilon$-Productions</a></li>
+<li><a href="#243-when-to-use-epsilonepsilon-productions">2.4.3 When to Use \epsilon\epsilon-Productions</a></li>
 </ul>
 </li>
 </ul>
@@ -1004,7 +1004,7 @@
 <p>NOTE: The concept of parsing is introduced in chapter 2.2.2 Derivations</p>
 </blockquote>
 <p>This section introduces a parsing method called "<a href="https://en.wikipedia.org/wiki/Recursive_descent_parser">recursive descent</a>," which can be used both to parse and to implement syntax-directed translators. A complete Java program, implementing the translation scheme of Fig. 2.15, appears in the next section. A viable alternative is to use a software tool to generate a translator directly from a translation scheme. Section 4.9 describes such a tool  Yacc; it can implement the translation scheme of Fig. 2.15 without modification.</p>
-<p>For any context-free grammar there is a parser that takes at most $O (n^3)$ time to parse a string of n terminals. But cubic time is generally too expensive. Fortunately, for real programming languages, we can generally design a grammar that can be parsed quickly. Linear-time algorithms suffice to parse essentially all languages that arise in practice. Programming-language parsers almost always make a single left-to-right scan over the input, looking ahead one terminal at a time, and constructing pieces of the parse tree as they go.</p>
+<p>For any context-free grammar there is a parser that takes at most <span><span class="MathJax_Preview">O (n^3)</span><script type="math/tex">O (n^3)</script></span> time to parse a string of n terminals. But cubic time is generally too expensive. Fortunately, for real programming languages, we can generally design a grammar that can be parsed quickly. Linear-time algorithms suffice to parse essentially all languages that arise in practice. Programming-language parsers almost always make a single left-to-right scan over the input, looking ahead one terminal at a time, and constructing pieces of the parse tree as they go.</p>
 <p>Most parsing methods fall into one of two classes, called the <a href="https://en.wikipedia.org/wiki/Top-down_parsing">top-down</a> and <a href="https://en.wikipedia.org/wiki/Bottom-up_parsing">bottom-up</a> methods. These terms refer to the order in which <strong>nodes</strong> in the <strong>parse tree</strong> are constructed. In top-down parsers, construction starts at the root and proceeds towards the leaves, while in bottom-up parsers, construction starts at the leaves and proceeds towards the root. The popularity of top-down parsers is due to the fact that efficient parsers can be constructed more easily by hand using top-down methods. Bottom-up parsing, however, can handle a larger class of grammars and translation schemes, so software tools for generating parsers directly from grammars often use bottom-up methods.</p>
 <blockquote>
 <p>TIPS:  Wikipedia has a special section on parsing algorithms</p>
@@ -1022,15 +1022,15 @@
 </ol>
 <p><img alt="" src="../Figure2.17A-parse-tree-according-to-the-grammar-in-Fig2.16.jpg" /></p>
 <p>For some grammars, the above steps can be implemented during a single left-to-right scan of the input string. The current terminal being scanned in the input is frequently referred to as the <em>lookahead symbol</em>. Initially, the <strong>lookahead symbol</strong> is the first, i.e., leftmost, terminal of the input string. Figure 2.18 illustrates the construction of the parse tree in Fig. 2.17 for the input string</p>
-<pre><code class="pseudocode">for ( ; expr ; expr ) other
-</code></pre>
+<div class="highlight"><pre><span></span>for ( ; expr ; expr ) other
+</pre></div>
 
 <p><img alt="" src="../Figure2.18Top-down-parsing-while-scanning-the-input-from-left-to-right.jpg" /></p>
 <p>Initially, the terminal <code>for</code> is the <strong>lookahead symbol</strong>, and the known part of the parse tree consists of the root, labeled with the starting nonterminal <code>stmt</code> in Fig. 2.18(a). The objective is to construct the remainder of the parse tree in such a way that the string generated by the parse tree matches the input string.</p>
 <p>For a match to occur, the nonterminal <code>stmt</code> in Fig. 2.18(a) must derive a string that starts with the lookahead symbol <code>for</code>. In the grammar of Fig. 2.16, there is just one production for <code>stmt</code> that can derive such a string, so we select it, and construct the children of the root labeled with the symbols in the production body. This expansion of the parse tree is shown in Fig. 2.18(b).</p>
 <p>Each of the three snapshots in Fig. 2.18 has arrows marking the <strong>lookahead symbol</strong> in the input and the node in the parse tree that is being considered. Once children are constructed at a node, we next consider the leftmost child. In Fig. 2.18(b), children have just been constructed at the root, and the leftmost
 child labeled with for is being considered.</p>
-<p>At the nonterminal node labeled <code>optexpr</code>, we repeat the process of selecting a production for a nonterminal. Productions with $\epsilon$ as the body (" $\epsilon$ -productions") require special treatment. For the moment, we use them as a default when no other production can be used; we return to them in Section 2.4.3. With nonterminal <code>optexpr</code> and lookahead <code>;</code>, the $\epsilon$ -productions is used, since <code>;</code> does not match the only other production for <code>optexpr</code>, which has terminal <code>expr</code> as its body.</p>
+<p>At the nonterminal node labeled <code>optexpr</code>, we repeat the process of selecting a production for a nonterminal. Productions with <span><span class="MathJax_Preview">\epsilon</span><script type="math/tex">\epsilon</script></span> as the body (" <span><span class="MathJax_Preview">\epsilon</span><script type="math/tex">\epsilon</script></span> -productions") require special treatment. For the moment, we use them as a default when no other production can be used; we return to them in Section 2.4.3. With nonterminal <code>optexpr</code> and lookahead <code>;</code>, the <span><span class="MathJax_Preview">\epsilon</span><script type="math/tex">\epsilon</script></span> -productions is used, since <code>;</code> does not match the only other production for <code>optexpr</code>, which has terminal <code>expr</code> as its body.</p>
 <p>In general, the selection of a production for a nonterminal may involve <a href="https://en.wikipedia.org/wiki/Trial_and_error">trial-and-error</a>; that is, we may have to try a production and <a href="https://en.wikipedia.org/wiki/Backtracking">backtrack</a> to try another production if the first is found to be unsuitable. A production is unsuitable if, after using the production, we cannot complete the tree to match the input string. Backtracking is not needed, however, in an important special case called predictive parsing, which we discuss next.</p>
 <blockquote>
 <p>NOTE: There is a good illustration of Top-Down Parser in <a href="https://www.tutorialspoint.com/compiler_design/compiler_design_top_down_parser.htm">this blog</a>.</p>
@@ -1038,17 +1038,17 @@ child labeled with for is being considered.</p>
 <h2 id="242-predictive-parsing">2.4.2 Predictive Parsing<a class="headerlink" href="#242-predictive-parsing" title="Permanent link">#</a></h2>
 <p><em>Recursive-descent parsing</em> is a top-down method of syntax analysis in which a set of recursive procedures is used to process the input. One procedure is associated with each nonterminal of a grammar. Here, we consider a simple form of <strong>recursive-descent parsing</strong>, called <em>predictive parsing</em>, in which the <strong>lookahead symbol</strong> unambiguously determines the flow of control through the procedure body for each <strong>nonterminal</strong>. The sequence of procedure calls during the analysis of an input string <strong>implicitly</strong> defines a <strong>parse tree</strong> for the input, and can be used to build an <strong>explicit parse tree</strong>, if desired.</p>
 <p>The predictive parser in Fig. 2.19 consists of procedures for the nonterminals <code>stmt</code> and <code>optexpr</code> of the grammar in Fig. 2.16 and an additional procedure match, used to simplify the code for <code>stmt</code> and <code>optexpr</code>. Procedure <code>match(t)</code> compares its argument <code>t</code> with the <strong>lookahead symbol</strong> and advances to the next input terminal if they match. Thus match changes the value of variable lookahead, a global variable that holds the currently scanned input terminal.</p>
-<pre><code class="pseudocode">void stmt () {
+<div class="highlight"><pre><span></span>void stmt () {
     switch ( lookahead ) {
     case expr:
-        match (expr); match (';'); break;
-    case 'if':
-        match ('if'); match ('('); match (expr); match (')'); stmt ();
+        match (expr); match (&#39;;&#39;); break;
+    case &#39;if&#39;:
+        match (&#39;if&#39;); match (&#39;(&#39;); match (expr); match (&#39;)&#39;); stmt ();
         break;
-    case 'for':
-        match ('for'); match ('(');
-        optexpr (); match (';'); optexpr (); match (';'); optexpr ();
-        match (')'); stmt (); break;
+    case &#39;for&#39;:
+        match (&#39;for&#39;); match (&#39;(&#39;);
+        optexpr (); match (&#39;;&#39;); optexpr (); match (&#39;;&#39;); optexpr ();
+        match (&#39;)&#39;); stmt (); break;
     case other;
         match (other); break;
     default:
@@ -1063,7 +1063,7 @@ void match (terminal t) {
     if ( lookahead == t ) lookahead = nextTerminal;
     else report (&quot;syntax error&quot;);
 }
-</code></pre>
+</pre></div>
 
 <p>Figure 2.19: Pseudo code for a predictive parser</p>
 <blockquote>
@@ -1074,28 +1074,28 @@ $$
 stmt \to for ( optexpr ; optexpr ; optexpr ) stmt
 $$
 In the code for the production body -- that is, the for case of procedure <code>stmt</code>--each terminal is matched with the lookahead symbol, and each nonterminal leads to a call of its procedure, in the following sequence of calls:</p>
-<pre><code class="pseudocode">match (for); match ('(');
-optexpr (); match (';'); optexpr (); match (';'); optexpr ();
-match (')'); stmt ();
-</code></pre>
+<div class="highlight"><pre><span></span>match (for); match (&#39;(&#39;);
+optexpr (); match (&#39;;&#39;); optexpr (); match (&#39;;&#39;); optexpr ();
+match (&#39;)&#39;); stmt ();
+</pre></div>
 
-<p><strong>Predictive parsing</strong> relies on information about the first symbols that can be generated by a production body. More precisely, let $\alpha$ be a string of grammar symbols (terminals and/or nonterminals). We define $FIRST (\alpha)$ to be the set of terminals that appear as the first symbols of one or more strings of terminals
-generated from $\alpha$. If $\alpha$ is $\epsilon$ or can generate  $\epsilon$ , then  $\epsilon$  is also in $FIRST (\alpha)$.</p>
+<p><strong>Predictive parsing</strong> relies on information about the first symbols that can be generated by a production body. More precisely, let <span><span class="MathJax_Preview">\alpha</span><script type="math/tex">\alpha</script></span> be a string of grammar symbols (terminals and/or nonterminals). We define <span><span class="MathJax_Preview">FIRST (\alpha)</span><script type="math/tex">FIRST (\alpha)</script></span> to be the set of terminals that appear as the first symbols of one or more strings of terminals
+generated from <span><span class="MathJax_Preview">\alpha</span><script type="math/tex">\alpha</script></span>. If <span><span class="MathJax_Preview">\alpha</span><script type="math/tex">\alpha</script></span> is <span><span class="MathJax_Preview">\epsilon</span><script type="math/tex">\epsilon</script></span> or can generate  <span><span class="MathJax_Preview">\epsilon</span><script type="math/tex">\epsilon</script></span> , then  <span><span class="MathJax_Preview">\epsilon</span><script type="math/tex">\epsilon</script></span>  is also in <span><span class="MathJax_Preview">FIRST (\alpha)</span><script type="math/tex">FIRST (\alpha)</script></span>.</p>
 <blockquote>
-<p>NOTE: Only when $FIRST (\alpha)$ is known, can flow of control determine.</p>
+<p>NOTE: Only when <span><span class="MathJax_Preview">FIRST (\alpha)</span><script type="math/tex">FIRST (\alpha)</script></span> is known, can flow of control determine.</p>
 </blockquote>
-<p>The details of how one computes $FIRST (\alpha)$ are in Section 4.4.2. Here, we shall just use ad hoc reasoning to deduce the symbols in $FIRST (\alpha)$; typically, $\alpha$  will either begin with a terminal, which is therefore the only symbol in $FIRST (\alpha)$, or $\alpha$ will begin with a nonterminal whose production bodies begin with terminals, in which case these terminals are the only members of $FIRST (\alpha)$.</p>
-<p>For example, with respect to the grammar of Fig. 2.16, the following are correct calculations of $FIRST$.</p>
-<pre><code>FIRST (stmt) = {expr; if; for; other}
+<p>The details of how one computes <span><span class="MathJax_Preview">FIRST (\alpha)</span><script type="math/tex">FIRST (\alpha)</script></span> are in Section 4.4.2. Here, we shall just use ad hoc reasoning to deduce the symbols in <span><span class="MathJax_Preview">FIRST (\alpha)</span><script type="math/tex">FIRST (\alpha)</script></span>; typically, <span><span class="MathJax_Preview">\alpha</span><script type="math/tex">\alpha</script></span>  will either begin with a terminal, which is therefore the only symbol in <span><span class="MathJax_Preview">FIRST (\alpha)</span><script type="math/tex">FIRST (\alpha)</script></span>, or <span><span class="MathJax_Preview">\alpha</span><script type="math/tex">\alpha</script></span> will begin with a nonterminal whose production bodies begin with terminals, in which case these terminals are the only members of <span><span class="MathJax_Preview">FIRST (\alpha)</span><script type="math/tex">FIRST (\alpha)</script></span>.</p>
+<p>For example, with respect to the grammar of Fig. 2.16, the following are correct calculations of <span><span class="MathJax_Preview">FIRST</span><script type="math/tex">FIRST</script></span>.</p>
+<div class="highlight"><pre><span></span>FIRST (stmt) = {expr; if; for; other}
 FIRST(expr ;) = {expr}
-</code></pre>
+</pre></div>
 
 <blockquote>
 <p>NOTE: <code>FIRST (stmt)</code> corresponds to the case of <code>void stmt ()</code>.</p>
 </blockquote>
-<p>The FIRST sets must be considered if there are two pro ductions $A \to \alpha$ and $A \to \beta$ . Ignoring $\epsilon$-productions for the moment, predictive parsing requires $FIRST (\alpha)$ and $FIRST(\beta )$ to b e disjoint. The lookahead symbol can then be used to decide which production to use; if the lookahead symbol is in $FIRST (\alpha)$, then
-$\alpha$ is used. Otherwise, if the lookahead symbol is in $FIRST (\beta)$, then $\beta$ is used.</p>
-<h2 id="243-when-to-use-epsilon-productions">2.4.3 When to Use $\epsilon$-Productions<a class="headerlink" href="#243-when-to-use-epsilon-productions" title="Permanent link">#</a></h2>
+<p>The FIRST sets must be considered if there are two pro ductions <span><span class="MathJax_Preview">A \to \alpha</span><script type="math/tex">A \to \alpha</script></span> and <span><span class="MathJax_Preview">A \to \beta</span><script type="math/tex">A \to \beta</script></span> . Ignoring <span><span class="MathJax_Preview">\epsilon</span><script type="math/tex">\epsilon</script></span>-productions for the moment, predictive parsing requires <span><span class="MathJax_Preview">FIRST (\alpha)</span><script type="math/tex">FIRST (\alpha)</script></span> and <span><span class="MathJax_Preview">FIRST(\beta )</span><script type="math/tex">FIRST(\beta )</script></span> to b e disjoint. The lookahead symbol can then be used to decide which production to use; if the lookahead symbol is in <span><span class="MathJax_Preview">FIRST (\alpha)</span><script type="math/tex">FIRST (\alpha)</script></span>, then
+<span><span class="MathJax_Preview">\alpha</span><script type="math/tex">\alpha</script></span> is used. Otherwise, if the lookahead symbol is in <span><span class="MathJax_Preview">FIRST (\beta)</span><script type="math/tex">FIRST (\beta)</script></span>, then <span><span class="MathJax_Preview">\beta</span><script type="math/tex">\beta</script></span> is used.</p>
+<h2 id="243-when-to-use-epsilonepsilon-productions">2.4.3 When to Use <span><span class="MathJax_Preview">\epsilon</span><script type="math/tex">\epsilon</script></span>-Productions<a class="headerlink" href="#243-when-to-use-epsilonepsilon-productions" title="Permanent link">#</a></h2>
                 
                   
                 
@@ -1169,6 +1169,8 @@ $\alpha$ is used. Otherwise, if the lookahead symbol is in $FIRST (\beta)$, then
       <script src="../../assets/javascripts/application.808e90bb.js"></script>
       
       <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
       
     
   </body>

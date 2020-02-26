@@ -2,187 +2,187 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
      <loc>https://dengking.github.io/compiler-principle/</loc>
-     <lastmod>2020-02-21</lastmod>
+     <lastmod>2020-02-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/compiler-principle/Guide/</loc>
-     <lastmod>2020-02-21</lastmod>
+     <lastmod>2020-02-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/compiler-principle/Guide/Compile-time-and-run-time/</loc>
-     <lastmod>2020-02-21</lastmod>
+     <lastmod>2020-02-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/compiler-principle/Guide/VS-LL-parser-VS-LR-parser/</loc>
-     <lastmod>2020-02-21</lastmod>
+     <lastmod>2020-02-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/compiler-principle/Chapter-1-Introduction/</loc>
-     <lastmod>2020-02-21</lastmod>
+     <lastmod>2020-02-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/compiler-principle/Chapter-1-Introduction/1.1-Language-Processors/</loc>
-     <lastmod>2020-02-21</lastmod>
+     <lastmod>2020-02-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/compiler-principle/Chapter-1-Introduction/1.2-The-Structure-of-a-Compiler/</loc>
-     <lastmod>2020-02-21</lastmod>
+     <lastmod>2020-02-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/compiler-principle/Chapter-1-Introduction/1.5-Applications-of-Compiler-Technology/</loc>
-     <lastmod>2020-02-21</lastmod>
+     <lastmod>2020-02-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/compiler-principle/Chapter-1-Introduction/1.6-Programming-Language-Basics/</loc>
-     <lastmod>2020-02-21</lastmod>
+     <lastmod>2020-02-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/compiler-principle/Chapter-2-A-Simple-Syntax-Directed-Translator/</loc>
-     <lastmod>2020-02-21</lastmod>
+     <lastmod>2020-02-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/compiler-principle/Chapter-2-A-Simple-Syntax-Directed-Translator/2.1-Introduction/</loc>
-     <lastmod>2020-02-21</lastmod>
+     <lastmod>2020-02-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/compiler-principle/Chapter-2-A-Simple-Syntax-Directed-Translator/2.2-Syntax-Definition/</loc>
-     <lastmod>2020-02-21</lastmod>
+     <lastmod>2020-02-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/compiler-principle/Chapter-2-A-Simple-Syntax-Directed-Translator/2.3-Syntax-Directed-Translation/</loc>
-     <lastmod>2020-02-21</lastmod>
+     <lastmod>2020-02-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/compiler-principle/Chapter-2-A-Simple-Syntax-Directed-Translator/2.4-Parsing/</loc>
-     <lastmod>2020-02-21</lastmod>
+     <lastmod>2020-02-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/compiler-principle/Chapter-3-Lexical-Analysis/</loc>
-     <lastmod>2020-02-21</lastmod>
+     <lastmod>2020-02-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/compiler-principle/Chapter-3-Lexical-Analysis/3.1-The-Role-of-the-Lexical-Analyzer/</loc>
-     <lastmod>2020-02-21</lastmod>
+     <lastmod>2020-02-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/compiler-principle/Chapter-3-Lexical-Analysis/3.4-Recognition-of-Tokens/</loc>
-     <lastmod>2020-02-21</lastmod>
+     <lastmod>2020-02-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/compiler-principle/Chapter-3-Lexical-Analysis/3.6-Finite-Automata/</loc>
-     <lastmod>2020-02-21</lastmod>
+     <lastmod>2020-02-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/compiler-principle/Chapter-3-Lexical-Analysis/3.7-From-Regular-Expressions-to-Automata/</loc>
-     <lastmod>2020-02-21</lastmod>
+     <lastmod>2020-02-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/compiler-principle/Chapter-4-Syntax-Analysis/</loc>
-     <lastmod>2020-02-21</lastmod>
+     <lastmod>2020-02-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/compiler-principle/Chapter-4-Syntax-Analysis/4.2-Context-Free-Grammars/</loc>
-     <lastmod>2020-02-21</lastmod>
+     <lastmod>2020-02-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/compiler-principle/Chapter-4-Syntax-Analysis/4.3-Writing-a-Grammar/</loc>
-     <lastmod>2020-02-21</lastmod>
+     <lastmod>2020-02-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/compiler-principle/Chapter-4-Syntax-Analysis/4.5-Bottom-Up-Parsing/</loc>
-     <lastmod>2020-02-21</lastmod>
+     <lastmod>2020-02-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/compiler-principle/Chapter-4-Syntax-Analysis/4.6-Introduction-to-LR-Parsing-Simple-LR/</loc>
-     <lastmod>2020-02-21</lastmod>
+     <lastmod>2020-02-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/compiler-principle/Chapter-4-Syntax-Analysis/4.7-More-Powerful-LR-Parsers/</loc>
-     <lastmod>2020-02-21</lastmod>
+     <lastmod>2020-02-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/compiler-principle/Chapter-5-Syntax-Directed-Translation/</loc>
-     <lastmod>2020-02-21</lastmod>
+     <lastmod>2020-02-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/compiler-principle/Chapter-5-Syntax-Directed-Translation/5.1-Syntax-Directed-Definitions/</loc>
-     <lastmod>2020-02-21</lastmod>
+     <lastmod>2020-02-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/compiler-principle/Chapter-5-Syntax-Directed-Translation/5.2-Evaluation-Orders-for-SDD's/</loc>
-     <lastmod>2020-02-21</lastmod>
+     <lastmod>2020-02-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/compiler-principle/Chapter-5-Syntax-Directed-Translation/5.3-Applications-of-Syntax-Directed-Translation/</loc>
-     <lastmod>2020-02-21</lastmod>
+     <lastmod>2020-02-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/compiler-principle/Chapter-6-Intermediate-Code-Generation/</loc>
-     <lastmod>2020-02-21</lastmod>
+     <lastmod>2020-02-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/compiler-principle/Chapter-6-Intermediate-Code-Generation/6.3-Types-and-Declarations/</loc>
-     <lastmod>2020-02-21</lastmod>
+     <lastmod>2020-02-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/compiler-principle/Chapter-7-Run-Time-Environments/</loc>
-     <lastmod>2020-02-21</lastmod>
+     <lastmod>2020-02-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/compiler-principle/Chapter-7-Run-Time-Environments/7.1-Storage-Organization/</loc>
-     <lastmod>2020-02-21</lastmod>
+     <lastmod>2020-02-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/compiler-principle/Chapter-7-Run-Time-Environments/7.2-Stack-Allocation-of-Space/</loc>
-     <lastmod>2020-02-21</lastmod>
+     <lastmod>2020-02-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/compiler-principle/Chapter-7-Run-Time-Environments/7.3-Access-to-Non-local-Data-on-the-Stack/</loc>
-     <lastmod>2020-02-21</lastmod>
+     <lastmod>2020-02-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/compiler-principle/Chapter-7-Run-Time-Environments/7.4-Heap-Management/</loc>
-     <lastmod>2020-02-21</lastmod>
+     <lastmod>2020-02-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
     <url>
      <loc>https://dengking.github.io/compiler-principle/Chapter-9-Machine-Independent-Optimizations/</loc>
-     <lastmod>2020-02-21</lastmod>
+     <lastmod>2020-02-26</lastmod>
      <changefreq>daily</changefreq>
     </url>
 </urlset>

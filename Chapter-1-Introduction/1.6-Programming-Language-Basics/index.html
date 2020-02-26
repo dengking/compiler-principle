@@ -1128,13 +1128,13 @@ encountered other languages as well.</p>
 <strong><em>time</em></strong>. On the other hand, a policy that only allows a decision to be made when we execute the program is said to be a <strong><em>dynamic policy</em></strong> or to require a decision at <strong><em>run time</em></strong>.</p>
 <p>One issue on which we shall concentrate is the <strong><em>scope of declarations</em></strong>. The <strong><em>scope of a declaration</em></strong> of <code>x</code> is the region of the program in which uses of <code>x</code> refer to this declaration. A language uses <strong><em>static scope</em></strong> or <strong><em>lexical scope</em></strong> if it is possible to determine the scope of a declaration by looking only at the program. Otherwise, the language uses <strong><em>dynamic scope</em></strong>. With <strong><em>dynamic scope</em></strong>, as the program runs, the same use of <code>x</code> could refer to any of several different declarations of <code>x</code>.</p>
 <blockquote>
-<p>NOTE:上面关于<strong>scope</strong>的定义所指代的是declaration，而非variable。显然declaration能够指代的范围远远大于variable。</p>
+<p>NOTE:上面关于**scope**的定义所指代的是declaration，而非variable。显然declaration能够指代的范围远远大于variable。</p>
 <p>See also: <a href="https://en.wikipedia.org/wiki/Scope_(computer_science)">Scope (computer science)</a></p>
 </blockquote>
 <p>Most languages, such as C and Java, use <strong>static scope</strong>. We shall discuss <strong>static scoping</strong> in Section 1.6.3.</p>
 <p><strong>Example 1.3</strong> : As another example of the <strong>static/dynamic distinction</strong>, consider the use of the term <strong>"static"</strong> as it applies to data in a Java class declaration. <strong>In Java, a variable is a name for a location in memory used to hold a data value</strong>. Here, <strong>"static"</strong> refers <strong>not</strong> to the <strong>scope</strong> of the variable, but rather to the ability of the <strong>compiler</strong> to determine the location in memory where the declared variable can be found. A declaration like</p>
-<pre><code class="java">public static int x;
-</code></pre>
+<div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kd">static</span> <span class="kt">int</span> <span class="n">x</span><span class="o">;</span>
+</pre></div>
 
 <p>makes <code>x</code> a <strong>class variable</strong> and says that there is only one copy of <code>x</code>, no matter how many objects of this class are created. Moreover, the compiler can determine a location in memory where this integer <code>x</code> will be held. In contrast, had "<strong>static</strong>" been omitted from this declaration, then each object of the class would have its own location where <code>x</code> would be held, and the compiler could not determine all these places in advance of running the program.</p>
 <blockquote>
@@ -1151,21 +1151,20 @@ the <strong>name</strong> <code>x</code>. More specifically, the assignment chan
 2. The <strong>state</strong> is a mapping from <strong>locations</strong> in store to their <strong>values</strong>. That is, the state maps <strong>l-values</strong> to their corresponding <strong>r-values</strong>, in the terminology of C.</p>
 <p><strong>Environments</strong> change according to the <strong>scope rules</strong> of a language.</p>
 <blockquote>
-<p>NOTE:  <strong>environments</strong>和<strong>scope</strong> 是不同的概念。</p>
+<p>NOTE:  <strong>environments**和**scope</strong> 是不同的概念。</p>
 </blockquote>
 <p><strong>Example 1.4</strong> : Consider the C program fragment in Fig. 1.9. Integer <code>i</code> is declared a global variable, and also declared as a variable local to function <code>f</code> .When <code>f</code> is executing, the <strong>environment</strong> adjusts so that name <code>i</code> refers to the location reserved for the <code>i</code> that is local to <code>f</code> , and any use of <code>i</code>, such as the assignment <code>i = 3</code> shown explicitly, refers to that location. Typically, the local <code>i</code> is given a place on the <strong>run-time stack</strong></p>
-<pre><code class="c">
-int i; /* global i */
+<div class="highlight"><pre><span></span><span class="kt">int</span> <span class="n">i</span><span class="p">;</span> <span class="cm">/* global i */</span>
 
-void f(...) {
-    int i; /* local i */
-    ...
-    i = 3; /* use of local i */
-    ...
-}
-...
-    x = i + 1; /* use of global i */
-</code></pre>
+<span class="kt">void</span> <span class="nf">f</span><span class="p">(...)</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">i</span><span class="p">;</span> <span class="cm">/* local i */</span>
+    <span class="p">...</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span> <span class="cm">/* use of local i */</span>
+    <span class="p">...</span>
+<span class="p">}</span>
+<span class="p">...</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span> <span class="cm">/* use of global i */</span>
+</pre></div>
 
 <p>Whenever a function <code>g</code> other than <code>f</code> is executing, uses of <code>i</code> cannot refer to the <code>i</code> that is local to <code>f</code> . Uses of name <code>i</code> in <code>g</code> must be within the scope of some other declaration of <code>i</code>. An example is the explicitly shown statement <code>x = i+1</code>,which is inside some procedure whose definition is not shown. The <code>i</code> in <code>i + 1</code>
 presumably（大概） refers to the global <code>i</code>. As in most languages, declarations in C must precede their use, so a function that comes before the global <code>i</code> cannot refer to it. </p>
@@ -1179,15 +1178,16 @@ presumably（大概） refers to the global <code>i</code>. As in most languages
 <ol>
 <li><strong>Static versus dynamic</strong> binding of <strong>locations</strong> to <strong>values</strong>. The binding of locations to values (the second stage in Fig. 1.8), is <strong>generally</strong> dynamic as well, since we cannot tell the value in a location until we run the program. <strong>Declared constants</strong> are an exception. For instance, the C definition</li>
 </ol>
-<p><code>c
-   #define ARRAYSIZE 1000</code></p>
+<div class="highlight"><pre><span></span><span class="cp">#define ARRAYSIZE 1000</span>
+</pre></div>
+
 <p>binds the name <code>ARRAYSIZE</code> to the value 1000 statically. We can determine this binding by looking at the statement, and we know that it is impossible for this binding to change when the program executes.</p>
 <h2 id="163-static-scope-and-block-structure">1.6.3 Static Scope and Block Structure<a class="headerlink" href="#163-static-scope-and-block-structure" title="Permanent link">#</a></h2>
 <p>Most languages, including C and its family, use <a href="#1.6.1 The Static/Dynamic Distinction">static scope</a>_. The <strong>scope rules</strong> for C are based on <strong>program structure</strong>; the scope of a declaration is determined implicitly(隐式地) by where the declaration appears in the program. Later languages,such as C++, Java, and C#, also provide explicit control over scopes through
 the use of keywords like <code>public</code>, <code>private</code>, and <code>protected</code>.</p>
 <p>In this section we consider static-scope rules for a language with <strong>blocks</strong>, where a block is a grouping of <strong>declarations</strong> and <strong>statements</strong>. C uses braces <code>{</code> and <code>}</code> to delimit(定界) a <strong>block</strong>; the alternative use of <code>begin</code> and <code>end</code> for the same purpose dates back to Algol.</p>
 <blockquote>
-<p>NOTE : 在<code>c++</code>中，block除了可以用于确定scope外，block也可以决定<em>storage duration</em> 。以下是摘自cppreference 的 <a href="https://en.cppreference.com/w/cpp/language/storage_duration">Storage class specifiers</a>章节：</p>
+<p>NOTE : 在<code>c++</code>中，block除了可以用于确定scope外，block也可以决定*storage duration* 。以下是摘自cppreference 的 <a href="https://en.cppreference.com/w/cpp/language/storage_duration">Storage class specifiers</a>章节：</p>
 <p><strong><em>automatic</em></strong> storage duration. The storage for the object is allocated at the beginning of the enclosing code block and deallocated at the end. All local objects have this storage duration, except those declared <code>static</code>, <code>extern</code> or <code>thread_local</code>.</p>
 </blockquote>
 <hr />
@@ -1223,7 +1223,7 @@ the store at different times.</p>
 <p>Note that this syntax allows blocks to be nested inside each other. This nesting property is referred to as <strong><em>block structure</em></strong>. The C family of languages has block structure, except that a function may not be defined inside another function.</p>
 <p>We say that a declaration <code>D</code>  belongs to a block <code>B</code> if <code>B</code> is the most closely nested block containing <code>D</code>; that is, <code>D</code> is located within <code>B</code> , but not within any block that is nested within <code>B</code>.</p>
 <p>The <strong>static-scope rule</strong> for variable declarations in <strong>block-structured languages</strong> is as follows. If declaration <code>D</code> of name <code>x</code> belongs to block <code>B</code> , then the scope of <code>D</code> is all of <code>B</code> , except for any blocks <code>B'</code>nested to any depth within B , in which <code>x</code> is redeclared. Here, <code>x</code> is redeclared in <code>B'</code> if some other declaration D of the same name <code>x</code> belongs to <code>B'</code>.</p>
-<p>An equivalent way to express this rule is to focus on a use of a name <code>x</code>.Let $B_1$, $B_2$, ... $B_k$ be all the blocks that surround this use of <code>x</code>, with $B_k$ the smallest, nested within $B_{k-1}$ , which is nested within $B_{k-2}$ , and so on. Search for the largest <code>i</code> such that there is a declaration of <code>x</code> belonging to $B_i$. This use of <code>x</code> refers to the declaration in $B_i$ . Alternatively, this use of <code>x</code> is within the scope of the declaration in $B_i$.</p>
+<p>An equivalent way to express this rule is to focus on a use of a name <code>x</code>.Let <span><span class="MathJax_Preview">B_1</span><script type="math/tex">B_1</script></span>, <span><span class="MathJax_Preview">B_2</span><script type="math/tex">B_2</script></span>, ... <span><span class="MathJax_Preview">B_k</span><script type="math/tex">B_k</script></span> be all the blocks that surround this use of <code>x</code>, with <span><span class="MathJax_Preview">B_k</span><script type="math/tex">B_k</script></span> the smallest, nested within <span><span class="MathJax_Preview">B_{k-1}</span><script type="math/tex">B_{k-1}</script></span> , which is nested within <span><span class="MathJax_Preview">B_{k-2}</span><script type="math/tex">B_{k-2}</script></span> , and so on. Search for the largest <code>i</code> such that there is a declaration of <code>x</code> belonging to <span><span class="MathJax_Preview">B_i</span><script type="math/tex">B_i</script></span>. This use of <code>x</code> refers to the declaration in <span><span class="MathJax_Preview">B_i</span><script type="math/tex">B_i</script></span> . Alternatively, this use of <code>x</code> is within the scope of the declaration in <span><span class="MathJax_Preview">B_i</span><script type="math/tex">B_i</script></span>.</p>
 <h2 id="164-explicit-access-control">1.6.4 Explicit Access Control<a class="headerlink" href="#164-explicit-access-control" title="Permanent link">#</a></h2>
 <p><strong>Classes</strong> and <strong>structures</strong> introduce a new <strong>scope</strong> for their members. If <code>p</code> is an object of a class with a field (member) <code>x</code>, then the use of <code>x</code> in <code>p.x</code> refers to field <code>x</code> in the class definition. In analogy with block structure, the scope of a member declaration <code>x</code> in a class <code>C</code> extends to any subclass <code>C'</code>, except if <code>C'</code>
 has a local declaration of the same name <code>x</code>.</p>
@@ -1240,12 +1240,12 @@ only the method declarations and definitions associated with that class and any 
 <h2 id="165-dynamic-scope">1.6.5 Dynamic Scope<a class="headerlink" href="#165-dynamic-scope" title="Permanent link">#</a></h2>
 <p>Technically, any scoping policy is dynamic if it is based on factor(s) that can be known only when the program executes. The term <strong>dynamic scope</strong>, however,usually refers to the following policy: a use of a name <code>x</code> refers to the declaration of <code>x</code> in the most recently called, not-yet-terminated, <strong>procedure</strong> with such a declaration. <strong>Dynamic scoping</strong> of this type appears only in special situations.We shall consider two examples of dynamic policies: macro expansion in the C preprocessor and method resolution in object-oriented programming.</p>
 <p><strong>Example 1.7</strong> : In the C program of Fig. 1.12, identifier a is a macro that stands for expression <code>(x + 1)</code>. But what is <code>x</code>? We cannot resolve <code>x</code> statically,that is, in terms of the program text</p>
-<pre><code class="c">#define a (x+1)
-int x = 2;
-void b() { int x = 1; printf(&quot;%d\n&quot;, a); }
-void c() { printf(&quot;%d\n&quot;, a); }
-void main() { b(); c();}
-</code></pre>
+<div class="highlight"><pre><span></span><span class="cp">#define a (x+1)</span>
+<span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+<span class="kt">void</span> <span class="nf">b</span><span class="p">()</span> <span class="p">{</span> <span class="kt">int</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">a</span><span class="p">);</span> <span class="p">}</span>
+<span class="kt">void</span> <span class="nf">c</span><span class="p">()</span> <span class="p">{</span> <span class="n">printf</span><span class="p">(</span><span class="s">&quot;%d</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">a</span><span class="p">);</span> <span class="p">}</span>
+<span class="kt">void</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span> <span class="n">b</span><span class="p">();</span> <span class="n">c</span><span class="p">();}</span>
+</pre></div>
 
 <p>In fact, in order to interpret <code>x,</code> we must use the usual dynamic-scope rule.We examine all the function calls that are currently <strong>active</strong>, and we take the most recently called function that has a declaration of x. It is to this declaration that the use of <code>x</code> refers.</p>
 <p>In the example of Fig. 1.12, the function main first calls function <code>b</code>. As <code>b</code> executes, it prints the value of the macro <code>a</code>. Since <code>(x + 1)</code>must be substituted for <code>a</code>, we resolve this use of <code>x</code>to the declaration int <code>x=1</code> in function <code>b</code>. The reason is that <code>b</code> has a declaration of <code>x</code>, so the <code>(x + 1)</code> in the <code>printf</code> in <code>b</code> refers to this <code>x</code>. Thus, the value printed is 2.</p>
@@ -1353,6 +1353,8 @@ procedure is in effect a pointer to the object. Thus, the called procedure is ab
       <script src="../../assets/javascripts/application.808e90bb.js"></script>
       
       <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
       
     
   </body>

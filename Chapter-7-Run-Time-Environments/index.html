@@ -918,12 +918,12 @@
                 <h1 id="chapter-7-run-time-environments">Chapter 7 Run-Time Environments<a class="headerlink" href="#chapter-7-run-time-environments" title="Permanent link">#</a></h1>
 <p>A compiler must accurately implement the <strong>abstractions</strong> embodied in the source-language definition. These abstractions typically include the concepts we discussed in Section 1.6 such as names, scopes, bindings, data types, operators,<strong>procedures</strong>, parameters, and flow-of-control constructs. The compiler must cooperate with the operating system and other systems software to support these <strong>abstractions</strong> on the target machine.</p>
 <blockquote>
-<p>NOTE: 上面这段话中的<strong>abstractions</strong>是有特殊含义的，参见文章<a href="https://dengking.github.io/Post/Abstraction/Abstraction/">Abstraction</a>。</p>
+<p>NOTE: 上面这段话中的**abstractions**是有特殊含义的，参见文章<a href="https://dengking.github.io/Post/Abstraction/Abstraction/">Abstraction</a>。</p>
 <p>Compiler需要使用<a href="https://en.wikipedia.org/wiki/Machine_code">machine language</a>来实现programming language中的各种abstraction。</p>
 </blockquote>
 <p>To do so, the compiler creates and manages a <strong>run-time environment</strong> in which it assumes its <strong>target programs</strong> are being executed. This environment deals with a variety of issues such as the layout and allocation of storage locations for the <strong>objects</strong> named in the source program, the mechanisms used by the target program to access <strong>variables</strong>, the linkages between procedures, the mechanisms for passing parameters, and the interfaces to the operating system, input/output devices, and other programs.</p>
 <blockquote>
-<p>NOTE: 显然，<strong>run-time environment</strong>是一个<a href="https://dengking.github.io/Post/Abstraction/Abstraction-and-model/">概念模型</a>（是一个简化的模型，没有考虑multi-thread等），关于对这个概念模型的实现，参见工程<a href="https://dengking.github.io/Linux-OS/">Linux-OS</a>的<a href="https://dengking.github.io/Linux-OS/Kernel/Guide/Linux-OS's-multitasking/01-Process-mode-run-time-environment/">Process mode: run time environment</a>。</p>
+<p>NOTE: 显然，**run-time environment**是一个<a href="https://dengking.github.io/Post/Abstraction/Abstraction-and-model/">概念模型</a>（是一个简化的模型，没有考虑multi-thread等），关于对这个概念模型的实现，参见工程<a href="https://dengking.github.io/Linux-OS/">Linux-OS</a>的<a href="https://dengking.github.io/Linux-OS/Kernel/Guide/Linux-OS's-multitasking/01-Process-mode-run-time-environment/">Process mode: run time environment</a>。</p>
 <p>本段描述的这些内容是由<a href="https://en.wikipedia.org/wiki/Application_binary_interface">Application binary interface</a>所约定。</p>
 </blockquote>
 <p>The two themes in this chapter are <strong>the allocation of storage locations</strong> and <strong>access to variables and data</strong>. We shall discuss <strong>memory management</strong> in some detail, including <strong>stack allocation</strong>, <strong>heap management</strong>, and <strong>garbage collection</strong>. In the next chapter, we present techniques for generating target code for many common language constructs.</p>
@@ -1004,6 +1004,8 @@
       <script src="../assets/javascripts/application.808e90bb.js"></script>
       
       <script>app.initialize({version:"1.0.4",url:{base:".."}})</script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
       
     
   </body>

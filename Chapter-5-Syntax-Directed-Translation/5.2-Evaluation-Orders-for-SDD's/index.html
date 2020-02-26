@@ -1041,7 +1041,7 @@ written to conform to the requirements of at least one of these classes.</p>
 </blockquote>
 <h2 id="522-ordering-the-evaluation-of-attributes">5.2.2 Ordering the Evaluation of Attributes<a class="headerlink" href="#522-ordering-the-evaluation-of-attributes" title="Permanent link">#</a></h2>
 <p>The <em>dependency graph</em> characterizes the possible orders in which we can evaluate the attributes at the various nodes of a <strong>parse tree</strong>. If the dependency graph has an edge from node <code>M</code> to node <code>N</code> , then the attribute corresponding to <code>M</code> must be evaluated before the attribute of <code>N</code> . Thus, the only allowable orders
-of evaluation are those sequences of nodes $N_1, N_2,\dots , N_k$ such that if there is an edge of the dependency graph from $N_i$ to $N_j$, then i &lt; j . Such an ordering embeds a directed graph into a linear order, and is called a <em>topological sort</em> of the graph.</p>
+of evaluation are those sequences of nodes <span><span class="MathJax_Preview">N_1, N_2,\dots , N_k</span><script type="math/tex">N_1, N_2,\dots , N_k</script></span> such that if there is an edge of the dependency graph from <span><span class="MathJax_Preview">N_i</span><script type="math/tex">N_i</script></span> to <span><span class="MathJax_Preview">N_j</span><script type="math/tex">N_j</script></span>, then i &lt; j . Such an ordering embeds a directed graph into a linear order, and is called a <em>topological sort</em> of the graph.</p>
 <p>If there is any <strong>cycle</strong> in the graph, then there are no <strong>topological sorts</strong>; that is, there is no way to evaluate the SDD on this <strong>parse tree</strong>. If there are no <strong>cycles</strong>, however, then there is always at least one topological sort. To see why, since there are no cycles, we can surely find a node with no edge entering. For if there were no such node, we could proceed from predecessor to predecessor until we came back to some node we had already seen, yielding a cycle. Make this node the first in the topological order, remove it from the dependency graph, and repeat the process on the remaining nodes.</p>
 <h2 id="523-s-attributed-definitions">5.2.3 S-Attributed Definitions<a class="headerlink" href="#523-s-attributed-definitions" title="Permanent link">#</a></h2>
 <p>As mentioned earlier, given an SDD, it is very hard to tell whether there exist any parse trees whose dependency graphs have cycles. In practice, translations can be implemented using classes of SDD's that guarantee an evaluation order, since they do not permit dependency graphs with cycles. Moreover, the two
@@ -1057,14 +1057,14 @@ classes introduced in this section can be implemented efficiently in connection 
 <p>The second class of SDD's is called <em>L-attributed definitions</em>. The idea behind this class is that, between the attributes associated with a production body, <strong>dependency-graph edges</strong> can go from <strong>left</strong> to <strong>right</strong>, but not from <strong>right</strong> to <strong>left</strong> (hence "L-attributed"). More precisely, each attribute must be either</p>
 <ol>
 <li>Synthesized, or</li>
-<li>Inherited, but with the rules limited as follows. Suppose that there is a production $A \to X_1, X_2, \dots,  X_n$, and that there is an <strong>inherited attribute</strong> $X_i.a$ computed by a rule associated with this production. Then the rule may use only:</li>
+<li>Inherited, but with the rules limited as follows. Suppose that there is a production <span><span class="MathJax_Preview">A \to X_1, X_2, \dots,  X_n</span><script type="math/tex">A \to X_1, X_2, \dots,  X_n</script></span>, and that there is an <strong>inherited attribute</strong> <span><span class="MathJax_Preview">X_i.a</span><script type="math/tex">X_i.a</script></span> computed by a rule associated with this production. Then the rule may use only:</li>
 <li>Inherited attributes associated with the head <code>A</code>.</li>
-<li>Either inherited or synthesized attributes associated with the occurrences of symbols $X_1, X_2, \dots, X_{i-1}$ located to the left of $X_i$.</li>
-<li>Inherited or synthesized attributes associated with this occurrence of $X_i$ itself, but only in such a way that there are no cycles in a dependency graph formed by the attributes of this $X_i$.</li>
+<li>Either inherited or synthesized attributes associated with the occurrences of symbols <span><span class="MathJax_Preview">X_1, X_2, \dots, X_{i-1}</span><script type="math/tex">X_1, X_2, \dots, X_{i-1}</script></span> located to the left of <span><span class="MathJax_Preview">X_i</span><script type="math/tex">X_i</script></span>.</li>
+<li>Inherited or synthesized attributes associated with this occurrence of <span><span class="MathJax_Preview">X_i</span><script type="math/tex">X_i</script></span> itself, but only in such a way that there are no cycles in a dependency graph formed by the attributes of this <span><span class="MathJax_Preview">X_i</span><script type="math/tex">X_i</script></span>.</li>
 </ol>
 <p><strong>Example 5.8 :</strong>  The SDD in Fig. 5.4 is <strong>L-attributed</strong>. To see why, consider the semantic rules for inherited attributes, which are repeated here for convenience:</p>
 <p><img alt="" src="../SDD-in-Fig5.4.jpg" /></p>
-<p>The first of these rules defines the inherited attribute <code>T'.inh</code> using only <code>F.val</code> , and <code>F</code> appears to the left of <code>T'</code> in the production body, as required. The second rule defines $T_1'.inh$ using the inherited attribute <code>T'inh</code> associated with the <strong>head</strong>, and <code>F.val</code> , where <code>F</code> appears to the left of $T_1'$ in the production body.</p>
+<p>The first of these rules defines the inherited attribute <code>T'.inh</code> using only <code>F.val</code> , and <code>F</code> appears to the left of <code>T'</code> in the production body, as required. The second rule defines <span><span class="MathJax_Preview">T_1'.inh</span><script type="math/tex">T_1'.inh</script></span> using the inherited attribute <code>T'inh</code> associated with the <strong>head</strong>, and <code>F.val</code> , where <code>F</code> appears to the left of <span><span class="MathJax_Preview">T_1'</span><script type="math/tex">T_1'</script></span> in the production body.</p>
 <p>In each of these cases, the rules use information "from above or from the left," as required by the class. The remaining attributes are synthesized. Hence, the SDD is L-attributed. </p>
 <p><strong>Example 5.9 :</strong> Any SDD containing the following production and rules cannot be L-attributed:</p>
 <p><img alt="" src="../Example5.9.jpg" /></p>
@@ -1150,6 +1150,8 @@ order consistent with the dependency graph. Translation schemes impose left-to-r
       <script src="../../assets/javascripts/application.808e90bb.js"></script>
       
       <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
       
     
   </body>

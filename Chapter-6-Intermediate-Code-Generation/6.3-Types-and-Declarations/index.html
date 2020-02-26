@@ -1010,13 +1010,15 @@
 <blockquote>
 <p>Type Names and Recursive Types</p>
 <p>Once a class is defined, its name can be used as a <strong>type name</strong> in C++ or Java; for example, consider <code>Node</code> in the program fragment</p>
-<p><code>java
-public class Node { ... }
-...
-public Node n;</code></p>
+<div class="highlight"><pre><span></span><span class="kd">public</span> <span class="kd">class</span> <span class="nc">Node</span> <span class="o">{</span> <span class="o">...</span> <span class="o">}</span>
+<span class="o">...</span>
+<span class="kd">public</span> <span class="n">Node</span> <span class="n">n</span><span class="o">;</span>
+</pre></div>
+
 <p>Names can be used to define recursive types, which are needed for data structures such as linked lists. The pseudo code for a list element</p>
-<p><code>java
-class Cell { int info; Cell next; ... }</code></p>
+<div class="highlight"><pre><span></span><span class="kd">class</span> <span class="nc">Cell</span> <span class="o">{</span> <span class="kt">int</span> <span class="n">info</span><span class="o">;</span> <span class="n">Cell</span> <span class="n">next</span><span class="o">;</span> <span class="o">...</span> <span class="o">}</span>
+</pre></div>
+
 <p>defines the recursive type <code>Cell</code> as a class that contains a field info and a field next of type <code>Cell</code>. Similar recursive types can be defined in C using records and pointers. The techniques in this chapter carry over to recursive types.</p>
 </blockquote>
 <hr />
@@ -1031,7 +1033,7 @@ class Cell { int info; Cell next; ... }</code></p>
 <p>Suppose that storage comes in blocks of contiguous bytes, where a byte is the smallest unit of addressable memory. Typically, a byte is eight bits, and some number of bytes form a machine word. Multibyte objects are stored in consecutive bytes and given the address of the first byte.</p>
 <p>The <strong>width</strong> of a <strong>type</strong> is the number of storage units needed for objects of that type. A basic type, such as a character, integer, or float, requires an integral number of bytes. For easy access, storage for aggregates such as arrays and classes is allocated in one contiguous block of bytes.</p>
 <p>The <strong>translation scheme</strong> (SDT) (翻译方案) in Fig. 6.15 computes <strong>types</strong> and their <strong>widths</strong> for basic and array types; record types will be discussed in Section 6.3.6. The SDT uses synthesized attributes <strong><em>type</em></strong> and <strong><em>width</em></strong> for each nonterminal and two variables <code>t</code> and <code>w</code> to pass type and width information from a <code>B</code> node in a parse tree to the node for the production <code>C</code>. In a syntax-directed definition, <code>t</code> and <code>w</code> would be inherited attributes for <code>C</code> .</p>
-<pre><code>T -&gt; B f t = B :type; w = B :width ; g
+<div class="highlight"><pre><span></span>T -&gt; B f t = B :type; w = B :width ; g
 C f T :type = C :type ; T :width = C :width ; g
 B -&gt; int f B :type = integer; B :width = 4; g
 B -&gt; ?oat f B :type = ?oat; B :width = 8; g
@@ -1044,7 +1046,7 @@ f C :type = array (num:value ; C
 C :width = num:value ? C
 1
 :width ; g
-</code></pre>
+</pre></div>
                 
                   
                 
@@ -1118,6 +1120,8 @@ C :width = num:value ? C
       <script src="../../assets/javascripts/application.808e90bb.js"></script>
       
       <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
       
     
   </body>

@@ -966,17 +966,17 @@
 <p>We consider two SDD's for constructing <strong>syntax trees</strong> for expressions. The first, an S-attributed definition, is suitable for use during bottom-up parsing. The second, L-attributed, is suitable for use during top-down parsing.</p>
 <p>The final example of this section is an L-attributed definition that deals with basic and array types.</p>
 <h2 id="531-construction-of-syntax-trees">5.3.1 Construction of Syntax Trees<a class="headerlink" href="#531-construction-of-syntax-trees" title="Permanent link">#</a></h2>
-<p>As discussed in Section 2.8.2, each node in a syntax tree represents a construct; the children of the node represent the meaningful components of the construct. A syntax-tree node representing an expression $E_1 + E_2$ has label <code>+</code> and two children representing the sub expressions $E_1$ and $E_2$.</p>
+<p>As discussed in Section 2.8.2, each node in a syntax tree represents a construct; the children of the node represent the meaningful components of the construct. A syntax-tree node representing an expression <span><span class="MathJax_Preview">E_1 + E_2</span><script type="math/tex">E_1 + E_2</script></span> has label <code>+</code> and two children representing the sub expressions <span><span class="MathJax_Preview">E_1</span><script type="math/tex">E_1</script></span> and <span><span class="MathJax_Preview">E_2</span><script type="math/tex">E_2</script></span>.</p>
 <p>We shall implement the nodes of a syntax tree by objects with a suitable number of fields. Each object will have an <code>op</code> field that is the label of the node. The objects will have additional fields as follows:</p>
 <ul>
 <li>If the node is a leaf, an additional field holds the lexical value for the leaf. A constructor function <code>Leaf (op, val )</code> creates a leaf object. Alternatively, if nodes are viewed as records, then <code>Leaf</code> returns a pointer to a new record for a leaf.</li>
-<li>If the node is an <strong>interior node</strong>, there are as many additional fields as the node has children in the <strong>syntax tree</strong>. A constructor function <code>Node</code> takes two or more arguments: $Node(op, c_1, c_2, c_3, \dots, c_k)$ creates an object with  first field <code>op</code> and k additional fields for the <code>k</code> children $c_1, c_2, c_3, \dots, c_k$.</li>
+<li>If the node is an <strong>interior node</strong>, there are as many additional fields as the node has children in the <strong>syntax tree</strong>. A constructor function <code>Node</code> takes two or more arguments: <span><span class="MathJax_Preview">Node(op, c_1, c_2, c_3, \dots, c_k)</span><script type="math/tex">Node(op, c_1, c_2, c_3, \dots, c_k)</script></span> creates an object with  first field <code>op</code> and k additional fields for the <code>k</code> children <span><span class="MathJax_Preview">c_1, c_2, c_3, \dots, c_k</span><script type="math/tex">c_1, c_2, c_3, \dots, c_k</script></span>.</li>
 </ul>
 <p><strong>Example 5.11 :</strong> The S-attributed definition in Fig. 5.10 constructs syntax trees for a simple expression grammar involving only the binary operators <code>+</code> and <code>-</code>. As usual, these operators are at the same precedence level and are jointly left associative. All nonterminals have one synthesized attribute <code>node</code> ,
 which represents a node of the syntax tree.</p>
-<p>Every time the first production $E \to E_1 + T$  is used, its rule creates a node with <code>+</code> for <code>op</code> and two children, $E_1.node$ and $T.node$, for the sub expressions. The second production has a similar rule.</p>
+<p>Every time the first production <span><span class="MathJax_Preview">E \to E_1 + T</span><script type="math/tex">E \to E_1 + T</script></span>  is used, its rule creates a node with <code>+</code> for <code>op</code> and two children, <span><span class="MathJax_Preview">E_1.node</span><script type="math/tex">E_1.node</script></span> and <span><span class="MathJax_Preview">T.node</span><script type="math/tex">T.node</script></span>, for the sub expressions. The second production has a similar rule.</p>
 <p><img alt="" src="../Figure5.10Constructing-syntax-trees-for-simple-expressions.jpg" /></p>
-<p>For production 3, $E \to T$ , no node is created, since $E.node$ is the same as $T.node$. Similarly, no node is created for production 4, $T \to (E)$. The value of <code>T.node</code> is the same as <code>E.node</code>, since parentheses are used only for grouping; they influence the structure of the <strong>parse tree</strong> and the <strong>syntax tree</strong>, but once their
+<p>For production 3, <span><span class="MathJax_Preview">E \to T</span><script type="math/tex">E \to T</script></span> , no node is created, since <span><span class="MathJax_Preview">E.node</span><script type="math/tex">E.node</script></span> is the same as <span><span class="MathJax_Preview">T.node</span><script type="math/tex">T.node</script></span>. Similarly, no node is created for production 4, <span><span class="MathJax_Preview">T \to (E)</span><script type="math/tex">T \to (E)</script></span>. The value of <code>T.node</code> is the same as <code>E.node</code>, since parentheses are used only for grouping; they influence the structure of the <strong>parse tree</strong> and the <strong>syntax tree</strong>, but once their
 job is done, there is no further need to retain them in the <strong>syntax tree</strong>.</p>
                 
                   
@@ -1051,6 +1051,8 @@ job is done, there is no further need to retain them in the <strong>syntax tree<
       <script src="../../assets/javascripts/application.808e90bb.js"></script>
       
       <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
       
     
   </body>

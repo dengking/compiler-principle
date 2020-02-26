@@ -924,16 +924,16 @@
 <li><a href="https://en.wikipedia.org/wiki/Shunting-yard_algorithm">Shunting-yard algorithm</a></li>
 </ul>
 </blockquote>
-<pre><code class="java">{
-    int i; int j; float[100] a; float v; float x;
-    while ( true ) {
-        do i = i+1; while ( a[i] &lt; v );
-        do j = j-1; while ( a[j] &gt; v );
-        if ( i &gt;= j ) break;
-        x = a[i]; a[i] = a[j]; a[j] = x;
-    }
-}
-</code></pre>
+<div class="highlight"><pre><span></span><span class="o">{</span>
+    <span class="kt">int</span> <span class="n">i</span><span class="o">;</span> <span class="kt">int</span> <span class="n">j</span><span class="o">;</span> <span class="kt">float</span><span class="o">[</span><span class="mi">100</span><span class="o">]</span> <span class="n">a</span><span class="o">;</span> <span class="kt">float</span> <span class="n">v</span><span class="o">;</span> <span class="kt">float</span> <span class="n">x</span><span class="o">;</span>
+    <span class="k">while</span> <span class="o">(</span> <span class="kc">true</span> <span class="o">)</span> <span class="o">{</span>
+        <span class="k">do</span> <span class="n">i</span> <span class="o">=</span> <span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="o">;</span> <span class="k">while</span> <span class="o">(</span> <span class="n">a</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">&lt;</span> <span class="n">v</span> <span class="o">);</span>
+        <span class="k">do</span> <span class="n">j</span> <span class="o">=</span> <span class="n">j</span><span class="o">-</span><span class="mi">1</span><span class="o">;</span> <span class="k">while</span> <span class="o">(</span> <span class="n">a</span><span class="o">[</span><span class="n">j</span><span class="o">]</span> <span class="o">&gt;</span> <span class="n">v</span> <span class="o">);</span>
+        <span class="k">if</span> <span class="o">(</span> <span class="n">i</span> <span class="o">&gt;=</span> <span class="n">j</span> <span class="o">)</span> <span class="k">break</span><span class="o">;</span>
+        <span class="n">x</span> <span class="o">=</span> <span class="n">a</span><span class="o">[</span><span class="n">i</span><span class="o">];</span> <span class="n">a</span><span class="o">[</span><span class="n">i</span><span class="o">]</span> <span class="o">=</span> <span class="n">a</span><span class="o">[</span><span class="n">j</span><span class="o">];</span> <span class="n">a</span><span class="o">[</span><span class="n">j</span><span class="o">]</span> <span class="o">=</span> <span class="n">x</span><span class="o">;</span>
+    <span class="o">}</span>
+<span class="o">}</span>
+</pre></div>
 
 <p>Figure 2.1: A code fragment to be translated</p>
 <table>
@@ -1076,6 +1076,8 @@
       <script src="../assets/javascripts/application.808e90bb.js"></script>
       
       <script>app.initialize({version:"1.0.4",url:{base:".."}})</script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
       
     
   </body>

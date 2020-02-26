@@ -978,40 +978,40 @@
 <p>Almost all compilers for languages that use procedures, functions, or methods as units of user-defined actions manage at least part of their run-time memory as a <strong>stack</strong>. Each time a <strong>procedure</strong> is called, space for its <strong>local variables</strong> is pushed onto a <strong>stack</strong>, and when the procedure terminates, that space is popped
 off the stack. As we shall see, this arrangement not only allows space to be shared by procedure calls whose durations do not overlap in time, but it allows us to compile code for a procedure in such a way that the <strong>relative addresses</strong> of its <strong>nonlocal variables</strong> are always the same, regardless of the sequence of procedure calls.</p>
 <blockquote>
-<p>NOTE: 上面这段话中的<strong>nonlocal variables</strong>，参见<a href="https://en.wikipedia.org/wiki/Non-local_variable">Non-local variable</a>。</p>
+<p>NOTE: 上面这段话中的**nonlocal variables**，参见<a href="https://en.wikipedia.org/wiki/Non-local_variable">Non-local variable</a>。</p>
 </blockquote>
 <h2 id="721-activation-trees">7.2.1 Activation Trees<a class="headerlink" href="#721-activation-trees" title="Permanent link">#</a></h2>
 <p>Stack allocation would not be feasible if procedure calls, or activations of procedures, did not <strong>nest in time</strong>. The following example illustrates nesting of procedure calls.</p>
 <blockquote>
-<p>NOTE: <strong>nest in time</strong>会在后面进行详细说明。</p>
+<p>NOTE: **nest in time**会在后面进行详细说明。</p>
 </blockquote>
 <p><strong>Example 7.1</strong> : Figure 7.2 contains a sketch of a program that reads nine integers into an array <code>a</code> and sorts them using the <strong>recursive quicksort algorithm</strong>.</p>
-<pre><code class="c">int a[11];
-void readArray() { /* Reads 9 integers into a[1]; :::; a[9]. */
-    int i;
-    ...
-}
-int partition(int m, int n) {
-/* Picks a separator value v , and partitions a[m .. n] so that
-a[m , p - 1] are less than v , a[p] = v , and a[p + 1 , n] are
-equal to or greater than v . Returns p. */
-    ...
-}
-void quicksort(int m, int n) {
-    int i;
-    if (n &gt; m) {
-        i = partition(m, n);
-        quicksort(m, i-1);
-        quicksort(i+1, n);
-    }
-}
-main() {
-    readArray();
-    a[0] = -9999;
-    a[10] = 9999;
-    quicksort(1,9);
-}
-</code></pre>
+<div class="highlight"><pre><span></span><span class="kt">int</span> <span class="n">a</span><span class="p">[</span><span class="mi">11</span><span class="p">];</span>
+<span class="kt">void</span> <span class="nf">readArray</span><span class="p">()</span> <span class="p">{</span> <span class="cm">/* Reads 9 integers into a[1]; :::; a[9]. */</span>
+    <span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
+    <span class="p">...</span>
+<span class="p">}</span>
+<span class="kt">int</span> <span class="nf">partition</span><span class="p">(</span><span class="kt">int</span> <span class="n">m</span><span class="p">,</span> <span class="kt">int</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+<span class="cm">/* Picks a separator value v , and partitions a[m .. n] so that</span>
+<span class="cm">a[m , p - 1] are less than v , a[p] = v , and a[p + 1 , n] are</span>
+<span class="cm">equal to or greater than v . Returns p. */</span>
+    <span class="p">...</span>
+<span class="p">}</span>
+<span class="kt">void</span> <span class="nf">quicksort</span><span class="p">(</span><span class="kt">int</span> <span class="n">m</span><span class="p">,</span> <span class="kt">int</span> <span class="n">n</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">int</span> <span class="n">i</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">n</span> <span class="o">&gt;</span> <span class="n">m</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">i</span> <span class="o">=</span> <span class="n">partition</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">n</span><span class="p">);</span>
+        <span class="n">quicksort</span><span class="p">(</span><span class="n">m</span><span class="p">,</span> <span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">);</span>
+        <span class="n">quicksort</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">);</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+<span class="n">main</span><span class="p">()</span> <span class="p">{</span>
+    <span class="n">readArray</span><span class="p">();</span>
+    <span class="n">a</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="o">-</span><span class="mi">9999</span><span class="p">;</span>
+    <span class="n">a</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span> <span class="o">=</span> <span class="mi">9999</span><span class="p">;</span>
+    <span class="n">quicksort</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">9</span><span class="p">);</span>
+<span class="p">}</span>
+</pre></div>
 
 <p>Figure 7.2: Sketch of a <code>quicksort</code> program</p>
 <p>The main function has three tasks. It calls <code>readArray</code>, sets the sentinels, and then calls <code>quicksort</code> on the entire data array. Figure 7.3 suggests a sequence of calls that might result from an execution of the program. In this execution, the call to <code>partition (1, 9)</code> returns 4, so <code>a[1]</code>through <code>a[3]</code> hold elements less than its chosen separator value <code>v</code> , while the larger elements are in <code>a[5]</code> through <code>a[9]</code>. </p>
@@ -1026,7 +1026,7 @@ main() {
 <p>We therefore can represent the activations of procedures during the running of an entire program by a tree, called an <strong><em>activation tree</em></strong>. Each node corresponds to one activation, and the root is the activation of the "main" procedure that initiates execution of the program. At a node for an activation of procedure <code>p</code>,
 the children correspond to activations of the procedures called by this activation of <code>p</code>. We show these activations in the order that they are called, from left to right. Notice that one child must finish before the activation to its right can begin.</p>
 <blockquote>
-<p>NOTE: 通过上面的描述，我们应该能够理解在本节第一段中提出的<strong>nest in time</strong>的含义了，nest的中文意思是嵌套，其实可以使用括号来进行类比nest in time，进入函数就相当于开括号，退出函数就相当于闭括号，这样函数调用的过程就可以使用括号来进行表示了，nest in time相当于说是括号是完全匹配的。</p>
+<p>NOTE: 通过上面的描述，我们应该能够理解在本节第一段中提出的**nest in time**的含义了，nest的中文意思是嵌套，其实可以使用括号来进行类比nest in time，进入函数就相当于开括号，退出函数就相当于闭括号，这样函数调用的过程就可以使用括号来进行表示了，nest in time相当于说是括号是完全匹配的。</p>
 </blockquote>
 <p><img alt="" src="../Figure-7.4-Activation-tree-representing-calls-during-an-execution-of-quicksort.jpg" /></p>
 <p>Example 7.2 : One possible activation tree that completes the sequence of calls and returns suggested in Fig. 7.3 is shown in Fig. 7.4. Functions are represented by the first letters of their names. Remember that this tree is only one possibility, since the arguments of subsequent calls, and also the number of calls along any branch is influenced by the values returned by partition. </p>
@@ -1127,6 +1127,8 @@ the children correspond to activations of the procedures called by this activati
       <script src="../../assets/javascripts/application.808e90bb.js"></script>
       
       <script>app.initialize({version:"1.0.4",url:{base:"../.."}})</script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
       
     
   </body>
