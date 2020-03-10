@@ -4,7 +4,9 @@ Compile-time 和 run-time 是非常重要的两个概念，由非常非常多的
 
 从它们的名称可以看出，这两个概念是根据time的维度来进行划分的。
 
-TODO: 维基百科[Runtime (program lifecycle phase)](https://en.wikipedia.org/wiki/Runtime_(program_lifecycle_phase))、[Compile time](https://en.wikipedia.org/wiki/Compile_time)
+## 维基百科[Runtime (program lifecycle phase)](https://en.wikipedia.org/wiki/Runtime_(program_lifecycle_phase))
+
+## 维基百科[Compile time](https://en.wikipedia.org/wiki/Compile_time)
 
 本书的如下章节涉及到了两者：
 
@@ -45,7 +47,7 @@ stack area、heap area是run-time分配；
 
 
 
-### Bind
+### Name binding
 
 [Name binding](https://en.wikipedia.org/wiki/Name_binding)
 
@@ -54,3 +56,15 @@ stack area、heap area是run-time分配；
 Static binding参见：
 
 [Early binding](https://en.wikipedia.org/wiki/Ad_hoc_polymorphism#Early_binding)
+
+
+
+### Runtime error VS compile-time error 
+
+参见维基百科[Runtime error detection](https://en.wikipedia.org/wiki/Runtime_error_detection)
+
+
+
+### Static and dynamic polymorphism
+
+参见工程[programming-language](https://dengking.github.io/programming-language/)的[Polymorphism](https://dengking.github.io/programming-language/Theory/Programming-paradigm/Object-oriented-programming/Polymorphism/index.md)。
