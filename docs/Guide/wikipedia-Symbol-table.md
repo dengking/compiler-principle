@@ -1,4 +1,0 @@
-# [Symbol table](https://en.wikipedia.org/wiki/Symbol_table)
-
-In [computer science](https://en.wikipedia.org/wiki/Computer_science), a **symbol table** is a [data structure](https://en.wikipedia.org/wiki/Data_structure) used by a language [translator](https://en.wikipedia.org/wiki/Translator) such as a [compiler](https://en.wikipedia.org/wiki/Compiler) or [interpreter](https://en.wikipedia.org/wiki/Interpreter_(computing)), where each [identifier](https://en.wikipedia.org/wiki/Identifier) (a.k.a. [symbol](https://en.wikipedia.org/wiki/Symbol_(programming))) in a program's [source code](https://en.wikipedia.org/wiki/Source_code) is associated with information relating to its declaration or appearance in the source. In other words, the entries of a symbol table store the information related to the entry's corresponding symbol.
-

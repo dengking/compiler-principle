@@ -4,4 +4,4 @@ nav:
     - 2.2-Syntax-Definition: 2.2-Syntax-Definition.md
     - 2.3-Syntax-Directed-Translation: 2.3-Syntax-Directed-Translation.md
     - 2.4-Parsing: 2.4-Parsing.md
-    - 2.7-Symbol-Tables: 2.7-Symbol-Tables
+    - 2.7-Symbol-Tables: 2.7-Symbol-Tables.md

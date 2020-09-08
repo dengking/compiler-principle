@@ -3,3 +3,4 @@ nav:
     - Compile-time-and-run-time: Compile-time-and-run-time.md
     - VS-LL-parser-VS-LR-parser: VS-LL-parser-VS-LR-parser.md
     - Name-bind: Name-bind
+    - Symbol-table: Symbol-table.md
