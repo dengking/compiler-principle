@@ -2,5 +2,7 @@ nav:
     - Introduction: index.md
     - Compile-time-and-run-time: Compile-time-and-run-time.md
     - VS-LL-parser-VS-LR-parser: VS-LL-parser-VS-LR-parser.md
-    - Name-bind: Name-bind
+    - Parsing-algorithm: Parsing-algorithm
+    - Parser-generator: Parser-generator
+    - Bind: Bind
     - Symbol-table: Symbol-table.md
