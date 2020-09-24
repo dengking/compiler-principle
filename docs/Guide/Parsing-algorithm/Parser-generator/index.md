@@ -2,13 +2,19 @@
 
 在龙书的4.9 Parser Generators中，介绍了Yacc，本文将对一些常见的parser generator进行总结。
 
+
+
 ## Lex 
 
 wikipedia [Lex (software)](https://en.wikipedia.org/wiki/Lex_(software))
 
+
+
 ## Yacc
 
 wikipedia [Yacc](https://en.wikipedia.org/wiki/Yacc)
+
+
 
 ## Bison
 
@@ -25,6 +31,8 @@ wikipedia [GNU Bison](https://en.wikipedia.org/wiki/GNU_Bison)
 ## The Lemon LALR(1) Parser Generator
 
 sqlite [The Lemon LALR(1) Parser Generator](https://www.sqlite.org/lemon.html)
+
+
 
 ## wikipedia [Comparison of parser generators](https://en.wikipedia.org/wiki/Comparison_of_parser_generators)
 
