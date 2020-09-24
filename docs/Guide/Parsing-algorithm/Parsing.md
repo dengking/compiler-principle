@@ -1,5 +1,3 @@
-[TOC]
-
 # [Parsing](https://en.wikipedia.org/wiki/Parsing)
 
 **Parsing**, **syntax analysis**, or **syntactic analysis** is the process of analysing a [string](https://en.wikipedia.org/wiki/String_(computer_science)) of [symbols](https://en.wikipedia.org/wiki/Symbol_(formal)), either in [natural language](https://en.wikipedia.org/wiki/Natural_language), [computer languages](https://en.wikipedia.org/wiki/Computer_languages) or [data structures](https://en.wikipedia.org/wiki/Data_structure), conforming to the rules of a [formal grammar](https://en.wikipedia.org/wiki/Formal_grammar). The term *parsing* comes from Latin *pars* (*orationis*), meaning [part (of speech)](https://en.wikipedia.org/wiki/Part_of_speech).[[1\]](https://en.wikipedia.org/wiki/Parsing#cite_note-dictionary.com-1)
