@@ -1,2 +1,3 @@
 nav:
     - Optimizing-compiler: Optimizing-compiler.md
+    - Inline: Inline.md
