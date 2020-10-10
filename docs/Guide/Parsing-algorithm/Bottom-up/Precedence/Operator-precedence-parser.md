@@ -4,3 +4,10 @@ In [computer science](https://en.wikipedia.org/wiki/Computer_science), an **oper
 
 [Edsger Dijkstra](https://en.wikipedia.org/wiki/Edsger_Dijkstra)'s [shunting yard algorithm](https://en.wikipedia.org/wiki/Shunting_yard_algorithm) is commonly used to implement operator precedence parsers. Other algorithms include the precedence climbing method and the [top down operator precedence method](https://en.wikipedia.org/wiki/Pratt_parser).[[1\]](https://en.wikipedia.org/wiki/Operator-precedence_parser#cite_note-Norvell2001-1)
 
+
+
+
+
+## Shunting yard algorithm
+
+参见`Guide\Expression-tree\Shunting-yard-algorithm`。
