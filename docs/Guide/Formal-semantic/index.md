@@ -1,0 +1,1 @@
+将sentence看做是expression，然后将expression转换为tree，然后基于tree进行翻译，将它翻译为一些列的指令，这就完成了语义的理解。最最典型的案例就是[computer algebra](https://en.wikipedia.org/wiki/Computer_algebra)。
