@@ -1,4 +1,14 @@
-# [Name-binding](https://en.wikipedia.org/wiki/Name_binding)
+# Name binding
+
+## What is name binding?
+
+其实，从symbol的角度来理解是比较容易的: 一个name就是一个symbol，symbol是用于指代的，所谓binding是给这个name指定value。关于此，参见utexas [CS 378, Symbolic Programming](https://www.cs.utexas.edu/~novak/cs378.pdf)。
+
+关于symbol，参见工程discrete的`Relation-structure-computation\Representation-and-computation\Symbol-expression`章节。
+
+
+
+## wikipedia [Name-binding](https://en.wikipedia.org/wiki/Name_binding)
 
 For bound variables in mathematics, see [free variables and bound variables](https://en.wikipedia.org/wiki/Free_variables_and_bound_variables).
 
@@ -6,11 +16,13 @@ In [programming languages](https://en.wikipedia.org/wiki/Programming_language), 
 
 Use of an identifier `id` in a context that establishes a binding for `id` is called a **binding (or defining) occurrence**(绑定事件或定义事件. In all other occurrences (e.g., in expressions, assignments, and subprogram calls), an identifier stands for what it is bound to; such occurrences are called **applied occurrences**(在为id建立绑定的上下文中使用标识符id称为绑定（或定义）事件。 在所有其他事件中（例如，在表达式，赋值和子程序调用中），标识符代表它所绑定的内容; 这种事件称为应用事件).
 
-思考：name binding和scope的关系
+> NOTE: 
+>
+> 思考：name binding和scope的关系
+>
+> 总结：显然name-binding和by reference是密切相关的。
 
-总结：显然name-binding和by reference是密切相关的。
-
-## Binding time
+### Binding time
 
 - *Static binding* (or *early binding*) is **name binding** performed before the program is run [[2\]](https://en.wikipedia.org/wiki/Name_binding#cite_note-ieee24765:2010(E)-2).
 - *Dynamic binding* (or *late binding* or *virtual binding*) is **name binding** performed as the program is running [[2\]](https://en.wikipedia.org/wiki/Name_binding#cite_note-ieee24765:2010(E)-2).
@@ -29,7 +41,7 @@ But an example of **dynamic binding** is [dynamic dispatch](https://en.wikipedia
 
 总结：上面这段话还描述了C语言中实现**dynamic binding**的方式。
 
-## Rebinding and mutation
+### Rebinding and mutation
 
 **Rebinding** should not be confused with **mutation**(突变，改变).
 
@@ -47,7 +59,7 @@ Consider the following [Java](https://en.wikipedia.org/wiki/Java_(programming_la
 
 The identifier `list` initially references nothing (it is [uninitialized](https://en.wikipedia.org/wiki/Uninitialized_variable)); it is then rebound to reference an object (a linked list of strings). The linked list referenced by `list` is then mutated, adding a string to the list. Lastly, `list` is rebound to `null`.
 
-## Late static
+### Late static
 
 **Late static binding** is a variant of binding somewhere between static and dynamic binding. Consider the following [PHP](https://en.wikipedia.org/wiki/PHP) example:
 
