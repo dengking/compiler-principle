@@ -6,13 +6,15 @@
 
 关于symbol，参见工程discrete的`Relation-structure-computation\Representation-and-computation\Symbol-expression`章节。
 
-
-
 ## wikipedia [Name-binding](https://en.wikipedia.org/wiki/Name_binding)
 
-For bound variables in mathematics, see [free variables and bound variables](https://en.wikipedia.org/wiki/Free_variables_and_bound_variables).
+*For bound variables in mathematics, see* [free variables and bound variables](https://en.wikipedia.org/wiki/Free_variables_and_bound_variables)*.*
 
-In [programming languages](https://en.wikipedia.org/wiki/Programming_language), **name binding** is the association of entities (data and/or code) with [identifiers](https://en.wikipedia.org/wiki/Identifier).[[1\]](https://en.wikipedia.org/wiki/Name_binding#cite_note-tkac08-1) An identifier bound to an object is said to [reference](https://en.wikipedia.org/wiki/Reference_(computer_science)) that object(此处的object就是上一句提到的entity). [Machine languages](https://en.wikipedia.org/wiki/Machine_language)(可以直接有CPU运行的语言) have no built-in notion of identifiers(机器语言没有内置的identifier的概念), but name-object bindings(name和object的binding) as a service and notation for the programmer is implemented by programming languages(binding是由programming languages来实现的). **Binding** is intimately(紧密地) connected with [scoping](https://en.wikipedia.org/wiki/Scoping), as scope determines which names bind to which objects – at which locations in the program code ([lexically](https://en.wikipedia.org/wiki/Scope_(computer_science)#Lexical_scoping)) and in which one of the possible execution paths ([temporally](https://en.wikipedia.org/wiki/Scope_(computer_science)#Dynamic_scoping))(binding与scope密切相关，因为scope 确定哪些name绑定到哪些object - 程序代码中的哪些位置（词法）以及哪个可能的执行路径（临时）).
+In [programming languages](https://en.wikipedia.org/wiki/Programming_language), **name binding** is the association of entities (data and/or code) with [identifiers](https://en.wikipedia.org/wiki/Identifier).[[1\]](https://en.wikipedia.org/wiki/Name_binding#cite_note-tkac08-1) An identifier bound to an object is said to [reference](https://en.wikipedia.org/wiki/Reference_(computer_science)) that object(此处的object就是上一句提到的entity). [Machine languages](https://en.wikipedia.org/wiki/Machine_language)(可以直接由CPU运行的语言) have no built-in notion of identifiers(机器语言没有内置的identifier的概念), but name-object bindings(name和object的binding) as a service and notation for the programmer is implemented by programming languages(binding是由programming languages来实现的). **Binding** is intimately(紧密地) connected with [scoping](https://en.wikipedia.org/wiki/Scoping), as scope determines which names bind to which objects – at which locations in the program code ([lexically](https://en.wikipedia.org/wiki/Scope_(computer_science)#Lexical_scoping)) and in which one of the possible execution paths ([temporally](https://en.wikipedia.org/wiki/Scope_(computer_science)#Dynamic_scoping))(binding与scope密切相关，因为scope 确定哪些name绑定到哪些object - 程序代码中的哪些位置（词法）以及哪个可能的执行路径（临时）).
+
+> NOTE: 关于 "data and/or code"，参见工程Hardware的`Computer-architecture\Stored-program-computer`章节的"Function and data model"章节。
+>
+> 其实所谓的name binding是compiler来做的一件事情，compiler将各个identifier和它对应的entity进行关联从而正确地理解program。
 
 Use of an identifier `id` in a context that establishes a binding for `id` is called a **binding (or defining) occurrence**(绑定事件或定义事件. In all other occurrences (e.g., in expressions, assignments, and subprogram calls), an identifier stands for what it is bound to; such occurrences are called **applied occurrences**(在为id建立绑定的上下文中使用标识符id称为绑定（或定义）事件。 在所有其他事件中（例如，在表达式，赋值和子程序调用中），标识符代表它所绑定的内容; 这种事件称为应用事件).
 
@@ -39,7 +41,7 @@ But an example of **dynamic binding** is [dynamic dispatch](https://en.wikipedia
 
 `List` is an [interface](https://en.wikipedia.org/wiki/Interface_(computing)), so `list` must refer to a [subtype](https://en.wikipedia.org/wiki/Subtype) of it. Is it a reference to a `LinkedList`, an `ArrayList`, or some other [subtype](https://en.wikipedia.org/wiki/Subtype) of `List`? The actual method referenced by `add` is not known until runtime. In C, such instance of **dynamic binding** may be a call to a function pointed by a variable or expression of a **function pointer type** whose value is unknown until it actually gets evaluated at run-time.
 
-总结：上面这段话还描述了C语言中实现**dynamic binding**的方式。
+> NOTE: 上面这段话还描述了C语言中实现**dynamic binding**的方式。
 
 ### Rebinding and mutation
 
@@ -93,3 +95,10 @@ class B extends A {
 B::hello();
 ```
 
+
+
+
+
+## wikipedia [Late binding](https://en.wikipedia.org/wiki/Late_binding)
+
+**Late binding**, **dynamic binding**,[[1\]](https://en.wikipedia.org/wiki/Late_binding#cite_note-1) or **dynamic linkage**[[2\]](https://en.wikipedia.org/wiki/Late_binding#cite_note-2)—though not an identical process to [dynamically linking](https://en.wikipedia.org/wiki/Dynamic_linker) imported code libraries—is a computer programming mechanism in which the method being called upon an object, or the function being called with arguments, is looked up by name at [runtime](https://en.wikipedia.org/wiki/Run_time_(program_lifecycle_phase)). In other words, a name is associated with a particular operation or object at runtime, rather than during compilation.
