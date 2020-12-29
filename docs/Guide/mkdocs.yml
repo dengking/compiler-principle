@@ -4,3 +4,4 @@ nav:
     - Parsing-algorithm: Parsing-algorithm
     - Bind: Bind
     - Symbol-table: Symbol-table.md
+    - Program-transformation: Program-transformation
