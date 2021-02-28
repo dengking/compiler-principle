@@ -1,7 +1,8 @@
 nav:
     - Introduction: index.md
-    - VS-LL-parser-VS-LR-parser: VS-LL-parser-VS-LR-parser.md
+
     - Parsing-algorithm: Parsing-algorithm
     - Bind: Bind
-    - Symbol-table: Symbol-table.md
+    - Formal-semantic: Formal-semantic
     - Program-transformation: Program-transformation
+    - Compiler-front-end: Compiler-front-end.md

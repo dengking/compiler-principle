@@ -1,8 +1,8 @@
-# [Parsing](https://en.wikipedia.org/wiki/Parsing)
+# wikipedia [Parsing](https://en.wikipedia.org/wiki/Parsing)
 
 **Parsing**, **syntax analysis**, or **syntactic analysis** is the process of analysing a [string](https://en.wikipedia.org/wiki/String_(computer_science)) of [symbols](https://en.wikipedia.org/wiki/Symbol_(formal)), either in [natural language](https://en.wikipedia.org/wiki/Natural_language), [computer languages](https://en.wikipedia.org/wiki/Computer_languages) or [data structures](https://en.wikipedia.org/wiki/Data_structure), conforming to the rules of a [formal grammar](https://en.wikipedia.org/wiki/Formal_grammar). The term *parsing* comes from Latin *pars* (*orationis*), meaning [part (of speech)](https://en.wikipedia.org/wiki/Part_of_speech).[[1\]](https://en.wikipedia.org/wiki/Parsing#cite_note-dictionary.com-1)
 
-***SUMMARY*** : **syntax analysis**更加能够说明[Parsing](https://en.wikipedia.org/wiki/Parsing)的含义；
+> NOTE: **syntax analysis**更加能够说明[Parsing](https://en.wikipedia.org/wiki/Parsing)的含义；
 
 The term has slightly different meanings in different branches of [linguistics](https://en.wikipedia.org/wiki/Linguistics) and [computer science](https://en.wikipedia.org/wiki/Computer_science). Traditional [sentence](https://en.wikipedia.org/wiki/Sentence_(linguistics)) parsing is often performed as a method of understanding the exact meaning of a sentence or word, sometimes with the aid of devices such as [sentence diagrams](https://en.wikipedia.org/wiki/Sentence_diagram). It usually emphasizes the importance of grammatical divisions such as [subject](https://en.wikipedia.org/wiki/Subject_(grammar)) and [predicate](https://en.wikipedia.org/wiki/Predicate_(grammar)).
 

@@ -1,8 +1,9 @@
 nav:
     - Introduction: Parsing.md
+    - VS-LL-parser-VS-LR-parser: VS-LL-parser-VS-LR-parser.md
     - Parser-generator: Parser-generator
     - Dyck-language: Dyck-language.md
-    - Top-down: Top-down
-    - Bottom-up: Bottom-up
+
+
     - Others: Others
     - Parser-generator: Parser-generator

@@ -26,8 +26,25 @@ nav:
 - Home: index.md
 - Guide:
   - Introduction: Guide/index.md
-  - Compile-time-and-run-time: Guide/Compile-time-and-run-time.md
-  - VS-LL-parser-VS-LR-parser: Guide/VS-LL-parser-VS-LR-parser.md
+  - Parsing-algorithm:
+    - Introduction: Guide/Parsing-algorithm/Parsing.md
+    - VS-LL-parser-VS-LR-parser: Guide/Parsing-algorithm/VS-LL-parser-VS-LR-parser.md
+    - Parser-generator:
+      - Introduction: Guide/Parsing-algorithm/Parser-generator/index.md
+    - Dyck-language: Guide/Parsing-algorithm/Dyck-language.md
+    - Others:
+      - Chart-parser: Guide/Parsing-algorithm/Others/Chart-parser.md
+      - Earley-parser: Guide/Parsing-algorithm/Others/Earley-parser.md
+    - Parser-generator: Parser-generator
+  - Bind:
+    - Name-binding: Guide/Bind/Name-binding.md
+  - Formal-semantic:
+    - Introduction: Guide/Formal-semantic/index.md
+  - Program-transformation:
+    - Introduction: Guide/Program-transformation/index.md
+    - DMS-Software-Reengineering-Toolkit:
+      - Introduction: Guide/Program-transformation/DMS-Software-Reengineering-Toolkit/index.md
+  - Compiler-front-end: Guide/Compiler-front-end.md
 - Chapter-1-Introduction:
   - 1-Introduction: Chapter-1-Introduction/index.md
   - 1.1-Language-Processors.md: Chapter-1-Introduction/1.1-Language-Processors.md
@@ -40,6 +57,9 @@ nav:
   - 2.2-Syntax-Definition: Chapter-2-A-Simple-Syntax-Directed-Translator/2.2-Syntax-Definition.md
   - 2.3-Syntax-Directed-Translation: Chapter-2-A-Simple-Syntax-Directed-Translator/2.3-Syntax-Directed-Translation.md
   - 2.4-Parsing: Chapter-2-A-Simple-Syntax-Directed-Translator/2.4-Parsing.md
+  - 2.7-Symbol-Tables:
+    - 2.7-Symbol-Tables: Chapter-2-A-Simple-Syntax-Directed-Translator/2.7-Symbol-Tables/2.7-Symbol-Tables.md
+    - Symbol-table: Chapter-2-A-Simple-Syntax-Directed-Translator/2.7-Symbol-Tables/Symbol-table.md
 - Chapter-3-Lexical-Analysis:
   - 3: Chapter-3-Lexical-Analysis/index.md
   - 3.1-The-Role-of-the-Lexical-Analyzer: Chapter-3-Lexical-Analysis/3.1-The-Role-of-the-Lexical-Analyzer.md
@@ -69,6 +89,13 @@ nav:
   - 7.4-Heap-Management: Chapter-7-Run-Time-Environments/7.4-Heap-Management.md
 - Chapter-9-Machine-Independent-Optimizations:
   - 9: Chapter-9-Machine-Independent-Optimizations/index.md
+- Compiler-optimizing:
+  - Optimizing-compiler: Compiler-optimizing/Optimizing-compiler.md
+  - Inline: Compiler-optimizing/Inline.md
+  - Static-single-assignment-form:
+    - Introduction: Compiler-optimizing/Static-single-assignment-form/index.md
+- Implementation:
+  - Introduction: Implementation/index.md
 plugins:
 - search
 repo_url: https://github.com/dengking/compiler-principle
