@@ -1,6 +1,3 @@
-[TOC]
-
-
 
 # [Syntax-directed translation](https://en.wikipedia.org/wiki/Syntax-directed_translation)
 

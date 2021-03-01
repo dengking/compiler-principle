@@ -23,8 +23,25 @@ Within computer science, the term is used in the analysis of [computer languages
 
 The *task* of the parser is essentially to determine if and how the input can be derived from the start symbol of the grammar. This can be done in essentially two ways:
 
-- [Top-down parsing](https://en.wikipedia.org/wiki/Top-down_parsing) - Top-down parsing can be viewed as an attempt to find left-most derivations of an input-stream by searching for [parse trees](https://en.wikipedia.org/wiki/Parse_tree) using a top-down expansion of the given [formal grammar](https://en.wikipedia.org/wiki/Formal_grammar) rules. Tokens are consumed from left to right. Inclusive choice is used to accommodate [ambiguity](https://en.wikipedia.org/wiki/Ambiguity) by expanding all alternative right-hand-sides of grammar rules.
-- [Bottom-up parsing](https://en.wikipedia.org/wiki/Bottom-up_parsing) - A parser can start with the input and attempt to rewrite it to the start symbol. Intuitively, the parser attempts to locate the most basic elements, then the elements containing these, and so on. [LR parsers](https://en.wikipedia.org/wiki/LR_parser) are examples of bottom-up parsers. Another term used for this type of parser is [Shift-Reduce](https://en.wikipedia.org/wiki/Shift-reduce_parser) parsing.
+1、[Top-down parsing](https://en.wikipedia.org/wiki/Top-down_parsing) - Top-down parsing can be viewed as an attempt to find left-most derivations of an input-stream by searching for [parse trees](https://en.wikipedia.org/wiki/Parse_tree) using a top-down expansion of the given [formal grammar](https://en.wikipedia.org/wiki/Formal_grammar) rules. Tokens are consumed from left to right. Inclusive choice is used to accommodate [ambiguity](https://en.wikipedia.org/wiki/Ambiguity) by expanding all alternative right-hand-sides of grammar rules.
+
+2、[Bottom-up parsing](https://en.wikipedia.org/wiki/Bottom-up_parsing) - A parser can start with the input and attempt to rewrite it to the start symbol. Intuitively, the parser attempts to locate the most basic elements, then the elements containing these, and so on. [LR parsers](https://en.wikipedia.org/wiki/LR_parser) are examples of bottom-up parsers. Another term used for this type of parser is [Shift-Reduce](https://en.wikipedia.org/wiki/Shift-reduce_parser) parsing.
+
+> ## Parsing algorithm doc and code
+>
+> ## Bottom-up
+>
+> |          parser          | doc  | code |
+> | :----------------------: | :--: | :--: |
+> |        LL parser         |      |      |
+> | Recursive descent parser |      |      |
+> |                          |      |      |
+>
+> 
+>
+> ## Top-down
+>
+> 
 
 [LL parsers](https://en.wikipedia.org/wiki/LL_parser) and [recursive-descent parser](https://en.wikipedia.org/wiki/Recursive-descent_parser) are examples of top-down parsers which cannot accommodate [left recursive](https://en.wikipedia.org/wiki/Left_recursion) [production rules](https://en.wikipedia.org/wiki/Formal_grammar#The_syntax_of_grammars). Although it has been believed that simple implementations of top-down parsing cannot accommodate direct and indirect left-recursion and may require exponential time and space complexity while parsing ambiguous [context-free grammars](https://en.wikipedia.org/wiki/Context-free_grammar), more sophisticated algorithms for top-down parsing have been created by Frost, Hafiz, and Callaghan[[11\]](https://en.wikipedia.org/wiki/Parsing#cite_note-FrostHafizCallaghan_2007-11)[[12\]](https://en.wikipedia.org/wiki/Parsing#cite_note-FrostHafizCallaghan_2008-12) which accommodate [ambiguity](https://en.wikipedia.org/wiki/Ambiguity) and [left recursion](https://en.wikipedia.org/wiki/Left_recursion) in polynomial time and which generate polynomial-size representations of the potentially exponential number of parse trees. Their algorithm is able to produce both left-most and right-most derivations of an input with regard to a given [context-free grammar](https://en.wikipedia.org/wiki/Context-free_grammar).
 

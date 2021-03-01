@@ -1,7 +1,3 @@
-[TOC]
-
-
-
 # [Lex (software)](https://en.wikipedia.org/wiki/Lex_(software))
 
 **Lex** is a [computer program](https://en.wikipedia.org/wiki/Computer_program) that generates [lexical analyzers](https://en.wikipedia.org/wiki/Lexical_analysis) ("scanners" or "lexers").[[1\]](https://en.wikipedia.org/wiki/Lex_(software)#cite_note-1)[[2\]](https://en.wikipedia.org/wiki/Lex_(software)#cite_note-2)
