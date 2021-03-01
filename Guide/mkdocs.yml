@@ -1,4 +1,8 @@
 nav:
     - Introduction: index.md
-    - Compile-time-and-run-time: Compile-time-and-run-time.md
-    - VS-LL-parser-VS-LR-parser: VS-LL-parser-VS-LR-parser.md
+
+    - Parsing-algorithm: Parsing-algorithm
+    - Bind: Bind
+    - Formal-semantic: Formal-semantic
+    - Program-transformation: Program-transformation
+    - Compiler-front-end: Compiler-front-end.md

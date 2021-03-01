@@ -1,0 +1,4 @@
+nav:
+    - Optimizing-compiler: Optimizing-compiler.md
+    - Inline: Inline.md
+    - Static-single-assignment-form: Static-single-assignment-form
