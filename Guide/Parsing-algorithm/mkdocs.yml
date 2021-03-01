@@ -1,5 +1,5 @@
 nav:
-    - Introduction: Parsing.md
+    - Introduction: index.md
     - VS-LL-parser-VS-LR-parser: VS-LL-parser-VS-LR-parser.md
     - Parser-generator: Parser-generator
     - Dyck-language: Dyck-language.md

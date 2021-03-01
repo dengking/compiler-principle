@@ -8,7 +8,7 @@
      <lastmod>2021-03-01</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://dengking.github.io/compiler-principle/Guide/Parsing-algorithm/Parsing/</loc>
+     <loc>https://dengking.github.io/compiler-principle/Guide/Parsing-algorithm/</loc>
      <lastmod>2021-03-01</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
@@ -92,7 +92,7 @@
      <lastmod>2021-03-01</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://dengking.github.io/compiler-principle/Chapter-2-A-Simple-Syntax-Directed-Translator/2.7-Symbol-Tables/2.7-Symbol-Tables/</loc>
+     <loc>https://dengking.github.io/compiler-principle/Chapter-2-A-Simple-Syntax-Directed-Translator/2.7-Symbol-Tables/</loc>
      <lastmod>2021-03-01</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
@@ -117,6 +117,10 @@
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dengking.github.io/compiler-principle/Chapter-3-Lexical-Analysis/3.7-From-Regular-Expressions-to-Automata/</loc>
+     <lastmod>2021-03-01</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://dengking.github.io/compiler-principle/Chapter-3-Lexical-Analysis/wikipedia-Lex%28software%29/</loc>
      <lastmod>2021-03-01</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
@@ -157,6 +161,10 @@
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dengking.github.io/compiler-principle/Chapter-5-Syntax-Directed-Translation/5.3-Applications-of-Syntax-Directed-Translation/</loc>
+     <lastmod>2021-03-01</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://dengking.github.io/compiler-principle/Chapter-5-Syntax-Directed-Translation/wikipedia-Syntax-directed-translation/</loc>
      <lastmod>2021-03-01</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
