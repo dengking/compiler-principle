@@ -1,12 +1,12 @@
-[TOC]
+# Basic block
 
 
 
-# [Basic block](https://en.wikipedia.org/wiki/Basic_bloc)
+## wikipedia [Basic block](https://en.wikipedia.org/wiki/Basic_bloc)
 
 In [compiler construction](https://en.wikipedia.org/wiki/Compiler), a **basic block** is a straight-line code sequence with no branches in except to the entry and no branches out except at the exit.[[1\]](https://en.wikipedia.org/wiki/Basic_block#cite_note-1)[[2\]](https://en.wikipedia.org/wiki/Basic_block#cite_note-2) This restricted form makes a basic block highly amenable to analysis.[[3\]](https://en.wikipedia.org/wiki/Basic_block#cite_note-3) [Compilers](https://en.wikipedia.org/wiki/Compiler) usually decompose programs into their basic blocks as a first step in the analysis process. Basic blocks form the vertices or nodes in a [control flow graph](https://en.wikipedia.org/wiki/Control_flow_graph).
 
-## Definition
+### Definition
 
 The code in a basic block has:
 
@@ -32,9 +32,9 @@ The blocks to which control may transfer after reaching the end of a block are c
 
 
 
-# [Basic Blocks and Flow Graphs | Examples](https://www.gatevidyalay.com/basic-blocks-and-flow-graphs/)
+## gatevidyalay [Basic Blocks and Flow Graphs | Examples](https://www.gatevidyalay.com/basic-blocks-and-flow-graphs/)
 
-## Basic Blocks
+### Basic Blocks
 
 Basic block is a set of statements that always executes in a sequence one after the other.
 
@@ -47,7 +47,7 @@ The characteristics of basic blocks are
 
 > NOTE: 有点原子的含义
 
-### Example Of Basic Block
+#### Example Of Basic Block
 
 Three Address Code for the expression `a = b + c + d` is-
 
@@ -62,7 +62,7 @@ Here,
 
 
 
-### Example Of Not A Basic Block
+#### Example Of Not A Basic Block
 
 Three Address Code for the expression `If A<B then 1 else 0` is-
 
@@ -77,11 +77,11 @@ Here,
 - The statements do not execute in a sequence one after the other.
 - Thus, they do not form a basic block.
 
-## Partitioning Intermediate Code Into Basic Blocks
+### Partitioning Intermediate Code Into Basic Blocks
 
 Any given code can be partitioned into basic blocks using the following rules
 
-### Rule-01: Determining Leaders
+#### Rule-01: Determining Leaders
 
  Following statements of the code are called as **Leaders**
 
@@ -91,7 +91,7 @@ Any given code can be partitioned into basic blocks using the following rules
 
  
 
-### Rule-02: Determining Basic Blocks
+#### Rule-02: Determining Basic Blocks
 
  
 
@@ -101,7 +101,7 @@ Any given code can be partitioned into basic blocks using the following rules
 
 
 
-## Flow Graphs
+### Flow Graphs
 
 A flow graph is a directed graph with flow control information added to the basic blocks.
 
@@ -110,9 +110,9 @@ A flow graph is a directed graph with flow control information added to the basi
 
 
 
-## PRACTICE PROBLEMS BASED ON BASIC BLOCKS & FLOW GRAPHS
+### PRACTICE PROBLEMS BASED ON BASIC BLOCKS & FLOW GRAPHS
 
-## Problem-01:
+### Problem-01:
 
 Compute the basic blocks for the given three address statements
 
@@ -142,7 +142,7 @@ Compute the basic blocks for the given three address statements
 
 
 
-### Solution
+#### Solution
 
 We have-
 
@@ -155,13 +155,13 @@ Now, the given code can be partitioned into two basic blocks as-
 
 ![Basic Blocks and Flow Graphs | Problem-01 | Basic Blocks](https://www.gatevidyalay.com/wp-content/uploads/2018/03/Basic-Blocks-and-Flow-Graphs-Problem-01-Basic-Blocks.png)
 
-## Problem-02:
+### Problem-02:
 
 Draw a flow graph for the three address statements given in problem-01.
 
 
 
-## Solution
+### Solution
 
 - Firstly, we compute the basic blocks (already done above).
 - Secondly, we assign the flow control information.
