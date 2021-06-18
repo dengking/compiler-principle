@@ -98,10 +98,21 @@ nav:
 - Chapter-9-Machine-Independent-Optimizations:
   - 9: Chapter-9-Machine-Independent-Optimizations/index.md
 - Compiler-optimizing:
-  - Optimizing-compiler: Compiler-optimizing/Optimizing-compiler.md
-  - Inline: Compiler-optimizing/Inline.md
+  - Introduction: Compiler-optimizing/index.md
+  - Basic-block:
+    - Introduction: Compiler-optimizing/Basic-block/index.md
   - Static-single-assignment-form:
     - Introduction: Compiler-optimizing/Static-single-assignment-form/index.md
+  - Control-flow-analysis:
+    - Introduction: Compiler-optimizing/Control-flow-analysis/index.md
+    - Control-flow&&program-counter:
+      - Introduction: Compiler-optimizing/Control-flow-analysis/Control-flow&&program-counter/index.md
+    - Control-flow-graph:
+      - Introduction: Compiler-optimizing/Control-flow-analysis/Control-flow-graph/index.md
+  - Data-flow-analysis:
+    - Introduction: Compiler-optimizing/Data-flow-analysis/index.md
+  - Inline:
+    - Introduction: Compiler-optimizing/Inline/index.md
 - Implementation:
   - Introduction: Implementation/index.md
 plugins:
