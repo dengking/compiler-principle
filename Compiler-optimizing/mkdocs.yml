@@ -1,4 +1,7 @@
 nav:
-    - Optimizing-compiler: Optimizing-compiler.md
-    - Inline: Inline.md
+    - Introduction: index.md
+    - Basic-block: Basic-block
     - Static-single-assignment-form: Static-single-assignment-form
+    - Control-flow-analysis: Control-flow-analysis
+    - Data-flow-analysis: Data-flow-analysis
+    - Inline: Inline    

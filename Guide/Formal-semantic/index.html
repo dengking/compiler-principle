@@ -69,6 +69,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#formal#semantic" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -488,10 +493,48 @@
       
       <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
       
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Introduction
+          <span class="md-nav__icon md-icon"></span>
+        </label>
       
       <a href="./" class="md-nav__link md-nav__link--active">
         Introduction
       </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#draft1" class="md-nav__link">
+    draft1
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#draft2" class="md-nav__link">
+    draft2
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -1339,7 +1382,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Compiler-optimizing/Optimizing-compiler/" class="md-nav__link">
+      <a href="../../Compiler-optimizing/Optimizing-compiler.md" class="md-nav__link">
         Optimizing-compiler
       </a>
     </li>
@@ -1351,7 +1394,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Compiler-optimizing/Inline/" class="md-nav__link">
+      <a href="../../Compiler-optimizing/Inline.md" class="md-nav__link">
         Inline
       </a>
     </li>
@@ -1452,15 +1495,60 @@
               </div>
             
             
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#draft1" class="md-nav__link">
+    draft1
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#draft2" class="md-nav__link">
+    draft2
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
           
           <div class="md-content" data-md-component="content">
             <article class="md-content__inner md-typeset">
               
                 
                 
-                  <h1>Introduction</h1>
-                
-                <p>将sentence看做是expression，然后将expression转换为tree，然后基于tree进行翻译，将它翻译为一些列的指令，这就完成了语义的理解。最最典型的案例就是<a href="https://en.wikipedia.org/wiki/Computer_algebra">computer algebra</a>。</p>
+                <h1 id="formal#semantic">Formal semantic</h1>
+<h2 id="draft1">draft1</h2>
+<p>我不知道本节标题的formal semantic是否准确，这是上周彭总提出的一个概念。其实对symbol expression的evaluation就是对它的语义的理解，关于此，我首先想到的是基于AST的evaluation，如果都是基于AST的话，那么operator的定义、含义的解释就非常重要了。</p>
+<p>我的一个问题是: 是否都是基于AST的evaluation来实现semantic的理解？关于这个问题，可以阅读: </p>
+<p>1) <code>programming-language\docs\Theory\Programming-paradigm\Symbolic-programming\utexas-cs378.pdf</code></p>
+<p>2) 龙书中的描述</p>
+<p>3) Google "tree and formal semantic"</p>
+<p>4) <a href="http://people.umass.edu/partee/MGU_2009/materials/MGU091_2-up.pdf">Formal Semantics and Formal Pragmatics, Lecture 1</a>  这篇文章不错，已经将他保存到了本地</p>
+<h2 id="draft2">draft2</h2>
+<p>将sentence看做是expression，然后将expression转换为tree，然后基于tree进行翻译，将它翻译为一些列的指令，这就完成了语义的理解。最最典型的案例就是<a href="https://en.wikipedia.org/wiki/Computer_algebra">computer algebra</a>。</p>
                 
               
               
