@@ -1,12 +1,12 @@
-[TOC]
+# Bottom-up parsing
 
 
 
-# [Bottom-up parsing](https://en.wikipedia.org/wiki/Bottom-up_parsing)
+## wikipedia [Bottom-up parsing](https://en.wikipedia.org/wiki/Bottom-up_parsing)
 
 In [computer science](https://en.wikipedia.org/wiki/Computer_science), [parsing](https://en.wikipedia.org/wiki/Parsing) reveals the grammatical structure of linear input text, as a first step in working out its meaning. **Bottom-up parsing** recognizes the text's lowest-level small details first, before its mid-level structures, and leaving the highest-level overall structure to last.
 
-## Bottom-up Versus Top-down
+### Bottom-up Versus Top-down
 
 The bottom-up name comes from the concept of a [parse tree](https://en.wikipedia.org/wiki/Parse_tree), in which the most detailed parts are at the **bottom** of the (upside-down) tree, and larger structures composed from them are in successively higher layers, until at the top or "root" of the tree a single unit describes the entire input stream. A bottom-up parse discovers and processes that tree starting from the **bottom left end**, and incrementally works its way upwards and rightwards.[[2\]](https://en.wikipedia.org/wiki/Bottom-up_parsing#cite_note-2) A parser may act on the structure hierarchy's low, mid, and highest levels without ever creating an actual data tree; the tree is then merely implicit in the parser's actions. Bottom-up parsing patiently waits until it has scanned and parsed all parts of some construct before committing to what the combined construct is.
 
@@ -26,20 +26,20 @@ Bottom-up parsing is sometimes done by [backtracking](https://en.wikipedia.org/w
 
 
 
-## Examples
+### Examples
 
 Some of the parsers that use bottom-up parsing include:
 
-- Precedence parser
+1、 Precedence parser
   - [Simple precedence parser](https://en.wikipedia.org/wiki/Simple_precedence_parser)
   - [Operator-precedence parser](https://en.wikipedia.org/wiki/Operator-precedence_parser)
-- Bounded-context parser (BC)
-- [LR parser](https://en.wikipedia.org/wiki/LR_parser) (**L**eft-to-right, **R**ightmost derivation in reverse)
+2、Bounded-context parser (BC)
+3、[LR parser](https://en.wikipedia.org/wiki/LR_parser) (**L**eft-to-right, **R**ightmost derivation in reverse)
   - [Simple LR parser](https://en.wikipedia.org/wiki/Simple_LR_parser) (SLR)
   - [LALR parser](https://en.wikipedia.org/wiki/LALR_parser) (Look-Ahead)
   - [Canonical LR parser](https://en.wikipedia.org/wiki/Canonical_LR_parser) (LR(1))
   - [GLR parser](https://en.wikipedia.org/wiki/GLR_parser) (Generalized)[[3\]](https://en.wikipedia.org/wiki/Bottom-up_parsing#cite_note-GruneJacobs2007-3)
-- [CYK parser](https://en.wikipedia.org/wiki/CYK_algorithm) (Cocke–Younger–Kasami)
-- Recursive ascent parser
+4、[CYK parser](https://en.wikipedia.org/wiki/CYK_algorithm) (Cocke–Younger–Kasami)
+5、Recursive ascent parser
   - [Packrat parser](https://en.wikipedia.org/wiki/Packrat_parser)
-- [Shift-reduce parser](https://en.wikipedia.org/wiki/Shift-reduce_parser)
+6、 [Shift-reduce parser](https://en.wikipedia.org/wiki/Shift-reduce_parser)
