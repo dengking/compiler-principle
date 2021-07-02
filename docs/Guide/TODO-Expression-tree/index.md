@@ -1,16 +1,18 @@
-# [Binary expression tree](https://en.wikipedia.org/wiki/Binary_expression_tree)
+# Binary expression tree
+
+## wikipedia [Binary expression tree](https://en.wikipedia.org/wiki/Binary_expression_tree)
 
 A **binary expression tree** is a specific kind of a [binary tree](https://en.wikipedia.org/wiki/Binary_tree) used to represent expressions. Two common types of expressions that a binary expression tree can represent are [algebraic](https://en.wikipedia.org/wiki/Algebra)[[1\]](https://en.wikipedia.org/wiki/Binary_expression_tree#cite_note-brpreiss-1) and [boolean](https://en.wikipedia.org/wiki/Boolean_algebra). These trees can represent expressions that contain both [unary](https://en.wikipedia.org/wiki/Unary_operation) and [binary](https://en.wikipedia.org/wiki/Binary_function) operators.[[1\]](https://en.wikipedia.org/wiki/Binary_expression_tree#cite_note-brpreiss-1)
 
 Each node of a **binary tree**, and hence of a **binary expression tree**, has zero, one, or two children. This restricted structure simplifies the processing of **expression trees**.
 
-***SUMMARY*** : 二叉树能够满足 [unary](https://en.wikipedia.org/wiki/Unary_operation) and [binary](https://en.wikipedia.org/wiki/Binary_function) operators有一个或两个operands的需求；
+> NOTE: : 二叉树能够满足 [unary](https://en.wikipedia.org/wiki/Unary_operation) and [binary](https://en.wikipedia.org/wiki/Binary_function) operators有一个或两个operands的需求；
 
-## Overview
+### Overview
 
 The leaves of a binary expression tree are **operands**, such as constants or variable names, and the other nodes contain **operators**. These particular trees happen to be binary, because all of the operations are binary, and although this is the simplest case, it is possible for nodes to have more than two children. It is also possible for a node to have only one child, as is the case with the unary minus operator. An expression tree, *T*, can be evaluated by applying the **operator** at the root to the values obtained by recursively evaluating the left and right subtrees.[[2\]](https://en.wikipedia.org/wiki/Binary_expression_tree#cite_note-Gopal2010-2) 
 
-***SUMMARY*** : 关于Evaluation of Expression Tree参见：
+> NOTE: : 关于Evaluation of Expression Tree参见：
 
 -  [Evaluation of Expression Tree](https://www.geeksforgeeks.org/evaluation-of-expression-tree/ )
 - [Evaluating expression trees](https://stackoverflow.com/questions/10769174/evaluating-expression-trees)
@@ -25,7 +27,7 @@ The leaves of a binary expression tree are **operands**, such as constants or va
 
  Expression tree 
 
-***SUMMARY*** : 
+> NOTE: : 
 
 - how to evaluate expression tree？
 - how to construct an expression tree of an expression？
@@ -37,7 +39,7 @@ The leaves of a binary expression tree are **operands**, such as constants or va
 
 ### Traversal
 
-***SUMMARY*** : 对binary expression tree进行traverse从而获得对应的algebraic expression。
+> NOTE: : 对binary expression tree进行traverse从而获得对应的algebraic expression。
 
 An algebraic expression can be produced from a **binary expression tree** by recursively producing a **parenthesized left expression**, then printing out the operator at the **root**, and finally recursively producing a **parenthesized right expression**. This general strategy (left, node, right) is known as an [in-order traversal](https://en.wikipedia.org/wiki/Tree_traversal). An alternate traversal strategy is to recursively print out the left subtree, the right subtree, and then the operator. This traversal strategy is generally known as [post-order traversal](https://en.wikipedia.org/wiki/Tree_traversal). A third strategy is to print out the operator first and then recursively print out the left and right subtree known as pre-order traversal.[[2\]](https://en.wikipedia.org/wiki/Binary_expression_tree#cite_note-Gopal2010-2)
 
@@ -93,8 +95,6 @@ end postfix
 
 
 
-
-
-## Construction of an expression tree
+### Construction of an expression tree
 
  The evaluation of the tree takes place by reading the postfix expression one symbol at a time. If the symbol is an operand, a one-node tree is created and its pointer is pushed onto a [stack](https://en.wikipedia.org/wiki/Stack_(abstract_data_type)). If the symbol is an operator, the pointers to two trees *T1* and *T2* are popped from the stack and a new tree whose root is the operator and whose left and right children point to *T2* and *T1* respectively is formed . A pointer to this new tree is then pushed to the Stack.[[4\]](https://en.wikipedia.org/wiki/Binary_expression_tree#cite_note-4) 

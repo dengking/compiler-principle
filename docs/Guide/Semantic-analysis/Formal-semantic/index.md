@@ -2,7 +2,7 @@
 
 ## draft1
 
-我不知道本节标题的formal semantic是否准确，这是上周彭总提出的一个概念。其实对symbol expression的evaluation就是对它的语义的理解，关于此，我首先想到的是基于AST的evaluation，如果都是基于AST的话，那么operator的定义、含义的解释就非常重要了。
+我不知道本节标题的formal semantic是否准确，这是上周和同事讨论的时候，他提出的一个概念。其实对symbol expression的evaluation就是对它的语义的理解，关于此，我首先想到的是基于AST的evaluation，如果都是基于AST的话，那么operator的定义、含义的解释就非常重要了。
 
 我的一个问题是: 是否都是基于AST的evaluation来实现semantic的理解？关于这个问题，可以阅读: 
 

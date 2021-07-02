@@ -1,8 +1,7 @@
 nav:
     - Introduction: index.md
-
     - Parsing-algorithm: Parsing-algorithm
     - Bind: Bind
-    - Formal-semantic: Formal-semantic
+    - Semantic-analysis: Semantic-analysis
     - Program-transformation: Program-transformation
-    - Compiler-front-end: Compiler-front-end.md
+    - Implementation: impl

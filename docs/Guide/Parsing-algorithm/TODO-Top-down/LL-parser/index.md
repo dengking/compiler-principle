@@ -1,8 +1,4 @@
-
-
-
-
-# [LL parser](https://en.wikipedia.org/wiki/LL_parser)
+# wikipedia [LL parser](https://en.wikipedia.org/wiki/LL_parser)
 
 In [computer science](https://en.wikipedia.org/wiki/Computer_science), an **LL parser** (**L**eft-to-right, **L**eftmost derivation) is a [top-down parser](https://en.wikipedia.org/wiki/Top-down_parsing) for a subset of [context-free languages](https://en.wikipedia.org/wiki/Context-free_languages). It parses the input from **L**eft to right, performing [**L**eftmost derivation](https://en.wikipedia.org/wiki/Context-free_grammar#Derivations_and_syntax_trees) of the sentence.
 

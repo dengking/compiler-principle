@@ -9,3 +9,14 @@
 
 
 ## semanticdesigns [Program Transformation](http://www.semanticdesigns.com/Products/DMS/ProgramTransformation.html?Home=DMSToolkit)
+
+
+
+## TODO
+
+1、Google Logica
+
+**Logica代码可以编译成SQL**
+
+参见:
+

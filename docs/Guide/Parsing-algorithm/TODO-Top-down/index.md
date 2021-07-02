@@ -1,8 +1,8 @@
-[TOC]
+# Top-down parsing
 
 
 
-# [Top-down parsing](https://en.wikipedia.org/wiki/Top-down_parsing)
+## wikipedia [Top-down parsing](https://en.wikipedia.org/wiki/Top-down_parsing)
 
 In [computer science](https://en.wikipedia.org/wiki/Computer_science), **top-down parsing** is a [parsing](https://en.wikipedia.org/wiki/Parsing) strategy where one first looks at the highest level of the [parse tree](https://en.wikipedia.org/wiki/Parse_tree) and works down the parse tree by using the rewriting rules of a [formal grammar](https://en.wikipedia.org/wiki/Formal_grammar).[[1\]](https://en.wikipedia.org/wiki/Top-down_parsing#cite_note-GruneJacobs2007-1) [LL parsers](https://en.wikipedia.org/wiki/LL_parser) are a type of parser that uses a top-down parsing strategy.
 
