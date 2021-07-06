@@ -44,13 +44,18 @@ nav:
     - Parser-generator: Parser-generator
   - Bind:
     - Name-binding: Guide/Bind/Name-binding.md
-  - Formal-semantic:
-    - Introduction: Guide/Formal-semantic/index.md
+  - Semantic-analysis:
+    - Introduction: Guide/Semantic-analysis/index.md
+    - Formal-semantic:
+      - Introduction: Guide/Semantic-analysis/Formal-semantic/index.md
   - Program-transformation:
     - Introduction: Guide/Program-transformation/index.md
     - DMS-Software-Reengineering-Toolkit:
       - Introduction: Guide/Program-transformation/DMS-Software-Reengineering-Toolkit/index.md
-  - Compiler-front-end: Guide/Compiler-front-end.md
+  - Implementation:
+    - Introduction: Guide/impl/index.md
+    - Architecture:
+      - Introduction: Guide/impl/Architecture/index.md
 - Chapter-1-Introduction:
   - 1-Introduction: Chapter-1-Introduction/index.md
   - 1.1-Language-Processors.md: Chapter-1-Introduction/1.1-Language-Processors.md
