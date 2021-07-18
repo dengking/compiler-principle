@@ -189,35 +189,5 @@ These steps are repeated until the parser stops, and then it will have either co
 
 In order to fill the **parsing table**, we have to establish what grammar rule the parser should choose if it sees a nonterminal `A` on the top of its stack and a symbol `a` on its input stream. It is easy to see that such a rule should be of the form `A` → `w` and that the language corresponding to `w` should have at least one string starting with `a`. For this purpose we define the *First-set* of `w`, written here as **`Fi`** `(w)`, as the set of terminals that can be found at the start of some string in `w`, plus $\epsilon$ if the empty string also belongs to `w`. Given a grammar with the rules $A_1 \to w_1, \dots, A_n \to w_n$, we can compute the **`Fi`** `(wi)` and **`Fi`** `(Ai)` for every rule as follows:
 
-- initialize every `Fi(Ai)` with the empty set
-- add `Fi(wi)` to **`Fi`** `(wi)` for every rule $A_i \to w_i$, where `Fi` is defined as follows:
-  - `Fi(aw) = { a }` for every terminal `a`
-  - 
 
-
-
-Unfortunately, the **First-sets** are not sufficient to compute the **parsing table**. This is because a right-hand side *w* of a rule might ultimately be rewritten to the empty string. So the parser should also use the rule *A* → *w* if ε is in **Fi**(*w*) and it sees on the input stream a symbol that could follow *A*. Therefore, we also need the *Follow-set* of *A*, written as **Fo**(*A*) here, which is defined as the set of terminals *a* such that there is a string of symbols *αAaβ* that can be derived from the start symbol. We use **$** as a special terminal indicating end of input stream, and *S* as start symbol.
-
-
-
-
-
-In an LL(1) parser, the parser works by maintaining a workspace initially seeded to the **start symbol** followed by the end-of-string marker (usually denoted `$`). At each step, it does one of the following:
-
-- If the first symbol of the workspace is a terminal, it **matches** it against the next token of input (or reports an error if it doesn't match.)
-- If the first symbol of the workspace is a nonterminal, it **predicts** what production to replace that nonterminal with.
-
-The **predict step** is where FIRST and FOLLOW show up. The parser needs to be able to guess, based purely on the current **nonterminal** and the next token of input, which production to use. The question is how to do this.
-
-Let's suppose that the current nonterminal is `A` and the next token of input is `t`. If you know the productions of `A`, which one would you choose to apply? There's one simple case to consider: if there's a production of the form `A → tω`, where `ω` is some arbitrary string, then you should pick that production because the `t` you're looking at as input will match the `t` at the front of the production.
-
-There are also some complex cases to consider. Suppose you have a production of the form `A → Bω`, where `B` is a nonterminal and `ω` is some string. Under what circumstances would you want to guess this production? Well, if you know that the next terminal symbol is a `t`, you wouldn't want to guess this production unless you knew that `B` can expand to a string that starts with the terminal `t` (there's another case that we'll talk about in a second). This is where **FIRST sets** come in. In grammars without `ε` productions, the set `FIRST(X)` for some nonterminal `X` is the set of all terminals that can potentially appear at the start of some string derived from `X`. If you have a production of the form `A → Bω` and you see the nonterminal `t`, you'd guess to use that production precisely when `t ∈ FIRST(B)`; that is, `B` can derive some string that starts with `t`. If `B` doesn't derive anything starting with `t`, then there's no reason to choose it, and if `B` does derive something starting with `t`, you'd want to make this choice so that you could eventually match the t against it.
-
-Things get a bit trickier when `ε` productions are introduced. Now, let's suppose that you have a production of the form `A → BCω`, where `B` and `C` are nonterminals and `ω` is a string. Let's also suppose the next token of input is `t`. If `t ∈ FIRST(B)`, then we'd choose this production, as mentioned above. However, what happens if `t ∉ FIRST(B)`? If there are `ε` productions in the grammar, we might still want to choose this production if `B` can derive `ε` and `t ∈ FIRST(C)`. Why is this? If this happens, it means that we might be able to match the `t` by producing `BCω`, then producing `ε` from `B`, leaving `Cω` against which to match the `t`. This is one context where we might have to "look through" a nonterminal. Fortunately, this is handled by FIRST sets. If a nonterminal `X` can produce `ε`, then `ε ∈ FIRST(X)`. Therefore, we can use FIRST sets to check whether we need to "look through" a nonterminal by seeing whether `ε ∈ FIRST(X)`.
-
-So far we haven't talked about FOLLOW sets. Where do they come in? Well, suppose that we're processing the nonterminal `A`, we see the terminal `t`, but none of the productions for `A` can actually consume the `t`. What do we do then? It turns out there's still a way that we can eat up that `t`. Remember that LL(1) parsers work by maintaining a workspace with a string in it. It's possible that the `t` we're looking at is not supposed to be matched against the current nonterminal `A` at all, and instead we're supposed to have `A` produce `ε` and then let some later nonterminal in the workspace match against the `t`. This is where FOLLOW sets come in. The FOLLOW set of a nonterminal `X`, denoted FOLLOW(X), is the set of all terminal symbols that can appear immediately after `X` in some derivation. When choosing which production to choose for A, we add in a final rule - if the terminal symbol `t` is in the FOLLOW set of A, we choose some production that ultimately will produce `ε`. That way, the A will "disappear" and we can match the `t` against some character that appears after the `A` nonterminal.
-
-This isn't a complete introduction to LL(1) parsing, but I hope it helps you see why we need FIRST and FOLLOW sets. For more information, pick up a book on parsing (I recommend *Parsing Techniques: A Practical Guide* by Grune and Jacobs) or take a course on compilers. As a totally shameless plug, I taught a compilers course in Summer 2012-2013 and [all of the lecture slides are available online](http://www.stanford.edu/class/archive/cs/cs143/cs143.1128/).
-
-Hope this helps!
 

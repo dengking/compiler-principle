@@ -3,7 +3,4 @@ nav:
     - Top-down: Top-down
     - Bottom-up: Bottom-up
     - LL-VS-LR-parser: LL-VS-LR-parser
-    # - Parser-generator: Parser-generator
-    - Dyck-language: Dyck-language.md
     - Others: Others
-    
