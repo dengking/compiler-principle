@@ -1,6 +1,7 @@
 nav:
     - 1-Introduction: index.md
-    - 1.1-Language-Processors.md: 1.1-Language-Processors.md
-    - 1.2-The-Structure-of-a-Compiler.md: 1.2-The-Structure-of-a-Compiler.md
-    - 1.5-Applications-of-Compiler-Technology.md: 1.5-Applications-of-Compiler-Technology.md
-    - 1.6-Programming-Language-Basics.md: 1.6-Programming-Language-Basics.md
+    - 1.1-Language-Processors.md: 1.1-Language-Processors
+    - 1.2-The-Structure-of-a-Compiler.md: 1.2-The-Structure-of-a-Compiler
+    - 1.5-Applications-of-Compiler-Technology.md: 1.5-Applications-of-Compiler-Technology
+    - 1.6-Programming-Language-Basics.md: 1.6-Programming-Language-Basics
+    

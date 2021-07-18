@@ -129,9 +129,11 @@ analyzers automatically from certain classes of grammars. In Chapters 2 and 5 we
 >
 > - [The Parser Library](http://clang.llvm.org/docs/InternalsManual.html#id25)[¶](http://clang.llvm.org/docs/InternalsManual.html#the-parser-library)
 
+
+
 ## 1.2.3 Semantic Analysis
 
-The *semantic analyzer* uses the **syntax tree** and the information in the symbol table to check the source program for semantic consistency with the language definition. It also gathers type information and saves it in either the syntax tree or the symbol table, for subsequent use during intermediate-code generation.
+The *semantic analyzer* uses the **syntax tree** and the information in the symbol table to check the source program for semantic consistency with the language definition. It also gathers type information and saves it in either the **syntax tree** or the **symbol table**, for subsequent use during intermediate-code generation.
 
 An important part of **semantic analysis** is *type checking*, where the compiler checks that each operator has matching operands. For example, many programming language definitions require an array index to be an integer; the compiler must report an error if a floating-point number is used to index an array.
 
@@ -143,11 +145,17 @@ In Fig. 1.7, notice that the output of the semantic analyzer has an extra node f
 >
 > - [The Sema Library](http://clang.llvm.org/docs/InternalsManual.html#id57)[¶](http://clang.llvm.org/docs/InternalsManual.html#the-sema-library)
 
+
+
 ## 1.2.4 Intermediate Code Generation
 
 In the process of translating a source program into target code, a compiler may construct one or more **intermediate representations**, which can have a variety of forms. **Syntax trees** are a form of **intermediate representation**; they are commonly used during syntax and semantic analysis.
 
-After syntax and semantic analysis of the source program, many compilers generate an explicit low-level or machine-like intermediate representation, which we can think of as a program for an abstract machine. This intermediate representation should have two important properties: it should be easy to produce and it should be easy to translate into the target machine.
+After syntax and semantic analysis of the source program, many compilers generate an explicit low-level or machine-like intermediate representation, which we can think of as a program for an abstract machine. This intermediate representation should have two important properties: 
+
+1、it should be easy to produce 
+
+2、it should be easy to translate into the target machine.
 
 In Chapter 6, we consider an intermediate form called three-address code, which consists of a sequence of assembly-like instructions with three operands per instruction. Each operand can act like a register. The output of the intermediate code generator in Fig. 1.7 consists of the three-address code sequence
 
@@ -183,12 +191,15 @@ STF id1, R1														(1.5)
 ```
 
 
+
 ## 1.2.7 Symbol-Table Management
 
 An essential function of a compiler is to record the variable names used in the source program and collect information about various attributes of each name. These attributes may provide information about the storage allocated for a name, its type, its scope (where in the program its value may b e used), and in the case of procedure names, such things as the number and types of its arguments, the method of passing each argument (for example, by value or by reference), and the type returned.
 
 The symbol table is a data structure containing a record for each variable name, with fields for the attributes of the name. The data structure should be designed to allow the compiler to find the record for each name quickly and to store or retrieve data from that record quickly. Symbol tables are discussed in
 Chapter 2.
+
+
 
 ## 1.2.8 The Grouping of Phases into Passes
 
@@ -200,12 +211,17 @@ The compiler writer, like any software developer, can profitably use modern soft
 
 These tools use specialized languages for specifying and implementing specific components, and many use quite sophisticated algorithms. The most successful tools are those that hide the details of the generation algorithm and produce components that can be easily integrated into the remainder of the compiler. Some commonly used compiler-construction tools include
 
-1. *Parser generators* that automatically produce syntax analyzers from a grammatical description of a programming language.
-2. *Scanner generators* that produce lexical analyzers from a regular-expression description of the tokens of a language.
-3. *Syntax-directed translation engines* that produce collections of routines for walking a parse tree and generating **intermediate code**.
-4. *Code-generator generators* that produce a code generator from a collection of rules for translating each operation of the intermediate language into the machine language for a target machine.
-5. *Data-flow analysis engines* that facilitate the gathering of information about how values are transmitted from one part of a program to each other part. Data-flow analysis is a key part of code optimization.
-6. Compiler-construction toolkits that provide an integrated set of routines for constructing various phases of a compiler.
+1、*Parser generators* that automatically produce syntax analyzers from a grammatical description of a programming language.
+
+2、*Scanner generators* that produce lexical analyzers from a regular-expression description of the tokens of a language.
+
+3、*Syntax-directed translation engines* that produce collections of routines for walking a parse tree and generating **intermediate code**.
+
+4、*Code-generator generators* that produce a code generator from a collection of rules for translating each operation of the intermediate language into the machine language for a target machine.
+
+5、*Data-flow analysis engines* that facilitate the gathering of information about how values are transmitted from one part of a program to each other part. Data-flow analysis is a key part of code optimization.
+
+6、Compiler-construction toolkits that provide an integrated set of routines for constructing various phases of a compiler.
 
 We shall describe many of these tools throughout this book.
 
