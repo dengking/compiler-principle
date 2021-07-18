@@ -2,20 +2,31 @@
 
 In this section, we introduce a notation — the "[context-free grammar](https://en.wikipedia.org/wiki/Context-free_grammar)," or "grammar" for short — that is used to specify the syntax of a language. Grammars will be used throughout this book to organize **compiler front ends**.
 
-> NOTE: Wikipedia has a good **explanation** of [context-free grammar](https://en.wikipedia.org/wiki/Context-free_grammar)
-
-> NOTE: It is a convention that there is a section called **language reference** or **language specification** to describe grammar of the programming language in the official document of the programming language , such as
+> NOTE: 
 >
-> - [The Python Language Reference](https://docs.python.org/3/reference/index.html) use [extended BNF](https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_Form) notation to describe [grammar](https://docs.python.org/3/reference/grammar.html) of the language.
-> - [The Java® Language Specification](https://docs.oracle.com/javase/specs/jls/se7/html/index.html)
+> 一、wikipedia has a good **explanation** of [context-free grammar](https://en.wikipedia.org/wiki/Context-free_grammar)
+>
+> 二、It is a convention that there is a section called **language reference** or **language specification** to describe grammar of the programming language in the official document of the programming language , such as
+>
+> 1、[The Python Language Reference](https://docs.python.org/3/reference/index.html) use [extended BNF](https://en.wikipedia.org/wiki/Extended_Backus%E2%80%93Naur_Form) notation to describe [grammar](https://docs.python.org/3/reference/grammar.html) of the language.
+>
+> 2、[The Java® Language Specification](https://docs.oracle.com/javase/specs/jls/se7/html/index.html)
+>
+> 
+
+
 
 ## 2.2.1 Definition of Grammars
 
 A [context-free grammar](https://en.wikipedia.org/wiki/Context-free_grammar) has four components:
-1. A set of [terminal symbols](https://en.wikipedia.org/wiki/Terminal_and_nonterminal_symbols), sometimes referred to as "tokens." The terminals are the elementary symbols of the language defined by the grammar.
-2. A set of [nonterminals](https://en.wikipedia.org/wiki/Terminal_and_nonterminal_symbols), sometimes called "syntactic variables." Each nonterminal represents a set of strings of terminals, in a manner we shall describe.
-3. A set of [productions](https://en.wikipedia.org/wiki/Production_(computer_science)), where each production consists of a nonterminal, called the *head* or *left* side of the production, an arrow, and a sequence of terminals and/or nonterminals, called the *body* or *right* side of the production. 
-4. A designation of one of the nonterminals as the *start* symbol.
+
+1、A set of [terminal symbols](https://en.wikipedia.org/wiki/Terminal_and_nonterminal_symbols), sometimes referred to as "tokens." The terminals are the elementary symbols of the language defined by the grammar.
+
+2、A set of [nonterminals](https://en.wikipedia.org/wiki/Terminal_and_nonterminal_symbols), sometimes called "syntactic variables." Each nonterminal represents a set of strings of terminals, in a manner we shall describe.
+
+3、A set of [productions](https://en.wikipedia.org/wiki/Production_(computer_science)), where each production consists of a nonterminal, called the *head* or *left* side of the production, an arrow, and a sequence of terminals and/or nonterminals, called the *body* or *right* side of the production. 
+
+4、A designation of one of the nonterminals as the *start* symbol.
 
 
 
@@ -36,31 +47,37 @@ $$
 
 ## 2.2.2 Derivations
 
-> NOTE: In addition to using the word **derivation**/derive,  word **expand** is also used a lot. I think word **expand** can visually reflect the process of expanding an inner nodes of the parse tree describing in 2.2.3.
+> NOTE: 
+>
+> In addition to using the word **derivation**/derive,  word **expand** is also used a lot. I think word **expand** can visually reflect the process of expanding an inner nodes of the parse tree describing in 2.2.3.
 
 A grammar derives strings by beginning with the start symbol and repeatedly replacing a nonterminal by the body of a production for that nonterminal. The **terminal strings** that can be derived from the start symbol form the *language* defined by the grammar.
 
-> NOTE: Here is the definition of *language*, please recall my question in the first introduction that what a programming language is.
+> NOTE: 
+>
+> Here is the definition of *language*, please recall my question in the first introduction that what a programming language is.
 
 *Parsing* is the problem of taking a string of terminals and figuring out how to derive it from the **start symbol** of the grammar, and if it cannot be derived from the start symbol of the grammar, then reporting syntax errors within the string. 
 
-> NOTE: The process of parsing is the **inverse** of the process of deriving. The process of deriving is to generate terminal strings in the direction of generation while the process of parsing is to find productions in the opposite direction of production. They are like [recursion](https://en.wikipedia.org/wiki/Recursion_(computer_science)) and [corecursion](https://en.wikipedia.org/wiki/Corecursion).
-
-> NOTE: Implementation of *parsing* is described in chapter 2.4.
+> NOTE: 
+>
+> 一、The process of parsing is the **inverse** of the process of deriving. The process of deriving is to generate terminal strings in the direction of generation while the process of parsing is to find productions in the opposite direction of production. They are like [recursion](https://en.wikipedia.org/wiki/Recursion_(computer_science)) and [corecursion](https://en.wikipedia.org/wiki/Corecursion).
+>
+> 二、Implementation of *parsing* is described in chapter 2.4.
 
 
 
 ## 2.2.3 Parse Trees
 
-> NOTE:  [Parse tree](https://en.wikipedia.org/wiki/Parse_tree) reveal us of the power of  [tree](https://en.wikipedia.org/wiki/Tree_(data_structure)) structure, and it is an typical application of  [tree](https://en.wikipedia.org/wiki/Tree_(data_structure)). Tree data structures figure prominently in compiling.
-
-> NOTE:  [Parse tree](https://en.wikipedia.org/wiki/Parse_tree) is the software implementation of grammar.
-
-> NOTE: Recall what concluded in 2.2.1 Definition of Grammars is that [Context-free grammar](https://en.wikipedia.org/wiki/Context-free_grammar) has the property of [recursion](https://en.wikipedia.org/wiki/Recursion_(computer_science))， so do  [tree](https://en.wikipedia.org/wiki/Tree_(data_structure)) structure. This is one of reason why [tree](https://en.wikipedia.org/wiki/Tree_(data_structure)) structure is selected as  implementation of grammar.
-
-> NOTE: This chapter gives the algorithm of build a parse tree according to the grammar.
-
-
+> NOTE:  
+>
+> 一、[Parse tree](https://en.wikipedia.org/wiki/Parse_tree) reveal us of the power of  [tree](https://en.wikipedia.org/wiki/Tree_(data_structure)) structure, and it is an typical application of  [tree](https://en.wikipedia.org/wiki/Tree_(data_structure)). Tree data structures figure prominently in compiling.
+>
+> [Parse tree](https://en.wikipedia.org/wiki/Parse_tree) is the software implementation of grammar.
+>
+> 二、Recall what concluded in 2.2.1 Definition of Grammars is that [Context-free grammar](https://en.wikipedia.org/wiki/Context-free_grammar) has the property of [recursion](https://en.wikipedia.org/wiki/Recursion_(computer_science))， so do  [tree](https://en.wikipedia.org/wiki/Tree_(data_structure)) structure. This is one of reason why [tree](https://en.wikipedia.org/wiki/Tree_(data_structure)) structure is selected as  implementation of grammar.
+>
+> This chapter gives the algorithm of build a parse tree according to the grammar.
 
 
 
@@ -79,7 +96,7 @@ A grammar derives strings by beginning with the start symbol and repeatedly repl
 
 
 
-By convention, $9+5+2$ is equivalent to $(9+5)+2$ and $9-5-2$ is equivalent to $(9-5)-2$. When an operand like 5 has operators to its left and right, conventions are needed for deciding which operator applies to that operand. We say that the operator + associates to the left, because an operand with plus signs on both sides of it belongs to the operator to its left. In most programming languages the four arithmetic operators, addition, subtraction, multiplication, and division are left-associative.
+By convention, $9+5+2$ is equivalent to $(9+5)+2$ and $9-5-2$ is equivalent to $(9-5)-2$. When an operand like 5 has operators to its left and right, conventions are needed for deciding which operator applies to that operand. We say that the operator + associates to the left, because an operand with plus signs on both sides of it belongs to the operator to its left. In most programming languages the four arithmetic operators, addition, subtraction, multiplication, and division are **left-associative**.
 
 Some common operators such as exponentiation are right-associative. As another example, the assignment operator in C and its descendants is right-associative; that is, the expression `a=b=c`is treated in the same way as the expression `a=(b=c)`.
 
