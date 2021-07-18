@@ -30,18 +30,102 @@ markdown_extensions:
 - pymdownx.tilde
 nav:
 - Home: index.md
+- 1-Introduction:
+  - 1: 1-Introduction/index.md
+  - 1.1-Language-Processors.md:
+    - Introduction: 1-Introduction/1.1-Language-Processors/index.md
+  - 1.2-The-Structure-of-a-Compiler.md:
+    - Introduction: 1-Introduction/1.2-The-Structure-of-a-Compiler/index.md
+  - 1.5-Applications-of-Compiler-Technology.md:
+    - Introduction: 1-Introduction/1.5-Applications-of-Compiler-Technology/index.md
+  - 1.6-Programming-Language-Basics.md:
+    - Introduction: 1-Introduction/1.6-Programming-Language-Basics/index.md
+- 2-A-Simple-Syntax-Directed-Translator:
+  - 2: 2-A-Simple-Syntax-Directed-Translator/index.md
+  - 2.1-Introduction:
+    - Introduction: 2-A-Simple-Syntax-Directed-Translator/2.1-Introduction/index.md
+  - 2.2-Syntax-Definition:
+    - Introduction: 2-A-Simple-Syntax-Directed-Translator/2.2-Syntax-Definition/index.md
+  - 2.3-Syntax-Directed-Translation:
+    - Introduction: 2-A-Simple-Syntax-Directed-Translator/2.3-Syntax-Directed-Translation/index.md
+  - 2.4-Parsing:
+    - Introduction: 2-A-Simple-Syntax-Directed-Translator/2.4-Parsing/index.md
+  - 2.7-Symbol-Tables:
+    - 2.7-Symbol-Tables: 2-A-Simple-Syntax-Directed-Translator/2.7-Symbol-Tables/index.md
+    - Symbol-table: 2-A-Simple-Syntax-Directed-Translator/2.7-Symbol-Tables/Symbol-table.md
+- 3-Lexical-Analysis:
+  - 3: 3-Lexical-Analysis/index.md
+  - 3.1-The-Role-of-the-Lexical-Analyzer:
+    - Introduction: 3-Lexical-Analysis/3.1-The-Role-of-the-Lexical-Analyzer/index.md
+  - 3.4-Recognition-of-Tokens:
+    - Introduction: 3-Lexical-Analysis/3.4-Recognition-of-Tokens/index.md
+  - 3.6-Finite-Automata:
+    - Introduction: 3-Lexical-Analysis/3.6-Finite-Automata/index.md
+  - 3.7-From-Regular-Expressions-to-Automata:
+    - Introduction: 3-Lexical-Analysis/3.7-From-Regular-Expressions-to-Automata/index.md
+- 4-Syntax-Analysis:
+  - 4: 4-Syntax-Analysis/index.md
+  - 4.2-Context-Free-Grammars:
+    - Introduction: 4-Syntax-Analysis/4.2-Context-Free-Grammars/index.md
+  - 4.3-Writing-a-Grammar:
+    - Introduction: 4-Syntax-Analysis/4.3-Writing-a-Grammar/index.md
+  - 4.5-Bottom-Up-Parsing:
+    - Introduction: 4-Syntax-Analysis/4.5-Bottom-Up-Parsing/index.md
+  - 4.6-Introduction-to-LR-Parsing-Simple-LR:
+    - Introduction: 4-Syntax-Analysis/4.6-Introduction-to-LR-Parsing-Simple-LR/index.md
+  - 4.7-More-Powerful-LR-Parsers:
+    - Introduction: 4-Syntax-Analysis/4.7-More-Powerful-LR-Parsers/index.md
+- 5-Syntax-Directed-Translation:
+  - 5: 5-Syntax-Directed-Translation/index.md
+  - 5.1-Syntax-Directed-Definitions: 5-Syntax-Directed-Translation/5.1-Syntax-Directed-Definitions.md
+  - 5.2-Evaluation-Orders-for-SDD's: 5-Syntax-Directed-Translation/5.2-Evaluation-Orders-for-SDD's.md
+  - 5.3-Applications-of-Syntax-Directed-Translation: 5-Syntax-Directed-Translation/5.3-Applications-of-Syntax-Directed-Translation.md
+  - wikipedia-Syntax-directed-translation: 5-Syntax-Directed-Translation/wikipedia-Syntax-directed-translation.md
+- 6-Intermediate-Code-Generation:
+  - 6: 6-Intermediate-Code-Generation/index.md
+  - 6.3-Types-and-Declarations:
+    - Introduction: 6-Intermediate-Code-Generation/6.3-Types-and-Declarations/index.md
+- 7-Run-Time-Environments:
+  - 7: 7-Run-Time-Environments/index.md
+  - 7.1-Storage-Organization: 7-Run-Time-Environments/7.1-Storage-Organization.md
+  - 7.2-Stack-Allocation-of-Space: 7-Run-Time-Environments/7.2-Stack-Allocation-of-Space.md
+  - 7.3-Access-to-Non-local-Data-on-the-Stack: 7-Run-Time-Environments/7.3-Access-to-Non-local-Data-on-the-Stack.md
+  - 7.4-Heap-Management: 7-Run-Time-Environments/7.4-Heap-Management.md
+- 9-Machine-Independent-Optimizations:
+  - 9: 9-Machine-Independent-Optimizations/index.md
 - Guide:
   - Introduction: Guide/index.md
+  - Parse-tree-VS-syntax-tree:
+    - Introduction: Guide/Parse-tree-VS-syntax-tree/index.md
+    - Parse-tree:
+      - Introduction: Guide/Parse-tree-VS-syntax-tree/Parse-tree/index.md
+    - Abstract-syntax-tree:
+      - Introduction: Guide/Parse-tree-VS-syntax-tree/Abstract-syntax-tree/index.md
+    - Abstract-syntax-tree-VS-parse-tree:
+      - Introduction: Guide/Parse-tree-VS-syntax-tree/Abstract-syntax-tree-VS-parse-tree/index.md
+    - Parse-tree-to-AST:
+      - Introduction: Guide/Parse-tree-VS-syntax-tree/Parse-tree-to-AST/index.md
   - Parsing-algorithm:
     - Introduction: Guide/Parsing-algorithm/index.md
-    - VS-LL-parser-VS-LR-parser: Guide/Parsing-algorithm/VS-LL-parser-VS-LR-parser.md
-    - Parser-generator:
-      - Introduction: Guide/Parsing-algorithm/Parser-generator/index.md
-    - Dyck-language: Guide/Parsing-algorithm/Dyck-language.md
+    - Top-down:
+      - Introduction: Guide/Parsing-algorithm/Top-down/index.md
+      - Recursive-descent-parser:
+        - Introduction: Guide/Parsing-algorithm/Top-down/Recursive-descent-parser/index.md
+      - LL-parser:
+        - Introduction: Guide/Parsing-algorithm/Top-down/LL-parser/index.md
+        - andrewbegel-LL(1)-Parsing:
+          - Introduction: Guide/Parsing-algorithm/Top-down/LL-parser/andrewbegel-LL(1)-Parsing/index.md
+    - Bottom-up:
+      - Introduction: Guide/Parsing-algorithm/Bottom-up/index.md
+      - LR-parser:
+        - Introduction: Guide/Parsing-algorithm/Bottom-up/LR-parser/index.md
+      - CYK-algorithm:
+        - Introduction: Guide/Parsing-algorithm/Bottom-up/CYK-algorithm/index.md
+    - LL-VS-LR-parser:
+      - Introduction: Guide/Parsing-algorithm/LL-VS-LR-parser/index.md
     - Others:
       - Chart-parser: Guide/Parsing-algorithm/Others/Chart-parser.md
       - Earley-parser: Guide/Parsing-algorithm/Others/Earley-parser.md
-    - Parser-generator: Parser-generator
   - Bind:
     - Name-binding: Guide/Bind/Name-binding.md
   - Semantic-analysis:
@@ -52,72 +136,27 @@ nav:
     - Introduction: Guide/Program-transformation/index.md
     - DMS-Software-Reengineering-Toolkit:
       - Introduction: Guide/Program-transformation/DMS-Software-Reengineering-Toolkit/index.md
-  - Implementation:
-    - Introduction: Guide/impl/index.md
-    - Architecture:
-      - Introduction: Guide/impl/Architecture/index.md
-- Chapter-1-Introduction:
-  - 1-Introduction: Chapter-1-Introduction/index.md
-  - 1.1-Language-Processors.md: Chapter-1-Introduction/1.1-Language-Processors.md
-  - 1.2-The-Structure-of-a-Compiler.md: Chapter-1-Introduction/1.2-The-Structure-of-a-Compiler.md
-  - 1.5-Applications-of-Compiler-Technology.md: Chapter-1-Introduction/1.5-Applications-of-Compiler-Technology.md
-  - 1.6-Programming-Language-Basics.md: Chapter-1-Introduction/1.6-Programming-Language-Basics.md
-- Chapter-2-A-Simple-Syntax-Directed-Translator:
-  - 2: Chapter-2-A-Simple-Syntax-Directed-Translator/index.md
-  - 2.1-Introduction: Chapter-2-A-Simple-Syntax-Directed-Translator/2.1-Introduction.md
-  - 2.2-Syntax-Definition: Chapter-2-A-Simple-Syntax-Directed-Translator/2.2-Syntax-Definition.md
-  - 2.3-Syntax-Directed-Translation: Chapter-2-A-Simple-Syntax-Directed-Translator/2.3-Syntax-Directed-Translation.md
-  - 2.4-Parsing: Chapter-2-A-Simple-Syntax-Directed-Translator/2.4-Parsing.md
-  - 2.7-Symbol-Tables:
-    - 2.7-Symbol-Tables: Chapter-2-A-Simple-Syntax-Directed-Translator/2.7-Symbol-Tables/index.md
-    - Symbol-table: Chapter-2-A-Simple-Syntax-Directed-Translator/2.7-Symbol-Tables/Symbol-table.md
-- Chapter-3-Lexical-Analysis:
-  - 3: Chapter-3-Lexical-Analysis/index.md
-  - 3.1-The-Role-of-the-Lexical-Analyzer: Chapter-3-Lexical-Analysis/3.1-The-Role-of-the-Lexical-Analyzer.md
-  - 3.4-Recognition-of-Tokens: Chapter-3-Lexical-Analysis/3.4-Recognition-of-Tokens.md
-  - 3.6-Finite-Automata: Chapter-3-Lexical-Analysis/3.6-Finite-Automata.md
-  - 3.7-From-Regular-Expressions-to-Automata: Chapter-3-Lexical-Analysis/3.7-From-Regular-Expressions-to-Automata.md
-  - wikipedia-Lex(software): Chapter-3-Lexical-Analysis/wikipedia-Lex(software).md
-- Chapter-4-Syntax-Analysis:
-  - 4: Chapter-4-Syntax-Analysis/index.md
-  - 4.2-Context-Free-Grammars: Chapter-4-Syntax-Analysis/4.2-Context-Free-Grammars.md
-  - 4.3-Writing-a-Grammar: Chapter-4-Syntax-Analysis/4.3-Writing-a-Grammar.md
-  - 4.5-Bottom-Up-Parsing: Chapter-4-Syntax-Analysis/4.5-Bottom-Up-Parsing.md
-  - 4.6-Introduction-to-LR-Parsing-Simple-LR: Chapter-4-Syntax-Analysis/4.6-Introduction-to-LR-Parsing-Simple-LR.md
-  - 4.7-More-Powerful-LR-Parsers: Chapter-4-Syntax-Analysis/4.7-More-Powerful-LR-Parsers.md
-- Chapter-5-Syntax-Directed-Translation:
-  - 5: Chapter-5-Syntax-Directed-Translation/index.md
-  - 5.1-Syntax-Directed-Definitions: Chapter-5-Syntax-Directed-Translation/5.1-Syntax-Directed-Definitions.md
-  - 5.2-Evaluation-Orders-for-SDD's: Chapter-5-Syntax-Directed-Translation/5.2-Evaluation-Orders-for-SDD's.md
-  - 5.3-Applications-of-Syntax-Directed-Translation: Chapter-5-Syntax-Directed-Translation/5.3-Applications-of-Syntax-Directed-Translation.md
-  - wikipedia-Syntax-directed-translation: Chapter-5-Syntax-Directed-Translation/wikipedia-Syntax-directed-translation.md
-- Chapter-6-Intermediate-Code-Generation:
-  - 6: Chapter-6-Intermediate-Code-Generation/index.md
-  - 6.3-Types-and-Declarations: Chapter-6-Intermediate-Code-Generation/6.3-Types-and-Declarations.md
-- Chapter-7-Run-Time-Environments:
-  - 7: Chapter-7-Run-Time-Environments/index.md
-  - 7.1-Storage-Organization: Chapter-7-Run-Time-Environments/7.1-Storage-Organization.md
-  - 7.2-Stack-Allocation-of-Space: Chapter-7-Run-Time-Environments/7.2-Stack-Allocation-of-Space.md
-  - 7.3-Access-to-Non-local-Data-on-the-Stack: Chapter-7-Run-Time-Environments/7.3-Access-to-Non-local-Data-on-the-Stack.md
-  - 7.4-Heap-Management: Chapter-7-Run-Time-Environments/7.4-Heap-Management.md
-- Chapter-9-Machine-Independent-Optimizations:
-  - 9: Chapter-9-Machine-Independent-Optimizations/index.md
-- Compiler-optimizing:
-  - Introduction: Compiler-optimizing/index.md
+- Optimization:
+  - Introduction: Optimization/index.md
   - Basic-block:
-    - Introduction: Compiler-optimizing/Basic-block/index.md
+    - Introduction: Optimization/Basic-block/index.md
   - Static-single-assignment-form:
-    - Introduction: Compiler-optimizing/Static-single-assignment-form/index.md
+    - Introduction: Optimization/Static-single-assignment-form/index.md
   - Control-flow-analysis:
-    - Introduction: Compiler-optimizing/Control-flow-analysis/index.md
+    - Introduction: Optimization/Control-flow-analysis/index.md
     - Control-flow&&program-counter:
-      - Introduction: Compiler-optimizing/Control-flow-analysis/Control-flow&&program-counter/index.md
+      - Introduction: Optimization/Control-flow-analysis/Control-flow&&program-counter/index.md
     - Control-flow-graph:
-      - Introduction: Compiler-optimizing/Control-flow-analysis/Control-flow-graph/index.md
+      - Introduction: Optimization/Control-flow-analysis/Control-flow-graph/index.md
   - Data-flow-analysis:
-    - Introduction: Compiler-optimizing/Data-flow-analysis/index.md
+    - Introduction: Optimization/Data-flow-analysis/index.md
   - Inline:
-    - Introduction: Compiler-optimizing/Inline/index.md
+    - Introduction: Optimization/Inline/index.md
+- Tools:
+  - Parser-generator:
+    - Introduction: Tools/Parser-generator/index.md
+    - Lex&yacc:
+      - Introduction: Tools/Parser-generator/Lex&yacc/index.md
 - Implementation:
   - Introduction: Implementation/index.md
 plugins:
