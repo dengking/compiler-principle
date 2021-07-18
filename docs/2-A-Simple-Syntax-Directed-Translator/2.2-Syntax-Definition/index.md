@@ -98,7 +98,7 @@ A grammar derives strings by beginning with the start symbol and repeatedly repl
 
 By convention, $9+5+2$ is equivalent to $(9+5)+2$ and $9-5-2$ is equivalent to $(9-5)-2$. When an operand like 5 has operators to its left and right, conventions are needed for deciding which operator applies to that operand. We say that the operator + associates to the left, because an operand with plus signs on both sides of it belongs to the operator to its left. In most programming languages the four arithmetic operators, addition, subtraction, multiplication, and division are **left-associative**.
 
-Some common operators such as exponentiation are right-associative. As another example, the assignment operator in C and its descendants is right-associative; that is, the expression `a=b=c`is treated in the same way as the expression `a=(b=c)`.
+Some common operators such as exponentiation(幂运算) are **right-associative**. As another example, the assignment operator in C and its descendants is right-associative; that is, the expression `a=b=c`is treated in the same way as the expression `a=(b=c)`.
 
 > For clarity, sample grammar for left-associative operator and sample grammar for right-associative operator are listed below along their parse tree.
 
@@ -122,7 +122,9 @@ $$
 
 The contrast between a parse tree for a left-associative operator like `-` and a parse tree for a right-associative operator like `= is` shown by Fig. 2.7. Note that the parse tree for `9-5-2` grows down towards the left, whereas the parse tree for `a=b=c` grows down towards the right.
 
-> NOTE: Recall what concluded in 2.2.1 Definition of Grammars is that [Context-free grammar](https://en.wikipedia.org/wiki/Context-free_grammar) has the property of [recursion](https://en.wikipedia.org/wiki/Recursion_(computer_science))，a [grammar](https://en.wikipedia.org/wiki/Formal_grammar) is informally called a [**recursive grammar**](https://en.wikipedia.org/wiki/Recursive_grammar) if it contains [production rules](https://en.wikipedia.org/wiki/Formal_grammar#The_syntax_of_grammars) that are [recursive](https://en.wikipedia.org/wiki/Recursion_(computer_science)). Here we can further subdivide, a grammar for a [context-free language](https://en.wikipedia.org/wiki/Context-free_language) is [left recursive](https://en.wikipedia.org/wiki/Left_recursion) if there exists a non-terminal symbol *A* that can be put through the production rules to produce a string with *A* (as the leftmost symbol), so grammars for left-associative operator are [left recursive](https://en.wikipedia.org/wiki/Left_recursion)  while grammars for right-associative operator are [right recursive](https://en.wikipedia.org/wiki/Left_recursion). 
+> NOTE: 
+>
+> Recall what concluded in 2.2.1 Definition of Grammars is that [Context-free grammar](https://en.wikipedia.org/wiki/Context-free_grammar) has the property of [recursion](https://en.wikipedia.org/wiki/Recursion_(computer_science))，a [grammar](https://en.wikipedia.org/wiki/Formal_grammar) is informally called a [**recursive grammar**](https://en.wikipedia.org/wiki/Recursive_grammar) if it contains [production rules](https://en.wikipedia.org/wiki/Formal_grammar#The_syntax_of_grammars) that are [recursive](https://en.wikipedia.org/wiki/Recursion_(computer_science)). Here we can further subdivide, a grammar for a [context-free language](https://en.wikipedia.org/wiki/Context-free_language) is [left recursive](https://en.wikipedia.org/wiki/Left_recursion) if there exists a non-terminal symbol *A* that can be put through the production rules to produce a string with *A* (as the leftmost symbol), so grammars for left-associative operator are [left recursive](https://en.wikipedia.org/wiki/Left_recursion)  while grammars for right-associative operator are [right recursive](https://en.wikipedia.org/wiki/Left_recursion). 
 
 
 
@@ -134,7 +136,7 @@ $$
 
 ## 2.2.6 Precedence of Operators
 
-We say that `*` has higher precedence than `+` if `*` takes its operands before `+` does. In ordinary arithmetic, multiplication and division have higher precedence than addition and subtraction. Therefore, 5 is taken by `*` in b oth `9+5*2` and `9*5+2`; i.e., the expressions are equivalent to `9+(5*2)` and `(9*5)+2`, respectively.
+We say that `*` has higher precedence than `+` if `*` takes its operands before `+` does. In ordinary arithmetic, multiplication and division have higher precedence than addition and subtraction. Therefore, 5 is taken by `*` in both `9+5*2` and `9*5+2`; i.e., the expressions are equivalent to `9+(5*2)` and `(9*5)+2`, respectively.
 
 **Example 2.6** : A grammar for arithmetic expressions can be constructed from a table showing the **associativity** and **precedence** of operators. We start with the four common arithmetic operators and a precedence table, showing the operators in order of increasing precedence. Operators on the same line have the same associativity and precedence:
 
@@ -144,6 +146,11 @@ We say that `*` has higher precedence than `+` if `*` takes its operands before 
 | left-associative: | `* /` |
 
 We create two **nonterminals** `expr` and `term` for the two levels of precedence(`expr`  for `+ -` and `term` for `* /`), and an extra **nonterminal** `factor` for generating basic units in expressions. The basic units in expressions are presently digits and parenthesized expressions.
+
+> NOTE: 
+>
+> "factor"的意思是"因素"，它是基本单元
+
 $$
 factor \to digit | ( expr )
 $$
@@ -166,16 +173,17 @@ term \to term * factor | term / factor | factor \\
 factor \to digit | ( expr )
 $$
 
-> NOTE: The priorities decrease from bottom to top
+> NOTE: 
+>
+> 自底向上，优先级在降低
 
 ### Generalizing the Expression Grammar of Example 2.6
 
-We can think of a **factor** as an expression that cannot b e "torn apart" by any operator. By "torn apart," we mean that placing an operator next to any factor, on either side, does not cause any piece of the **factor**, other than the **whole**, to become an operand of that operator. If the **factor** is a **parenthesized expression**, the parentheses protect against such "tearing," while if the factor is a single operand, it cannot be torn apart.
+We can think of a **factor** as an expression that cannot be "torn apart"(拆开) by any operator. By "torn apart," we mean that placing an operator next to any factor, on either side, does not cause any piece of the **factor**, other than the **whole**, to become an operand of that operator. If the **factor** is a **parenthesized expression**, the parentheses protect against such "tearing," while if the factor is a single operand, it cannot be torn apart.
 
 A **term** (that is not also a factor) is an expression that can be torn apart by operators of the highest precedence: `*` and `/`, but not by the lower-precedence operators. An expression (that is not a term or factor) can be torn apart by any operator.
 
-We can generalize this idea to any number `n` of precedence levels. We need `n + 1` nonterminals. The first, like factor in Example 2.6, can never be torn apart. Typically, the production bodies for this nonterminal are only single operands and **parenthesized expressions**. Then, for each precedence level, there is one nonterminal representing expressions that can be torn apart only by operators at that level or higher. Typically, the productions for this nonterminal have bodies representing uses of the operators at that
-level, plus one body that is just the nonterminal for the next higher level.
+We can generalize this idea to any number `n` of precedence levels. We need `n + 1` nonterminals. The first, like factor in Example 2.6, can never be torn apart. Typically, the production bodies for this nonterminal are only single operands and **parenthesized expressions**. Then, for each precedence level, there is one nonterminal representing expressions that can be torn apart only by operators at that level or higher. Typically, the productions for this nonterminal have bodies representing uses of the operators at that level, plus one body that is just the nonterminal for the next higher level.
 
 > NOTE:  The reason one more is needed is that it is for  **factor**
 
