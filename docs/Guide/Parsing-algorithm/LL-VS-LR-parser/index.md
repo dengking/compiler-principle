@@ -1,12 +1,12 @@
-[TOC]
+# LL VS LR
 
 
 
-# [What is the difference between LL and LR parsing?](https://stackoverflow.com/questions/5975741/what-is-the-difference-between-ll-and-lr-parsing)
+## stackoverflow [What is the difference between LL and LR parsing?](https://stackoverflow.com/questions/5975741/what-is-the-difference-between-ll-and-lr-parsing)
 
 
 
-## [A](https://stackoverflow.com/a/6824545)
+### [A](https://stackoverflow.com/a/6824545)
 
 At a high level, the difference between LL parsing and LR parsing is that LL parsers begin at the start symbol and try to apply productions to arrive at the **target string**, whereas LR parsers begin at the target string and try to arrive back at the **start symbol**.
 
@@ -77,7 +77,7 @@ As a shameless plug, if you'd like to learn more about LL and LR parsing, I just
 
 
 
-## [A](https://stackoverflow.com/a/18239653)
+### [A](https://stackoverflow.com/a/18239653)
 
 Josh Haberman in his article [LL and LR Parsing Demystified](http://blog.reverberate.org/2013/07/ll-and-lr-parsing-demystified.html) claims that LL parsing directly corresponds with the [Polish Notation](http://en.wikipedia.org/wiki/Polish_notation), whereas LR corresponds to [Reverse Polish Notation](http://en.wikipedia.org/wiki/Reverse_Polish_notation). The difference between PN and RPN is the order of traversing the binary tree of the equation:
 
@@ -96,7 +96,7 @@ For the in-depth explanation, examples and conclusions check out Haberman's [art
 
 
 
-# 预测分析表 VS LR语法分析表
+## 预测分析表 VS LR语法分析表
 
 LL和LR都是表驱动的，这两个表就是分别驱动两者的表。
 
@@ -129,7 +129,7 @@ LR是一个automaton，状态，转换
 
 
 
-# 从LR(0)自动机到LR语法分析表
+## 从LR(0)自动机到LR语法分析表
 
 LR语法分析表的构造是基于LR(0)自动机的
 

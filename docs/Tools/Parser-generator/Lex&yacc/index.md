@@ -26,9 +26,9 @@ Though originally distributed as proprietary software, some versions of Lex are 
 
 The structure of a Lex file is intentionally similar to that of a yacc file; files are divided into three sections, separated by lines that contain only two percent signs, as follows
 
+1、The **definition** section defines [macros](https://en.wikipedia.org/wiki/Macro_(computer_science)) and imports [header files](https://en.wikipedia.org/wiki/Header_file) written in [C](https://en.wikipedia.org/wiki/C_(programming_language)). It is also possible to write any C code here, which will be copied verbatim into the generated source file.
 
+2、The **rules** section associates [regular expression](https://en.wikipedia.org/wiki/Regular_expression) patterns with C [statements](https://en.wikipedia.org/wiki/Statement_(programming)). When the lexer sees text in the input matching a given pattern, it will execute the associated C code.
 
-- The **definition** section defines [macros](https://en.wikipedia.org/wiki/Macro_(computer_science)) and imports [header files](https://en.wikipedia.org/wiki/Header_file) written in [C](https://en.wikipedia.org/wiki/C_(programming_language)). It is also possible to write any C code here, which will be copied verbatim into the generated source file.
-- The **rules** section associates [regular expression](https://en.wikipedia.org/wiki/Regular_expression) patterns with C [statements](https://en.wikipedia.org/wiki/Statement_(programming)). When the lexer sees text in the input matching a given pattern, it will execute the associated C code.
-- The **C code** section contains C statements and [functions](https://en.wikipedia.org/wiki/Function_(programming)) that are copied verbatim to the generated source file. These statements presumably contain code called by the rules in the rules section. In large programs it is more convenient to place this code in a separate file linked in at [compile](https://en.wikipedia.org/wiki/Compiler) time.
+3、The **C code** section contains C statements and [functions](https://en.wikipedia.org/wiki/Function_(programming)) that are copied verbatim to the generated source file. These statements presumably contain code called by the rules in the rules section. In large programs it is more convenient to place this code in a separate file linked in at [compile](https://en.wikipedia.org/wiki/Compiler) time.
 

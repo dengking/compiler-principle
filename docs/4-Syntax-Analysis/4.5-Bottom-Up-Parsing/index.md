@@ -1,5 +1,9 @@
 # 4.5 Bottom-Up Parsing
 
+> NOTE: 
+>
+> 这一章节重要描述的如何手工地实现shift-reduce parsing
+
 A bottom-up parse corresponds to the construction of a parse tree for an input string beginning at the leaves (the bottom) and working up towards the root(the top). It is convenient to describe parsing as the process of building parse trees, although a front end may in fact carry out a translation directly without
 building an **explicit tree**. The sequence of tree snapshots in Fig. 4.25 illustrates a **bottom-up parse** of the token stream $id \ast id$, with respect to the expression grammar (4.1).
 
@@ -22,6 +26,12 @@ This section introduces a general style of **bottom-up parsing** known as **shif
 We can think of **bottom-up parsing** as the process of  "reducing" a string $w$ to the **start symbol** of the grammar. At each reduction step, a specific substring matching the body of a production is replaced by the nonterminal at the head of that production.
 
 The key decisions during bottom-up parsing are about when to reduce and about what production to apply, as the parse proceeds.
+
+> NOTE: 
+>
+> 1、何时reduce
+>
+> 2、使用哪个production进行reduce
 
 **Example 4.37 :** The snapshots in Fig. 4.25 illustrate a sequence of reductions; the grammar is the expression grammar (4.1). The reductions will be discussed in terms of the sequence of strings
 $$

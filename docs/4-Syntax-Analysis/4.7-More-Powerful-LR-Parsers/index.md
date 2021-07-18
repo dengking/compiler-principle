@@ -1,7 +1,3 @@
-[TOC]
-
-
-
 # 4.7 More Powerful LR Parsers
 
 In this section, we shall extend the previous LR parsing techniques to use one symbol of lookahead on the input. There are two different methods:
