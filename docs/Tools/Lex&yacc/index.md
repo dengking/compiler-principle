@@ -1,4 +1,12 @@
-# [Lex (software)](https://en.wikipedia.org/wiki/Lex_(software))
+# Lex & Yacc 
+
+
+
+## compilertools [The Lex & Yacc Page](http://dinosaur.compilertools.net/)
+
+
+
+## wikipedia [Lex (software)](https://en.wikipedia.org/wiki/Lex_(software))
 
 **Lex** is a [computer program](https://en.wikipedia.org/wiki/Computer_program) that generates [lexical analyzers](https://en.wikipedia.org/wiki/Lexical_analysis) ("scanners" or "lexers").[[1\]](https://en.wikipedia.org/wiki/Lex_(software)#cite_note-1)[[2\]](https://en.wikipedia.org/wiki/Lex_(software)#cite_note-2)
 
@@ -8,13 +16,13 @@ Lex reads an input [stream](https://en.wikipedia.org/wiki/Stream_(computing)) sp
 
 
 
-## Open source
+### Open source
 
 Though originally distributed as proprietary software, some versions of Lex are now [open source](https://en.wikipedia.org/wiki/Open-source_software). Open source versions of Lex, based on the original AT&T code are now distributed as a part of open source operating systems such as [OpenSolaris](https://en.wikipedia.org/wiki/OpenSolaris) and [Plan 9 from Bell Labs](https://en.wikipedia.org/wiki/Plan_9_from_Bell_Labs).[*clarification needed*] One popular open source version of Lex, called [flex](https://en.wikipedia.org/wiki/Flex_lexical_analyser), or the "fast lexical analyzer", is not derived from proprietary coding.
 
 
 
-## Structure of a Lex file
+### Structure of a Lex file
 
 The structure of a Lex file is intentionally similar to that of a yacc file; files are divided into three sections, separated by lines that contain only two percent signs, as follows
 

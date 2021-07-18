@@ -1,15 +1,17 @@
 # 4.5 Bottom-Up Parsing
 
 A bottom-up parse corresponds to the construction of a parse tree for an input string beginning at the leaves (the bottom) and working up towards the root(the top). It is convenient to describe parsing as the process of building parse trees, although a front end may in fact carry out a translation directly without
-building an explicit tree. The sequence of tree snapshots in Fig. 4.25 illustrates a bottom-up parse of the token stream $id \ast id$, with respect to the expression grammar (4.1).
+building an **explicit tree**. The sequence of tree snapshots in Fig. 4.25 illustrates a **bottom-up parse** of the token stream $id \ast id$, with respect to the expression grammar (4.1).
 
 > NOTE: Thinking of parsing as the process of building parse trees can help us grasp the content more easily.
 
 ![](./Figure4.25A-bottom-up-parse-for-id-product-id.jpg)
 
-This section introduces a general style of **bottom-up parsing** known as **shift-reduce parsing**. The largest class of grammars for which **shift-reduce parsers** can be built, the **LR grammars**, will be discussed in Sections 4.6 and 4.7. Although it is too much work to build an **LR parser** by hand, tools called automatic parser generators make it easy to construct efficient **LR parsers** from suitable grammars. The concepts in this section are helpful for writing suitable grammars to make effective use of an LR parser generator. Algorithms for implementing parser generators appear in Section 4.7.
+This section introduces a general style of **bottom-up parsing** known as **shift-reduce parsing**. The largest class of grammars for which **shift-reduce parsers** can be built, the **LR grammars**, will be discussed in Sections 4.6 and 4.7. Although it is too much work to build an **LR parser** by hand, tools called **automatic parser generators** make it easy to construct efficient **LR parsers** from suitable grammars. The concepts in this section are helpful for writing suitable grammars to make effective use of an LR parser generator. Algorithms for implementing parser generators appear in Section 4.7.
 
-> NOTE:  **LR parser** uses **shift-reduce parsing**.
+> NOTE:  
+>
+> **LR parser** uses **shift-reduce parsing**.
 
 
 

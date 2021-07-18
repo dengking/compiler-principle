@@ -1,11 +1,10 @@
-[TOC]
-
 # 6.3 Types and Declarations
 
 The applications of types can be grouped under **checking** and **translation**:
 
-- **Type checking** uses logical rules to reason(推理) about the behavior of a program at run time. Specifically(更加确切地说), it ensures that the types of the operands match the type expected by an operator. For example, the `&& `operator in Java expects its two operands to be booleans; the result is also of type boolean.
-- **Translation Applications**. From the type of a name, a compiler can determine the storage that will be needed for that name at run time. **Type information** is also needed to calculate the address denoted by an array reference, to insert explicit type conversions, and to choose the right version of an arithmetic operator, among other things.
+1、**Type checking** uses logical rules to reason(推理) about the behavior of a program at run time. Specifically(更加确切地说), it ensures that the types of the operands match the type expected by an operator. For example, the `&& `operator in Java expects its two operands to be booleans; the result is also of type boolean.
+
+2、**Translation Applications**. From the type of a name, a compiler can determine the storage that will be needed for that name at run time. **Type information** is also needed to calculate the address denoted by an array reference, to insert explicit type conversions, and to choose the right version of an arithmetic operator, among other things.
 
 
 
