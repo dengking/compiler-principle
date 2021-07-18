@@ -1,7 +1,6 @@
 nav:
     - 3: index.md
-    - 3.1-The-Role-of-the-Lexical-Analyzer: 3.1-The-Role-of-the-Lexical-Analyzer.md
-    - 3.4-Recognition-of-Tokens: 3.4-Recognition-of-Tokens.md
-    - 3.6-Finite-Automata: 3.6-Finite-Automata.md
-    - 3.7-From-Regular-Expressions-to-Automata: 3.7-From-Regular-Expressions-to-Automata.md
-    - wikipedia-Lex(software): wikipedia-Lex(software).md
+    - 3.1-The-Role-of-the-Lexical-Analyzer: 3.1-The-Role-of-the-Lexical-Analyzer
+    - 3.4-Recognition-of-Tokens: 3.4-Recognition-of-Tokens
+    - 3.6-Finite-Automata: 3.6-Finite-Automata
+    - 3.7-From-Regular-Expressions-to-Automata: 3.7-From-Regular-Expressions-to-Automata

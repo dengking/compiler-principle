@@ -1,6 +1,6 @@
 # 3.6 Finite Automata
 
-We shall now discover how Lex turns its input program into a lexical analyzer. At the heart of the transition is the formalism known as [*finite automata*](https://en.wikipedia.org/wiki/Finite-state_machine). These are essentially graphs, like transition diagrams, with a few differences:
+We shall now discover how Lex turns its input program into a **lexical analyzer**. At the heart of the transition is the formalism known as [*finite automata*](https://en.wikipedia.org/wiki/Finite-state_machine). These are essentially graphs, like transition diagrams, with a few differences:
 
 1、**Finite automata** are recognizers ; they simply say "yes" or "no" about each possible input string.
 
@@ -26,11 +26,15 @@ Both deterministic and nondeterministic finite automata are capable of recognizi
 
 A nondeterministic finite automaton (NFA) consists of:
 
-1. A finite set of states `S` .
-2. A set of input symbols $ \Sigma $, the *input alphabet*. We assume that $\epsilon$, which stands for the empty string, is never a member of $ \Sigma $.
-3. A *transition function* that gives, for each state, and for each **symbol** in $ \Sigma \cup \{\epsilon\}$ a set of *next states*.
-4. A state $s_0$ from $S$ that is distinguished as the *start state* (or initial state).
-5. A set of states $F$ , a subset of $S$ , that is distinguished as the *accepting states* (or *final states*).
+1、A finite set of states `S` .
+
+2、A set of input symbols $ \Sigma $, the *input alphabet*. We assume that $\epsilon$, which stands for the empty string, is never a member of $ \Sigma $.
+
+3、A *transition function* that gives, for each state, and for each **symbol** in $ \Sigma \cup \{\epsilon\}$ a set of *next states*.
+
+4、A state $s_0$ from $S$ that is distinguished as the *start state* (or initial state).
+
+5、A set of states $F$ , a subset of $S$ , that is distinguished as the *accepting states* (or *final states*).
 
 
 
@@ -70,8 +74,9 @@ The transition table has the advantage that we can easily find the transitions o
 
 A *deterministic finite automaton* (DFA) is a special case of an NFA where:
 
-1. There are no moves on input $\epsilon$ , and
-2. For each state `s` and input symbol `a`, there is exactly one edge out of `s` labeled `a`.
+1、There are no moves on input $\epsilon$ , and
+
+2、For each state `s` and input symbol `a`, there is exactly one edge out of `s` labeled `a`.
 
 
 
