@@ -2,8 +2,9 @@
 
 Up to this point we have treated a compiler as a single box that maps a source program into a semantically equivalent target program. If we open up this box a little, we see that there are two parts to this mapping: 
 
-- analysis
-- synthesis
+1、analysis
+
+2、synthesis
 
 The *analysis* part breaks up the source program into constituent pieces and imposes a grammatical structure on them. It then uses this structure to create an **intermediate representation** of the source program. If the analysis part detects that the source program is either syntactically ill formed or semantically unsound, then it must provide informative messages, so the user can take corrective action. The analysis part also collects information about the source program and stores it in a data structure called a *symbol table*, which is passed along with the **intermediate representation** to the **synthesis part**.
 
@@ -70,45 +71,44 @@ for **semantic analysis** and **code generation**.
 For example, suppose a source program contains the assignment statement
 
 ```
-position = initial + rate * 60 														(1.1)
+position = initial + rate * 60 													(1.1)
 ```
 
 The characters in this assignment could be grouped into the following **lexemes** and mapped into the following tokens passed on to the **syntax analyzer**:
 
-1. `position` is a **lexeme** that would be mapped into a token `<id, 1>`, where `id` is an abstract symbol standing for identifier and `1` points to the **symbol-table entry** for `position`. The symbol-table entry for an identifier holds information about the identifier, such as its **name** and **type**.
+1、`position` is a **lexeme** that would be mapped into a token `<id, 1>`, where `id` is an abstract symbol standing for identifier and `1` points to the **symbol-table entry** for `position`. The symbol-table entry for an identifier holds information about the identifier, such as its **name** and **type**.
 
-2. The assignment symbol `=` is a **lexeme** that is mapped into the token `<=>`. Since this token needs no attribute-value, we have omitted the second component. We could have used any abstract symbol such as assign for the token-name, but for notational convenience we have chosen to use the lexeme itself as the name of the abstract symbol.
+2、The assignment symbol `=` is a **lexeme** that is mapped into the token `<=>`. Since this token needs no attribute-value, we have omitted the second component. We could have used any abstract symbol such as assign for the token-name, but for notational convenience we have chosen to use the lexeme itself as the name of the abstract symbol.
 
-3. `initial` is a lexeme that is mapped into the token `<id, 2>`, where `2` points to the symbol-table entry for `initial`.
+3、`initial` is a lexeme that is mapped into the token `<id, 2>`, where `2` points to the symbol-table entry for `initial`.
 
-4. `+` is a lexeme that is mapped into the token `<+>`.
+4、`+` is a lexeme that is mapped into the token `<+>`.
 
-5. `rate` is a lexeme that is mapped into the token `<id, 3>`, where 3 points to the symbol-table entry for `rate`.
+5、`rate` is a lexeme that is mapped into the token `<id, 3>`, where 3 points to the symbol-table entry for `rate`.
 
-6. `*` is a lexeme that is mapped into the token `<*>`.
+6、`*` is a lexeme that is mapped into the token `<*>`.
 
-7. `60` is a lexeme that is mapped into the token `<60>`.
+7、`60` is a lexeme that is mapped into the token `<60>`.
 
-   > Technically speaking, for the lexeme `60` we should make up a token like `<number, 4>`,
-   > where 4 points to the symbol table for the internal representation of integer `60` but we shall
-   > defer the discussion of tokens for numbers until Chapter 2. Chapter 3 discusses techniques
-   > for building lexical analyzers.
+> Technically speaking, for the lexeme `60` we should make up a token like `<number, 4>`, where 4 points to the symbol table for the internal representation of integer `60` but we shall defer the discussion of tokens for numbers until Chapter 2. Chapter 3 discusses techniques for building lexical analyzers.
 
 Blanks separating the lexemes would b e discarded by the lexical analyzer.
 
 Figure 1.7 shows the representation of the assignment statement (1.1) after lexical analysis as the sequence of tokens
 
 ```
-<id, 1> <=> <id, 2> <+> <id, 3> <?> <60> 											(1.2)
+<id, 1> <=> <id, 2> <+> <id, 3> <?> <60> 										(1.2)
 ```
 
 ![](./Figure-1.7Translation-of-an-assignment-statement.jpg)
 
 
 
-> NOTE: Lexical Analysis主要在Chapter 3 Lexical Analysis中讲述。
-
-> NOTE: [Clang](http://clang.llvm.org/)中由[**liblex**](http://clang.llvm.org/features.html#libraryarch)来实现Lexical Analysis，如下是文档:
+> NOTE: 
+>
+> 一、Lexical Analysis主要在Chapter 3 Lexical Analysis中讲述。
+>
+> 二、[Clang](http://clang.llvm.org/)中由[**liblex**](http://clang.llvm.org/features.html#libraryarch)来实现Lexical Analysis，如下是文档:
 >
 > - [The Lexer and Preprocessor Library](http://clang.llvm.org/docs/InternalsManual.html#id19)[¶](http://clang.llvm.org/docs/InternalsManual.html#the-lexer-and-preprocessor-library)
 
@@ -116,7 +116,7 @@ Figure 1.7 shows the representation of the assignment statement (1.1) after lexi
 
 ## 1.2.2 Syntax Analysis
 
-The second phase of the compiler is *syntax analysis* or *parsing*. The parser uses the first components of the tokens produced by the **lexical analyzer** to create a tree-like intermediate representation that depicts the grammatical structure of the token stream. A typical representation is a *syntax tree* in which each interior node represents an operation and the children of the node represent the arguments of the operation. A syntax tree for the token stream (1.2) is shown as the output of the syntactic analyzer in Fig. 1.7.
+The second phase of the compiler is *syntax analysis* or *parsing*. The parser uses the first components of the tokens produced by the **lexical analyzer** to create a tree-like intermediate representation that depicts(描述) the grammatical structure of the token stream. A typical representation is a *syntax tree* in which each interior node represents an operation and the children of the node represent the arguments of the operation. A syntax tree for the token stream (1.2) is shown as the output of the syntactic analyzer in Fig. 1.7.
 
 This tree shows the order in which the operations in the assignment `position = initial + rate * 60` are to be performed. The tree has an interior node labeled `*` with `<id, 3>` as its left child and the integer `60` as its right child. The node `<id, 3>` represents the identifier `rate`. The node labeled `*` makes it explicit that we must first multiply the value of `rate` by `60`. The node labeled `+` indicates that we must
 add the result of this multiplication to the value of initial. The `root` of the tree, labeled `=`, indicates that we must store the result of this addition into the location for the identifier `position`. This ordering of operations is consistent with the usual conventions of arithmetic which tell us that multiplication has
@@ -212,4 +212,3 @@ We shall describe many of these tools throughout this book.
 > NOTE: 
 >
 > Wikipedia的[Comparison of parser generators](https://en.wikipedia.org/wiki/Comparison_of_parser_generators)总结了parser generator和scanner generator。
->

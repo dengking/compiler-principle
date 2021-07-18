@@ -1,8 +1,12 @@
 # 1.1 Language Processors
 
+## Compiler
+
 Simply stated, a **compiler** is a program that can read a program in one language--the *source* language--and **translate** it into an equivalent program in another language--the *target* language; see Fig. 1.1. An important role of the compiler is to report any errors in the source program that it detects during the translation process.
 
-> See also: [Compiler](https://en.wikipedia.org/wiki/Compiler)
+> See also: 
+>
+> wikipedia [Compiler](https://en.wikipedia.org/wiki/Compiler)
 
 ![](./Figure1.1-A-compiler.jpg)
 
@@ -10,20 +14,23 @@ If the **target program** is an **executable machine-language program**, it can 
 
 > See also: 
 >
-> - [Machine code](https://en.wikipedia.org/wiki/Machine_code)
-> - [Executable](https://en.wikipedia.org/wiki/Executable)
+> wikipedia [Machine code](https://en.wikipedia.org/wiki/Machine_code)
+>
+> wikipedia [Executable](https://en.wikipedia.org/wiki/Executable)
 
 
 
 ![](./Figure1.2-Running-the-target-program.jpg)
 
-> NOTE: The compiler definition given here is very broad because **target programs** can take many forms, not just **executable machine-language programs**. As stated in article [Is Python interpreted or compiled? Yes.](https://nedbatchelder.com/blog/201803/is_python_interpreted_or_compiled_yes.html):
+> NOTE: 
+>
+> The compiler definition given here is very broad because **target programs** can take many forms, not just **executable machine-language programs**. As stated in article [Is Python interpreted or compiled? Yes.](https://nedbatchelder.com/blog/201803/is_python_interpreted_or_compiled_yes.html):
 >
 > [Compiling](https://en.wikipedia.org/wiki/Compiler) is a more general idea: take a program in one language (or form), and convert it into another language or form. Usually the source form is a higher-level language than the destination form, such as when converting from C to machine code. But converting from JavaScript 8 to JavaScript 5 is also a kind of compiling.
 >
 > In Python, the source is compiled into a much simpler form called [bytecode](https://en.wikipedia.org/wiki/Bytecode). 
 
-
+## Interpreter
 
 An **interpreter** is another common kind of language processor. Instead of producing a **target program** as a translation, an interpreter appears to directly execute the operations specified in the **source program** on inputs supplied by the user, as shown in Fig. 1.3.
 
@@ -37,6 +44,8 @@ The machine-language target program produced by a compiler is usually much faste
 >
 > - bash 
 > - redis server's execution of command committed by the client can also be seen as an interpreter just as shell
+
+## Hybrid compiler
 
 Java language processors combine **compilation** and **interpretation**, as shown in Fig. 1.4. A Java source program may first be compiled into an intermediate form called [bytecode](https://en.wikipedia.org/wiki/Bytecode). The bytecodes are then interpreted by a **virtual machine**. A benefit of this arrangement is that bytecodes compiled on one machine can be interpreted on another machine, perhaps across a network.
 

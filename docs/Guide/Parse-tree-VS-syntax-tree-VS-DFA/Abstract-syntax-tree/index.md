@@ -1,6 +1,6 @@
-[TOC]
+# Abstract syntax tree
 
-# [Abstract syntax tree](https://en.wikipedia.org/wiki/Abstract_syntax_tree)
+## wikipedia [Abstract syntax tree](https://en.wikipedia.org/wiki/Abstract_syntax_tree)
 
 In [computer science](https://en.wikipedia.org/wiki/Computer_science), an **abstract syntax tree** (**AST**), or just **syntax tree**, is a [tree](https://en.wikipedia.org/wiki/Directed_tree) representation of the [abstract syntactic](https://en.wikipedia.org/wiki/Abstract_syntax) structure of [source code](https://en.wikipedia.org/wiki/Source_code) written in a [programming language](https://en.wikipedia.org/wiki/Programming_language). Each node of the tree denotes a construct occurring in the source code.
 
@@ -10,7 +10,9 @@ The syntax is "abstract" in the sense that it does not represent every **detail*
 
 This distinguishes **abstract syntax trees** from **concrete syntax trees**, traditionally designated [parse trees](https://en.wikipedia.org/wiki/Parse_tree). Parse trees are typically **built** by a [parser](https://en.wikipedia.org/wiki/Parser) during the source code translation and [compiling](https://en.wikipedia.org/wiki/Compiler) process. Once built, additional information is added to the AST by means of subsequent processing, e.g., [contextual analysis](https://en.wikipedia.org/wiki/Semantic_analysis_(compilers)).
 
-***SUMMARY*** : parse tree和abstract syntax tree的构建
+> NOTE: 
+>
+> parse tree和abstract syntax tree的构建
 
 Abstract syntax trees are also used in [program analysis](https://en.wikipedia.org/wiki/Program_analysis) and [program transformation](https://en.wikipedia.org/wiki/Program_transformation) systems.
 
@@ -29,7 +31,7 @@ return a
 
 
 
-## Application in compilers
+### Application in compilers
 
 **Abstract syntax trees** are [data structures](https://en.wikipedia.org/wiki/Data_structures) widely used in [compilers](https://en.wikipedia.org/wiki/Compilers) to represent the structure of program code. An AST is usually the result of the [syntax analysis](https://en.wikipedia.org/wiki/Syntax_analysis) phase of a compiler. It often serves as an intermediate representation of the program through several stages that the compiler requires, and has a strong impact on the final output of the compiler. 
 

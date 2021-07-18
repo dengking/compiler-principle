@@ -8,11 +8,13 @@ There are many ways to answer this question, here I will try to answer this ques
 
 A **programming language** is a [formal language](https://en.wikipedia.org/wiki/Formal_language),  so it is equipped with
 
-- [alphabet](https://en.wikipedia.org/wiki/Alphabet_(computer_science)) 
-- [words](https://en.wikipedia.org/wiki/String_(computer_science)) and [lexical grammar](https://en.wikipedia.org/wiki/Lexical_grammar) to defining the [syntax](https://en.wikipedia.org/wiki/Syntax_(programming_languages)) of [tokens](https://en.wikipedia.org/wiki/Token_(parser)). 
+1、[alphabet](https://en.wikipedia.org/wiki/Alphabet_(computer_science)) 
 
-- [Syntax](https://en.wikipedia.org/wiki/Syntax) and [formal grammar](https://en.wikipedia.org/wiki/Formal_grammar) to describe its [syntax](https://en.wikipedia.org/wiki/Syntax)
-- [semantics](https://en.wikipedia.org/wiki/Semantics#Computer_science)
+2、[words](https://en.wikipedia.org/wiki/String_(computer_science)) and [lexical grammar](https://en.wikipedia.org/wiki/Lexical_grammar) to defining the [syntax](https://en.wikipedia.org/wiki/Syntax_(programming_languages)) of [tokens](https://en.wikipedia.org/wiki/Token_(parser)). 
+
+3、[Syntax](https://en.wikipedia.org/wiki/Syntax) and [formal grammar](https://en.wikipedia.org/wiki/Formal_grammar) to describe its [syntax](https://en.wikipedia.org/wiki/Syntax)
+
+4、[semantics](https://en.wikipedia.org/wiki/Semantics#Computer_science)
 
 
 

@@ -9,3 +9,6 @@
 
 
 ## semanticdesigns [DMS® Software Reengineering Toolkit™](http://www.semanticdesigns.com/Products/DMS/DMSToolkit.html)
+
+## wikipedia [DMS Software Reengineering Toolkit](https://en.wikipedia.org/wiki/DMS_Software_Reengineering_Toolkit)
+
