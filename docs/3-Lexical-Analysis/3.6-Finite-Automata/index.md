@@ -2,13 +2,13 @@
 
 We shall now discover how Lex turns its input program into a lexical analyzer. At the heart of the transition is the formalism known as [*finite automata*](https://en.wikipedia.org/wiki/Finite-state_machine). These are essentially graphs, like transition diagrams, with a few differences:
 
-1. **Finite automata** are recognizers ; they simply say "yes" or "no" about each possible input string.
+1、**Finite automata** are recognizers ; they simply say "yes" or "no" about each possible input string.
 
-2. **Finite automata** come in two favors:
+2、**Finite automata** come in two favors:
 
-   (a) [Nondeterministic finite automata (NFA)](https://en.wikipedia.org/wiki/Nondeterministic_finite_automaton) have no restrictions on the labels of their edges. A symbol can label several edges out of the same state, and $\epsilon$, the empty string, is a possible label.
+(a) [Nondeterministic finite automata (NFA)](https://en.wikipedia.org/wiki/Nondeterministic_finite_automaton) have no restrictions on the labels of their edges. A symbol can label several edges out of the same state, and $\epsilon$, the empty string, is a possible label.
 
-   (b) [Deterministic finite automata (DFA)](https://en.wikipedia.org/wiki/Deterministic_finite_automaton) have, for each state, and for each symbol of its input alphabet exactly one edge with that symbol leaving that state.
+(b) [Deterministic finite automata (DFA)](https://en.wikipedia.org/wiki/Deterministic_finite_automaton) have, for each state, and for each symbol of its input alphabet exactly one edge with that symbol leaving that state.
 
 Both deterministic and nondeterministic finite automata are capable of recognizing the same languages. In fact these languages are exactly the same languages, called the [**regular languages**](https://en.wikipedia.org/wiki/Regular_language), that regular expressions can describe.
 

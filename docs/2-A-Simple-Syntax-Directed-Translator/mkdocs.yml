@@ -1,7 +1,8 @@
 nav:
     - 2: index.md
-    - 2.1-Introduction: 2.1-Introduction.md
-    - 2.2-Syntax-Definition: 2.2-Syntax-Definition.md
-    - 2.3-Syntax-Directed-Translation: 2.3-Syntax-Directed-Translation.md
-    - 2.4-Parsing: 2.4-Parsing.md
+    - 2.1-Introduction: 2.1-Introduction
+    - 2.2-Syntax-Definition: 2.2-Syntax-Definition
+    - 2.3-Syntax-Directed-Translation: 2.3-Syntax-Directed-Translation
+    - 2.4-Parsing: 2.4-Parsing
     - 2.7-Symbol-Tables: 2.7-Symbol-Tables
+    

@@ -1,10 +1,8 @@
-[TOC]
-
-
-
 # 3.4 Recognition of Tokens
 
-> NOTE:  This chapter  describes conversion from regular-expression patterns to **transition diagrams** by hand, which is intended to help reader to understand the **finite automaton**(finite state machine) widely used in engineering described in section 3.5. In essence, a transition diagram is a visual representation of a finite state machine.
+> NOTE:  
+>
+> This chapter  describes conversion from regular-expression patterns to **transition diagrams** by hand, which is intended to help reader to understand the **finite automaton**(finite state machine) widely used in engineering described in section 3.5. In essence, a transition diagram is a visual representation of a finite state machine.
 
 In the previous section we learned how to express patterns using regular expressions. Now, we must study how to take the patterns for all the needed tokens and build a piece of code that examines the input string and finds a prefix that is a lexeme matching one of the patterns. Our discussion will make use of the following running example.
 $$
