@@ -3,4 +3,5 @@ nav:
     - Prefix-Infix-Postfix: Prefix-Infix-Postfix
     - Evaluation: Evaluation
     - LeetCode: LeetCode
+    - Build-expression-tree: Build-expression-tree    
     - Mathematical-Expression-Parsing: Mathematical-Expression-Parsing

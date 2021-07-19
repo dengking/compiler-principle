@@ -12,7 +12,9 @@
 
 5、[Operator associativity](https://en.wikipedia.org/wiki/Operator_associativity) and construction of expression tree
 
+## Expression tree 是 AST
 
+需要注意的是，expression tree 是 AST。
 
 ## wikipedia [Binary expression tree](https://en.wikipedia.org/wiki/Binary_expression_tree)
 
@@ -35,8 +37,6 @@ The leaves of a binary expression tree are **operands**, such as constants or va
 
 
 [![img](https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Exp-tree-ex-11.svg/250px-Exp-tree-ex-11.svg.png)](https://en.wikipedia.org/wiki/File:Exp-tree-ex-11.svg)
-
-
 
 
 

@@ -6,5 +6,4 @@ nav:
     - Infix-to-postfix: Infix-to-postfix # 中缀到后缀
     - Postfix-to-Prefix: Postfix-to-Prefix # 后缀到前缀
     - Prefix-to-Infix: Prefix-to-Infix # 前缀到中缀
-    - Build-AST: Build-AST
     

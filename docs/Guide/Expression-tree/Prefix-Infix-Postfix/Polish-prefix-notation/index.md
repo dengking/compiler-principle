@@ -2,6 +2,16 @@
 
 "infix notation" 即 "中缀表达式"，"polish notation" 即 "波兰式"。
 
+## build && evaluate
+
+一、evaluate
+
+在 infogalactic [Polish notation](https://infogalactic.com/info/Polish_notation) 中，给出的是自底向上地evaluate的方式
+
+二、build
+
+在 geeksforgeeks [Building Expression tree from Prefix Expression](https://www.geeksforgeeks.org/building-expression-tree-from-prefix-expression/) 给出了递归、自顶向下地构建expression tree 过程
+
 ## infogalactic [Polish notation](https://infogalactic.com/info/Polish_notation)
 
 **Polish notation** (**PN**), also known as **normal Polish notation** (**NPN**),[[1\]](https://infogalactic.com/info/Polish_notation#cite_note-Jorke_1989-1) **Łukasiewicz notation**, **Warsaw notation**, **Polish prefix notation** or simply **prefix notation**, is a form of notation for [logic](https://infogalactic.com/info/Logic), [arithmetic](https://infogalactic.com/info/Arithmetic), and [algebra](https://infogalactic.com/info/Algebra). Its distinguishing feature is that it places [operators](https://infogalactic.com/info/Operator_(mathematics)) to the left of their [operands](https://infogalactic.com/info/Operand). If the [arity](https://infogalactic.com/info/Arity) of the operators is fixed, the result is a syntax lacking parentheses or other brackets that can still be parsed without ambiguity. The [Polish](https://infogalactic.com/info/Poland) logician [Jan Łukasiewicz](https://infogalactic.com/info/Jan_Łukasiewicz) invented this notation in 1924 in order to simplify [sentential logic](https://infogalactic.com/info/Propositional_calculus).
