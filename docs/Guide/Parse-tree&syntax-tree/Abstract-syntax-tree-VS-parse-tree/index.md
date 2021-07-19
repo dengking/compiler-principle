@@ -20,8 +20,6 @@ Is there something that I'm missing about the **semantic analyzer**, or is the d
 
 ### [A](https://stackoverflow.com/a/1888973)
 
-
-
 A **concrete syntax tree** represents the source text exactly in parsed form. In general, it conforms to the **context-free grammar** defining the source language.
 
 However, the concrete grammar and tree have a lot of things that are necessary to make source text **unambiguously(无二义的) parseable**, but do not contribute to actual meaning. For example, to implement **operator precedence**, your CFG usually has several levels of expression components (term, factor, etc.), with the operators connecting them at the different levels (you add terms to get expressions, terms are composed of factors optionally multipled, etc.). To actually interpret or compile the language, however, you don't need this; you just need Expression nodes that have operators and operands. The **abstract syntax tree** is the result of simplifying the **concrete syntax tree** down to this things actually needed to represent the meaning of the program. This tree has a much simpler definition and is thus easier to process in the later stages of **execution**.
@@ -30,7 +28,7 @@ You usually don't need to actually build a **concrete syntax tree**. The action 
 
 ***COMMENTS*** : 
 
--  Supplements: the Python interpreter first builds a CST and then converts to AST. – [cgsdfc](https://stackoverflow.com/users/8039762/cgsdfc) [Dec 2 '18 at 12:18](https://stackoverflow.com/questions/1888854/what-is-the-difference-between-an-abstract-syntax-tree-and-a-concrete-syntax-tree#comment94023727_1888973) 
+Supplements: the Python interpreter first builds a CST and then converts to AST. – [cgsdfc](https://stackoverflow.com/users/8039762/cgsdfc) [Dec 2 '18 at 12:18](https://stackoverflow.com/questions/1888854/what-is-the-difference-between-an-abstract-syntax-tree-and-a-concrete-syntax-tree#comment94023727_1888973) 
 
 ### [A](https://stackoverflow.com/a/1916687)
 
@@ -178,21 +176,25 @@ Also note that the pascal syntax disappears. Thus it is possible to have more th
 
 
 
-
-
-
-
-
-
 ## TODO
 
 stackoverflow [What would an AST (abstract syntax tree) for an object-oriented programming language look like?](https://stackoverflow.com/questions/6376662/what-would-an-ast-abstract-syntax-tree-for-an-object-oriented-programming-lang)
 
 stackoverflow [Compiling an AST back to source code](https://stackoverflow.com/questions/5832412/compiling-an-ast-back-to-source-code)
 
-
-
 thegreenplace [Abstract vs. Concrete Syntax Trees](https://eli.thegreenplace.net/2009/02/16/abstract-vs-concrete-syntax-trees)
+
+
+
+## draft
+
+在《Compilers Principles, Techniques, & Tools Second Edition》4.2.4 Parse Trees and Derivations节中有这样的描述：
+
+> A parse tree is a graphical representation of a derivation that filters out the **order** in which productions are applied to replace nonterminals. Each interior node of a parse tree represents the application of a production. The interior node is labeled with the nonterminal `A` in the head of the production; the children of the node are labeled, from left to right, by the symbols in the body of the production by which this `A` was replaced during the derivation.
+
+expression tree的interior node是operator。
+
+两者之间既存在着相同点也存在着不同点。
 
 
 
