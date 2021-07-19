@@ -16,6 +16,6 @@
 
 那如何实现binary expression tree的构造呢？其实这个过程是复杂的；
 
-# Precedence and Associativity
+## Precedence and Associativity
 
 http://www.cs.ecu.edu/karl/5220/spr16/Notes/CFG/precedence.html

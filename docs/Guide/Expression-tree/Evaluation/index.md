@@ -1,5 +1,3 @@
-
-
 # Evaluation
 
 geeksforgeeks [Evaluation of Expression Tree](https://www.geeksforgeeks.org/evaluation-of-expression-tree/ )
@@ -16,7 +14,7 @@ codeproject [Binary Tree Expression Solver](https://www.codeproject.com/articles
 
 
 
-## Post-order traversal、dependency
+## Post-order traversal、dependency、stack
 
 表达式树也是树，既然是树，那么它的结构就具备递归性
 

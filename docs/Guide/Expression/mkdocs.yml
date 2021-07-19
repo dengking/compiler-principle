@@ -1,6 +1,0 @@
-nav:
-    - Introduction: index.md
-    - Prefix-infix-postfix: Prefix-infix-postfix
-    - Evaluation: Evaluation
-    - LeetCode: LeetCode
-    

@@ -5,4 +5,5 @@ nav:
     - Bind: Bind
     - Semantic-analysis: Semantic-analysis
     - Program-transformation: Program-transformation
+    - Expression-tree: Expression-tree
     
