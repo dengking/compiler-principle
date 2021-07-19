@@ -23,7 +23,7 @@ If  t is not null then
 
 > NOTE: 
 >
-> 这是典型的递归写法
+> 典型的递归、自顶向下、binary tree-DFS-post order后序-return value
 
 
 

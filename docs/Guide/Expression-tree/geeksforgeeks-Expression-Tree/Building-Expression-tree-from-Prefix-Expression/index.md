@@ -1,4 +1,4 @@
-# geeksforgeeks [Building Expression tree from Prefix Expression](https://www.geeksforgeeks.org/building-expression-tree-from-prefix-expression/)
+# geeksforgeeks [Building Expression tree from Prefix Expression](https://www.geeksforgeeks.org/building-expression-tree-from-prefix-expression/) 
 
 > NOTE: 
 >
@@ -6,7 +6,7 @@
 >
 > 它的implementation让我想到了根据preorder traversal来反序列化一棵二叉树
 >
-> 原文给出的实现是递归自顶向下构建二叉树；
+> 原文给出的实现是递归自顶向下构建二叉树、先构造root node-然后递归构造左右子树
 >
 > 在 infogalactic [Polish notation](https://infogalactic.com/info/Polish_notation) 中，给出了自底向上evaluate prefix expression
 >
