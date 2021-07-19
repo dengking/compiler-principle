@@ -95,16 +95,16 @@ nav:
   - 9: 9-Machine-Independent-Optimizations/index.md
 - Guide:
   - Introduction: Guide/index.md
-  - Parse-tree-VS-syntax-tree:
-    - Introduction: Guide/Parse-tree-VS-syntax-tree/index.md
+  - Parse-tree&syntax-tree:
+    - Introduction: Guide/Parse-tree&syntax-tree/index.md
     - Parse-tree:
-      - Introduction: Guide/Parse-tree-VS-syntax-tree/Parse-tree/index.md
+      - Introduction: Guide/Parse-tree&syntax-tree/Parse-tree/index.md
     - Abstract-syntax-tree:
-      - Introduction: Guide/Parse-tree-VS-syntax-tree/Abstract-syntax-tree/index.md
+      - Introduction: Guide/Parse-tree&syntax-tree/Abstract-syntax-tree/index.md
     - Abstract-syntax-tree-VS-parse-tree:
-      - Introduction: Guide/Parse-tree-VS-syntax-tree/Abstract-syntax-tree-VS-parse-tree/index.md
+      - Introduction: Guide/Parse-tree&syntax-tree/Abstract-syntax-tree-VS-parse-tree/index.md
     - Parse-tree-to-AST:
-      - Introduction: Guide/Parse-tree-VS-syntax-tree/Parse-tree-to-AST/index.md
+      - Introduction: Guide/Parse-tree&syntax-tree/Parse-tree-to-AST/index.md
   - Parsing-algorithm:
     - Introduction: Guide/Parsing-algorithm/index.md
     - Top-down:
@@ -126,8 +126,53 @@ nav:
     - Others:
       - Chart-parser: Guide/Parsing-algorithm/Others/Chart-parser.md
       - Earley-parser: Guide/Parsing-algorithm/Others/Earley-parser.md
-  - Bind:
-    - Name-binding: Guide/Bind/Name-binding.md
+  - Expression-tree:
+    - Introduction: Guide/Expression-tree/index.md
+    - Prefix-Infix-Postfix:
+      - Introduction: Guide/Expression-tree/Prefix-Infix-Postfix/index.md
+      - Infix-notation:
+        - Introduction: Guide/Expression-tree/Prefix-Infix-Postfix/Infix-notation/index.md
+      - Polish-prefix-notation:
+        - Introduction: Guide/Expression-tree/Prefix-Infix-Postfix/Polish-prefix-notation/index.md
+      - Reverse-Polish-postfix-notation:
+        - Introduction: Guide/Expression-tree/Prefix-Infix-Postfix/Reverse-Polish-postfix-notation/index.md
+      - Infix-to-postfix:
+        - Introduction: Guide/Expression-tree/Prefix-Infix-Postfix/Infix-to-postfix/index.md
+        - Shunting-yard-algorithm:
+          - Introduction: Guide/Expression-tree/Prefix-Infix-Postfix/Infix-to-postfix/Shunting-yard-algorithm/index.md
+      - Postfix-to-Prefix:
+        - Introduction: Guide/Expression-tree/Prefix-Infix-Postfix/Postfix-to-Prefix/index.md
+        - geeksforgeeks-Postfix-to-Prefix-Conversion:
+          - Introduction: Guide/Expression-tree/Prefix-Infix-Postfix/Postfix-to-Prefix/geeksforgeeks-Postfix-to-Prefix-Conversion/index.md
+      - Prefix-to-Infix:
+        - Introduction: Guide/Expression-tree/Prefix-Infix-Postfix/Prefix-to-Infix/index.md
+        - geeksforgeeks-Prefix-to-Infix-Conversion:
+          - Introduction: Guide/Expression-tree/Prefix-Infix-Postfix/Prefix-to-Infix/geeksforgeeks-Prefix-to-Infix-Conversion/index.md
+    - Build-evaluate-expression-tree:
+      - Introduction: Guide/Expression-tree/Build-evaluate-expression-tree/index.md
+    - geeksforgeeks-Expression-Tree:
+      - Introduction: Guide/Expression-tree/geeksforgeeks-Expression-Tree/index.md
+      - Expression-Tree:
+        - Introduction: Guide/Expression-tree/geeksforgeeks-Expression-Tree/Expression-Tree/index.md
+      - Building-Expression-tree-from-Prefix-Expression:
+        - Introduction: Guide/Expression-tree/geeksforgeeks-Expression-Tree/Building-Expression-tree-from-Prefix-Expression/index.md
+      - Evaluation-of-Expression-Tree:
+        - Introduction: Guide/Expression-tree/geeksforgeeks-Expression-Tree/Evaluation-of-Expression-Tree/index.md
+      - Program-to-convert-Infix-notation-to-Expression-Tree:
+        - Introduction: Guide/Expression-tree/geeksforgeeks-Expression-Tree/Program-to-convert-Infix-notation-to-Expression-Tree/index.md
+      - Convert-ternary-expression-to-Binary-Tree:
+        - Introduction: Guide/Expression-tree/geeksforgeeks-Expression-Tree/Convert-ternary-expression-to-Binary-Tree/index.md
+    - LeetCode:
+      - Introduction: Guide/Expression-tree/LeetCode/index.md
+      - "LeetCode-150-\u9006\u6CE2\u5170\u8868\u8FBE\u5F0F\u6C42\u503C":
+        - Introduction: "Guide/Expression-tree/LeetCode/LeetCode-150-\u9006\u6CE2\u5170\
+            \u8868\u8FBE\u5F0F\u6C42\u503C/index.md"
+    - Mathematical-Expression-Parsing:
+      - Introduction: Guide/Expression-tree/Mathematical-Expression-Parsing/index.md
+      - Operator-precedence-parser:
+        - Introduction: Guide/Expression-tree/Mathematical-Expression-Parsing/Operator-precedence-parser/index.md
+  - Name-binding:
+    - Introduction: Guide/Name-binding/index.md
   - Semantic-analysis:
     - Introduction: Guide/Semantic-analysis/index.md
     - Formal-semantic:
