@@ -1,6 +1,12 @@
-# [Shunting-yard algorithm](https://en.wikipedia.org/wiki/Shunting-yard_algorithm)
+# Shunting-yard algorithm
 
-调度场算法
+
+
+## wikipedia [Shunting-yard algorithm](https://en.wikipedia.org/wiki/Shunting-yard_algorithm)
+
+> NOTE: 
+>
+> 调度场算法
 
 In [computer science](https://en.wikipedia.org/wiki/Computer_science), the **shunting-yard algorithm** is a method for parsing mathematical expressions specified in [infix notation](https://en.wikipedia.org/wiki/Infix_notation). It can produce either a **postfix notation** string, also known as [Reverse Polish notation](https://en.wikipedia.org/wiki/Reverse_Polish_notation) (RPN), or an [abstract syntax tree](https://en.wikipedia.org/wiki/Abstract_syntax_tree) (AST). The [algorithm](https://en.wikipedia.org/wiki/Algorithm) was invented by [Edsger Dijkstra](https://en.wikipedia.org/wiki/Edsger_Dijkstra) and named the "shunting yard"（调车场） algorithm because its operation resembles that of a [railroad shunting yard](https://en.wikipedia.org/wiki/Classification_yard). Dijkstra first described the Shunting Yard Algorithm in the [Mathematisch Centrum](https://en.wikipedia.org/wiki/Mathematisch_Centrum) report [MR 34/61](https://repository.cwi.nl/noauth/search/fullrecord.php?publnr=9251).
 
@@ -8,7 +14,7 @@ Like the evaluation of RPN（ [Reverse Polish notation](https://en.wikipedia.org
 
 The shunting-yard algorithm was later generalized（泛化） into [operator-precedence parsing](https://en.wikipedia.org/wiki/Operator-precedence_parser).
 
-## A simple conversion
+### A simple conversion
 
 1. Input: 3 + 4
 
@@ -29,9 +35,11 @@ This already shows a couple of rules:
 - All numbers are pushed to the output when they are read.
 - At the end of reading the expression, pop all operators off the stack and onto the output.
 
-***SUMMARY*** : 无论哪种表达式，它们的operand的顺序是相同的，各种表达式的区别就在于它们的operator的位置不同，其实该算法所做的是决定何时将operator添加到output中，它所采用的方式是基于operator的precedence进行比较，operator stack有precedence的比较，同时也考虑了associative；由于它需要转换为postfix，所以operator看到是放到operand的后面的，当优先级更高的时候，就需要出栈，添加到output中；还需要考虑括号的情况，其实可以这样来看待括号，括号其实是一种隔离，将括号内的operator的stack和括号外的operator的stack隔离开来了；
+> NOTE: 
+>
+> 无论哪种表达式，它们的operand的顺序是相同的，各种表达式的区别就在于它们的operator的位置不同，其实该算法所做的是决定何时将operator添加到output中，它所采用的方式是基于operator的precedence进行比较，operator stack有precedence的比较，同时也考虑了associative；由于它需要转换为postfix，所以operator看到是放到operand的后面的，当优先级更高的时候，就需要出栈，添加到output中；还需要考虑括号的情况，其实可以这样来看待括号，括号其实是一种隔离，将括号内的operator的stack和括号外的operator的stack隔离开来了；
 
-## Graphical illustration
+### Graphical illustration
 
  [![Shunting yard.svg](https://upload.wikimedia.org/wikipedia/commons/thumb/2/24/Shunting_yard.svg/400px-Shunting_yard.svg.png)](https://en.wikipedia.org/wiki/File:Shunting_yard.svg) 
 
@@ -39,9 +47,11 @@ This already shows a couple of rules:
 
 Graphical illustration of algorithm, using a [three-way railroad junction](https://en.wikipedia.org/wiki/Wye_junction)（三方铁路枢纽）. The input is processed one symbol at a time: if a variable or number is found, it is copied directly to the **output** a), c), e), h). If the symbol is an **operator**, it is pushed onto the **operator stack** b), d), f). If the operator's precedence is less than that of the **operators** at the top of the stack or the precedences are equal and the operator is **left associative**, then that operator is popped off the stack and added to the output g). Finally, any remaining operators are popped off the stack and added to the output i). 
 
-***SUMMARY*** : 如果是left associative（如除法，减法），则会
+> NOTE: 
+>
+> 如果是left associative（如除法，减法），则会
 
-## The algorithm in detail
+### The algorithm in detail
 
  Important terms: [Token](https://en.wikipedia.org/wiki/Token_(parser)), [Function](https://en.wikipedia.org/wiki/Function_(mathematics)), [Operator associativity](https://en.wikipedia.org/wiki/Operator_associativity), [Precedence](https://en.wikipedia.org/wiki/Order_of_operations) 
 
@@ -81,3 +91,14 @@ To analyze the running time complexity of this algorithm, one has only to note t
 
 The shunting yard algorithm can also be applied to produce prefix notation (also known as [Polish notation](https://en.wikipedia.org/wiki/Polish_notation)). To do this one would simply start from the end of a string of tokens to be parsed and work backwards, reverse the output queue (therefore making the output queue an output stack), and flip the left and right parenthesis behavior (remembering that the now-left parenthesis behavior should pop until it finds a now-right parenthesis). And changing the associativity condition to right.
 
+
+
+## TODO
+
+stackoverflow [Algorithm for converting expression to binary tree [closed]](https://stackoverflow.com/questions/42441416/algorithm-for-converting-expression-to-binary-tree)
+
+codeproject [Binary Tree Expression Solver](https://www.codeproject.com/Articles/10316/Binary-Tree-Expression-Solver)
+
+cnblogs [shunting-yard 调度场算法、中缀表达式转逆波兰表达式](https://www.cnblogs.com/magisk/p/8620303.html)
+
+geeksforgeeks [Program to convert Infix notation to Expression Tree](https://www.geeksforgeeks.org/program-to-convert-infix-notation-to-expression-tree/?ref=rp)
