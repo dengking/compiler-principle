@@ -951,11 +951,50 @@
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_3" type="checkbox" id="__nav_5_3" >
       
       <label class="md-nav__link" for="__nav_5_3">
+        4.4-Top-Down-Parsing
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="4.4-Top-Down-Parsing" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_3">
+          <span class="md-nav__icon md-icon"></span>
+          4.4-Top-Down-Parsing
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../4.4-Top-Down-Parsing/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_4" type="checkbox" id="__nav_5_4" >
+      
+      <label class="md-nav__link" for="__nav_5_4">
         4.3-Writing-a-Grammar
         <span class="md-nav__icon md-icon"></span>
       </label>
       <nav class="md-nav" aria-label="4.3-Writing-a-Grammar" data-md-level="2">
-        <label class="md-nav__title" for="__nav_5_3">
+        <label class="md-nav__title" for="__nav_5_4">
           <span class="md-nav__icon md-icon"></span>
           4.3-Writing-a-Grammar
         </label>
@@ -987,14 +1026,14 @@
     <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_4" type="checkbox" id="__nav_5_4" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_5" type="checkbox" id="__nav_5_5" >
       
-      <label class="md-nav__link" for="__nav_5_4">
+      <label class="md-nav__link" for="__nav_5_5">
         4.5-Bottom-Up-Parsing
         <span class="md-nav__icon md-icon"></span>
       </label>
       <nav class="md-nav" aria-label="4.5-Bottom-Up-Parsing" data-md-level="2">
-        <label class="md-nav__title" for="__nav_5_4">
+        <label class="md-nav__title" for="__nav_5_5">
           <span class="md-nav__icon md-icon"></span>
           4.5-Bottom-Up-Parsing
         </label>
@@ -1028,14 +1067,14 @@
     <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_5" type="checkbox" id="__nav_5_5" checked>
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_6" type="checkbox" id="__nav_5_6" checked>
       
-      <label class="md-nav__link" for="__nav_5_5">
+      <label class="md-nav__link" for="__nav_5_6">
         4.6-Introduction-to-LR-Parsing-Simple-LR
         <span class="md-nav__icon md-icon"></span>
       </label>
       <nav class="md-nav" aria-label="4.6-Introduction-to-LR-Parsing-Simple-LR" data-md-level="2">
-        <label class="md-nav__title" for="__nav_5_5">
+        <label class="md-nav__title" for="__nav_5_6">
           <span class="md-nav__icon md-icon"></span>
           4.6-Introduction-to-LR-Parsing-Simple-LR
         </label>
@@ -1139,14 +1178,14 @@
     <li class="md-nav__item md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_6" type="checkbox" id="__nav_5_6" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_7" type="checkbox" id="__nav_5_7" >
       
-      <label class="md-nav__link" for="__nav_5_6">
+      <label class="md-nav__link" for="__nav_5_7">
         4.7-More-Powerful-LR-Parsers
         <span class="md-nav__icon md-icon"></span>
       </label>
       <nav class="md-nav" aria-label="4.7-More-Powerful-LR-Parsers" data-md-level="2">
-        <label class="md-nav__title" for="__nav_5_6">
+        <label class="md-nav__title" for="__nav_5_7">
           <span class="md-nav__icon md-icon"></span>
           4.7-More-Powerful-LR-Parsers
         </label>
@@ -3754,11 +3793,11 @@
                 
                 
                 <h1 id="46#introduction#to#lr#parsing#simple#lr">4.6 Introduction to LR Parsing: Simple LR</h1>
-<p>The most prevalent type of bottom-up parser to day is based on a concept called <strong>LR(k )</strong> parsing; the "L" is for left-to-right scanning of the input, the "R" for constructing a rightmost derivation in reverse, and the k for the number of input symbols of lookahead that are used in making parsing decisions. The cases k = 0 or k = 1 are of practical interest, and we shall only consider LR parsers with <span><span class="MathJax_Preview">k \le 1</span><script type="math/tex">k \le 1</script></span> here. When (k ) is omitted, k is assumed to be 1.</p>
-<p>This section introduces the basic concepts of LR parsing and the easiest method for constructing shift-reduce parsers, called "simple LR" (or SLR, for short). Some familiarity with the basic concepts is helpful even if the LR parser itself is constructed using an automatic parser generator. We begin with "items" and "parser states;" the diagnostic output from an LR parser generator typically includes <strong>parser states</strong>, which can be used to isolate the sources of parsing conflicts.</p>
+<p>The most prevalent(流行的) type of <strong>bottom-up parser</strong> to day is based on a concept called <strong>LR(k )</strong> parsing; the "L" is for left-to-right scanning of the input, the "R" for constructing a rightmost derivation in reverse, and the k for the number of input symbols of lookahead that are used in making parsing decisions. The cases k = 0 or k = 1 are of practical interest, and we shall only consider LR parsers with <span><span class="MathJax_Preview">k \le 1</span><script type="math/tex">k \le 1</script></span> here. When (k ) is omitted, k is assumed to be 1.</p>
+<p>This section introduces the basic concepts of LR parsing and the easiest method for constructing <strong>shift-reduce parsers</strong>, called "<strong>simple LR</strong>" (or <strong>SLR</strong>, for short). Some familiarity with the basic concepts is helpful even if the LR parser itself is constructed using an <strong>automatic parser generator</strong>. We begin with "items" and "parser states;" the diagnostic output from an LR parser generator typically includes <strong>parser states</strong>, which can be used to isolate the sources of parsing conflicts.</p>
 <p>Section 4.7 introduces two, more complex methods canonical-LR and LALR that are used in the majority of LR parsers.</p>
 <h2 id="461#why#lr#parsers">4.6.1 Why LR Parsers?</h2>
-<p>LR parsers are table-driven, much like the nonrecursive LL parsers of Section 4.4.4. A grammar for which we can construct a parsing table using one of  the methods in this section and the next is said to be an <strong>LR grammar</strong>. Intuitively, for a grammar to be LR it is sufficient that a left-to-right shift-reduce parser be able to recognize handles of right-sentential forms when they appear on top of the stack.</p>
+<p>LR parsers are table-driven, much like the nonrecursive LL parsers of Section 4.4.4. A grammar for which we can construct a parsing table using one of  the methods in this section and the next is said to be an <strong>LR grammar</strong>. Intuitively(直观的), for a grammar to be LR it is sufficient that a left-to-right shift-reduce parser be able to recognize handles of right-sentential forms when they appear on top of the stack.</p>
 <h2 id="462#items#and#the#lr0#automaton">4.6.2 Items and the LR(0) Automaton</h2>
 <p>How do es a shift-reduce parser know when to shift and when to reduce? For example, with stack contents <code>$T</code>  and next input symbol <code>*</code> in Fig. 4.28, how does the parser know that <code>T</code> on the top of the stack is not a handle, so the appropriate action is to shift and not to reduce <code>T</code> to <code>E</code>?</p>
 <p>An <strong>LR parser</strong> makes shift-reduce decisions by maintaining <strong>states</strong> to keep track of where we are in a parse. States represent sets of "items." An <em>LR(0) item</em> (<em>item</em> for short) of a grammar G is a production of G with a dot at some position of the body. Thus, production <span><span class="MathJax_Preview">A \to XYZ</span><script type="math/tex">A \to XYZ</script></span> yields the four items</p>
