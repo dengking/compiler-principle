@@ -236,6 +236,14 @@
      <lastmod>2021-07-20</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
+     <loc>https://dengking.github.io/compiler-principle/Guide/Expression-tree/Prefix-Infix-Postfix/Infix-to-Postfix/</loc>
+     <lastmod>2021-07-20</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://dengking.github.io/compiler-principle/Guide/Expression-tree/Prefix-Infix-Postfix/Infix-to-Postfix/Shunting-yard-algorithm/</loc>
+     <lastmod>2021-07-20</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
      <loc>https://dengking.github.io/compiler-principle/Guide/Expression-tree/Prefix-Infix-Postfix/Postfix-to-Prefix/</loc>
      <lastmod>2021-07-20</lastmod>
      <changefreq>daily</changefreq>
@@ -357,6 +365,10 @@
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dengking.github.io/compiler-principle/Implementation/</loc>
+     <lastmod>2021-07-20</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://dengking.github.io/compiler-principle/Implementation/Architecture/</loc>
      <lastmod>2021-07-20</lastmod>
      <changefreq>daily</changefreq>
     </url>
