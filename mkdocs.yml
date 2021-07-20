@@ -121,8 +121,8 @@ nav:
         - Introduction: Guide/Parsing-algorithm/Bottom-up/LR-parser/index.md
       - CYK-algorithm:
         - Introduction: Guide/Parsing-algorithm/Bottom-up/CYK-algorithm/index.md
-    - LL-VS-LR-parser:
-      - Introduction: Guide/Parsing-algorithm/LL-VS-LR-parser/index.md
+    - LL-VS-LR-Recursive-descent-Parser:
+      - Introduction: Guide/Parsing-algorithm/LL-VS-LR-Recursive-descent-Parser/index.md
     - Others:
       - Chart-parser: Guide/Parsing-algorithm/Others/Chart-parser.md
       - Earley-parser: Guide/Parsing-algorithm/Others/Earley-parser.md

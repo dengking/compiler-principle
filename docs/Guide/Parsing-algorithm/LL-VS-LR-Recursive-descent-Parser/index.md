@@ -1,4 +1,10 @@
-# LL VS LR
+# LL VS LR VS Recursive descend parser
+
+## Recursive descent parser VS LL、LR
+
+[Recursive descent parser](https://en.wikipedia.org/wiki/Recursive_descent_parser) use [backtracking](https://en.wikipedia.org/wiki/Backtracking) to match.
+
+LL parsers are table-based parsers, they use parsing table. Parsing table is constructed from the grammar and acts as a transformation function. Using parsing table and *k* [tokens](https://en.wikipedia.org/wiki/Token_(parser)) of [lookahead](https://en.wikipedia.org/wiki/Parsing#Lookahead), a LL parser can become *predictive parser* and  avoid  [backtracking](https://en.wikipedia.org/wiki/Backtracking). 
 
 
 
@@ -10,12 +16,15 @@
 
 At a high level, the difference between LL parsing and LR parsing is that LL parsers begin at the start symbol and try to apply productions to arrive at the **target string**, whereas LR parsers begin at the target string and try to arrive back at the **start symbol**.
 
-An LL parse is a left-to-right, leftmost derivation. That is, we consider the input symbols from the left to the right and attempt to construct a leftmost derivation. This is done by beginning at the start symbol and repeatedly expanding out the leftmost nonterminal until we arrive at the **target string**. An LR parse is a left-to-right, rightmost derivation, meaning that we scan from the left to right and attempt to construct a rightmost derivation. The parser continuously picks a substring of the input and attempts to reverse it back to a nonterminal.
+An LL parse is a left-to-right, leftmost derivation. That is, we consider the input symbols from the left to the right and attempt to construct a leftmost derivation. This is done by beginning at the start symbol and repeatedly expanding out the **leftmost nonterminal** until we arrive at the **target string**. 
+
+An LR parse is a left-to-right, rightmost derivation, meaning that we scan from the left to right and attempt to construct a rightmost derivation. The parser continuously picks a substring of the input and attempts to reverse it back to a nonterminal.
 
 During an LL parse, the parser continuously chooses between two actions:
 
-1. **Predict**: Based on the leftmost nonterminal and some number of lookahead tokens, choose which production ought to be applied to get closer to the input string.
-2. **Match**: Match the leftmost guessed terminal symbol with the leftmost unconsumed symbol of input.
+1、**Predict**: Based on the leftmost nonterminal and some number of lookahead tokens, choose which production ought to be applied to get closer to the input string.
+
+2、**Match**: Match the leftmost guessed terminal symbol with the leftmost unconsumed symbol of input.
 
 As an example, given this grammar:
 
@@ -48,8 +57,9 @@ Notice that in each step we look at the leftmost symbol in our production. If it
 
 In an LR parser, there are two actions:
 
-1. **Shift**: Add the next token of input to a buffer for consideration.
-2. **Reduce**: Reduce a collection of terminals and nonterminals in this buffer back to some nonterminal by reversing a production.
+1、**Shift**: Add the next token of input to a buffer for consideration.
+
+2、**Reduce**: Reduce a collection of terminals and nonterminals in this buffer back to some nonterminal by reversing a production.
 
 As an example, an LR(1) parser (with one token of lookahead) might parse that same string as follows:
 
@@ -141,7 +151,7 @@ SLR语法分析表的构造过程主要让我感到困惑的是它将action定�
 
 SLR语法分析表的ACTION的构造过程中有这样的规则：
 
-- 
+
 
 ## LR语法分析器的格局configuration VS LR(0)自动机的状态
 

@@ -2,7 +2,9 @@
 
 In [computer science](https://en.wikipedia.org/wiki/Computer_science), an **LL parser** (**L**eft-to-right, **L**eftmost derivation) is a [top-down parser](https://en.wikipedia.org/wiki/Top-down_parsing) for a subset of [context-free languages](https://en.wikipedia.org/wiki/Context-free_languages). It parses the input from **L**eft to right, performing [**L**eftmost derivation](https://en.wikipedia.org/wiki/Context-free_grammar#Derivations_and_syntax_trees) of the sentence.
 
-> NOTE: Follow the  [**L**eftmost derivation](https://en.wikipedia.org/wiki/Context-free_grammar#Derivations_and_syntax_trees) , you will find an detailed explanation of leftmost derivation.
+> NOTE: 
+>
+> Follow the  [**L**eftmost derivation](https://en.wikipedia.org/wiki/Context-free_grammar#Derivations_and_syntax_trees) , you will find an detailed explanation of leftmost derivation.
 
 An LL parser is called an LL(*k*) parser if it uses *k* [tokens](https://en.wikipedia.org/wiki/Token_(parser)) of [lookahead](https://en.wikipedia.org/wiki/Parsing#Lookahead) when parsing a sentence. A grammar is called an [LL(*k*) grammar](https://en.wikipedia.org/wiki/LL_grammar) if an LL(*k*) parser can be constructed from it. A **formal language** is called an LL(*k*) language if it has an LL(*k*) grammar. The set of LL(*k*) languages is properly contained in that of LL(*k*+1) languages, for each *k* ≥ 0. A corollary of this is that not all context-free languages can be recognized by an LL(*k*) parser. An LL parser is called an LL(`*`), or LL-regular, parser if it is not restricted to a finite number *k* of tokens of lookahead, but can make parsing decisions by recognizing whether the following tokens belong to a [regular language](https://en.wikipedia.org/wiki/Regular_language) (for example by means of a [deterministic finite automaton](https://en.wikipedia.org/wiki/Deterministic_finite_automaton)).
 
@@ -14,9 +16,11 @@ LL grammars, particularly LL(1) grammars, are of great practical interest, as pa
 
 For a given [context-free grammar](https://en.wikipedia.org/wiki/Context-free_grammar), the parser attempts to find the [leftmost derivation](https://en.wikipedia.org/wiki/Context-free_grammar#Derivations_and_syntax_trees). Given an example grammar $ G $:
 
-1. $ S\to E $
-2. $ E\to (E+E) $
-3. $ E\to i $
+1、$ S\to E $
+
+2、$ E\to (E+E) $
+
+3、$ E\to i $
 
 the leftmost derivation for $ w=((i+i)+i) $ is:
 
@@ -81,11 +85,15 @@ If the parser cannot perform a valid transition, the input is rejected (empty ce
 
 
 
-> NOTE: The LL parser consists of three parts
+> NOTE: 
 >
-> - **parsing table**
-> - **parser stack**
-> - **input stream**
+> The LL parser consists of three parts
+>
+> 1、**parsing table**
+>
+> 2、**parser stack**
+>
+> 3、**input stream**
 >
 > The following image is from a Wikipedia entry [pushdown automaton](https://en.wikipedia.org/wiki/Pushdown_automaton)
 >
