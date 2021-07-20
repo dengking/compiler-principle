@@ -1,8 +1,8 @@
 # 4.6 Introduction to LR Parsing: Simple LR
 
-The most prevalent type of bottom-up parser to day is based on a concept called **LR(k )** parsing; the "L" is for left-to-right scanning of the input, the "R" for constructing a rightmost derivation in reverse, and the k for the number of input symbols of lookahead that are used in making parsing decisions. The cases k = 0 or k = 1 are of practical interest, and we shall only consider LR parsers with $k \le 1$ here. When (k ) is omitted, k is assumed to be 1.
+The most prevalent(流行的) type of **bottom-up parser** to day is based on a concept called **LR(k )** parsing; the "L" is for left-to-right scanning of the input, the "R" for constructing a rightmost derivation in reverse, and the k for the number of input symbols of lookahead that are used in making parsing decisions. The cases k = 0 or k = 1 are of practical interest, and we shall only consider LR parsers with $k \le 1$ here. When (k ) is omitted, k is assumed to be 1.
 
-This section introduces the basic concepts of LR parsing and the easiest method for constructing shift-reduce parsers, called "simple LR" (or SLR, for short). Some familiarity with the basic concepts is helpful even if the LR parser itself is constructed using an automatic parser generator. We begin with "items" and "parser states;" the diagnostic output from an LR parser generator typically includes **parser states**, which can be used to isolate the sources of parsing conflicts.
+This section introduces the basic concepts of LR parsing and the easiest method for constructing **shift-reduce parsers**, called "**simple LR**" (or **SLR**, for short). Some familiarity with the basic concepts is helpful even if the LR parser itself is constructed using an **automatic parser generator**. We begin with "items" and "parser states;" the diagnostic output from an LR parser generator typically includes **parser states**, which can be used to isolate the sources of parsing conflicts.
 
 Section 4.7 introduces two, more complex methods canonical-LR and LALR that are used in the majority of LR parsers.
 
@@ -10,7 +10,7 @@ Section 4.7 introduces two, more complex methods canonical-LR and LALR that are 
 
 ## 4.6.1 Why LR Parsers?
 
-LR parsers are table-driven, much like the nonrecursive LL parsers of Section 4.4.4. A grammar for which we can construct a parsing table using one of  the methods in this section and the next is said to be an **LR grammar**. Intuitively, for a grammar to be LR it is sufficient that a left-to-right shift-reduce parser be able to recognize handles of right-sentential forms when they appear on top of the stack.
+LR parsers are table-driven, much like the nonrecursive LL parsers of Section 4.4.4. A grammar for which we can construct a parsing table using one of  the methods in this section and the next is said to be an **LR grammar**. Intuitively(直观的), for a grammar to be LR it is sufficient that a left-to-right shift-reduce parser be able to recognize handles of right-sentential forms when they appear on top of the stack.
 
 
 
