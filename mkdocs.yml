@@ -136,10 +136,10 @@ nav:
         - Introduction: Guide/Expression-tree/Prefix-Infix-Postfix/Polish-prefix-notation/index.md
       - Reverse-Polish-postfix-notation:
         - Introduction: Guide/Expression-tree/Prefix-Infix-Postfix/Reverse-Polish-postfix-notation/index.md
-      - Infix-to-postfix:
-        - Introduction: Guide/Expression-tree/Prefix-Infix-Postfix/Infix-to-postfix/index.md
+      - Infix-to-Postfix:
+        - Introduction: Guide/Expression-tree/Prefix-Infix-Postfix/Infix-to-Postfix/index.md
         - Shunting-yard-algorithm:
-          - Introduction: Guide/Expression-tree/Prefix-Infix-Postfix/Infix-to-postfix/Shunting-yard-algorithm/index.md
+          - Introduction: Guide/Expression-tree/Prefix-Infix-Postfix/Infix-to-Postfix/Shunting-yard-algorithm/index.md
       - Postfix-to-Prefix:
         - Introduction: Guide/Expression-tree/Prefix-Infix-Postfix/Postfix-to-Prefix/index.md
         - geeksforgeeks-Postfix-to-Prefix-Conversion:
@@ -204,6 +204,8 @@ nav:
       - Introduction: Tools/Parser-generator/Lex&yacc/index.md
 - Implementation:
   - Introduction: Implementation/index.md
+  - Architecture:
+    - Introduction: Implementation/Architecture/index.md
 plugins:
 - search
 repo_url: https://github.com/dengking/compiler-principle

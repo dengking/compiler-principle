@@ -3,7 +3,7 @@ nav:
     - Infix-notation: Infix-notation
     - Polish-prefix-notation: Polish-prefix-notation
     - Reverse-Polish-postfix-notation: Reverse-Polish-postfix-notation
-    - Infix-to-postfix: Infix-to-postfix # 中缀到后缀
+    - Infix-to-Postfix: Infix-to-Postfix # 中缀到后缀
     - Postfix-to-Prefix: Postfix-to-Prefix # 后缀到前缀
     - Prefix-to-Infix: Prefix-to-Infix # 前缀到中缀
     
