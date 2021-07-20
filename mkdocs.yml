@@ -67,6 +67,8 @@ nav:
   - 4: 4-Syntax-Analysis/index.md
   - 4.2-Context-Free-Grammars:
     - Introduction: 4-Syntax-Analysis/4.2-Context-Free-Grammars/index.md
+  - 4.4-Top-Down-Parsing:
+    - Introduction: 4-Syntax-Analysis/4.4-Top-Down-Parsing/index.md
   - 4.3-Writing-a-Grammar:
     - Introduction: 4-Syntax-Analysis/4.3-Writing-a-Grammar/index.md
   - 4.5-Bottom-Up-Parsing:
