@@ -1,0 +1,4 @@
+nav:
+    - Introduction: index.md
+    - LR-parser: LR-parser
+    - CYK-algorithm: CYK-algorithm

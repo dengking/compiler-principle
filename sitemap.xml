@@ -1,239 +1,363 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url>
      <loc>https://dengking.github.io/compiler-principle/</loc>
-     <lastmod>2021-06-18</lastmod>
+     <lastmod>2021-07-20</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://dengking.github.io/compiler-principle/1-Introduction/</loc>
+     <lastmod>2021-07-20</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://dengking.github.io/compiler-principle/1-Introduction/1.1-Language-Processors/</loc>
+     <lastmod>2021-07-20</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://dengking.github.io/compiler-principle/1-Introduction/1.2-The-Structure-of-a-Compiler/</loc>
+     <lastmod>2021-07-20</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://dengking.github.io/compiler-principle/1-Introduction/1.5-Applications-of-Compiler-Technology/</loc>
+     <lastmod>2021-07-20</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://dengking.github.io/compiler-principle/1-Introduction/1.6-Programming-Language-Basics/</loc>
+     <lastmod>2021-07-20</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://dengking.github.io/compiler-principle/2-A-Simple-Syntax-Directed-Translator/</loc>
+     <lastmod>2021-07-20</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://dengking.github.io/compiler-principle/2-A-Simple-Syntax-Directed-Translator/2.1-Introduction/</loc>
+     <lastmod>2021-07-20</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://dengking.github.io/compiler-principle/2-A-Simple-Syntax-Directed-Translator/2.2-Syntax-Definition/</loc>
+     <lastmod>2021-07-20</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://dengking.github.io/compiler-principle/2-A-Simple-Syntax-Directed-Translator/2.3-Syntax-Directed-Translation/</loc>
+     <lastmod>2021-07-20</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://dengking.github.io/compiler-principle/2-A-Simple-Syntax-Directed-Translator/2.4-Parsing/</loc>
+     <lastmod>2021-07-20</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://dengking.github.io/compiler-principle/2-A-Simple-Syntax-Directed-Translator/2.7-Symbol-Tables/</loc>
+     <lastmod>2021-07-20</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://dengking.github.io/compiler-principle/2-A-Simple-Syntax-Directed-Translator/2.7-Symbol-Tables/Symbol-table/</loc>
+     <lastmod>2021-07-20</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://dengking.github.io/compiler-principle/3-Lexical-Analysis/</loc>
+     <lastmod>2021-07-20</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://dengking.github.io/compiler-principle/3-Lexical-Analysis/3.1-The-Role-of-the-Lexical-Analyzer/</loc>
+     <lastmod>2021-07-20</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://dengking.github.io/compiler-principle/3-Lexical-Analysis/3.4-Recognition-of-Tokens/</loc>
+     <lastmod>2021-07-20</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://dengking.github.io/compiler-principle/3-Lexical-Analysis/3.6-Finite-Automata/</loc>
+     <lastmod>2021-07-20</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://dengking.github.io/compiler-principle/3-Lexical-Analysis/3.7-From-Regular-Expressions-to-Automata/</loc>
+     <lastmod>2021-07-20</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://dengking.github.io/compiler-principle/4-Syntax-Analysis/</loc>
+     <lastmod>2021-07-20</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://dengking.github.io/compiler-principle/4-Syntax-Analysis/4.2-Context-Free-Grammars/</loc>
+     <lastmod>2021-07-20</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://dengking.github.io/compiler-principle/4-Syntax-Analysis/4.3-Writing-a-Grammar/</loc>
+     <lastmod>2021-07-20</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://dengking.github.io/compiler-principle/4-Syntax-Analysis/4.5-Bottom-Up-Parsing/</loc>
+     <lastmod>2021-07-20</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://dengking.github.io/compiler-principle/4-Syntax-Analysis/4.6-Introduction-to-LR-Parsing-Simple-LR/</loc>
+     <lastmod>2021-07-20</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://dengking.github.io/compiler-principle/4-Syntax-Analysis/4.7-More-Powerful-LR-Parsers/</loc>
+     <lastmod>2021-07-20</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://dengking.github.io/compiler-principle/5-Syntax-Directed-Translation/</loc>
+     <lastmod>2021-07-20</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://dengking.github.io/compiler-principle/5-Syntax-Directed-Translation/5.1-Syntax-Directed-Definitions/</loc>
+     <lastmod>2021-07-20</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://dengking.github.io/compiler-principle/5-Syntax-Directed-Translation/5.2-Evaluation-Orders-for-SDD%27s/</loc>
+     <lastmod>2021-07-20</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://dengking.github.io/compiler-principle/5-Syntax-Directed-Translation/5.3-Applications-of-Syntax-Directed-Translation/</loc>
+     <lastmod>2021-07-20</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://dengking.github.io/compiler-principle/5-Syntax-Directed-Translation/wikipedia-Syntax-directed-translation/</loc>
+     <lastmod>2021-07-20</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://dengking.github.io/compiler-principle/6-Intermediate-Code-Generation/</loc>
+     <lastmod>2021-07-20</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://dengking.github.io/compiler-principle/6-Intermediate-Code-Generation/6.3-Types-and-Declarations/</loc>
+     <lastmod>2021-07-20</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://dengking.github.io/compiler-principle/7-Run-Time-Environments/</loc>
+     <lastmod>2021-07-20</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://dengking.github.io/compiler-principle/7-Run-Time-Environments/7.1-Storage-Organization/</loc>
+     <lastmod>2021-07-20</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://dengking.github.io/compiler-principle/7-Run-Time-Environments/7.2-Stack-Allocation-of-Space/</loc>
+     <lastmod>2021-07-20</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://dengking.github.io/compiler-principle/7-Run-Time-Environments/7.3-Access-to-Non-local-Data-on-the-Stack/</loc>
+     <lastmod>2021-07-20</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://dengking.github.io/compiler-principle/7-Run-Time-Environments/7.4-Heap-Management/</loc>
+     <lastmod>2021-07-20</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://dengking.github.io/compiler-principle/9-Machine-Independent-Optimizations/</loc>
+     <lastmod>2021-07-20</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dengking.github.io/compiler-principle/Guide/</loc>
-     <lastmod>2021-06-18</lastmod>
+     <lastmod>2021-07-20</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://dengking.github.io/compiler-principle/Guide/Parse-tree%26syntax-tree/</loc>
+     <lastmod>2021-07-20</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://dengking.github.io/compiler-principle/Guide/Parse-tree%26syntax-tree/Parse-tree/</loc>
+     <lastmod>2021-07-20</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://dengking.github.io/compiler-principle/Guide/Parse-tree%26syntax-tree/Abstract-syntax-tree/</loc>
+     <lastmod>2021-07-20</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://dengking.github.io/compiler-principle/Guide/Parse-tree%26syntax-tree/Abstract-syntax-tree-VS-parse-tree/</loc>
+     <lastmod>2021-07-20</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://dengking.github.io/compiler-principle/Guide/Parse-tree%26syntax-tree/Parse-tree-to-AST/</loc>
+     <lastmod>2021-07-20</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dengking.github.io/compiler-principle/Guide/Parsing-algorithm/</loc>
-     <lastmod>2021-06-18</lastmod>
+     <lastmod>2021-07-20</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://dengking.github.io/compiler-principle/Guide/Parsing-algorithm/VS-LL-parser-VS-LR-parser/</loc>
-     <lastmod>2021-06-18</lastmod>
+     <loc>https://dengking.github.io/compiler-principle/Guide/Parsing-algorithm/Top-down/</loc>
+     <lastmod>2021-07-20</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://dengking.github.io/compiler-principle/Guide/Parsing-algorithm/Parser-generator/</loc>
-     <lastmod>2021-06-18</lastmod>
+     <loc>https://dengking.github.io/compiler-principle/Guide/Parsing-algorithm/Top-down/Recursive-descent-parser/</loc>
+     <lastmod>2021-07-20</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://dengking.github.io/compiler-principle/Guide/Parsing-algorithm/Dyck-language/</loc>
-     <lastmod>2021-06-18</lastmod>
+     <loc>https://dengking.github.io/compiler-principle/Guide/Parsing-algorithm/Top-down/LL-parser/</loc>
+     <lastmod>2021-07-20</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://dengking.github.io/compiler-principle/Guide/Parsing-algorithm/Top-down/LL-parser/andrewbegel-LL%281%29-Parsing/</loc>
+     <lastmod>2021-07-20</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://dengking.github.io/compiler-principle/Guide/Parsing-algorithm/Bottom-up/</loc>
+     <lastmod>2021-07-20</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://dengking.github.io/compiler-principle/Guide/Parsing-algorithm/Bottom-up/LR-parser/</loc>
+     <lastmod>2021-07-20</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://dengking.github.io/compiler-principle/Guide/Parsing-algorithm/Bottom-up/CYK-algorithm/</loc>
+     <lastmod>2021-07-20</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://dengking.github.io/compiler-principle/Guide/Parsing-algorithm/LL-VS-LR-parser/</loc>
+     <lastmod>2021-07-20</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dengking.github.io/compiler-principle/Guide/Parsing-algorithm/Others/Chart-parser/</loc>
-     <lastmod>2021-06-18</lastmod>
+     <lastmod>2021-07-20</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dengking.github.io/compiler-principle/Guide/Parsing-algorithm/Others/Earley-parser/</loc>
-     <lastmod>2021-06-18</lastmod>
+     <lastmod>2021-07-20</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://dengking.github.io/compiler-principle/Guide/Bind/Name-binding/</loc>
-     <lastmod>2021-06-18</lastmod>
+     <loc>https://dengking.github.io/compiler-principle/Guide/Expression-tree/</loc>
+     <lastmod>2021-07-20</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://dengking.github.io/compiler-principle/Guide/Formal-semantic/</loc>
-     <lastmod>2021-06-18</lastmod>
+     <loc>https://dengking.github.io/compiler-principle/Guide/Expression-tree/Prefix-Infix-Postfix/</loc>
+     <lastmod>2021-07-20</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://dengking.github.io/compiler-principle/Guide/Expression-tree/Prefix-Infix-Postfix/Infix-notation/</loc>
+     <lastmod>2021-07-20</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://dengking.github.io/compiler-principle/Guide/Expression-tree/Prefix-Infix-Postfix/Polish-prefix-notation/</loc>
+     <lastmod>2021-07-20</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://dengking.github.io/compiler-principle/Guide/Expression-tree/Prefix-Infix-Postfix/Reverse-Polish-postfix-notation/</loc>
+     <lastmod>2021-07-20</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://dengking.github.io/compiler-principle/Guide/Expression-tree/Prefix-Infix-Postfix/Postfix-to-Prefix/</loc>
+     <lastmod>2021-07-20</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://dengking.github.io/compiler-principle/Guide/Expression-tree/Prefix-Infix-Postfix/Postfix-to-Prefix/geeksforgeeks-Postfix-to-Prefix-Conversion/</loc>
+     <lastmod>2021-07-20</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://dengking.github.io/compiler-principle/Guide/Expression-tree/Prefix-Infix-Postfix/Prefix-to-Infix/</loc>
+     <lastmod>2021-07-20</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://dengking.github.io/compiler-principle/Guide/Expression-tree/Prefix-Infix-Postfix/Prefix-to-Infix/geeksforgeeks-Prefix-to-Infix-Conversion/</loc>
+     <lastmod>2021-07-20</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://dengking.github.io/compiler-principle/Guide/Expression-tree/Build-evaluate-expression-tree/</loc>
+     <lastmod>2021-07-20</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://dengking.github.io/compiler-principle/Guide/Expression-tree/geeksforgeeks-Expression-Tree/</loc>
+     <lastmod>2021-07-20</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://dengking.github.io/compiler-principle/Guide/Expression-tree/geeksforgeeks-Expression-Tree/Expression-Tree/</loc>
+     <lastmod>2021-07-20</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://dengking.github.io/compiler-principle/Guide/Expression-tree/geeksforgeeks-Expression-Tree/Building-Expression-tree-from-Prefix-Expression/</loc>
+     <lastmod>2021-07-20</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://dengking.github.io/compiler-principle/Guide/Expression-tree/geeksforgeeks-Expression-Tree/Evaluation-of-Expression-Tree/</loc>
+     <lastmod>2021-07-20</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://dengking.github.io/compiler-principle/Guide/Expression-tree/geeksforgeeks-Expression-Tree/Program-to-convert-Infix-notation-to-Expression-Tree/</loc>
+     <lastmod>2021-07-20</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://dengking.github.io/compiler-principle/Guide/Expression-tree/geeksforgeeks-Expression-Tree/Convert-ternary-expression-to-Binary-Tree/</loc>
+     <lastmod>2021-07-20</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://dengking.github.io/compiler-principle/Guide/Expression-tree/LeetCode/</loc>
+     <lastmod>2021-07-20</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://dengking.github.io/compiler-principle/Guide/Expression-tree/LeetCode/LeetCode-150-%E9%80%86%E6%B3%A2%E5%85%B0%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%B1%82%E5%80%BC/</loc>
+     <lastmod>2021-07-20</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://dengking.github.io/compiler-principle/Guide/Expression-tree/Mathematical-Expression-Parsing/</loc>
+     <lastmod>2021-07-20</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://dengking.github.io/compiler-principle/Guide/Expression-tree/Mathematical-Expression-Parsing/Operator-precedence-parser/</loc>
+     <lastmod>2021-07-20</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://dengking.github.io/compiler-principle/Guide/Name-binding/</loc>
+     <lastmod>2021-07-20</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://dengking.github.io/compiler-principle/Guide/Semantic-analysis/</loc>
+     <lastmod>2021-07-20</lastmod>
+     <changefreq>daily</changefreq>
+    </url><url>
+     <loc>https://dengking.github.io/compiler-principle/Guide/Semantic-analysis/Formal-semantic/</loc>
+     <lastmod>2021-07-20</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dengking.github.io/compiler-principle/Guide/Program-transformation/</loc>
-     <lastmod>2021-06-18</lastmod>
+     <lastmod>2021-07-20</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dengking.github.io/compiler-principle/Guide/Program-transformation/DMS-Software-Reengineering-Toolkit/</loc>
-     <lastmod>2021-06-18</lastmod>
+     <lastmod>2021-07-20</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://dengking.github.io/compiler-principle/Guide/Compiler-front-end/</loc>
-     <lastmod>2021-06-18</lastmod>
+     <loc>https://dengking.github.io/compiler-principle/Optimization/</loc>
+     <lastmod>2021-07-20</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://dengking.github.io/compiler-principle/Chapter-1-Introduction/</loc>
-     <lastmod>2021-06-18</lastmod>
+     <loc>https://dengking.github.io/compiler-principle/Optimization/Basic-block/</loc>
+     <lastmod>2021-07-20</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://dengking.github.io/compiler-principle/Chapter-1-Introduction/1.1-Language-Processors/</loc>
-     <lastmod>2021-06-18</lastmod>
+     <loc>https://dengking.github.io/compiler-principle/Optimization/Static-single-assignment-form/</loc>
+     <lastmod>2021-07-20</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://dengking.github.io/compiler-principle/Chapter-1-Introduction/1.2-The-Structure-of-a-Compiler/</loc>
-     <lastmod>2021-06-18</lastmod>
+     <loc>https://dengking.github.io/compiler-principle/Optimization/Control-flow-analysis/</loc>
+     <lastmod>2021-07-20</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://dengking.github.io/compiler-principle/Chapter-1-Introduction/1.5-Applications-of-Compiler-Technology/</loc>
-     <lastmod>2021-06-18</lastmod>
+     <loc>https://dengking.github.io/compiler-principle/Optimization/Control-flow-analysis/Control-flow%26%26program-counter/</loc>
+     <lastmod>2021-07-20</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://dengking.github.io/compiler-principle/Chapter-1-Introduction/1.6-Programming-Language-Basics/</loc>
-     <lastmod>2021-06-18</lastmod>
+     <loc>https://dengking.github.io/compiler-principle/Optimization/Control-flow-analysis/Control-flow-graph/</loc>
+     <lastmod>2021-07-20</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://dengking.github.io/compiler-principle/Chapter-2-A-Simple-Syntax-Directed-Translator/</loc>
-     <lastmod>2021-06-18</lastmod>
+     <loc>https://dengking.github.io/compiler-principle/Optimization/Data-flow-analysis/</loc>
+     <lastmod>2021-07-20</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://dengking.github.io/compiler-principle/Chapter-2-A-Simple-Syntax-Directed-Translator/2.1-Introduction/</loc>
-     <lastmod>2021-06-18</lastmod>
+     <loc>https://dengking.github.io/compiler-principle/Optimization/Inline/</loc>
+     <lastmod>2021-07-20</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://dengking.github.io/compiler-principle/Chapter-2-A-Simple-Syntax-Directed-Translator/2.2-Syntax-Definition/</loc>
-     <lastmod>2021-06-18</lastmod>
+     <loc>https://dengking.github.io/compiler-principle/Tools/Parser-generator/</loc>
+     <lastmod>2021-07-20</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://dengking.github.io/compiler-principle/Chapter-2-A-Simple-Syntax-Directed-Translator/2.3-Syntax-Directed-Translation/</loc>
-     <lastmod>2021-06-18</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://dengking.github.io/compiler-principle/Chapter-2-A-Simple-Syntax-Directed-Translator/2.4-Parsing/</loc>
-     <lastmod>2021-06-18</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://dengking.github.io/compiler-principle/Chapter-2-A-Simple-Syntax-Directed-Translator/2.7-Symbol-Tables/</loc>
-     <lastmod>2021-06-18</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://dengking.github.io/compiler-principle/Chapter-2-A-Simple-Syntax-Directed-Translator/2.7-Symbol-Tables/Symbol-table/</loc>
-     <lastmod>2021-06-18</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://dengking.github.io/compiler-principle/Chapter-3-Lexical-Analysis/</loc>
-     <lastmod>2021-06-18</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://dengking.github.io/compiler-principle/Chapter-3-Lexical-Analysis/3.1-The-Role-of-the-Lexical-Analyzer/</loc>
-     <lastmod>2021-06-18</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://dengking.github.io/compiler-principle/Chapter-3-Lexical-Analysis/3.4-Recognition-of-Tokens/</loc>
-     <lastmod>2021-06-18</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://dengking.github.io/compiler-principle/Chapter-3-Lexical-Analysis/3.6-Finite-Automata/</loc>
-     <lastmod>2021-06-18</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://dengking.github.io/compiler-principle/Chapter-3-Lexical-Analysis/3.7-From-Regular-Expressions-to-Automata/</loc>
-     <lastmod>2021-06-18</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://dengking.github.io/compiler-principle/Chapter-3-Lexical-Analysis/wikipedia-Lex%28software%29/</loc>
-     <lastmod>2021-06-18</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://dengking.github.io/compiler-principle/Chapter-4-Syntax-Analysis/</loc>
-     <lastmod>2021-06-18</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://dengking.github.io/compiler-principle/Chapter-4-Syntax-Analysis/4.2-Context-Free-Grammars/</loc>
-     <lastmod>2021-06-18</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://dengking.github.io/compiler-principle/Chapter-4-Syntax-Analysis/4.3-Writing-a-Grammar/</loc>
-     <lastmod>2021-06-18</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://dengking.github.io/compiler-principle/Chapter-4-Syntax-Analysis/4.5-Bottom-Up-Parsing/</loc>
-     <lastmod>2021-06-18</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://dengking.github.io/compiler-principle/Chapter-4-Syntax-Analysis/4.6-Introduction-to-LR-Parsing-Simple-LR/</loc>
-     <lastmod>2021-06-18</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://dengking.github.io/compiler-principle/Chapter-4-Syntax-Analysis/4.7-More-Powerful-LR-Parsers/</loc>
-     <lastmod>2021-06-18</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://dengking.github.io/compiler-principle/Chapter-5-Syntax-Directed-Translation/</loc>
-     <lastmod>2021-06-18</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://dengking.github.io/compiler-principle/Chapter-5-Syntax-Directed-Translation/5.1-Syntax-Directed-Definitions/</loc>
-     <lastmod>2021-06-18</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://dengking.github.io/compiler-principle/Chapter-5-Syntax-Directed-Translation/5.2-Evaluation-Orders-for-SDD%27s/</loc>
-     <lastmod>2021-06-18</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://dengking.github.io/compiler-principle/Chapter-5-Syntax-Directed-Translation/5.3-Applications-of-Syntax-Directed-Translation/</loc>
-     <lastmod>2021-06-18</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://dengking.github.io/compiler-principle/Chapter-5-Syntax-Directed-Translation/wikipedia-Syntax-directed-translation/</loc>
-     <lastmod>2021-06-18</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://dengking.github.io/compiler-principle/Chapter-6-Intermediate-Code-Generation/</loc>
-     <lastmod>2021-06-18</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://dengking.github.io/compiler-principle/Chapter-6-Intermediate-Code-Generation/6.3-Types-and-Declarations/</loc>
-     <lastmod>2021-06-18</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://dengking.github.io/compiler-principle/Chapter-7-Run-Time-Environments/</loc>
-     <lastmod>2021-06-18</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://dengking.github.io/compiler-principle/Chapter-7-Run-Time-Environments/7.1-Storage-Organization/</loc>
-     <lastmod>2021-06-18</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://dengking.github.io/compiler-principle/Chapter-7-Run-Time-Environments/7.2-Stack-Allocation-of-Space/</loc>
-     <lastmod>2021-06-18</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://dengking.github.io/compiler-principle/Chapter-7-Run-Time-Environments/7.3-Access-to-Non-local-Data-on-the-Stack/</loc>
-     <lastmod>2021-06-18</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://dengking.github.io/compiler-principle/Chapter-7-Run-Time-Environments/7.4-Heap-Management/</loc>
-     <lastmod>2021-06-18</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://dengking.github.io/compiler-principle/Chapter-9-Machine-Independent-Optimizations/</loc>
-     <lastmod>2021-06-18</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://dengking.github.io/compiler-principle/Compiler-optimizing/</loc>
-     <lastmod>2021-06-18</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://dengking.github.io/compiler-principle/Compiler-optimizing/Basic-block/</loc>
-     <lastmod>2021-06-18</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://dengking.github.io/compiler-principle/Compiler-optimizing/Static-single-assignment-form/</loc>
-     <lastmod>2021-06-18</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://dengking.github.io/compiler-principle/Compiler-optimizing/Control-flow-analysis/</loc>
-     <lastmod>2021-06-18</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://dengking.github.io/compiler-principle/Compiler-optimizing/Control-flow-analysis/Control-flow%26%26program-counter/</loc>
-     <lastmod>2021-06-18</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://dengking.github.io/compiler-principle/Compiler-optimizing/Control-flow-analysis/Control-flow-graph/</loc>
-     <lastmod>2021-06-18</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://dengking.github.io/compiler-principle/Compiler-optimizing/Data-flow-analysis/</loc>
-     <lastmod>2021-06-18</lastmod>
-     <changefreq>daily</changefreq>
-    </url><url>
-     <loc>https://dengking.github.io/compiler-principle/Compiler-optimizing/Inline/</loc>
-     <lastmod>2021-06-18</lastmod>
+     <loc>https://dengking.github.io/compiler-principle/Tools/Parser-generator/Lex%26yacc/</loc>
+     <lastmod>2021-07-20</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
      <loc>https://dengking.github.io/compiler-principle/Implementation/</loc>
-     <lastmod>2021-06-18</lastmod>
+     <lastmod>2021-07-20</lastmod>
      <changefreq>daily</changefreq>
     </url>
 </urlset>

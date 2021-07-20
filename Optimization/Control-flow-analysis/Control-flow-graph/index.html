@@ -1,0 +1,3873 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Project documentation with Markdown.">
+      
+      
+      
+        <meta name="author" content="DengKing">
+      
+      
+        <link rel="canonical" href="https://dengking.github.io/compiler-principle/Optimization/Control-flow-analysis/Control-flow-graph/">
+      
+      <link rel="shortcut icon" href="../../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-7.0.3">
+    
+    
+      
+        <title>Introduction - compiler-principle</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.1655a90d.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.7fa14f5b.min.css">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>:root{--md-text-font-family:"Roboto";--md-code-font-family:"Roboto Mono"}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="../../../css/extra.css">
+    
+    
+      
+        
+<script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga("create","UA-27795084-5","mkdocs.org"),ga("set","anonymizeIp",!0),ga("send","pageview"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){var e;this.value&&(e=document.location.pathname,ga("send","pageview",e+"?q="+this.value))}),"undefined"!=typeof location$&&location$.subscribe(function(e){ga("send","pageview",e.pathname)})})</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
+      
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#control-flow#graph" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="https://dengking.github.io/compiler-principle" title="compiler-principle" class="md-header__button md-logo" aria-label="compiler-principle">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            compiler-principle
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Introduction
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="md-header__options">
+      
+    </div>
+    
+      <label class="md-header__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header__source">
+        
+<a href="https://github.com/dengking/compiler-principle" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="https://dengking.github.io/compiler-principle" title="compiler-principle" class="md-nav__button md-logo" aria-label="compiler-principle">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+
+    </a>
+    compiler-principle
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/dengking/compiler-principle" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M439.55 236.05L244 40.45a28.87 28.87 0 0 0-40.81 0l-40.66 40.63 51.52 51.52c27.06-9.14 52.68 16.77 43.39 43.68l49.66 49.66c34.23-11.8 61.18 31 35.47 56.69-26.49 26.49-70.21-2.87-56-37.34L240.22 199v121.85c25.3 12.54 22.26 41.85 9.08 55a34.34 34.34 0 0 1-48.55 0c-17.57-17.6-11.07-46.91 11.25-56v-123c-20.8-8.51-24.6-30.74-18.64-45L142.57 101 8.45 235.14a28.86 28.86 0 0 0 0 40.81l195.61 195.6a28.86 28.86 0 0 0 40.8 0l194.69-194.69a28.86 28.86 0 0 0 0-40.81z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    GitHub
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../.." class="md-nav__link">
+        Home
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2" type="checkbox" id="__nav_2" >
+      
+      <label class="md-nav__link" for="__nav_2">
+        1-Introduction
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="1-Introduction" data-md-level="1">
+        <label class="md-nav__title" for="__nav_2">
+          <span class="md-nav__icon md-icon"></span>
+          1-Introduction
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../1-Introduction/" class="md-nav__link">
+        1
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_2" type="checkbox" id="__nav_2_2" >
+      
+      <label class="md-nav__link" for="__nav_2_2">
+        1.1-Language-Processors.md
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="1.1-Language-Processors.md" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_2">
+          <span class="md-nav__icon md-icon"></span>
+          1.1-Language-Processors.md
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../1-Introduction/1.1-Language-Processors/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_3" type="checkbox" id="__nav_2_3" >
+      
+      <label class="md-nav__link" for="__nav_2_3">
+        1.2-The-Structure-of-a-Compiler.md
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="1.2-The-Structure-of-a-Compiler.md" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_3">
+          <span class="md-nav__icon md-icon"></span>
+          1.2-The-Structure-of-a-Compiler.md
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../1-Introduction/1.2-The-Structure-of-a-Compiler/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_4" type="checkbox" id="__nav_2_4" >
+      
+      <label class="md-nav__link" for="__nav_2_4">
+        1.5-Applications-of-Compiler-Technology.md
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="1.5-Applications-of-Compiler-Technology.md" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_4">
+          <span class="md-nav__icon md-icon"></span>
+          1.5-Applications-of-Compiler-Technology.md
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../1-Introduction/1.5-Applications-of-Compiler-Technology/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_2_5" type="checkbox" id="__nav_2_5" >
+      
+      <label class="md-nav__link" for="__nav_2_5">
+        1.6-Programming-Language-Basics.md
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="1.6-Programming-Language-Basics.md" data-md-level="2">
+        <label class="md-nav__title" for="__nav_2_5">
+          <span class="md-nav__icon md-icon"></span>
+          1.6-Programming-Language-Basics.md
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../1-Introduction/1.6-Programming-Language-Basics/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" >
+      
+      <label class="md-nav__link" for="__nav_3">
+        2-A-Simple-Syntax-Directed-Translator
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="2-A-Simple-Syntax-Directed-Translator" data-md-level="1">
+        <label class="md-nav__title" for="__nav_3">
+          <span class="md-nav__icon md-icon"></span>
+          2-A-Simple-Syntax-Directed-Translator
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../2-A-Simple-Syntax-Directed-Translator/" class="md-nav__link">
+        2
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_2" type="checkbox" id="__nav_3_2" >
+      
+      <label class="md-nav__link" for="__nav_3_2">
+        2.1-Introduction
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="2.1-Introduction" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_2">
+          <span class="md-nav__icon md-icon"></span>
+          2.1-Introduction
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../2-A-Simple-Syntax-Directed-Translator/2.1-Introduction/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_3" type="checkbox" id="__nav_3_3" >
+      
+      <label class="md-nav__link" for="__nav_3_3">
+        2.2-Syntax-Definition
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="2.2-Syntax-Definition" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_3">
+          <span class="md-nav__icon md-icon"></span>
+          2.2-Syntax-Definition
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../2-A-Simple-Syntax-Directed-Translator/2.2-Syntax-Definition/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_4" type="checkbox" id="__nav_3_4" >
+      
+      <label class="md-nav__link" for="__nav_3_4">
+        2.3-Syntax-Directed-Translation
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="2.3-Syntax-Directed-Translation" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_4">
+          <span class="md-nav__icon md-icon"></span>
+          2.3-Syntax-Directed-Translation
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../2-A-Simple-Syntax-Directed-Translator/2.3-Syntax-Directed-Translation/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_5" type="checkbox" id="__nav_3_5" >
+      
+      <label class="md-nav__link" for="__nav_3_5">
+        2.4-Parsing
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="2.4-Parsing" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_5">
+          <span class="md-nav__icon md-icon"></span>
+          2.4-Parsing
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../2-A-Simple-Syntax-Directed-Translator/2.4-Parsing/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3_6" type="checkbox" id="__nav_3_6" >
+      
+      <label class="md-nav__link" for="__nav_3_6">
+        2.7-Symbol-Tables
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="2.7-Symbol-Tables" data-md-level="2">
+        <label class="md-nav__title" for="__nav_3_6">
+          <span class="md-nav__icon md-icon"></span>
+          2.7-Symbol-Tables
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../2-A-Simple-Syntax-Directed-Translator/2.7-Symbol-Tables/" class="md-nav__link">
+        2.7-Symbol-Tables
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../2-A-Simple-Syntax-Directed-Translator/2.7-Symbol-Tables/Symbol-table/" class="md-nav__link">
+        Symbol-table
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" >
+      
+      <label class="md-nav__link" for="__nav_4">
+        3-Lexical-Analysis
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="3-Lexical-Analysis" data-md-level="1">
+        <label class="md-nav__title" for="__nav_4">
+          <span class="md-nav__icon md-icon"></span>
+          3-Lexical-Analysis
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../3-Lexical-Analysis/" class="md-nav__link">
+        3
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_2" type="checkbox" id="__nav_4_2" >
+      
+      <label class="md-nav__link" for="__nav_4_2">
+        3.1-The-Role-of-the-Lexical-Analyzer
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="3.1-The-Role-of-the-Lexical-Analyzer" data-md-level="2">
+        <label class="md-nav__title" for="__nav_4_2">
+          <span class="md-nav__icon md-icon"></span>
+          3.1-The-Role-of-the-Lexical-Analyzer
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../3-Lexical-Analysis/3.1-The-Role-of-the-Lexical-Analyzer/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_3" type="checkbox" id="__nav_4_3" >
+      
+      <label class="md-nav__link" for="__nav_4_3">
+        3.4-Recognition-of-Tokens
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="3.4-Recognition-of-Tokens" data-md-level="2">
+        <label class="md-nav__title" for="__nav_4_3">
+          <span class="md-nav__icon md-icon"></span>
+          3.4-Recognition-of-Tokens
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../3-Lexical-Analysis/3.4-Recognition-of-Tokens/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_4" type="checkbox" id="__nav_4_4" >
+      
+      <label class="md-nav__link" for="__nav_4_4">
+        3.6-Finite-Automata
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="3.6-Finite-Automata" data-md-level="2">
+        <label class="md-nav__title" for="__nav_4_4">
+          <span class="md-nav__icon md-icon"></span>
+          3.6-Finite-Automata
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../3-Lexical-Analysis/3.6-Finite-Automata/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4_5" type="checkbox" id="__nav_4_5" >
+      
+      <label class="md-nav__link" for="__nav_4_5">
+        3.7-From-Regular-Expressions-to-Automata
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="3.7-From-Regular-Expressions-to-Automata" data-md-level="2">
+        <label class="md-nav__title" for="__nav_4_5">
+          <span class="md-nav__icon md-icon"></span>
+          3.7-From-Regular-Expressions-to-Automata
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../3-Lexical-Analysis/3.7-From-Regular-Expressions-to-Automata/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5" type="checkbox" id="__nav_5" >
+      
+      <label class="md-nav__link" for="__nav_5">
+        4-Syntax-Analysis
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="4-Syntax-Analysis" data-md-level="1">
+        <label class="md-nav__title" for="__nav_5">
+          <span class="md-nav__icon md-icon"></span>
+          4-Syntax-Analysis
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../4-Syntax-Analysis/" class="md-nav__link">
+        4
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_2" type="checkbox" id="__nav_5_2" >
+      
+      <label class="md-nav__link" for="__nav_5_2">
+        4.2-Context-Free-Grammars
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="4.2-Context-Free-Grammars" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_2">
+          <span class="md-nav__icon md-icon"></span>
+          4.2-Context-Free-Grammars
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../4-Syntax-Analysis/4.2-Context-Free-Grammars/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_3" type="checkbox" id="__nav_5_3" >
+      
+      <label class="md-nav__link" for="__nav_5_3">
+        4.3-Writing-a-Grammar
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="4.3-Writing-a-Grammar" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_3">
+          <span class="md-nav__icon md-icon"></span>
+          4.3-Writing-a-Grammar
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../4-Syntax-Analysis/4.3-Writing-a-Grammar/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_4" type="checkbox" id="__nav_5_4" >
+      
+      <label class="md-nav__link" for="__nav_5_4">
+        4.5-Bottom-Up-Parsing
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="4.5-Bottom-Up-Parsing" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_4">
+          <span class="md-nav__icon md-icon"></span>
+          4.5-Bottom-Up-Parsing
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../4-Syntax-Analysis/4.5-Bottom-Up-Parsing/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_5" type="checkbox" id="__nav_5_5" >
+      
+      <label class="md-nav__link" for="__nav_5_5">
+        4.6-Introduction-to-LR-Parsing-Simple-LR
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="4.6-Introduction-to-LR-Parsing-Simple-LR" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_5">
+          <span class="md-nav__icon md-icon"></span>
+          4.6-Introduction-to-LR-Parsing-Simple-LR
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../4-Syntax-Analysis/4.6-Introduction-to-LR-Parsing-Simple-LR/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_5_6" type="checkbox" id="__nav_5_6" >
+      
+      <label class="md-nav__link" for="__nav_5_6">
+        4.7-More-Powerful-LR-Parsers
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="4.7-More-Powerful-LR-Parsers" data-md-level="2">
+        <label class="md-nav__title" for="__nav_5_6">
+          <span class="md-nav__icon md-icon"></span>
+          4.7-More-Powerful-LR-Parsers
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../4-Syntax-Analysis/4.7-More-Powerful-LR-Parsers/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_6" type="checkbox" id="__nav_6" >
+      
+      <label class="md-nav__link" for="__nav_6">
+        5-Syntax-Directed-Translation
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="5-Syntax-Directed-Translation" data-md-level="1">
+        <label class="md-nav__title" for="__nav_6">
+          <span class="md-nav__icon md-icon"></span>
+          5-Syntax-Directed-Translation
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../5-Syntax-Directed-Translation/" class="md-nav__link">
+        5
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../5-Syntax-Directed-Translation/5.1-Syntax-Directed-Definitions/" class="md-nav__link">
+        5.1-Syntax-Directed-Definitions
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../5-Syntax-Directed-Translation/5.2-Evaluation-Orders-for-SDD%27s/" class="md-nav__link">
+        5.2-Evaluation-Orders-for-SDD's
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../5-Syntax-Directed-Translation/5.3-Applications-of-Syntax-Directed-Translation/" class="md-nav__link">
+        5.3-Applications-of-Syntax-Directed-Translation
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../5-Syntax-Directed-Translation/wikipedia-Syntax-directed-translation/" class="md-nav__link">
+        wikipedia-Syntax-directed-translation
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7" type="checkbox" id="__nav_7" >
+      
+      <label class="md-nav__link" for="__nav_7">
+        6-Intermediate-Code-Generation
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="6-Intermediate-Code-Generation" data-md-level="1">
+        <label class="md-nav__title" for="__nav_7">
+          <span class="md-nav__icon md-icon"></span>
+          6-Intermediate-Code-Generation
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../6-Intermediate-Code-Generation/" class="md-nav__link">
+        6
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_7_2" type="checkbox" id="__nav_7_2" >
+      
+      <label class="md-nav__link" for="__nav_7_2">
+        6.3-Types-and-Declarations
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="6.3-Types-and-Declarations" data-md-level="2">
+        <label class="md-nav__title" for="__nav_7_2">
+          <span class="md-nav__icon md-icon"></span>
+          6.3-Types-and-Declarations
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../6-Intermediate-Code-Generation/6.3-Types-and-Declarations/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_8" type="checkbox" id="__nav_8" >
+      
+      <label class="md-nav__link" for="__nav_8">
+        7-Run-Time-Environments
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="7-Run-Time-Environments" data-md-level="1">
+        <label class="md-nav__title" for="__nav_8">
+          <span class="md-nav__icon md-icon"></span>
+          7-Run-Time-Environments
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../7-Run-Time-Environments/" class="md-nav__link">
+        7
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../7-Run-Time-Environments/7.1-Storage-Organization/" class="md-nav__link">
+        7.1-Storage-Organization
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../7-Run-Time-Environments/7.2-Stack-Allocation-of-Space/" class="md-nav__link">
+        7.2-Stack-Allocation-of-Space
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../7-Run-Time-Environments/7.3-Access-to-Non-local-Data-on-the-Stack/" class="md-nav__link">
+        7.3-Access-to-Non-local-Data-on-the-Stack
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../7-Run-Time-Environments/7.4-Heap-Management/" class="md-nav__link">
+        7.4-Heap-Management
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_9" type="checkbox" id="__nav_9" >
+      
+      <label class="md-nav__link" for="__nav_9">
+        9-Machine-Independent-Optimizations
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="9-Machine-Independent-Optimizations" data-md-level="1">
+        <label class="md-nav__title" for="__nav_9">
+          <span class="md-nav__icon md-icon"></span>
+          9-Machine-Independent-Optimizations
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../9-Machine-Independent-Optimizations/" class="md-nav__link">
+        9
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_10" type="checkbox" id="__nav_10" >
+      
+      <label class="md-nav__link" for="__nav_10">
+        Guide
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Guide" data-md-level="1">
+        <label class="md-nav__title" for="__nav_10">
+          <span class="md-nav__icon md-icon"></span>
+          Guide
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Guide/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_10_2" type="checkbox" id="__nav_10_2" >
+      
+      <label class="md-nav__link" for="__nav_10_2">
+        Parse-tree&syntax-tree
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Parse-tree&syntax-tree" data-md-level="2">
+        <label class="md-nav__title" for="__nav_10_2">
+          <span class="md-nav__icon md-icon"></span>
+          Parse-tree&syntax-tree
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Guide/Parse-tree%26syntax-tree/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_10_2_2" type="checkbox" id="__nav_10_2_2" >
+      
+      <label class="md-nav__link" for="__nav_10_2_2">
+        Parse-tree
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Parse-tree" data-md-level="3">
+        <label class="md-nav__title" for="__nav_10_2_2">
+          <span class="md-nav__icon md-icon"></span>
+          Parse-tree
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Guide/Parse-tree%26syntax-tree/Parse-tree/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_10_2_3" type="checkbox" id="__nav_10_2_3" >
+      
+      <label class="md-nav__link" for="__nav_10_2_3">
+        Abstract-syntax-tree
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Abstract-syntax-tree" data-md-level="3">
+        <label class="md-nav__title" for="__nav_10_2_3">
+          <span class="md-nav__icon md-icon"></span>
+          Abstract-syntax-tree
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Guide/Parse-tree%26syntax-tree/Abstract-syntax-tree/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_10_2_4" type="checkbox" id="__nav_10_2_4" >
+      
+      <label class="md-nav__link" for="__nav_10_2_4">
+        Abstract-syntax-tree-VS-parse-tree
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Abstract-syntax-tree-VS-parse-tree" data-md-level="3">
+        <label class="md-nav__title" for="__nav_10_2_4">
+          <span class="md-nav__icon md-icon"></span>
+          Abstract-syntax-tree-VS-parse-tree
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Guide/Parse-tree%26syntax-tree/Abstract-syntax-tree-VS-parse-tree/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_10_2_5" type="checkbox" id="__nav_10_2_5" >
+      
+      <label class="md-nav__link" for="__nav_10_2_5">
+        Parse-tree-to-AST
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Parse-tree-to-AST" data-md-level="3">
+        <label class="md-nav__title" for="__nav_10_2_5">
+          <span class="md-nav__icon md-icon"></span>
+          Parse-tree-to-AST
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Guide/Parse-tree%26syntax-tree/Parse-tree-to-AST/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_10_3" type="checkbox" id="__nav_10_3" >
+      
+      <label class="md-nav__link" for="__nav_10_3">
+        Parsing-algorithm
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Parsing-algorithm" data-md-level="2">
+        <label class="md-nav__title" for="__nav_10_3">
+          <span class="md-nav__icon md-icon"></span>
+          Parsing-algorithm
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Guide/Parsing-algorithm/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_10_3_2" type="checkbox" id="__nav_10_3_2" >
+      
+      <label class="md-nav__link" for="__nav_10_3_2">
+        Top-down
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Top-down" data-md-level="3">
+        <label class="md-nav__title" for="__nav_10_3_2">
+          <span class="md-nav__icon md-icon"></span>
+          Top-down
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Guide/Parsing-algorithm/Top-down/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_10_3_2_2" type="checkbox" id="__nav_10_3_2_2" >
+      
+      <label class="md-nav__link" for="__nav_10_3_2_2">
+        Recursive-descent-parser
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Recursive-descent-parser" data-md-level="4">
+        <label class="md-nav__title" for="__nav_10_3_2_2">
+          <span class="md-nav__icon md-icon"></span>
+          Recursive-descent-parser
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Guide/Parsing-algorithm/Top-down/Recursive-descent-parser/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_10_3_2_3" type="checkbox" id="__nav_10_3_2_3" >
+      
+      <label class="md-nav__link" for="__nav_10_3_2_3">
+        LL-parser
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="LL-parser" data-md-level="4">
+        <label class="md-nav__title" for="__nav_10_3_2_3">
+          <span class="md-nav__icon md-icon"></span>
+          LL-parser
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Guide/Parsing-algorithm/Top-down/LL-parser/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_10_3_2_3_2" type="checkbox" id="__nav_10_3_2_3_2" >
+      
+      <label class="md-nav__link" for="__nav_10_3_2_3_2">
+        andrewbegel-LL(1)-Parsing
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="andrewbegel-LL(1)-Parsing" data-md-level="5">
+        <label class="md-nav__title" for="__nav_10_3_2_3_2">
+          <span class="md-nav__icon md-icon"></span>
+          andrewbegel-LL(1)-Parsing
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Guide/Parsing-algorithm/Top-down/LL-parser/andrewbegel-LL%281%29-Parsing/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_10_3_3" type="checkbox" id="__nav_10_3_3" >
+      
+      <label class="md-nav__link" for="__nav_10_3_3">
+        Bottom-up
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Bottom-up" data-md-level="3">
+        <label class="md-nav__title" for="__nav_10_3_3">
+          <span class="md-nav__icon md-icon"></span>
+          Bottom-up
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Guide/Parsing-algorithm/Bottom-up/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_10_3_3_2" type="checkbox" id="__nav_10_3_3_2" >
+      
+      <label class="md-nav__link" for="__nav_10_3_3_2">
+        LR-parser
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="LR-parser" data-md-level="4">
+        <label class="md-nav__title" for="__nav_10_3_3_2">
+          <span class="md-nav__icon md-icon"></span>
+          LR-parser
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Guide/Parsing-algorithm/Bottom-up/LR-parser/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_10_3_3_3" type="checkbox" id="__nav_10_3_3_3" >
+      
+      <label class="md-nav__link" for="__nav_10_3_3_3">
+        CYK-algorithm
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="CYK-algorithm" data-md-level="4">
+        <label class="md-nav__title" for="__nav_10_3_3_3">
+          <span class="md-nav__icon md-icon"></span>
+          CYK-algorithm
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Guide/Parsing-algorithm/Bottom-up/CYK-algorithm/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_10_3_4" type="checkbox" id="__nav_10_3_4" >
+      
+      <label class="md-nav__link" for="__nav_10_3_4">
+        LL-VS-LR-parser
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="LL-VS-LR-parser" data-md-level="3">
+        <label class="md-nav__title" for="__nav_10_3_4">
+          <span class="md-nav__icon md-icon"></span>
+          LL-VS-LR-parser
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Guide/Parsing-algorithm/LL-VS-LR-parser/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_10_3_5" type="checkbox" id="__nav_10_3_5" >
+      
+      <label class="md-nav__link" for="__nav_10_3_5">
+        Others
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Others" data-md-level="3">
+        <label class="md-nav__title" for="__nav_10_3_5">
+          <span class="md-nav__icon md-icon"></span>
+          Others
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Guide/Parsing-algorithm/Others/Chart-parser/" class="md-nav__link">
+        Chart-parser
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Guide/Parsing-algorithm/Others/Earley-parser/" class="md-nav__link">
+        Earley-parser
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_10_4" type="checkbox" id="__nav_10_4" >
+      
+      <label class="md-nav__link" for="__nav_10_4">
+        Expression-tree
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Expression-tree" data-md-level="2">
+        <label class="md-nav__title" for="__nav_10_4">
+          <span class="md-nav__icon md-icon"></span>
+          Expression-tree
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Guide/Expression-tree/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_10_4_2" type="checkbox" id="__nav_10_4_2" >
+      
+      <label class="md-nav__link" for="__nav_10_4_2">
+        Prefix-Infix-Postfix
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Prefix-Infix-Postfix" data-md-level="3">
+        <label class="md-nav__title" for="__nav_10_4_2">
+          <span class="md-nav__icon md-icon"></span>
+          Prefix-Infix-Postfix
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Guide/Expression-tree/Prefix-Infix-Postfix/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_10_4_2_2" type="checkbox" id="__nav_10_4_2_2" >
+      
+      <label class="md-nav__link" for="__nav_10_4_2_2">
+        Infix-notation
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Infix-notation" data-md-level="4">
+        <label class="md-nav__title" for="__nav_10_4_2_2">
+          <span class="md-nav__icon md-icon"></span>
+          Infix-notation
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Guide/Expression-tree/Prefix-Infix-Postfix/Infix-notation/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_10_4_2_3" type="checkbox" id="__nav_10_4_2_3" >
+      
+      <label class="md-nav__link" for="__nav_10_4_2_3">
+        Polish-prefix-notation
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Polish-prefix-notation" data-md-level="4">
+        <label class="md-nav__title" for="__nav_10_4_2_3">
+          <span class="md-nav__icon md-icon"></span>
+          Polish-prefix-notation
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Guide/Expression-tree/Prefix-Infix-Postfix/Polish-prefix-notation/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_10_4_2_4" type="checkbox" id="__nav_10_4_2_4" >
+      
+      <label class="md-nav__link" for="__nav_10_4_2_4">
+        Reverse-Polish-postfix-notation
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Reverse-Polish-postfix-notation" data-md-level="4">
+        <label class="md-nav__title" for="__nav_10_4_2_4">
+          <span class="md-nav__icon md-icon"></span>
+          Reverse-Polish-postfix-notation
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Guide/Expression-tree/Prefix-Infix-Postfix/Reverse-Polish-postfix-notation/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_10_4_2_5" type="checkbox" id="__nav_10_4_2_5" >
+      
+      <label class="md-nav__link" for="__nav_10_4_2_5">
+        Infix-to-postfix
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Infix-to-postfix" data-md-level="4">
+        <label class="md-nav__title" for="__nav_10_4_2_5">
+          <span class="md-nav__icon md-icon"></span>
+          Infix-to-postfix
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Guide/Expression-tree/Prefix-Infix-Postfix/Infix-to-postfix/index.md" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_10_4_2_5_2" type="checkbox" id="__nav_10_4_2_5_2" >
+      
+      <label class="md-nav__link" for="__nav_10_4_2_5_2">
+        Shunting-yard-algorithm
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Shunting-yard-algorithm" data-md-level="5">
+        <label class="md-nav__title" for="__nav_10_4_2_5_2">
+          <span class="md-nav__icon md-icon"></span>
+          Shunting-yard-algorithm
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Guide/Expression-tree/Prefix-Infix-Postfix/Infix-to-postfix/Shunting-yard-algorithm/index.md" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_10_4_2_6" type="checkbox" id="__nav_10_4_2_6" >
+      
+      <label class="md-nav__link" for="__nav_10_4_2_6">
+        Postfix-to-Prefix
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Postfix-to-Prefix" data-md-level="4">
+        <label class="md-nav__title" for="__nav_10_4_2_6">
+          <span class="md-nav__icon md-icon"></span>
+          Postfix-to-Prefix
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Guide/Expression-tree/Prefix-Infix-Postfix/Postfix-to-Prefix/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_10_4_2_6_2" type="checkbox" id="__nav_10_4_2_6_2" >
+      
+      <label class="md-nav__link" for="__nav_10_4_2_6_2">
+        geeksforgeeks-Postfix-to-Prefix-Conversion
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="geeksforgeeks-Postfix-to-Prefix-Conversion" data-md-level="5">
+        <label class="md-nav__title" for="__nav_10_4_2_6_2">
+          <span class="md-nav__icon md-icon"></span>
+          geeksforgeeks-Postfix-to-Prefix-Conversion
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Guide/Expression-tree/Prefix-Infix-Postfix/Postfix-to-Prefix/geeksforgeeks-Postfix-to-Prefix-Conversion/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_10_4_2_7" type="checkbox" id="__nav_10_4_2_7" >
+      
+      <label class="md-nav__link" for="__nav_10_4_2_7">
+        Prefix-to-Infix
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Prefix-to-Infix" data-md-level="4">
+        <label class="md-nav__title" for="__nav_10_4_2_7">
+          <span class="md-nav__icon md-icon"></span>
+          Prefix-to-Infix
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Guide/Expression-tree/Prefix-Infix-Postfix/Prefix-to-Infix/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_10_4_2_7_2" type="checkbox" id="__nav_10_4_2_7_2" >
+      
+      <label class="md-nav__link" for="__nav_10_4_2_7_2">
+        geeksforgeeks-Prefix-to-Infix-Conversion
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="geeksforgeeks-Prefix-to-Infix-Conversion" data-md-level="5">
+        <label class="md-nav__title" for="__nav_10_4_2_7_2">
+          <span class="md-nav__icon md-icon"></span>
+          geeksforgeeks-Prefix-to-Infix-Conversion
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Guide/Expression-tree/Prefix-Infix-Postfix/Prefix-to-Infix/geeksforgeeks-Prefix-to-Infix-Conversion/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_10_4_3" type="checkbox" id="__nav_10_4_3" >
+      
+      <label class="md-nav__link" for="__nav_10_4_3">
+        Build-evaluate-expression-tree
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Build-evaluate-expression-tree" data-md-level="3">
+        <label class="md-nav__title" for="__nav_10_4_3">
+          <span class="md-nav__icon md-icon"></span>
+          Build-evaluate-expression-tree
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Guide/Expression-tree/Build-evaluate-expression-tree/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_10_4_4" type="checkbox" id="__nav_10_4_4" >
+      
+      <label class="md-nav__link" for="__nav_10_4_4">
+        geeksforgeeks-Expression-Tree
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="geeksforgeeks-Expression-Tree" data-md-level="3">
+        <label class="md-nav__title" for="__nav_10_4_4">
+          <span class="md-nav__icon md-icon"></span>
+          geeksforgeeks-Expression-Tree
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Guide/Expression-tree/geeksforgeeks-Expression-Tree/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_10_4_4_2" type="checkbox" id="__nav_10_4_4_2" >
+      
+      <label class="md-nav__link" for="__nav_10_4_4_2">
+        Expression-Tree
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Expression-Tree" data-md-level="4">
+        <label class="md-nav__title" for="__nav_10_4_4_2">
+          <span class="md-nav__icon md-icon"></span>
+          Expression-Tree
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Guide/Expression-tree/geeksforgeeks-Expression-Tree/Expression-Tree/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_10_4_4_3" type="checkbox" id="__nav_10_4_4_3" >
+      
+      <label class="md-nav__link" for="__nav_10_4_4_3">
+        Building-Expression-tree-from-Prefix-Expression
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Building-Expression-tree-from-Prefix-Expression" data-md-level="4">
+        <label class="md-nav__title" for="__nav_10_4_4_3">
+          <span class="md-nav__icon md-icon"></span>
+          Building-Expression-tree-from-Prefix-Expression
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Guide/Expression-tree/geeksforgeeks-Expression-Tree/Building-Expression-tree-from-Prefix-Expression/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_10_4_4_4" type="checkbox" id="__nav_10_4_4_4" >
+      
+      <label class="md-nav__link" for="__nav_10_4_4_4">
+        Evaluation-of-Expression-Tree
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Evaluation-of-Expression-Tree" data-md-level="4">
+        <label class="md-nav__title" for="__nav_10_4_4_4">
+          <span class="md-nav__icon md-icon"></span>
+          Evaluation-of-Expression-Tree
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Guide/Expression-tree/geeksforgeeks-Expression-Tree/Evaluation-of-Expression-Tree/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_10_4_4_5" type="checkbox" id="__nav_10_4_4_5" >
+      
+      <label class="md-nav__link" for="__nav_10_4_4_5">
+        Program-to-convert-Infix-notation-to-Expression-Tree
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Program-to-convert-Infix-notation-to-Expression-Tree" data-md-level="4">
+        <label class="md-nav__title" for="__nav_10_4_4_5">
+          <span class="md-nav__icon md-icon"></span>
+          Program-to-convert-Infix-notation-to-Expression-Tree
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Guide/Expression-tree/geeksforgeeks-Expression-Tree/Program-to-convert-Infix-notation-to-Expression-Tree/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_10_4_4_6" type="checkbox" id="__nav_10_4_4_6" >
+      
+      <label class="md-nav__link" for="__nav_10_4_4_6">
+        Convert-ternary-expression-to-Binary-Tree
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Convert-ternary-expression-to-Binary-Tree" data-md-level="4">
+        <label class="md-nav__title" for="__nav_10_4_4_6">
+          <span class="md-nav__icon md-icon"></span>
+          Convert-ternary-expression-to-Binary-Tree
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Guide/Expression-tree/geeksforgeeks-Expression-Tree/Convert-ternary-expression-to-Binary-Tree/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_10_4_5" type="checkbox" id="__nav_10_4_5" >
+      
+      <label class="md-nav__link" for="__nav_10_4_5">
+        LeetCode
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="LeetCode" data-md-level="3">
+        <label class="md-nav__title" for="__nav_10_4_5">
+          <span class="md-nav__icon md-icon"></span>
+          LeetCode
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Guide/Expression-tree/LeetCode/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_10_4_5_2" type="checkbox" id="__nav_10_4_5_2" >
+      
+      <label class="md-nav__link" for="__nav_10_4_5_2">
+        LeetCode-150-逆波兰表达式求值
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="LeetCode-150-逆波兰表达式求值" data-md-level="4">
+        <label class="md-nav__title" for="__nav_10_4_5_2">
+          <span class="md-nav__icon md-icon"></span>
+          LeetCode-150-逆波兰表达式求值
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Guide/Expression-tree/LeetCode/LeetCode-150-%E9%80%86%E6%B3%A2%E5%85%B0%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%B1%82%E5%80%BC/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_10_4_6" type="checkbox" id="__nav_10_4_6" >
+      
+      <label class="md-nav__link" for="__nav_10_4_6">
+        Mathematical-Expression-Parsing
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Mathematical-Expression-Parsing" data-md-level="3">
+        <label class="md-nav__title" for="__nav_10_4_6">
+          <span class="md-nav__icon md-icon"></span>
+          Mathematical-Expression-Parsing
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Guide/Expression-tree/Mathematical-Expression-Parsing/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_10_4_6_2" type="checkbox" id="__nav_10_4_6_2" >
+      
+      <label class="md-nav__link" for="__nav_10_4_6_2">
+        Operator-precedence-parser
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Operator-precedence-parser" data-md-level="4">
+        <label class="md-nav__title" for="__nav_10_4_6_2">
+          <span class="md-nav__icon md-icon"></span>
+          Operator-precedence-parser
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Guide/Expression-tree/Mathematical-Expression-Parsing/Operator-precedence-parser/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_10_5" type="checkbox" id="__nav_10_5" >
+      
+      <label class="md-nav__link" for="__nav_10_5">
+        Name-binding
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Name-binding" data-md-level="2">
+        <label class="md-nav__title" for="__nav_10_5">
+          <span class="md-nav__icon md-icon"></span>
+          Name-binding
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Guide/Name-binding/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_10_6" type="checkbox" id="__nav_10_6" >
+      
+      <label class="md-nav__link" for="__nav_10_6">
+        Semantic-analysis
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Semantic-analysis" data-md-level="2">
+        <label class="md-nav__title" for="__nav_10_6">
+          <span class="md-nav__icon md-icon"></span>
+          Semantic-analysis
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Guide/Semantic-analysis/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_10_6_2" type="checkbox" id="__nav_10_6_2" >
+      
+      <label class="md-nav__link" for="__nav_10_6_2">
+        Formal-semantic
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Formal-semantic" data-md-level="3">
+        <label class="md-nav__title" for="__nav_10_6_2">
+          <span class="md-nav__icon md-icon"></span>
+          Formal-semantic
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Guide/Semantic-analysis/Formal-semantic/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_10_7" type="checkbox" id="__nav_10_7" >
+      
+      <label class="md-nav__link" for="__nav_10_7">
+        Program-transformation
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Program-transformation" data-md-level="2">
+        <label class="md-nav__title" for="__nav_10_7">
+          <span class="md-nav__icon md-icon"></span>
+          Program-transformation
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Guide/Program-transformation/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_10_7_2" type="checkbox" id="__nav_10_7_2" >
+      
+      <label class="md-nav__link" for="__nav_10_7_2">
+        DMS-Software-Reengineering-Toolkit
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="DMS-Software-Reengineering-Toolkit" data-md-level="3">
+        <label class="md-nav__title" for="__nav_10_7_2">
+          <span class="md-nav__icon md-icon"></span>
+          DMS-Software-Reengineering-Toolkit
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Guide/Program-transformation/DMS-Software-Reengineering-Toolkit/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_11" type="checkbox" id="__nav_11" checked>
+      
+      <label class="md-nav__link" for="__nav_11">
+        Optimization
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Optimization" data-md-level="1">
+        <label class="md-nav__title" for="__nav_11">
+          <span class="md-nav__icon md-icon"></span>
+          Optimization
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_11_2" type="checkbox" id="__nav_11_2" >
+      
+      <label class="md-nav__link" for="__nav_11_2">
+        Basic-block
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Basic-block" data-md-level="2">
+        <label class="md-nav__title" for="__nav_11_2">
+          <span class="md-nav__icon md-icon"></span>
+          Basic-block
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Basic-block/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_11_3" type="checkbox" id="__nav_11_3" >
+      
+      <label class="md-nav__link" for="__nav_11_3">
+        Static-single-assignment-form
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Static-single-assignment-form" data-md-level="2">
+        <label class="md-nav__title" for="__nav_11_3">
+          <span class="md-nav__icon md-icon"></span>
+          Static-single-assignment-form
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Static-single-assignment-form/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_11_4" type="checkbox" id="__nav_11_4" checked>
+      
+      <label class="md-nav__link" for="__nav_11_4">
+        Control-flow-analysis
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Control-flow-analysis" data-md-level="2">
+        <label class="md-nav__title" for="__nav_11_4">
+          <span class="md-nav__icon md-icon"></span>
+          Control-flow-analysis
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_11_4_2" type="checkbox" id="__nav_11_4_2" >
+      
+      <label class="md-nav__link" for="__nav_11_4_2">
+        Control-flow&&program-counter
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Control-flow&&program-counter" data-md-level="3">
+        <label class="md-nav__title" for="__nav_11_4_2">
+          <span class="md-nav__icon md-icon"></span>
+          Control-flow&&program-counter
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../Control-flow%26%26program-counter/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+    
+  
+  
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_11_4_3" type="checkbox" id="__nav_11_4_3" checked>
+      
+      <label class="md-nav__link" for="__nav_11_4_3">
+        Control-flow-graph
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Control-flow-graph" data-md-level="3">
+        <label class="md-nav__title" for="__nav_11_4_3">
+          <span class="md-nav__icon md-icon"></span>
+          Control-flow-graph
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+    
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Introduction
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        Introduction
+      </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#definition" class="md-nav__link">
+    Definition
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reachability" class="md-nav__link">
+    Reachability
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#domination#relationship" class="md-nav__link">
+    Domination relationship
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#special#edges" class="md-nav__link">
+    Special edges
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#loop#management" class="md-nav__link">
+    Loop management
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reducibility" class="md-nav__link">
+    Reducibility
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#loop#connectedness" class="md-nav__link">
+    Loop connectedness
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_11_5" type="checkbox" id="__nav_11_5" >
+      
+      <label class="md-nav__link" for="__nav_11_5">
+        Data-flow-analysis
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Data-flow-analysis" data-md-level="2">
+        <label class="md-nav__title" for="__nav_11_5">
+          <span class="md-nav__icon md-icon"></span>
+          Data-flow-analysis
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Data-flow-analysis/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_11_6" type="checkbox" id="__nav_11_6" >
+      
+      <label class="md-nav__link" for="__nav_11_6">
+        Inline
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Inline" data-md-level="2">
+        <label class="md-nav__title" for="__nav_11_6">
+          <span class="md-nav__icon md-icon"></span>
+          Inline
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../Inline/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_12" type="checkbox" id="__nav_12" >
+      
+      <label class="md-nav__link" for="__nav_12">
+        Tools
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Tools" data-md-level="1">
+        <label class="md-nav__title" for="__nav_12">
+          <span class="md-nav__icon md-icon"></span>
+          Tools
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_12_1" type="checkbox" id="__nav_12_1" >
+      
+      <label class="md-nav__link" for="__nav_12_1">
+        Parser-generator
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Parser-generator" data-md-level="2">
+        <label class="md-nav__title" for="__nav_12_1">
+          <span class="md-nav__icon md-icon"></span>
+          Parser-generator
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Tools/Parser-generator/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+            
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_12_1_2" type="checkbox" id="__nav_12_1_2" >
+      
+      <label class="md-nav__link" for="__nav_12_1_2">
+        Lex&yacc
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Lex&yacc" data-md-level="3">
+        <label class="md-nav__title" for="__nav_12_1_2">
+          <span class="md-nav__icon md-icon"></span>
+          Lex&yacc
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Tools/Parser-generator/Lex%26yacc/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+      
+      
+      
+
+  
+  
+  
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+      
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_13" type="checkbox" id="__nav_13" >
+      
+      <label class="md-nav__link" for="__nav_13">
+        Implementation
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+      <nav class="md-nav" aria-label="Implementation" data-md-level="1">
+        <label class="md-nav__title" for="__nav_13">
+          <span class="md-nav__icon md-icon"></span>
+          Implementation
+        </label>
+        <ul class="md-nav__list" data-md-scrollfix>
+          
+            
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../../Implementation/" class="md-nav__link">
+        Introduction
+      </a>
+    </li>
+  
+
+          
+        </ul>
+      </nav>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#definition" class="md-nav__link">
+    Definition
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reachability" class="md-nav__link">
+    Reachability
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#domination#relationship" class="md-nav__link">
+    Domination relationship
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#special#edges" class="md-nav__link">
+    Special edges
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#loop#management" class="md-nav__link">
+    Loop management
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#reducibility" class="md-nav__link">
+    Reducibility
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#loop#connectedness" class="md-nav__link">
+    Loop connectedness
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content" data-md-component="content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                <div class="toc">
+<ul>
+<li><a href="#control-flow#graph">Control-flow graph</a><ul>
+<li><a href="#definition">Definition</a></li>
+<li><a href="#reachability">Reachability</a></li>
+<li><a href="#domination#relationship">Domination relationship</a></li>
+<li><a href="#special#edges">Special edges</a></li>
+<li><a href="#loop#management">Loop management</a></li>
+<li><a href="#reducibility">Reducibility</a></li>
+<li><a href="#loop#connectedness">Loop connectedness</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<h1 id="control-flow#graph"><a href="https://en.wikipedia.org/wiki/Control-flow_graph">Control-flow graph</a></h1>
+<p>In <a href="https://en.wikipedia.org/wiki/Computer_science">computer science</a>, a <strong>control-flow graph</strong> (<strong>CFG</strong>) is a <a href="https://en.wikipedia.org/wiki/Depiction">representation</a>, using <a href="https://en.wikipedia.org/wiki/Graph_(discrete_mathematics)">graph</a> notation, of all paths that might be traversed through a <a href="https://en.wikipedia.org/wiki/Computer_program">program</a> during its <a href="https://en.wikipedia.org/wiki/Execution_(computing)">execution</a>. The control-flow graph is due to <a href="https://en.wikipedia.org/wiki/Frances_E._Allen">Frances E. Allen</a>,[<a href="https://en.wikipedia.org/wiki/Control-flow_graph#cite_note-1">1]</a> who notes that <a href="https://en.wikipedia.org/wiki/Reese_Prosser">Reese T. Prosser</a> used <a href="https://en.wikipedia.org/wiki/Adjacency_matrix">boolean connectivity matrices</a> for flow analysis before.[<a href="https://en.wikipedia.org/wiki/Control-flow_graph#cite_note-2">2]</a></p>
+<p>The CFG is essential to many <a href="https://en.wikipedia.org/wiki/Compiler_optimization#Data-flow_optimizations">compiler optimizations</a> and <a href="https://en.wikipedia.org/wiki/Static_code_analysis">static-analysis</a> tools.</p>
+<h2 id="definition">Definition</h2>
+<p>In a <strong>control-flow graph</strong> each <a href="https://en.wikipedia.org/wiki/Vertex_(graph_theory)">node</a> in the <a href="https://en.wikipedia.org/wiki/Graph_(discrete_mathematics)">graph</a> represents a <a href="https://en.wikipedia.org/wiki/Basic_block">basic block</a>, i.e. a straight-line piece of code without any jumps or <a href="https://en.wikipedia.org/wiki/Jump_target_(computing)">jump targets</a>; jump targets start a block, and jumps end a block. Directed <a href="https://en.wikipedia.org/wiki/Edge_(graph_theory)">edges</a> are used to represent <strong>jumps</strong> in the <a href="https://en.wikipedia.org/wiki/Control_flow">control flow</a>. There are, in most presentations, two specially designated blocks: the <em>entry block</em>, through which control enters into the flow graph, and the <em>exit block</em>, through which all control flow leaves.[<a href="https://en.wikipedia.org/wiki/Control-flow_graph#cite_note-3">3]</a></p>
+<blockquote>
+<p>NOTE: 表示jump的关键字：</p>
+<ul>
+<li><code>break</code></li>
+<li><code>goto</code></li>
+</ul>
+</blockquote>
+<p>Because of its construction procedure, in a CFG, every edge A→B has the property that:</p>
+<p><a href="https://en.wikipedia.org/wiki/Outdegree">outdegree</a>(A) &gt; 1 or indegree(B) &gt; 1 (or both).</p>
+<p>The CFG can thus be obtained, at least conceptually, by starting from the program's (full) flow graph—i.e. the graph in which every node represents an individual instruction—and performing an <a href="https://en.wikipedia.org/wiki/Edge_contraction">edge contraction</a> for every edge that falsifies the predicate above, i.e. contracting every edge whose source has a single exit and whose destination has a single entry. This contraction-based algorithm is of no practical importance, except as a visualization aid for understanding the CFG construction, because the CFG can be more efficiently constructed directly from the program by <a href="https://en.wikipedia.org/wiki/Basic_block#Creation_algorithm">scanning it for basic blocks</a>.</p>
+<h2 id="reachability">Reachability</h2>
+<p>Main article: <a href="https://en.wikipedia.org/wiki/Reachability">Reachability</a></p>
+<p><a href="https://en.wikipedia.org/wiki/Reachability">Reachability</a> is a graph property useful in optimization.</p>
+<p>If a subgraph is not connected from the subgraph containing the entry block, that subgraph is unreachable during any execution, and so is <a href="https://en.wikipedia.org/wiki/Unreachable_code">unreachable code</a>; under normal conditions it can be safely removed.</p>
+<p>If the exit block is unreachable from the entry block, an <a href="https://en.wikipedia.org/wiki/Infinite_loop">infinite loop</a> may exist. Not all infinite loops are detectable, see <a href="https://en.wikipedia.org/wiki/Halting_problem">Halting problem</a>. A halting order may also exist there.</p>
+<p>Unreachable code and infinite loops are possible even if the programmer does not explicitly code them: optimizations like <a href="https://en.wikipedia.org/wiki/Constant_propagation">constant propagation</a> and <a href="https://en.wikipedia.org/wiki/Constant_folding">constant folding</a> followed by <a href="https://en.wikipedia.org/wiki/Jump_threading">jump threading</a> can collapse multiple basic blocks into one, cause edges to be removed from a CFG, etc., thus possibly disconnecting parts of the graph.</p>
+<h2 id="domination#relationship">Domination relationship</h2>
+<p><em>Main article:</em> <a href="https://en.wikipedia.org/wiki/Dominator_(graph_theory)">Dominator (graph theory)</a></p>
+<p>A block M <em><a href="https://en.wikipedia.org/wiki/Dominator_(graph_theory)">dominates</a></em> a block N if every path from the entry that reaches block N has to pass through block M. The entry block dominates all blocks.</p>
+<p>In the reverse direction, block M <em>postdominates</em> block N if every path from N to the exit has to pass through block M. The exit block postdominates all blocks.</p>
+<p>It is said that a block M <em>immediately dominates</em> block N if M dominates N, and there is no intervening block P such that M dominates P and P dominates N. In other words, M is the last dominator on all paths from entry to N. Each block has a unique immediate dominator.</p>
+<p>Similarly, there is a notion of <em>immediate postdominator</em>, analogous to <em>immediate dominator</em>.</p>
+<p>The <a href="https://en.wikipedia.org/wiki/Dominator_(graph_theory)"><em>dominator tree</em></a> is an ancillary data structure depicting the dominator relationships. There is an arc from Block M to Block N if M is an immediate dominator of N. This graph is a tree, since each block has a unique immediate dominator. This tree is rooted at the entry block. The dominator tree can be calculated efficiently using <a href="https://en.wikipedia.org/wiki/Lengauer–Tarjan's_algorithm">Lengauer–Tarjan's algorithm</a>.</p>
+<p>A <em>postdominator tree</em> is analogous to the <em>dominator tree</em>. This tree is rooted at the exit block.</p>
+<h2 id="special#edges">Special edges</h2>
+<p>A <em>back edge</em> is an edge that points to a block that has already been met during a depth-first (<a href="https://en.wikipedia.org/wiki/Depth-first_search">DFS</a>) traversal of the graph. Back edges are typical of loops.</p>
+<p>A <em>critical edge</em> is an edge which is neither the only edge leaving its source block, nor the only edge entering its destination block. These edges must be <em>split</em>: a new block must be created in the middle of the edge, in order to insert computations on the edge without affecting any other edges.</p>
+<p>An <em>abnormal edge</em> is an edge whose destination is unknown. <a href="https://en.wikipedia.org/wiki/Exception_handling">Exception handling</a> constructs can produce them. These edges tend to inhibit optimization.</p>
+<p>An <em>impossible edge</em> (also known as a <em>fake edge</em>) is an edge which has been added to the graph solely to preserve the property that the exit block postdominates all blocks. It cannot ever be traversed.</p>
+<h2 id="loop#management">Loop management</h2>
+<p>A <em>loop header</em> (sometimes called the <em>entry point</em> of the loop) is a dominator that is the target of a loop-forming back edge. The loop header dominates all blocks in the loop body. A block may be a loop header for more than one loop. A loop may have multiple entry points, in which case it has no "loop header".</p>
+<p>Suppose block M is a dominator with several incoming edges, some of them being back edges (so M is a loop header). It is advantageous to several optimization passes to break M up into two blocks Mpre and Mloop. The contents of M and back edges are moved to Mloop, the rest of the edges are moved to point into Mpre, and a new edge from Mpre to Mloop is inserted (so that Mpre is the immediate dominator of Mloop). In the beginning, Mpre would be empty, but passes like <a href="https://en.wikipedia.org/wiki/Loop-invariant_code_motion">loop-invariant code motion</a> could populate it. Mpre is called the <em>loop pre-header</em>, and Mloop would be the loop header.</p>
+<h2 id="reducibility">Reducibility</h2>
+<p>A reducible CFG is one with edges that can be partitioned into two disjoint sets: forward edges, and back edges, such that:[<a href="https://en.wikipedia.org/wiki/Control-flow_graph#cite_note-5">5]</a></p>
+<ul>
+<li>Forward edges form a <a href="https://en.wikipedia.org/wiki/Directed_acyclic_graph">directed acyclic graph</a> with all nodes reachable from the entry node.</li>
+<li>For all back edges (A, B), node B <a href="https://en.wikipedia.org/wiki/Dominator_(graph_theory)">dominates</a> node A.</li>
+</ul>
+<p><a href="https://en.wikipedia.org/wiki/Structured_programming">Structured programming</a> languages are often designed such that all CFGs they produce are reducible, and common structured programming statements such as IF, FOR, WHILE, BREAK, and CONTINUE produce reducible graphs. To produce irreducible graphs, statements such as <a href="https://en.wikipedia.org/wiki/GOTO">GOTO</a> are needed. Irreducible graphs may also be produced by some compiler optimizations.</p>
+<h2 id="loop#connectedness">Loop connectedness</h2>
+<p>The loop connectedness of a CFG is defined with respect to a given <a href="https://en.wikipedia.org/wiki/Depth-first_search">depth-first search</a> tree (DFST) of the CFG. This DFST should be rooted at the start node and cover every node of the CFG.</p>
+<p>Edges in the CFG which run from a node to one of its DFST ancestors (including itself) are called back edges.</p>
+<p>The loop connectedness is the largest number of back edges found in any cycle-free path of the CFG. In a reducible CFG, the loop connectedness is independent of the DFST chosen.[<a href="https://en.wikipedia.org/wiki/Control-flow_graph#cite_note-:0-6">6]</a>[<a href="https://en.wikipedia.org/wiki/Control-flow_graph#cite_note-7">7]</a></p>
+<p>Loop connectedness has been used to reason about the time complexity of <a href="https://en.wikipedia.org/wiki/Data-flow_analysis">data-flow analysis</a>.[<a href="https://en.wikipedia.org/wiki/Control-flow_graph#cite_note-:0-6">6]</a></p>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        <a href="../Control-flow%26%26program-counter/" class="md-footer__link md-footer__link--prev" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Introduction
+            </div>
+          </div>
+        </a>
+      
+      
+        <a href="../../Data-flow-analysis/" class="md-footer__link md-footer__link--next" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Introduction
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+      </div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    <script id="__config" type="application/json">{"base": "../../..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}, "search": "../../../assets/javascripts/workers/search.fb4a9340.min.js", "version": null}</script>
+    
+    
+      <script src="../../../assets/javascripts/bundle.ca5457b8.min.js"></script>
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+      
+    
+  </body>
+</html>

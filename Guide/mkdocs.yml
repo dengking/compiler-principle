@@ -1,8 +1,9 @@
 nav:
     - Introduction: index.md
-
+    - Parse-tree&syntax-tree: Parse-tree&syntax-tree
     - Parsing-algorithm: Parsing-algorithm
-    - Bind: Bind
-    - Formal-semantic: Formal-semantic
+    - Expression-tree: Expression-tree    
+    - Name-binding: Name-binding
+    - Semantic-analysis: Semantic-analysis
     - Program-transformation: Program-transformation
-    - Compiler-front-end: Compiler-front-end.md
+    

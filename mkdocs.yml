@@ -1,15 +1,15 @@
 nav:
     - Home: index.md
+    - 1-Introduction: 1-Introduction
+    - 2-A-Simple-Syntax-Directed-Translator: 2-A-Simple-Syntax-Directed-Translator
+    - 3-Lexical-Analysis: 3-Lexical-Analysis
+    - 4-Syntax-Analysis: 4-Syntax-Analysis
+    - 5-Syntax-Directed-Translation: 5-Syntax-Directed-Translation
+    - 6-Intermediate-Code-Generation: 6-Intermediate-Code-Generation
+    - 7-Run-Time-Environments: 7-Run-Time-Environments
+    - 9-Machine-Independent-Optimizations: 9-Machine-Independent-Optimizations
     - Guide: Guide
-    - Chapter-1-Introduction: Chapter-1-Introduction
-    - Chapter-2-A-Simple-Syntax-Directed-Translator: Chapter-2-A-Simple-Syntax-Directed-Translator
-    - Chapter-3-Lexical-Analysis: Chapter-3-Lexical-Analysis
-    - Chapter-4-Syntax-Analysis: Chapter-4-Syntax-Analysis
-    - Chapter-5-Syntax-Directed-Translation: Chapter-5-Syntax-Directed-Translation
-    - Chapter-6-Intermediate-Code-Generation: Chapter-6-Intermediate-Code-Generation
-    - Chapter-7-Run-Time-Environments: Chapter-7-Run-Time-Environments
-    - Chapter-9-Machine-Independent-Optimizations: Chapter-9-Machine-Independent-Optimizations
-#################### 实战部分，主要是运用两款主要的compiler：gcc和clang，主要的OS为linux OS####################     
-    - Compiler-optimizing: Compiler-optimizing
+    - Optimization: Optimization
+    - Tools: Tools
     - Implementation: Implementation
 
