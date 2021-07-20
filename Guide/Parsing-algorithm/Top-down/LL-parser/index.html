@@ -2052,13 +2052,13 @@
         <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_10_3_4" type="checkbox" id="__nav_10_3_4" >
       
       <label class="md-nav__link" for="__nav_10_3_4">
-        LL-VS-LR-parser
+        LL-VS-LR-Recursive-descent-Parser
         <span class="md-nav__icon md-icon"></span>
       </label>
-      <nav class="md-nav" aria-label="LL-VS-LR-parser" data-md-level="3">
+      <nav class="md-nav" aria-label="LL-VS-LR-Recursive-descent-Parser" data-md-level="3">
         <label class="md-nav__title" for="__nav_10_3_4">
           <span class="md-nav__icon md-icon"></span>
-          LL-VS-LR-parser
+          LL-VS-LR-Recursive-descent-Parser
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
@@ -2067,7 +2067,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../LL-VS-LR-parser/" class="md-nav__link">
+      <a href="../../LL-VS-LR-Recursive-descent-Parser/" class="md-nav__link">
         Introduction
       </a>
     </li>
@@ -3802,17 +3802,16 @@
                 <h1 id="wikipedia#ll#parser">wikipedia <a href="https://en.wikipedia.org/wiki/LL_parser">LL parser</a></h1>
 <p>In <a href="https://en.wikipedia.org/wiki/Computer_science">computer science</a>, an <strong>LL parser</strong> (**L**eft-to-right, **L**eftmost derivation) is a <a href="https://en.wikipedia.org/wiki/Top-down_parsing">top-down parser</a> for a subset of <a href="https://en.wikipedia.org/wiki/Context-free_languages">context-free languages</a>. It parses the input from **L**eft to right, performing <a href="https://en.wikipedia.org/wiki/Context-free_grammar#Derivations_and_syntax_trees">**L**eftmost derivation</a> of the sentence.</p>
 <blockquote>
-<p>NOTE: Follow the  <a href="https://en.wikipedia.org/wiki/Context-free_grammar#Derivations_and_syntax_trees">**L**eftmost derivation</a> , you will find an detailed explanation of leftmost derivation.</p>
+<p>NOTE: </p>
+<p>Follow the  <a href="https://en.wikipedia.org/wiki/Context-free_grammar#Derivations_and_syntax_trees">**L**eftmost derivation</a> , you will find an detailed explanation of leftmost derivation.</p>
 </blockquote>
 <p>An LL parser is called an LL(<em>k</em>) parser if it uses <em>k</em> <a href="https://en.wikipedia.org/wiki/Token_(parser)">tokens</a> of <a href="https://en.wikipedia.org/wiki/Parsing#Lookahead">lookahead</a> when parsing a sentence. A grammar is called an <a href="https://en.wikipedia.org/wiki/LL_grammar">LL(<em>k</em>) grammar</a> if an LL(<em>k</em>) parser can be constructed from it. A <strong>formal language</strong> is called an LL(<em>k</em>) language if it has an LL(<em>k</em>) grammar. The set of LL(<em>k</em>) languages is properly contained in that of LL(<em>k</em>+1) languages, for each <em>k</em> ≥ 0. A corollary of this is that not all context-free languages can be recognized by an LL(<em>k</em>) parser. An LL parser is called an LL(<code>*</code>), or LL-regular, parser if it is not restricted to a finite number <em>k</em> of tokens of lookahead, but can make parsing decisions by recognizing whether the following tokens belong to a <a href="https://en.wikipedia.org/wiki/Regular_language">regular language</a> (for example by means of a <a href="https://en.wikipedia.org/wiki/Deterministic_finite_automaton">deterministic finite automaton</a>).</p>
 <p>LL grammars, particularly LL(1) grammars, are of great practical interest, as parsers for these grammars are easy to construct, and many <a href="https://en.wikipedia.org/wiki/Computer_language">computer languages</a> are designed to be LL(1) for this reason.[<a href="https://en.wikipedia.org/wiki/LL_parser#cite_note-3">3]</a> LL parsers are table-based parsers, similar to <a href="https://en.wikipedia.org/wiki/LR_parser">LR parsers</a>. LL grammars can also be parsed by <a href="https://en.wikipedia.org/wiki/Recursive_descent_parser">recursive descent parsers</a>. According to Waite and Goos (1984),  LL(<em>k</em>) grammars were introduced by Stearns and Lewis (1969). </p>
 <h2 id="overview">Overview</h2>
 <p>For a given <a href="https://en.wikipedia.org/wiki/Context-free_grammar">context-free grammar</a>, the parser attempts to find the <a href="https://en.wikipedia.org/wiki/Context-free_grammar#Derivations_and_syntax_trees">leftmost derivation</a>. Given an example grammar $ G $:</p>
-<ol>
-<li>$ S\to E $</li>
-<li>$ E\to (E+E) $</li>
-<li>$ E\to i $</li>
-</ol>
+<p>1、$ S\to E $</p>
+<p>2、$ E\to (E+E) $</p>
+<p>3、$ E\to i $</p>
 <p>the leftmost derivation for $ w=((i+i)+i) $ is:</p>
 <p>$ S {\overset {(1)}{\Rightarrow }} E {\overset {(2)}{\Rightarrow }} (E+E) {\overset {(2)}{\Rightarrow }} ((E+E)+E) {\overset {(3)}{\Rightarrow }} ((i+E)+E) {\overset {(3)}{\Rightarrow }} ((i+i)+E) {\overset {(3)}{\Rightarrow }} ((i+i)+i) $</p>
 <p>Generally, there are multiple possibilities when selecting a rule to expand the <strong>leftmost non-terminal</strong>. In step 2 of the previous example, the parser must choose whether to apply rule 2 or rule 3:</p>
@@ -3857,12 +3856,11 @@
 </ul>
 <p>If the parser cannot perform a valid transition, the input is rejected (empty cells). To make the table more compact, only the <strong>non-terminal</strong> rows are commonly displayed, since the action is the same for terminals.</p>
 <blockquote>
-<p>NOTE: The LL parser consists of three parts</p>
-<ul>
-<li><strong>parsing table</strong></li>
-<li><strong>parser stack</strong></li>
-<li><strong>input stream</strong></li>
-</ul>
+<p>NOTE: </p>
+<p>The LL parser consists of three parts</p>
+<p>1、<strong>parsing table</strong></p>
+<p>2、<strong>parser stack</strong></p>
+<p>3、<strong>input stream</strong></p>
 <p>The following image is from a Wikipedia entry <a href="https://en.wikipedia.org/wiki/Pushdown_automaton">pushdown automaton</a></p>
 <p><a href="https://en.wikipedia.org/wiki/File:Pushdown-overview.svg"><img alt="img" src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/Pushdown-overview.svg/340px-Pushdown-overview.svg.png" /></a></p>
 <p>The $ LL(k) $ parser is a <a href="https://en.wikipedia.org/wiki/Deterministic_pushdown_automaton">deterministic pushdown automaton</a>. </p>

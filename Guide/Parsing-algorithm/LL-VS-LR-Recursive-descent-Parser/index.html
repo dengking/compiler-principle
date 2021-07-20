@@ -13,21 +13,21 @@
         <meta name="author" content="DengKing">
       
       
-        <link rel="canonical" href="https://dengking.github.io/compiler-principle/Guide/Parsing-algorithm/LL-VS-LR-parser/LR-parsers-VS-recursive-descent-parsers/">
+        <link rel="canonical" href="https://dengking.github.io/compiler-principle/Guide/Parsing-algorithm/LL-VS-LR-Recursive-descent-Parser/">
       
-      <link rel="shortcut icon" href="../../../../assets/images/favicon.png">
+      <link rel="shortcut icon" href="../../../assets/images/favicon.png">
       <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-7.0.3">
     
     
       
-        <title>LR parsers VS recursive descent parsers - compiler-principle</title>
+        <title>Introduction - compiler-principle</title>
       
     
     
-      <link rel="stylesheet" href="../../../../assets/stylesheets/main.1655a90d.min.css">
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.1655a90d.min.css">
       
         
-        <link rel="stylesheet" href="../../../../assets/stylesheets/palette.7fa14f5b.min.css">
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.7fa14f5b.min.css">
         
       
     
@@ -42,7 +42,7 @@
     
     
     
-      <link rel="stylesheet" href="../../../../css/extra.css">
+      <link rel="stylesheet" href="../../../css/extra.css">
     
     
       
@@ -68,6 +68,11 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
+      
+        
+        <a href="#ll#vs#lr#vs#recursive#descend#parser" class="md-skip">
+          Skip to content
+        </a>
       
     </div>
     <div data-md-component="announce">
@@ -97,7 +102,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              LR parsers VS recursive descent parsers
+              Introduction
             
           </span>
         </div>
@@ -206,7 +211,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../.." class="md-nav__link">
+      <a href="../../.." class="md-nav__link">
         Home
       </a>
     </li>
@@ -242,7 +247,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../1-Introduction/" class="md-nav__link">
+      <a href="../../../1-Introduction/" class="md-nav__link">
         1
       </a>
     </li>
@@ -275,7 +280,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../1-Introduction/1.1-Language-Processors/" class="md-nav__link">
+      <a href="../../../1-Introduction/1.1-Language-Processors/" class="md-nav__link">
         Introduction
       </a>
     </li>
@@ -314,7 +319,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../1-Introduction/1.2-The-Structure-of-a-Compiler/" class="md-nav__link">
+      <a href="../../../1-Introduction/1.2-The-Structure-of-a-Compiler/" class="md-nav__link">
         Introduction
       </a>
     </li>
@@ -353,7 +358,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../1-Introduction/1.5-Applications-of-Compiler-Technology/" class="md-nav__link">
+      <a href="../../../1-Introduction/1.5-Applications-of-Compiler-Technology/" class="md-nav__link">
         Introduction
       </a>
     </li>
@@ -392,7 +397,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../1-Introduction/1.6-Programming-Language-Basics/" class="md-nav__link">
+      <a href="../../../1-Introduction/1.6-Programming-Language-Basics/" class="md-nav__link">
         Introduction
       </a>
     </li>
@@ -440,7 +445,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../2-A-Simple-Syntax-Directed-Translator/" class="md-nav__link">
+      <a href="../../../2-A-Simple-Syntax-Directed-Translator/" class="md-nav__link">
         2
       </a>
     </li>
@@ -473,7 +478,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../2-A-Simple-Syntax-Directed-Translator/2.1-Introduction/" class="md-nav__link">
+      <a href="../../../2-A-Simple-Syntax-Directed-Translator/2.1-Introduction/" class="md-nav__link">
         Introduction
       </a>
     </li>
@@ -512,7 +517,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../2-A-Simple-Syntax-Directed-Translator/2.2-Syntax-Definition/" class="md-nav__link">
+      <a href="../../../2-A-Simple-Syntax-Directed-Translator/2.2-Syntax-Definition/" class="md-nav__link">
         Introduction
       </a>
     </li>
@@ -551,7 +556,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../2-A-Simple-Syntax-Directed-Translator/2.3-Syntax-Directed-Translation/" class="md-nav__link">
+      <a href="../../../2-A-Simple-Syntax-Directed-Translator/2.3-Syntax-Directed-Translation/" class="md-nav__link">
         Introduction
       </a>
     </li>
@@ -590,7 +595,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../2-A-Simple-Syntax-Directed-Translator/2.4-Parsing/" class="md-nav__link">
+      <a href="../../../2-A-Simple-Syntax-Directed-Translator/2.4-Parsing/" class="md-nav__link">
         Introduction
       </a>
     </li>
@@ -629,7 +634,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../2-A-Simple-Syntax-Directed-Translator/2.7-Symbol-Tables/" class="md-nav__link">
+      <a href="../../../2-A-Simple-Syntax-Directed-Translator/2.7-Symbol-Tables/" class="md-nav__link">
         2.7-Symbol-Tables
       </a>
     </li>
@@ -641,7 +646,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../2-A-Simple-Syntax-Directed-Translator/2.7-Symbol-Tables/Symbol-table/" class="md-nav__link">
+      <a href="../../../2-A-Simple-Syntax-Directed-Translator/2.7-Symbol-Tables/Symbol-table/" class="md-nav__link">
         Symbol-table
       </a>
     </li>
@@ -689,7 +694,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../3-Lexical-Analysis/" class="md-nav__link">
+      <a href="../../../3-Lexical-Analysis/" class="md-nav__link">
         3
       </a>
     </li>
@@ -722,7 +727,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../3-Lexical-Analysis/3.1-The-Role-of-the-Lexical-Analyzer/" class="md-nav__link">
+      <a href="../../../3-Lexical-Analysis/3.1-The-Role-of-the-Lexical-Analyzer/" class="md-nav__link">
         Introduction
       </a>
     </li>
@@ -761,7 +766,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../3-Lexical-Analysis/3.4-Recognition-of-Tokens/" class="md-nav__link">
+      <a href="../../../3-Lexical-Analysis/3.4-Recognition-of-Tokens/" class="md-nav__link">
         Introduction
       </a>
     </li>
@@ -800,7 +805,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../3-Lexical-Analysis/3.6-Finite-Automata/" class="md-nav__link">
+      <a href="../../../3-Lexical-Analysis/3.6-Finite-Automata/" class="md-nav__link">
         Introduction
       </a>
     </li>
@@ -839,7 +844,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../3-Lexical-Analysis/3.7-From-Regular-Expressions-to-Automata/" class="md-nav__link">
+      <a href="../../../3-Lexical-Analysis/3.7-From-Regular-Expressions-to-Automata/" class="md-nav__link">
         Introduction
       </a>
     </li>
@@ -887,7 +892,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../4-Syntax-Analysis/" class="md-nav__link">
+      <a href="../../../4-Syntax-Analysis/" class="md-nav__link">
         4
       </a>
     </li>
@@ -920,7 +925,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../4-Syntax-Analysis/4.2-Context-Free-Grammars/" class="md-nav__link">
+      <a href="../../../4-Syntax-Analysis/4.2-Context-Free-Grammars/" class="md-nav__link">
         Introduction
       </a>
     </li>
@@ -959,7 +964,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../4-Syntax-Analysis/4.3-Writing-a-Grammar/" class="md-nav__link">
+      <a href="../../../4-Syntax-Analysis/4.3-Writing-a-Grammar/" class="md-nav__link">
         Introduction
       </a>
     </li>
@@ -998,7 +1003,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../4-Syntax-Analysis/4.5-Bottom-Up-Parsing/" class="md-nav__link">
+      <a href="../../../4-Syntax-Analysis/4.5-Bottom-Up-Parsing/" class="md-nav__link">
         Introduction
       </a>
     </li>
@@ -1037,7 +1042,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../4-Syntax-Analysis/4.6-Introduction-to-LR-Parsing-Simple-LR/" class="md-nav__link">
+      <a href="../../../4-Syntax-Analysis/4.6-Introduction-to-LR-Parsing-Simple-LR/" class="md-nav__link">
         Introduction
       </a>
     </li>
@@ -1076,7 +1081,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../4-Syntax-Analysis/4.7-More-Powerful-LR-Parsers/" class="md-nav__link">
+      <a href="../../../4-Syntax-Analysis/4.7-More-Powerful-LR-Parsers/" class="md-nav__link">
         Introduction
       </a>
     </li>
@@ -1124,7 +1129,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../5-Syntax-Directed-Translation/" class="md-nav__link">
+      <a href="../../../5-Syntax-Directed-Translation/" class="md-nav__link">
         5
       </a>
     </li>
@@ -1136,7 +1141,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../5-Syntax-Directed-Translation/5.1-Syntax-Directed-Definitions/" class="md-nav__link">
+      <a href="../../../5-Syntax-Directed-Translation/5.1-Syntax-Directed-Definitions/" class="md-nav__link">
         5.1-Syntax-Directed-Definitions
       </a>
     </li>
@@ -1148,7 +1153,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../5-Syntax-Directed-Translation/5.2-Evaluation-Orders-for-SDD%27s/" class="md-nav__link">
+      <a href="../../../5-Syntax-Directed-Translation/5.2-Evaluation-Orders-for-SDD%27s/" class="md-nav__link">
         5.2-Evaluation-Orders-for-SDD's
       </a>
     </li>
@@ -1160,7 +1165,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../5-Syntax-Directed-Translation/5.3-Applications-of-Syntax-Directed-Translation/" class="md-nav__link">
+      <a href="../../../5-Syntax-Directed-Translation/5.3-Applications-of-Syntax-Directed-Translation/" class="md-nav__link">
         5.3-Applications-of-Syntax-Directed-Translation
       </a>
     </li>
@@ -1172,7 +1177,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../5-Syntax-Directed-Translation/wikipedia-Syntax-directed-translation/" class="md-nav__link">
+      <a href="../../../5-Syntax-Directed-Translation/wikipedia-Syntax-directed-translation/" class="md-nav__link">
         wikipedia-Syntax-directed-translation
       </a>
     </li>
@@ -1214,7 +1219,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../6-Intermediate-Code-Generation/" class="md-nav__link">
+      <a href="../../../6-Intermediate-Code-Generation/" class="md-nav__link">
         6
       </a>
     </li>
@@ -1247,7 +1252,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../6-Intermediate-Code-Generation/6.3-Types-and-Declarations/" class="md-nav__link">
+      <a href="../../../6-Intermediate-Code-Generation/6.3-Types-and-Declarations/" class="md-nav__link">
         Introduction
       </a>
     </li>
@@ -1295,7 +1300,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../7-Run-Time-Environments/" class="md-nav__link">
+      <a href="../../../7-Run-Time-Environments/" class="md-nav__link">
         7
       </a>
     </li>
@@ -1307,7 +1312,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../7-Run-Time-Environments/7.1-Storage-Organization/" class="md-nav__link">
+      <a href="../../../7-Run-Time-Environments/7.1-Storage-Organization/" class="md-nav__link">
         7.1-Storage-Organization
       </a>
     </li>
@@ -1319,7 +1324,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../7-Run-Time-Environments/7.2-Stack-Allocation-of-Space/" class="md-nav__link">
+      <a href="../../../7-Run-Time-Environments/7.2-Stack-Allocation-of-Space/" class="md-nav__link">
         7.2-Stack-Allocation-of-Space
       </a>
     </li>
@@ -1331,7 +1336,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../7-Run-Time-Environments/7.3-Access-to-Non-local-Data-on-the-Stack/" class="md-nav__link">
+      <a href="../../../7-Run-Time-Environments/7.3-Access-to-Non-local-Data-on-the-Stack/" class="md-nav__link">
         7.3-Access-to-Non-local-Data-on-the-Stack
       </a>
     </li>
@@ -1343,7 +1348,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../7-Run-Time-Environments/7.4-Heap-Management/" class="md-nav__link">
+      <a href="../../../7-Run-Time-Environments/7.4-Heap-Management/" class="md-nav__link">
         7.4-Heap-Management
       </a>
     </li>
@@ -1385,7 +1390,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../9-Machine-Independent-Optimizations/" class="md-nav__link">
+      <a href="../../../9-Machine-Independent-Optimizations/" class="md-nav__link">
         9
       </a>
     </li>
@@ -1404,12 +1409,14 @@
 
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_10" type="checkbox" id="__nav_10" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_10" type="checkbox" id="__nav_10" checked>
       
       <label class="md-nav__link" for="__nav_10">
         Guide
@@ -1427,7 +1434,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../" class="md-nav__link">
+      <a href="../../" class="md-nav__link">
         Introduction
       </a>
     </li>
@@ -1460,7 +1467,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../Parse-tree%26syntax-tree/" class="md-nav__link">
+      <a href="../../Parse-tree%26syntax-tree/" class="md-nav__link">
         Introduction
       </a>
     </li>
@@ -1493,7 +1500,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../Parse-tree%26syntax-tree/Parse-tree/" class="md-nav__link">
+      <a href="../../Parse-tree%26syntax-tree/Parse-tree/" class="md-nav__link">
         Introduction
       </a>
     </li>
@@ -1532,7 +1539,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../Parse-tree%26syntax-tree/Abstract-syntax-tree/" class="md-nav__link">
+      <a href="../../Parse-tree%26syntax-tree/Abstract-syntax-tree/" class="md-nav__link">
         Introduction
       </a>
     </li>
@@ -1571,7 +1578,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../Parse-tree%26syntax-tree/Abstract-syntax-tree-VS-parse-tree/" class="md-nav__link">
+      <a href="../../Parse-tree%26syntax-tree/Abstract-syntax-tree-VS-parse-tree/" class="md-nav__link">
         Introduction
       </a>
     </li>
@@ -1610,7 +1617,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../Parse-tree%26syntax-tree/Parse-tree-to-AST/" class="md-nav__link">
+      <a href="../../Parse-tree%26syntax-tree/Parse-tree-to-AST/" class="md-nav__link">
         Introduction
       </a>
     </li>
@@ -1632,12 +1639,14 @@
             
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_10_3" type="checkbox" id="__nav_10_3" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_10_3" type="checkbox" id="__nav_10_3" checked>
       
       <label class="md-nav__link" for="__nav_10_3">
         Parsing-algorithm
@@ -1655,7 +1664,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../" class="md-nav__link">
+      <a href="../" class="md-nav__link">
         Introduction
       </a>
     </li>
@@ -1688,7 +1697,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Top-down/" class="md-nav__link">
+      <a href="../Top-down/" class="md-nav__link">
         Introduction
       </a>
     </li>
@@ -1721,7 +1730,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Top-down/Recursive-descent-parser/" class="md-nav__link">
+      <a href="../Top-down/Recursive-descent-parser/" class="md-nav__link">
         Introduction
       </a>
     </li>
@@ -1760,7 +1769,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Top-down/LL-parser/" class="md-nav__link">
+      <a href="../Top-down/LL-parser/" class="md-nav__link">
         Introduction
       </a>
     </li>
@@ -1793,7 +1802,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Top-down/LL-parser/andrewbegel-LL%281%29-Parsing/" class="md-nav__link">
+      <a href="../Top-down/LL-parser/andrewbegel-LL%281%29-Parsing/" class="md-nav__link">
         Introduction
       </a>
     </li>
@@ -1844,7 +1853,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Bottom-up/" class="md-nav__link">
+      <a href="../Bottom-up/" class="md-nav__link">
         Introduction
       </a>
     </li>
@@ -1877,7 +1886,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Bottom-up/LR-parser/" class="md-nav__link">
+      <a href="../Bottom-up/LR-parser/" class="md-nav__link">
         Introduction
       </a>
     </li>
@@ -1916,7 +1925,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Bottom-up/CYK-algorithm/" class="md-nav__link">
+      <a href="../Bottom-up/CYK-algorithm/" class="md-nav__link">
         Introduction
       </a>
     </li>
@@ -1938,32 +1947,120 @@
             
   
   
+    
+  
   
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
       
-        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_10_3_4" type="checkbox" id="__nav_10_3_4" >
+        <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_10_3_4" type="checkbox" id="__nav_10_3_4" checked>
       
       <label class="md-nav__link" for="__nav_10_3_4">
-        LL-VS-LR-parser
+        LL-VS-LR-Recursive-descent-Parser
         <span class="md-nav__icon md-icon"></span>
       </label>
-      <nav class="md-nav" aria-label="LL-VS-LR-parser" data-md-level="3">
+      <nav class="md-nav" aria-label="LL-VS-LR-Recursive-descent-Parser" data-md-level="3">
         <label class="md-nav__title" for="__nav_10_3_4">
           <span class="md-nav__icon md-icon"></span>
-          LL-VS-LR-parser
+          LL-VS-LR-Recursive-descent-Parser
         </label>
         <ul class="md-nav__list" data-md-scrollfix>
           
             
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="../" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          Introduction
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         Introduction
       </a>
+      
+        
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#recursive#descent#parser#vs#lllr" class="md-nav__link">
+    Recursive descent parser VS LL、LR
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#stackoverflow#what#is#the#difference#between#ll#and#lr#parsing" class="md-nav__link">
+    stackoverflow What is the difference between LL and LR parsing?
+  </a>
+  
+    <nav class="md-nav" aria-label="stackoverflow What is the difference between LL and LR parsing?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a" class="md-nav__link">
+    A
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a_1" class="md-nav__link">
+    A
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vs#lr" class="md-nav__link">
+    预测分析表 VS LR语法分析表
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lr0lr" class="md-nav__link">
+    从LR(0)自动机到LR语法分析表
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lrconfiguration#vs#lr0" class="md-nav__link">
+    LR语法分析器的格局configuration VS LR(0)自动机的状态
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -2000,7 +2097,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Others/Chart-parser/" class="md-nav__link">
+      <a href="../Others/Chart-parser/" class="md-nav__link">
         Chart-parser
       </a>
     </li>
@@ -2012,7 +2109,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../Others/Earley-parser/" class="md-nav__link">
+      <a href="../Others/Earley-parser/" class="md-nav__link">
         Earley-parser
       </a>
     </li>
@@ -2057,7 +2154,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../Expression-tree/" class="md-nav__link">
+      <a href="../../Expression-tree/" class="md-nav__link">
         Introduction
       </a>
     </li>
@@ -2090,7 +2187,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../Expression-tree/Prefix-Infix-Postfix/" class="md-nav__link">
+      <a href="../../Expression-tree/Prefix-Infix-Postfix/" class="md-nav__link">
         Introduction
       </a>
     </li>
@@ -2123,7 +2220,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../Expression-tree/Prefix-Infix-Postfix/Infix-notation/" class="md-nav__link">
+      <a href="../../Expression-tree/Prefix-Infix-Postfix/Infix-notation/" class="md-nav__link">
         Introduction
       </a>
     </li>
@@ -2162,7 +2259,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../Expression-tree/Prefix-Infix-Postfix/Polish-prefix-notation/" class="md-nav__link">
+      <a href="../../Expression-tree/Prefix-Infix-Postfix/Polish-prefix-notation/" class="md-nav__link">
         Introduction
       </a>
     </li>
@@ -2201,7 +2298,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../Expression-tree/Prefix-Infix-Postfix/Reverse-Polish-postfix-notation/" class="md-nav__link">
+      <a href="../../Expression-tree/Prefix-Infix-Postfix/Reverse-Polish-postfix-notation/" class="md-nav__link">
         Introduction
       </a>
     </li>
@@ -2240,7 +2337,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../Expression-tree/Prefix-Infix-Postfix/Infix-to-Postfix/" class="md-nav__link">
+      <a href="../../Expression-tree/Prefix-Infix-Postfix/Infix-to-Postfix/" class="md-nav__link">
         Introduction
       </a>
     </li>
@@ -2273,7 +2370,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../Expression-tree/Prefix-Infix-Postfix/Infix-to-Postfix/Shunting-yard-algorithm/" class="md-nav__link">
+      <a href="../../Expression-tree/Prefix-Infix-Postfix/Infix-to-Postfix/Shunting-yard-algorithm/" class="md-nav__link">
         Introduction
       </a>
     </li>
@@ -2318,7 +2415,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../Expression-tree/Prefix-Infix-Postfix/Postfix-to-Prefix/" class="md-nav__link">
+      <a href="../../Expression-tree/Prefix-Infix-Postfix/Postfix-to-Prefix/" class="md-nav__link">
         Introduction
       </a>
     </li>
@@ -2351,7 +2448,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../Expression-tree/Prefix-Infix-Postfix/Postfix-to-Prefix/geeksforgeeks-Postfix-to-Prefix-Conversion/" class="md-nav__link">
+      <a href="../../Expression-tree/Prefix-Infix-Postfix/Postfix-to-Prefix/geeksforgeeks-Postfix-to-Prefix-Conversion/" class="md-nav__link">
         Introduction
       </a>
     </li>
@@ -2396,7 +2493,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../Expression-tree/Prefix-Infix-Postfix/Prefix-to-Infix/" class="md-nav__link">
+      <a href="../../Expression-tree/Prefix-Infix-Postfix/Prefix-to-Infix/" class="md-nav__link">
         Introduction
       </a>
     </li>
@@ -2429,7 +2526,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../Expression-tree/Prefix-Infix-Postfix/Prefix-to-Infix/geeksforgeeks-Prefix-to-Infix-Conversion/" class="md-nav__link">
+      <a href="../../Expression-tree/Prefix-Infix-Postfix/Prefix-to-Infix/geeksforgeeks-Prefix-to-Infix-Conversion/" class="md-nav__link">
         Introduction
       </a>
     </li>
@@ -2480,7 +2577,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../Expression-tree/Build-evaluate-expression-tree/" class="md-nav__link">
+      <a href="../../Expression-tree/Build-evaluate-expression-tree/" class="md-nav__link">
         Introduction
       </a>
     </li>
@@ -2519,7 +2616,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../Expression-tree/geeksforgeeks-Expression-Tree/" class="md-nav__link">
+      <a href="../../Expression-tree/geeksforgeeks-Expression-Tree/" class="md-nav__link">
         Introduction
       </a>
     </li>
@@ -2552,7 +2649,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../Expression-tree/geeksforgeeks-Expression-Tree/Expression-Tree/" class="md-nav__link">
+      <a href="../../Expression-tree/geeksforgeeks-Expression-Tree/Expression-Tree/" class="md-nav__link">
         Introduction
       </a>
     </li>
@@ -2591,7 +2688,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../Expression-tree/geeksforgeeks-Expression-Tree/Building-Expression-tree-from-Prefix-Expression/" class="md-nav__link">
+      <a href="../../Expression-tree/geeksforgeeks-Expression-Tree/Building-Expression-tree-from-Prefix-Expression/" class="md-nav__link">
         Introduction
       </a>
     </li>
@@ -2630,7 +2727,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../Expression-tree/geeksforgeeks-Expression-Tree/Evaluation-of-Expression-Tree/" class="md-nav__link">
+      <a href="../../Expression-tree/geeksforgeeks-Expression-Tree/Evaluation-of-Expression-Tree/" class="md-nav__link">
         Introduction
       </a>
     </li>
@@ -2669,7 +2766,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../Expression-tree/geeksforgeeks-Expression-Tree/Program-to-convert-Infix-notation-to-Expression-Tree/" class="md-nav__link">
+      <a href="../../Expression-tree/geeksforgeeks-Expression-Tree/Program-to-convert-Infix-notation-to-Expression-Tree/" class="md-nav__link">
         Introduction
       </a>
     </li>
@@ -2708,7 +2805,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../Expression-tree/geeksforgeeks-Expression-Tree/Convert-ternary-expression-to-Binary-Tree/" class="md-nav__link">
+      <a href="../../Expression-tree/geeksforgeeks-Expression-Tree/Convert-ternary-expression-to-Binary-Tree/" class="md-nav__link">
         Introduction
       </a>
     </li>
@@ -2753,7 +2850,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../Expression-tree/LeetCode/" class="md-nav__link">
+      <a href="../../Expression-tree/LeetCode/" class="md-nav__link">
         Introduction
       </a>
     </li>
@@ -2786,7 +2883,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../Expression-tree/LeetCode/LeetCode-150-%E9%80%86%E6%B3%A2%E5%85%B0%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%B1%82%E5%80%BC/" class="md-nav__link">
+      <a href="../../Expression-tree/LeetCode/LeetCode-150-%E9%80%86%E6%B3%A2%E5%85%B0%E8%A1%A8%E8%BE%BE%E5%BC%8F%E6%B1%82%E5%80%BC/" class="md-nav__link">
         Introduction
       </a>
     </li>
@@ -2831,7 +2928,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../Expression-tree/Mathematical-Expression-Parsing/" class="md-nav__link">
+      <a href="../../Expression-tree/Mathematical-Expression-Parsing/" class="md-nav__link">
         Introduction
       </a>
     </li>
@@ -2864,7 +2961,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../Expression-tree/Mathematical-Expression-Parsing/Operator-precedence-parser/" class="md-nav__link">
+      <a href="../../Expression-tree/Mathematical-Expression-Parsing/Operator-precedence-parser/" class="md-nav__link">
         Introduction
       </a>
     </li>
@@ -2915,7 +3012,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../Name-binding/" class="md-nav__link">
+      <a href="../../Name-binding/" class="md-nav__link">
         Introduction
       </a>
     </li>
@@ -2954,7 +3051,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../Semantic-analysis/" class="md-nav__link">
+      <a href="../../Semantic-analysis/" class="md-nav__link">
         Introduction
       </a>
     </li>
@@ -2987,7 +3084,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../Semantic-analysis/Formal-semantic/" class="md-nav__link">
+      <a href="../../Semantic-analysis/Formal-semantic/" class="md-nav__link">
         Introduction
       </a>
     </li>
@@ -3032,7 +3129,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../Program-transformation/" class="md-nav__link">
+      <a href="../../Program-transformation/" class="md-nav__link">
         Introduction
       </a>
     </li>
@@ -3065,7 +3162,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../Program-transformation/DMS-Software-Reengineering-Toolkit/" class="md-nav__link">
+      <a href="../../Program-transformation/DMS-Software-Reengineering-Toolkit/" class="md-nav__link">
         Introduction
       </a>
     </li>
@@ -3119,7 +3216,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../Optimization/" class="md-nav__link">
+      <a href="../../../Optimization/" class="md-nav__link">
         Introduction
       </a>
     </li>
@@ -3152,7 +3249,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../Optimization/Basic-block/" class="md-nav__link">
+      <a href="../../../Optimization/Basic-block/" class="md-nav__link">
         Introduction
       </a>
     </li>
@@ -3191,7 +3288,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../Optimization/Static-single-assignment-form/" class="md-nav__link">
+      <a href="../../../Optimization/Static-single-assignment-form/" class="md-nav__link">
         Introduction
       </a>
     </li>
@@ -3230,7 +3327,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../Optimization/Control-flow-analysis/" class="md-nav__link">
+      <a href="../../../Optimization/Control-flow-analysis/" class="md-nav__link">
         Introduction
       </a>
     </li>
@@ -3263,7 +3360,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../Optimization/Control-flow-analysis/Control-flow%26%26program-counter/" class="md-nav__link">
+      <a href="../../../Optimization/Control-flow-analysis/Control-flow%26%26program-counter/" class="md-nav__link">
         Introduction
       </a>
     </li>
@@ -3302,7 +3399,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../Optimization/Control-flow-analysis/Control-flow-graph/" class="md-nav__link">
+      <a href="../../../Optimization/Control-flow-analysis/Control-flow-graph/" class="md-nav__link">
         Introduction
       </a>
     </li>
@@ -3347,7 +3444,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../Optimization/Data-flow-analysis/" class="md-nav__link">
+      <a href="../../../Optimization/Data-flow-analysis/" class="md-nav__link">
         Introduction
       </a>
     </li>
@@ -3386,7 +3483,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../Optimization/Inline/" class="md-nav__link">
+      <a href="../../../Optimization/Inline/" class="md-nav__link">
         Introduction
       </a>
     </li>
@@ -3455,7 +3552,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../Tools/Parser-generator/" class="md-nav__link">
+      <a href="../../../Tools/Parser-generator/" class="md-nav__link">
         Introduction
       </a>
     </li>
@@ -3488,7 +3585,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../Tools/Parser-generator/Lex%26yacc/" class="md-nav__link">
+      <a href="../../../Tools/Parser-generator/Lex%26yacc/" class="md-nav__link">
         Introduction
       </a>
     </li>
@@ -3542,7 +3639,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../Implementation/" class="md-nav__link">
+      <a href="../../../Implementation/" class="md-nav__link">
         Introduction
       </a>
     </li>
@@ -3575,7 +3672,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../../../Implementation/Architecture/" class="md-nav__link">
+      <a href="../../../Implementation/Architecture/" class="md-nav__link">
         Introduction
       </a>
     </li>
@@ -3601,16 +3698,182 @@
               </div>
             
             
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#recursive#descent#parser#vs#lllr" class="md-nav__link">
+    Recursive descent parser VS LL、LR
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#stackoverflow#what#is#the#difference#between#ll#and#lr#parsing" class="md-nav__link">
+    stackoverflow What is the difference between LL and LR parsing?
+  </a>
+  
+    <nav class="md-nav" aria-label="stackoverflow What is the difference between LL and LR parsing?">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a" class="md-nav__link">
+    A
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a_1" class="md-nav__link">
+    A
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#vs#lr" class="md-nav__link">
+    预测分析表 VS LR语法分析表
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lr0lr" class="md-nav__link">
+    从LR(0)自动机到LR语法分析表
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#lrconfiguration#vs#lr0" class="md-nav__link">
+    LR语法分析器的格局configuration VS LR(0)自动机的状态
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
           
           <div class="md-content" data-md-component="content">
             <article class="md-content__inner md-typeset">
               
                 
                 
-                  <h1>LR parsers VS recursive descent parsers</h1>
-                
-                <p><a href="https://en.wikipedia.org/wiki/Recursive_descent_parser">Recursive descent parser</a> use <a href="https://en.wikipedia.org/wiki/Backtracking">backtracking</a> to match.</p>
+                <h1 id="ll#vs#lr#vs#recursive#descend#parser">LL VS LR VS Recursive descend parser</h1>
+<h2 id="recursive#descent#parser#vs#lllr">Recursive descent parser VS LL、LR</h2>
+<p><a href="https://en.wikipedia.org/wiki/Recursive_descent_parser">Recursive descent parser</a> use <a href="https://en.wikipedia.org/wiki/Backtracking">backtracking</a> to match.</p>
 <p>LL parsers are table-based parsers, they use parsing table. Parsing table is constructed from the grammar and acts as a transformation function. Using parsing table and <em>k</em> <a href="https://en.wikipedia.org/wiki/Token_(parser)">tokens</a> of <a href="https://en.wikipedia.org/wiki/Parsing#Lookahead">lookahead</a>, a LL parser can become <em>predictive parser</em> and  avoid  <a href="https://en.wikipedia.org/wiki/Backtracking">backtracking</a>. </p>
+<h2 id="stackoverflow#what#is#the#difference#between#ll#and#lr#parsing">stackoverflow <a href="https://stackoverflow.com/questions/5975741/what-is-the-difference-between-ll-and-lr-parsing">What is the difference between LL and LR parsing?</a></h2>
+<h3 id="a"><a href="https://stackoverflow.com/a/6824545">A</a></h3>
+<p>At a high level, the difference between LL parsing and LR parsing is that LL parsers begin at the start symbol and try to apply productions to arrive at the <strong>target string</strong>, whereas LR parsers begin at the target string and try to arrive back at the <strong>start symbol</strong>.</p>
+<p>An LL parse is a left-to-right, leftmost derivation. That is, we consider the input symbols from the left to the right and attempt to construct a leftmost derivation. This is done by beginning at the start symbol and repeatedly expanding out the <strong>leftmost nonterminal</strong> until we arrive at the <strong>target string</strong>. </p>
+<p>An LR parse is a left-to-right, rightmost derivation, meaning that we scan from the left to right and attempt to construct a rightmost derivation. The parser continuously picks a substring of the input and attempts to reverse it back to a nonterminal.</p>
+<p>During an LL parse, the parser continuously chooses between two actions:</p>
+<p>1、<strong>Predict</strong>: Based on the leftmost nonterminal and some number of lookahead tokens, choose which production ought to be applied to get closer to the input string.</p>
+<p>2、<strong>Match</strong>: Match the leftmost guessed terminal symbol with the leftmost unconsumed symbol of input.</p>
+<p>As an example, given this grammar:</p>
+<ul>
+<li>S → E</li>
+<li>E → T + E</li>
+<li>E → T</li>
+<li>T → <code>int</code></li>
+</ul>
+<p>Then given the string <code>int + int + int</code>, an LL(2) parser (which uses two tokens of lookahead) would parse the string as follows:</p>
+<div class="highlight"><pre><span></span><code>Production       Input              Action
+---------------------------------------------------------
+S                int + int + int    Predict S -&gt; E
+E                int + int + int    Predict E -&gt; T + E
+T + E            int + int + int    Predict T -&gt; int
+int + E          int + int + int    Match int
++ E              + int + int        Match +
+E                int + int          Predict E -&gt; T + E
+T + E            int + int          Predict T -&gt; int
+int + E          int + int          Match int
++ E              + int              Match +
+E                int                Predict E -&gt; T
+T                int                Predict T -&gt; int
+int              int                Match int
+                                    Accept
+</code></pre></div>
+<p>Notice that in each step we look at the leftmost symbol in our production. If it's a terminal, we match it, and if it's a nonterminal, we predict what it's going to be by choosing one of the rules.</p>
+<p>In an LR parser, there are two actions:</p>
+<p>1、<strong>Shift</strong>: Add the next token of input to a buffer for consideration.</p>
+<p>2、<strong>Reduce</strong>: Reduce a collection of terminals and nonterminals in this buffer back to some nonterminal by reversing a production.</p>
+<p>As an example, an LR(1) parser (with one token of lookahead) might parse that same string as follows:</p>
+<div class="highlight"><pre><span></span><code>Workspace        Input              Action
+---------------------------------------------------------
+                 int + int + int    Shift
+int              + int + int        Reduce T -&gt; int
+T                + int + int        Shift
+T +              int + int          Shift
+T + int          + int              Reduce T -&gt; int
+T + T            + int              Shift
+T + T +          int                Shift
+T + T + int                         Reduce T -&gt; int
+T + T + T                           Reduce E -&gt; T
+T + T + E                           Reduce E -&gt; T + E
+T + E                               Reduce E -&gt; T + E
+E                                   Reduce S -&gt; E
+S                                   Accept
+</code></pre></div>
+<p>The two parsing algorithms you mentioned (LL and LR) are known to have different characteristics. LL parsers tend to be easier to write by hand, but they are less powerful than LR parsers and accept a much smaller set of grammars than LR parsers do. LR parsers come in many flavors (LR(0), SLR(1), LALR(1), LR(1), IELR(1), GLR(0), etc.) and are far more powerful. They also tend to have much more complex and are almost always generated by tools like <code>yacc</code> or <code>bison</code>. LL parsers also come in many flavors (including LL(*), which is used by the <a href="http://www.antlr.org/"><code>ANTLR</code></a> tool), though in practice LL(1) is the most-widely used.</p>
+<p>As a shameless plug, if you'd like to learn more about LL and LR parsing, I just finished teaching a compilers course and have <a href="http://www.stanford.edu/class/archive/cs/cs143/cs143.1128/">some handouts and lecture slides on parsing</a> on the course website. I'd be glad to elaborate on any of them if you think it would be useful.</p>
+<h3 id="a_1"><a href="https://stackoverflow.com/a/18239653">A</a></h3>
+<p>Josh Haberman in his article <a href="http://blog.reverberate.org/2013/07/ll-and-lr-parsing-demystified.html">LL and LR Parsing Demystified</a> claims that LL parsing directly corresponds with the <a href="http://en.wikipedia.org/wiki/Polish_notation">Polish Notation</a>, whereas LR corresponds to <a href="http://en.wikipedia.org/wiki/Reverse_Polish_notation">Reverse Polish Notation</a>. The difference between PN and RPN is the order of traversing the binary tree of the equation:</p>
+<p><img alt="binary tree of an equation" src="https://i.stack.imgur.com/QLYBe.png" /></p>
+<div class="highlight"><pre><span></span><code>+ 1 * 2 3  // Polish (prefix) expression; pre-order traversal.
+1 2 3 * +  // Reverse Polish (postfix) expression; post-order traversal.
+</code></pre></div>
+<p>According to Haberman, this illustrates the main difference between LL and LR parsers:</p>
+<blockquote>
+<p>The primary difference between how LL and LR parsers operate is that an LL parser outputs a pre-order traversal of the parse tree and an LR parser outputs a post-order traversal.</p>
+</blockquote>
+<p>For the in-depth explanation, examples and conclusions check out Haberman's <a href="http://blog.reverberate.org/2013/07/ll-and-lr-parsing-demystified.html">article</a>.</p>
+<h2 id="vs#lr">预测分析表 VS LR语法分析表</h2>
+<p>LL和LR都是表驱动的，这两个表就是分别驱动两者的表。</p>
+<p>语法分析的过程是不断根据产生式进行转换的过程。</p>
+<p>两者的构造都是基于对grammar的分析，两者的构造过程都是沿着产生式进行derive，所不同的是，预测分析表一直derive到了terminal；而LR语法分析表则是将所有的可能的转换全部包含了：</p>
+<p>预测分析表的构造使用是non-terminal symbol的FIRST和FOLLOW，FIRST和FOLLOW所包含的都是terminal，其实它的目的是知道当遇到某个terminal的时候，使用哪个production可以得到这个terminal。即它侧重的是对于一个non-terminal的production，它能够推导出什么，这样它就能够据此来决定是否使用这个production。</p>
+<p>LR语法分析表正如其名称所揭示地，它其实是对语法的分析，对语法中所有的可能的转换进行分析，构造出来它的转换所对应的automaton。显然，因为它的转换都是基于grammar所构造出来的，因此，它的所有的转换都是有效的转换，因此只要待分析的串不符合这个automaton的转换，那么它就是无效的了。因此我们的待分析的串一定是对应了automaton中的一条路径。使用我们的文法，按照某种推导方式是一定能够derive这个串的。在待分析的串中，仅仅包含的是terminal，而grammar中，是两者都包含的，所以在进行分析的时候，一定要将terminal规约为non-terminal，这样才能够使分析继续下去。LR语法分析是推导的逆过程，显然我们是要沿着推导方向逆流而上，因为推导的过程的中间过程肯定是会存在non-terminal的，而我们是逆向进行推导，所以肯定需要将一些terminal规约为non-terminal。</p>
+<p>为什么LR是right-most derivation？</p>
+<p>预测分析表其实也是一个转换函数，要使用哪个产生式进行derivate</p>
+<p>LR是一个automaton，状态，转换</p>
+<p>语法分析表由两个部分组成：</p>
+<ul>
+<li>action</li>
+<li>goto</li>
+</ul>
+<h2 id="lr0lr">从LR(0)自动机到LR语法分析表</h2>
+<p>LR语法分析表的构造是基于LR(0)自动机的</p>
+<p>本质还是转换，无论是在terminal上的转换还是在non-terminal上的转换</p>
+<p>action主要定义的是在terminal上的转换，而goto则定义的是在non-terminal上的转换。</p>
+<p>SLR语法分析表的构造过程主要让我感到困惑的是它将action定义成了 状态和terminal的函数？</p>
+<p>SLR语法分析表的ACTION的构造过程中有这样的规则：</p>
+<h2 id="lrconfiguration#vs#lr0">LR语法分析器的格局configuration VS LR(0)自动机的状态</h2>
                 
               
               
@@ -3625,6 +3888,39 @@
       
         
 <footer class="md-footer">
+  
+    <nav class="md-footer__inner md-grid" aria-label="Footer">
+      
+        <a href="../Bottom-up/CYK-algorithm/" class="md-footer__link md-footer__link--prev" rel="prev">
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+          </div>
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              Introduction
+            </div>
+          </div>
+        </a>
+      
+      
+        <a href="../Others/Chart-parser/" class="md-footer__link md-footer__link--next" rel="next">
+          <div class="md-footer__title">
+            <div class="md-ellipsis">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              Chart-parser
+            </div>
+          </div>
+          <div class="md-footer__button md-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+          </div>
+        </a>
+      
+    </nav>
   
   <div class="md-footer-meta md-typeset">
     <div class="md-footer-meta__inner md-grid">
@@ -3644,10 +3940,10 @@
     <div class="md-dialog" data-md-component="dialog">
       <div class="md-dialog__inner md-typeset"></div>
     </div>
-    <script id="__config" type="application/json">{"base": "../../../..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}, "search": "../../../../assets/javascripts/workers/search.fb4a9340.min.js", "version": null}</script>
+    <script id="__config" type="application/json">{"base": "../../..", "features": [], "translations": {"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}, "search": "../../../assets/javascripts/workers/search.fb4a9340.min.js", "version": null}</script>
     
     
-      <script src="../../../../assets/javascripts/bundle.ca5457b8.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.ca5457b8.min.js"></script>
       
         <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML"></script>
       
