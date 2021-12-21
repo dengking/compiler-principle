@@ -78,3 +78,10 @@ The AST is used intensively during [semantic analysis](https://en.wikipedia.org/
 
 After verifying correctness, the AST serves as the base for code generation. The AST is often used to generate an intermediate representation (IR), sometimes called an [intermediate language](https://en.wikipedia.org/wiki/Intermediate_language), for the code generation.
 
+
+
+## TODO
+
+medium [Abstract Syntax Trees (AST) with Python](https://medium.com/@aysebilgegunduz/abstract-syntax-tree-ast-with-python-f1a11659fcaf)
+
+vinaytech [Abstract Syntax Tree](https://vinaytech.wordpress.com/2008/10/04/abstract-syntax-tree/)
