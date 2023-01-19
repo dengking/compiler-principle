@@ -1,16 +1,25 @@
 # 5.1 Syntax-Directed Definitions
 
+> NOTE:
+>
+> 一、see also
+>
+> geeksforgeeks [Compiler Design | Syntax Directed Definition](https://www.geeksforgeeks.org/compiler-design-syntax-directed-definition/) 
+
 A *syntax-directed definition* (SDD) is a context-free grammar together with **attributes** and **rules**. Attributes are associated with grammar symbols and rules are associated with productions. If `X` is a symbol and `a` is one of its attributes, then we write `X.a` to denote the value of `a` at a particular parse-tree node labeled `X` . If we implement the nodes of the parse tree by records or objects, then the **attributes** of `X` can b e implemented by data fields in the records that represent the nodes for `X` . Attributes may be of any kind: numbers, types, table references, or strings, for instance. The strings may even be long sequences of
 code, say code in the intermediate language used by a compiler.
 
-> NOTE: SDD consist of two element: attribute and rule, So SDD is used in the future, you need to be clear it means attribute and rule.
+> NOTE: 
+>
+> 一、SDD=CFG+attribute+rule
 
 ## 5.1.1 Inherited and Synthesized Attributes
 
 We shall deal with two kinds of attributes for **nonterminals**:
 
-1. A *synthesized attribute* for a **nonterminal** `A` at a parse-tree node `N` is defined by a **semantic rule** associated with the production at `N` . Note that the production must have `A` as its **head**. A **synthesized attribute** at node `N` is defined only in terms of attribute values at the children of `N` and at `N` itself.
-2. An *inherited attribute* for a **nonterminal** `B` at a parse-tree node `N` is defined by a **semantic rule** associated with the production at the parent of `N` . Note that the production must have `B` as a symbol in its body. An **inherited attribute** at node `N` is defined only in terms of attribute values at `N` 's parent, `N` itself, and `N` 's siblings.
+1、A *synthesized attribute* for a **nonterminal** `A` at a parse-tree node `N` is defined by a **semantic rule** associated with the production at `N` . Note that the production must have `A` as its **head**. A **synthesized attribute** at node `N` is defined only in terms of attribute values at the children of `N` and at `N` itself.
+
+2、An *inherited attribute* for a **nonterminal** `B` at a parse-tree node `N` is defined by a **semantic rule** associated with the production at the parent of `N` . Note that the production must have `B` as a symbol in its body. An **inherited attribute** at node `N` is defined only in terms of attribute values at `N` 's parent, `N` itself, and `N` 's siblings.
 
 > NOTE: The above classification method is based on how to calculate the attribute value. It is obvious that the direction of computation of **synthesized attribute** is contrast to **inherited attribute**'s. More precisely, **synthesized attribute** is suitable to **bottom-up parsing** while **inherited attribute** is suitable to **top-down parsing**. Example 5.2 show how **synthesized attribute** is calculated while example 5.3 show how **inherited attribute** is calculated. The computation of attribute will be discussed in later chapter. 
 
