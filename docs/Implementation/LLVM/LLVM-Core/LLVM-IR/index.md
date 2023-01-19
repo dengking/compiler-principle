@@ -1,5 +1,13 @@
 # LLVM Language Reference Manual[¶](http://llvm.org/docs/LangRef.html#llvm-language-reference-manual)
 
+> NOTE:
+>
+> 一、see also:
+>
+> zhihu [A Tour to LLVM IR（上）](https://zhuanlan.zhihu.com/p/66793637) 
+>
+> 
+
 ## [Abstract](http://llvm.org/docs/LangRef.html#id1242)[¶](http://llvm.org/docs/LangRef.html#abstract)
 
 LLVM is a **Static Single Assignment** (SSA) based representation that provides type safety, low-level operations, flexibility, and the capability of representing ‘all’ high-level languages cleanly. It is the common code representation used throughout all phases of the LLVM compilation strategy.
