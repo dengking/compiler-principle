@@ -1,4 +1,4 @@
-# compiler-principle
+# 龙书
 [Compilers Principles, Techniques and Tools Second Edition(aka ***dragon book***)](https://en.wikipedia.org/wiki/Compilers:_Principles,_Techniques,_and_Tools) is really an amazing book, as mentioned in Chapter 1 Introduction  
 
 > This book is is about how to design and implement compilers. We shall discover that a few basic ideas can be used to construct translators for a wide variety of languages and machines. Besides compilers, the principles and techniques for compiler design are applicable to so many other domains that they are likely to be reused many times in the career of a computer scientist. The study of compiler writing touches up on **programming languages**, **machine architecture**, **language theory**, **algorithms**, and **software engineering**.
@@ -12,5 +12,4 @@ The data structure mentioned in the book can be found in my repository [data-str
 The algorithm mentioned in the book can be found in my repository [algorithm](https://github.com/dengking/algorithm).
 
 Beside the book, this repository also contain some material supplemented to help understand.
-
 

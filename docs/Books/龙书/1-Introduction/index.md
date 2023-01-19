@@ -35,5 +35,4 @@ How dose compiler understand what the program mean? The table is a summary of th
 
 
 
-This book is about how to design and implement compilers. We shall discover that a few basic ideas can be used to construct translators for a wide variety of languages and machines. Besides compilers, the **principles** and **techniques** for compiler design are applicable to so many other domains that they
-are likely to be reused many times in the career of a computer scientist. The study of compiler writing touches up on programming languages, machine architecture, language theory, algorithms, and software engineering.
+This book is about how to design and implement compilers. We shall discover that a few basic ideas can be used to construct translators for a wide variety of languages and machines. Besides compilers, the **principles** and **techniques** for compiler design are applicable to so many other domains that they are likely to be reused many times in the career of a computer scientist. The study of compiler writing touches up on programming languages, machine architecture, language theory, algorithms, and software engineering.
