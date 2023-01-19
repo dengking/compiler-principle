@@ -1,13 +1,6 @@
 nav:
     - Home: index.md
-    - 1-Introduction: 1-Introduction
-    - 2-A-Simple-Syntax-Directed-Translator: 2-A-Simple-Syntax-Directed-Translator
-    - 3-Lexical-Analysis: 3-Lexical-Analysis
-    - 4-Syntax-Analysis: 4-Syntax-Analysis
-    - 5-Syntax-Directed-Translation: 5-Syntax-Directed-Translation
-    - 6-Intermediate-Code-Generation: 6-Intermediate-Code-Generation
-    - 7-Run-Time-Environments: 7-Run-Time-Environments
-    - 9-Machine-Independent-Optimizations: 9-Machine-Independent-Optimizations
+    - Books: Books
     - Guide: Guide
     - Optimization: Optimization
     - Tools: Tools
