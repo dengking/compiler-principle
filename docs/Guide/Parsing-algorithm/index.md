@@ -105,7 +105,7 @@ Most [programming languages](https://en.wikipedia.org/wiki/Programming_language)
 
 ### [现在的编译前端技术还是用NFA和递归下降实现lexer和parser吗？ - RednaxelaFX的回答 - 知乎](https://www.zhihu.com/question/34968369/answer/60588787)  
 
-然后当然也还有一些前端是用lex/yacc系的做法，例如Ruby的[parser](https://www.zhihu.com/search?q=parser&search_source=Entity&hybrid_search_source=Entity&hybrid_search_extra={"sourceType"%3A"answer"%2C"sourceId"%3A"60588787"})；或者是用ANTLR那样的LL(*)的做法，例如Groovy的parser。
+然后当然也还有一些前端是用lex/yacc系的做法，例如Ruby的[parser](https://www.zhihu.com/search?q=parser&search_source=Entity&hybrid_search_source=Entity&hybrid_search_extra={"sourceType"%3A"answer"%2C"sourceId"%3A"60588787"})；或者是用ANTLR那样的`LL(*)`的做法，例如Groovy的parser。
 
 （注意ANTLR的LL(*)不是给定k的LL(k)而比后者更强，因为其lookahead允许无限多，本质上跟PEG类似）
 
@@ -165,3 +165,10 @@ zhihu [编译原理-几种LR算法的演化1——LR(0)](https://zhuanlan.zhihu.
 
 啊,我还忘记了最近在看的Leveldb代码,不算[测试用例](https://www.zhihu.com/search?q=测试用例&search_source=Entity&hybrid_search_source=Entity&hybrid_search_extra={"sourceType"%3A"answer"%2C"sourceId"%3A"25571103"})的话也是这个量级,[大师作品](https://www.zhihu.com/search?q=大师作品&search_source=Entity&hybrid_search_source=Entity&hybrid_search_extra={"sourceType"%3A"answer"%2C"sourceId"%3A"25571103"}),不多说了.
 
+
+
+## GCC、llvm
+
+一、stackoverflow [Are GCC and Clang parsers really handwritten?](https://stackoverflow.com/questions/6319086/are-gcc-and-clang-parsers-really-handwritten)
+
+非常好的内容

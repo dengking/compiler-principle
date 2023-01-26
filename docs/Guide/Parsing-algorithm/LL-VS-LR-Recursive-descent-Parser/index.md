@@ -1,6 +1,6 @@
-# LL VS LR VS Recursive descend parser
+# LL、LR、recursive descend、recursive ascend
 
-## Recursive descent parser VS LL、LR
+
 
 [Recursive descent parser](https://en.wikipedia.org/wiki/Recursive_descent_parser) use [backtracking](https://en.wikipedia.org/wiki/Backtracking) to match.
 
