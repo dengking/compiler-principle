@@ -49,25 +49,17 @@ The *task* of the parser is essentially to determine if and how the input can be
 
 
 
-> NOTE: 
->
-> Top-down:
->
-> |                            parser                            | doc  | code |
-> | :----------------------------------------------------------: | :--: | :--: |
-> |    [LL parsers](https://en.wikipedia.org/wiki/LL_parser)     |      |      |
-> | [Recursive-descent parser](https://en.wikipedia.org/wiki/Recursive-descent_parser) |      |      |
-> |                                                              |      |      |
->
-> Bottom-up:
->
->  [LR parsers](https://en.wikipedia.org/wiki/LR_parser) 、[Shift-Reduce](https://en.wikipedia.org/wiki/Shift-reduce_parser) 
-
 [LL parsers](https://en.wikipedia.org/wiki/LL_parser) and [recursive-descent parser](https://en.wikipedia.org/wiki/Recursive-descent_parser) are examples of top-down parsers which cannot accommodate [left recursive](https://en.wikipedia.org/wiki/Left_recursion) [production rules](https://en.wikipedia.org/wiki/Formal_grammar#The_syntax_of_grammars). Although it has been believed that simple implementations of top-down parsing cannot accommodate direct and indirect left-recursion and may require exponential time and space complexity while parsing ambiguous [context-free grammars](https://en.wikipedia.org/wiki/Context-free_grammar), more sophisticated algorithms for top-down parsing have been created by Frost, Hafiz, and Callaghan[[11\]](https://en.wikipedia.org/wiki/Parsing#cite_note-FrostHafizCallaghan_2007-11)[[12\]](https://en.wikipedia.org/wiki/Parsing#cite_note-FrostHafizCallaghan_2008-12) which accommodate [ambiguity](https://en.wikipedia.org/wiki/Ambiguity) and [left recursion](https://en.wikipedia.org/wiki/Left_recursion) in polynomial time and which generate polynomial-size representations of the potentially exponential number of parse trees. Their algorithm is able to produce both left-most and right-most derivations of an input with regard to a given [context-free grammar](https://en.wikipedia.org/wiki/Context-free_grammar).
 
 An important distinction with regard to parsers is whether a parser generates a *leftmost derivation* or a *rightmost derivation* (see [context-free grammar](https://en.wikipedia.org/wiki/Context-free_grammar)). LL parsers will generate a leftmost [derivation](https://en.wikipedia.org/wiki/Parse_tree) and LR parsers will generate a rightmost derivation (although usually in reverse).
 
 Some *graphical parsing* algorithms have been designed for [visual programming languages](https://en.wikipedia.org/wiki/Visual_programming_languages).[[13\]](https://en.wikipedia.org/wiki/Parsing#cite_note-13)[[14\]](https://en.wikipedia.org/wiki/Parsing#cite_note-14) Parsers for visual languages are sometimes based on [graph grammars](https://en.wikipedia.org/wiki/Graph_grammar).
+
+### Lookahead
+
+Lookahead establishes the maximum incoming tokens that a parser can use to decide which rule it should use. Lookahead is especially relevant to [LL](https://en.wikipedia.org/wiki/LL_parser), [LR](https://en.wikipedia.org/wiki/LR_parser), and [LALR parsers](https://en.wikipedia.org/wiki/LALR_parser), where it is often explicitly indicated by affixing the lookahead to the algorithm name in parentheses, such as LALR(1).
+
+Most [programming languages](https://en.wikipedia.org/wiki/Programming_language), the primary target of parsers, are carefully defined in such a way that a parser with limited lookahead, typically one, can parse them, because parsers with limited lookahead are often more efficient. One important change to this trend came in 1990 when [Terence Parr](https://en.wikipedia.org/wiki/Terence_Parr) created [ANTLR](https://en.wikipedia.org/wiki/ANTLR) for his Ph.D. thesis, a [parser generator](https://en.wikipedia.org/wiki/Parser_generator) for efficient LL(*k*) parsers, where *k* is any fixed value.
 
 
 
