@@ -27,3 +27,15 @@ An **attribute grammar** is a formal way to supplement a [formal grammar](https:
 
 
 ## wikipedia [S-attributed grammar](https://en.wikipedia.org/wiki/S-attributed_grammar)
+
+
+
+## see also
+
+cs.csub.edu [Ch 3.4 Attribute Grammars](https://www.cs.csub.edu/~melissa/cs350-f15/notes/notes04.html#:~:text=Static%20Semantics%20refers%20to%20the,sensitive%20meaning%20of%20a%20program.)
+
+cs.fsu.edu [**5. Semantics**](https://www.cs.fsu.edu/~engelen/courses/COP402003/notes4.html)
+
+cs.fsu.edu [Semantic Analysis](https://www.cs.fsu.edu/~engelen/courses/COP402001/notes4_4.pdf)
+
+zhihu [读书笔记 | 编译原理 ——一个简单的语法制导翻译器（上）](https://zhuanlan.zhihu.com/p/428054996)
