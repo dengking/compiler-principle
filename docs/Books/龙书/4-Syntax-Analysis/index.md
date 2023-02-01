@@ -95,3 +95,14 @@ In this chapter, we assume that the output of the parser is some representation 
 > 2、**semantic analysis: type checking**
 >
 > 3、**generate intermediate code**
+
+
+
+### 4.1.2 Representative Grammars 
+
+Some of the grammars that will be examined in this chapter are presented here for ease of reference. Constructs that begin with keywords like **while** or **int**, are relatively easy to parse, because the keyword guides the choice of the **grammar production** that must be applied to match the input. We therefore concentrate on expressions, which present more of challenge, because of the **associativity** and **precedence** of operators
+
+> NOTE:
+>
+> 一、"**grammar production**"中"production"的含义是产生式
+
