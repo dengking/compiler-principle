@@ -50,9 +50,11 @@ Terminals can have **synthesized attributes**, but not **inherited attributes**.
 >
 > If you want a terminal to have an inherited attribute, you can simulate that with a non-terminal whose only production is a right-hand side with the terminal as its only symbol. So the restriction is not very important in practice, but it is convenient for some of the theoretical statements the authors want to make. 
 >
-> – [rici](https://stackoverflow.com/users/1566221/rici) [Jun 10, 2020 at 23:40](https://stackoverflow.com/questions/62308752/why-can-terminals-have-synthesized-attributes-but-not-inherited-attributes#comment110209826_62311803)
+> – [rici](https://stackoverflow.com/users/1566221/rici) [Jun 10, 2020 at 23:40](https://stackoverflow.com/questions/62308752/why-can-terminals-have-synthesized-attributes-but-not-inherited-attributes#comment110209826_62311803) 
 >
-> 2、terminal的attribute相当于base case
+> 2、stackexchange [In syntax-directed definition, terminals are assumed to have synthesized attributes only, definition doesn't provide any semantic rules for terminals?](https://cs.stackexchange.com/questions/138190/in-syntax-directed-definition-terminals-are-assumed-to-have-synthesized-attribu) 
+>
+> 3、terminal的attribute相当于base case
 >
 > 二、How about a start symbol? It is obvious that a start symbol can not has inherited attribute because it is the ancestor and it has no parent.
 
