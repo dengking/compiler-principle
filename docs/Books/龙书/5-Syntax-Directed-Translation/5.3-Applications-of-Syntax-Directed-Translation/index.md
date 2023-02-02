@@ -24,8 +24,7 @@ Every time the first production $E \to E_1 + T$  is used, its rule creates a nod
 
 ![](./Figure5.10Constructing-syntax-trees-for-simple-expressions.jpg)
 
-For production 3, $E \to T$ , no node is created, since $E.node$ is the same as $T.node$. Similarly, no node is created for production 4, $T \to (E)$. The value of `T.node` is the same as `E.node`, since parentheses are used only for grouping; they influence the structure of the **parse tree** and the **syntax tree**, but once their
-job is done, there is no further need to retain them in the **syntax tree**.
+For production 3, $E \to T$ , no node is created, since $E.node$ is the same as $T.node$. Similarly, no node is created for production 4, $T \to (E)$. The value of `T.node` is the same as `E.node`, since parentheses are used only for grouping; they influence the structure of the **parse tree** and the **syntax tree**, but once their job is done, there is no further need to retain them in the **syntax tree**.
 
 
 

@@ -54,7 +54,15 @@ When an SDD is **S-attributed**, we can evaluate its attributes in any bottom-up
 
 ## 5.2.4 L-Attributed Definitions
 
-The second class of SDD's is called ***L-attributed definitions***. The idea behind this class is that, between the attributes associated with a **production body**, **dependency-graph edges** can go from **left** to **right**, but not from **right** to **left** (hence "L-attributed"). More precisely, each attribute must be either
+The second class of SDD's is called ***L-attributed definitions***. The idea behind this class is that, between the attributes associated with a **production body**, **dependency-graph edges** can go from **left** to **right**, but not from **right** to **left** (hence "L-attributed"). 
+
+> NOTE:
+>
+> 一、从更高层次来理解 "L-attributed":
+>
+> 在进行top-down parse的时候，它对production的使用其实就是从left到right的，因此"L-attributed"能够保证**属性值**被正确计算
+
+More precisely, each attribute must be either
 
 一、**Synthesized**, or
 
@@ -74,7 +82,7 @@ Suppose that there is a production $A \to X_1, X_2, \dots,  X_n$, and that there
 
 > NOTE:
 >
-> 一、上述规则是为了满足: "**dependency-graph edges** can go from **left** to **right**, but not from **right** to **left** (hence "L-attributed")"
+> 一、上面这段话的意思是: 位于$X_i$的左边的文法符号实例$X_1, X_2, \dots, X_{i-1}$ 相关的继承属性或者综合属性，显然这条规则是为了满足: "**dependency-graph edges** can go from **left** to **right**, but not from **right** to **left** (hence "L-attributed")"
 
 3、Inherited or synthesized attributes associated with this occurrence of $X_i$ itself, but only in such a way that there are no cycles in a dependency graph formed by the attributes of this $X_i$.
 
@@ -101,8 +109,9 @@ order consistent with the dependency graph. Translation schemes impose left-to-r
 
 We shall control side effcts in SDD's in one of the following ways:
 
-- Permit incidental side effects that do not constrain attribute evaluation. In other words, permit side effects when attribute evaluation based on any topological sort of the dependency graph produces a "correct" translation, where "correct" depends on the application.
-- Constrain the allowable evaluation orders, so that the same translation is produced for any allowable order. The constraints can be thought of as implicit edges added to the dependency graph.
+1、Permit incidental side effects that do not constrain attribute evaluation. In other words, permit side effects when attribute evaluation based on any topological sort of the dependency graph produces a "correct" translation, where "correct" depends on the application.
+
+2、Constrain the allowable evaluation orders, so that the same translation is produced for any allowable order. The constraints can be thought of as implicit edges added to the dependency graph.
 
 
 
