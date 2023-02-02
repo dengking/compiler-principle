@@ -4,9 +4,15 @@
 
 ## What is syntax-directed translation
 
-三、zhihu [C++代码与AST compiler](https://zhuanlan.zhihu.com/p/599569303)
+素材: 
 
-四、zhihu [读书笔记 | 编译原理 ——一个简单的语法制导翻译器（上） - Ouyz的文章 - 知乎](https://zhuanlan.zhihu.com/p/428054996) 
+1、zhihu [语法制导翻译是干什么的？](https://www.zhihu.com/question/27594539/answer/43441044) 
+
+2、wikipedia [Syntax-directed translation](https://en.wikipedia.org/wiki/Syntax-directed_translation) 
+
+3、zhihu [C++代码与AST compiler](https://zhuanlan.zhihu.com/p/599569303)
+
+4、zhihu [读书笔记 | 编译原理 ——一个简单的语法制导翻译器（上） - Ouyz的文章 - 知乎](https://zhuanlan.zhihu.com/p/428054996) 
 
 
 
@@ -76,7 +82,7 @@ E -> NUM + ACTION1 NUM ACTION2
 
 对编译原理感兴趣的可以关注该系列文章或我的公众号：Imagination Space
 
-### wikipedia [Syntax-directed translation](https://en.wikipedia.org/wiki/Syntax-directed_translation)
+### wikipedia [Syntax-directed translation](https://en.wikipedia.org/wiki/Syntax-directed_translation) 
 
 **Syntax-directed translation** refers to a method of [compiler](https://en.wikipedia.org/wiki/Compiler) implementation where the source language translation is completely driven by the [parser](https://en.wikipedia.org/wiki/Parser).
 
@@ -102,27 +108,36 @@ Thus, given actions and attributes, the grammar can be used for translating stri
 
 ## 正文
 
-This chapter develops the theme of Section 2.3: the translation of languages guided by **context-free grammars**. The translation techniques in this chapter will be applied in Chapter 6 to **type checking** and **intermediate-code generation**. The techniques are also useful for implementing little languages for specialized tasks; this chapter includes an example from typesetting.
+This chapter develops the theme of Section 2.3: the translation of languages guided by **context-free grammars**. The translation techniques in this chapter will be applied in Chapter 6 to **type checking** and **intermediate-code generation**. The techniques are also useful for implementing little languages for specialized tasks; this chapter includes an example from **typesetting**.
 
-We associate information with a language construct by attaching **attributes** to the grammar symbol(s) representing the construct, as discussed in Section 2.3.2. A **syntax-directed definition** specifies the values of **attributes** by associating **semantic rules** with the grammar productions. For example, an infix-to-postfix translator might have a production and rule
+> NOTE:
+>
+> 一、"typesetting"的意思是"排版"，这个例子在 Example 5.18
 
-![](./5.1.jpg)
+We associate information with a language construct by attaching **attributes** to the grammar symbol(s) representing the construct, as discussed in Section 2.3.2. A **syntax-directed definition** specifies the values of **attributes** by associating **semantic rules** with the **grammar productions**. For example, an infix-to-postfix translator might have a production and rule
+
+![](./Figure-5.1.jpg)
 
 From Section 2.3.5, a syntax-directed translation scheme embeds program fragments called **semantic actions** within production bodies, as in
 
-![](./5.2.jpg)
+![](./Figure-5.2.jpg)
 
 By convention, semantic actions are enclosed within curly braces.
 
-Between the two notations, syntax-directed definitions can be more readable, and hence more useful for specifications. However, translation schemes can be more efficient, and hence more useful for implementations.
+Between the two notations, **syntax-directed definitions** can be more readable, and hence more useful for specifications. However, **translation schemes** can be more efficient, and hence more useful for implementations.
 
-|                                    |      |                 |
-| ---------------------------------- | ---- | --------------- |
-| syntax-directed definition         | SDD  | semantic rule   |
-| syntax-directed translation scheme | SDT  | semantic action |
+> NOTE:
+>
+> 一、上面这段话总结了两者
+>
+> |                                    |      |                         |
+> | ---------------------------------- | ---- | ----------------------- |
+> | syntax-directed definition         | SDD  | attribute+semantic rule |
+> | syntax-directed translation scheme | SDT  | semantic action         |
+>
+> 
 
-The most general approach to **syntax-directed translation** is to construct a **parse tree** or a **syntax tree**, and then to compute the values of attributes at the nodes of the tree by visiting the nodes of the tree. In many cases, translation can be done during parsing, without building an explicit tree. We shall therefore
-study a class of syntax-directed translations called "L-attributed translations" (L for left-to-right), which encompass virtually all translations that can be performed during parsing. We also study a smaller class, called "S-attributed translations" (S for synthesized), which can be performed easily in connection with a bottom-up parse.
+The most general approach to **syntax-directed translation** is to construct a **parse tree** or a **syntax tree**, and then to compute the values of **attributes** at the nodes of the tree by visiting the nodes of the tree. In many cases, translation can be done during parsing, without building an explicit tree. We shall therefore study a class of **syntax-directed translations** called "**L-attributed translations**" (L for left-to-right), which encompass(包含) virtually all translations that can be performed during parsing. We also study a smaller class, called "**S-attributed translations**" (S for synthesized), which can be performed easily in connection with a bottom-up parse.
 
 
 

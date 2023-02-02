@@ -6,8 +6,9 @@
 >
 > geeksforgeeks [Compiler Design | Syntax Directed Definition](https://www.geeksforgeeks.org/compiler-design-syntax-directed-definition/) 
 
-A *syntax-directed definition* (SDD) is a context-free grammar together with **attributes** and **rules**. Attributes are associated with grammar symbols and rules are associated with productions. If `X` is a symbol and `a` is one of its attributes, then we write `X.a` to denote the value of `a` at a particular parse-tree node labeled `X` . If we implement the nodes of the parse tree by records or objects, then the **attributes** of `X` can b e implemented by data fields in the records that represent the nodes for `X` . Attributes may be of any kind: numbers, types, table references, or strings, for instance. The strings may even be long sequences of
-code, say code in the intermediate language used by a compiler.
+A *syntax-directed definition* (SDD) is a context-free grammar together with **attributes** and **rules**. Attributes are associated with grammar symbols and rules are associated with productions. If `X` is a symbol and `a` is one of its attributes, then we write `X.a` to denote the value of `a` at a particular parse-tree node labeled `X` . If we implement the nodes of the parse tree by records or objects, then the **attributes** of `X` can be implemented by data fields in the records that represent the nodes for `X` . 
+
+Attributes may be of any kind: numbers, types, table references, or strings, for instance. The strings may even be long sequences of code, say code in the intermediate language used by a compiler.
 
 > NOTE: 
 >
@@ -21,9 +22,13 @@ We shall deal with two kinds of attributes for **nonterminals**:
 
 2、An *inherited attribute* for a **nonterminal** `B` at a parse-tree node `N` is defined by a **semantic rule** associated with the production at the parent of `N` . Note that the production must have `B` as a symbol in its body. An **inherited attribute** at node `N` is defined only in terms of attribute values at `N` 's parent, `N` itself, and `N` 's siblings.
 
-> NOTE: The above classification method is based on how to calculate the attribute value. It is obvious that the direction of computation of **synthesized attribute** is contrast to **inherited attribute**'s. More precisely, **synthesized attribute** is suitable to **bottom-up parsing** while **inherited attribute** is suitable to **top-down parsing**. Example 5.2 show how **synthesized attribute** is calculated while example 5.3 show how **inherited attribute** is calculated. The computation of attribute will be discussed in later chapter. 
+> NOTE: 
+>
+> 一、The above classification method is based on how to calculate the attribute value. It is obvious that the direction of computation of **synthesized attribute** is contrast to **inherited attribute**'s. More precisely, **synthesized attribute** is suitable to **bottom-up parsing** while **inherited attribute** is suitable to **top-down parsing**. Example 5.2 show how **synthesized attribute** is calculated while example 5.3 show how **inherited attribute** is calculated. The computation of attribute will be discussed in later chapter. 
+>
+> 二、A SDD can has inherited attribute and inherited attribute at the same time, which is introduced in chapter 5.1.2.
 
-> NOTE: A SDD can has inherited attribute and inherited attribute at the same time, which is introduced in chapter 5.1.2.
+
 
 While we do not allow an **inherited attribute** at node `N` to be defined in terms of attribute values at the children of node `N` , we do allow a synthesized attribute at node `N` to be defined in terms of **inherited attribute** values at node `N` itself.
 
@@ -31,7 +36,25 @@ While we do not allow an **inherited attribute** at node `N` to be defined in te
 
 Terminals can have **synthesized attributes**, but not **inherited attributes**. Attributes for terminals have lexical values that are supplied by the lexical analyzer; there are no semantic rules in the SDD itself for computing the value of an attribute for a terminal.
 
-> NOTE: How about a start symbol? It is obvious that a start symbol can not has inherited attribute because it is the ancestor and it has no parent.
+> NOTE: 
+>
+> 一、
+>
+> 1、stackoverflow [Why can terminals have synthesized attributes but not inherited attributes?](https://stackoverflow.com/questions/62308752/why-can-terminals-have-synthesized-attributes-but-not-inherited-attributes) 
+>
+> In Aho et al's Compilers: Principles, Techniques, and Tools on page 305 it says "Terminals can have synthesized attributes, but not inherited attributes." Here's my hang up: if synthesized attributes are attributes that can be computed based on a node's children, and inherited attributes can be computed based on a node's parent and siblings, then this feels wrong to me because since the terminals would be the leaves of the parse tree they wouldn't have any children. If they don't have any children then they shouldn't be able to have synthesized attributes. Similarly it seems that since they're leaves it would be likely they would have parent nodes and, as a result, could have inherited attributes. If someone could point out where I'm going wrong here that would be awesome.
+>
+> [A](https://stackoverflow.com/a/62311803)
+>
+> When I first read that in the dragon book, I was also confused. But if you think about it for a moment, it will become clear. The terminals synthesized attributes don't come from the parser; rather they come from the lexer. To give an example suppose you have a terminal **digit** (example taken from the dragon book). **digit** has the synthesized attribute `lexval`. This synthesized attribute does not come from the parser. It comes from the lexer instead. It should be pretty clear why terminals can't have inherited attributes :)
+>
+> If you want a terminal to have an inherited attribute, you can simulate that with a non-terminal whose only production is a right-hand side with the terminal as its only symbol. So the restriction is not very important in practice, but it is convenient for some of the theoretical statements the authors want to make. 
+>
+> – [rici](https://stackoverflow.com/users/1566221/rici) [Jun 10, 2020 at 23:40](https://stackoverflow.com/questions/62308752/why-can-terminals-have-synthesized-attributes-but-not-inherited-attributes#comment110209826_62311803)
+>
+> 2、terminal的attribute相当于base case
+>
+> 二、How about a start symbol? It is obvious that a start symbol can not has inherited attribute because it is the ancestor and it has no parent.
 
 **Example 5.1**: skipped
 
@@ -66,7 +89,7 @@ For SDD's with both inherited and synthesized attributes, there is no guarantee 
 
 These rules are circular; it is impossible to evaluate either `A.s` at a node `N` or `B.i` at the child of `N` without first evaluating the other. The [circular dependency](https://en.wikipedia.org/wiki/Circular_dependency) of `A.s` and `B.i` at some pair of nodes in a parse tree is suggested by Fig. 5.2.
 
-![](./Figure5.2The-circular-dependency-of-A.s-and-B.i-on-one-another.jpg)
+![](./Figure-5.2-The-circular-dependency-of-A.s-and-B.i-on-one-another.jpg)
 
 
 
@@ -96,7 +119,7 @@ Each of the nonterminals `T` and `F` has a **synthesized attribute** `val` ; the
 The semantic rules are based on the idea that the left operand of the operator `*` is inherited. More precisely, the head `T'` of the production $T' \to * F T_1'$ inherits the left operand of `*` in the production body. Given a term `x * y * z` , the root of the subtree for $* y * z$ inherits `x`. Then, the root of the subtree for
 `* z` inherits the value of `* x * y` , and so on, if there are more factors in the term. Once all the factors have been accumulated, the result is passed back up the tree using **synthesized attributes**.
 
-![](./Figure5.5Annotated-parse-tree-for-3-times-5.jpg)
+![](./Figure-5.5-Annotated-parse-tree-for-3-times-5.jpg)
 
 
 
