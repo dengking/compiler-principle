@@ -41,3 +41,14 @@ LeetCode后台使用clang进行santinizer:
 > NOTE: 
 >
 > 在其中可以查找到完整的LLVM的版本，基本上LLVM的version和clang的version是一致的
+
+
+
+## Getting Involved
+
+[Contributing to LLVM](https://llvm.org/docs/Contributing.html)
+
+
+
+[LLVM Programmer’s Manual](https://llvm.org/docs/ProgrammersManual.html)
+
