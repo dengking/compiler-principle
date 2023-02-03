@@ -106,3 +106,8 @@ Some of the grammars that will be examined in this chapter are presented here fo
 >
 > 一、"**grammar production**"中"production"的含义是产生式
 
+**Associativity** and **precedence** are captured in the following grammar, whichis similar to ones used in Chapter 2 for describing **expressions**, **terms**, and **factors**. `E` represents expressions consisting of **terms** separated by `+` signs, `T` represents **terms** consisting of **factors** separated by `*` signs, and `F` represents **factors** that can be either parenthesized expressions or identiers:
+
+![](./Fig-4.1-left-recursive-expression-grammar.png)
+
+**Expression grammar** (4.1) belongs to the class of **LR grammars** that are suitable for **bottom-up parsing**. This grammar can be adapted to handle additional operators and additional levels of **precedence**. However, it cannot be used for **top-down parsing** because it is **left recursive**.
