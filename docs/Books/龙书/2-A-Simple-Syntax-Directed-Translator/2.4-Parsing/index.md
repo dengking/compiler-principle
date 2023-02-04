@@ -6,11 +6,11 @@ Parsing is the process of determining how a string of **terminals** can be gener
 >
 > The concept of parsing is introduced in chapter 2.2.2 Derivations
 
-This section introduces a parsing method called "[recursive descent](https://en.wikipedia.org/wiki/Recursive_descent_parser)," which can be used both to parse and to implement syntax-directed translators. A complete Java program, implementing the translation scheme of Fig. 2.15, appears in the next section. A viable alternative is to use a software tool to generate a translator directly from a translation scheme. Section 4.9 describes such a tool  Yacc; it can implement the translation scheme of Fig. 2.15 without modification.
+This section introduces a parsing method called "[recursive descent](https://en.wikipedia.org/wiki/Recursive_descent_parser)," which can be used both to parse and to implement **syntax-directed translators**. A complete Java program, implementing the translation scheme of Fig. 2.15, appears in the next section. A viable alternative is to use a software tool to generate a translator directly from a translation scheme. Section 4.9 describes such a tool  Yacc; it can implement the translation scheme of Fig. 2.15 without modification.
 
 For any context-free grammar there is a parser that takes at most $O (n^3)$ time to parse a string of n terminals. But cubic(立方的) time is generally too expensive. Fortunately, for real programming languages, we can generally design a grammar that can be parsed quickly. Linear-time algorithms suffice to parse essentially all languages that arise in practice. Programming-language parsers almost always make a single left-to-right scan over the input, looking ahead one terminal at a time, and constructing pieces of the parse tree as they go.
 
-Most parsing methods fall into one of two classes, called the [top-down](https://en.wikipedia.org/wiki/Top-down_parsing) and [bottom-up](https://en.wikipedia.org/wiki/Bottom-up_parsing) methods. These terms refer to the order in which **nodes** in the **parse tree** are constructed. In top-down parsers, construction starts at the root and proceeds towards the leaves, while in bottom-up parsers, construction starts at the leaves and proceeds towards the root. The popularity of top-down parsers is due to the fact that efficient parsers can be constructed more easily by hand using top-down methods. Bottom-up parsing, however, can handle a larger class of grammars and translation schemes, so software tools for generating parsers directly from grammars often use bottom-up methods.
+Most parsing methods fall into one of two classes, called the [top-down](https://en.wikipedia.org/wiki/Top-down_parsing) and [bottom-up](https://en.wikipedia.org/wiki/Bottom-up_parsing) methods. These terms refer to the order in which **nodes** in the **parse tree** are constructed. In **top-down parsers**, construction starts at the root and proceeds towards the leaves, while in **bottom-up parsers**, construction starts at the leaves and proceeds towards the root. The popularity of **top-down parsers** is due to the fact that efficient parsers can be constructed more easily by hand using **top-down methods**. Bottom-up parsing, however, can handle a larger class of grammars and translation schemes, so software tools for generating parsers directly from grammars often use **bottom-up methods**.
 
 > NOTE:  
 >
@@ -18,9 +18,9 @@ Most parsing methods fall into one of two classes, called the [top-down](https:/
 
 ## 2.4.1 Top-Down Parsing
 
-We introduce **top-down parsing** by considering a grammar that is well-suited for this class of methods. Later in this section, we consider the construction of top-down parsers in general. The grammar in Fig. 2.16 generates a subset of the statements of C or Java. We use the boldface terminals **if** and **for** for the keywords "`if`" and "`for`", respectively, to emphasize that these character sequences are treated as units, i.e., as single terminal symbols. Further, the terminal `expr` represents expressions; a more complete grammar would use a nonterminal `expr` and have productions for nonterminal `expr`. Similarly, other is a terminal representing other statement constructs.
+We introduce **top-down parsing** by considering a grammar that is well-suited for this class of methods. Later in this section, we consider the construction of **top-down parsers** in general. The grammar in Fig. 2.16 generates a subset of the statements of C or Java. We use the boldface terminals **if** and **for** for the keywords "`if`" and "`for`", respectively, to emphasize that these character sequences are treated as units, i.e., as single terminal symbols. Further, the terminal `expr` represents expressions; a more complete grammar would use a nonterminal `expr` and have productions for nonterminal `expr`. Similarly, `other` is a terminal representing other statement constructs.
 
-![](./Figure2.16A-grammar-for-some-statements-in-C-and-Java.jpg)
+![](./Figure-2.16-A-grammar-for-some-statements-in-C-and-Java.jpg)
 
 The **top-down** construction of a **parse tree** like the one in Fig. 2.17, is done by starting with the root, labeled with the starting nonterminal `stmt`, and repeatedly performing the following two steps.
 
@@ -28,11 +28,11 @@ The **top-down** construction of a **parse tree** like the one in Fig. 2.17, is 
 
 2、Find the next node at which a subtree is to be constructed, typically the **leftmost** unexpanded **nonterminal** of the tree.
 
-![](./Figure2.17A-parse-tree-according-to-the-grammar-in-Fig2.16.jpg)
+![](./Figure-2.17-A-parse-tree-according-to-the-grammar-in-Fig2.16.jpg)
 
 
 
-For some grammars, the above steps can be implemented during a single left-to-right scan of the input string. The current terminal being scanned in the input is frequently referred to as the *lookahead symbol*. Initially, the **lookahead symbol** is the first, i.e., leftmost, terminal of the input string. Figure 2.18 illustrates the construction of the parse tree in Fig. 2.17 for the input string
+For some grammars, the above steps can be implemented during a single left-to-right scan of the input string. The current terminal being scanned in the input is frequently referred to as the ***lookahead symbol***. Initially, the **lookahead symbol** is the first, i.e., leftmost, terminal of the input string. Figure 2.18 illustrates the construction of the **parse tree** in Fig. 2.17 for the input string
 
 ```pseudocode
 for ( ; expr ; expr ) other
@@ -40,11 +40,11 @@ for ( ; expr ; expr ) other
 
 
 
-![](./Figure2.18Top-down-parsing-while-scanning-the-input-from-left-to-right.jpg)
+![](./Figure-2.18-Top-down-parsing-while-scanning-the-input-from-left-to-right.jpg)
 
-Initially, the terminal `for` is the **lookahead symbol**, and the known part of the parse tree consists of the root, labeled with the starting nonterminal `stmt` in Fig. 2.18(a). The objective is to construct the remainder of the parse tree in such a way that the string generated by the parse tree matches the input string.
+Initially, the terminal `for` is the **lookahead symbol**, and the known part of the **parse tree** consists of the root, labeled with the starting nonterminal `stmt` in Fig. 2.18(a). The objective is to construct the remainder of the **parse tree** in such a way that the string generated by the **parse tree** matches the input string.
 
-For a match to occur, the nonterminal `stmt` in Fig. 2.18(a) must derive(派生、expand) a string that starts with the lookahead symbol `for`. In the grammar of Fig. 2.16, there is just one production for `stmt` that can derive such a string, so we select it, and construct the children of the root labeled with the symbols in the production body. This expansion of the parse tree is shown in Fig. 2.18(b).
+For a match to occur, the nonterminal `stmt` in Fig. 2.18(a) must derive(派生、expand) a string that starts with the **lookahead symbol** `for`. In the grammar of Fig. 2.16, there is just one production for `stmt` that can derive such a string, so we select it, and construct the children of the root labeled with the symbols in the production body. This expansion of the parse tree is shown in Fig. 2.18(b).
 
 Each of the three snapshots in Fig. 2.18 has arrows marking the **lookahead symbol** in the input and the node in the parse tree that is being considered. Once children are constructed at a node, we next consider the leftmost child. In Fig. 2.18(b), children have just been constructed at the root, and the **leftmost child** labeled with **for** is being considered.
 
