@@ -7,9 +7,6 @@ nav:
     - 5-Syntax-Directed-Translation: 5-Syntax-Directed-Translation
     - 6-Intermediate-Code-Generation: 6-Intermediate-Code-Generation
     - 7-Run-Time-Environments: 7-Run-Time-Environments
+    - 8-Code-generation: 8-Code-generation
     - 9-Machine-Independent-Optimizations: 9-Machine-Independent-Optimizations
-    - Guide: Guide
-    - Optimization: Optimization
-    - Tools: Tools
-    - Implementation: Implementation
-
+    
