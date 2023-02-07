@@ -239,7 +239,17 @@ $$
 
 
 
+
 The same effect can be achieved, as in Fig. 2.20(b), by rewriting the productions for `A` in the following manner, using a new nonterminal `R`:
 $$
 A \to \beta R \\ R \to \alpha R | \epsilon
 $$
+
+The nonterminal `A` and its production are said to be **left recursive**, because the production $A \to A \alpha$ has `A` itself as the leftmost symbol on the right side(In a general **left-recursive** grammar, instead of a production $A \to A$, the nonterminal `A` may derive `A` through intermediate productions). Repeated application of this production builds up a sequence of $\alpha$ 's to the right of `A`, as in Fig. 2.20(a). When `A` is finally replaced by $\beta$, we have a $\beta$ followed by a sequence of zero or more $\alpha$'s.
+
+The same effect can be achieved, as in Fig. 2.20(b), by rewriting the productions for `A` in the following manner, using a new nonterminal $R$:
+$$
+A \to \beta R \\ R \to \alpha R | \epsilon
+$$
+Nonterminal `R` and its production $R \to \alpha R$ are right recursive because this production for R has R itself as the last symbol on the right side. **Right-recursive productions** lead to trees that grow down towards the right, as in Fig. 2.20(b). Trees growing down to the right make it harder to translate expressions containing **left-associative operators**, such as minus. In Section 2.5.2, however, we shall see that the proper translation of expressions into postx notation canstill be attained by a careful design of the translation scheme.
+
