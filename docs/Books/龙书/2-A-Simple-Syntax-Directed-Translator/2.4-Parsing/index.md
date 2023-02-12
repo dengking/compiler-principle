@@ -199,11 +199,27 @@ The FIRST sets must be considered if there are two pro ductions $A \to \alpha$ a
 
 ## 2.4.3 When to Use $\epsilon$-Productions
 
+Our **predictive parser** uses an $\epsilon$-production as a default when no other production can be used. With the input of Fig. 2.18, after the terminals `for` and `(` are matched, the **lookahead symbol** is `;`. At this point procedure `optexpr` is called, and the code
+
+```c++
+if ( lookahead == expr ) match(expr);
+```
+
+in its body is executed. Nonterminal `optexpr` has two productions, with bodies `expr` and $\epsilon$. The **lookahead symbol** "`;`" does not match the terminal `expr`, so the production with body `expr` cannot apply. In fact, the procedure returns without changing the **lookahead symbol** or doing anything else. In fact, the procedure returns without changing the **lookahead symbol** or doing anything else. Doing nothing corresponds to applying an $\epsilon$-production.
+
+More generally, consider a variant of the productions in Fig. 2.16 where `optexpr` generates an expression nonterminal instead of the terminal `expr`:
+$$
+optexpr \to expr | \epsilon
+$$
+Thus, `optexpr` either generates an expression using nonterminal `expr` or it generates $\epsilon$ . While parsing `optexpr`, if the **lookahead symbol** is not in `FIRST(expr)`, then the $\epsilon$-production is used.
+
+For more on when to use $\epsilon$-productions, see the discussion of LL(1) grammars in Section 4.4.3.
+
 
 
 ## 2.4.4 Designing a Predictive Parser 
 
-
+We can generalize the technique introduced informally in Section 2.4.2, to apply to any grammar that has disjoint FIRST sets for the production bodies belonging to any nonterminal. We shall also see that when we have a **translation scheme**--that is, a grammar with embedded actions | it is possible to execute those actions as part of the procedures designed for the parser.
 
 
 
