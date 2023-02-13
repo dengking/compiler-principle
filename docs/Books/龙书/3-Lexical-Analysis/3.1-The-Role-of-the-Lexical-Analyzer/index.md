@@ -21,3 +21,16 @@ b) ***Lexical analysis*** proper is the more complex portion, which produces tok
 TODO
 
 ## 3.1.2 Tokens, Patterns, and Lexemes 
+
+> NOTE:
+>
+> 一、
+>
+> token 词法单元
+>
+> lexeme 词素
+>
+> 二、token是核心
+>
+> 
+
