@@ -76,7 +76,7 @@ Figure 3.4 shows the same arrangement as Fig. 3.3, but with the **sentinels** ad
 
 
 
-## Can We Run Out of Buer Space?
+## Can We Run Out of Buffer Space?
 
 > NOTE:
 >
@@ -89,3 +89,4 @@ In most modern languages, **lexemes** are short, and one or two characters of **
 > 一、最后一段的意思: "为了避免长字符串的问题，我们可以将它们视为组件的串联，每个组件来自字符串所在的行。例如，在Java中，通过在每行上写一段并在每段末尾用+运算符连接段来表示长字符串是常规的。"
 
 A more difficult problem occurs when arbitrarily long **lookahead** may be needed. For example, some languages like PL/I do not treat keywords as ***reserved***; that is, you can use identifiers with the same name as a keyword like `DECLARE`. If the **lexical analyzer** is presented with text of a PL/I program that begins `DECLARE ( ARG1, ARG2,...` it cannot be sure whether `DECLARE` is a keyword, and `ARG1` and so on are variables being declared, or whether `DECLARE` is a procedure name with its arguments. For this reason, modern languages tend to reserve their keywords. However, if not, one can treat a keyword like `DECLARE` as an ambiguous identifier, and let the parser resolve the issue, perhaps in conjunction with symbol-table lookup.
+
