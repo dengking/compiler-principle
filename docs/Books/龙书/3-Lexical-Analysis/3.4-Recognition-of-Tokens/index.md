@@ -36,7 +36,9 @@ Here, `blank`, `tab`, and `newline` are abstract symbols that we use to express 
 
 ## 3.4.1 Transition Diagrams 
 
+As an intermediate step in the construction of a **lexical analyzer**, we first convert patterns into stylized(程式化的；有艺术效果的；按固定格式的) flowcharts, called "transition diagrams." In this section, we perform the conversion from **regular-expression patterns** to **transition diagrams** by hand, but in Section 3.6, we shall see that there is a mechanical way to construct these diagrams from collections of regular expressions.
 
+Transition diagrams have a collection of **nodes** or **circles**, called ***states***. Each state represents a condition that could occur during the process of scanning the input looking for a lexeme that matches one of several patterns. We may think of a **state** as summarizing all we need to know about what characters we have seen between the `lexemeBegin` pointer and the `forward` pointer (as in the situation of Fig. 3.3).
 
 
 
