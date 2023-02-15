@@ -76,7 +76,11 @@ The [McNaughton-Yamada-Thompson algorithm](https://en.wikipedia.org/wiki/Thompso
 
 **OUTPUT**: An NFA `N` accepting `L(r)`.
 
-METHOD: Begin by parsing `r` into its constituent **subexpressions**. The rules for constructing an NFA consist of **basis rules** for handling subexpressions with no operators, and **inductive rules** for constructing larger NFA's from the NFA's for the immediate subexpressions of a given expression.
+**METHOD**: Begin by parsing `r` into its constituent **subexpressions**. The rules for constructing an NFA consist of:
+
+1、**basis rules** for handling **subexpressions** with no operators, 
+
+2、**inductive rules** for constructing larger NFA's from the NFA's for the immediate subexpressions of a given expression.
 
 **BASIS**: For expression $\epsilon$ construct the NFA
 
@@ -96,7 +100,7 @@ where again `i` and `f` are new states, the start and accepting states, respecti
 
 a) Suppose `r = s|t`. Then `N (r )`, the NFA for `r` , is constructed as in Fig. 3.40. Here, `i` and `f` are new states, the start and accepting states of `N (r )`, respectively. There are $\epsilon$-transitions from `i` to the start states of `N (s)` and `N (t)`, and each of their accepting states have $\epsilon$-transitions to the accepting state `f` . Note that the accepting states of `N (s)` and `N (t)` are not accepting in `N (r)`. Since any path from `i` to `f` must pass through either `N (s)` or `N (t)` exclusively, and since the label of that path is not changed by the $\epsilon$'s leaving `i` or entering `f` , we conclude that `N (r )` accepts $L(s) \cup L(t)$, which is the same as `L(r )`. That is, Fig. 3.40 is a correct construction for the union operator.
 
-![](./Figure3.40NFA-for-the-union-of-two-regular-expressions.jpg)
+![](./figure-3.40-NFA-for-union-of-two-regex=regular-expression.jpg)
 
 b) Suppose `r = st`. Then construct `N (r )` as in Fig. 3.41. The **start state** of `N (s)` becomes the **start state** of `N (r )`, and the **accepting state** of `N (t)` is the only accepting state of `N (r )`. The **accepting state** of `N(s)` and the **start state** of `N (t)` are merged into a single state, with all the transitions in or out of either state. A path from `i` to `f` in Fig. 3.41 must go first through `N (s)`, and therefore its label will begin with some string in `L(s)`. The path then continues through `N (t)`, so the path's label finishes with a
 string in `L(t)`. As we shall so on argue, **accepting states** never have edges out and start states never have edges in, so it is not possible for a path to re-enter `N (s)` after leaving it. Thus, `N (r )` accepts exactly `L(s)L(t)`, and is a correct NFA for `r = st`.
