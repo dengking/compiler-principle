@@ -50,27 +50,33 @@ Fig. 3.33, is a straightforward search in a graph from a set of states. In this 
 
 
 
-![](./Figure3.33Computing-closure(T).jpg)
+![](./figure-3.33-Computing-closure(T).jpg)
 
 
 
 ## 3.7.4 Construction of an NFA from a Regular Expression
 
-We now give an algorithm for converting any regular expression to an NFA that defines the same language. The algorithm is **syntax-directed**, in the sense that it works recursively up the **parse tree** for the regular expression. For each sub expression the algorithm constructs an NFA with a single accepting state.
+We now give an algorithm for converting any **regular expression** to an **NFA** that defines the same language. The algorithm is **syntax-directed**, in the sense that it works recursively up the **parse tree** for the regular expression. For each **subexpression** the algorithm constructs an NFA with a **single accepting state**.
 
-> NOTE: bottom-up
-
-> NOTE: How to build a parse tree for a regular expression? 
+> NOTE: 
 >
-> - [Efficiently building a parse tree from a regular expression](http://www.iro.umontreal.ca/~feeley/papers/DubeFeeleyACTAINFORMATICA00.pdf)
+> 一、bottom-up
+>
+> 二、How to build a parse tree for a regular expression? 
+>
+> [Efficiently building a parse tree from a regular expression](http://www.iro.umontreal.ca/~feeley/papers/DubeFeeleyACTAINFORMATICA00.pdf)
 
-**Algorithm 3.23** : The [McNaughton-Yamada-Thompson algorithm](https://en.wikipedia.org/wiki/Thompson%27s_construction) to convert a regular expression to an NFA.
+
+
+### Algorithm 3.23 
+
+The [McNaughton-Yamada-Thompson algorithm](https://en.wikipedia.org/wiki/Thompson%27s_construction) to convert a regular expression to an NFA.
 
 **INPUT**: A regular expression `r` over alphabet $\Sigma$.
 
-**OUTPUT**: An NFA `N` accepting `L(r )`.
+**OUTPUT**: An NFA `N` accepting `L(r)`.
 
-METHOD: Begin by parsing `r` into its constituent subexpressions. The rules for constructing an NFA consist of **basis rules** for handling subexpressions with no operators, and **inductive rules** for constructing larger NFA's from the NFA's for the immediate subexpressions of a given expression.
+METHOD: Begin by parsing `r` into its constituent **subexpressions**. The rules for constructing an NFA consist of **basis rules** for handling subexpressions with no operators, and **inductive rules** for constructing larger NFA's from the NFA's for the immediate subexpressions of a given expression.
 
 **BASIS**: For expression $\epsilon$ construct the NFA
 
