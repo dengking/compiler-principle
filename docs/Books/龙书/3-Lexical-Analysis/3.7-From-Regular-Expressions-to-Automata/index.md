@@ -105,11 +105,11 @@ a) Suppose `r = s|t`. Then `N (r )`, the NFA for `r` , is constructed as in Fig.
 b) Suppose `r = st`. Then construct `N (r )` as in Fig. 3.41. The **start state** of `N (s)` becomes the **start state** of `N (r )`, and the **accepting state** of `N (t)` is the only accepting state of `N (r )`. The **accepting state** of `N(s)` and the **start state** of `N (t)` are merged into a single state, with all the transitions in or out of either state. A path from `i` to `f` in Fig. 3.41 must go first through `N (s)`, and therefore its label will begin with some string in `L(s)`. The path then continues through `N (t)`, so the path's label finishes with a
 string in `L(t)`. As we shall so on argue, **accepting states** never have edges out and start states never have edges in, so it is not possible for a path to re-enter `N (s)` after leaving it. Thus, `N (r )` accepts exactly `L(s)L(t)`, and is a correct NFA for `r = st`.
 
-![](./Figure3.41NFA-for-the-concatenation-of-two-regular-expressions.jpg)
+![](./figure-3.41-NFA-for-concatenation-of-two-regex=regular-expression.jpg)
 
 c) Suppose $r = s^*$. Then for `r` we construct the NFA `N (r )` shown in Fig. 3.42. Here, `i` and `f` are new states, the start state and lone accepting state of `N (r )`. To get from `i` to `f` , we can either follow the introduced path labeled $\epsilon$, which takes care of the one string in $L(s)^0$ , or we can go to the start state of `N(s)`, through that NFA, then from its accepting state back to its start state zero or more times. These options allow `N (r )` to accept all the strings in $L(s)^1$, $L(s)^2$, and so on, so the entire set of strings accepted by `N (r )` is $L(s^*)$.
 
-![](./Figure3.42NFA-for-the-closure-of-a-regular-expression.jpg)
+![](./figure-3.42-NFA-for-closure-of-a-regex=regular-expression.jpg)
 
 d) Finally, suppose `r = (s)`. Then `L(r ) = L(s)`, and we can use the NFA `N (s)` as `N (r )`.
 
@@ -123,28 +123,28 @@ The method description in Algorithm 3.23 contains hints as to why the **inductiv
 
 **Example 3.24** : Let us use Algorithm 3.23 to construct an NFA for $r = (a | b) ^*abb$. Figure 3.43 shows a **parse tree** for `r` that is analogous to the **parse trees** constructed for arithmetic expressions in Section 2.2.3. For subexpression $r_1$ , the first `a`, we construct the NFA:
 
-![](./Figure3.43Parse-tree-for.jpg)
+![](./figure-3.43-Parse-tree-for.jpg)
 
-![](./Figure-a-NFA-example3.24.jpg)
+![](./figure-a-NFA-example-3.24.jpg)
 
 State numbers have been chosen for consistency with what follows. For $r_2$ we construct:
 
-![](./Figure-b-NFA-example3.24.jpg)
+![](./figure-b-NFA-example-3.24.jpg)
 
 We can now combine $N (r_1)$ and $N (r_2)$, using the construction of Fig. 3.40 to obtain the NFA for $r_3
 =r_1|r_2$; this NFA is shown in Fig. 3.44.
 
-![](./Figure3.44NFA-for-r3.jpg)
+![](./figure-3.44-NFA-for-r3.jpg)
 
 The NFA for $r_4= (r_3)$ is the same as that for $r_3$. The NFA for $r_5= (r_3)$ is then as shown in Fig. 3.45. We have used the construction in Fig. 3.42 to build this NFA from the NFA in Fig. 3.44.
 
-![](./Figure-3.45-NFA-for-r5.jpg)
+![](./figure-3.45-NFA-for-r5.jpg)
 
 Now, consider subexpression $r_6$, which is another `a`. We use the basis construction for `a` again, but we must use new states. It is not permissible to reuse the NFA we constructed for $r_1$, even though $r_1$ and $r_6$ are the same expression. The NFA for $r_6$ is:
 
-![](./Figure-a-NFA-example3.24-state7.jpg)
+![](./figure-a-NFA-example-3.24-state-7.jpg)
 
 To obtain the NFA for $r_7= r_5r_6$, we apply the construction of Fig. 3.41. We merge states 7 and $7^{'}$, yielding the NFA of Fig. 3.46. Continuing in this fashion with new NFA's for the two subexpressions `b` called $r_8$
 and $r_{10}$, we eventually construct the NFA for  tha$r = (a | b) ^*abb$ that we first met in Fig. 3.34. 
 
-![](./Figure3.46-NFA-for-r7.jpg)
+![](./figure-3.46-NFA-for-r7.jpg)
