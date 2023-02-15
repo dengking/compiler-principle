@@ -1,6 +1,8 @@
 # 3.7 From Regular Expressions to Automata
 
-> NOTE: What this chapter describe is mainly three algorithms
+> NOTE: 
+>
+> What this chapter describe is mainly three algorithms
 >
 > | Name                                                         | Function                                                     | chapter                                                |
 > | ------------------------------------------------------------ | ------------------------------------------------------------ | ------------------------------------------------------ |
