@@ -40,23 +40,71 @@ As an intermediate step in the construction of a **lexical analyzer**, we first 
 
 Transition diagrams have a collection of **nodes** or **circles**, called ***states***. Each state represents a condition that could occur during the process of scanning the input looking for a lexeme that matches one of several patterns. We may think of a **state** as summarizing all we need to know about what characters we have seen between the `lexemeBegin` pointer and the `forward` pointer (as in the situation of Fig. 3.3).
 
+***Edges*** are directed from one state of the **transition diagram** to another. Each edge is ***labeled*** by a symbol or set of symbols. If we are in some state `s`, and the next input symbol is `a`, we look for an edge out of state `s` labeled by `a` (and perhaps by other symbols, as well). If we find such an **edge**, we advance the ***forward pointer*** and enter the state of the **transition diagram** to which that edge leads. We shall assume that all our **transition diagrams** are **deterministic**, meaning that there is never more than one edge out of a given state with a given symbol among its labels. Starting in Section 3.5, we shall relax the condition of determinism, making life much easier for the designer of a **lexical analyzer**, although trickier for the implementer. Some important conventions about transition diagrams are:
+
+### Example 3.9
 
 
-## Aho-Corasick algorithm 
+
+![](figure-3.13-transition-diagram-for-relop.png)
+
+
+
+
+
+## 3.4.2 Recognition of Reserved Words and Identiers 
+
+
+
+There are two ways that we can handle **reserved words** that look like identiers:
+
+1、Install the reserved words in the symbol table initially.
+
+2、Create separate transition diagrams for each keyword; 
+
+
+
+## 3.4.3 Completion of the Running Example 
+
+
+
+![](figure-3.16-A-transition-diagram-for-unsigned-numbers.png)
+
+
+
+![](figure-3.17-A-transition-diagram-for-whitespace.png)
+
+
+
+## 3.4.4 Architecture of a Transition-Diagram-Based Lexical Analyzer 
+
+There are several ways that a collection of transition diagrams can be usedto build a **lexical analyzer**. Regardless of the overall strategy, each state is represented by a piece of code.
+
+
+
+![](figure-3.18-sketch-of-implementation-of-relop-transition-diagram.png)
+
+## 3.4.5 Exercises for Section 3.4 
+
+
+
+### Aho-Corasick algorithm、KMP algorithm
 
 > NOTE: 
 >
 > The main content of this chapter is passed, but in the exercise,  the author introduce [Aho-Corasick algorithm](https://en.wikipedia.org/wiki/Aho%E2%80%93Corasick_algorithm) and [KMP algorithm](https://en.wikipedia.org/wiki/Knuth%E2%80%93Morris%E2%80%93Pratt_algorithm) which are interesting.
 
-The following exercises, up to Exercise 3.4.12, introduce the Aho-Corasick algorithm for recognizing a collection of keywords in a text string in time proportional to the length of the text and the sum of the length of the keywords. This algorithm uses a special form of transition diagram called a [trie](https://en.wikipedia.org/wiki/Trie). A [trie](https://en.wikipedia.org/wiki/Trie) is a tree-structured transition diagram with distinct labels on the edges leading from a node to its children. Leaves of the trie represent recognized keywords.
+The following exercises, up to Exercise 3.4.12, introduce the **Aho-Corasick algorithm** for recognizing a collection of keywords in a text string in time proportional to the length of the text and the sum of the length of the keywords. This algorithm uses a special form of **transition diagram** called a [trie](https://en.wikipedia.org/wiki/Trie). A [trie](https://en.wikipedia.org/wiki/Trie) is a **tree-structured transition** diagram with distinct labels on the edges leading from a node to its children. Leaves of the trie represent recognized keywords.
 
-> NOTE: A [trie](https://en.wikipedia.org/wiki/Trie) is a tree-structured transition diagram or **finite automaton**, do you see the power of tree structure here as I do
+> NOTE: 
+>
+> A [trie](https://en.wikipedia.org/wiki/Trie) is a tree-structured transition diagram or **finite automaton**, do you see the power of tree structure here as I do
 
-Knuth, Morris, and Pratt presented an algorithm for recognizing a single keyword $b_1 b_2 \dots b_n$(length of the word is n) in a text string. Here the trie is a transition diagram with n+ 1 states, 0 through n. State 0 is the initial state, and state n represents acceptance, that is, discovery of the keyword. From each state s from 0 through n - 1, there is a transition to state s + 1, labeled by symbol $b_{s+1}$ . For example, the trie for the keyword `ababaa` is:
+Knuth, Morris, and Pratt presented an algorithm for recognizing a single keyword $b_1 b_2 \dots b_n$(length of the word is n) in a text string. Here the **trie** is a **transition diagram** with n+ 1 states, 0 through n. State 0 is the **initial state**, and state n represents **acceptance**, that is, discovery of the keyword. From each state s from 0 through n - 1, there is a transition to state s + 1, labeled by symbol $b_{s+1}$ . For example, the **trie** for the keyword `ababaa` is:
 
 ![](./figure-trie-.jpg)
 
-In order to process text strings rapidly and search those strings for a keyword, it is useful to define, for keyword $b_1 b_2 \dots b_n$ and position `s` in that keyword (corresponding to state `s` of its trie),  a *failure function*, `f(s)`, computed as in Fig. 3.19.  The objective is that $b_1 b_2 \dots b_{f(s)}$ is the longest proper prefix of $b_1 b_2 \dots b_s$ that is also a suffix of $b_1 b_2 \dots b_s$.  The reason $f (s)$ is important is that if we are trying to match a text string for $b_1 b_2 \dots b_n$,  and we have matched the first `s` positions, but we then fail (i.e., the next position of the text string does not hold $b_{s+1}$ ), then $f (s)$ is the longest prefix of  $b_1 b_2 \dots b_n$ that could possibly match the text string up to the point we are at. Of course, the next character of the text string must be $b_{f (s)+1}$, or else we still have problems and must consider a yet shorter prefix, which will be $b_{f (f (s))}$.
+In order to process text strings rapidly and search those strings for a keyword, it is useful to define, for keyword $b_1 b_2 \dots b_n$ and position `s` in that keyword (corresponding to state `s` of its trie),  a ***failure function***, `f(s)`, computed as in Fig. 3.19.  The objective is that $b_1 b_2 \dots b_{f(s)}$ is the longest proper prefix of $b_1 b_2 \dots b_s$ that is also a suffix of $b_1 b_2 \dots b_s$.  The reason $f (s)$ is important is that if we are trying to match a text string for $b_1 b_2 \dots b_n$,  and we have matched the first `s` positions, but we then fail (i.e., the next position of the text string does not hold $b_{s+1}$ ), then $f (s)$ is the longest prefix of  $b_1 b_2 \dots b_n$ that could possibly match the text string up to the point we are at. Of course, the next character of the text string must be $b_{f (s)+1}$, or else we still have problems and must consider a yet shorter prefix, which will be $b_{f (f (s))}$.
 
 ```pseudocode
  t = 0;
@@ -73,18 +121,31 @@ In order to process text strings rapidly and search those strings for a keyword,
 
 Figure 3.19: Algorithm to compute the failure function for keyword $b_1 b_2 \dots b_n$
 
-As an example, the failure function for the trie constructed above for `ababaa` is:
+As an example, the **failure function** for the trie constructed above for `ababaa` is:
+
+
 
 |      |      |      |      |      |      |      |
 | ---- | ---- | ---- | ---- | ---- | ---- | ---- |
 | s    | 1    | 2    | 3    | 4    | 5    | 6    |
 | f(s) | 0    | 0    | 1    | 2    | 3    | 1    |
 
+
+
+
+
 For instance, states 3 and 1 represent prefixes `aba` and `a`, respectively. `f (3) = 1` because `a` is the longest proper prefix of `aba` that is also a suffix of `aba`. Also, `f (2) = 0`, because the longest proper prefix of `ab` that is also a suffix is the empty string.
 
 
 
-Aho and Corasick generalized the KMP algorithm to recognize any of a set of keywords in a text string. In this case, the trie is a true tree, with branching from the root. There is one state for every string that is a prefix (not necessarily proper) of any keyword. The parent of a state corresponding to string $b_1 b_2 \dots b_n$ is the state that corresponds to $b_1 b_2 \dots b_k$. A state is accepting if it corresponds to a complete keyword. For example, Fig. 3.21 shows the trie for the keywords `he`, `she`, `his`, and `hers`.
+Having computed the **failure function** for a keyword $b_1 b_2 \dots b_n$, we can scana string $a_1 a_2 \dots a_m$ in time $O(m)$ to tell whether the keyword occurs in the string. The algorithm, shown in Fig. 3.20, slides the keyword along the string, trying to make progress by matching the next character of the keyword with the next character of the string. If it cannot do so after matching `s` characters, then it "slides" the keyword right `s - f (s)` positions, so only the first `f (s)` characters of the keyword are considered matched with the string.
+
+![](figure-3.20-the-KMP-algorithm.png)
+
+
+
+**Aho and Corasick** generalized the **KMP algorithm** to recognize any of a set of keywords in a text string. In this case, the trie is a true tree, with branching from the root. There is one state for every string that is a prefix (not necessarily proper) of any keyword. The parent of a state corresponding to string $b_1 b_2 \dots b_n$ is the state that corresponds to $b_1 b_2 \dots b_k$. A state is accepting if it corresponds to a complete keyword. For example, Fig. 3.21 shows the trie for the keywords `he`, `she`, `his`, and `hers`.
 
 ![](./figure-3.21-Trie-for-keywords-he-she-his-hers.jpg)
 
+! Exercise 3.4.10: Modify the algorithm of Fig. 3.19 to compute the **failure function** for general tries. s. Hint : The major difference is that we cannot simply test for equality or inequality of $b_{s+1}$ and $b_{t+1}$ in lines (4) and (5) of Fig. 3.19. . Rather, from any state there may be several transitions out on several characters, as there are transitions on both `e` and `i` from **state 1** in Fig. 3. \1. Any of those transitions could lead to a state that represents the longest suffix that is also a prefix.
