@@ -70,7 +70,7 @@ We now give an algorithm for converting any **regular expression** to an **NFA**
 
 ### Algorithm 3.23 
 
-The [McNaughton-Yamada-Thompson algorithm](https://en.wikipedia.org/wiki/Thompson%27s_construction) to convert a regular expression to an NFA.
+The [McNaughton-Yamada-Thompson algorithm](https://en.wikipedia.org/wiki/Thompson%27s_construction) to convert a **regular expression** to an **NFA**.
 
 **INPUT**: A regular expression `r` over alphabet $\Sigma$.
 
@@ -82,46 +82,59 @@ The [McNaughton-Yamada-Thompson algorithm](https://en.wikipedia.org/wiki/Thompso
 
 2、**inductive rules** for constructing larger NFA's from the NFA's for the immediate subexpressions of a given expression.
 
-**BASIS**: For expression $\epsilon$ construct the NFA
+#### **BASIS**: 
+
+For expression $\epsilon$ construct the **NFA**
 
 ![](./Figure-epsilon-NFA.jpg)
 
-Here, `i` is a new state, the **start state** of this NFA, and `f` is another new state, the **accepting state** for the NFA.
+Here, `i` is a new state, the **start state** of this NFA, and `f` is another new state, the **accepting state** for the **NFA**.
 
-For any subexpression a in $\Sigma$, construct the NFA
+For any subexpression a in $\Sigma$, construct the **NFA**
 
 ![](./Figure-a-NFA.jpg)
 
-where again `i` and `f` are new states, the start and accepting states, respectively. Note that in both of the basis constructions, we construct a distinct NFA, with new states, for every occurrence of $\epsilon$ or some `a` as a subexpression of `r`.
+where again `i` and `f` are new states, the **start** and **accepting states**, respectively. Note that in both of the basis constructions, we construct a distinct NFA, with new states, for every occurrence of $\epsilon$ or some `a` as a subexpression of `r`.
 
 
 
-**INDUCTION**: Suppose `N (s)` and `N (t)` are NFA's for regular expressions `s` and `t`, respectively.
+#### **INDUCTION**: 
 
-a) Suppose `r = s|t`. Then `N (r )`, the NFA for `r` , is constructed as in Fig. 3.40. Here, `i` and `f` are new states, the start and accepting states of `N (r )`, respectively. There are $\epsilon$-transitions from `i` to the start states of `N (s)` and `N (t)`, and each of their accepting states have $\epsilon$-transitions to the accepting state `f` . Note that the accepting states of `N (s)` and `N (t)` are not accepting in `N (r)`. Since any path from `i` to `f` must pass through either `N (s)` or `N (t)` exclusively, and since the label of that path is not changed by the $\epsilon$'s leaving `i` or entering `f` , we conclude that `N (r )` accepts $L(s) \cup L(t)$, which is the same as `L(r )`. That is, Fig. 3.40 is a correct construction for the union operator.
+Suppose `N (s)` and `N (t)` are NFA's for **regular expressions** `s` and `t`, respectively.
+
+a) Suppose `r = s|t`. Then `N (r)`, the NFA for `r` , is constructed as in Fig. 3.40. Here, `i` and `f` are new states, the start and accepting states of `N (r)`, respectively. There are $\epsilon$-transitions from `i` to the **start states** of `N(s)` and `N(t)`, and each of their **accepting states** have $\epsilon$-transitions to the **accepting state** `f` . Note that the accepting states of `N(s)` and `N(t)` are not accepting in `N(r)`. Since any path from `i` to `f` must pass through either `N(s)` or `N(t)` exclusively, and since the label of that path is not changed by the $\epsilon$'s leaving `i` or entering `f` , we conclude that `N(r)` accepts $L(s) \cup L(t)$, which is the same as `L(r)`. That is, Fig. 3.40 is a correct construction for the union operator.
 
 ![](./figure-3.40-NFA-for-union-of-two-regex=regular-expression.jpg)
 
-b) Suppose `r = st`. Then construct `N (r )` as in Fig. 3.41. The **start state** of `N (s)` becomes the **start state** of `N (r )`, and the **accepting state** of `N (t)` is the only accepting state of `N (r )`. The **accepting state** of `N(s)` and the **start state** of `N (t)` are merged into a single state, with all the transitions in or out of either state. A path from `i` to `f` in Fig. 3.41 must go first through `N (s)`, and therefore its label will begin with some string in `L(s)`. The path then continues through `N (t)`, so the path's label finishes with a
-string in `L(t)`. As we shall so on argue, **accepting states** never have edges out and start states never have edges in, so it is not possible for a path to re-enter `N (s)` after leaving it. Thus, `N (r )` accepts exactly `L(s)L(t)`, and is a correct NFA for `r = st`.
+b) Suppose `r = st`. Then construct `N(r)` as in Fig. 3.41. The **start state** of `N(s)` becomes the **start state** of `N(r)`, and the **accepting state** of `N(t)` is the only **accepting state** of `N(r)`. The **accepting state** of `N(s)` and the **start state** of `N(t)` are merged into a single state, with all the transitions in or out of either state. A path from `i` to `f` in Fig. 3.41 must go first through `N (s)`, and therefore its label will begin with some string in `L(s)`. The path then continues through `N(t)`, so the path's label finishes with a string in `L(t)`. As we shall so on argue, **accepting states** never have edges out and start states never have edges in, so it is not possible for a path to re-enter `N(s)` after leaving it. Thus, `N(r)` accepts exactly `L(s)L(t)`, and is a correct NFA for `r = st`.
 
 ![](./figure-3.41-NFA-for-concatenation-of-two-regex=regular-expression.jpg)
 
-c) Suppose $r = s^*$. Then for `r` we construct the NFA `N (r )` shown in Fig. 3.42. Here, `i` and `f` are new states, the start state and lone accepting state of `N (r )`. To get from `i` to `f` , we can either follow the introduced path labeled $\epsilon$, which takes care of the one string in $L(s)^0$ , or we can go to the start state of `N(s)`, through that NFA, then from its accepting state back to its start state zero or more times. These options allow `N (r )` to accept all the strings in $L(s)^1$, $L(s)^2$, and so on, so the entire set of strings accepted by `N (r )` is $L(s^*)$.
+c) Suppose $r = s^*$. Then for `r` we construct the NFA `N(r)` shown in Fig. 3.42. Here, `i` and `f` are new states, the start state and lone accepting state of `N(r)`. To get from `i` to `f` , we can either follow the introduced path labeled $\epsilon$, which takes care of the one string in $L(s)^0$ , or we can go to the start state of `N(s)`, through that NFA, then from its accepting state back to its start state zero or more times. These options allow `N(r)` to accept all the strings in $L(s)^1$, $L(s)^2$, and so on, so the entire set of strings accepted by `N(r)` is $L(s^*)$.
 
 ![](./figure-3.42-NFA-for-closure-of-a-regex=regular-expression.jpg)
 
-d) Finally, suppose `r = (s)`. Then `L(r ) = L(s)`, and we can use the NFA `N (s)` as `N (r )`.
+d) Finally, suppose `r = (s)`. Then `L(r)=L(s)`, and we can use the NFA `N(s)` as `N(r)`.
 
-> NOTE: Implementing a [regular expression engine](https://en.wikipedia.org/wiki/Comparison_of_regular_expression_engines) is far more complex than the algorithm described here.
+> NOTE:
+>
+> 这条规则描述的是加上括号
 
-The method description in Algorithm 3.23 contains hints as to why the **inductive construction** works as it should. We shall not give a formal correctness proof, but we shall list several properties of the constructed NFA's, in addition to the all-important fact that `N (r )` accepts language `L(r )`. These properties are interesting in their own right, and helpful in making a formal proof.
 
-1. `N (r )` has at most twice as many states as there are operators and operands in `r` . This bound follows from the fact that each step of the algorithm creates at most two new states.
-2. `N (r )` has one **start state** and one **accepting state**. The accepting state has no outgoing transitions, and the start state has no incoming transitions.
-3. Each state of `N (r )` other than the accepting state has either one outgoing transition on a symbol in $\Sigma$ or two outgoing transitions, both on $\epsilon$.
 
-**Example 3.24** : Let us use Algorithm 3.23 to construct an NFA for $r = (a | b) ^*abb$. Figure 3.43 shows a **parse tree** for `r` that is analogous to the **parse trees** constructed for arithmetic expressions in Section 2.2.3. For subexpression $r_1$ , the first `a`, we construct the NFA:
+> NOTE: 
+>
+> Implementing a [regular expression engine](https://en.wikipedia.org/wiki/Comparison_of_regular_expression_engines) is far more complex than the algorithm described here.
+
+The method description in Algorithm 3.23 contains hints as to why the **inductive construction** works as it should. We shall not give a formal correctness proof, but we shall list several properties of the constructed NFA's, in addition to the all-important fact that `N(r)` accepts language `L(r)`. These properties are interesting in their own right, and helpful in making a formal proof.
+
+1、`N(r)` has at most twice as many states as there are operators and operands in `r` . This bound follows from the fact that each step of the algorithm creates at most two new states.
+
+2、`N(r)` has one **start state** and one **accepting state**. The accepting state has no outgoing transitions, and the start state has no incoming transitions.
+
+3、Each state of `N(r)` other than the accepting state has either one outgoing transition on a symbol in $\Sigma$ or two outgoing transitions, both on $\epsilon$.
+
+**Example 3.24** : Let us use Algorithm 3.23 to construct an NFA for $r = (a | b) ^*abb$. Figure 3.43 shows a **parse tree** for `r` that is analogous to the **parse trees** constructed for **arithmetic expressions** in Section 2.2.3. For subexpression $r_1$ , the first `a`, we construct the **NFA**:
 
 ![](./figure-3.43-Parse-tree-for.jpg)
 
