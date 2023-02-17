@@ -49,9 +49,11 @@ b) An edge may be labeled by $\epsilon$, the empty string, instead of, or in add
 **Example 3.14** : The transition graph for an NFA recognizing the language of regular expression $(a|b)*abb$ is shown in Fig. 3.24. This abstract example, describing all strings of `a`'s and `b`'s ending in the particular string `abb`, will be used throughout this section. It is similar to regular expressions that describe languages of real interest, however. For instance, an expression describing all files whose name ends in `.o` is any
 `*.o`, where any stands for any printable character.
 
-![](./Figure3.24A-nondeterministic-finite-automaton.jpg)
+![](./figure-3.24-A-NFA=nondeterministic-finite-machine-automaton.jpg)
 
-> NOTE: There are two edges labeled with `a` from state 0 while this is not allowed in DFA. Below is come from [Finite-state machine](https://en.wikipedia.org/wiki/Finite-state_machine#Determinism):
+> NOTE: 
+>
+> There are two edges labeled with `a` from state 0 while this is not allowed in DFA. Below is come from [Finite-state machine](https://en.wikipedia.org/wiki/Finite-state_machine#Determinism):
 >
 > In a deterministic automaton, every state has exactly one transition for each possible input. In a non-deterministic automaton, an input can lead to one, more than one, or no transition for a given state. The [powerset construction](https://en.wikipedia.org/wiki/Powerset_construction) algorithm can transform any nondeterministic automaton into a (usually more complex) deterministic automaton with identical functionality.
 
@@ -64,7 +66,7 @@ pair, we put $\phi$ in the table for the pair.
 
 **Example 3.15** : The transition table for the NFA of Fig. 3.24 is shown in Fig. 3.25.
 
-![](./Figure3.25Transition-table-for-the-NFA-of-Fig3.24.jpg)
+![](./figure-3.25-transition-table-for-the-NFA-of-fig-3.24.jpg)
 
 The transition table has the advantage that we can easily find the transitions on a given state and input. Its disadvantage is that it takes a lot of space, when the input alphabet is large, yet most states do not have any moves on most of the input symbols.
 
@@ -92,11 +94,11 @@ While the NFA is an abstract representation of an algorithm to recognize the str
 
 **METHOD**: Apply the algorithm in Fig. 3.27 to the input string `x`. The function `move(s, c)` gives the state to which there is an edge from state `s` on input `c`. The function `nextChar` returns the next character of the input string `x`. 
 
-![](./Figure3.27Simulating-a-DFA.jpg)
+![](./figure-3.27-simulating-a-DFA=deterministic-finite-machine-automaton.jpg)
 
 
 
 **Example 3.19** : In Fig. 3.28 we see the transition graph of a DFA accepting the language $(a|b)*abb$ , the same as that accepted by the NFA of Fig. 3.24. Given the input string `ababb`, this DFA enters the sequence of states 0, 1, 2, 1, 2, 3 and returns  " yes." 
 
-![](./Figure3.28DFA-accepting.jpg)
+![](./figure-3.28-DFA=deterministic-finite-machine-automaton-accepting-state.jpg)
 
