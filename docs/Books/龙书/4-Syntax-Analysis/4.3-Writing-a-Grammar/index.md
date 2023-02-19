@@ -1,0 +1,5 @@
+# 4.3 Writing a Grammar 
+
+Grammars are capable of describing most, but not all, of the syntax of programming languages. For instance, the requirement that identifiers be declared before they are used, cannot be described by a **context-free grammar**. Therefore, the sequences of tokens accepted by a parser form a superset of the programming language; subsequent phases of the compiler must analyze the output of the parser to ensure compliance with rules that are not checked by the parser.
+
+This section begins with a discussion of how to divide work between a **lexical analyzer** and a **parser**. We then consider several transformations that could be applied to get a grammar more suitable for parsing. One technique can **eliminate ambiguity** in the grammar, and other techniques - **left-recursion elimination** and **left factoring** - are useful for rewriting grammars so they become suitable for **top-down parsing**. We conclude this section by considering some programming language constructs that cannot be described by any grammar.
