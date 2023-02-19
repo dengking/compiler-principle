@@ -31,3 +31,10 @@ Expression grammar (4.1) 描述了如何实现precedence、associativity
 ## epsilon的妙用
 
 在regex、cfg中都用epsilon。
+
+
+
+## implement
+
+使用什么样的DS来表示production，因为它还需要生成parse tree。
+
