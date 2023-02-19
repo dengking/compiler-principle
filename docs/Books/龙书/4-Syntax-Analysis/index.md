@@ -108,6 +108,10 @@ In this chapter, we assume that the output of the parser is some representation 
 
 ### 4.1.2 Representative Grammars 
 
+> NOTE:
+>
+> 一、标题的含义是"代表性的文法"
+
 Some of the grammars that will be examined in this chapter are presented here for ease of reference. Constructs that begin with keywords like **while** or **int**, are relatively easy to parse, because the keyword guides the choice of the **grammar production** that must be applied to match the input. We therefore concentrate on expressions, which present more of challenge, because of the **associativity** and **precedence** of operators
 
 > NOTE:
@@ -119,3 +123,46 @@ Some of the grammars that will be examined in this chapter are presented here fo
 ![](./expression-grammar-4.1.png)
 
 **Expression grammar** (4.1) belongs to the class of **LR grammars** that are suitable for **bottom-up parsing**. This grammar can be adapted to handle additional operators and additional levels of **precedence**. However, it cannot be used for **top-down parsing** because it is **left recursive**.
+
+The following **non-left-recursive** variant of the **expression grammar** (4.1) will be used for **top-down parsing**:
+
+![](expression-grammar-4.2.png)
+
+The following grammar treats + and `*` alike, so it is useful for illustrating techniques for handling ambiguities during parsing:
+
+![](expression-grammar-4.3.png)
+
+Here, `E` represents expressions of all types. Grammar (4.3) permits more thanone **parse tree** for expressions like `a + b * c`.
+
+
+
+### 4.1.3 Syntax Error Handling 
+
+The remainder of this section considers the nature of **syntactic errors** and general strategies for error recovery. Two of these strategies, called **panic-mode** and **phrase-level recovery**, are discussed in more detail in connection with specic parsing methods.
+
+
+
+The precision of parsing methods allows syntactic errors to be detected very effciently. Several parsing methods, such as the LL and LR methods, detect an error as soon as possible; that is, when the stream of tokens from the **lexical analyzer** cannot be parsed further according to the grammar for the language. More precisely, they have the ***viable-prefix property***(可行性前缀属性), meaning that they detect that an error has occurred as soon as they see a prefix of the input that cannot be completed to form a string in the language.
+
+
+
+Another reason for emphasizing **error recovery** during parsing is that many errors appear syntactic, whatever their cause, and are exposed when parsing cannot continue. A few **semantic errors**, such as **type mismatches**, can also be detected efficiently; however, accurate detection of semantic and logical errors at compile time is in general a difficult task.
+
+
+
+The error handler in a parser has goals that are simple to state but challenging to realize: 
+
+1、Report the presence of errors clearly and accurately.  
+
+2、Recover from each error quickly enough to detect subsequent errors.  
+
+3、Add minimal overhead to the processing of correct programs.
+
+
+
+
+
+### 4.1.4 Error-Recovery Strategies 
+
+Once an error is detected, how should the parser recover? 
+
