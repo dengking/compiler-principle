@@ -8,6 +8,8 @@ species the structure of this form of **conditional statement**. Other **product
 
 This section reviews the definition of a **context-free grammar** and introduces terminology for talking about parsing. In particular, the notion of derivations is very helpful for discussing the order in which **productions** are applied during parsing.
 
+
+
 ## 4.2.1 The Formal Definition of a Context-Free Grammar
 
 From Section 2.2, a **context-free grammar** (grammar for short) consists of **terminals**, **nonterminals**, a **start symbol**, and **productions**.
@@ -22,7 +24,79 @@ From Section 2.2, a **context-free grammar** (grammar for short) consists of **t
 
 (a) A **nonterminal** called the **head** or **left side** of the **production**; this production defines some of the strings denoted by the **head**.
 
+(b) The symbo $\to$. Sometimes `::=` has been used in place of the arrow.
 
+(c) A ***body*** or ***right side*** consisting of zero or more **terminals** and **nonterminals**. The components of the body describe one way in which strings of the nonterminal at the head can be constructed.
+
+### Example 4.5
+
+**Example 4.5** : The grammar in Fig. 4.2 defines simple arithmetic expressions. In this grammar, the terminal symbols are
+
+```
+id + - * / ( )
+```
+
+The **nonterminal symbols** are ***expression***, ***term*** and ***factor***, and ***expression*** is the **start symbol**
+
+![](figure-4.2-grammar-for-simple-arithmetic-expressions.png)
+
+## 4.2.2 Notational Conventions 
+
+> NOTE:
+>
+> 一、标题的含义是"符号表示的约定"
+
+To avoid always having to state that "these are the terminals," "these are the nonterminals," and so on, the following **notational conventions** for grammars will be used throughout the **remainder** of this book.
+
+### 1、These symbols are **terminals**
+
+(a) **Lowercase letters** early in the alphabet, such as a, b, c. 
+
+(b) **Operator symbols** such as `+`, `*`, and so on. 
+
+(c) Punctuation symbols such as **parentheses**, comma, and so on. 
+
+(d) The digits 0, 1,...9. 
+
+(e) **Boldface** strings such as **id** or **if**, each of which represents a single **terminal symbol**. 
+
+
+
+### 2、These symbols are nonterminals
+
+(a) Uppercase letters early in the alphabet, such as A, B, C. 
+
+(b) The letter S, which, when it appears, is usually the **start symbol**. 
+
+(c) Lowercase, italic names such as *expr* or *stmt*. 
+
+(d) When discussing programming constructs, uppercase letters may be used to represent **nonterminals** for the constructs. For example, nonterminals for expressions, terms, and factors are often represented by `E`, `T`, and `F`, respectively.
+
+### 3、
+
+Uppercase letters late in the alphabet, such as X, Y, Z, represent ***grammar symbols***; that is, either **nonterminals** or **terminals**. 
+
+### 4、
+
+Lowercase letters late in the alphabet, chiey u, v, ... z, represent (possibly empty) strings of terminals. 
+
+### 5、
+
+Lowercase Greek letters $\alpha$, $\beta$,$\gamma$,  for example, represent (possibly empty) strings of grammar symbols. Thus, a generic production can be written as $A \to \alpha$, where A is the **head** and $\alpha$ the body.
+
+### 6、
+
+A set of productions $A \to \alpha_1$, $A \to \alpha_2$,...,$A \to \alpha_k$, with a common head `A` (call them ***A-productions***), may be written $A \to \alpha_1 | \alpha_2 | \dots | \alpha_k$ . Call $\alpha_1 \alpha_2 \dots \alpha_k$ the alternatives  for `A`.
+
+
+
+### Example 4.6
+
+Example 4.6 : Using these conventions, the grammar of Example 4.5 can be rewritten concisely as
+
+![](example-4.6.png)
+
+The **notational conventions** tell us that `E`, `T`, and `F` are nonterminals, with `E` the start symbol. The remaining symbols are terminals
 
 ## 4.2.3 Derivations
 
@@ -30,8 +104,7 @@ From Section 2.2, a **context-free grammar** (grammar for short) consists of **t
 >
 > 一、"derivation" means "推导" in Chinese.
 
-The construction of a parse tree can be made precise by taking a derivational view, in which productions are treated as rewriting rules. Beginning with the start symbol, each rewriting step replaces a **nonterminal** by the body of one of its productions. This derivational view corresponds to the **top-down** construction
-of a **parse tree**, but the precision afforded by **derivations** will be especially helpful when **bottom-up** parsing is discussed. As we shall see, **bottom-up parsing** is related to a class of derivations known as "**rightmost**" derivations, in which the **rightmost nonterminal** is rewritten at each step.
+The construction of a parse tree can be made precise by taking a **derivational view**, in which **productions** are treated as **rewriting rules**. Beginning with the **start symbol**, each rewriting step replaces a **nonterminal** by the body of one of its productions. This derivational view corresponds to the **top-down** construction of a **parse tree**, but the precision afforded by **derivations** will be especially helpful when **bottom-up** parsing is discussed. As we shall see, **bottom-up parsing** is related to a class of derivations known as "**rightmost**" derivations, in which the **rightmost nonterminal** is rewritten at each step.
 
 > NOTE: 
 >
@@ -39,7 +112,39 @@ of a **parse tree**, but the precision afforded by **derivations** will be espec
 >
 > $\Rightarrow$
 
-If $S \xrightarrow []{ \ast} \alpha$ where $S$ is the start symbol of a grammar $G$, we say that $\alpha$ is a *sentential form* of G. Note that a **sentential form** may contain both **terminals** and **nonterminals**, and may be empty. A *sentence* of G is a **sentential form** with no **nonterminals**. The *language* generated by a grammar is its set of **sentences**.
+For example, consider the following grammar, with a single nonterminal `E`, which adds a production $E \to - E$ to the grammar (4.3)
+
+![](grammar-4.7.png)
+
+
+
+The production $E \to -E$ signifies(表示) that if `E` denotes an expression, the  `-E` must also denote an expression. The replacement of a single `E` by `-E` will be described by writing
+$$
+E \Rightarrow -E
+$$
+which is read, "E derives -E."  The production $E \to ( E )$ can be applie to replace any instance of `E` in any string of grammar symbols by `(E)`, e.g., $E * E \Rightarrow (E) * E$ or $E * E \Rightarrow E * (E)$.  We can take a single `E` and repeatedly apply productions in any order to get a sequence of replacements. For example
+$$
+E \Rightarrow -E \Rightarrow -(E) \Rightarrow -(id)
+$$
+We call such a sequence of replacements a derivation of `(id)` from `E`. This derivation provides a proof that the string `-(id)` is one particular instance of an expression. 
+
+For a general definition of **derivation**, consider a nonterminal `A` in the middle of a sequence of **grammar symbols**, as in $\alpha A \beta$, where $\alpha$ and $\beta$ are  are arbitrary strings of grammar symbol. Suppose $A \to \gamma$  is a **production**. Then, we write $\alpha A \beta \Rightarrow \alpha \gamma \beta$. The symbol $\Rightarrow$ means, "derives in one step." When a sequence of derivation steps $\alpha_1 \Rightarrow \alpha_2 \Rightarrow \dots \Rightarrow \alpha_n$ rewrites $\alpha_1$ to $\alpha_n$, we say $\alpha_1$ ***derives*** $\alpha_n$. Often, we wish to say, "derives in zero or more steps." For this purpose, we can use the symbol $S \xRightarrow {\text{*}}$.  Thus,
+
+1、$\alpha \xRightarrow {\text{*}} \alpha$ , for any string $\alpha$, and
+
+2、If $\alpha \xRightarrow {\text{*}} \beta$ and  $\beta \Rightarrow \gamma $ , then $\alpha \xRightarrow {\text{*}} \gamma$, 
+
+ Likewise, $\xRightarrow {\text{+}}$ means, "derives in one or more steps."
+
+> NOTE:
+>
+> 一、上述latex参考自: https://tex.stackexchange.com/questions/103988/rightarrow-with-text-above-it/103993#103993
+
+
+
+We can take a single E and repeatedly aly productions in any order to get a sequence of replacements. For example
+
+If $S \xrightarrow []{ \ast} \alpha$ where $S$ is the **start symbol** of a grammar $G$, we say that $\alpha$ is a *sentential form* of G. Note that a **sentential form** may contain both **terminals** and **nonterminals**, and may be empty. A *sentence* of G is a **sentential form** with no **nonterminals**. The *language* generated by a grammar is its set of **sentences**.
 Thus, a string of terminals $w$ is in $L(G)$, the language generated by G, if and only if $w$ is a sentence of G (or $S \xrightarrow []{ \ast} w $. A language that can be generated by a **grammar** is said to be a **context-free language**. If two grammars generate the same language, the grammars are said to be *equivalent*.
 
 > NOTE: Natural language is not **context-free language**.
