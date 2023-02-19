@@ -26,3 +26,8 @@ Expression grammar (4.1) 描述了如何实现precedence、associativity
 
 增加indirection、中间变量、增加层次、增加hierarchy
 
+
+
+## epsilon的妙用
+
+在regex、cfg中都用epsilon。
