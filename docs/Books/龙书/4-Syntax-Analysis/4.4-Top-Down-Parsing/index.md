@@ -78,4 +78,36 @@ A **left-recursive grammar** can cause a **recursive-descent parser**, even one 
 
 ## 4.4.2 FIRST and FOLLOW 
 
-The construction of both **top-down** and **bottom-up** parsers is aided by two functions, FIRST and FOLLOW, associated with a grammar G. During topdown parsing, FIRST and FOLLOW allow us to choose which production to apply, based on the next input symbol. During **panic-mode error recovery**, sets of tokens produced by FOLLOW can be used as **synchronizing tokens**.
+The construction of both **top-down** and **bottom-up** parsers is aided by two functions, FIRST and FOLLOW, associated with a grammar G. During topdown parsing, FIRST and FOLLOW allow us to choose which production to apply, based on the **next input symbol**. During **panic-mode error recovery**, sets of tokens produced by FOLLOW can be used as **synchronizing tokens**.
+
+### FIRST
+
+Define $FIRST(\alpha)$, where $\alpha$ is any string of grammar symbols, to be the set of terminals that begin strings derived from $\alpha$. If  $\alpha \xRightarrow {\text{*}} \epsilon$ , then $\epsilon$ is also in $FIRST(\alpha)$. For example, in Fig. 4.15, $A \xRightarrow {\text{*}} c\gamma$, so c is in FIRST(A).
+
+
+
+![](figure-4.15-terminal-c-in-FIRST-A-and-a-in-FOLLOW-A.png)
+
+
+
+This idea will be explored when **LL(1) grammars** are dened in Section 4.4.3.
+
+
+
+### FOLLOW
+
+Dene FOLLOW(A), for nonterminal A, to be the set of terminals a that canappear immediately to the right of A in some **sentential form**; that is, the set of terminals a such that there exists a derivation of the form $S \xRightarrow {\text{*}} \alpha A a \beta $, for some $\alpha$  and $\beta$, as in Fig. 4.15. Note that there may have been symbols between $A$ and $a$, at some time during the derivation, but if so, they derived $\epsilon$ and disappeared. In addition, if A can be the **rightmost symbol** in some **sentential form**, then `$` is in FOLLOW(A); recall that `$` is a special "endmarker" symbol that is assumed not to be a symbol of any grammar.
+
+
+
+To compute FIRST(X) for all grammar symbols X, apply the following rules until no more terminals or  can be added to any FIRST set.
+
+1、If `X` is a terminal, then $FIRST(X) = { X }$.
+
+2、 If X is a nonterminal and $X \to Y_1 Y_2 \dots Y_k$ is a production for some $k \ge 1$, then place `a` in FIRST(X) if for some `i`, `a` is in $FIRST(Y_i)$, and $\epsilon$ is in all of $FIRST(Y_1), \dots ,FIRST(Y_{i-1})$; that is  $Y_1 \dots Y_{i-1} \xRightarrow {\text{*}} \epsilon$. 
+
+> NOTE:
+>
+> recursive definition
+
+3、If $X \to \epsilon$  is a production, then add $\epsilon$ to FIRST(X)
