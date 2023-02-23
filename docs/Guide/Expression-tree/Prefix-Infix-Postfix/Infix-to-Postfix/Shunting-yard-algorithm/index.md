@@ -2,13 +2,13 @@
 
 一、中文意思: "调度场算法"
 
-二、它可以采用syntax-directed-translation的思想实现evaluate expression
+二、application
 
-三、operator stack使用的是monotonic stack来维持precedence
+1、expression evaluation
 
-有点shift-reduce的意味，一旦operator被pop出**operator stack**，则它
+它可以采用syntax-directed-translation的思想实现evaluate expression
 
-是否要pop operator(结合)，要看它后面是否有比它优先级更高的operator，那如何判断是否有呢？这就可以通过monotonic stack来实现
+2、map infix notation to postfix notation
 
 ## wikipedia [Shunting-yard algorithm](https://en.wikipedia.org/wiki/Shunting-yard_algorithm)
 
@@ -98,13 +98,55 @@ while there are tokens on the operator stack:
 
 > NOTE: 
 >
-> 一、无论哪种表达式(infix、postfix)，它们的operand的顺序是相同的(显然shunting-yard-algorithm能够保证这一点)，各种表达式的区别就在于它们的operator的位置不同，其实该算法所做的是决定何时将**operator**添加到**output**中，它所采用的方式是基于operator的**precedence**进行比较，**operator stack**有**precedence**的比较，同时也考虑了associative；由于它需要转换为postfix，所以operator看到是放到operand的后面的，当优先级更高的时候，就需要出栈，添加到output中；还需要考虑括号的情况，其实可以这样来看待括号，括号其实是一种隔离，将括号内的operator的stack和括号外的operator的stack隔离开来了；
+> 一、无论哪种表达式(infix、postfix)，它们的operand的顺序是相同的(显然shunting-yard-algorithm能够保证这一点)，各种表达式的区别就在于它们的operator的位置不同，其实该算法所做的是决定何时将**operator**添加到**output**中。
 >
-> 高优先级要优先和
+> 二、parentheses、operator precedence、operator associativity决定了expression的计算顺序，那shunting yard algorithm是如何实现这些内容的呢？
 >
-> 1、当看到底precedence的operator的时候，就需要将stack中的已有的operator pop出去，让它和operand结合
+> shunting yard algorithm的只能处理binary operator，不能处理conditional (ternary) operator，这在一定程度上简化了处理，这样我们就能够只要看到一个operator知道它只能够和两个operand相结合。
 >
-> 2、
+> 1、operator precedence: 用monotonic stack来实现
+>
+> a、当看到lower precedence operator的时候，就需要将stack中的已有的superior precedence operator pop到input queue中让它和其中的operands结合，这样做是因为superior precedence operator比lower precedence operator拥有更高的优先级来和operand结合。下面是另外一种思考方式:
+>
+> 是否要pop operator(结合、reduce)，要看它后面是否有比它优先级更高的operator，那如何判断是否有呢？这就可以通过monotonic stack来实现，当碰到优先级更低的，则就触发它进行flush、reduce
+>
+> 
+>
+> 2、parentheses: supreme precedence
+>
+> a、可以认为括号的优先级最高: 可以看到algorithm中，一旦遇到close-parenthesis，则立马将pop operator到input queue中
+>
+> b、其实可以这样来看待括号，括号其实是一种隔离，将括号内的operator的stack和括号外的operator的stack隔离开来了；
+>
+> 3、associativity
+>
+> associativity决定了equal precedence operator的计算顺序(加括号方式):
+>
+> a、both left-associative: 比如下面情形:
+>
+> ```
+> 3+4-5
+> ```
+>
+> 显然operator stack中的operator是`+`，第二个是`-`，由于`+`是left-associative，所以此时需要将它pop到input queue中
+>
+> b、left-associative、right-associative
+>
+> c、both right-associative
+>
+> ```
+> 2^3^4
+> ```
+>
+> 这种其实是比较简单的，直接stack reverse即可
+>
+> 三、shunting yard algorithm有shift reduce parsing: 
+>
+> operator被pop出**operator stack**到input queue中，这相当于reduce
+>
+> 四、stack machine
+>
+> 
 
 To analyze the running time complexity of this algorithm, one has only to note that each token will be read once, each number, function, or operator will be printed once, and each function, operator, or parenthesis will be pushed onto the stack and popped off the stack once—therefore, there are at most a constant number of operations executed per token, and the running time is thus O(*n*)—linear in the size of the input.
 
