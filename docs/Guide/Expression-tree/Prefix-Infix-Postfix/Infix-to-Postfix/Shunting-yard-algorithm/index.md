@@ -1,6 +1,8 @@
 # Shunting-yard algorithm
 
-调度场算法
+一、中文意思: "调度场算法"
+
+二、它可以采用syntax-directed-translation的思想实现evaluate expression
 
 ## wikipedia [Shunting-yard algorithm](https://en.wikipedia.org/wiki/Shunting-yard_algorithm)
 
@@ -8,32 +10,35 @@ In [computer science](https://en.wikipedia.org/wiki/Computer_science), the **shu
 
 Like the evaluation of RPN（ [Reverse Polish notation](https://en.wikipedia.org/wiki/Reverse_Polish_notation) ）, the shunting yard algorithm is [stack](https://en.wikipedia.org/wiki/Stack_(data_structure))-based. Infix expressions are the form of mathematical notation most people are used to, for instance "3 + 4" or "3 + 4 × (2 − 1)". For the conversion there are two text [variables](https://en.wikipedia.org/wiki/Variable_(programming)) ([strings](https://en.wikipedia.org/wiki/String_(computer_science))), the input and the output. There is also a [stack](https://en.wikipedia.org/wiki/Stack_(data_structure)) that holds operators not yet added to the **output queue**. To convert, the program reads each symbol in order and does something based on that symbol. The result for the above examples would be (in [Reverse Polish notation](https://en.wikipedia.org/wiki/Reverse_Polish_notation)) "3 4 +" and "3 4 2 1 − × +", respectively.
 
-The shunting-yard algorithm was later generalized（泛化） into [operator-precedence parsing](https://en.wikipedia.org/wiki/Operator-precedence_parser).
+The shunting yard algorithm will correctly parse all valid infix expressions, but does not reject all **invalid expressions**. For example, "1 2 +" is not a valid **infix expression**, but would be parsed as "1 + 2". The algorithm can however reject expressions with **mismatched parentheses**.
+
+The **shunting-yard algorithm** was later generalized(泛化) into [operator-precedence parsing](https://en.wikipedia.org/wiki/Operator-precedence_parser).
 
 ### A simple conversion
 
-1. Input: 3 + 4
+1、Input: 3 + 4
 
-2. Push 3 to the output [queue](https://en.wikipedia.org/wiki/Queue_(data_structure)) (whenever a number is read it is pushed to the output)
+2、Push 3 to the output [queue](https://en.wikipedia.org/wiki/Queue_(data_structure)) (whenever a number is read it is pushed to the output)
 
-3. [Push](https://en.wikipedia.org/wiki/Stack_(data_structure)#Basic_architecture_of_a_stack) + (or its ID) onto the operator [stack](https://en.wikipedia.org/wiki/Stack_(data_structure))
+3、[Push](https://en.wikipedia.org/wiki/Stack_(data_structure)#Basic_architecture_of_a_stack) + (or its ID) onto the operator [stack](https://en.wikipedia.org/wiki/Stack_(data_structure)) 
 
-4. Push 4 to the **output queue**
+4、Push 4 to the **output queue**
 
-5. After reading the expression, [pop](https://en.wikipedia.org/wiki/Stack_(data_structure)#Basic_architecture_of_a_stack) the operators off the stack and add them to the **output**. In this case there is only one, "+". 
+5、After reading the expression, [pop](https://en.wikipedia.org/wiki/Stack_(data_structure)#Basic_architecture_of_a_stack) the operators off the stack and add them to the **output**. In this case there is only one, "+". 
 
-6. Output: 3 4 +
+6、Output: 3 4 +
 
-   
+
 
 This already shows a couple of rules:
 
-- All numbers are pushed to the output when they are read.
-- At the end of reading the expression, pop all operators off the stack and onto the output.
+1、All numbers are pushed to the output when they are read.
+
+2、At the end of reading the expression, pop all operators off the stack and onto the output.
 
 > NOTE: 
 >
-> 无论哪种表达式，它们的operand的顺序是相同的，各种表达式的区别就在于它们的operator的位置不同，其实该算法所做的是决定何时将operator添加到output中，它所采用的方式是基于operator的precedence进行比较，operator stack有precedence的比较，同时也考虑了associative；由于它需要转换为postfix，所以operator看到是放到operand的后面的，当优先级更高的时候，就需要出栈，添加到output中；还需要考虑括号的情况，其实可以这样来看待括号，括号其实是一种隔离，将括号内的operator的stack和括号外的operator的stack隔离开来了；
+> 一、无论哪种表达式(infix、postfix)，它们的operand的顺序是相同的(显然shunting-yard-algorithm能够保证这一点)，各种表达式的区别就在于它们的operator的位置不同，其实该算法所做的是决定何时将**operator**添加到**output**中，它所采用的方式是基于operator的**precedence**进行比较，**operator stack**有**precedence**的比较，同时也考虑了associative；由于它需要转换为postfix，所以operator看到是放到operand的后面的，当优先级更高的时候，就需要出栈，添加到output中；还需要考虑括号的情况，其实可以这样来看待括号，括号其实是一种隔离，将括号内的operator的stack和括号外的operator的stack隔离开来了；
 
 ### Graphical illustration
 
@@ -45,7 +50,7 @@ Graphical illustration of algorithm, using a [three-way railroad junction](https
 
 > NOTE: 
 >
-> 如果是left associative（如除法，减法），则会
+> left associative（如除法，减法）
 
 ### The algorithm in detail
 
@@ -85,7 +90,7 @@ exit.
 
 To analyze the running time complexity of this algorithm, one has only to note that each token will be read once, each number, function, or operator will be printed once, and each function, operator, or parenthesis will be pushed onto the stack and popped off the stack once—therefore, there are at most a constant number of operations executed per token, and the running time is thus O(*n*)—linear in the size of the input.
 
-The shunting yard algorithm can also be applied to produce prefix notation (also known as [Polish notation](https://en.wikipedia.org/wiki/Polish_notation)). To do this one would simply start from the end of a string of tokens to be parsed and work backwards, reverse the output queue (therefore making the output queue an output stack), and flip the left and right parenthesis behavior (remembering that the now-left parenthesis behavior should pop until it finds a now-right parenthesis). And changing the associativity condition to right.
+The **shunting yard algorithm** can also be applied to produce prefix notation (also known as [Polish notation](https://en.wikipedia.org/wiki/Polish_notation)). To do this one would simply start from the end of a string of tokens to be parsed and work backwards, reverse the output queue (therefore making the output queue an output stack), and flip the left and right parenthesis behavior (remembering that the now-left parenthesis behavior should pop until it finds a now-right parenthesis). And changing the associativity condition to right.
 
 
 
