@@ -4,6 +4,12 @@
 
 二、它可以采用syntax-directed-translation的思想实现evaluate expression
 
+三、operator stack使用的是monotonic stack来维持precedence
+
+有点shift-reduce的意味，一旦operator被pop出**operator stack**，则它
+
+是否要pop operator(结合)，要看它后面是否有比它优先级更高的operator，那如何判断是否有呢？这就可以通过monotonic stack来实现
+
 ## wikipedia [Shunting-yard algorithm](https://en.wikipedia.org/wiki/Shunting-yard_algorithm)
 
 In [computer science](https://en.wikipedia.org/wiki/Computer_science), the **shunting-yard algorithm** is a method for parsing mathematical expressions specified in [infix notation](https://en.wikipedia.org/wiki/Infix_notation). It can produce either a **postfix notation** string, also known as [Reverse Polish notation](https://en.wikipedia.org/wiki/Reverse_Polish_notation) (RPN), or an [abstract syntax tree](https://en.wikipedia.org/wiki/Abstract_syntax_tree) (AST). The [algorithm](https://en.wikipedia.org/wiki/Algorithm) was invented by [Edsger Dijkstra](https://en.wikipedia.org/wiki/Edsger_Dijkstra) and named the "shunting yard"（调车场） algorithm because its operation resembles that of a [railroad shunting yard](https://en.wikipedia.org/wiki/Classification_yard). Dijkstra first described the Shunting Yard Algorithm in the [Mathematisch Centrum](https://en.wikipedia.org/wiki/Mathematisch_Centrum) report [MR 34/61](https://repository.cwi.nl/noauth/search/fullrecord.php?publnr=9251).
@@ -36,9 +42,7 @@ This already shows a couple of rules:
 
 2、At the end of reading the expression, pop all operators off the stack and onto the output.
 
-> NOTE: 
->
-> 一、无论哪种表达式(infix、postfix)，它们的operand的顺序是相同的(显然shunting-yard-algorithm能够保证这一点)，各种表达式的区别就在于它们的operator的位置不同，其实该算法所做的是决定何时将**operator**添加到**output**中，它所采用的方式是基于operator的**precedence**进行比较，**operator stack**有**precedence**的比较，同时也考虑了associative；由于它需要转换为postfix，所以operator看到是放到operand的后面的，当优先级更高的时候，就需要出栈，添加到output中；还需要考虑括号的情况，其实可以这样来看待括号，括号其实是一种隔离，将括号内的operator的stack和括号外的operator的stack隔离开来了；
+
 
 ### Graphical illustration
 
@@ -57,40 +61,60 @@ Graphical illustration of algorithm, using a [three-way railroad junction](https
  Important terms: [Token](https://en.wikipedia.org/wiki/Token_(parser)), [Function](https://en.wikipedia.org/wiki/Function_(mathematics)), [Operator associativity](https://en.wikipedia.org/wiki/Operator_associativity), [Precedence](https://en.wikipedia.org/wiki/Order_of_operations) 
 
 ```pseudocode
-/* This implementation does not implement composite functions,functions with variable number of arguments, and unary operators. */
+/* The functions referred to in this algorithm are simple single argument functions such as sine, inverse or factorial. */
+/* This implementation does not implement composite functions, functions with a variable number of arguments, or unary operators. */
 
-while there are tokens to be read do:
-    read a token.
-    if the token is a number, then:
-        push it to the output queue.
-    if the token is a function then:
+while there are tokens to be read:
+    read a token
+    if the token is:
+    - a number:
+        put it into the output queue
+    - a function:
         push it onto the operator stack 
-    if the token is an operator, then:
-        while ((there is a function at the top of the operator stack)
-               or (there is an operator at the top of the operator stack with greater precedence)
-               or (the operator at the top of the operator stack has equal precedence and is left associative))
-              and (the operator at the top of the operator stack is not a left parenthesis):
-            pop operators from the operator stack onto the output queue.
-        push it onto the operator stack.
-    if the token is a left paren (i.e. "("), then:
-        push it onto the operator stack.
-    if the token is a right paren (i.e. ")"), then:
-        while the operator at the top of the operator stack is not a left paren:
-            pop the operator from the operator stack onto the output queue.
-        /* if the stack runs out without finding a left paren, then there are mismatched parentheses. */
-        if there is a left paren at the top of the operator stack, then:
-            pop the operator from the operator stack and discard it
-after while loop, if operator stack not null, pop everything to output queue
-if there are no more tokens to read then:
-    while there are still operator tokens on the stack:
-        /* if the operator token on the top of the stack is a paren, then there are mismatched parentheses. */
-        pop the operator from the operator stack onto the output queue.
-exit.
+    - an operator o1:
+        while (
+            there is an operator o2 at the top of the operator stack which is not a left parenthesis, 
+            and (o2 has greater precedence than o1 or (o1 and o2 have the same precedence and o1 is left-associative))
+        ):
+            pop o2 from the operator stack into the output queue
+        push o1 onto the operator stack
+    - a left parenthesis (i.e. "("):
+        push it onto the operator stack
+    - a right parenthesis (i.e. ")"):
+        while the operator at the top of the operator stack is not a left parenthesis:
+            {assert the operator stack is not empty}
+            /* If the stack runs out without finding a left parenthesis, then there are mismatched parentheses. */
+            pop the operator from the operator stack into the output queue
+        {assert there is a left parenthesis at the top of the operator stack}
+        pop the left parenthesis from the operator stack and discard it
+        if there is a function token at the top of the operator stack, then:
+            pop the function from the operator stack into the output queue
+/* After the while loop, pop the remaining items from the operator stack into the output queue. */
+while there are tokens on the operator stack:
+    /* If the operator token on the top of the stack is a parenthesis, then there are mismatched parentheses. */
+    {assert the operator on top of the stack is not a (left) parenthesis}
+    pop the operator from the operator stack onto the output queue
 ```
+
+> NOTE: 
+>
+> 一、无论哪种表达式(infix、postfix)，它们的operand的顺序是相同的(显然shunting-yard-algorithm能够保证这一点)，各种表达式的区别就在于它们的operator的位置不同，其实该算法所做的是决定何时将**operator**添加到**output**中，它所采用的方式是基于operator的**precedence**进行比较，**operator stack**有**precedence**的比较，同时也考虑了associative；由于它需要转换为postfix，所以operator看到是放到operand的后面的，当优先级更高的时候，就需要出栈，添加到output中；还需要考虑括号的情况，其实可以这样来看待括号，括号其实是一种隔离，将括号内的operator的stack和括号外的operator的stack隔离开来了；
+>
+> 高优先级要优先和
+>
+> 1、当看到底precedence的operator的时候，就需要将stack中的已有的operator pop出去，让它和operand结合
+>
+> 2、
 
 To analyze the running time complexity of this algorithm, one has only to note that each token will be read once, each number, function, or operator will be printed once, and each function, operator, or parenthesis will be pushed onto the stack and popped off the stack once—therefore, there are at most a constant number of operations executed per token, and the running time is thus O(*n*)—linear in the size of the input.
 
-The **shunting yard algorithm** can also be applied to produce prefix notation (also known as [Polish notation](https://en.wikipedia.org/wiki/Polish_notation)). To do this one would simply start from the end of a string of tokens to be parsed and work backwards, reverse the output queue (therefore making the output queue an output stack), and flip the left and right parenthesis behavior (remembering that the now-left parenthesis behavior should pop until it finds a now-right parenthesis). And changing the associativity condition to right.
+The **shunting yard algorithm** can also be applied to produce **prefix notation** (also known as [Polish notation](https://en.wikipedia.org/wiki/Polish_notation)). To do this one would simply start from the end of a string of tokens to be parsed and work backwards, reverse the output queue (therefore making the output queue an output stack), and flip the left and right parenthesis behavior (remembering that the now-left parenthesis behavior should pop until it finds a now-right parenthesis). And changing the associativity condition to right.
+
+> NOTE:
+>
+> 一、two direction dual
+
+
 
 
 
@@ -103,3 +127,22 @@ codeproject [Binary Tree Expression Solver](https://www.codeproject.com/Articles
 cnblogs [shunting-yard 调度场算法、中缀表达式转逆波兰表达式](https://www.cnblogs.com/magisk/p/8620303.html)
 
 geeksforgeeks [Program to convert Infix notation to Expression Tree](https://www.geeksforgeeks.org/program-to-convert-infix-notation-to-expression-tree/?ref=rp)
+
+
+
+https://news.ycombinator.com/item?id=19190208
+
+
+
+### oilshell [Code for the Shunting Yard Algorithm, and More](http://www.oilshell.org/blog/2017/04/22.html)
+
+
+
+### codereview.stackexchange [Infix-to-postfix parser using Dijkstra's shunting yard algorithm](https://codereview.stackexchange.com/questions/46136/infix-to-postfix-parser-using-dijkstras-shunting-yard-algorithm)
+
+
+
+github [bourguet](https://github.com/bourguet)/**[operator_precedence_parsing](https://github.com/bourguet/operator_precedence_parsing)**
+
+github [andychu](https://github.com/andychu)/**[pratt-parsing-demo](https://github.com/andychu/pratt-parsing-demo)**
+
