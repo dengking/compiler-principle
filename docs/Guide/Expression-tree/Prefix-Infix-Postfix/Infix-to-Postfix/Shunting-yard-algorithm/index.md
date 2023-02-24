@@ -178,13 +178,64 @@ https://news.ycombinator.com/item?id=19190208
 
 ### oilshell [Code for the Shunting Yard Algorithm, and More](http://www.oilshell.org/blog/2017/04/22.html)
 
-
+> NOTE:
+>
+> 在这篇文章中，其实并没有详细说明shunting yard algorithm的细节，它正如它的标题所言提供了shunting yard algorithm的code
+>
+> > Jean-Marc Bourguet [answered my questions](https://www.reddit.com/r/oilshell/comments/5l70p7/pratt_parsing_and_precedence_climbing_are_the/) with example code:
+> >
+> > - [C89 expressions parsed with the shunting yard algorithm in Python](https://github.com/bourguet/operator_precedence_parsing/blob/master/shunting_yard.md)
+> > - [shunting_yard.py](https://github.com/bourguet/operator_precedence_parsing/blob/master/shunting_yard.py) (~270 lines)
+> >
+> > And the repo has comparisons with more algorithms:
+> >
+> > - [bourguet/operator_precedence_parsing on Github](https://github.com/bourguet/operator_precedence_parsing) (标记不错，提供了多种parser的实现)
 
 ### codereview.stackexchange [Infix-to-postfix parser using Dijkstra's shunting yard algorithm](https://codereview.stackexchange.com/questions/46136/infix-to-postfix-parser-using-dijkstras-shunting-yard-algorithm)
 
 
 
-github [bourguet](https://github.com/bourguet)/**[operator_precedence_parsing](https://github.com/bourguet/operator_precedence_parsing)**
+
+
+## Pratt parsing
+
+oilshell [Pratt Parsing Index and Updates](https://www.oilshell.org/blog/2017/03/31.html)
 
 github [andychu](https://github.com/andychu)/**[pratt-parsing-demo](https://github.com/andychu/pratt-parsing-demo)**
 
+
+
+oilshell [Pratt Parsing and Precedence Climbing Are the Same Algorithm](https://www.oilshell.org/blog/2016/11/01.html)
+
+> I used Eli Bendersky's 2012 [article on precedence climbing](http://eli.thegreenplace.net/2012/08/02/parsing-expressions-by-precedence-climbing) to write it. I cited his article in the patch, as well as Keith Clarke's 1986 paper [The Top-Down Parsing of Expressions](https://scholar.google.com/scholar?cluster=17307359715187030691), which I found in a relevant [Wikipedia article](https://en.wikipedia.org/wiki/Operator-precedence_parser).
+>
+> (For contrast, GNU `expr` uses a plain recursive descent parser, which works fine, but is more verbose and in theory less efficient.)
+>
+> The `expr` command only supports binary operators, so we just need a single recursive function `eval_expr()` to handle all operators, as in Bendersky's article.
+>
+> But shell arithmetic is borrowed from C and also has these constructs:
+>
+> - prefix operators: `-3` and `+x`
+> - the ternary operator: `x > 2 ? y : 0`
+> - right associative operators: `2 ** 3 ** 4` is `2 ** (3 ** 4)`
+> - array indexing: `a[0]`
+
+
+
+
+
+matklad.github [Simple but Powerful Pratt Parsing](https://matklad.github.io/2020/04/13/simple-but-powerful-pratt-parsing.html#Simple-but-Powerful-Pratt-Parsing) 
+
+
+
+## Precedence climbing
+
+eli.thegreenplace [Parsing expressions by precedence climbing](https://eli.thegreenplace.net/2012/08/02/parsing-expressions-by-precedence-climbing)
+
+
+
+## Operator-precedence parser
+
+
+
+### wikipedia [Operator-precedence parser](https://en.wikipedia.org/wiki/Operator-precedence_parser)
