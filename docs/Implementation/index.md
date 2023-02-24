@@ -11,6 +11,20 @@
 
 
 
+## GCC、llvm
+
+一、stackoverflow [Are GCC and Clang parsers really handwritten?](https://stackoverflow.com/questions/6319086/are-gcc-and-clang-parsers-really-handwritten)
+
+非常好的内容
+
+二、wikipedia [Operator-precedence parser](https://en.wikipedia.org/wiki/Operator-precedence_parser)
+
+> [GCC](https://en.wikipedia.org/wiki/GNU_Compiler_Collection)'s C and C++ parsers, which are hand-coded recursive descent parsers, are both sped up by an operator-precedence parser that can quickly examine arithmetic expressions.
+
+
+
+
+
 ## C compiler
 
 

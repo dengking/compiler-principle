@@ -167,8 +167,3 @@ zhihu [编译原理-几种LR算法的演化1——LR(0)](https://zhuanlan.zhihu.
 
 
 
-## GCC、llvm
-
-一、stackoverflow [Are GCC and Clang parsers really handwritten?](https://stackoverflow.com/questions/6319086/are-gcc-and-clang-parsers-really-handwritten)
-
-非常好的内容
