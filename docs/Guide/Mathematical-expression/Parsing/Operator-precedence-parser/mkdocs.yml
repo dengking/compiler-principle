@@ -1,3 +1,6 @@
 nav:
     - Introduction: index.md
+    - Precedence-climbing-method: Precedence-climbing-method
+    - Shunting-yard-algorithm: Shunting-yard-algorithm
+    - Pratt-parsing: Pratt-parsing
     

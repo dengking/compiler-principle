@@ -10,6 +10,37 @@ In [computer science](https://en.wikipedia.org/wiki/Computer_science), an **oper
 
 
 
-## Shunting yard algorithm
+### Relationship to other parsers
+
+
+
+
+
+## Algorithms
+
+
+
+### Shunting yard algorithm
 
 参见`Guide\Expression-tree\Shunting-yard-algorithm`。
+
+
+
+
+
+### 比较
+
+
+
+#### ycombinator [Shunting-yard algorithm](https://en.wikipedia.org/wiki/Shunting-yard_algorithm) 
+
+
+
+## Implementation
+
+
+
+[bourguet](https://github.com/bourguet)/**[operator_precedence_parsing](https://github.com/bourguet/operator_precedence_parsing)**
+
+这是在 ycombinator [Shunting-yard algorithm](https://en.wikipedia.org/wiki/Shunting-yard_algorithm) 中发现的
+
