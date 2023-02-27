@@ -28,6 +28,16 @@
 > primary ::= '(' expression ')' | NUMBER | VARIABLE | '-' primary
 > ```
 
+
+
+如何理解`primary`？在如下文章中，它被称为atom，我觉得这个名字时更好的:
+
+eli.thegreenplace [Parsing expressions by precedence climbing](https://eli.thegreenplace.net/2012/08/02/parsing-expressions-by-precedence-climbing)
+
+龙书
+
+其实更应该使用expression tree的思想来看待。
+
 a、equality-expression、additive-expression、multiplicative-expression 运算符优先级降低、不断的增加层次；
 
 equality-expression由additive-expression构成
