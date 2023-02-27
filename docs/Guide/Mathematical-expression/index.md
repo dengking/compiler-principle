@@ -30,6 +30,10 @@
 
 a、equality-expression、additive-expression、multiplicative-expression 运算符优先级降低、不断的增加层次；
 
+equality-expression由additive-expression构成
+
+additive-expression由multiplicative-expression构成
+
 b、括号的处理
 
 ```
@@ -37,3 +41,10 @@ primary ::= '(' expression ')'
 ```
 
 括号中是 `expression`，这说明遇到括号我们需要recursion
+
+c、上述grammar需要结合具体的例子来进行理解:
+
+```c++
+2 + 3 * 4 * 5 - 6
+```
+

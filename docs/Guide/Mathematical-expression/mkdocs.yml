@@ -3,6 +3,7 @@ nav:
     - Expression-tree: Expression-tree
     - Prefix-Infix-Postfix: Prefix-Infix-Postfix
     - geeksforgeeks-Expression-Tree: geeksforgeeks-Expression-Tree
+    - Operator-precedence-parser: Operator-precedence-parser    
     - LeetCode: LeetCode
-    - Parsing: Parsing
+
 
