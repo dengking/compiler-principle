@@ -1,7 +1,8 @@
 nav:
     - Introduction: index.md
+    - Expression-tree: Expression-tree
     - Prefix-Infix-Postfix: Prefix-Infix-Postfix
-    - Build-evaluate-expression-tree: Build-evaluate-expression-tree
     - geeksforgeeks-Expression-Tree: geeksforgeeks-Expression-Tree
     - LeetCode: LeetCode
-    - Mathematical-Expression-Parsing: Mathematical-Expression-Parsing
+    - Parsing: Parsing
+
