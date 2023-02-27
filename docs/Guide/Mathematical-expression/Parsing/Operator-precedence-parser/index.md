@@ -22,6 +22,74 @@ In [computer science](https://en.wikipedia.org/wiki/Computer_science), an **oper
 
 
 
+### Precedence climbing method
+
+
+
+An infix-notation expression grammar in [EBNF](https://en.wikipedia.org/wiki/EBNF) format will usually look like this:
+
+```c++
+expression ::= equality-expression
+equality-expression ::= additive-expression ( ( '==' | '!=' ) additive-expression ) *
+additive-expression ::= multiplicative-expression ( ( '+' | '-' ) multiplicative-expression ) *
+multiplicative-expression ::= primary ( ( '*' | '/' ) primary ) *
+primary ::= '(' expression ')' | NUMBER | VARIABLE | '-' primary
+```
+
+> NOTE:
+>
+> 一、上述grammar不是left-recursive的，因此它能够使用recursive method来实现
+>
+> 二、`primary ::= '-' primary` 这是负数
+
+With many levels of precedence, implementing this grammar with a predictive recursive-descent parser can become inefficient. Parsing a number, for example, can require five function calls: one for each non-terminal in the grammar until reaching *primary*.
+
+> NOTE:
+>
+> 一、primary可以看作是base case
+
+The algorithm is not a pure **operator-precedence parser** like the Dijkstra **shunting yard algorithm**. It assumes that the *primary* nonterminal is parsed in a separate subroutine, like in a **recursive descent parser**.
+
+#### Pseudocode
+
+The pseudocode for the algorithm is as follows. The parser starts at function *parse_expression*. Precedence levels are greater than or equal to 0.
+
+
+
+```python
+parse_expression()
+    return parse_expression_1(parse_primary(), 0)
+
+parse_expression_1(lhs, min_precedence)
+    lookahead := peek next token
+    while lookahead is a binary operator whose precedence is >= min_precedence
+        op := lookahead
+        advance to next token
+        rhs := parse_primary ()
+        lookahead := peek next token
+        while lookahead is a binary operator whose precedence is greater
+                 than op's, or a right-associative operator
+                 whose precedence is equal to op's
+            rhs := parse_expression_1 (rhs, precedence of op + (1 if lookahead precedence is greater, else 0))
+            lookahead := peek next token
+        lhs := the result of applying op with operands lhs and rhs
+    return lhs
+```
+
+
+
+
+
+
+
+### Pratt parsing
+
+> NOTE:
+
+
+
+
+
 ## Experts
 
 ### [Eli Bendersky](https://eli.thegreenplace.net/) 
@@ -31,6 +99,10 @@ https://eli.thegreenplace.net/tag/compilation
 https://eli.thegreenplace.net/tag/recursive-descent-parsing
 
 
+
+### Andy Chu
+
+oilshell [Pratt Parsing Index and Updates](https://www.oilshell.org/blog/2017/03/31.html) 
 
 
 
@@ -50,7 +122,7 @@ https://eli.thegreenplace.net/tag/recursive-descent-parsing
 
 
 
-#### ycombinator [Shunting-yard algorithm](https://news.ycombinator.com/item?id=19190208) 
+#### ycombinator [Shuntxing-yard algorithm](https://news.ycombinator.com/item?id=19190208) 
 
 
 
