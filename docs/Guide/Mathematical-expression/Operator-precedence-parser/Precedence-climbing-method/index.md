@@ -163,11 +163,15 @@ Finally, we all know that parentheses can be used to explicitly group sub-expres
 
 As we'll see, the algorithm has a special provision(规定) to cleverly handle nested sub-expressions.
 
+> NOTE:
+>
+> 一、翻译如下: "正如我们将看到的，该算法有一个特殊的规定来巧妙地处理嵌套的子表达式。"
+
 
 
 ### Precedence climbing - how it actually works
 
-First let's define some terms. *Atoms* are either **numbers** or **parenthesized expressions**. *Expressions* consist of atoms connected by binary operators [[1\]](https://eli.thegreenplace.net/2012/08/02/parsing-expressions-by-precedence-climbing#id4). Note how these two terms are mutually dependent. This is normal in the land of grammars and parsers.
+First let's define some terms. *Atoms* are either **numbers** or **parenthesized expressions**. *Expressions* consist of **atoms** connected by **binary operators** [[1\]](https://eli.thegreenplace.net/2012/08/02/parsing-expressions-by-precedence-climbing#id4). Note how these two terms are mutually dependent. This is normal in the land of grammars and parsers.
 
 The algorithm is *operator-guided*. Its fundamental step is to consume the next atom and look at the operator following it. If the operator has precedence lower than the lowest acceptable for the current step, the algorithm returns. Otherwise, it calls itself in a loop to handle the sub-expression. In pseudo-code, it looks like this [[2\]](https://eli.thegreenplace.net/2012/08/02/parsing-expressions-by-precedence-climbing#id5):
 
@@ -177,14 +181,14 @@ The algorithm is *operator-guided*. Its fundamental step is to consume the next 
 >
 > 
 
-```
+```pseudocode
 compute_expr(min_prec):
   result = compute_atom()
 
   while cur token is a binary operator with precedence >= min_prec:
     prec, assoc = precedence and associativity of current token
     if assoc is left:
-      next_min_prec = prec + 1
+      next_min_prec = prec + 1 # precedence climbing
     else:
       next_min_prec = prec
     rhs = compute_expr(next_min_prec)
@@ -193,4 +197,14 @@ compute_expr(min_prec):
   return result
 ```
 
-Each recursive call here handles a sequence of operator-connected atoms sharing the same minimal precedence.
+Each recursive call here handles a sequence of operator-connected atoms sharing the same **minimal precedence**.
+
+
+
+#### An example
+
+To get a feel for how the algorithm works, let's start with an example:
+
+```c++
+2 + 3 ^ 2 * 3 + 4
+```

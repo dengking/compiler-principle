@@ -98,7 +98,7 @@ while there are tokens on the operator stack:
 
 > NOTE: 
 >
-> 一、无论哪种表达式(infix、postfix)，它们的operand的顺序是相同的(显然shunting-yard-algorithm能够保证这一点)，各种表达式的区别就在于它们的operator的位置不同，其实该算法所做的是决定何时将**operator**添加到**output**中。
+> 一、无论哪种表达式(infix、postfix)，它们的operand的顺序是相同的(显然**shunting-yard-algorithm**能够保证这一点)，各种表达式的区别就在于它们的operator的位置不同，其实该算法所做的是决定何时将**operator**添加到**output**中。
 >
 > 二、parentheses、operator precedence、operator associativity决定了expression的计算顺序，那shunting yard algorithm是如何实现这些内容的呢？
 >
