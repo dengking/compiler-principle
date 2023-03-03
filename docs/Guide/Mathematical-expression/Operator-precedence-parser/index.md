@@ -56,6 +56,24 @@ oilshell [Pratt Parsing Index and Updates](https://www.oilshell.org/blog/2017/03
 
 ## Algorithms
 
+precedence、associativity、parentheses
+
+parentheses=sub-expression ( eli.thegreenplace [Parsing expressions by precedence climbing](https://eli.thegreenplace.net/2012/08/02/parsing-expressions-by-precedence-climbing) )
+
+explicit parentheses
+
+implicit parentheses: 算法根据operator的precedence、associativity来加上implicit parentheses
+
+lookahead 1 symbol: 
+
+1、根据next symbol来决定是否构造sub-expression，可以肯定的是每个atom后面都跟着一个operator
+
+2、eli.thegreenplace [Parsing expressions by precedence climbing](https://eli.thegreenplace.net/2012/08/02/parsing-expressions-by-precedence-climbing) 
+
+> The algorithm is *operator-guided*. Its fundamental step is to consume the next atom and look at the operator following it. If the operator has precedence lower than the lowest acceptable for the current step, the algorithm returns. Otherwise, it calls itself in a loop to handle the sub-expression.
+
+operator-directed-translation: eli.thegreenplace [Parsing expressions by precedence climbing](https://eli.thegreenplace.net/2012/08/02/parsing-expressions-by-precedence-climbing) 
+
 
 
 ### Shunting yard algorithm
@@ -77,6 +95,8 @@ oilshell [Pratt Parsing Index and Updates](https://www.oilshell.org/blog/2017/03
 二、eli.thegreenplace [Parsing expressions by precedence climbing](https://eli.thegreenplace.net/2012/08/02/parsing-expressions-by-precedence-climbing)
 
 > ***Update (2016-11-02):** Andy Chu [notes](http://www.oilshell.org/blog/2016/11/01.html) that precedence climbing and [TDOP](https://eli.thegreenplace.net/2010/01/02/top-down-operator-precedence-parsing) are pretty much the same algorithm, formulated a bit differently. I tend to agree, and also note that [Shunting Yard](https://eli.thegreenplace.net/2009/03/20/a-recursive-descent-parser-with-an-infix-expression-evaluator) is again the same algorithm, except that the explicit recursion is replaced by a stack.*
+
+
 
 
 
