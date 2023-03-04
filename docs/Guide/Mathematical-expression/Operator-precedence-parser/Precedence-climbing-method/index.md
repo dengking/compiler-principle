@@ -192,10 +192,18 @@ compute_expr(min_prec):
     else:
       next_min_prec = prec
     rhs = compute_expr(next_min_prec)
-    result = compute operator(result, rhs)
+    result = compute operator(result, rhs) # 这里是evaluate expression，根据 lhs opertor rhs 计算出结果
 
   return result
 ```
+
+> NOTE:
+>
+> 一、先读取一个operand，然后读取operator，它本质上和  [Shunting-yard algorithm](https://en.wikipedia.org/wiki/Shunting-yard_algorithm) 是一样的: 当当前operator的precedence比之前的operator的precedence要低的时候就让之前的evaluate，对应上述code就是不进入while loop，而是直接 `return result`。
+>
+> 二、为什么right-associativity不进行precedence-climbing？
+>
+> 三、`result`
 
 Each recursive call here handles a sequence of operator-connected atoms sharing the same **minimal precedence**.
 
@@ -208,3 +216,88 @@ To get a feel for how the algorithm works, let's start with an example:
 ```c++
 2 + 3 ^ 2 * 3 + 4
 ```
+
+It's recommended to follow the execution of the algorithm through this expression with, on paper. The computation is **kicked off**(启动) by calling `compute_expr(1)`, because 1 is the **minimal operator precedence** among all operators we've defined. Here is the "call tree" the algorithm produces for this expression:
+
+```
+* compute_expr(1)                # Initial call on the whole expression
+  * compute_atom() --> 2
+  * compute_expr(2)              # Loop entered, operator '+'
+    * compute_atom() --> 3
+    * compute_expr(3)
+      * compute_atom() --> 2
+      * result --> 2             # Loop not entered for '*' (prec < '^')
+    * result = 3 ^ 2 --> 9
+    * compute_expr(3)
+      * compute_atom() --> 3
+      * result --> 3             # Loop not entered for '+' (prec < '*')
+    * result = 9 * 3 --> 27
+  * result = 2 + 27 --> 29
+  * compute_expr(2)              # Loop entered, operator '+'
+    * compute_atom() --> 4
+    * result --> 4               # Loop not entered - end of expression
+  * result = 29 + 4 --> 33
+```
+
+#### Handling precedence
+
+Note that the algorithm makes one **recursive call** per **binary operator**. Some of these calls are short lived - they will only consume an atom and return it because the `while` loop is not entered (this happens on the second 2, as well as on the second 3 in the example expression above). Some are longer lived. The initial call to `compute_expr` will compute the whole expression.
+
+The `while` loop is the essential ingredient here. It's the thing that makes sure that the current `compute_expr` call handles all consecutive operators with the given **minimal precedence** before exiting.
+
+#### Handling associativity
+
+In my opinion, one of the coolest aspects of this algorithm is the simple and elegant way it handles associativity. It's all in that condition that either sets the minimal precedence for the next call to the current one, or current one plus one.
+
+Here's how this works. Assume we have this sub-expression somewhere:
+
+```c++
+8 * 9 * 10
+
+  ^
+  |
+```
+
+The arrow marks where the `compute_expr` call is, having entered the `while` loop. `prec` is 2. Since the associativity of `*` is left, `next_min_prec` is set to 3. The recursive call to `compute_expr(3)`, after consuming an atom, sees the next `*` token:
+
+```
+8 * 9 * 10
+
+      ^
+      |
+```
+
+Since the precedence of `*` is 2, while `min_prec` is 3, the `while` loop never runs and the call returns. So the original `compute_expr` will get to handle the second multiplication, not the internal call. Essentially, this means that the expression is grouped as follows:
+
+```
+(8 * 9) * 10
+```
+
+Which is exactly what we want from left associativity.
+
+In contrast, for this expression:
+
+```c++
+8 ^ 9 ^ 10
+```
+
+The precedence of `^` is 3, and since it's right associative, the `min_prec` for the recursive call stays 3. This will mean that the recursive call *will* consume the next `^` operator before returning to the original `compute_expr`, grouping the expression as follows:
+
+```c++
+8 ^ (9 ^ 10)
+```
+
+#### Handling sub-expressions
+
+The algorithm pseudo-code presented above doesn't explain how parenthesized sub-expressions are handled. Consider this expression:
+
+```
+2000 * (4 - 3) / 100
+```
+
+It's not clear how the `while` loop can handle this. The answer is `compute_atom`. When it sees a left paren, it knows that a sub-expression will follow, so it calls `compute_expr` on the sub expression (which lasts until the matching right paren), and returns its result as the result of the atom. So `compute_expr` is oblivious(不知) to the existence of sub-expressions.
+
+Finally, in order to stay short the pseudo-code leaves some interesting details out. What follows is a full implementation of the algorithm that fills all the gaps.
+
+### A Python implementation
+
