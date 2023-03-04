@@ -1,20 +1,26 @@
 # Precedence-climbing-method
 
-1、SDT vs ODT
+一、SDT vs ODT
 
 ODT是在 eli.thegreenplace [Parsing expressions by precedence climbing](https://eli.thegreenplace.net/2012/08/02/parsing-expressions-by-precedence-climbing) 中提出的
 
 
 
-2、决定何时使用operator和operand(lhs、rhs)相结合
+二、决定何时使用operator和operand(lhs、rhs)相结合
 
 
 
-3、three-common-thing: 
+三、three-common-thing: 
 
-precedence、associativity、parenthesis
+1、precedence、associativity、parenthesis
 
-implicit parentheses(由precedence、associativity决定)、explicit parentheses
+2、parenthesis
+
+implicit parentheses(由precedence、associativity决定)
+
+explicit parentheses
+
+四、相比于shunting yard algorithm，precedence climbing method会更加的简单优雅，它充分运用来expression的recursive structure特性
 
 
 
@@ -48,9 +54,15 @@ An **operator-precedence parser** can do the same more efficiently.[[1\]](https:
 >
 > 一、上面这段话要如何来进行理解呢？
 >
-> "The idea is that we can **left associate** the arithmetic operations as long as we find operators with the same precedence" 这其实和  [shunting-yard algorithm](https://en.wikipedia.org/wiki/Shunting-yard_algorithm) 的处理方式相同 
+> 1、"The idea is that we can **left associate** the arithmetic operations as long as we find operators with the same precedence" 这其实和  [shunting-yard algorithm](https://en.wikipedia.org/wiki/Shunting-yard_algorithm) 的处理方式相同 
 >
-> 核心思想是从syntax-directed-translation切换到operator-directed-translation
+> 核心思想是从 **syntax-directed-translation** 切换到 **operator-directed-translation**  
+>
+> 2、"but we have to save a temporary result to evaluate higher precedence operators"
+>
+> 结合 eli.thegreenplace [Parsing expressions by precedence climbing](https://eli.thegreenplace.net/2012/08/02/parsing-expressions-by-precedence-climbing) 中的 pseudocode 会更加容易理解
+>
+> 
 
 The algorithm is not a pure **operator-precedence parser** like the Dijkstra **shunting yard algorithm**. It assumes that the *primary* nonterminal is parsed in a separate subroutine, like in a **recursive descent parser**.
 
@@ -80,7 +92,11 @@ parse_expression_1(lhs, min_precedence)
     return lhs
 ```
 
-
+> NOTE:
+>
+> 一、eli.thegreenplace [Parsing expressions by precedence climbing](https://eli.thegreenplace.net/2012/08/02/parsing-expressions-by-precedence-climbing) 中的 pseudocode 会更加容易理解
+>
+> 
 
 
 
@@ -90,11 +106,13 @@ parse_expression_1(lhs, min_precedence)
 
 ### Precedence climbing - what it aims to achieve
 
-So the basic goal of the algorithm is the following: treat an expression as a bunch of nested sub-expressions, where each sub-expression has in common the lowest precedence level of the the operators it contains.
+So the basic goal of the algorithm is the following: treat an expression as a bunch of nested **sub-expressions**, where each **sub-expression** has in common the lowest precedence level of the the operators it contains.
 
 > NOTE:
 >
 > 一、这个算法有一个非常重要的概念就是"minimal precedence"(在后面会提及)，也就是上面这段话中所述的"lowest precedence level"，它是通过operator precedence、operator associativity来构建sub-expression，其实所谓的sub-expression其实是加括号的结果，显然这个算法其实所实现的就是重新加上括号。
+
+#### Example 1
 
 Here's a simple example:
 
@@ -112,6 +130,8 @@ Assuming that the precedence of `+` (and `-`) is 1 and the precedence of `*` (an
 ```
 
 The sub-expression multiplying the three numbers has a **minimal precedence** of 2. The sub-expression spanning the whole original expression has a **minimal precedence** of 1.
+
+#### Example 2
 
 Here's a more complex example, adding a power operator `^` with precedence 3:
 
@@ -173,11 +193,21 @@ As we'll see, the algorithm has a special provision(规定) to cleverly handle n
 
 First let's define some terms. *Atoms* are either **numbers** or **parenthesized expressions**. *Expressions* consist of **atoms** connected by **binary operators** [[1\]](https://eli.thegreenplace.net/2012/08/02/parsing-expressions-by-precedence-climbing#id4). Note how these two terms are mutually dependent. This is normal in the land of grammars and parsers.
 
-The algorithm is *operator-guided*. Its fundamental step is to consume the next atom and look at the operator following it. If the operator has precedence lower than the lowest acceptable for the current step, the algorithm returns. Otherwise, it calls itself in a loop to handle the sub-expression. In pseudo-code, it looks like this [[2\]](https://eli.thegreenplace.net/2012/08/02/parsing-expressions-by-precedence-climbing#id5):
+The algorithm is *operator-guided*. Its fundamental step is to consume the next atom and look at the operator following it. If the operator has precedence lower than the lowest acceptable for the current step, the algorithm returns. Otherwise, it calls itself in a loop to handle the **sub-expression**. In pseudo-code, it looks like this [[2\]](https://eli.thegreenplace.net/2012/08/02/parsing-expressions-by-precedence-climbing#id5):
 
 > NOTE:
 >
-> 一、lookahead 1 symbol: "The algorithm is *operator-guided*. Its fundamental step is to consume the next atom and look at the operator following it."
+> 一、一次读取两个symbol，lookahead 1 symbol(operator): "The algorithm is *operator-guided*. Its fundamental step is to consume the next atom and look at the operator following it."，通过到底是跟前面的结合还是跟后面的结合:
+>
+> ```
+> 1+2*3
+> ```
+>
+> 第一次: `1`、 `+`
+>
+> 第二次: `2`、 `*`
+>
+> 由于 `*` 的precedence高于 `+`，因此它决定 2 不能和前面的 `1` 结合
 >
 > 
 
@@ -192,7 +222,7 @@ compute_expr(min_prec):
     else:
       next_min_prec = prec
     rhs = compute_expr(next_min_prec)
-    result = compute operator(result, rhs) # 这里是evaluate expression，根据 lhs opertor rhs 计算出结果
+    result = compute operator(result, rhs) # 这里是evaluate expression，根据 lhs operator rhs 计算出结果
 
   return result
 ```
@@ -203,23 +233,33 @@ compute_expr(min_prec):
 >
 > 二、为什么right-associativity不进行precedence-climbing？
 >
+> 这在后面会进行解释
+>
 > 三、`result`
+>
+> 可以看到，`compute_atom()` 的返回值使用 `result` 保持、while loop中的 `compute operator(result, rhs)` 中将 `result` 作为 lhs 并且结果保存于 `result` ，最后函数的返回值也是 `return result` ，其实这对应的是对sub- expression的计算，关于sub- expression，在前面已经说明了。
+>
+> 在 wikipedia [Operator-precedence parser](https://en.wikipedia.org/wiki/Operator-precedence_parser) # Precedence climbing method中有这样的说明:
+>
+> > but we have to save a temporary result to evaluate higher precedence operators
 >
 > 四、从最简单的例子开始学习:
 >
 > 1、left associative
 >
 > ```c++
-> 1+2+3
+> 1+2+3+4
 > ```
 >
 > 2、right associative
 >
 > ```
-> 1^2^3
+> 1^2^3^4
 > ```
 >
-> 通过minimal precedence来控制计算
+> 上述两个例子是最最极端、简单的例子，通过它们可以看出: 这个algorithm是minimal precedence来控制计算顺序、加括号顺序:
+>
+> left associative从左到右、right associative从右到左
 
 Each recursive call here handles a sequence of operator-connected atoms sharing the same **minimal precedence**.
 
