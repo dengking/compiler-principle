@@ -197,7 +197,7 @@ The algorithm is *operator-guided*. Its fundamental step is to consume the next 
 
 > NOTE:
 >
-> 一、一次读取两个symbol，lookahead 1 symbol(operator): "The algorithm is *operator-guided*. Its fundamental step is to consume the next atom and look at the operator following it."，通过到底是跟前面的结合还是跟后面的结合:
+> 一、一次读取a pair symbol(两个):  operator、operand，通过比较current operator 和 previous operator的precedence来 通过到底是跟前面的结合还是跟后面的结合:
 >
 > ```
 > 1+2*3
@@ -207,9 +207,7 @@ The algorithm is *operator-guided*. Its fundamental step is to consume the next 
 >
 > 第二次: `2`、 `*`
 >
-> 由于 `*` 的precedence高于 `+`，因此它决定 2 不能和前面的 `1` 结合
->
-> 
+> 由于 `*` 的precedence高于 `+`，因此它决定 2 不能和前面的 `1` 结合。
 
 ```pseudocode
 compute_expr(min_prec):
