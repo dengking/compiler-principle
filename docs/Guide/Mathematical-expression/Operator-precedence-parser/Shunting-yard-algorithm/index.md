@@ -158,8 +158,6 @@ The **shunting yard algorithm** can also be applied to produce **prefix notation
 
 
 
-
-
 ## TODO
 
 stackoverflow [Algorithm for converting expression to binary tree [closed]](https://stackoverflow.com/questions/42441416/algorithm-for-converting-expression-to-binary-tree)

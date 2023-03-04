@@ -56,7 +56,13 @@ oilshell [Pratt Parsing Index and Updates](https://www.oilshell.org/blog/2017/03
 
 ## Algorithms
 
-一、precedence、associativity、parentheses
+一、three-common-thing in expression: 
+
+1、precedence
+
+2、associativity
+
+3、parentheses
 
 二、parentheses=sub-expression ( eli.thegreenplace [Parsing expressions by precedence climbing](https://eli.thegreenplace.net/2012/08/02/parsing-expressions-by-precedence-climbing) )
 
@@ -82,7 +88,7 @@ implicit parentheses: 算法根据operator的precedence、associativity来加上
 
 2、precedence climbing algorithm使用变量minimal precedence作为recursive function的入参实现的
 
-
+六、决定何时使用operator和operand(lhs、rhs)相结合
 
 ### Shunting yard algorithm
 
@@ -90,21 +96,13 @@ implicit parentheses: 算法根据operator的precedence、associativity来加上
 
 
 
-
-
 ### 比较
 
-
-
 一、ycombinator [Shuntxing-yard algorithm](https://news.ycombinator.com/item?id=19190208) 
-
-
 
 二、eli.thegreenplace [Parsing expressions by precedence climbing](https://eli.thegreenplace.net/2012/08/02/parsing-expressions-by-precedence-climbing)
 
 > ***Update (2016-11-02):** Andy Chu [notes](http://www.oilshell.org/blog/2016/11/01.html) that precedence climbing and [TDOP](https://eli.thegreenplace.net/2010/01/02/top-down-operator-precedence-parsing) are pretty much the same algorithm, formulated a bit differently. I tend to agree, and also note that [Shunting Yard](https://eli.thegreenplace.net/2009/03/20/a-recursive-descent-parser-with-an-infix-expression-evaluator) is again the same algorithm, except that the explicit recursion is replaced by a stack.*
-
-
 
 
 

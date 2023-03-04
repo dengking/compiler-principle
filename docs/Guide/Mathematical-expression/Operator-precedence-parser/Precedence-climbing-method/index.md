@@ -204,6 +204,22 @@ compute_expr(min_prec):
 > 二、为什么right-associativity不进行precedence-climbing？
 >
 > 三、`result`
+>
+> 四、从最简单的例子开始学习:
+>
+> 1、left associative
+>
+> ```c++
+> 1+2+3
+> ```
+>
+> 2、right associative
+>
+> ```
+> 1^2^3
+> ```
+>
+> 通过minimal precedence来控制计算
 
 Each recursive call here handles a sequence of operator-connected atoms sharing the same **minimal precedence**.
 
