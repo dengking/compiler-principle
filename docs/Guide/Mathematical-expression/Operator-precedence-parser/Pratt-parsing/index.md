@@ -25,5 +25,3 @@ oilshell [Pratt Parsing and Precedence Climbing Are the Same Algorithm](https://
 
 
 
-matklad.github [Simple but Powerful Pratt Parsing](https://matklad.github.io/2020/04/13/simple-but-powerful-pratt-parsing.html#Simple-but-Powerful-Pratt-Parsing) 
-
