@@ -355,3 +355,61 @@ Finally, in order to stay short the pseudo-code leaves some interesting details 
 
 ### A Python implementation
 
+Here is a Python implementation of expression parsing by precedence climbing. It's kept short for simplicity, but can be be easily expanded to cover a more real-world language of expressions. The following sections present the code in small chunks. The whole code is [available here](https://github.com/eliben/code-for-blog/blob/master/2012/rd_infix_precedence.py).
+
+I'll start with a small **tokenizer** class that breaks text into tokens and keeps a state. The grammar is very simple: numeric expressions, the basic arithmetic operators `+, -, *, /, ^` and parens - `(, )`.
+
+```c++
+Tok = namedtuple('Tok', 'name value')
+
+
+class Tokenizer(object):
+    """ Simple tokenizer object. The cur_token attribute holds the current
+        token (Tok). Call get_next_token() to advance to the
+        next token. cur_token is None before the first token is
+        taken and after the source ends.
+    """
+    TOKPATTERN = re.compile("\s*(?:(\d+)|(.))")
+
+    def __init__(self, source):
+        self._tokgen = self._gen_tokens(source)
+        self.cur_token = None
+
+    def get_next_token(self):
+        """ Advance to the next token, and return it.
+        """
+        try:
+            self.cur_token = self._tokgen.next()
+        except StopIteration:
+            self.cur_token = None
+        return self.cur_token
+
+    def _gen_tokens(self, source):
+        for number, operator in self.TOKPATTERN.findall(source):
+            if number:
+                yield Tok('NUMBER', number)
+            elif operator == '(':
+                yield Tok('LEFTPAREN', '(')
+            elif operator == ')':
+                yield Tok('RIGHTPAREN', ')')
+            else:
+                yield Tok('BINOP', operator)
+```
+
+> NOTE:
+>
+> 一、如何理解 `re.compile("\s*(?:(\d+)|(.))")` ？
+>
+> 1、`?:` 表示 non-capture group
+>
+> 2、下面是一些例子:
+>
+> ```python
+> >>> TOKPATTERN = re.compile("\s*(?:(\d+)|(.))")
+> >>> source='1+2*3'
+> >>> res = TOKPATTERN.findall(source)
+> >>> res
+> [('1', ''), ('', '+'), ('2', ''), ('', '*'), ('3', '')]
+> ```
+>
+> 
