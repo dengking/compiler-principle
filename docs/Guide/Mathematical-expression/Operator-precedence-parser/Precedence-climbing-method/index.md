@@ -412,4 +412,17 @@ class Tokenizer(object):
 > [('1', ''), ('', '+'), ('2', ''), ('', '*'), ('3', '')]
 > ```
 >
+> 二、如何理解 `self._tokgen = self._gen_tokens(source)`
+>
+> `_gen_tokens` 是generator，只有通过调用它的 `next()` 方法才能够触发它的执行:
+>
+> ```python
+> >>> t = Tokenizer('2 + 3^2*3 + 4')
+> >>> t._tokgen
+> <generator object Tokenizer._gen_tokens at 0x1016f4f90>
+> >>> t.cur_token
 > 
+> ```
+>
+> 
+
