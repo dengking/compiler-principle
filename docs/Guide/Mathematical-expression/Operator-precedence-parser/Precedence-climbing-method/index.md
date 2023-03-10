@@ -426,3 +426,85 @@ class Tokenizer(object):
 >
 > 
 
+Next, `compute_atom`:
+
+```python
+def compute_atom(tokenizer):
+    tok = tokenizer.cur_token
+    if tok.name == 'LEFTPAREN':
+        tokenizer.get_next_token()
+        val = compute_expr(tokenizer, 1)
+        if tokenizer.cur_token.name != 'RIGHTPAREN':
+            parse_error('unmatched "("')
+        tokenizer.get_next_token()
+        return val
+    elif tok is None:
+            parse_error('source ended unexpectedly')
+    elif tok.name == 'BINOP':
+        parse_error('expected an atom, not an operator "%s"' % tok.value)
+    else:
+        assert tok.name == 'NUMBER'
+        tokenizer.get_next_token()
+        return int(tok.value)
+```
+
+It handles true atoms (numbers in our case), as well as **parenthesized sub-expressions**.
+
+Here is `compute_expr` itself, which is very close to the pseudo-code shown above:
+
+```python
+# For each operator, a (precedence, associativity) pair.
+OpInfo = namedtuple('OpInfo', 'prec assoc')
+
+OPINFO_MAP = {
+    '+':    OpInfo(1, 'LEFT'),
+    '-':    OpInfo(1, 'LEFT'),
+    '*':    OpInfo(2, 'LEFT'),
+    '/':    OpInfo(2, 'LEFT'),
+    '^':    OpInfo(3, 'RIGHT'),
+}
+
+def compute_expr(tokenizer, min_prec):
+    atom_lhs = compute_atom(tokenizer)
+
+    while True:
+        cur = tokenizer.cur_token
+        if (cur is None or cur.name != 'BINOP'
+                        or OPINFO_MAP[cur.value].prec < min_prec):
+            break
+
+        # Inside this loop the current token is a binary operator
+        assert cur.name == 'BINOP'
+
+        # Get the operator's precedence and associativity, and compute a
+        # minimal precedence for the recursive call
+        op = cur.value
+        prec, assoc = OPINFO_MAP[op]
+        next_min_prec = prec + 1 if assoc == 'LEFT' else prec
+
+        # Consume the current token and prepare the next one for the
+        # recursive call
+        tokenizer.get_next_token()
+        atom_rhs = compute_expr(tokenizer, next_min_prec)
+
+        # Update lhs with the new value
+        atom_lhs = compute_op(op, atom_lhs, atom_rhs)
+
+    return atom_lhs
+```
+
+The only difference is that this code makes token handling more explicit. It basically follows the usual "recursive-descent protocol". Each recursive call has the current token available in `tokenizer.cur_tok`, and makes sure to consume all the tokens it has handled (by calling `tokenizer.get_next_token()`).
+
+One additional small piece is missing. `compute_op` simply performs the arithmetic computation for the supported binary operators:
+
+```python
+def compute_op(op, lhs, rhs):
+    lhs = int(lhs); rhs = int(rhs)
+    if op == '+':   return lhs + rhs
+    elif op == '-': return lhs - rhs
+    elif op == '*': return lhs * rhs
+    elif op == '/': return lhs / rhs
+    elif op == '^': return lhs ** rhs
+    else:
+        parse_error('unknown operator "%s"' % op)
+```
