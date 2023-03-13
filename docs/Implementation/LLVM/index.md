@@ -52,3 +52,9 @@ LeetCode后台使用clang进行santinizer:
 
 [LLVM Programmer’s Manual](https://llvm.org/docs/ProgrammersManual.html)
 
+
+
+## Community
+
+https://discourse.llvm.org/
+
