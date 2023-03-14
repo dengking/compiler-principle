@@ -2,3 +2,5 @@ nav:
     - Introduction: index.md
     - Control-flow&&program-counter: Control-flow&&program-counter
     - Control-flow-graph: Control-flow-graph
+    - Dominator-tree: Dominator-tree
+    
