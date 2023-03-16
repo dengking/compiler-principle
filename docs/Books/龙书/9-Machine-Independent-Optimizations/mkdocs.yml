@@ -1,2 +1,4 @@
 nav:
     - 9: index.md
+    - 9.2-Introduction-to-Data-Flow-Analysis: 9.2-Introduction-to-Data-Flow-Analysis
+    - 9.6-Loops-in-Flow-Graphs: 9.6-Loops-in-Flow-Graphs

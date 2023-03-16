@@ -1,0 +1,3 @@
+# 9.2 Introduction to Data-Flow Analysis 
+
+All the optimizations introduced in Section 9.1 depend on **data-flow analysis**. "Data-ow analysis" refers to a body of techniques that derive(获取) information about the flow of data along program execution paths. For example, one way to implement **global common subexpression elimination** requires us to determine whether two textually identical expressions evaluate to the same value along any possible execution path of the program. As another example, if the result of an assignment is not used along any subsequent execution path, then we can eliminate the assignment as **dead code**. These and many other important questions can be answered by **data-ow analysis**.

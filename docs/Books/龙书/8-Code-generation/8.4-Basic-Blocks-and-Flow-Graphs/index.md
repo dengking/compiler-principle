@@ -1,0 +1,3 @@
+# 8.4 Basic Blocks and Flow Graphs 
+
+This section introduces a graph representation of intermediate code that is helpful for discussing code generation even if the graph is not constructed explicitly by a code-generation algorithm. Code generation benefits from context. We can do a better job of register allocation if we know how values are denfied and used, as we shall see in Section 8.8. We can do a better job of instruction selection by looking at sequences of three-address statements, as we shall see inSection 8.9.
