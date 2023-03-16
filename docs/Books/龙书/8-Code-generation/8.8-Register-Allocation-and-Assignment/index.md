@@ -1,0 +1,3 @@
+# 8.8 Register Allocation and Assignment 
+
+Instructions involving only register operands are faster than those involving memory operands. On modern machines, processor speeds are often an order of magnitude or more faster than memory speeds. Therefore, efficient utilization of registers is vitally important in generating good code. This section presents various strategies for deciding at each point in a program what values should reside in registers (**register allocation**) and in which register each value shouldreside (**register assignment**).

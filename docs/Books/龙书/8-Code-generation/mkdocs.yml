@@ -1,4 +1,10 @@
 nav:
     - Introduction: index.md
     - 8.4-Basic-Blocks-and-Flow-Graphs: 8.4-Basic-Blocks-and-Flow-Graphs
-    
+    - 8.5-Optimization-of-Basic-Blocks: 8.5-Optimization-of-Basic-Blocks
+    - 8.7-Peephole-Optimization: 8.7-Peephole-Optimization
+    - 8.8-Register-Allocation-and-Assignment: 8.8-Register-Allocation-and-Assignment
+    - 8.9-Instruction-Selection-by-Tree-Rewriting: 8.9-Instruction-Selection-by-Tree-Rewriting
+    - 8.10-Optimal-Code-Generation-for-Expressions: 8.10-Optimal-Code-Generation-for-Expressions
+    - 8.13-References-for-Chapter-8: 8.13-References-for-Chapter-8
+
