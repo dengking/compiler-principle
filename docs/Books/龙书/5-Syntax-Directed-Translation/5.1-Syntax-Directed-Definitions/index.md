@@ -101,19 +101,19 @@ in Section 5.2, we shall allow semantic rules to compute arbitrary functions, po
 
 An S-attributed SDD can be implemented naturally in conjunction with an **LR parser**. 
 
+### Attribute grammar
+
 An SDD without side effects is sometimes called an *attribute grammar*. The rules in an attribute grammar define the value of an attribute purely in terms of the values of other attributes and constants.
 
 
 
 ## 5.1.2 Evaluating an SDD at the Nodes of a Parse Tree
 
-To visualize the translation specified by an SDD, it helps to work with parse trees, even though a translator need not actually build a parse tree. Imagine therefore that the rules of an SDD are applied by first constructing a parse tree and then using the rules to evaluate all of the attributes at each of the nodes
-of the **parse tree**. A **parse tree**, showing the value(s) of its attribute(s) is called an *annotated parse tree*.
+To visualize the translation specified by an SDD, it helps to work with parse trees, even though a translator need not actually build a parse tree. Imagine therefore that the rules of an SDD are applied by first constructing a parse tree and then using the rules to evaluate all of the attributes at each of the nodes of the **parse tree**. A **parse tree**, showing the value(s) of its attribute(s) is called an ***annotated parse tree***.
 
-How do we construct an **annotated parse tree**? In what order do we evaluate attributes? Before we can evaluate an attribute at a node of a parse tree, we must evaluate all the attributes up on which its value depends. For example, if all attributes are **synthesized**, as in Example 5.1, then we must evaluate the
-`val` attributes at all of the children of a node before we can evaluate the `val` attribute at the node itself.
+How do we construct an **annotated parse tree**? In what order do we evaluate attributes? Before we can evaluate an attribute at a node of a parse tree, we must evaluate all the attributes up on which its value depends. For example, if all attributes are **synthesized**, as in Example 5.1, then we must evaluate the `val` attributes at all of the children of a node before we can evaluate the `val` attribute at the node itself.
 
-With **synthesized attributes**, we can evaluate attributes in any bottom-up order, such as that of a postorder traversal of the parse tree; the evaluation of S-attributed definitions is discussed in Section 5.2.3.
+With **synthesized attributes**, we can evaluate attributes in any **bottom-up order**, such as that of a postorder traversal of the parse tree; the evaluation of S-attributed definitions is discussed in Section 5.2.3.
 
 For SDD's with both inherited and synthesized attributes, there is no guarantee that there is even one order in which to evaluate attributes at nodes. For instance, consider nonterminals `A` and `B` , with synthesized and inherited attributes `A.s` and `B.i`, respectively, along with the production and rules
 
@@ -129,7 +129,9 @@ These rules are circular; it is impossible to evaluate either `A.s` at a node `N
 
 It is computationally difficult to determine whether or not there exist any **circularities** in any of the parse trees that a given SDD could have to translate. Fortunately, there are useful sub classes of SDD's that are sufficient to guarantee that an order of evaluation exists, as we shall see in Section 5.2.
 
-> NOTE: Below is the explanation if why determining whether or not there exist any **circularities** in any of the parse trees of a given SDD is computationally difficult: 
+> NOTE: 
+>
+> 一、Below is the explanation if why determining whether or not there exist any **circularities** in any of the parse trees of a given SDD is computationally difficult: 
 >
 > Without going into details, while the problem is decidable, it cannot be solved by a polynomial-time algorithm, even if P = N P , since it has exponential time complexity.
 >
