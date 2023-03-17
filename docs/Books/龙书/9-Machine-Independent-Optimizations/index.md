@@ -1,1 +1,9 @@
 # Chapter 9 Machine-Independent Optimizations
+
+High-level language constructs can introduce substantial run-time overhead if we naively translate each construct independently into machine code. This chapter discusses how to eliminate many of these inefficiencies. Elimination of unnecessary instructions in object code, or the replacement of one sequence of instructions by a faster sequence of instructions that does the same thing is usually called "code improvement" or "code optimization."
+
+Local code optimization (code improvement within a basic block) was introduced in Section 8.5. This chapter deals with **global code optimization**, where improvements take into account what happens across basic blocks. We beginin Section 9.1 with a discussion of the principal opportunities for code improvement.
+
+
+
+Most global optimizations are based on **data-flow analyses**, which are algorithms to gather information about a program. The results of **data-flow analyses** all have the same form: for each instruction in the program, they specify some property that must hold every time that instruction is executed. The analyses differ in the properties they compute. For example, a **constant-propagation analysis** computes, for each point in the program, and for each variable used by the program, whether that variable has a unique constant value at that point. This information may be used to replace variable references by constant values, for instance. As another example, a **liveness analysis** determines, for each point in the program, whether the value held by a particular variable at that point is sure to be overwritten before it is read. If so, we do not need to preserve that value, either in a register or in a memory location.

@@ -1,0 +1,3 @@
+# 8.5 Optimization of Basic Blocks 
+
+We can often obtain a substantial improvement in the running time of code merely by performing **local optimization** within each **basic block** by itself. More thorough global optimization, which looks at how information flows among the basic blocks of a program, is covered in later chapters, starting with Chapter 9. It is a complex subject, with many different techniques to consider.

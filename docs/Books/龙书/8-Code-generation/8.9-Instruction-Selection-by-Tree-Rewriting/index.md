@@ -1,0 +1,5 @@
+# 8.9 Instruction Selection by Tree Rewriting 
+
+**Instruction selection** can be a large **combinatorial task**, especially for machines that are rich in addressing modes, such as CISC machines, or on machines with special-purpose instructions, say, for signal processing. Even if we assume that the order of evaluation is given and that registers are allocated by a separate mechanism, instruction selection - the problem of selecting target-language instructions to implement the operators in the intermediate representation -remains a large combinatorial task.
+
+In this section, we treat **instruction selection** as a **tree-rewriting problem**. Tree representations of target instructions have been used effectively in code generator generators, which automatically construct the instruction-selectionphase of a code generator from a high-level specication of the target machine. Better code might be obtained for some machines by using DAG's rather thantrees, but **DAG matching** is more complex than tree matching.

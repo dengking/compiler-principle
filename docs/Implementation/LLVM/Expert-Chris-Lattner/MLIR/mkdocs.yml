@@ -1,2 +1,4 @@
 nav:
     - Introduction: index.md
+    - MLIR-Pattern-Rewriting-Generic-DAG-to-DAG-Rewriting: MLIR-Pattern-Rewriting-Generic-DAG-to-DAG-Rewriting
+    
