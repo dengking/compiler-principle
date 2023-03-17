@@ -30,11 +30,11 @@ We shall deal with two kinds of attributes for **nonterminals**:
 
 
 
-While we do not allow an **inherited attribute** at node `N` to be defined in terms of attribute values at the children of node `N` , we do allow a synthesized attribute at node `N` to be defined in terms of **inherited attribute** values at node `N` itself.
+While we do not allow an **inherited attribute** at node `N` to be defined in terms of attribute values at the children of node `N` , we do allow a **synthesized attribute** at node `N` to be defined in terms of **inherited attribute** values at node `N` itself.
 
 > NOTE: **Inherited attribute**, the name has implied that the attribute is inherited from parent, so it is natural that **inherited attribute** at node `N` can not be defined in terms of attribute values at the **children** of node `N` or it will be self-contradictory.
 
-Terminals can have **synthesized attributes**, but not **inherited attributes**. Attributes for terminals have lexical values that are supplied by the lexical analyzer; there are no semantic rules in the SDD itself for computing the value of an attribute for a terminal.
+Terminals can have **synthesized attributes**, but not **inherited attributes**. Attributes for terminals have lexical values that are supplied by the **lexical analyzer**; there are no **semantic rules** in the SDD itself for computing the value of an attribute for a terminal.
 
 > NOTE: 
 >
@@ -58,9 +58,41 @@ Terminals can have **synthesized attributes**, but not **inherited attributes**.
 >
 > 二、How about a start symbol? It is obvious that a start symbol can not has inherited attribute because it is the ancestor and it has no parent.
 
-**Example 5.1**: skipped
 
 
+---
+
+### An Alternative Definition of Inherited Attributes
+
+No additional translations are enabled if we allow an **inherited attribute $B.c$** at a node N to be defined in terms of attribute values at the children of N, as well as at N itself, at its parent, and at its siblings. Such rules can be "simulated" by creating additional attributes of B, say $B_{c1},B_{c2} \dots$ . These are **synthesized attributes** that copy the needed attributes of the children of the node labeled B. We then compute $B.c$ as an **inherited attribute**, using the attributes $B_{c1},B_{c2} \dots$ in place of attributes at the children. Such attributes are rarely needed in practice.
+
+> NOTE:
+>
+> 一、上面这段话是什么意思？
+
+---
+
+---
+
+### Example 5.1
+
+The SDD in Fig. 5.1 is based on our familiar grammar for arithmetic expressions with operators `+` and `*`. It evaluates expressions terminated by an endmarker **n**. In the SDD, each of the nonterminals has a single **synthesized attribute**, called `val`. We also suppose that the terminal **digit** has a **synthesized attribute** `lexval`, which is an integer value returned by the **lexical analyzer**.
+
+![](./figure-5.1-Syntax-directed-definition-of-a-simple-desk-calculator.png)
+
+
+
+The rule for production 1, $L \to E {\bf n}$, sets $L.val$ to $E.val$, which we shall see is the **numerical value** of the entire expression.
+
+Production 2, $E \to E_1 + T$ , also has one rule, which computes the `val` attribute for the head `E` as the sum of the values at $E_1$ and `T` . At any parse-tree node `N` labeled `E`,  the value of `val` for `E` is the sum of the values of `val` at the children of node `N` labeled `E` and `T` .
+
+Production 3, $E \to T$ , has a single rule that defines the value of `val` for `E` to be the same as the value of `val` at the child for `T`. Production 4 is similar to the second production; its rule multiplies the values at the children instead of adding them. The rules for productions 5 and 6 copy values at a child, like that for the third production. Production 7 gives $F.val$ the value of a digit, that is, the numerical value of the token digit that the **lexical analyzer** returned.
+
+
+
+---
+
+### S-attributed
 
 An SDD that involves only **synthesized attributes** is called ***S-attributed***; the SDD in Fig. 5.1 has this property. In an **S-attributed SDD**, each rule computes an attribute for the nonterminal at the head of a production from attributes taken from the body of the production.
 
