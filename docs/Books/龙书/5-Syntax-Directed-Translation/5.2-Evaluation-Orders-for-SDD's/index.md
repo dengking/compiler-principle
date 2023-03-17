@@ -8,7 +8,7 @@
 >
 > 
 
-"Dependency graphs" are a useful tool for determining an evaluation order for the attribute instances in a given **parse tree**. While an annotated parse tree shows the values of attributes, a **dependency graph** helps us determine how those values can be computed.
+"Dependency graphs" are a useful tool for determining an evaluation order for the attribute instances in a given **parse tree**. While an **annotated parse tree** shows the values of attributes, a **dependency graph** helps us determine how those values can be computed.
 
 In this section, in addition to dependency graphs, we define two important classes of SDD's: the "S-attributed" and the more general "L-attributed" SDD's. The translations specified by these two classes fit well with the parsing methods we have studied, and most translations encountered in practice can be
 written to conform to the requirements of at least one of these classes.
@@ -17,22 +17,35 @@ written to conform to the requirements of at least one of these classes.
 
 A *dependency graph* depicts the flow of information among the attribute instances in a particular **parse tree**; an edge from one attribute instance to another means that the value of the first is needed to compute the second. Edges express constraints implied by the **semantic rules**. In more detail:
 
+> NOTE:
+> $$
+> A \to B
+> $$
+> 
+>
+> 表示B的计算需要A。
+
 1、For each parse-tree node, say a node labeled by grammar symbol `X` , the dependency graph has a node for each attribute associated with `X` .
 
 2、Suppose that a semantic rule associated with a production `p` defines the value of **synthesized attribute** `A.b` in terms of the value of `X.c` (the rule may define `A.b` in terms of other attributes in addition to `X.c`). Then, the dependency graph has an edge from `X.c` to `A.b`. More precisely, at every node `N` labeled `A` where production `p` is applied, create an edge to attribute `b` at `N` , from the attribute `c` at the child of `N` corresponding to this instance of the symbol `X` in the body of the production.
 
 > Since a node `N` can have several children labeled `X` , we again assume that subscripts distinguish among uses of the same symbol at different places in the production.
 
+> NOTE:
+>
+> 一、其实上面这个规则简而言之就是: production的head的**synthesized attribute**依赖于它的right、children、body
+
 3、Suppose that a semantic rule associated with a production `p` defines the value of inherited attribute `B.c` in terms of the value of `X.a`. Then, the dependency graph has an edge from `X.a` to `B.c`. For each node `N` labeled `B` that corresponds to an occurrence of this `B` in the body of production `p`, create an edge to attribute `c` at `N` from the attribute `a` at the node `M` that corresponds to this occurrence of `X` . Note that `M` could be either the parent or a sibling of `N` .
 
-> NOTE: What is described above is an algorithm for constructing a dependency graph.
+> NOTE: 
+>
+> 一、What is described above is an algorithm for constructing a dependency graph.
 
 
 
 ## 5.2.2 Ordering the Evaluation of Attributes
 
-The *dependency graph* characterizes the possible orders in which we can evaluate the attributes at the various nodes of a **parse tree**. If the dependency graph has an edge from node `M` to node `N` , then the attribute corresponding to `M` must be evaluated before the attribute of `N` . Thus, the only allowable orders
-of evaluation are those sequences of nodes $N_1, N_2,\dots , N_k$ such that if there is an edge of the dependency graph from $N_i$ to $N_j$, then i < j . Such an ordering embeds a directed graph into a linear order, and is called a *topological sort* of the graph.
+The *dependency graph* characterizes the possible orders in which we can evaluate the attributes at the various nodes of a **parse tree**. If the dependency graph has an edge from node `M` to node `N` , then the attribute corresponding to `M` must be evaluated before the attribute of `N` . Thus, the only allowable orders of evaluation are those sequences of nodes $N_1, N_2,\dots , N_k$ such that if there is an edge of the dependency graph from $N_i$ to $N_j$, then i < j . Such an ordering embeds a directed graph into a linear order, and is called a *topological sort* of the graph.
 
 If there is any **cycle** in the graph, then there are no **topological sorts**; that is, there is no way to evaluate the SDD on this **parse tree**. If there are no **cycles**, however, then there is always at least one topological sort. To see why, since there are no cycles, we can surely find a node with no edge entering. For if there were no such node, we could proceed from predecessor to predecessor until we came back to some node we had already seen, yielding a cycle. Make this node the first in the topological order, remove it from the dependency graph, and repeat the process on the remaining nodes.
 
