@@ -117,8 +117,7 @@ The second rule defines an inherited attribute `B.i`, so the entire SDD cannot b
 
 ## 5.2.5 Semantic Rules with Controlled Side Effects
 
-In practice, translations involve side effects: a desk calculator might print a result; a code generator might enter the type of an identifier into a symbol table. With SDD's, we strike a balance between **attribute grammars** and **translation schemes**. Attribute grammars have no side effects and allow any evaluation
-order consistent with the dependency graph. Translation schemes impose left-to-right evaluation and allow semantic actions to contain any program fragment; translation schemes are discussed in Section 5.4.
+In practice, translations involve side effects: a desk calculator might print a result; a code generator might enter the type of an identifier into a symbol table. With SDD's, we strike a balance between **attribute grammars** and **translation schemes**. Attribute grammars have no side effects and allow any evaluation order consistent with the dependency graph. Translation schemes impose left-to-right evaluation and allow semantic actions to contain any program fragment; translation schemes are discussed in Section 5.4.
 
 We shall control side effcts in SDD's in one of the following ways:
 
