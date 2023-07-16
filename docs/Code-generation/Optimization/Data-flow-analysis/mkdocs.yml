@@ -1,3 +1,4 @@
 nav:
     - Introduction: index.md
+    - Common-subexpression-elimination: Common-subexpression-elimination
     
