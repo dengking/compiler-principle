@@ -3,5 +3,6 @@ nav:
     - doc: doc
     - static-analyzer: static-analyzer
     - Application: Application
-
+    - Clang-format: Clang-format
+    
     
