@@ -1,4 +1,5 @@
 nav:
     - Introduction: index.md
+    - Reaching-definition: Reaching-definition
     - Common-subexpression-elimination: Common-subexpression-elimination
     

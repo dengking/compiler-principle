@@ -2,10 +2,6 @@
 
 ## wikipedia [Control flow analysis](https://en.wikipedia.org/wiki/Control_flow_analysis)
 
-
-
-
-
 ## Control-flow graph
 
 ### wikipedia [Control-flow graph](https://en.wikipedia.org/wiki/Control-flow_graph)
@@ -14,7 +10,7 @@ In [computer science](https://en.wikipedia.org/wiki/Computer_science), a **contr
 
 The CFG is essential to many [compiler optimizations](https://en.wikipedia.org/wiki/Compiler_optimization#Data-flow_optimizations) and [static-analysis](https://en.wikipedia.org/wiki/Static_code_analysis) tools.
 
-## Definition
+#### Definition
 
 In a **control-flow graph** each [node](https://en.wikipedia.org/wiki/Vertex_(graph_theory)) in the [graph](https://en.wikipedia.org/wiki/Graph_(discrete_mathematics)) represents a [basic block](https://en.wikipedia.org/wiki/Basic_block), i.e. a straight-line piece of code without any jumps or [jump targets](https://en.wikipedia.org/wiki/Jump_target_(computing)); jump targets start a block, and jumps end a block. Directed [edges](https://en.wikipedia.org/wiki/Edge_(graph_theory)) are used to represent **jumps** in the [control flow](https://en.wikipedia.org/wiki/Control_flow). There are, in most presentations, two specially designated blocks: the *entry block*, through which control enters into the flow graph, and the *exit block*, through which all control flow leaves.[[3\]](https://en.wikipedia.org/wiki/Control-flow_graph#cite_note-3)
 
@@ -29,7 +25,7 @@ Because of its construction procedure, in a CFG, every edge A→B has the proper
 
 The CFG can thus be obtained, at least conceptually, by starting from the program's (full) flow graph—i.e. the graph in which every node represents an individual instruction—and performing an [edge contraction](https://en.wikipedia.org/wiki/Edge_contraction) for every edge that falsifies the predicate above, i.e. contracting every edge whose source has a single exit and whose destination has a single entry. This contraction-based algorithm is of no practical importance, except as a visualization aid for understanding the CFG construction, because the CFG can be more efficiently constructed directly from the program by [scanning it for basic blocks](https://en.wikipedia.org/wiki/Basic_block#Creation_algorithm).
 
-## Reachability
+#### Reachability
 
 Main article: [Reachability](https://en.wikipedia.org/wiki/Reachability)
 
@@ -41,7 +37,7 @@ If the exit block is unreachable from the entry block, an [infinite loop](https:
 
 Unreachable code and infinite loops are possible even if the programmer does not explicitly code them: optimizations like [constant propagation](https://en.wikipedia.org/wiki/Constant_propagation) and [constant folding](https://en.wikipedia.org/wiki/Constant_folding) followed by [jump threading](https://en.wikipedia.org/wiki/Jump_threading) can collapse multiple basic blocks into one, cause edges to be removed from a CFG, etc., thus possibly disconnecting parts of the graph.
 
-## Domination relationship
+#### Domination relationship
 
 *Main article:* [Dominator (graph theory)](https://en.wikipedia.org/wiki/Dominator_(graph_theory))
 
@@ -57,7 +53,7 @@ The [*dominator tree*](https://en.wikipedia.org/wiki/Dominator_(graph_theory)) i
 
 A *postdominator tree* is analogous to the *dominator tree*. This tree is rooted at the exit block.
 
-## Special edges
+#### Special edges
 
 A *back edge* is an edge that points to a block that has already been met during a depth-first ([DFS](https://en.wikipedia.org/wiki/Depth-first_search)) traversal of the graph. Back edges are typical of loops.
 
@@ -67,13 +63,13 @@ An *abnormal edge* is an edge whose destination is unknown. [Exception handling]
 
 An *impossible edge* (also known as a *fake edge*) is an edge which has been added to the graph solely to preserve the property that the exit block postdominates all blocks. It cannot ever be traversed.
 
-## Loop management
+#### Loop management
 
 A *loop header* (sometimes called the *entry point* of the loop) is a dominator that is the target of a loop-forming back edge. The loop header dominates all blocks in the loop body. A block may be a loop header for more than one loop. A loop may have multiple entry points, in which case it has no "loop header".
 
 Suppose block M is a dominator with several incoming edges, some of them being back edges (so M is a loop header). It is advantageous to several optimization passes to break M up into two blocks Mpre and Mloop. The contents of M and back edges are moved to Mloop, the rest of the edges are moved to point into Mpre, and a new edge from Mpre to Mloop is inserted (so that Mpre is the immediate dominator of Mloop). In the beginning, Mpre would be empty, but passes like [loop-invariant code motion](https://en.wikipedia.org/wiki/Loop-invariant_code_motion) could populate it. Mpre is called the *loop pre-header*, and Mloop would be the loop header.
 
-## Reducibility
+#### Reducibility
 
 A reducible CFG is one with edges that can be partitioned into two disjoint sets: forward edges, and back edges, such that:[[5\]](https://en.wikipedia.org/wiki/Control-flow_graph#cite_note-5)
 
@@ -82,7 +78,7 @@ A reducible CFG is one with edges that can be partitioned into two disjoint sets
 
 [Structured programming](https://en.wikipedia.org/wiki/Structured_programming) languages are often designed such that all CFGs they produce are reducible, and common structured programming statements such as IF, FOR, WHILE, BREAK, and CONTINUE produce reducible graphs. To produce irreducible graphs, statements such as [GOTO](https://en.wikipedia.org/wiki/GOTO) are needed. Irreducible graphs may also be produced by some compiler optimizations.
 
-## Loop connectedness
+#### Loop connectedness
 
 The loop connectedness of a CFG is defined with respect to a given [depth-first search](https://en.wikipedia.org/wiki/Depth-first_search) tree (DFST) of the CFG. This DFST should be rooted at the start node and cover every node of the CFG.
 
@@ -91,3 +87,20 @@ Edges in the CFG which run from a node to one of its DFST ancestors (including i
 The loop connectedness is the largest number of back edges found in any cycle-free path of the CFG. In a reducible CFG, the loop connectedness is independent of the DFST chosen.[[6\]](https://en.wikipedia.org/wiki/Control-flow_graph#cite_note-:0-6)[[7\]](https://en.wikipedia.org/wiki/Control-flow_graph#cite_note-7)
 
 Loop connectedness has been used to reason about the time complexity of [data-flow analysis](https://en.wikipedia.org/wiki/Data-flow_analysis).[[6\]](https://en.wikipedia.org/wiki/Control-flow_graph#cite_note-:0-6)
+
+
+
+## 如何实现控制流: [`program counter`](https://en.wikipedia.org/wiki/Program_counter)
+
+我们常常听到Control flow，维基百科的[Control flow](https://en.wikipedia.org/wiki/Control_flow)对它的总结是非常全面的，从high-level programming language级别（在high-level programming language中有control flow statement，比如return、goto等），到[machine language](https://en.wikipedia.org/wiki/Machine_language)级别（这是最底层了；以x86 为例，[JMP](https://en.wikipedia.org/wiki/JMP_(x86_instruction)) 指令，更多参见[X86 Assembly/Control Flow](https://en.wikibooks.org/wiki/X86_Assembly/Control_Flow)）。在本文中，我们重点关注的是[machine language](https://en.wikipedia.org/wiki/Machine_language)级别，正如其所总结的：
+
+> At the level of [machine language](https://en.wikipedia.org/wiki/Machine_language) or [assembly language](https://en.wikipedia.org/wiki/Assembly_language), control flow instructions usually work by altering the [program counter](https://en.wikipedia.org/wiki/Program_counter). For some [central processing units](https://en.wikipedia.org/wiki/Central_processing_unit) (CPUs), the only control flow instructions available are conditional or unconditional [branch](https://en.wikipedia.org/wiki/Branch_(computer_science)) instructions, also termed jumps.
+
+CPU的[program counter](https://en.wikipedia.org/wiki/Program_counter)默认行为是：自加1的，所以程序默认是顺序执行即可（编译器编译生成的machine language program其实是顺序的），通过control flow instruction，可用改变这种默认行为，从而实现各种执行flow。
+
+一个例子是在OS书的4.1. The Role of Interrupt Signals
+
+> As the name suggests, interrupt signals provide a way to divert the processor to code outside the
+> normal** flow of control**. When an interrupt signal arrives, the CPU must stop what it's currently doing and switch to a new activity; it does this by saving the current value of the program counter (i.e., the content of the eip and cs registers) in the Kernel Mode stack and by placing an address related to the interrupt type into the program counter.
+
+正在不同的层次来看待本质上相同的事情，在program language层，我们把它叫做flow of control，在指令层，我们它其实是program counter。
