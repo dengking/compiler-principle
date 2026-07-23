@@ -1,4 +1,4 @@
-
 *.pyc
-.DS_Store
+*.DS_Store
 docs/.DS_Store
+
