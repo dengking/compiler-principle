@@ -24,7 +24,6 @@
 - **数据边（Value Edge）**：表示输入依赖（a+b中a、b是加法节点的数据输入）；
 
 - **控制边（Control Edge）**：仅带副作用操作才有（存储store、函数调用call、分支if、循环跳转），标记执行时序约束。
-     
 
 关键特性：
 
@@ -93,10 +92,13 @@ return a;
 ### 不适合
 
 - 快速AOT编译器、资源受限嵌入式轻量编译器（图结构内存开销更大、实现复杂）。
-  
 
 ## wikipedia [Sea of nodes](https://en.wikipedia.org/wiki/Sea_of_nodes)
 
 A **sea of nodes** is a [graph](https://en.wikipedia.org/wiki/Graph_\(abstract_data_type\) "Graph (abstract data type)") representation of [single-static assignment (SSA)](https://en.wikipedia.org/wiki/Static_single-assignment_form "Static single-assignment form") representation of a program that combines [data flow](https://en.wikipedia.org/wiki/Data-flow_analysis "Data-flow analysis") and [control flow](https://en.wikipedia.org/wiki/Control-flow_graph "Control-flow graph"), and relaxes the [control flow](https://en.wikipedia.org/wiki/Control_flow "Control flow") from a [total order](https://en.wikipedia.org/wiki/Total_order "Total order") to a [partial order](https://en.wikipedia.org/wiki/Partially_ordered_set "Partially ordered set"), keeping only the orderings required by [data flow](https://en.wikipedia.org/wiki/Dataflow "Dataflow").
 
 
+
+
+
+## github [Sea of Nodes](https://github.com/SeaOfNodes)
