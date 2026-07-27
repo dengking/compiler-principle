@@ -1,2 +1,5 @@
 nav:
     - Introduction: index.md
+    - Inherited-attribute: Inherited-attribute.md
+    - 2Rules: 2Rules.md
+    
