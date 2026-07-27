@@ -109,31 +109,13 @@ While we do not allow an **inherited attribute** at node `N` to be defined in te
 
 参见文档"2Rules" 
 
-
+### Attribute of terminal
 
 Terminals can have **synthesized attributes**, but not **inherited attributes**. Attributes for terminals have lexical values that are supplied by the **lexical analyzer**; there are no **semantic rules** in the SDD itself for computing the value of an attribute for a terminal.
 
-> NOTE: 
-> 
-> 一、
-> 
-> 1、stackoverflow [Why can terminals have synthesized attributes but not inherited attributes?](https://stackoverflow.com/questions/62308752/why-can-terminals-have-synthesized-attributes-but-not-inherited-attributes) 
-> 
-> In Aho et al's Compilers: Principles, Techniques, and Tools on page 305 it says "Terminals can have synthesized attributes, but not inherited attributes." Here's my hang up: if synthesized attributes are attributes that can be computed based on a node's children, and inherited attributes can be computed based on a node's parent and siblings, then this feels wrong to me because since the terminals would be the leaves of the parse tree they wouldn't have any children. If they don't have any children then they shouldn't be able to have synthesized attributes. Similarly it seems that since they're leaves it would be likely they would have parent nodes and, as a result, could have inherited attributes. If someone could point out where I'm going wrong here that would be awesome.
-> 
-> [A](https://stackoverflow.com/a/62311803)
-> 
-> When I first read that in the dragon book, I was also confused. But if you think about it for a moment, it will become clear. The terminals synthesized attributes don't come from the parser; rather they come from the lexer. To give an example suppose you have a terminal **digit** (example taken from the dragon book). **digit** has the synthesized attribute `lexval`. This synthesized attribute does not come from the parser. It comes from the lexer instead. It should be pretty clear why terminals can't have inherited attributes :)
-> 
-> If you want a terminal to have an inherited attribute, you can simulate that with a non-terminal whose only production is a right-hand side with the terminal as its only symbol. So the restriction is not very important in practice, but it is convenient for some of the theoretical statements the authors want to make. 
-> 
-> – [rici](https://stackoverflow.com/users/1566221/rici) [Jun 10, 2020 at 23:40](https://stackoverflow.com/questions/62308752/why-can-terminals-have-synthesized-attributes-but-not-inherited-attributes#comment110209826_62311803) 
-> 
-> 2、stackexchange [In syntax-directed definition, terminals are assumed to have synthesized attributes only, definition doesn't provide any semantic rules for terminals?](https://cs.stackexchange.com/questions/138190/in-syntax-directed-definition-terminals-are-assumed-to-have-synthesized-attribu) 
-> 
-> 3、terminal的attribute相当于base case
-> 
-> 二、How about a start symbol? It is obvious that a start symbol can not has inherited attribute because it is the ancestor and it has no parent.
+#### 补充内容
+
+参见 "attribute-of-terminal&start-symbol"
 
 ---
 
