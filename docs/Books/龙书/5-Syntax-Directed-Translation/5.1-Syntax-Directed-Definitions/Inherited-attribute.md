@@ -418,48 +418,9 @@ $$
 
 此版本无左递归、仍是 L-属性定义，变量按 a→b→c 从左到右自然处理，可直接用递归下降实现。
 
----
 
-## 七、属性文法全景图
 
-```mermaid
-graph TB
-    SDD["语法制导定义(SDD)<br/>= 文法 + 语义规则"]
-
-    SYN["综合属性<br/>自下而上⬆️<br/>如 E.code, E.val"]
-    INH["继承属性<br/>自上而下/横向⬇️➡️<br/>如 L.inh, S.next"]
-
-    INH_S["只从兄弟<br/>L.inh = T.type"]
-    INH_P["只从父节点<br/>S₁.next = S.next"]
-
-    S["S-属性定义<br/>(只含综合属性)<br/>→ 匹配自底向上LR"]
-    L["L-属性定义<br/>(综合+受限继承)<br/>→ 匹配自顶向下LL"]
-
-    SDD --> SYN
-    SDD --> INH
-    INH --> INH_S
-    INH --> INH_P
-    SYN --> S
-    SYN --> L
-    INH --> L
-
-    style SYN fill:#e3f2fd,stroke:#1976d2
-    style INH fill:#e8f5e9,stroke:#388e3c
-    style INH_S fill:#fff3e0,stroke:#f57c00
-    style INH_P fill:#fff3e0,stroke:#f57c00
-    style S fill:#f3e5f5,stroke:#7b1fa2
-    style L fill:#f3e5f5,stroke:#7b1fa2
-```
-
-| 概念        | 信息流向      | 类比  | 典型例子                |
-| --------- | --------- | --- | ------------------- |
-| 综合属性      | 子 → 父（向上） | 返回值 | $E.code$, $E.val$   |
-| 继承属性（从兄弟） | 兄 → 弟（横向） | —   | $L.inh = T.type$    |
-| 继承属性（从父）  | 父 → 子（向下） | 参数  | $S_1.next = S.next$ |
-
----
-
-## 八、总结
+## 七、总结
 
 ```
 继承属性（Inherited Attribute）核心要点：

@@ -101,11 +101,15 @@ graph TB
     style B2 fill:#e8f5e9
 ```
 
-
+### 两条精妙约定
 
 While we do not allow an **inherited attribute** at node `N` to be defined in terms of attribute values at the children of node `N` , we do allow a **synthesized attribute** at node `N` to be defined in terms of **inherited attribute** values at node `N` itself.
 
-> NOTE: **Inherited attribute**, the name has implied that the attribute is inherited from parent, so it is natural that **inherited attribute** at node `N` can not be defined in terms of attribute values at the **children** of node `N` or it will be self-contradictory.
+#### 补充内容
+
+参见文档"2Rules" 
+
+
 
 Terminals can have **synthesized attributes**, but not **inherited attributes**. Attributes for terminals have lexical values that are supplied by the **lexical analyzer**; there are no **semantic rules** in the SDD itself for computing the value of an attribute for a terminal.
 
@@ -167,6 +171,45 @@ An S-attributed SDD can be implemented naturally in conjunction with an **LR par
 ### Attribute grammar
 
 An SDD without side effects is sometimes called an *attribute grammar*. The rules in an attribute grammar define the value of an attribute purely in terms of the values of other attributes and constants.
+
+
+
+## 七、属性文法全景图
+
+```mermaid
+graph TB
+    SDD["语法制导定义(SDD)= 文法 + 语义规则"]
+
+    SYN["综合属性自下而上⬆️如 E.code, E.val"]
+    INH["继承属性自上而下/横向⬇️➡️如 L.inh, S.next"]
+
+    INH_S["只从兄弟L.inh = T.type"]
+    INH_P["只从父节点S₁.next = S.next"]
+
+    S["S-属性定义(只含综合属性)→ 匹配自底向上LR"]
+    L["L-属性定义(综合+受限继承)→ 匹配自顶向下LL"]
+
+    SDD --> SYN
+    SDD --> INH
+    INH --> INH_S
+    INH --> INH_P
+    SYN --> S
+    SYN --> L
+    INH --> L
+
+    style SYN fill:#e3f2fd,stroke:#1976d2
+    style INH fill:#e8f5e9,stroke:#388e3c
+    style INH_S fill:#fff3e0,stroke:#f57c00
+    style INH_P fill:#fff3e0,stroke:#f57c00
+    style S fill:#f3e5f5,stroke:#7b1fa2
+    style L fill:#f3e5f5,stroke:#7b1fa2
+```
+
+| 概念        | 信息流向      | 类比  | 典型例子                |
+| --------- | --------- | --- | ------------------- |
+| 综合属性      | 子 → 父（向上） | 返回值 | $E.code$, $E.val$   |
+| 继承属性（从兄弟） | 兄 → 弟（横向） | —   | $L.inh = T.type$    |
+| 继承属性（从父）  | 父 → 子（向下） | 参数  | $S_1.next = S.next$ |
 
 ## 5.1.2 Evaluating an SDD at the Nodes of a Parse Tree
 
