@@ -56,30 +56,52 @@ graph BT
 
 自底向上语法分析（如 LR 分析），在【归约(reduce)】时，子节点已在栈上处理完毕，恰好可以立即计算父节点的【综合属性】，综合属性与自底向上分析【完美匹配】。
 
-
-
 2 S 属性定义（S-Attributed Definition）
 
 > **只包含综合属性**的 SDD，称为 **S-属性定义**。
 
-```
 S-属性定义的优点：
     ✅ 可在【自底向上分析】的同时一趟计算完所有属性
     ✅ 无需构造完整语法树，边分析边求值
     ✅ 实现简单、高效
-```
-
-前面的表达式求值 SDD 就是一个 S-属性定义——所有属性都是综合属性。
 
 ### Inherited attribute(继承属性)
 
 An *inherited attribute* for a **nonterminal** `B` at a parse-tree node `N` is defined by a **semantic rule** associated with the production at the parent of `N` . Note that the production must have `B` as a symbol in its body. An **inherited attribute** at node `N` is defined only in terms of attribute values at `N` 's parent, `N` itself, and `N` 's siblings.
 
-> NOTE: 
-> 
-> 一、The above classification method is based on how to calculate the attribute value. It is obvious that the direction of computation of **synthesized attribute** is contrast to **inherited attribute**'s. More precisely, **synthesized attribute** is suitable to **bottom-up parsing** while **inherited attribute** is suitable to **top-down parsing**. Example 5.2 show how **synthesized attribute** is calculated while example 5.3 show how **inherited attribute** is calculated. The computation of attribute will be discussed in later chapter. 
-> 
-> 二、A SDD can has inherited attribute and inherited attribute at the same time, which is introduced in chapter 5.1.2.
+#### 补充内容
+
+继承属性比综合属性要复杂很多，补充内容单独放到了文档"Inherited-attribute"中
+
+
+
+### 综合属性 vs 继承属性
+
+| 维度                        | 综合属性（Synthesized） | 继承属性（Inherited）    |
+| ------------------------- | ----------------- | ------------------ |
+| **值来自**                   | **子节点**（+ 自身）     | **父节点、兄弟节点**（+ 自身） |
+| **信息流向**                  | 自下而上（向上） ⬆️       | 自上而下 / 横向 ⬇️➡️     |
+| **在产生式 $A \to \alpha$ 中** | 计算头部 $A$ 的属性      | 计算体部某符号的属性         |
+| **典型用途**                  | 求值、代码生成、返回结果      | 传递上下文、类型信息、符号表     |
+| **计算时机**                  | 子树处理完后            | 进入子树前              |
+
+```mermaid
+graph TB
+    subgraph 综合属性
+        A1["父"]
+        B1["子"] -->|向上| A1
+    end
+    subgraph 继承属性
+        A2["父"] -->|向下| B2["子"]
+    end
+
+    style A1 fill:#e8f5e9
+    style B1 fill:#e3f2fd
+    style A2 fill:#e3f2fd
+    style B2 fill:#e8f5e9
+```
+
+
 
 While we do not allow an **inherited attribute** at node `N` to be defined in terms of attribute values at the children of node `N` , we do allow a **synthesized attribute** at node `N` to be defined in terms of **inherited attribute** values at node `N` itself.
 
