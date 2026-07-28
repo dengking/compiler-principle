@@ -117,6 +117,8 @@ Terminals can have **synthesized attributes**, but not **inherited attributes**.
 
 参见 "attribute-of-terminal&start-symbol"
 
+
+
 ---
 
 ### An Alternative Definition of Inherited Attributes
@@ -125,7 +127,7 @@ No additional translations are enabled if we allow an **inherited attribute $B.c
 
 ---
 
----
+
 
 ### Example 5.1
 
@@ -156,7 +158,7 @@ An SDD without side effects is sometimes called an *attribute grammar*. The rule
 
 
 
-## 七、属性文法全景图
+#### 补充内容: 属性文法全景图
 
 ```mermaid
 graph TB

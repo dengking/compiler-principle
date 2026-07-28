@@ -34,8 +34,6 @@ Between the two notations, **syntax-directed definitions** can be more readable,
 > | syntax-directed definition         | SDD | 给文法符号（如 E、T）附加属性（attribute），再用语义规则（semantic rule）描述这些属性如何计算 |
 > | syntax-directed translation scheme | SDT | translation scheme+semantic action                          |
 
-
-
 ## L-attributed translations&&S-attributed translations
 
 The most general approach to **syntax-directed translation** is to construct a **parse tree** or a **syntax tree**, and then to compute the values of **attributes** at the nodes of the tree by visiting the nodes of the tree. In many cases, translation can be done during parsing, without building an **explicit tree**. We shall therefore study a class of **syntax-directed translations** called "**L-attributed translations**" (L for left-to-right), which encompass(包含) virtually all translations that can be performed during parsing. We also study a smaller class, called "**S-attributed translations**" (S for synthesized), which can be performed easily in connection with a **bottom-up parse**.
