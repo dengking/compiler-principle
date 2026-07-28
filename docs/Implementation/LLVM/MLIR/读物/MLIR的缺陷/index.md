@@ -1,5 +1,3 @@
-
-
 ## zhihu [如何评价MLIR项目中Linalg Dialect的设计思想？](https://www.zhihu.com/question/442964082/answer/1718438248)
 
 作者：知乎用户  
@@ -52,5 +50,3 @@ MLIR本身脱胎于tensorflow，tensorflow里面已经有HLO、XLA等一系列IR
 为啥？
 
 因为编译器核心问题没解决，low-level的问题是auto-tiling和auto-tensorize（auto-schedule算部分解决），high-level的问题是缺乏完备性。搞IR本质上是redirect这些问题，要么以一种方式redirect给用户（例如TVM），要么redirect给别的层去解决。但实际上如果有某一层可以解决这些问题，上面那些redirect的层都没啥必要存在。
-
-
