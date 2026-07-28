@@ -1,6 +1,12 @@
 # 编译器黄金时代
 
+[A New Golden Age for Computer Architecture](https://www.doc.ic.ac.uk/~wl/teachlocal/arch/papers/cacm19golden-age.pdf) => A New Golden Age for Compiler
 
+weixin [LLVM之父Chris Lattner：编译器的黄金时代](https://mp.weixin.qq.com/s/dRarW4iKtjBE5Ym_P0xUQw)
+
+youtube [ASPLOS Keynote: The Golden Age of Compiler Design in an Era of HW/SW Co-design by Dr. Chris Lattner](https://www.youtube.com/watch?v=4HgShra-KnY)
+
+zhihu [现在是不是编译器行业的风口时期？](https://www.zhihu.com/question/471096068/answer/1990950901)
 
 ## zhihu [LLVM创始人Chris Lattner回顾展望编译器](https://zhuanlan.zhihu.com/p/502828729)
 
@@ -10,15 +16,7 @@
 
 为了打破当前架构发展的桎梏，给出的答案是，需要**软硬件协同**设计和创新，构建领域专用架构、领域专用语言，构建更专业化的硬件，并提升运行速度。
 
-> NOTE:
->
-> 一、"**软硬件协同**"就是 youtube [ASPLOS Keynote: The Golden Age of Compiler Design in an Era of HW/SW Co-design by Dr. Chris Lattner](https://www.youtube.com/watch?v=4HgShra-KnY) 中的"hardware and software co-design"
->
-> 
-
-weixin [LLVM之父Chris Lattner：编译器的黄金时代](https://mp.weixin.qq.com/s/dRarW4iKtjBE5Ym_P0xUQw)
-
-youtube [ASPLOS Keynote: The Golden Age of Compiler Design in an Era of HW/SW Co-design by Dr. Chris Lattner](https://www.youtube.com/watch?v=4HgShra-KnY)
+> NOTE: "**软硬件协同**"就是 youtube [ASPLOS Keynote: The Golden Age of Compiler Design in an Era of HW/SW Co-design by Dr. Chris Lattner](https://www.youtube.com/watch?v=4HgShra-KnY) 中的"hardware and software co-design"
 
 
 
@@ -27,8 +25,6 @@ youtube [ASPLOS Keynote: The Golden Age of Compiler Design in an Era of HW/SW Co
 Chris Lattner 毕业于波特兰大学的计算机科学系，具有创建和领导多个知名大型项目的经验，其中包括 LLVM、Clang、MLIR和CIRCT等编译器基础设施项目，他还带头创建了Swift编程语言。
 
 以下是Chris Lattner的演讲内容。
-
-
 
 ## zhihu OneFlow [LLVM之父Chris Lattner：编译器的黄金时代](https://zhuanlan.zhihu.com/p/502730940)
 
@@ -42,10 +38,8 @@ Chris Lattner 毕业于波特兰大学的计算机科学系，具有创建和领
 
 你无法直接在这个新设备上使用旧的**软件堆栈**，它们的某个部件可能换了供应商，做了流程精简，导致所需的技术堆栈不一样。因此，你不得不给每个新的小型设备都写一个全新的**软件堆栈**。而这样做又导致了**软件的碎片化**，这种碎片化的发展带来了巨大成本，也会反噬硬件行业，因为硬件用不了了。
 
-> NOTE:
->
-> 一、"**软件的碎片化**"在 [The **LLVM** Compiler Infrastructure](https://llvm.org/)
->
+> NOTE: "**软件的碎片化**"在 [The **LLVM** Compiler Infrastructure](https://llvm.org/)
+> 
 > > MLIR aims to address software fragmentation, improve compilation for heterogeneous hardware, significantly reduce the cost of building domain specific compilers, and aid in connecting existing compilers together.
 
 我的观点是，我们需要下一代编译器和编程语言来帮助解决这种碎片化。**首先，计算机行业需要更好的硬件抽象，硬件抽象是允许软件创新的方式，不需要让每种不同设备变得过于专用化。**
@@ -57,8 +51,6 @@ Chris Lattner 毕业于波特兰大学的计算机科学系，具有创建和领
 令人兴奋的是，编译器或者编程语言工程师会迎来一个崭新的时代：过去和现在都有无数的技术诞生，这些技术正在改变世界，有幸参与这场变革浪潮非常令人激动。
 
 接下来，我会谈谈编译器行业的早期发展，以及它带给我们的经验和对未来的启发。
-
-
 
 ### 传统编译器的设计和挑战
 
@@ -72,12 +64,10 @@ Chris Lattner 毕业于波特兰大学的计算机科学系，具有创建和领
 
 Patterson和Hennessey提出过一个结论：我们来到了计算机架构的文艺复兴时代，需要把计算机行业上下游人员垂直整合起来，大家既要懂硬件，也要懂软件。他们说，因为世界变化得很快，所以思考问题时要回归**第一性原理**，要用新的眼光去重新看待旧事物。
 
-> NOTE:
->
-> 一、关于 "第一性原理"，参见下面内容:
->
+> NOTE: 关于 "第一性原理"，参见下面内容:
+> 
 > 1、zhihu [什么是第一性原理？](https://zhuanlan.zhihu.com/p/41263094)
->
+> 
 > 2、wikipedia [First principle](https://en.wikipedia.org/wiki/First_principle)
 
 接下来我会讲讲加速器的构建过程，并结合经验谈谈加速器未来可能的演变。
@@ -88,10 +78,8 @@ Patterson和Hennessey提出过一个结论：我们来到了计算机架构的�
 
 所以一方面CPU是通用的，不像矩阵运算加速器那么专用化。然后出现了GPGPU，很灵活，功能也很强大，但要对GPU进行编程就没那么容易了。然后针对机器学习加速又出现了TPU，可以做大矩阵乘法运算和直接卷积等操作。这些是可编程的各种“xPU”，除此之外还有FPGA（现场可编程门阵列）等固定功能硬件，你可以重新配置block之间的线路；再进一步细分的话还有ASIC，也就是可以应特定需要专门设计集成电路。
 
-> NOTE:
->
-> 一、关于ASIC，参见baike [ASIC](https://baike.baidu.com/item/ASIC/2014676?fr=aladdin)
->
+> NOTE: 关于ASIC，参见baike [ASIC](https://baike.baidu.com/item/ASIC/2014676?fr=aladdin)
+> 
 > > ASIC(Application Specific Integrated Circuit)即专用集成电路，是指应特定用户要求和特定电子系统的需要而设计、制造的[集成电路](https://baike.baidu.com/item/集成电路/108211?fromModule=lemma_inlink)。用[CPLD](https://baike.baidu.com/item/CPLD/2527470?fromModule=lemma_inlink)（[复杂可编程逻辑器件](https://baike.baidu.com/item/复杂可编程逻辑器件/12583489?fromModule=lemma_inlink)）和 [FPGA](https://baike.baidu.com/item/FPGA/935826?fromModule=lemma_inlink)（现场可编程逻辑门阵列）来进行ASIC设计是最为流行的方式之一，它们的共性是都具有用户现场可编程特性，都支持[边界扫描](https://baike.baidu.com/item/边界扫描/1150543?fromModule=lemma_inlink)技术，但两者在集成度、速度以及编程方式上具有各自的特点。
 
 总体就这两个大类，一类是通用的、可编程的，另一类是功能比较固定的。每当我思考领域专用架构时，我的脑海里就会浮现这两大类。
@@ -99,7 +87,6 @@ Patterson和Hennessey提出过一个结论：我们来到了计算机架构的�
 ![img](https://pic2.zhimg.com/80/v2-c4e0825bbdad5268ae54d9f67b27ca71_1440w.webp)
 
 上图列举了一些正在做上述硬件的公司（不完全统计），可以看到有不少都是行业巨头。每个公司研究的时候都会思考：怎么给它编程？而每个公司也会给出不同的答案。比如Google在做XLA和TensorFlow，NVIDIA在做CUDA，Intel在做oneAPI，还有很多硬件公司在做自己的硬件设计工具包等等。
-
 
 ![img](https://pic3.zhimg.com/80/v2-ce9c0b60d8af2a0577564438c4f10e1e_1440w.webp)
 
@@ -111,13 +98,4 @@ Patterson和Hennessey提出过一个结论：我们来到了计算机架构的�
 
 业内有许多精英人才，但还不够多。假如我们能够减少碎片化，把行业整合起来，就可以促进创新，加快行业发展，持续建立技术堆栈，充分利用硬件，并以全新方式利用异构计算。接下来谈谈我对加速器发展的看法，以及发展过程中可能遇到的挑战。
 
-
-
-
-
-## zhihu [现在是不是编译器行业的风口时期？](https://www.zhihu.com/question/471096068/answer/1990950901)&#x20;
-
-
-
-## weixin [两大图灵奖得主力作：计算机架构的新黄金时代](https://mp.weixin.qq.com/s/5ruauCn1vQswyo7lIrp6BQ)
 
