@@ -1,4 +1,6 @@
 nav:
     - 6: index.md
+    - 6.1-Variants-of-Syntax-Trees: 6.1-Variants-of-Syntax-Trees
+    - 6.2-Three-Address-Code: 6.2-Three-Address-Code
     - 6.3-Types-and-Declarations: 6.3-Types-and-Declarations
     
