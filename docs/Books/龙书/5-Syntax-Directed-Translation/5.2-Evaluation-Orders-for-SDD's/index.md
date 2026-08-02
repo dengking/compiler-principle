@@ -22,7 +22,7 @@ A *dependency graph* depicts(刻画) the flow of information among the attribute
 
 In more detail:
 
-> NOTE: $A \to B$ 表示B的计算需要A。
+> NOTE: $A \to B$ 表示B的计算需要A，显然这种方式很好地"depicts(刻画) the flow of information among the attribute instances"，即属性值流动的方向
 
 #### graph node
 
@@ -40,7 +40,31 @@ Suppose that a **semantic rule** associated with a production `p` defines the va
 
 Suppose that a semantic rule associated with a production `p` defines the value of inherited attribute `B.c` in terms of the value of `X.a`. Then, the dependency graph has an edge from `X.a` to `B.c`. For each node `N` labeled `B` that corresponds to an occurrence of this `B` in the body of production `p`, create an edge to attribute `c` at `N` from the attribute `a` at the node `M` that corresponds to this occurrence of `X` . Note that `M` could be either the parent or a sibling of `N` .
 
+### Example 5.4: synthesized attribute
 
+Consider the following production and rule:
+
+| PRODUCTION      | SEMANTIC RULE             |
+| --------------- | ------------------------- |
+| $E \to E_1 + T$ | $E.val = E_1.val + T.val$ |
+
+At every node $N$ labeled $E$, with children corresponding to the body of this production, the **synthesized attribute** $val$ at $N$ is computed using the values of $val$ at the two children, labeled $E$ and $T$. Thus, a portion of the **dependency graph** for every **parse tree** in which this production is used looks like *Fig. 5.6*. As a convention, we shall show the **parse tree** edges as dotted lines, while the edges of the **dependency graph** are solid. $\quad \square$
+
+![](Figure-5.6-E-val-is-synthesized-from-E1-val-and-T-val.png)
+
+### Example 5.5
+
+An example of a complete **dependency graph** appears in *Fig. 5.7*. The nodes of the **dependency graph**, represented by the numbers 1 through 9, correspond to the attributes in the annotated parse tree in *Fig. 5.5*.
+
+![](Figure-5.7-Dependency-graph-for-the-annotated-parse-tree-of-Fig-5.5.png)
+
+Nodes 1 and 2 represent the attribute *lexval* associated with the two leaves labeled **digit**. Nodes 3 and 4 represent the attribute *val* associated with the two nodes labeled $F$. The edges to node 3 from 1 and to node 4 from 2 result from the **semantic rule** that defines $F.val$ in terms of **digit**.*lexval*. In fact, $F.val$ equals **digit**.*lexval*, but the edge represents dependence, not equality.
+
+Nodes 5 and 6 represent the inherited attribute $T'.inh$ associated with each of the occurrences of nonterminal $T'$. The edge to 5 from 3 is due to the rule $T'.inh = F.val$, which defines $T'.inh$ at the right child of the root from $F.val$ at the left child. We see edges to 6 from node 5 for $T'.inh$ and from node 4 for $F.val$, because these values are multiplied to evaluate the attribute *inh* at node 6.
+Nodes 7 and 8 represent the synthesized attribute *syn* associated with the occurrences of $T'$. The edge to node 7 from 6 is due to the semantic rule $T'.syn = T'.inh$ associated with production 3 in *Fig. 5.4*. The edge to node 8 from 7 is due to a semantic rule associated with production 2.
+
+
+Finally, node 9 represents the attribute $T.val$. The edge to 9 from 8 is due to the semantic rule, $T.val = T'.syn$, associated with production 1. $\quad \square$
 
 ## 5.2.2 Ordering the Evaluation of Attributes
 
