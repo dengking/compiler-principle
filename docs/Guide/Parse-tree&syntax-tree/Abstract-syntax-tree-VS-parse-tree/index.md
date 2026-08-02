@@ -6,17 +6,11 @@
 
 > Abstract syntax trees, or simply *syntax trees*, resemble(类似于) parse trees to an extent. However, in the **syntax tree**, **interior nodes** represent **programming constructs** while in the **parse tree**, the **interior nodes** represent **nonterminals**. Many nonterminals of a grammar represent programming constructs, but others are "helpers" of one sort of another, such as those representing terms, factors, or other variations of expressions. In the syntax tree, these helpers typically are not needed and are hence dropped. To emphasize the contrast, a **parse tree** is sometimes called a *concrete syntax tree*, and the underlying grammar is called a concrete syntax for the language.
 
-
-
-
-
 ## stackoverflow [What is the difference between an Abstract Syntax Tree and a Concrete Syntax Tree?](https://stackoverflow.com/questions/1888854/what-is-the-difference-between-an-abstract-syntax-tree-and-a-concrete-syntax-tre)
 
 I've been reading a bit about how interpreters/compilers work, and one area where I'm getting confused is the difference between an AST and a CST. My understanding is that the **parser** makes a CST, hands it to the **semantic analyzer** which turns it into an **AST**. However, my understanding is that the **semantic analyzer** simply ensures that rules are followed. I don't really understand why it would actually make any changes to make it abstract rather than concrete.
 
 Is there something that I'm missing about the **semantic analyzer**, or is the difference between an AST and CST somewhat artificial?
-
-
 
 ### [A](https://stackoverflow.com/a/1888973)
 
@@ -63,17 +57,11 @@ Bottom line: ASTs are good for small, both phyiscal and conceptual. Automated AS
 
 EDIT March 2015: [Link to examples of CST vs. "AST" built this way](https://stackoverflow.com/a/6378997/120163)
 
-
-
-
-
 ### [A](https://stackoverflow.com/a/1888898)
 
 [This blog post](http://eli.thegreenplace.net/2009/02/16/abstract-vs-concrete-syntax-trees/) may be helpful.
 
 It seems to me that the AST "throws away" a lot of intermediate grammatical/structural information that wouldn't contribute to semantics. For example, you don't care that 3 is an atom is a term is a factor is a.... You just care that it's `3` when you're implementing the exponentiation expression or whatever.
-
-
 
 ## stackoverflow [What's the difference between parse tree and AST?](https://stackoverflow.com/questions/5026517/whats-the-difference-between-parse-tree-and-ast)
 
@@ -82,8 +70,6 @@ It seems to me that the AST "throws away" a lot of intermediate grammatical/stru
 ***COMMENTS***:
 
 1、**Parse Tree** is the result of your **grammar** with its artifacts (you can write an infinity of grammars for the same language), an **AST** reduce the **Parse Tree** the closest possible to the language. Several **grammars** for the same language will give different **parse trees** but should result to the same AST. (you can also reduce different scripts (different parse trees from the same grammar) to the same AST) – [Guillaume86](https://stackoverflow.com/users/172074/guillaume86) [Aug 29 '12 at 14:38](https://stackoverflow.com/questions/5026517/whats-the-difference-between-parse-tree-and-ast#comment16306109_5026517)  
-
-
 
 ### [A](https://stackoverflow.com/a/9864571)
 
@@ -148,15 +134,11 @@ The AST is an abstract representation of the input. Notice that parens are not p
 For a more through explanation see [Compilers and Compiler Generators](http://www.cs.ru.ac.za/compilers/pdfvers.pdf) pg. 23
 or [Abstract Syntax Trees](http://homepage.divms.uiowa.edu/~slonnegr/plf/Book/Chapter1.pdf) on pg. 21 in [Syntax and Semantics of Programming Languages](http://homepage.divms.uiowa.edu/~slonnegr/plf/Book/)
 
-
-
 ### [A](https://stackoverflow.com/a/5026608)
 
 From what I understand, the AST focuses more on the abstract relationships between the components of source code, while the parse tree focuses on the actual implementation of the **grammar** utilized by the language, including the nitpicky details. They are definitely not the same, since another term for "parse tree" is "concrete syntax tree".
 
 I found this [page](http://www.jguru.com/faq/view.jsp?EID=814505) which attempts to resolve this exact question.
-
-
 
 ### [A](https://stackoverflow.com/a/5026642)
 
@@ -174,8 +156,6 @@ The assignment becomes a node with 2 elements, `Age` and `42`. The idea is that 
 
 Also note that the pascal syntax disappears. Thus it is possible to have more than one language generate the same AST. This is useful for cross language script engines.
 
-
-
 ## TODO
 
 stackoverflow [What would an AST (abstract syntax tree) for an object-oriented programming language look like?](https://stackoverflow.com/questions/6376662/what-would-an-ast-abstract-syntax-tree-for-an-object-oriented-programming-lang)
@@ -183,8 +163,6 @@ stackoverflow [What would an AST (abstract syntax tree) for an object-oriented p
 stackoverflow [Compiling an AST back to source code](https://stackoverflow.com/questions/5832412/compiling-an-ast-back-to-source-code)
 
 thegreenplace [Abstract vs. Concrete Syntax Trees](https://eli.thegreenplace.net/2009/02/16/abstract-vs-concrete-syntax-trees)
-
-
 
 ## draft
 
@@ -195,6 +173,3 @@ thegreenplace [Abstract vs. Concrete Syntax Trees](https://eli.thegreenplace.net
 expression tree的interior node是operator。
 
 两者之间既存在着相同点也存在着不同点。
-
-
-
