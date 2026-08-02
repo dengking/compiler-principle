@@ -4,11 +4,20 @@ The **syntax-directed translation techniques** in this chapter will be applied i
 
 The main application in this section is the construction of **syntax trees**. Since some compilers use **syntax trees** as an **intermediate representation**, a common form of SDD turns its input string into a tree. To complete the translation to **intermediate code**, the compiler may then walk the **syntax tree**, using another set of rules that are in effect an SDD on the **syntax tree** rather than the **parse tree**. (Chapter 6 also discusses approaches to **intermediate-code generation** that apply an SDD without ever constructing a tree explicitly.)
 
+翻译: 本节的核心应用是**语法树**的构建。由于部分编译器会将语法树作为**中间表示**，因此有一种常用的语法制导定义（SDD）能够把输入字符串转换为语法树。若要完成到**中间代码**的翻译，编译器后续会遍历这棵**语法树**，使用另一套规则 —— 这套规则本质是作用于**语法树**、而非分析树的语法制导定义。
+
 We consider two SDD's for constructing **syntax trees** for expressions:
 
-- The first, an S-attributed definition, is suitable for use during bottom-up parsing. 
+- The first, an S-attributed definition, is suitable for use during **bottom-up parsing**. 
 
-- The second, L-attributed, is suitable for use during top-down parsing.
+- The second, L-attributed, is suitable for use during **top-down parsing**.
+
+|             | SDD          | parsing algo      |
+| ----------- | ------------ | ----------------- |
+| Synthesized | S-attributed | bottom-up parsing |
+| Left        | L-attributed | top-down parsing  |
+
+
 
 The final example of this section is an L-attributed definition that deals with basic and array types.
 
@@ -16,7 +25,7 @@ The final example of this section is an L-attributed definition that deals with 
 
 As discussed in Section 2.8.2, each node in a **syntax tree** represents a construct; the children of the node represent the meaningful components of the construct. A **syntax-tree node** representing an expression $E_1 + E_2$ has label `+` and two children representing the sub expressions $E_1$ and $E_2$.
 
-We shall implement the nodes of a syntax tree by objects with a suitable number of fields. Each object will have an `op` field that is the label of the node. The objects will have additional fields as follows:
+We shall implement the nodes of a **syntax tree** by objects with a suitable number of fields. Each object will have an `op` field that is the label of the node. The objects will have additional fields as follows:
 
 - If the node is a leaf, an additional field holds the **lexical value** for the leaf. A constructor function `Leaf (op, val )` creates a leaf object. Alternatively, if nodes are viewed as records, then `Leaf` returns a pointer to a new record for a leaf.
 - If the node is an **interior node**, there are as many additional fields as the node has children in the **syntax tree**. A constructor function `Node` takes two or more arguments: $Node(op, c_1, c_2, c_3, \dots, c_k)$ creates an object with  first field `op` and k additional fields for the `k` children $c_1, c_2, c_3, \dots, c_k$.

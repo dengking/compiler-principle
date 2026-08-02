@@ -73,8 +73,6 @@ An *inherited attribute* for a **nonterminal** `B` at a parse-tree node `N` is d
 
 继承属性比综合属性要复杂很多，补充内容单独放到了文档"Inherited-attribute"中
 
-
-
 ### 综合属性 vs 继承属性
 
 | 维度                        | 综合属性（Synthesized） | 继承属性（Inherited）    |
@@ -117,8 +115,6 @@ Terminals can have **synthesized attributes**, but not **inherited attributes**.
 
 参见 "attribute-of-terminal&start-symbol"
 
-
-
 ---
 
 ### An Alternative Definition of Inherited Attributes
@@ -126,8 +122,6 @@ Terminals can have **synthesized attributes**, but not **inherited attributes**.
 No additional translations are enabled if we allow an **inherited attribute $B.c$** at a node N to be defined in terms of attribute values at the children of N, as well as at N itself, at its parent, and at its siblings. Such rules can be "simulated" by creating additional attributes of B, say $B_{c1},B_{c2} \dots$ . These are **synthesized attributes** that copy the needed attributes of the children of the node labeled B. We then compute $B.c$ as an **inherited attribute**, using the attributes $B_{c1},B_{c2} \dots$ in place of attributes at the children. Such attributes are rarely needed in practice.
 
 ---
-
-
 
 ### Example 5.1
 
@@ -155,8 +149,6 @@ An S-attributed SDD can be implemented naturally in conjunction with an **LR par
 ### Attribute grammar
 
 An SDD without side effects is sometimes called an *attribute grammar*. The rules in an attribute grammar define the value of an attribute purely in terms of the values of other attributes and constants.
-
-
 
 #### 补充内容: 属性文法全景图
 
