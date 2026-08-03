@@ -1,8 +1,6 @@
 # Chapter 6 Intermediate-Code Generation
 
-> NOTE:
-> 
-> 一、本章主要介绍的是将SDT用于type checking、intermediate-code generation: 
+> NOTE: 本章主要介绍的是将SDT用于type checking、intermediate-code generation: 
 > 
 > Chapter 5:
 > 
@@ -34,9 +32,4 @@ A **low-level representation** is suitable for **machine-dependent tasks** like 
 
 翻译: 低层中间表示适用于依赖目标机器的任务，例如寄存器分配与指令选择。三地址码的层级可高可低，取决于所选用的操作符。对于表达式而言，语法树与三地址码之间的差异只是表面上的，我们将在 6.2.3 节中看到这一点。以循环语句为例：语法树只描述语句的组成部分，而三地址码会引入标号与跳转指令，像机器语言一样刻画控制流。
 
-
 The choice or design of an intermediate representation varies from compiler to compiler. An intermediate representation may either be an actual language or it may consist of internal data structures that are shared by phases of the compiler. C is a programming language, yet it is often used as an intermediate form because it is flexible, it compiles into efficient machine code, and its compilers are widely available. The original C++ compiler consisted of a front end that generated C, treating a C compiler as a back end.
-
-# 6.1 Variants of Syntax Trees
-
-Nodes in a syntax tree represent constructs in the source program; the children of a node represent the meaningful components of a construct. A directed acyclic graph (hereafter called a DAG) for an expression identifies the common subexpressions (subexpressions that occur more than once) of the expression. As we shall see in this section, DAG's can be constructed by using the same techniques that construct syntax trees.
