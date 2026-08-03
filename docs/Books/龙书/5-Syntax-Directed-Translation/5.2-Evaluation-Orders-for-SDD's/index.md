@@ -22,7 +22,7 @@ A *dependency graph* depicts(刻画) the flow of information among the attribute
 
 In more detail:
 
-> NOTE: $A \to B$ 表示B的计算需要A，显然这种方式很好地"depicts(刻画) the flow of information among the attribute instances"，即属性值流动的方向
+> NOTE: $A \to B$ 表示B的计算需要A，显然这种方式很好地"depicts(刻画) the flow of information among the attribute instances"，即属性值流动的方向，这是dependency graph的精妙之处
 
 #### graph node
 
@@ -54,7 +54,7 @@ At every node $N$ labeled $E$, with children corresponding to the body of this p
 
 ### Example 5.5
 
-An example of a complete **dependency graph** appears in *Fig. 5.7*. The nodes of the **dependency graph**, represented by the numbers 1 through 9, correspond to the attributes in the annotated parse tree in *Fig. 5.5*.
+An example of a complete **dependency graph** appears in *Fig. 5.7*. The nodes of the **dependency graph**, represented by the numbers 1 through 9, correspond to the attributes in the **annotated parse tree** in *Fig. 5.5*.
 
 ![](Figure-5.7-Dependency-graph-for-the-annotated-parse-tree-of-Fig-5.5.png)
 
@@ -63,28 +63,34 @@ Nodes 1 and 2 represent the attribute *lexval* associated with the two leaves la
 Nodes 5 and 6 represent the inherited attribute $T'.inh$ associated with each of the occurrences of nonterminal $T'$. The edge to 5 from 3 is due to the rule $T'.inh = F.val$, which defines $T'.inh$ at the right child of the root from $F.val$ at the left child. We see edges to 6 from node 5 for $T'.inh$ and from node 4 for $F.val$, because these values are multiplied to evaluate the attribute *inh* at node 6.
 Nodes 7 and 8 represent the synthesized attribute *syn* associated with the occurrences of $T'$. The edge to node 7 from 6 is due to the semantic rule $T'.syn = T'.inh$ associated with production 3 in *Fig. 5.4*. The edge to node 8 from 7 is due to a semantic rule associated with production 2.
 
-
 Finally, node 9 represents the attribute $T.val$. The edge to 9 from 8 is due to the semantic rule, $T.val = T'.syn$, associated with production 1. $\quad \square$
 
 ## 5.2.2 Ordering the Evaluation of Attributes
 
-The *dependency graph* characterizes the possible orders in which we can evaluate the attributes at the various nodes of a **parse tree**. If the **dependency graph** has an edge from node `M` to node `N` , then the attribute corresponding to `M` must be evaluated before the attribute of `N` . Thus, the only allowable orders of evaluation are those sequences of nodes $N_1, N_2,\dots , N_k$ such that if there is an edge of the dependency graph from $N_i$ to $N_j$, then i < j . Such an ordering embeds a directed graph into a linear order, and is called a *topological sort* of the graph.
+The *dependency graph* characterizes the possible orders in which we can evaluate the attributes at the various nodes of a **parse tree**. If the **dependency graph** has an edge from node `M` to node `N` , then the attribute corresponding to `M` must be evaluated before the attribute of `N` . Thus, the only allowable orders of evaluation are those sequences of nodes $N_1, N_2,\dots , N_k$ such that if there is an edge of the **dependency graph** from $N_i$ to $N_j$, then i < j . Such an ordering embeds a directed graph into a linear order, and is called a *topological sort* of the graph.
 
-If there is any **cycle** in the graph, then there are no **topological sorts**; that is, there is no way to evaluate the SDD on this **parse tree**. If there are no **cycles**, however, then there is always at least one topological sort. To see why, since there are no cycles, we can surely find a node with no edge entering. For if there were no such node, we could proceed from predecessor to predecessor until we came back to some node we had already seen, yielding a cycle. Make this node the first in the topological order, remove it from the dependency graph, and repeat the process on the remaining nodes.
+If there is any **cycle** in the graph, then there are no **topological sorts**; that is, there is no way to evaluate the SDD on this **parse tree**. If there are no **cycles**, however, then there is always at least one **topological sort**. To see why, since there are no cycles, we can surely find a node with no edge entering. For if there were no such node, we could proceed from predecessor to predecessor until we came back to some node we had already seen, yielding a cycle. Make this node the first in the **topological order**, remove it from the **dependency graph**, and repeat the process on the remaining nodes.
+
+### Example 5.6
+
+The **dependency graph** of *Fig. 5.7* has no cycles. One **topological sort** is the order in which the nodes have already been numbered: $1, 2, \dots, 9$.
+Notice that every edge of the graph goes from a node to a higher-numbered node, so this order is surely a topological sort. There are other topological sorts as well, such as $1, 3, 5, 2, 4, 6, 7, 8, 9$. $\quad \square$
 
 ## 5.2.3 S-Attributed Definitions
 
-As mentioned earlier, given an SDD, it is very hard to tell whether there exist any parse trees whose **dependency graphs** have cycles. In practice, translations can be implemented using classes of SDD's that guarantee an **evaluation order**, since they do not permit dependency graphs with cycles. Moreover, the two classes introduced in this section can be implemented efficiently in connection with **top-down** or **bottom-up** parsing.
+As mentioned earlier, given an SDD, it is very hard to tell whether there exist any **parse trees** whose **dependency graphs** have cycles. In practice, translations can be implemented using classes of SDD's that guarantee an **evaluation order**, since they do not permit dependency graphs with cycles. Moreover, the two classes introduced in this section can be implemented efficiently in connection with **top-down** or **bottom-up** parsing.
 
 The first class is defined as follows:
 
 - An SDD is **S-attributed** if every attribute is **synthesized**.
 
+### evaluate attribute
+
 When an SDD is **S-attributed**, we can evaluate its attributes in any bottom-up order of the nodes of the **parse tree**. It is often especially simple to evaluate the attributes by performing a **postorder traversal** of the **parse tree** and evaluating the attributes at a node `N` when the traversal leaves `N` for the last time. That is, we apply the function `postorder`, defined below, to the root of the parse tree (see also the box "Preorder and Postorder Traversals" in Section 2.3.4):
 
 ![](./S-attribute-post-order.jpg)
 
-**S-attributed definitions** can be implemented during bottom-up parsing, since a bottom-up parse corresponds to a **postorder traversal**. Specifically, **postorder** corresponds exactly to the order in which an **LR parser** reduces a **production body** to its **head**. This fact will be used in Section 5.4.2 to evaluate **synthesized attributes** and store them on the **stack** during **LR parsing**, without creating the tree nodes explicitly.
+**S-attributed definitions** can be implemented during **bottom-up parsing**, since a bottom-up parse corresponds to a **postorder traversal**. Specifically, **postorder** corresponds exactly to the order in which an **LR parser** reduces a **production body** to its **head**. This fact will be used in Section 5.4.2 to evaluate **synthesized attributes** and store them on the **stack** during **LR parsing**, without creating the tree nodes explicitly.
 
 ## 5.2.4 L-Attributed Definitions
 
