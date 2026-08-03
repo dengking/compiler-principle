@@ -211,8 +211,6 @@ These rules are circular; it is impossible to evaluate either `A.s` at a node `N
 
 ![](./Figure-5.2-The-circular-dependency-of-A.s-and-B.i-on-one-another.jpg)
 
-
-
 It is computationally difficult to determine whether or not there exist any **circularities** in any of the parse trees that a given SDD could have to translate. $^1$ Fortunately, there are useful sub classes of SDD's that are sufficient to guarantee that an order of evaluation exists, as we shall see in Section 5.2.
 
 > $^1$Without going into details, while the problem is decidable, it cannot be solved by a polynomial-time algorithm, even if $\mathcal{P} = \mathcal{NP}$, since it has exponential time complexity.

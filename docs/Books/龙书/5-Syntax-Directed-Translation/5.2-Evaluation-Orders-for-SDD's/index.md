@@ -96,37 +96,37 @@ When an SDD is **S-attributed**, we can evaluate its attributes in any bottom-up
 
 The second class of SDD's is called ***L-attributed definitions***. The idea behind this class is that, between the attributes associated with a **production body**, **dependency-graph edges** can go from **left** to **right**, but not from **right** to **left** (hence "L-attributed"). 
 
-> NOTE:
-> 
-> 一、从更高层次来理解 "L-attributed":
-> 
-> 在进行top-down parse的时候，它对production的使用其实就是从left到right的，因此"L-attributed"能够保证**属性值**被正确计算
+> NOTE: 从更高层次来理解 "L-attributed": 在进行top-down parse的时候，它对production的使用其实就是从left到right的，因此"L-attributed"能够保证**属性值**被正确计算
 
 More precisely, each attribute must be either
 
-一、**Synthesized**, or
+- Synthesized
 
-二、**Inherited**, but with the rules limited as follows. 
+- Inherited
+
+### Synthesized
+
+**Synthesized**
+
+### Inherited
+
+**Inherited**, but with the rules limited as follows. 
 
 Suppose that there is a production $A \to X_1, X_2, \dots,  X_n$, and that there is an **inherited attribute** $X_i.a$ computed by a rule associated with this **production**. Then the rule may use only:
 
-> NOTE:
-> 
-> 一、"**inherited attribute** $X_i.a$ " 既然是inherited attribute，那么显然它仅仅依赖于它的parent。
-> 
-> 二、"Then the rule may use only" 表达的含义是 "依赖"
+> NOTE: "**inherited attribute** $X_i.a$ " 既然是inherited attribute，那么显然它仅仅依赖于它的parent。"Then the rule may use only" 表达的含义是 "依赖"
 
-1、**Inherited attributes** associated with the head `A`.
+(1) **Inherited attributes** associated with the head `A`.
 
-2、Either inherited or synthesized attributes associated with the occurrences of symbols $X_1, X_2, \dots, X_{i-1}$ located to the left of $X_i$.
+(2) Either inherited or synthesized attributes associated with the occurrences of symbols $X_1, X_2, \dots, X_{i-1}$ located to the left of $X_i$.
 
-> NOTE:
-> 
-> 一、上面这段话的意思是: 位于$X_i$的左边的文法符号实例$X_1, X_2, \dots, X_{i-1}$ 相关的继承属性或者综合属性，显然这条规则是为了满足: "**dependency-graph edges** can go from **left** to **right**, but not from **right** to **left** (hence "L-attributed")"
+> NOTE: 上面这段话的意思是: 位于$X_i$的左边的文法符号实例$X_1, X_2, \dots, X_{i-1}$ 相关的继承属性或者综合属性，显然这条规则是为了满足: "**dependency-graph edges** can go from **left** to **right**, but not from **right** to **left** (hence "L-attributed")"
 
-3、Inherited or synthesized attributes associated with this occurrence of $X_i$ itself, but only in such a way that there are no cycles in a dependency graph formed by the attributes of this $X_i$.
+(3) Inherited or synthesized attributes associated with this occurrence of $X_i$ itself, but only in such a way that there are no cycles in a dependency graph formed by the attributes of this $X_i$.
 
-**Example 5.8 :**  The SDD in Fig. 5.4 is **L-attributed**. To see why, consider the semantic rules for inherited attributes, which are repeated here for convenience:
+### Example 5.8
+
+The SDD in Fig. 5.4 is **L-attributed**. To see why, consider the semantic rules for inherited attributes, which are repeated here for convenience:
 
 ![](./SDD-in-Fig54.jpg)
 
@@ -134,7 +134,9 @@ The first of these rules defines the inherited attribute `T'.inh` using only `F.
 
 In each of these cases, the rules use information "from above or from the left," as required by the class. The remaining attributes are synthesized. Hence, the SDD is L-attributed. 
 
-**Example 5.9 :** Any SDD containing the following production and rules cannot be L-attributed:
+### Example 5.9
+
+Any SDD containing the following production and rules cannot be L-attributed:
 
 ![](./Example5.9.jpg)
 
@@ -142,14 +144,46 @@ The second rule defines an inherited attribute `B.i`, so the entire SDD cannot b
 
 ## 5.2.5 Semantic Rules with Controlled Side Effects
 
-In practice, translations involve side effects: a desk calculator might print a result; a code generator might enter the type of an identifier into a symbol table. With SDD's, we strike a balance between **attribute grammars** and **translation schemes**. Attribute grammars have no side effects and allow any evaluation order consistent with the dependency graph. Translation schemes impose left-to-right evaluation and allow semantic actions to contain any program fragment; translation schemes are discussed in Section 5.4.
+In practice, translations involve side effects: a desk calculator might print a result; a **code generator** might enter the type of an identifier into a symbol table. With SDD's, we strike a balance between **attribute grammars** and **translation schemes**. **Attribute grammars** have no side effects and allow any evaluation order consistent with the **dependency graph**. **Translation schemes** impose left-to-right evaluation and allow **semantic actions** to contain any program fragment; **translation schemes** are discussed in Section 5.4.
 
-We shall control side effcts in SDD's in one of the following ways:
+> NOTE: 上面这段话从side effect的角度对比了SDD、attribute grammar、translation schemes，是很好的总结，在 "SDD-VS-Attribute-grammar-VS-Translation-scheme" 中对此进行了很好的总结。 
 
-1、Permit incidental side effects that do not constrain attribute evaluation. In other words, permit side effects when attribute evaluation based on any topological sort of the dependency graph produces a "correct" translation, where "correct" depends on the application.
+We shall control **side effcts** in SDD's in one of the following ways:
 
-2、Constrain the allowable evaluation orders, so that the same translation is produced for any allowable order. The constraints can be thought of as implicit edges added to the dependency graph.
+- Permit incidental side effects that do not constrain attribute evaluation.
+  In other words, permit side effects when attribute evaluation based on any topological sort of the dependency graph produces a "correct" translation, where "correct" depends on the application.
 
-## see also
+- Constrain the allowable evaluation orders, so that the same translation is produced for any allowable order. The constraints can be thought of as implicit edges added to the dependency graph.
 
-geeksforgeeks [Compiler Design | Syntax Directed Definition](https://www.geeksforgeeks.org/compiler-design-syntax-directed-definition/)
+### Example: desktop calculator
+
+As an example of an incidental **side effect**, let us modify the desk calculator of Example 5.1 to print a result. Instead of the rule $L.val = E.val$, which saves the result in the synthesized attribute $L.val$, consider:
+
+| PRODUCTION                     | SEMANTIC RULE  |
+| ------------------------------ | -------------- |
+| 1) $\quad L \to E\ \mathbf{n}$ | $print(E.val)$ |
+
+> NOTE: $L$ 是start symbol，因此没有其他attribute对它有依赖
+
+### dummy synthesized attributes
+
+**Semantic rules** that are executed for their side effects, such as $print(E.val)$, will be treated as the definitions of **dummy synthesized attributes** associated with the head of the production. The modified SDD produces the same translation under any **topological sort**, since the print statement is executed at the end, after the result is computed into $E.val$.
+
+### Example 5.10
+
+The SDD in *Fig. 5.8* takes a simple declaration $D$ consisting of a basic type $T$ followed by a list $L$ of identifiers. $T$ can be **int** or **float**. For each identifier on the list, the type is entered into the **symbol-table entry** for the identifier. We assume that entering the type for one identifier does not affect the **symbol-table entry** for any other identifier. Thus, entries can be updated in any order. This SDD does not check whether an identifier is declared more than once; it can be modified to do so.
+
+![](Figure-5.8-Syntax-directed-definition-for-simple-type-declarations.png)
+
+Nonterminal $D$ represents a declaration, which, from production 1, consists of a type $T$ followed by a list $L$ of identifiers. $T$ has one attribute, $T.type$, which is the type in the declaration $D$. Nonterminal $L$ also has one attribute, which we call $inh$ to emphasize that it is an inherited attribute. The purpose of $L.inh$ is to pass the declared type down the list of identifiers, so that it can be added to the appropriate symbol-table entries.
+
+Productions 2 and 3 each evaluate the synthesized attribute $T.type$, giving it the appropriate value, **integer** or **float**. This type is passed to the attribute $L.inh$ in the rule for production 1. Production 4 passes $L.inh$ down the parse tree. That is, the value $L_1.inh$ is computed at a parse-tree node by copying the value of $L.inh$ from the parent of that node; the parent corresponds to the head of the production.
+
+Productions 4 and 5 also have a rule in which a function $addType$ is called with two arguments:
+
+1. $\mathbf{id}.entry$, a lexical value that points to a symbol-table object, and
+2. $L.inh$, the type being assigned to every identifier on the list.
+
+We suppose that function $addType$ properly installs the type $L.inh$ as the type of the represented identifier.
+
+A dependency graph for the input string **float** $\mathbf{id_1}$, $\mathbf{id_2}$, $\mathbf{id_3}$ appears in *Fig. 5.9*. Numbers 1 through 10 represent the nodes of the dependency graph. Nodes 1, 2, and 3 represent the attribute $entry$ associated with each of the leaves labeled $\mathbf{id}$. Nodes 6, 8, and 10 are the dummy attributes that represent the application of the function $addType$ to a type and one of these $entry$ values.

@@ -2,9 +2,11 @@
 
 龙书中区分parse tree和syntax tree的章节有：
 
-一、2.5.1 Abstract and Concrete Syntax
+2.5.1 Abstract and Concrete Syntax
 
 > Abstract syntax trees, or simply *syntax trees*, resemble(类似于) parse trees to an extent. However, in the **syntax tree**, **interior nodes** represent **programming constructs** while in the **parse tree**, the **interior nodes** represent **nonterminals**. Many nonterminals of a grammar represent programming constructs, but others are "helpers" of one sort of another, such as those representing terms, factors, or other variations of expressions. In the syntax tree, these helpers typically are not needed and are hence dropped. To emphasize the contrast, a **parse tree** is sometimes called a *concrete syntax tree*, and the underlying grammar is called a concrete syntax for the language.
+
+5.1-Syntax-Directed-Definitions
 
 ## stackoverflow [What is the difference between an Abstract Syntax Tree and a Concrete Syntax Tree?](https://stackoverflow.com/questions/1888854/what-is-the-difference-between-an-abstract-syntax-tree-and-a-concrete-syntax-tre)
 
