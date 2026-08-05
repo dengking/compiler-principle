@@ -35,7 +35,7 @@ An address can be one of the following:
   - 翻译: 每当需要存储中间计算结果时，编译器都会生成一个唯一的临时变量名，该机制在优化编译器中尤为实用。后续为变量分配寄存器时，若条件允许，这些临时变量可以合并复用。
   - 关于optimizing compilers，参见: https://en.wikipedia.org/wiki/Optimizing_compiler
 
-### instructions
+### Instructions
 
 We now consider the common **three-address instructions** used in the rest of this book. **Symbolic labels** will be used by instructions that alter the **flow of control(控制流)**. A **symbolic label** represents the index of a **three-address instruction** in the sequence of instructions. Actual indexes can be substituted for the labels, either by making a separate pass or by "backpatching"(回填), discussed in Section 6.7. 
 
@@ -149,3 +149,44 @@ Two possible translations of this statement are shown in Fig. 6.9. The translati
 The translation in (b) shows position numbers for the instructions, starting arbitrarily at position 100. In both translations, the last instruction is a conditional jump to the first instruction. The multiplication $i * 8$ is appropriate for an array of elements that each take 8 units of space. $\quad \square$
 
 ![](Figure-6.9-Two-ways-of-assigning-labels-to-three-address-statements.png)
+
+The choice of allowable operators is an important issue in the design of an intermediate form. The operator set clearly must be rich enough to implement the operations in the source language. Operators that are close to **machine instructions** make it easier to implement the intermediate form on a target machine. However, if the **front end** must generate long sequences of instructions for some source‑language operations, then the optimizer and code generator may have to work harder to rediscover the structure and generate good code for these operations.
+
+## 6.2.2 Quadruples(四元式、四元组)
+
+The description of **three‑address instructions** specifies the components of each type of instruction, but it does not specify the representation of these instructions in a **data structure**. In a compiler, these instructions can be implemented as objects or as records with fields for the operator and the operands. Three such representations are called "quadruples," "triples," and "indirect triples."
+
+A quadruple (or just "quad") has four fields, which we call $op$, $arg_1$, $arg_2$, and $result$. The $op$ field contains an internal code for the operator. For instance, the three‑address instruction $x = y + z$ is represented by placing $+$ in $op$, $y$ in $arg_1$, $z$ in $arg_2$, and $x$ in $result$. The following are some exceptions to this rule:
+
+1. Instructions with unary operators like $x = \text{minus }y$ or $x = y$ do not use $arg_2$. Note that for a copy statement like $x = y$, $op$ is $=$, while for most other operations, the assignment operator is implied.
+2. Operators like $\text{param}$ use neither $arg_2$ nor $result$.
+3. Conditional and unconditional jumps put the target label in $result$.
+
+## 6.2.3 Triples
+
+## 6.2.4 Static Single-Assignment Form(静态单赋值形式)
+
+> see also:
+> 
+> - wikipedia [Static single-assignment form](https://en.wikipedia.org/wiki/Static_single-assignment_form) 
+> - "static-single-assignment-form"
+
+Static single‑assignment form (SSA) is an intermediate representation that facilitates certain code optimizations. Two distinctive aspects distinguish SSA from **three‑address code**. The first is that all assignments in SSA are to variables with distinct names; hence the term static single‑assignment. Figure 6.13 shows the same intermediate program in three‑address code and in **static single‑assignment form**. Note that subscripts distinguish each definition of variables p and q in the SSA representation.
+
+![](Figure-6.13-Intermediate-program-in-three-address-code-and-SSA.png)
+
+The same variable may be defined in two different **control‑flow paths** in a program. For example, the source program
+
+```
+if ( flag ) x = -1; else x = 1;
+y = x * a;
+```
+
+has two **control‑flow paths** in which the variable x gets defined. If we use different names for x in the true part and the false part of the conditional statement, then which name should we use in the assignment $y = x * a$? Here is where the second distinctive aspect of SSA comes into play. SSA uses a notational convention called the $\phi$-function to combine the two definitions of x:
+
+```
+if ( flag ) x₁ = -1; else x₂ = 1;
+x₃ = $\phi$(x₁, x₂);
+```
+
+Here, $\phi(x_1, x_2)$ has the value $x_1$ if the control flow passes through the true part of the conditional and the value $x_2$ if the control flow passes through the false part. That is to say, the $\phi$-function returns the value of its argument that corresponds to the control‑flow path that was taken to get to the assignment‑statement containing the $\phi$-function.
