@@ -19,6 +19,20 @@
 
 ### Sea of Nodes 统一图模型
 
+它的关键特性是将**控制流**和**数据流**统一在同一个图结构中，通过**依赖边**而不是严格的指令顺序来连接节点。 这种设计让指令可以"浮动"，只受**数据**和**控制依赖**的约束，从而使得**全局代码移动**和**全局值编号**这样的优化变得更容易实现。
+
+其核心特征：
+
+1. **控制流与数据流统一在一张图中**：控制依赖和数据依赖都用图的边表示。
+2. **指令"浮动"（floating）**：大多数节点**没有固定的执行顺序/位置**，只受**依赖边**约束。指令不属于任何固定**基本块**。
+3. **调度延后（late scheduling）**：具体把节点放到哪个基本块、什么顺序，是通过 **全局代码移动（Global Code Motion, GCM）** 等 pass **后期才确定**的。
+
+**它为什么利于全局优化？**
+
+- 因为解除了"指令顺序"的过度约束，只保留真实依赖，**全局值编号（GVN）**、公共子表达式消除、[代码外提（loop-invariant code motion）](https://en.wikipedia.org/wiki/Loop-invariant_code_motion)等优化可以在图上自然进行，不受基本块边界束缚。
+
+**一句话：SoN 的精髓 = 用"最松散的依赖图"表示程序，把 schedule 推迟到最后。**
+
 所有运算、值、分支、内存操作全部抽象为**Node节点**，边分两类：
 
 - **数据边（Value Edge）**：表示输入依赖（a+b中a、b是加法节点的数据输入）；
@@ -54,15 +68,7 @@
 
 5. 寄存器分配、生成机器码。
 
-## 易混淆概念区分
-
-### 1. Sea of Nodes ≠ Node.js SEA
-
-   Node.js SEA = Single Executable Application，是Node单文件可执行打包工具，和编译器IR无关，只是缩写撞名。
-
-### 2. Sea of Nodes ≠ SSA
-
-SSA是值的命名规则（每个赋值唯一变量）；Sea of Nodes是**图组织结构**，SoN内部普遍使用SSA形式，但二者不是同一层级概念。
+# 
 
 ## 简单示例直观理解
 
@@ -96,9 +102,5 @@ return a;
 ## wikipedia [Sea of nodes](https://en.wikipedia.org/wiki/Sea_of_nodes)
 
 A **sea of nodes** is a [graph](https://en.wikipedia.org/wiki/Graph_\(abstract_data_type\) "Graph (abstract data type)") representation of [single-static assignment (SSA)](https://en.wikipedia.org/wiki/Static_single-assignment_form "Static single-assignment form") representation of a program that combines [data flow](https://en.wikipedia.org/wiki/Data-flow_analysis "Data-flow analysis") and [control flow](https://en.wikipedia.org/wiki/Control-flow_graph "Control-flow graph"), and relaxes the [control flow](https://en.wikipedia.org/wiki/Control_flow "Control flow") from a [total order](https://en.wikipedia.org/wiki/Total_order "Total order") to a [partial order](https://en.wikipedia.org/wiki/Partially_ordered_set "Partially ordered set"), keeping only the orderings required by [data flow](https://en.wikipedia.org/wiki/Dataflow "Dataflow").
-
-
-
-
 
 ## github [Sea of Nodes](https://github.com/SeaOfNodes)
