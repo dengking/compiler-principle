@@ -21,3 +21,86 @@ The instruction‑set architecture of the target machine has a significant impac
 A RISC machine typically has many registers, three‑address instructions, simple addressing modes, and a relatively simple instruction‑set architecture. In contrast, a CISC machine typically has few registers, two‑address instructions, a variety of addressing modes, several register classes, variable‑length instructions, and instructions with side effects.
 In a stack‑based machine, operations are done by pushing operands onto a stack and then performing the operations on the operands at the top of the stack. To achieve high performance the top of the stack is typically kept in registers. Stack‑based machines almost disappeared because it was felt that the stack organization was too limiting and required too many swap and copy operations.
 However, stack‑based architectures were revived with the introduction of the Java Virtual Machine (JVM). The JVM is a software interpreter for Java bytecodes, an intermediate language produced by Java compilers. The inter‑
+
+## 8.1.3 Instruction Selection
+
+The **code generator** must map the IR program into a code sequence that can be
+executed by the target machine. The complexity of performing this mapping is
+determined by factors such as
+
+- the level of the IR
+- the nature of the **instruction‑set architecture**
+- the desired quality of the generated code.
+
+If the IR is **high level**, the **code generator** may translate each IR statement into a sequence of **machine instructions** using **code templates**. Such **statement‑by‑statement code generation**, however, often produces poor code that needs further optimization. If the IR reflects some of the **low‑level** details of the underlying machine, then the **code generator** can use this information to generate more efficient code sequences.
+
+
+The nature of the instruction set of the target machine has a strong effect on the difficulty of instruction selection. For example, the uniformity and completeness of the instruction set are important factors. If the target machine does not support each data type in a uniform manner, then each exception to the general rule requires special handling. On some machines, for example, floating‑point operations are done using separate registers.
+
+
+Instruction speeds and machine idioms are other important factors. If we do not care about the efficiency of the target program, instruction selection is straightforward. For each type of three‑address statement, we can design a code skeleton that defines the target code to be generated for that construct. For example, every three‑address statement of the form x = y + z, where x, y, and z are statically allocated, can be translated into the code sequence
+
+
+
+
+
+This strategy often pro duces redundant loads and stores. For example, the sequence of three-address statements
+
+## 8.1.4 Register Allocation
+
+A key problem in **code generation** is deciding what values to hold in what registers. Registers are the fastest computational unit on the target machine, but we usually do not have enough of them to hold all values. Values not held in registers need to reside in memory. Instructions involving register operands are invariably shorter and faster than those involving operands in memory, so efficient utilization of registers is particularly important.
+
+The use of registers is often subdivided into two subproblems:
+
+1. *Register allocation*, during which we select the set of variables that will reside in registers at each point in the program.
+2. *Register assignment*, during which we pick the specific register that a variable will reside in.
+
+Finding an optimal assignment of registers to variables is difficult, even with single‑register machines. Mathematically, the problem is **NP‑complete**. The problem is further complicated because the hardware and/or the operating system of the target machine may require that certain register‑usage conventions be observed.
+
+### Example 8.1
+
+**Example 8.1**: Certain machines require ***register‑pairs*** (an even and next odd‑numbered register) for some operands and results. For example, on some machines, integer multiplication and integer division involve **register pairs**. The multiplication instruction is of the form
+
+翻译: 编号为偶数的寄存器 + 紧随其后的奇数编号寄存器
+
+NOTE: **register‑pairs 寄存器对**：老式计算机 ALU 为支持 64 位乘法，使用相邻一偶一奇两个 32‑bit 寄存器拼接成宽位存储
+
+```
+M x, y
+```
+
+where $x$, the multiplicand, is the odd register of an even/odd register pair and $y$, the multiplier, can be anywhere. The product occupies the entire even/odd register pair. 
+
+翻译: 其中被乘数 `x` 需要存放在一组奇偶寄存器对内的奇数寄存器；乘数 `y` 的存放位置不受限制。乘法运算结束之后，完整的乘积会占用整组奇偶寄存器对。
+
+The division instruction is of the form
+
+```
+D x, y
+```
+
+where the dividend occupies an even/odd register pair whose even register is x;
+the divisor is y. After division, the even register holds the remainder and the
+odd register the quotient.
+
+翻译: 被除数预先存放在一组奇偶寄存器对内，该组的偶数寄存器编号为`x`；`y`代表除数。除法运算完成后：偶数寄存器存储余数，奇数寄存器存放商。
+
+Now, consider the two three‑address code sequences in [Fig. 8.2] in which the
+only difference in (a) and (b) is the operator in the second statement. The
+shortest assembly‑code sequences for (a) and (b) are given in [Fig. 8.3].
+
+![](Figure-8.3-Optimal-machine-code-sequences.png)
+
+$Ri$ stands for register i. SRDA stands for Shift‑Right‑Double‑Arithmetic and
+SRDA R0,32 shifts the dividend into R1 and clears R0 so all bits equal its sign
+bit. L, ST, and A stand for load, store, and add, respectively. Note that the
+optimal choice for the register into which a is to be loaded depends on what
+will ultimately happen to t. $\square$
+
+Strategies for register **allocation** and **assignment** are discussed in [Section 8.8].
+[Section 8.10] shows that for certain classes of machines we can construct code
+sequences that evaluate expressions using as few registers as possible.
+
+## 8.1.5 Evaluation Order
+
+The order in which computations are performed can affect the efficiency of the target code. As we shall see, some **computation orders** require fewer registers to hold intermediate results than others. However, picking a best order in the general case is a difficult [NP‑complete](https://en.wikipedia.org/wiki/NP-completeness) problem. Initially, we shall avoid the problem by generating code for the three‑address statements in the order in which they have been produced by the **intermediate code generator**. In [Chapter 10], we shall study **code scheduling** for **pipelined machines** that can execute several operations in a single **clock cycle**.
