@@ -41,23 +41,54 @@ We assume our target machine has a variety of addressing modes:
 
 In instructions, a location can be a variable name $x$ referring to the memory location that is reserved for $x$ (that is, the l‑value of $x$).
 
-#### indexed address of variable
+#### indexed address of variable(变址寻址) + register
 
 A location can also be an indexed address of the form $a(r)$, where $a$ is a variable and $r$ is a register. The memory location denoted by $a(r)$ is computed by taking the l‑value of $a$ and adding to it the value in register $r$. For example, the instruction `LD R1, a(R2)` has the effect of setting $\text{R1} = \text{contents}(a+\text{contents(R2)})$, where $\text{contents}(x)$ denotes the contents of the register or memory location represented by $x$. This addressing mode is useful for accessing arrays, where $a$ is the base address of the array (that is, the address of the first element), and $r$ holds the number of bytes past that address we wish to go to reach one of the elements of array $a$.
 
-#### integer indexed by a register
+翻译: 存储位置同样可以采用形如 $a(r)$ 的变址寻址地址，其中 $a$ 为变量，$r$ 代表寄存器。
+$a(r)$ 对应的内存地址求解方式：取出 $a$ 的左值（内存地址），再加上寄存器 $r$ 内部存储的数值。举个例子，指令 `LD R1, a(R2)` 的执行效果等价于
+$\text{R1} = \text{contents}(a+\text{contents(R2)})$；
+函数 $\text{contents}(x)$ 代表读取 $x$ 所指向寄存器或者内存单元当中存放的数据。
+该寻址方式十分适合数组访问场景：$a$ 是数组的基地址（数组首个元素的地址），寄存器 $r$ 保存目标元素距离数组首地址的字节偏移量，借此定位数组 $a$ 的任意元素。
 
-A memory location can be an integer indexed by a register. For example, `LD R1, 100(R2)` has the effect of setting $\text{R1} = \text{contents}(100+\text{contents(R2)})$, that is, of loading into R1 the value in the memory location obtained by adding 100 to the contents of register R2. This feature is useful for following pointers, as we shall see in the example below.
 
-#### indirect addressing modes
 
-We also allow two **indirect addressing modes**: `*r` means the memory location found in the location represented by the contents of register $r$ and `*100(r)` means the memory location found in the location obtained by adding 100 to the contents of $r$. 
+#### integer indexed by a register(变址寻址)
+
+A memory location can be an integer(立即数) indexed by a register. For example, `LD R1, 100(R2)` has the effect of setting $\text{R1} = \text{contents}(100+\text{contents(R2)})$, that is, of loading into R1 the value in the memory location obtained by adding 100 to the contents of register R2. This feature is useful for following pointers, as we shall see in the example below.
+
+译文: 内存地址可以是一个整数搭配寄存器偏移的变址形式。例如指令 `LD R1, 100(R2)`，执行逻辑为 $\text{R1} = \text{contents}(100+\text{contents(R2)})$，也就是将寄存器 R2 的数值加上立即数100，读取该内存单元的数据并载入寄存器R1。后文示例将会讲到，此种寻址方式非常适合指针寻址操作。
+
+
+
+#### indirect addressing modes(间接寻址模式)
+
+We also allow two **indirect addressing modes**: 
+
+- `*r` means the memory location found in the location represented by the contents of register $r$  
+
+- `*100(r)` means the memory location found in the location obtained by adding 100 to the contents of $r$. 
 
 For example, `LD R1, *100(R2)` has the effect of setting $\text{R1} = \text{contents}(\text{contents}(100+\text{contents(R2)}))$, that is, of loading into R1 the value in the memory location stored in the memory location obtained by adding 100 to the contents of register R2.
+
+翻译: 本机还支持两种**间接寻址模式**：
+`*r` 代表先取出寄存器 $r$ 的存储值当作内存地址，再访问该地址对应的内存单元；
+`*100(r)` 为先将寄存器 $r$ 内的值加上立即数100得到内存地址，再读取该地址里存放的地址，最终访问此二次寻址对应的内存单元。
+举例而言，指令 `LD R1, *100(R2)` 的执行效果：
+$\text{R1} = \text{contents}(\text{contents}(100+\text{contents(R2)}))$
+通俗来讲：寄存器R2的值加上100得到地址A；读取地址A当中保存的地址B；最后把地址B存储的数据加载至寄存器R1。
+
+
 
 #### immediate constant addressing mode
 
 Finally, we allow an **immediate constant addressing mode**. The constant is prefixed by `#`. The instruction `LD R1, #100` loads the integer 100 into register R1, and `ADD R1, R1, #100` adds the integer 100 into register R1.
+
+
+翻译: 最后，硬件还支持**立即数寻址模式**，立即数前面添加前缀 `#` 进行标记。
+指令 `LD R1, #100` 的作用是将常数100载入寄存器 R1；
+`ADD R1, R1, #100` 代表把数值100加到寄存器 R1 的原有数值之上。
+
 
 
 ### Comments
