@@ -1,5 +1,6 @@
 nav:
     - 4: index.md
+    - 4.1-Introduction: 4.1-Introduction
     - 4.2-Context-Free-Grammars: 4.2-Context-Free-Grammars
     - 4.4-Top-Down-Parsing: 4.4-Top-Down-Parsing
     - 4.3-Writing-a-Grammar: 4.3-Writing-a-Grammar
