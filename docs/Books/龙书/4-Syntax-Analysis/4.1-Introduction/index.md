@@ -75,9 +75,15 @@ Some of the grammars that will be examined in this chapter are presented here fo
 
 **Expression grammar** (4.1) belongs to the class of **LR grammars** that are suitable for **bottom-up parsing**. This grammar can be adapted to handle additional operators and additional levels of **precedence**. However, it cannot be used for **top-down parsing** because it is **left recursive**.
 
+> NOTE: 关于上述文法的介绍，参见"expression-grammar-associativity-and-precedence"
+
+#### non-left-recursive
+
 The following **non-left-recursive** variant of the **expression grammar** (4.1) will be used for **top-down parsing**:
 
 ![](expression-grammar-4.2.png)
+
+#### ambiguous
 
 The following grammar treats + and `*` alike, so it is useful for illustrating techniques for handling ambiguities during parsing:
 
@@ -85,11 +91,43 @@ The following grammar treats + and `*` alike, so it is useful for illustrating t
 
 Here, `E` represents expressions of all types. Grammar (4.3) permits more than one **parse tree** for expressions like `a + b * c`.
 
+> NOTE: 关于上述文法的介绍，参见"expression-grammar-associativity-and-precedence"
+
 ### 4.1.3 Syntax Error Handling
 
-The remainder of this section considers the nature of **syntactic errors** and general strategies for error recovery. Two of these strategies, called **panic-mode** and **phrase-level recovery**, are discussed in more detail in connection with specic parsing methods.
+The remainder of this section considers the nature of **syntactic errors** and general strategies for error recovery. Two of these strategies, called **panic-mode** and **phrase-level recovery**, are discussed in more detail in connection with specific parsing methods.
 
-The precision of parsing methods allows syntactic errors to be detected very effciently. Several parsing methods, such as the LL and LR methods, detect an error as soon as possible; that is, when the stream of tokens from the **lexical analyzer** cannot be parsed further according to the grammar for the language. More precisely, they have the ***viable-prefix property***(可行性前缀属性), meaning that they detect that an error has occurred as soon as they see a prefix of the input that cannot be completed to form a string in the language.
+翻译: 本节余下部分将探讨**语法错误**的性质以及错误恢复的通用策略。其中两种策略 ——**恐慌模式恢复**与**短语级恢复**，会结合具体的语法分析方法展开更为详尽的讨论。
+
+If a compiler had to process only correct programs, its design and implementation would be simplified greatly. However, a compiler is expected to assist the programmer in locating and tracking down errors that inevitably(不可避免地) creep into programs, despite the programmer’s best efforts. Strikingly, few languages have been designed with error handling in mind, even though errors are so commonplace(常见). Our civilization would be radically different if spoken languages had the same requirements for syntactic accuracy as computer languages. Most programming language specifications do not describe how a compiler should respond to errors; error handling is left to the compiler designer. Planning the error handling right from the start can both simplify the structure of a compiler and improve its handling of errors.
+
+> **中文译文**: 如果编译器只需要处理完全正确的程序，那么它的设计与实现将会大大简化。然而，程序员即便再仔细，程序中也难免会出现错误，编译器应当帮助程序员定位并排查这些错误。值得注意的是，尽管程序错误十分常见，但很少有编程语言在设计之初就考虑到错误处理机制。倘若人类口头语言也和计算机语言一样，有着严苛的语法正确性要求，人类文明将会截然不同。绝大多数编程语言规范都不会规定编译器应当如何响应错误；错误处理方案交由编译器设计者自行决定。从项目一开始就规划好错误处理方案，既能够简化编译器的整体结构，又可以提升编译器的错误处理能力。
+
+
+
+Common programming errors can occur at many different levels. 
+
+- *Lexical errors* include misspellings of identifiers, keywords, or operators — e.g., the use of an identifier `elipseSize` instead of `ellipseSize` — and missing quotes around text intended as a string. 
+  
+  - 翻译: **词法错误**：包括标识符、关键字、运算符拼写错误（例如标识符写成`elipseSize`而非`ellipseSize`）；字符串文本缺少引号。
+
+- *Syntactic errors* include misplaced semicolons or extra or missing braces; that is, "`{`" or "`}`." As another example, in C or Java, the appearance of a `case` statement without an enclosing `switch` is a **syntactic error** (however, this situation is usually allowed by the parser and caught later in the processing, as the compiler attempts to generate code). 
+  
+  - 翻译: **语法错误**：包括分号位置错误、大括号`{}`多写或漏写。另举一例：在C或Java语言中，`case`语句没有被包裹在`switch`内就属于语法错误（不过语法分析器通常不会拦截该错误，会等到编译器尝试生成代码的后续阶段才捕获）。
+
+- *Semantic errors* include **type mismatches** between operators and operands, e.g., the return of a value in a Java method with result type `void`. 
+  
+  - 翻译: **语义错误**：包括运算符与操作数之间的类型不匹配；例如在返回类型为`void`的Java方法中返回了一个值。
+
+- *Logical errors* can be anything from incorrect reasoning on the part of the programmer to the use in a C program of the assignment operator `=` instead of the comparison operator `==`. The program containing `=` may be well formed; however, it may not reflect the programmer’s intent.
+  
+  - 翻译: **逻辑错误**：范围很广，既可以是程序员本身逻辑思考出错，也可以是在C程序中将赋值运算符`=`误写为比较运算符`==`。这类含`=`的代码语法完全合法，但程序运行结果并不符合程序员原本的意图。
+
+
+
+The precision of parsing methods allows syntactic errors to be detected very efficiently. Several parsing methods, such as the LL and LR methods, detect an error as soon as possible; that is, when the stream of tokens from the **lexical analyzer** cannot be parsed further according to the grammar for the language. More precisely, they have the ***viable-prefix property***(可行性前缀属性), meaning that they detect that an error has occurred as soon as they see a prefix of the input that cannot be completed to form a string in the language.
+
+翻译: 语法分析方法具有很高的精确性，因此可以高效检测出语法错误。若干语法分析算法（例如 LL、LR 分析法）能够**尽早报错**：即当来自**词法分析器**的记号流再也无法按照该语言的文法继续向下分析时，就立刻检测到错误。更准确地说，这类算法具备**可行前缀属性（viable‑prefix property）**；该属性的含义为：只要读到输入串的某个前缀，并且该前缀无论后续补上什么符号都无法构成该语言的合法句子，分析器便可立即发现错误。
 
 Another reason for emphasizing **error recovery** during parsing is that many errors appear syntactic, whatever their cause, and are exposed when parsing cannot continue. A few **semantic errors**, such as **type mismatches**, can also be detected efficiently; however, accurate detection of semantic and logical errors at compile time is in general a difficult task.
 
