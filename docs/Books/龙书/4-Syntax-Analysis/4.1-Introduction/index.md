@@ -143,8 +143,38 @@ Once an error is detected, how should the parser recover? Although no strategy h
 
 > 翻译: 一旦检测到错误，语法分析器应当如何恢复？尽管还没有哪一种策略被证明可以通用，仍有若干种方法具备广泛适用性。最简单的方案是：**语法分析器**检测到第一个错误时，输出有参考价值的错误信息然后直接退出。 如果语法分析器能够恢复状态、继续处理输入，并且有较大希望在后续处理中输出有意义的诊断信息，就往往还能发现更多错误。当错误大量累积时，编译器最好在超出错误数量上限后停止工作，避免输出一大堆恼人的“虚假错误”。 本节剩余部分将介绍下面几种恢复策略：恐慌模式恢复、短语级恢复、错误产生式、全局校正。
 
+### Panic‑Mode Recovery(恐慌模式恢复)
+
+With this method, on discovering an error, the parser discards input symbols one at a time until one of a designated set of ***synchronizing tokens*** is found. The **synchronizing tokens** are usually delimiters(分隔符), such as semicolon(分号) or `}`, whose role in the source program is clear and unambiguous. The compiler designer must select the **synchronizing tokens** appropriate for the source language. While **panic‑mode correction** often skips a considerable amount of input without checking it for additional errors, it has the advantage of simplicity, and, unlike some methods to be considered later, is guaranteed not to go into an infinite loop. 
+
+> 翻译: 采用该方法时，语法分析器一旦发现错误，就逐个丢弃输入符号，直到遇见预先指定集合中的**同步记号**。**同步记号**通常是分隔符，例如分号或者`}`，它们在源程序中的作用明确、不存在二义性。编译器设计者必须选用适配源语言的同步记号。尽管恐慌模式纠错常常会跳过大量输入，不再检查被跳过部分是否还存在其他错误，但它具备实现简单的优点；并且和后续将要介绍的部分方法不同，该方法能够保证不会进入死循环。
+
+### Phrase‑Level Recovery(短语级恢复)
+
+On discovering an error, a parser may perform **local correction** on the remaining input; that is, it may replace a prefix of the remaining input by some string that allows the parser to continue. A typical **local correction** is to replace a comma by a semicolon(分号), delete an extraneous semicolon(分号), or insert a missing semicolon. The choice of the **local correction** is left to the compiler designer. Of course, we must be careful to choose replacements that do not lead to infinite loops, as would be the case, for example, if we always inserted something on the input ahead of the current input symbol.
 
 
-### Panic‑Mode Recovery
+**Phrase‑level replacement** has been used in several error‑repairing compilers, as it can correct any input string. Its major drawback is the difficulty it has in coping with situations in which the actual error has occurred before the point of detection. 
 
-With this method, on discovering an error, the parser discards input symbols one at a time until one of a designated set of synchronizing tokens is found. The synchronizing tokens are usually delimiters, such as semicolon or `}`, whose role in the source program is clear and unambiguous. The compiler designer
+> 翻译: 当检测到错误时，语法分析器可以对剩余输入做局部修正：即用某一串符号替换剩余输入的前缀，让语法分析器可以继续分析。典型的局部修正包括：把逗号替换成分号、删除多余的分号、插入缺失的分号。采用何种局部修正由编译器设计者决定。当然，必须谨慎选择替换方案，避免造成死循环；例如，不能总是在当前输入符号前面插入内容，否则就会发生死循环。
+> 
+> 不少具备错误修复能力的编译器都采用过短语级替换，该方法可以对任意输入串做纠错。它的主要缺点：如果真正的错误发生在检测点之前，该方法很难处理这类场景。
+
+### Error Productions(错误产生式)
+
+By anticipating(预判) common errors that might be encountered, we can augment the grammar for the language at hand with productions that generate the erroneous constructs. A parser constructed from a grammar augmented by these **error productions** detects the anticipated errors when an **error production** is used during parsing. The parser can then generate appropriate error diagnostics about the erroneous construct that has been recognized in the input. 
+
+> 翻译: 我们可以预先预判会遇到的常见错误，在原有文法中增加一批产生式，这些产生式专门用来生成错误语法结构。基于扩充后的文法构造语法分析器，当分析过程中用到错误产生式时，就说明捕获到了这类可预判的错误。此时语法分析器就可以针对识别出来的错误结构，输出恰当的错误诊断信息。
+
+
+
+### Global Correction
+
+Ideally, we would like a compiler to make as few changes as possible in processing an incorrect input string. There are algorithms for choosing a **minimal sequence of changes** to obtain a globally **least‑cost correction**. Given an incorrect input string $x$ and grammar $G$, these algorithms will find a **parse tree** for a related string $y$, such that the number of insertions, deletions, and changes of tokens required to transform $x$ into $y$ is as small as possible. Unfortunately, these methods are in general too costly to implement in terms of time and space, so these techniques are currently only of theoretical interest.
+
+
+Do note that a closest correct program may not be what the programmer had in mind. Nevertheless, the notion of **least‑cost correction** provides a yardstick for evaluating error‑recovery techniques, and has been used for finding optimal replacement strings for phrase‑level recovery.
+
+> 翻译: 理想情况下，编译器处理错误输入串时，应当尽可能少改动输入。存在一类算法，可以选出改动次数最少的序列，实现全局最小代价纠错。给定错误输入串 $x$ 和文法 $G$，算法会为一个相近的合法串 $y$ 生成语法树，使得把 $x$ 变换成 $y$ 所需要的记号插入、删除、修改总次数尽可能小。遗憾的是，这类算法时间、空间开销太大，一般不适合工程实现，目前仅具备理论研究价值。
+> 
+> 需要注意：和错误输入最接近的合法程序，未必就是程序员真正想要写的程序。即便如此，最小代价纠错这一概念依然可以作为评判错误恢复技术的标尺，也被用来为短语级恢复求取最优替换字符串。
