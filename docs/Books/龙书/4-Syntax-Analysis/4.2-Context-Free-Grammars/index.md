@@ -79,15 +79,15 @@ To avoid always having to state that "these are the terminals," "these are the n
 
 Uppercase letters late in the alphabet, such as X, Y, Z, represent ***grammar symbols***; that is, either **nonterminals** or **terminals**. 
 
-### 4、
+### Strings of terminals
 
-Lowercase letters late in the alphabet, chiey u, v, ... z, represent (possibly empty) strings of terminals. 
+Lowercase letters late in the alphabet, chiefly u, v, ... z, represent (possibly empty) strings of terminals. 
 
-### 5、
+### Strings of grammar symbols
 
 Lowercase Greek letters $\alpha$, $\beta$,$\gamma$,  for example, represent (possibly empty) strings of grammar symbols. Thus, a generic production can be written as $A \to \alpha$, where A is the **head** and $\alpha$ the body.
 
-### 6、
+### A set of productions
 
 A set of productions $A \to \alpha_1$, $A \to \alpha_2$,...,$A \to \alpha_k$, with a common head `A` (call them ***A-productions***), may be written $A \to \alpha_1 | \alpha_2 | \dots | \alpha_k$ . Call $\alpha_1 \alpha_2 \dots \alpha_k$ the alternatives  for `A`.
 
@@ -99,35 +99,35 @@ Example 4.6 : Using these conventions, the grammar of Example 4.5 can be rewritt
 
 The **notational conventions** tell us that `E`, `T`, and `F` are nonterminals, with `E` the start symbol. The remaining symbols are terminals
 
-## 4.2.3 Derivations
+## 4.2.3 Derivations(推导)
 
-> NOTE: 
-> 
-> 一、"derivation" means "推导" in Chinese.
+The construction of a **parse tree** can be made precise by taking a **derivational view**(推导视角), in which **productions** are treated as **rewriting rules**. Beginning with the **start symbol**, each rewriting step replaces a **nonterminal** by the body of one of its productions. This **derivational view**(推导视角) corresponds to the **top-down** construction of a **parse tree**, but the precision afforded by **derivations** will be especially helpful when **bottom-up** parsing is discussed. As we shall see, **bottom-up parsing** is related to a class of derivations known as "**rightmost**" derivations, in which the **rightmost nonterminal** is rewritten at each step.
 
-The construction of a parse tree can be made precise by taking a **derivational view**, in which **productions** are treated as **rewriting rules**. Beginning with the **start symbol**, each rewriting step replaces a **nonterminal** by the body of one of its productions. This derivational view corresponds to the **top-down** construction of a **parse tree**, but the precision afforded by **derivations** will be especially helpful when **bottom-up** parsing is discussed. As we shall see, **bottom-up parsing** is related to a class of derivations known as "**rightmost**" derivations, in which the **rightmost nonterminal** is rewritten at each step.
-
-> NOTE: 
+> 翻译: 采用**推导视角**可以对语法树的构造给出精确定义；在该视角下，**产生式**被视作**重写规则**。从**开始符号**出发，每一步重写都会把一个**非终结符**替换为它某条产生式的右部。这种推导视角对应语法树的**自顶向下**构造方式，不过，**推导**所带来的严谨性，在后续讨论**自底向上语法分析**时将尤为有用。我们将会看到，**自底向上语法分析**和一类叫作**最右推导**的推导密切相关，最右推导的每一步都对**最右侧非终结符**做重写。
 > 
-> I still do not understand why bottom-up parsing corresponds "**rightmost**" derivations.
-> 
-> $\Rightarrow$
+> NOTE: I still do not understand why bottom-up parsing corresponds "**rightmost**" derivations. $\Rightarrow$
 
 For example, consider the following grammar, with a single nonterminal `E`, which adds a production $E \to - E$ to the grammar (4.3)
 
 ![](grammar-4.7.png)
 
-The production $E \to -E$ signifies(表示) that if `E` denotes an expression, the  `-E` must also denote an expression. The replacement of a single `E` by `-E` will be described by writing
+The production $E \to -E$ signifies(表示) that if `E` denotes an expression, the  `-E` must also denote an expression. The **replacement**(其实就是前面提到的rewrite) of a single `E` by `-E` will be described by writing
+
 $$
 E \Rightarrow -E
 $$
-which is read, "E derives -E."  The production $E \to ( E )$ can be applie to replace any instance of `E` in any string of grammar symbols by `(E)`, e.g., $E * E \Rightarrow (E) * E$ or $E * E \Rightarrow E * (E)$.  We can take a single `E` and repeatedly apply productions in any order to get a sequence of replacements. For example
+
+which is read, "E derives -E."  The production $E \to ( E )$ can be applied to replace any instance of `E` in any string of grammar symbols by `(E)`, e.g., $E * E \Rightarrow (E) * E$ or $E * E \Rightarrow E * (E)$.  We can take a single `E` and repeatedly apply productions in any order to get a sequence of **replacements**. For example
+
 $$
 E \Rightarrow -E \Rightarrow -(E) \Rightarrow -(id)
 $$
-We call such a sequence of replacements a derivation of `(id)` from `E`. This derivation provides a proof that the string `-(id)` is one particular instance of an expression. 
 
-For a general definition of **derivation**, consider a nonterminal `A` in the middle of a sequence of **grammar symbols**, as in $\alpha A \beta$, where $\alpha$ and $\beta$ are  are arbitrary strings of grammar symbol. Suppose $A \to \gamma$  is a **production**. Then, we write $\alpha A \beta \Rightarrow \alpha \gamma \beta$. The symbol $\Rightarrow$ means, "derives in one step." When a sequence of derivation steps $\alpha_1 \Rightarrow \alpha_2 \Rightarrow \dots \Rightarrow \alpha_n$ rewrites $\alpha_1$ to $\alpha_n$, we say $\alpha_1$ ***derives*** $\alpha_n$. Often, we wish to say, "derives in zero or more steps." For this purpose, we can use the symbol $S \xRightarrow {\text{*}}$.  Thus,
+We call such a sequence of replacements a ***derivation***(推导) of `(id)` from `E`. This derivation provides a proof that the string `-(id)` is one particular ***instance***(实例) of an expression. 
+
+### General definition of derivation
+
+For a general definition of **derivation**, consider a nonterminal `A` in the middle of a sequence of **grammar symbols**, as in $\alpha A \beta$, where $\alpha$ and $\beta$ are  are arbitrary strings of **grammar symbol**. Suppose $A \to \gamma$  is a **production**. Then, we write $\alpha A \beta \Rightarrow \alpha \gamma \beta$. The symbol $\Rightarrow$ means, "derives in one step." When a sequence of derivation steps $\alpha_1 \Rightarrow \alpha_2 \Rightarrow \dots \Rightarrow \alpha_n$ rewrites $\alpha_1$ to $\alpha_n$, we say $\alpha_1$ ***derives*** $\alpha_n$. Often, we wish to say, "derives in zero or more steps." For this purpose, we can use the symbol $S \xRightarrow {\text{*}}$.  Thus,
 
 1、$\alpha \xRightarrow {\text{*}} \alpha$ , for any string $\alpha$, and
 
@@ -135,9 +135,7 @@ For a general definition of **derivation**, consider a nonterminal `A` in the mi
 
  Likewise, $\xRightarrow {\text{+}}$ means, "derives in one or more steps."
 
-> NOTE:
-> 
-> 一、上述latex参考自: https://tex.stackexchange.com/questions/103988/rightarrow-with-text-above-it/103993#103993
+> NOTE: 上述latex参考自: https://tex.stackexchange.com/questions/103988/rightarrow-with-text-above-it/103993#103993
 
 We can take a single E and repeatedly aly productions in any order to get a sequence of replacements. For example
 
