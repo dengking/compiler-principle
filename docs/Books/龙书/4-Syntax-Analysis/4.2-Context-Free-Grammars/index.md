@@ -577,7 +577,11 @@ The sequence of parse trees constructed from the derivation (4.8) is shown in Fi
 In the second step of the derivation, $-E \Rightarrow -(E)$. Consequently, add three children, labeled $(,E,\text{ and })$, to the leaf labeled $E$ of the second tree, to obtain the third tree with yield $-(E)$. Continuing in this fashion we obtain the complete parse tree as the sixth tree. $\square$
 ![](Figure-4.4-Sequence-of-parse-trees-for-derivation.png)
 
+### N:1
+
 Since a **parse tree** ignores variations in the order in which symbols in **sentential forms** are replaced, there is a **many‑to‑one** relationship between **derivations** and **parse trees**. For example, both derivations (4.8) and (4.9), are associated with the same final parse tree of Fig. 4.4.
+
+### 1:1
 
 In what follows, we shall frequently parse by producing a **leftmost** or a **rightmost** derivation, since there is a one‑to‑one relationship between **parse trees** and either **leftmost** or **rightmost** derivations. Both leftmost and rightmost derivations pick a particular order for replacing symbols in **sentential forms**, so they too filter out variations in the order. It is not hard to show that every **parse tree** has associated with it a unique **leftmost** and a unique **rightmost** derivation.
 
