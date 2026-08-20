@@ -697,9 +697,10 @@ proving that $w=(x)y$ is also derivable from $S$. $\square$
 
 ## 4.2.7 Context-Free Grammars Versus Regular Expressions
 
-Before leaving this section on grammars and their properties, we establish that grammars are a more powerful notation than regular expressions. Every construct that can be described by a regular expression can be described by a grammar, but not vice‑versa. Alternatively, every regular language is a context‑free language, but not vice‑versa.
+Before leaving this section on grammars and their properties, we establish that **grammars** are a more powerful notation than **regular expressions**. Every construct that can be described by a regular expression can be described by a grammar, but not vice‑versa. Alternatively, every regular language is a context‑free language, but not vice‑versa.
 
 For example, the regular expression $({\bf a}|{\bf b})^*{\bf abb}$ and the grammar
+
 $$
 \begin{aligned}
 A_0 &\rightarrow aA_0 \mid bA_0 \mid aA_1 \\
@@ -708,13 +709,17 @@ A_2 &\rightarrow bA_3 \\
 A_3 &\rightarrow \epsilon
 \end{aligned}
 $$
+
 describe the same language, the set of strings of $a$'s and $b$'s ending in $abb$.
 
 We can construct mechanically a grammar to recognize the same language as a nondeterministic finite automaton (NFA). The grammar above was constructed from the NFA in Fig. 3.24 using the following construction:
 
 1. For each state $i$ of the NFA, create a nonterminal $A_i$.
+
 2. If state $i$ has a transition to state $j$ on input $a$, add the production $A_i \rightarrow aA_j$. If state $i$ goes to state $j$ on input $\epsilon$, add the production $A_i \rightarrow A_j$.
+
 3. If $i$ is an accepting state, add $A_i \rightarrow \epsilon$.
+
 4. If $i$ is the start state, make $A_i$ be the start symbol of the grammar.
 
 On the other hand, the language $L=\{a^nb^n \mid n \ge 1\}$ with an equal number of $a$'s and $b$'s is a prototypical example of a language that can be described by a grammar but not by a regular expression. To see why, suppose $L$ were the language defined by some regular expression. We could construct a DFA $D$ with a finite number of states, say $k$, to accept $L$. Since $D$ has only $k$ states, for an input beginning with more than $k$ $a$'s, $D$ must enter some state twice, say $s_i$, as in Fig. 4.6. Suppose that the path from $s_i$ back to itself is labeled with a sequence $a^{j-i}$. Since $a^ib^i$ is in the language, there must be a path labeled $b^i$ from $s_i$ to an accepting state $f$. But, then there is also a path from the initial state $s_0$ through $s_i$ to $f$ labeled $a^jb^i$, as shown in Fig. 4.6. Thus, $D$ also accepts $a^jb^i$, which is not in the language, contradicting the assumption that $L$ is the language accepted by $D$.
@@ -722,6 +727,8 @@ On the other hand, the language $L=\{a^nb^n \mid n \ge 1\}$ with an equal number
 > Figure 4.6: DFA $D$ accepting both $a^ib^i$ and $a^jb^i$.
 
 Colloquially, we say that "finite automata cannot count," meaning that a finite automaton cannot accept a language like $\{a^nb^n \mid n \ge 1\}$ that would require it to keep count of the number of $a$'s before it sees the $b$'s. Likewise, "a grammar can count two items but not three," as we shall see when we consider non‑context‑free language constructs in Section 4.3.5.
+
+> 翻译: 通俗来讲：**有限自动机不能计数**。它无法处理 $\{a^nb^n\mid n\ge1\}$ 这类需要记住前面 $a$ 的数量、再匹配同等数量 $b$ 的语言。类似地，“上下文无关文法可以对两类对象计数，但无法对三类对象计数”，在4.3.5节讨论非上下文无关语言结构时会看到这一点。
 
 ### 补充内容
 
