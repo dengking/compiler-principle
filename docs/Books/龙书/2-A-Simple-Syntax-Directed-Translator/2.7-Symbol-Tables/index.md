@@ -32,12 +32,24 @@ The term "scope of identifier $x$" really refers to the scope of a particular de
 
 **Scopes** are important, because the same identifier can be declared for different purposes in different parts of a program. Common names like $\texttt{i}$ and $\texttt{x}$ often have multiple uses. As another example, subclasses can redeclare a method name to **override** a method in a superclass.
 
-If blocks can be nested, several declarations of the same identifier can appear within a single block. The following syntax results in nested blocks when $stmts$ can generate a block:
+If blocks can be nested, several declarations of the same identifier can appear within a single block. The following syntax results in nested blocks when $stmts$ can generate a **block**:
 
 $$
 block \rightarrow '\{'\ decls\ stmts\ '\}'
 $$
 
-(We quote curly braces in the syntax to distinguish them from curly braces for semantic actions.) With the grammar in Fig. 2.38, $decls$ generates an optional sequence of declarations and $stmts$ generates an optional sequence of statements.
+(We quote curly braces in the syntax to distinguish them from curly braces for **semantic actions**.) With the grammar in Fig. 2.38, $decls$ generates an optional sequence of declarations and $stmts$ generates an optional sequence of statements.
+
+### 2.7.2 The Use of Symbol Tables(符号表的作用)
+
+In effect, the role of a **symbol table** is to pass information from **declarations** to **uses**. A **semantic action** "puts" information about identifier $x$ into the **symbol table**, when the **declaration** of $x$ is analyzed. Subsequently, a **semantic action** associated with a production such as $factor \rightarrow \mathbf{id}$ "gets" information about the **identifier** from the **symbol table**. Since the translation of an expression $E_1\ \mathbf{op}\ E_2$, for a typical operator $\mathbf{op}$, depends only on the translations of $E_1$ and $E_2$, and does not directly depend on the **symbol table**, we can add any number of operators without changing the basic flow of information from declarations to uses, through the **symbol table**.
+
+> 翻译: 实际上，符号表的作用是把信息从**声明处传递到使用处**。
+> 分析标识符 $x$ 的声明时，会通过语义动作将标识符 $x$ 的相关信息**存入**符号表。
+> 后续，对于类似产生式 $\boldsymbol{factor \rightarrow \mathbf{id}}$，其绑定的语义动作会从符号表中**取出**该标识符的信息。对于普通运算符 $\mathbf{op}$，表达式 $E_1\ \mathbf{op}\ E_2$ 的翻译仅依赖 $E_1$、$E_2$ 的翻译结果，并不直接依赖符号表。因此，我们可以新增任意多的运算符，而不会改变“经由符号表，信息从声明流向使用”这一基础信息流。
 
 
+
+### Example 2.17
+
+![](Figure-2.38-The-use-of-symbol-tables-for-translating-a-language-with-blocks.png)

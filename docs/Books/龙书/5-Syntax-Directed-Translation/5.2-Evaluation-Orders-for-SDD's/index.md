@@ -144,7 +144,7 @@ The second rule defines an inherited attribute `B.i`, so the entire SDD cannot b
 
 ## 5.2.5 Semantic Rules with Controlled Side Effects
 
-In practice, translations involve side effects: a desk calculator might print a result; a **code generator** might enter the type of an identifier into a symbol table. With SDD's, we strike a balance between **attribute grammars** and **translation schemes**. **Attribute grammars** have no side effects and allow any evaluation order consistent with the **dependency graph**. **Translation schemes** impose left-to-right evaluation and allow **semantic actions** to contain any program fragment; **translation schemes** are discussed in Section 5.4.
+In practice, translations involve side effects: a desk calculator might print a result; a **code generator** might enter the type of an identifier into a **symbol table**. With SDD's, we strike a balance between **attribute grammars** and **translation schemes**. **Attribute grammars** have no side effects and allow any evaluation order consistent with the **dependency graph**. **Translation schemes** impose left-to-right evaluation and allow **semantic actions** to contain any program fragment; **translation schemes** are discussed in Section 5.4.
 
 > NOTE: 上面这段话从side effect的角度对比了SDD、attribute grammar、translation schemes，是很好的总结，在 "SDD-VS-Attribute-grammar-VS-Translation-scheme" 中对此进行了很好的总结。 
 
@@ -171,7 +171,7 @@ As an example of an incidental **side effect**, let us modify the desk calculato
 
 ### Example 5.10
 
-The SDD in *Fig. 5.8* takes a simple declaration $D$ consisting of a basic type $T$ followed by a list $L$ of identifiers. $T$ can be **int** or **float**. For each identifier on the list, the type is entered into the **symbol-table entry** for the identifier. We assume that entering the type for one identifier does not affect the **symbol-table entry** for any other identifier. Thus, entries can be updated in any order. This SDD does not check whether an identifier is declared more than once; it can be modified to do so.
+The SDD in *Fig. 5.8* takes a simple declaration $D$ consisting of a basic type $T$ followed by a list $L$ of identifiers. $T$ can be **int** or **float**. For each identifier on the list, the type is entered into the **symbol-table entry** for the **identifier**. We assume that entering the type for one identifier does not affect the **symbol-table entry** for any other identifier. Thus, entries can be updated in any order. This SDD does not check whether an identifier is declared more than once; it can be modified to do so.
 
 ![](Figure-5.8-Syntax-directed-definition-for-simple-type-declarations.png)
 
