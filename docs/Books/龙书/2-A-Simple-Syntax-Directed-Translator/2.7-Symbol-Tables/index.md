@@ -26,6 +26,12 @@ The examples of block structure in Section 1.6.3 dealt with the definitions and 
 
 ---
 
+## Optimization of Symbol Tables for Blocks
+
+Implementations of symbol tables for blocks can take advantage of the most‑closely nested rule. Nesting ensures that the chain of applicable symbol tables forms a stack. At the top of the stack is the table for the current block. Below it in the stack are the tables for the enclosing blocks. Thus, symbol tables can be allocated and deallocated in a stack‑like fashion.
+
+Some compilers maintain a single hash table of accessible entries; that is, of entries that are not hidden by a declaration in a nested block. Such a hash table supports essentially constant‑time lookups, at the expense of inserting and deleting entries on block entry and exit. Upon exit from a block $B$, the compiler must undo any changes to the hash table due to declarations in block $B$. It can do so by using an auxiliary stack to keep track of changes to the hash table while block $B$ is processed.
+
 ## 2.7.1 Symbol Table Per Scope
 
 The term "scope of identifier $x$" really refers to the scope of a particular declaration of $x$. The term *scope* by itself refers to a portion of a program that is the **scope** of one or more declarations.
@@ -48,8 +54,22 @@ In effect, the role of a **symbol table** is to pass information from **declarat
 > 分析标识符 $x$ 的声明时，会通过语义动作将标识符 $x$ 的相关信息**存入**符号表。
 > 后续，对于类似产生式 $\boldsymbol{factor \rightarrow \mathbf{id}}$，其绑定的语义动作会从符号表中**取出**该标识符的信息。对于普通运算符 $\mathbf{op}$，表达式 $E_1\ \mathbf{op}\ E_2$ 的翻译仅依赖 $E_1$、$E_2$ 的翻译结果，并不直接依赖符号表。因此，我们可以新增任意多的运算符，而不会改变“经由符号表，信息从声明流向使用”这一基础信息流。
 
-
-
 ### Example 2.17
 
+The translation scheme in Fig. 2.38 illustrates how class Env can be used. The translation scheme concentrates on scopes, declarations, and uses. It implements the translation described in Example 2.14. 
+
+> 翻译: 图 2.38 中的翻译方案演示了`Env`类的使用方法。该翻译方案聚焦于**作用域、声明与引用**，实现了例 2.14 中描述的翻译逻辑。正如前文所述，面对输入
+
 ![](Figure-2.38-The-use-of-symbol-tables-for-translating-a-language-with-blocks.png)
+
+As noted earlier, on input
+
+```c
+{ int x; char y; { bool y; x; y; } x; y; }
+```
+
+the translation scheme strips the declarations and produces
+
+```
+{ { x:int; y:bool; } x:int; y:char; }
+```

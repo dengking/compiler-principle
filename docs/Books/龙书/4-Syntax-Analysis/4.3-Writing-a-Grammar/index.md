@@ -20,7 +20,7 @@ As we observed in Section 4.2.7, everything that can be described by a regular e
    
    1. 翻译: 针对记号（token），正则表达式通常比文法更加简洁、更容易理解。
 
-4. More efficient lexical analyzers can be constructed automatically from regular expressions than from arbitrary grammars.
+4. More efficient **lexical analyzers** can be constructed automatically from regular expressions than from arbitrary grammars.
    
    1. 翻译: 相比于任意文法，从正则表达式可以自动生成效率更高的词法分析器。
 
