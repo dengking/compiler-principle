@@ -28,9 +28,13 @@ The examples of block structure in Section 1.6.3 dealt with the definitions and 
 
 ## Optimization of Symbol Tables for Blocks
 
-Implementations of symbol tables for blocks can take advantage of the most‑closely nested rule. Nesting ensures that the chain of applicable symbol tables forms a stack. At the top of the stack is the table for the current block. Below it in the stack are the tables for the enclosing blocks. Thus, symbol tables can be allocated and deallocated in a stack‑like fashion.
+Implementations of **symbol tables** for blocks can take advantage of the ***most‑closely nested rule***. Nesting ensures that the chain of applicable **symbol tables** forms a **stack**. At the top of the stack is the table for the current block. Below it in the stack are the tables for the **enclosing blocks**. Thus, **symbol tables** can be allocated and deallocated in a stack‑like fashion.
 
-Some compilers maintain a single hash table of accessible entries; that is, of entries that are not hidden by a declaration in a nested block. Such a hash table supports essentially constant‑time lookups, at the expense of inserting and deleting entries on block entry and exit. Upon exit from a block $B$, the compiler must undo any changes to the hash table due to declarations in block $B$. It can do so by using an auxiliary stack to keep track of changes to the hash table while block $B$ is processed.
+> 翻译: 针对程序块的符号表实现可以利用**最近嵌套规则**。块的嵌套特性，使得一组生效的符号表构成一个栈。栈顶存放当前程序块的符号表，栈中其下方存放各个外层包围块的符号表。因此，符号表可以按照栈的形式进行分配与释放。
+
+Some compilers maintain a single hash table of accessible entries; that is, of entries that are not hidden by a declaration in a **nested block**. Such a hash table supports essentially constant‑time lookups, at the expense of inserting and deleting entries on block entry and exit. Upon exit from a block $B$, the compiler must undo any changes to the hash table due to declarations in block $B$. It can do so by using an auxiliary stack to keep track of changes to the hash table while block $B$ is processed.
+
+> 翻译: 有些编译器维护一张哈希表，里面保存全部可访问的表项，也就是那些没有被嵌套块内的声明所遮蔽的表项。该哈希表能够实现近乎常数时间的查找，但代价是：在进入和退出程序块时，需要插入、删除表项。当退出程序块$B$时，编译器必须撤销块$B$中的声明对哈希表造成的所有改动。实现该功能可以借助一个辅助栈，在处理块$B$期间记录哈希表发生的全部修改。
 
 ## 2.7.1 Symbol Table Per Scope
 
