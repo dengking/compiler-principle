@@ -80,3 +80,56 @@ open\_stmt &\to \textbf{if } expr \textbf{ then } stmt \\
 $$
 
 Figure 4.10: Unambiguous grammar for if-then-else statements
+
+## 4.3.3 Elimination of Left Recursion
+
+A grammar is *left recursive* if it has a nonterminal $A$ such that there is a derivation $A \overset{+}{\Rightarrow} A\alpha$ for some string $\alpha$. **Top‑down parsing methods** cannot handle **left‑recursive grammars**, so a transformation is needed to eliminate **left recursion**. In Section 2.4.5, we discussed *immediate left recursion*, where there is a production of the form $A \to A\alpha$. Here, we study the general case. In Section 2.4.5, we showed how the **left‑recursive** pair of productions $A \to A\alpha \mid \beta$ could be replaced by the non‑left‑recursive productions:
+
+$$
+\begin{align*}
+A &\to \beta A' \\
+A' &\to \alpha A' \mid \epsilon
+\end{align*}
+$$
+
+without changing the strings derivable from $A$. This rule by itself suffices for many grammars.
+
+$$
+\begin{align*}
+A &\to \beta_1 A' \mid \beta_2 A' \mid \cdots \mid \beta_n A' \\
+A' &\to \alpha_1 A' \mid \alpha_2 A' \mid \cdots \mid \alpha_m A' \mid \epsilon
+\end{align*}
+$$
+
+The nonterminal $A$ generates the same strings as before but is no longer left recursive. This procedure eliminates all left recursion from the $A$ and $A'$ productions (provided no $\alpha_i$ is $\epsilon$), but it does not eliminate left recursion involving derivations of two or more steps. For example, consider the grammar
+
+$$
+\begin{align*}
+S &\to A a \mid b \tag{4.18}\\
+A &\to A c \mid S d \mid \epsilon
+\end{align*}
+$$
+
+The nonterminal $S$ is left recursive because $S \Rightarrow Aa \Rightarrow Sda$, but it is not immediately left recursive.
+
+Algorithm 4.19, below, systematically eliminates left recursion from a grammar. It is guaranteed to work if the grammar has no cycles (derivations of the form $A \overset{+}{\Rightarrow} A$) or $\epsilon$-productions (productions of the form $A \to \epsilon$). Cycles can be eliminated systematically from a grammar, as can $\epsilon$-productions (see Exercises 4.4.6 and 4.4.7).
+
+**Algorithm 4.19**: Eliminating left recursion.
+
+**INPUT**: Grammar $G$ with no cycles or $\epsilon$-productions.
+
+**OUTPUT**: An equivalent grammar with no left recursion.
+
+**METHOD**: Apply the algorithm in Fig. 4.11 to $G$. Note that the resulting non-left-recursive grammar may have $\epsilon$-productions. $\square$
+
+1. arrange the nonterminals in some order $A_1, A_2, \dots, A_n$.
+2. **for** ( each $i$ from $1$ to $n$ ) {
+3.     **for** ( each $j$ from $1$ to $i-1$ ) {
+4.         replace each production of the form $A_i \to A_j\gamma$ by the
+            productions $A_i \to \delta_1\gamma \mid \delta_2\gamma \mid \cdots \mid \delta_k\gamma$, where
+            $A_j \to \delta_1 \mid \delta_2 \mid \cdots \mid \delta_k$ are all current $A_j$-productions
+5.     }
+6.     eliminate the immediate left recursion among the $A_i$-productions
+7. }
+
+**Figure 4.11**: Algorithm to eliminate left recursion from a grammar
