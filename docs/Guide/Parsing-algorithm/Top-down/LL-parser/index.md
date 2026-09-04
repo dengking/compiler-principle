@@ -1,16 +1,16 @@
-# wikipedia [LL parser](https://en.wikipedia.org/wiki/LL_parser)
+LL parser
+
+## wikipedia [LL parser](https://en.wikipedia.org/wiki/LL_parser)
 
 In [computer science](https://en.wikipedia.org/wiki/Computer_science), an **LL parser** (**L**eft-to-right, **L**eftmost derivation) is a [top-down parser](https://en.wikipedia.org/wiki/Top-down_parsing) for a subset of [context-free languages](https://en.wikipedia.org/wiki/Context-free_languages). It parses the input from **L**eft to right, performing [**L**eftmost derivation](https://en.wikipedia.org/wiki/Context-free_grammar#Derivations_and_syntax_trees) of the sentence.
 
 > NOTE: 
->
+> 
 > Follow the  [**L**eftmost derivation](https://en.wikipedia.org/wiki/Context-free_grammar#Derivations_and_syntax_trees) , you will find an detailed explanation of leftmost derivation.
 
 An LL parser is called an LL(*k*) parser if it uses *k* [tokens](https://en.wikipedia.org/wiki/Token_(parser)) of [lookahead](https://en.wikipedia.org/wiki/Parsing#Lookahead) when parsing a sentence. A grammar is called an [LL(*k*) grammar](https://en.wikipedia.org/wiki/LL_grammar) if an LL(*k*) parser can be constructed from it. A **formal language** is called an LL(*k*) language if it has an LL(*k*) grammar. The set of LL(*k*) languages is properly contained in that of LL(*k*+1) languages, for each *k* ≥ 0. A corollary of this is that not all context-free languages can be recognized by an LL(*k*) parser. An LL parser is called an LL(`*`), or LL-regular, parser if it is not restricted to a finite number *k* of tokens of lookahead, but can make parsing decisions by recognizing whether the following tokens belong to a [regular language](https://en.wikipedia.org/wiki/Regular_language) (for example by means of a [deterministic finite automaton](https://en.wikipedia.org/wiki/Deterministic_finite_automaton)).
 
 LL grammars, particularly LL(1) grammars, are of great practical interest, as parsers for these grammars are easy to construct, and many [computer languages](https://en.wikipedia.org/wiki/Computer_language) are designed to be LL(1) for this reason.[[3\]](https://en.wikipedia.org/wiki/LL_parser#cite_note-3) LL parsers are table-based parsers, similar to [LR parsers](https://en.wikipedia.org/wiki/LR_parser). LL grammars can also be parsed by [recursive descent parsers](https://en.wikipedia.org/wiki/Recursive_descent_parser). According to Waite and Goos (1984),  LL(*k*) grammars were introduced by Stearns and Lewis (1969). 
-
-
 
 ## Overview
 
@@ -47,8 +47,6 @@ the following condition holds: the prefix of the string $ u $ of length $ k $ eq
 
 > Do not understand.
 
-
-
 ## Parser
 
 The $ LL(k) $ parser is a [deterministic pushdown automaton](https://en.wikipedia.org/wiki/Deterministic_pushdown_automaton) with the ability to peek on the next $ k $ input symbols without reading. This peek capability can be emulated by storing the lookahead buffer contents in the **finite state space**, since both buffer and input alphabet are finite in size. As a result, this does not make the automaton more powerful, but is a convenient abstraction.
@@ -58,20 +56,16 @@ The stack alphabet is $ \Gamma =N\cup \Sigma $, where:
 - $ N $ is the set of non-terminals;
 - $ \Sigma $ the set of terminal (input) symbols with a special end-of-input (EOI) symbol $ \$ $.
 
-
-
 The **parser stack** initially contains the **starting symbol** above the EOI: $ [\ S\ \$\ ] $. During operation, the parser repeatedly replaces the symbol $ X $ on top of the stack:
 
 - with some $ \alpha $, if $ X\in N $ and there is a rule $ X\to \alpha $ ($X$ is a non-terminal);
 - with $ \epsilon $ (in some notations $ \lambda $), i.e. $ X $ is popped off the stack, if $ X\in \Sigma $. In this case, an input symbol $ x $ is read and if $ x\neq X $, the parser rejects the input ($X$ is a terminal, which means $X$ should equal to $x$).
 
 > NOTE: 
->
+> 
 > At first step, $X$ is $S$.
 
 If the last symbol to be removed from the stack is the EOI, the parsing is successful; the automaton accepts via an empty stack.
-
-
 
 The **states** and the **transition function** are not explicitly given; they are specified (generated) using a more convenient *parse table* instead. The table provides the following mapping:
 
@@ -79,29 +73,23 @@ The **states** and the **transition function** are not explicitly given; they ar
 - column: $ |w|\leq k $ lookahead buffer contents
 - cell: rule number for $ X\to \alpha $ or $ \epsilon $
 
-
-
 If the parser cannot perform a valid transition, the input is rejected (empty cells). To make the table more compact, only the **non-terminal** rows are commonly displayed, since the action is the same for terminals.
 
-
-
 > NOTE: 
->
+> 
 > The LL parser consists of three parts
->
+> 
 > 1、**parsing table**
->
+> 
 > 2、**parser stack**
->
+> 
 > 3、**input stream**
->
+> 
 > The following image is from a Wikipedia entry [pushdown automaton](https://en.wikipedia.org/wiki/Pushdown_automaton)
->
+> 
 > [![img](https://upload.wikimedia.org/wikipedia/commons/thumb/7/71/Pushdown-overview.svg/340px-Pushdown-overview.svg.png)](https://en.wikipedia.org/wiki/File:Pushdown-overview.svg)
->
+> 
 > The $ LL(k) $ parser is a [deterministic pushdown automaton](https://en.wikipedia.org/wiki/Deterministic_pushdown_automaton). 
-
-
 
 ## Concrete example
 
@@ -121,10 +109,10 @@ An LL(1) **parsing table** for a grammar has a row for each of the **non-termina
 
 Each cell of the table may point to at most one rule of the grammar (identified by its number). For example, in the parsing table for the above grammar, the cell for the non-terminal 'S' and terminal '(' points to the rule number 2:
 
-|      |  (   |  )   |  a   |  +   |  $   |
-| :--: | :--: | :--: | :--: | :--: | :--: |
-|  S   |  2   |  -   |  1   |  -   |  -   |
-|  F   |  -   |  -   |  3   |  -   |  -   |
+|     | (   | )   | a   | +   | $   |
+|:---:|:---:|:---:|:---:|:---:|:---:|
+| S   | 2   | -   | 1   | -   | -   |
+| F   | -   | -   | 3   | -   | -   |
 
 The algorithm to construct a parsing table is described in a later section, but first let's see how the parser uses the **parsing table** to process its input.
 
@@ -172,14 +160,10 @@ This is indeed a list of rules for a [leftmost derivation](https://en.wikipedia.
 
 S → **(** S **+** F **)** → **(** F **+** F **)** → **( a +** F **)** → **( a + a )**
 
-
-
-### implementation 
+### implementation
 
 - cpp
 - python
-
-
 
 ## Remarks
 
@@ -191,11 +175,6 @@ As can be seen from the example, the parser performs three types of steps depend
 
 These steps are repeated until the parser stops, and then it will have either completely parsed the input and written a [leftmost derivation](https://en.wikipedia.org/wiki/Context-free_grammar#Derivations_and_syntax_trees) to the output stream or it will have reported an error.
 
-
-
 ## Constructing an LL(1) parsing table
 
 In order to fill the **parsing table**, we have to establish what grammar rule the parser should choose if it sees a nonterminal `A` on the top of its stack and a symbol `a` on its input stream. It is easy to see that such a rule should be of the form `A` → `w` and that the language corresponding to `w` should have at least one string starting with `a`. For this purpose we define the *First-set* of `w`, written here as **`Fi`** `(w)`, as the set of terminals that can be found at the start of some string in `w`, plus $\epsilon$ if the empty string also belongs to `w`. Given a grammar with the rules $A_1 \to w_1, \dots, A_n \to w_n$, we can compute the **`Fi`** `(wi)` and **`Fi`** `(Ai)` for every rule as follows:
-
-
-
