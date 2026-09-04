@@ -1,18 +1,16 @@
-LL parser
+# LL parser&LL grammar
 
 ## wikipedia [LL parser](https://en.wikipedia.org/wiki/LL_parser)
 
 In [computer science](https://en.wikipedia.org/wiki/Computer_science), an **LL parser** (**L**eft-to-right, **L**eftmost derivation) is a [top-down parser](https://en.wikipedia.org/wiki/Top-down_parsing) for a subset of [context-free languages](https://en.wikipedia.org/wiki/Context-free_languages). It parses the input from **L**eft to right, performing [**L**eftmost derivation](https://en.wikipedia.org/wiki/Context-free_grammar#Derivations_and_syntax_trees) of the sentence.
 
-> NOTE: 
-> 
-> Follow the  [**L**eftmost derivation](https://en.wikipedia.org/wiki/Context-free_grammar#Derivations_and_syntax_trees) , you will find an detailed explanation of leftmost derivation.
+> NOTE:  Follow the  [**L**eftmost derivation](https://en.wikipedia.org/wiki/Context-free_grammar#Derivations_and_syntax_trees) , you will find an detailed explanation of leftmost derivation.
 
 An LL parser is called an LL(*k*) parser if it uses *k* [tokens](https://en.wikipedia.org/wiki/Token_(parser)) of [lookahead](https://en.wikipedia.org/wiki/Parsing#Lookahead) when parsing a sentence. A grammar is called an [LL(*k*) grammar](https://en.wikipedia.org/wiki/LL_grammar) if an LL(*k*) parser can be constructed from it. A **formal language** is called an LL(*k*) language if it has an LL(*k*) grammar. The set of LL(*k*) languages is properly contained in that of LL(*k*+1) languages, for each *k* ≥ 0. A corollary of this is that not all context-free languages can be recognized by an LL(*k*) parser. An LL parser is called an LL(`*`), or LL-regular, parser if it is not restricted to a finite number *k* of tokens of lookahead, but can make parsing decisions by recognizing whether the following tokens belong to a [regular language](https://en.wikipedia.org/wiki/Regular_language) (for example by means of a [deterministic finite automaton](https://en.wikipedia.org/wiki/Deterministic_finite_automaton)).
 
 LL grammars, particularly LL(1) grammars, are of great practical interest, as parsers for these grammars are easy to construct, and many [computer languages](https://en.wikipedia.org/wiki/Computer_language) are designed to be LL(1) for this reason.[[3\]](https://en.wikipedia.org/wiki/LL_parser#cite_note-3) LL parsers are table-based parsers, similar to [LR parsers](https://en.wikipedia.org/wiki/LR_parser). LL grammars can also be parsed by [recursive descent parsers](https://en.wikipedia.org/wiki/Recursive_descent_parser). According to Waite and Goos (1984),  LL(*k*) grammars were introduced by Stearns and Lewis (1969). 
 
-## Overview
+### Overview
 
 For a given [context-free grammar](https://en.wikipedia.org/wiki/Context-free_grammar), the parser attempts to find the [leftmost derivation](https://en.wikipedia.org/wiki/Context-free_grammar#Derivations_and_syntax_trees). Given an example grammar $ G $:
 
@@ -47,7 +45,7 @@ the following condition holds: the prefix of the string $ u $ of length $ k $ eq
 
 > Do not understand.
 
-## Parser
+### Parser
 
 The $ LL(k) $ parser is a [deterministic pushdown automaton](https://en.wikipedia.org/wiki/Deterministic_pushdown_automaton) with the ability to peek on the next $ k $ input symbols without reading. This peek capability can be emulated by storing the lookahead buffer contents in the **finite state space**, since both buffer and input alphabet are finite in size. As a result, this does not make the automaton more powerful, but is a convenient abstraction.
 
@@ -91,9 +89,9 @@ If the parser cannot perform a valid transition, the input is rejected (empty ce
 > 
 > The $ LL(k) $ parser is a [deterministic pushdown automaton](https://en.wikipedia.org/wiki/Deterministic_pushdown_automaton). 
 
-## Concrete example
+### Concrete example
 
-### Set up
+#### Set up
 
 To explain an LL(1) parser's workings we will consider the following small LL(1) grammar:
 
@@ -116,7 +114,7 @@ Each cell of the table may point to at most one rule of the grammar (identified 
 
 The algorithm to construct a parsing table is described in a later section, but first let's see how the parser uses the **parsing table** to process its input.
 
-### Parsing procedure
+#### Parsing procedure
 
 In each step, the parser reads the next-available symbol from the input stream, and the top-most symbol from the stack. If the input symbol and the stack-top symbol match, the parser discards them both, leaving only the unmatched symbols in the input stream and on the stack.
 
@@ -160,12 +158,12 @@ This is indeed a list of rules for a [leftmost derivation](https://en.wikipedia.
 
 S → **(** S **+** F **)** → **(** F **+** F **)** → **( a +** F **)** → **( a + a )**
 
-### implementation
+#### implementation
 
 - cpp
 - python
 
-## Remarks
+### Remarks
 
 As can be seen from the example, the parser performs three types of steps depending on whether the top of the stack is a nonterminal, a terminal or the special symbol **$**:
 
@@ -175,6 +173,14 @@ As can be seen from the example, the parser performs three types of steps depend
 
 These steps are repeated until the parser stops, and then it will have either completely parsed the input and written a [leftmost derivation](https://en.wikipedia.org/wiki/Context-free_grammar#Derivations_and_syntax_trees) to the output stream or it will have reported an error.
 
-## Constructing an LL(1) parsing table
+### Constructing an LL(1) parsing table
 
 In order to fill the **parsing table**, we have to establish what grammar rule the parser should choose if it sees a nonterminal `A` on the top of its stack and a symbol `a` on its input stream. It is easy to see that such a rule should be of the form `A` → `w` and that the language corresponding to `w` should have at least one string starting with `a`. For this purpose we define the *First-set* of `w`, written here as **`Fi`** `(w)`, as the set of terminals that can be found at the start of some string in `w`, plus $\epsilon$ if the empty string also belongs to `w`. Given a grammar with the rules $A_1 \to w_1, \dots, A_n \to w_n$, we can compute the **`Fi`** `(wi)` and **`Fi`** `(Ai)` for every rule as follows:
+
+
+
+## LL grammar
+
+[LL grammar](https://en.wikipedia.org/wiki/LL_grammar)
+
+
