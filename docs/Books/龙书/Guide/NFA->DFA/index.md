@@ -776,5 +776,3 @@ ALL(*) 的前看：配置带栈 → 超出正则 → 不能预先确定化 → �
 8. **Parr, Harwell, Fisher.** *Adaptive LL(\*) Parsing: The Power of Dynamic Analysis.* OOPSLA 2014.
 9. **Cox, R.** *Regular Expression Matching Can Be Simple And Fast.* 2007. <https://swtch.com/~rsc/regexp/regexp1.html>（lazy DFA 的最佳通俗讲解）
 10. **Safra, S.** *On the Complexity of ω-Automata.* FOCS 1988.（Büchi 确定化）
-
-
