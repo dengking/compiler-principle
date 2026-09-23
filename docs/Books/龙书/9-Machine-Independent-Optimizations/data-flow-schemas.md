@@ -1,19 +1,24 @@
-# Data-flow Schemas
+# Data-flow Schemas(数据流模式)
 
-In compiler design, **data-flow schemas** usually refer to the general framework for computing information about a program by propagating (传播) facts (事实) through its **control-flow graph (CFG)**.
+In compiler design, **data-flow schemas** usually refer to the **general framework** for computing information about a program by propagating (传播) facts (事实) through its **control-flow graph (CFG)**.
 
 They support analyses such as **reaching definitions**, live variables, available expressions, and constant propagation.
+
+> 翻译: 在编译器设计中，**数据流模式（data-flow schemas）** 通常指代一套通用框架：沿着**控制流图（CFG）**传播事实信息，以此计算程序的相关信息。
+> 该框架支持多种分析，包括**到达 - 定值**、活跃变量、可用表达式以及**常量传播**。
 
 ## 1. Basic Framework
 
 For each basic block $B$, maintain:
 
-- **IN[B]**: facts true immediately before the block.
-- **OUT[B]**: facts true immediately after the block.
-- **Transfer function** $f_B$: how the block changes those facts.
+- **IN[B]**: *facts* true immediately before the block.
+- **OUT[B]**: *facts* true immediately after the block.
+- **Transfer function** $f_B$: how the block changes those *facts*.
 - **Merge operator**: how **facts** from multiple **control-flow paths** are combined.
 
 The analysis repeatedly updates these values until reaching a **fixed point**—no value changes.
+
+> iterative method
 
 ## 2. Forward Data-flow Schema
 
