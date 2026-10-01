@@ -57,4 +57,23 @@ ANTLR v4 automatically rewrites **left-recursive rules** such as `expr` into **n
 
 ANTLR v4 is exactly what I want in a **parser generator**, so I can finally get back to the problem I was originally trying to solve in the 1980s. Now, if I could just remember what that was.
 
+## 环境准备
+
+`.zshrc` 
+
+```
+# ANTLR4 语法测试工具 TestRig（《The Definitive ANTLR 4 Reference》install 章节的 grun 别名）
+alias grun='java org.antlr.v4.gui.TestRig'
+```
+
+`.zshenv` 
+
+```
+export ANTLR4_TOOLS_ANTLR_VERSION=4.13.2
+
+# ANTLR 4 (《The Definitive ANTLR 4 Reference》示例): 工具 jar 与运行时 classpath
+export ANTLR4_JAR="$HOME/.m2/repository/org/antlr/antlr4/4.13.2/antlr4-4.13.2-complete.jar"
+export CLASSPATH=".:$ANTLR4_JAR"
+```
+
 
