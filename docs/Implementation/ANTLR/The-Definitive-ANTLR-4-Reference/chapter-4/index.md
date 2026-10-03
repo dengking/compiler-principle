@@ -606,7 +606,7 @@ The visitor and listener mechanisms work very well and promote the **separation 
 
 ### Embedding Arbitrary Actions in a Grammar
 
-We can compute values or print things out on-the-fly during parsing if we don’t want the overhead of building a **parse tree**. On the other hand, it means embedding arbitrary code within the expression grammar, which is harder; we have to understand the effect of the actions on the parser and where to position those actions.
+We can compute values or print things out on-the-fly during parsing if we don’t want the overhead of building a **parse tree**. On the other hand, it means embedding arbitrary code within the **expression grammar**, which is harder; we have to understand the effect of the **actions** on the parser and where to position those actions.
 
 To demonstrate actions embedded in a grammar, let’s build a program that prints out a specific column from rows of data. This comes up all the time for me because people send me text files from which I need to grab, say, the name or email column. For our purposes, let’s use the following data:
 
@@ -625,5 +625,154 @@ Matching this kind of input is pretty simple grammatically.
 file : (row NL)+ ; // NL is newline token: '\r'? '\n'
 row  : STUFF+ ;
 ```
+
+It gets mucked up, though, when we add actions. We need to create a constructor so that we can pass in the column number we want (counting from 1), and we need an action inside the `(...)`+ loop in rule row.
+
+> 翻译: 不过，一旦加入**动作（action）**，事情就会变得复杂。我们需要定义一个构造函数，用来传入目标列号（从 1 开始计数），并且要在`row`规则的`(...)`+ 循环内部嵌入一段动作代码。
+
+> tour/Rows.g4
+
+```antlr
+grammar Rows;
+
+@parser::members { // add members to generated RowsParser
+    int col;
+    public RowsParser(TokenStream input, int col) { // custom constructor
+        this(input);
+        this.col = col;
+    }
+}
+
+file: (row NL)+ ;
+
+row
+locals [int i=0]
+    : ( STUFF
+        {
+            $i++;
+            if ( $i == col ) System.out.println($STUFF.text);
+        }
+      )+
+    ;
+
+TAB : '\t' -> skip ;   // match but don't pass to the parser
+NL  : '\r'? '\n' ;    // match and pass to the parser
+STUFF: ~[\t\r\n]+ ;   // match any chars except tab, newline
+```
+
+The STUFF lexical rule matches anything that's not a tab or newline, which means we can have **space characters** in a column.
+
+A suitable main program should be looking pretty familiar by now. The only thing different here is that we're passing in a column number to the parser using a **custom constructor** and telling the parser not to build a tree.
+
+> tour/Col.java
+
+```java
+RowsLexer lexer = new RowsLexer(input);
+CommonTokenStream tokens = new CommonTokenStream(lexer);
+int col = Integer.valueOf(args[0]);
+RowsParser parser = new RowsParser(tokens, col); // pass column number!
+parser.setBuildParseTree(false); // don't waste time building a tree
+parser.file(); // parse
+```
+
+There are a lot of details in there that we'll explore in Chapter 10, **Attributes** and **Actions**, on page 175. For now, actions are code snippets surrounded by curly braces. The **members action** injects that code into the member area of the generated parser class. The action within rule row accesses `$i`, the **local variable** defined with the `locals` clause. It also uses `$STUFF.text` to get the text for the most recently matched STUFF token.
+
+Here's the build and test sequence, one test per column:
+
+```shell
+$ antlr4 -no-listener Rows.g4  # don't need the listener
+$ javac Rows*.java Col.java
+$ java Col 1 < t.rows           # print out column 1, reading from file t.rows
+```
+
+```
+parrt
+tombu
+bke
+```
+
+```shell
+$ java Col 2 < t.rows
+```
+
+```
+Terence Parr
+Tom Burns
+Kevin Edgar
+```
+
+```shell
+$ java Col 3 < t.rows
+```
+
+```
+101
+020
+008
+```
+
+These actions extract and print values matched by the parser, but they don’t alter the **parse** itself. Actions can also finesse how the parser recognizes input phrases. In the next section, we’ll take the concept of **embedded actions** one step further.
+
+### Altering the Parse with Semantic Predicates
+
+Until we get to Chapter 11, Altering the Parse with Semantic Predicates, on page 189, we can demonstrate the power of **semantic predicates** with a simple example. Let’s look at a grammar that reads in sequences of integers. The trick is that part of the input specifies how many integers to group together. We don’t know until runtime how many integers to match. Here’s a sample input file:
+
+> 翻译: 在第 11 章《利用语义谓词修改解析过程》（第 189 页）之前，我们先用一个简单示例展示**语义谓词（semantic predicates）**的能力。我们来看一门文法，用于读取整数序列。关键点在于：输入中的一部分数据指定了每组需要包含多少个整数。在运行时之前，我们无法预知需要匹配多少个整数。下面是一份输入样例文件：
+
+> tour/t.data
+
+```
+2 9 10 3 1 2 3
+```
+
+The first number says to match the two subsequent numbers, 9 and 10. The 3 following the 10 says to match three more as a sequence. Our goal is a grammar called Data that groups 9 and 10 together and then 1, 2, and 3 like this:
+
+```shell
+$ antlr4 -no-listener Data.g4
+$ javac Data*.java
+$ grun Data file -tree t.data
+```
+
+```
+(file (group 2 (sequence 9 10)) (group 3 (sequence 1 2 3)))
+```
+
+The parse tree clearly identifies the groups.
+
+![](groups.png)
+
+The key in the following **Data grammar** is a special Boolean-valued action called a **semantic predicate**: `{$i<=$n}?`. That predicate evaluates to true until we surpass the number of integers requested by the sequence rule parameter n. False predicates make the associated alternative "disappear" from the grammar and, hence, from the generated parser. In this case, a false predicate makes the `(...)`* loop terminate and return from rule sequence.
+
+> 翻译: 下面这份**Data文法**的核心是一种特殊的布尔型动作，称为**语义谓词（semantic predicate）**：`{$i<=$n}?`。只要尚未达到`sequence`规则参数`n`所要求的整数个数，该谓词的求值结果就为真。当谓词结果为假时，对应的备选分支会从文法中“消失”，自然也不会出现在生成的解析器中。在本例中，谓词为假会终止`(...)`*循环，并从`sequence`规则返回。
+
+> tour/Data.g4
+
+```antlr
+grammar Data;
+
+file : group+ ;
+
+group: INT sequence[$INT.int] ;
+
+sequence[int n]
+locals [int i = 1;]
+    : ( {$i<=$n}? INT {$i++;} )*  // match n integers
+    ;
+
+INT : [0-9]+ ;              // match integers
+WS  : [ \t\n\r]+ -> skip ;  // toss out all whitespace
+```
+
+Visually, the internal grammar representation of rule sequence used by the parser looks something like this:
+
+![](DFA.png)
+
+The scissors and dashed line indicate that the predicate can snip that path, leaving the parser with only one choice: the path to the exit.
+
+> 翻译: 剪刀和虚线表示：该谓词可以剪断这条路径，让解析器只剩下唯一选择 —— 走向出口的那条分支。
+
+Most of the time we won’t need such micromanagement, but it’s nice to know we have a weapon for handling pathological parsing problems.
+
+During our tour so far, we’ve focused on parsing features, but there is a lot of interesting stuff going on at the **lexical level**. Let’s take a look.
 
 
