@@ -775,4 +775,203 @@ Most of the time we won’t need such micromanagement, but it’s nice to know w
 
 During our tour so far, we’ve focused on parsing features, but there is a lot of interesting stuff going on at the **lexical level**. Let’s take a look.
 
+## 4.5 Cool Lexical Features
 
+ANTLR has three great token-related features that are worth demonstrating in our tour:
+
+First, we'll see how to deal with formats like XML that have different lexical structures (inside and outside tags) in the same file. 
+
+Next, we'll learn how to insert a field into a Java class by tweaking the input stream. It'll show how to generate output that is very similar to the input with minimal effort. 
+
+Lastly, we'll see how ANTLR parsers can ignore whitespace and comments without having to throw them out.
+
+### Island Grammars: Dealing with Different Formats in the Same File
+
+All the sample input files we've seen so far contain a single language, but there are common file formats that contain multiple languages. For example, the `@author` tags and so on inside Java document comments follow a mini language; everything outside the comment is Java code. Template engines such as StringTemplate³ and Django⁴ have a similar problem. They have to treat all of the text surrounding the template expressions differently. These are often called **island grammars**.
+
+> 翻译: 到目前为止，我们见到的所有样例输入文件都只包含一种语言，但存在很多常见文件格式，其中内嵌了多种语言。例如，Java 文档注释里的`@author`标签等内容遵循一套小型语言规范；注释之外的全部内容则是 Java 代码。StringTemplate、Django 这类模板引擎也面临类似问题：它们需要对模板表达式周围的文本做差异化处理。这类文法通常被称为**岛状文法（island grammars）**。
+
+ANTLR provides a well-known lexer feature called **lexical modes** that lets us deal easily with files containing mixed formats. The basic idea is to have the lexer switch back and forth between modes when it sees special **sentinel character sequences**.
+
+> 翻译: ANTLR 提供了一项知名的词法分析器特性，叫做**词法模式（lexical modes）**，借助它我们可以轻松处理包含多种混合格式的文件。其核心思路是：当词法分析器读到特殊的**哨兵字符序列（sentinel character sequences）**时，在不同模式之间来回切换。
+
+XML is a good example. An **XML parser** treats everything other than tags and entity references (such as `&pound;`) as text chunks. When the lexer sees `<`, it switches to "inside" mode and switches back to the **default mode** when it sees `>` or `/>`. The following grammar demonstrates how this works. We'll explore this in more detail in Chapter 12, Wielding Lexical Black Magic, on page 203.
+
+> tour/XMLLexer.g4
+
+```antlr
+lexer grammar XMLLexer;
+
+// Default "mode": Everything OUTSIDE of a tag
+OPEN        : '<'           -> pushMode(INSIDE) ;
+COMMENT     : '<!--' .*? '-->' -> skip ;
+EntityRef   : '&' [a-z]+ ';' ;
+TEXT        : ~('<'|'&')+ ;         // match any 16 bit char minus < and &
+
+// ---------------- Everything INSIDE of a tag ----------------
+mode INSIDE;
+CLOSE       : '>'           -> popMode ; // back to default mode
+SLASH_CLOSE : '/>'          -> popMode ;
+EQUALS      : '=' ;
+STRING      : '"' .*? '"' ;
+SlashName   : '/' Name ;
+Name        : ALPHA (ALPHA|DIGIT)* ;
+S           : [ \t\r\n]     -> skip ;
+
+fragment
+ALPHA       : [a-zA-Z] ;
+
+fragment
+DIGIT       : [0-9] ;
+```
+
+Let's use the following XML file as a sample input to that grammar:
+
+> tour/t.xml
+
+```
+<tools>
+        <tool name="ANTLR">A parser generator</tool>
+</tools>
+```
+
+Here's how to do a build and launch the test rig:
+
+```
+$ antlr4 XMLLexer.g4
+$ javac XML*.java
+$ grun XML tokens -tokens t.xml
+```
+
+```
+[@0,0:0='<',<1>,1:0]
+[@1,1:5='tools',<10>,1:1]
+[@2,6:6='>',<5>,1:6]
+[@3,7:8='\n\t',<4>,1:7]
+[@4,9:9='<',<1>,2:1]
+[@5,10:13='tool',<10>,2:2]
+[@6,15:18='name',<10>,2:7]
+[@7,19:19='=',<7>,2:11]
+[@8,20:26='"ANTLR"',<8>,2:12]
+[@9,27:27='>',<5>,2:19]
+[@10,28:45='A parser generator',<4>,2:20]
+[@11,46:46='<',<1>,2:38]
+[@12,47:51='/tool',<9>,2:39]
+[@13,52:52='>',<5>,2:44]
+[@14,53:53='\n',<4>,2:45]
+[@15,54:54='<',<1>,3:0]
+[@16,55:60='/tools',<9>,3:1]
+[@17,61:61='>',<5>,3:7]
+[@18,62:62='\n',<4>,3:8]
+[@19,63:62='<EOF>',<-1>,4:9]
+```
+
+Each line of that output represents a token and contains the **token index**, the start and stop character, the **token text**, the **token type**, and finally the line and character position within the line. This tells us how the **lexer** tokenized the input.
+
+> 翻译: 输出结果中的每一行代表一个词法符号（token），包含词法符号索引、起止字符位置、符号文本、符号类型，最后还有行号以及该行内的字符偏移位置。这组信息展示了词法分析器是如何对输入进行分词的。
+
+On the test rig command line, the XML tokens sequence is normally a **grammar name** followed by the **start rule**. In this case, we use the grammar name followed by special rule name `tokens` to tell the test rig it should run the **lexer** but not the **parser**. Then, we use test rig option `-tokens` to print out the list of matched tokens.
+
+Knowledge of the token stream flowing from the **lexer** to the **parser** can be pretty useful. For example, some translation problems are really just tweaks of the input. We can sometimes get away with altering the original token stream rather than generating completely new output.
+
+> 翻译: 理解从**词法分析器（lexer）**流向**解析器（parser）**的词元流是十分有用的。例如，部分代码转换问题本质上只需要对输入做小幅修改。有些场景下，我们可以直接修改原始词元流，而不用生成全新的输出，以此简化实现。
+
+### Rewriting the Input Stream
+
+Let's build a tool that processes Java source code to insert serialization identifiers, `serialVersionUID`, for use with `java.io.Serializable` (like Eclipse does automatically). We want to avoid implementing every listener method in a `JavaListener` interface, generated from a Java grammar by ANTLR, just to capture the text and print it back out. It's easier to insert the appropriate constant field into the original token stream and then print out the altered input stream. No fuss, no muss.
+
+> 翻译: 我们来开发一个工具，用来处理 Java 源代码，自动插入序列化标识`serialVersionUID`，供`java.io.Serializable`使用（效果类似 Eclipse 自动生成该字段）。我们不想仅仅为了读取文本并原样输出，就去实现 ANTLR 根据 Java 文法生成的`JavaListener`接口里的全部监听器方法。更简便的做法是：在原始词元流中插入对应的常量字段，然后输出修改后的输入流。简单省事，干净利落。
+
+Our main program looks exactly the same as the one in `ExtractInterfaceTool.java` from Section 4.3, Building a Translator with a Listener, on page 42 except that we print the token stream out when the listener has finished (highlighted with an arrow).
+
+> tour/InsertSerialID.java
+
+```java
+ParseTreeWalker walker = new ParseTreeWalker(); // create standard walker
+InsertSerialIDListener extractor = new InsertSerialIDListener(tokens);
+walker.walk(extractor, tree); // initiate walk of tree with listener
+
+// print back ALTERED stream
+> System.out.println(extractor.rewriter.getText());
+```
+
+To implement the listener, we need to trigger an insertion when we see the start of a class.
+
+> tour/InsertSerialIDListener.java
+
+```java
+import org.antlr.v4.runtime.TokenStream;
+import org.antlr.v4.runtime.TokenStreamRewriter;
+
+public class InsertSerialIDListener extends JavaBaseListener {
+    TokenStreamRewriter rewriter;
+    public InsertSerialIDListener(TokenStream tokens) {
+        rewriter = new TokenStreamRewriter(tokens);
+    }
+}
+
+@Override
+public void enterClassBody(JavaParser.ClassBodyContext ctx) {
+    String field = "\n\tpublic static final long serialVersionUID = 1L;";
+    rewriter.insertAfter(ctx.start, field);
+}
+```
+
+The key is the `TokenStreamRewriter` object that knows how to give altered views of a token stream without actually modifying the stream. It treats all of the manipulation methods as "instructions" and queues them up for lazy execution when traversing the token stream to render it back as text. The rewriter executes those instructions every time we call `getText()`.
+
+Let's build and test the listener on the `Demo.java` test file we used before.
+
+```
+$ antlr4 Java.g4
+$ javac InsertSerialID*.java Java*.java
+$ java InsertSerialID Demo.java
+```
+
+```java
+import java.util.List;
+import java.util.Map;
+public class Demo {
+    public static final long serialVersionUID = 1L;
+    void f(int x, String y) { }
+    int[ ] g(/*no args*/) { return null; }
+    List<Map<String, Integer>>[] h() { return null; }
+}
+```
+
+With only a few lines of code, we were able to tweak a Java class definition without disturbing anything outside of our insertion point. This strategy is very effective for the general problem of source code instrumentation or refactoring. The `TokenStreamRewriter` is a powerful and extremely efficient means of manipulating a token stream.
+
+One more lexical goodie before finishing our tour involves a mundane issue but one that is a beast to solve without a general scheme like ANTLR's token channels.
+
+> 翻译: 在结束本章概览之前，再介绍一项实用的词法特性。它要解决的问题本身很普通，但如果没有 ANTLR 的词元通道这类通用机制，实现起来会非常棘手。
+
+### Sending Tokens on Different Channels
+
+The Java interface extractor we looked at earlier magically preserves whitespace and comments in method signatures such as the following:
+
+> 翻译: 前面我们介绍的 Java 接口提取工具，可以神奇地保留方法签名中的空白符与注释
+
+```java
+int[ ] g(/*no args*/) { return null; }
+```
+
+Traditionally, this has been a nasty requirement to fulfill. For most grammars, comments and whitespace are things the **parser** can ignore. If we don't want to explicitly allow whitespace and comments all over the place in a grammar, we need the lexer to throw them out. Unfortunately, that means the whitespace and comments are inaccessible to application code and any subsequent processing steps. The secret to preserving but ignoring comments and whitespace is to send those tokens to the parser on a "hidden channel." The **parser** tunes to only a single channel and so we can pass anything we want on the other channels. Here's how the Java grammar does it:
+
+> 翻译: 传统方案下，这是一项很难实现的需求。对于大多数文法而言，**解析器（parser）**可以忽略注释与空白符。如果不想在文法的各处显式声明允许空白符和注释，就需要让词法分析器直接丢弃它们。但这样做会带来一个问题：应用代码以及后续所有处理流程，都无法再获取这些空白符和注释。
+> 
+> 想要做到**保留注释、空白符，同时又让解析器忽略它们**，秘诀就是把这类词元通过**隐藏通道（hidden channel）**传给解析器。解析器只会监听单个通道，因此我们可以在其他通道中传递任意内容。下面是 Java 文法的实现方式：
+
+> tour/Java.g4
+
+```antlr
+COMMENT
+    : '/*' .*? '*/'    -> channel(HIDDEN) // match anything between /* and */
+    ;
+WS  : [ \r\t\u000C\n]+ -> channel(HIDDEN)
+    ;
+```
+
+The `-> channel(HIDDEN)` is a lexer command like the `-> skip` we discussed before. In this case, it sets the channel number of these tokens so that it's ignored by the **parser**. The **token stream** still maintains the original sequence of tokens but skips over the off-channel tokens when feeding the parser.
+
+With these lexical features out of the way, we can wrap up our ANTLR tour. This chapter covered all of the major elements that make ANTLR easy to use and flexible. We didn't cover any of the details, but we saw ANTLR in action solving some small but real problems. We got a feel for grammar notation. We implemented **visitors** and **listeners** that let us calculate and translate without embedding actions in the grammar. We also saw that, sometimes, embedded actions are exactly what we want in order to satisfy our inner control freak. And, finally, we looked at some cool things we can do with ANTLR lexers and token streams.
+
+It's time to slow down our pace and revisit all of the concepts explored in this chapter with the goal of learning all of the details. Each chapter in the next part of the book will take us another step toward becoming language implementers. We'll start by learning ANTLR notation and figuring out how to derive grammars from examples and language reference manuals. Once we have those fundamentals, we'll build some grammars for real-world languages and then learn the details of the tree listeners and visitors we just raced through. After that, we'll move on to some virtuoso topics in Part III.
