@@ -86,14 +86,10 @@ Without going into too much detail, let’s look at some of the key elements of 
 
 We’ll tackle all of this stuff in detail when we get to Chapter 5, *Designing Grammars*, on page 57.
 
-
-
 One of ANTLR v4’s most significant new features is its ability to handle (most kinds of) **left-recursive rules**. A **left-recursive rule** is one that invokes itself at the start of an alternative. For example, in this grammar, rule `expr` has alternatives on lines 11 and 12 that recursively invoke `expr` on the left edge. Specifying arithmetic expression notation this way is dramatically easier than what we’d need for the typical **top-down parser** strategy. In that strategy, we’d need multiple rules, one for each operator precedence level. For more on this feature, see Section 5.4, *Dealing with Precedence, Left Recursion, and Associativity*, on page 69.
 
 > 翻译: ANTLR v4最重要的新特性之一，就是**可以处理大多数类型的左递归规则**。左递归规则指：在某个候选分支的开头调用自身。例如在本文的文法中，`expr`规则第11、12行的分支，就在最左侧递归调用`expr`。
 > 用这种方式定义算术表达式，远比传统自顶向下语法分析方案简单得多。传统方案中，需要为每一级运算符优先级单独写一条规则。更多相关内容，参见5.4节《处理优先级、左递归与结合性》（69页）。
-
-
 
 The notation for the token definitions should be familiar to those with regular expression experience. We’ll look at lots of lexical (token) rules in Chapter 6, *Exploring Some Real Grammars*, on page 83. The only unusual syntax is the `-> skip` operation on the WS whitespace rule. It’s a **directive**(指令) that tells the lexer to match but throw out whitespace. (Every possible input character must be matched by at least one **lexical rule**.) We avoid tying the grammar to a specific target language by using formal ANTLR notation instead of an arbitrary code snippet in the grammar that tells the lexer to skip.
 
@@ -125,6 +121,32 @@ It’s OK to develop and test grammars using the test rig, but ultimately we’l
 > 
 > 语法树，类似于语法分析器识别输入时产生的函数调用树。（ANTLR会为每一条规则生成一个对应的函数。）可以使用TestRig开发、测试文法，但最终我们还是要把ANTLR生成的语法分析器集成到应用程序中。
 
+```markdown
+tour/ExprJoyRide.java
+```
 
+```java
+import org.antlr.v4.runtime.*;
+import org.antlr.v4.runtime.tree.*;
+import java.io.FileInputStream;
+import java.io.InputStream;
+
+public class ExprJoyRide {
+    public static void main(String[] args) throws Exception {
+        String inputFile = null;
+        if ( args.length>0 ) inputFile = args[0];
+        InputStream is = System.in;
+        if ( inputFile!=null ) is = new FileInputStream(inputFile);
+        ANTLRInputStream input = new ANTLRInputStream(is);
+        ExprLexer lexer = new ExprLexer(input);
+        CommonTokenStream tokens = new CommonTokenStream(lexer);
+        ExprParser parser = new ExprParser(tokens);
+        ParseTree tree = parser.prog(); // parse; start at prog
+        System.out.println(tree.toStringTree(parser)); // print tree as text
+    }
+}
+```
+
+Lines 7..11 create an input stream of characters for the **lexer**. Lines 12..14 create the **lexer** and **parser** objects and a token stream "pipe" between them. Line 15 actually launches the parser. (Calling a rule method is like invoking 
 
 
