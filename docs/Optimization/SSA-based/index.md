@@ -21,12 +21,8 @@ Vanilla SSA（标准SSA，strict SSA），满足两条核心性质：
 
 > 当控制流交汇时，在基本块开头插入 $\phi$ 函数（phi-node），用来选择来自不同前驱分支的值。
 
-
-
 #### 关键要点
 
 1. Vanilla SSA = **Maximal SSA**，是理论研究的基准版本；用支配前沿（dominance frontier）算法构建。
 2. $\phi$ 函数**只允许放在基本块的起始位置**（vanilla SSA强制要求）。
 3. 现代工业编译器（LLVM）**不是vanilla SSA**，是剪枝后的SSA，减少phi开销。
-
-
