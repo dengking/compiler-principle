@@ -1,5 +1,5 @@
 nav:
     - Introduction: index.md
-    - Reaching-definition: Reaching-definition
+    - Use-define-chain&Define-use-chain: Use-define-chain&Define-use-chain
     - Common-subexpression-elimination: Common-subexpression-elimination
     

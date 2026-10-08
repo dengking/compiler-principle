@@ -45,3 +45,7 @@ $$
 The in–state of a block is the set of variables that are live at the start of the block. Its out–state is the set of variables that are live at the end of it. The out–state is the union of the in–states of the block's successors. The transfer function of a statement is applied by making the variables that are written dead, then making the variables that are read live.
 
 
+
+
+
+
