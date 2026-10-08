@@ -310,4 +310,36 @@ For other data-flow problems, properties may change at points that are not varia
 
 Part **II** of this textbook gives a comprehensive treatment of some SSA-based data-flow analysis.
 
+## 1.5 About the rest of this book
+
+In this chapter, we have introduced the notion of SSA. The rest of this book presents various aspects of SSA, from the pragmatic perspective of compiler engineers and code analysts. The ultimate goals of this book are:
+
+1. To demonstrate clearly the *benefits* of SSA-based analysis.
+2. To dispel the *fallacies* that prevent people from using SSA.
+   1. 翻译: 破除阻碍人们使用 SSA 的那些误区
+
+This section gives pointers to later parts of the book that deal with specific topics.
+
+## 1.5.1 Benefits of SSA
+
+SSA imposes a strict discipline on variable naming in programs, so that each variable has a unique definition. Fresh variable names are introduced at **assignment statements**, and **control-flow merge points**. This serves to simplify the structure of variable *def-use* relationships (see Section 2.1) and live ranges (see Section 2.3), which underpin **data-flow analysis**. Part II of this book focus on data-flow analysis using SSA. 
+
+> 翻译: SSA 对程序中的变量命名施加了一套严格约束，使得每个变量只有唯一的定义点。新的变量名在赋值语句处以及控制流汇合点处被引入。这样做的目的是简化变量的 “定义 — 使用”（def-use）关系（见 2.1 节）和活跃区间（live range）的结构（见 2.3 节），而这两者正是数据流分析（data-flow analysis）的基础。本书第二部分（Part II）将聚焦于基于 SSA 的数据流分析。
+
+There are three major advantages to SSA:
+
+**Compile time benefit.** Certain compiler optimizations can be more efficient when operating on SSA programs, since **referential transparency** means that **data-flow information** can be associated directly with variables, rather than with variables at each **program point**. We have illustrated this simply with the **non-zero value analysis** in Section 1.3.
+
+**Compiler development benefit.** Program analyses and transformations can be easier to express in SSA. This means that compiler engineers can be more productive, in writing new compiler passes, and debugging existing passes. For example, the **dead code elimination pass** in GCC 4.x, which relies on an underlying SSA-based intermediate representation, takes only 40% as many lines of code as the equivalent pass in GCC 3.x, which does not use SSA. The SSA version of the pass is simpler, since it relies on the general-purpose, factored-out, data-flow propagation engine.
+
+> 翻译: 程序分析与变换用 SSA 表达起来更为容易。这意味着编译器工程师在编写新编译遍（pass）以及调试已有遍时，能获得更高的产出效率。例如，GCC 4.x 中的死代码消除遍（dead code elimination pass）依托于底层的基于 SSA 的中间表示，其代码行数仅为未使用 SSA 的 GCC 3.x 中同功能遍的 40%。由于该 SSA 版本遍依赖的是一个通用的、被抽取出来的数据流传播引擎，因此它更为简洁。
+
+**Program runtime benefit.** Conceptually, any analysis and optimization that can be done under SSA form can also be done identically out of SSA form. Because of the compiler development mentioned above, several compiler optimizations are shown to be more effective when operating on programs in SSA form. These include the class of control-flow insensitive analyses, e.g. [112].
+
+
+
+## 1.5.2 Fallacies(误区) about SSA
+
+Some people believe that SSA is too cumbersome to be an effective program representation. This book aims to convince the reader that such a concern is unnecessary, given the application of suitable techniques. The table below presents some common myths about SSA, and references in this first part of the book contain material to dispell these myths.<sup>*</sup>
+
 
