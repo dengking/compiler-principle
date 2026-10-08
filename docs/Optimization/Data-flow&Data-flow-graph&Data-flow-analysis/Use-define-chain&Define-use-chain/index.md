@@ -1,8 +1,8 @@
 # Use-define chain&Definition-use chain
 
-Use-define=use of define，需要知道自己被哪些使用
+Use-define=use's define，需要知道自己被哪些使用
 
-Definition-use=definition of use，需要知道使用的variable是源自哪里
+Definition-use=definition's use，需要知道使用的variable是源自哪里
 
 wikipedia [Use-define chain](https://en.wikipedia.org/wiki/Use-define_chain) 
 
@@ -11,8 +11,6 @@ Within [computer science](https://en.wikipedia.org/wiki/Computer_science "Comput
 A counterpart of a *UD Chain* is a **definition-use chain** (or **DU chain**), which consists of a definition *D* of a variable and all the uses *U* reachable from that definition without any other intervening definitions.[[3]](https://en.wikipedia.org/wiki/Use-define_chain#cite_note-leiss-3)
 
 Both UD and DU chains are created by using a form of [static code analysis](https://en.wikipedia.org/wiki/Static_code_analysis "Static code analysis") known as [data flow analysis](https://en.wikipedia.org/wiki/Data_flow_analysis "Data flow analysis"). Knowing the use-def and def-use chains for a program or subprogram is a prerequisite for many [compiler optimizations](https://en.wikipedia.org/wiki/Compiler_optimization "Compiler optimization"), including [constant propagation](https://en.wikipedia.org/wiki/Constant_propagation "Constant propagation") and [common subexpression elimination](https://en.wikipedia.org/wiki/Common_subexpression_elimination "Common subexpression elimination").
-
-
 
 ## wikipedia [Reaching definition](https://en.wikipedia.org/wiki/Reaching_definition)
 
@@ -36,3 +34,9 @@ d3 : x := y
 ### As analysis
 
 The similarly named **reaching definitions** is a [data-flow analysis](https://en.wikipedia.org/wiki/Data-flow_analysis "Data-flow analysis") which statically determines which definitions may reach a given point in the code. Because of its simplicity, it is often used as the canonical example of a data-flow analysis in textbooks. The data-flow confluence operator used is set union, and the analysis is forward flow. Reaching definitions are used to compute [use-def chains](https://en.wikipedia.org/wiki/Use-def_chain "Use-def chain").
+
+## Combination
+
+它们是一种combination:
+
+> Because of its single definition per variable property, SSA form simplifies **def-use** and **use-def chains** in several ways. First, SSA form simplifies **def-use chains** as it combines the information as early as possible. This is illustrated by Figure 2.1 where the **def-use chain** in the non-SSA program requires as many merges as there are uses of $x$, whereas the corresponding SSA form allows early and more efficient combination.
