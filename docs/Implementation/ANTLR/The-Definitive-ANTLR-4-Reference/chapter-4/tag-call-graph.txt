@@ -1,1 +1,13 @@
 
+### 译文
+
+---
+#### 术语注释
+1. **Data grammar**：Data文法（本例自定义的ANTLR文法文件名）
+2. **semantic predicate**：语义谓词，ANTLR特色机制，运行时布尔条件，动态控制文法分支是否可用
+3. **Boolean-valued action**：布尔型动作
+4. **rule parameter**：规则参数（ANTLR可给文法规则传参）
+5. **alternative**：备选分支（文法中同一规则下不同匹配选项）
+6. **generated parser**：生成的解析器（ANTLR自动生成的递归下降解析代码）
+
+需要把这段译文合并进双语Markdown笔记吗？
