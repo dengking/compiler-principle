@@ -32,7 +32,7 @@ For forward propagation, since **def-use chains** are precisely the reverse of *
 
 ## 2.2 Minimality(极小性)
 
-SSA construction is a two-phase process: placement of $\phi$-functions, followed by renaming. The goal of the first phase is to generate code that fulfills the **single reaching-definition property**, as already outlined. **Minimality** is an additional property relating to code that has $\phi$-functions inserted, but prior to renaming; Chapter 3 describes the classical SSA construction algorithm in detail, while this section focuses primarily on describing the minimality property.
+SSA construction is a two-phase process: placement of $\phi$-functions, followed by renaming. The goal of the first phase is to generate code that fulfills the **single reaching-definition property**, as already outlined. **Minimality** is an additional property relating to code that has $\phi$-functions inserted, but prior to renaming; Chapter 3 describes the classical **SSA construction algorithm** in detail, while this section focuses primarily on describing the **minimality property**.
 
 > 翻译: 静态单赋值（SSA）构造分为两个阶段：$\phi$函数插入，随后进行重命名。第一阶段的目标是生成满足**单一定义到达**性质的代码，前文已经简述过该性质。**极小性**是针对已经插入$\phi$函数、但尚未执行重命名的代码的另一项性质；第3章会详细介绍经典SSA构造算法，本节重点阐述极小性这一性质。
 
@@ -51,83 +51,3 @@ Intuitively, a **join set** corresponds to the placement of $\phi$-functions. In
 We are not aware of any optimizations that require a strict enforcement of **minimality property**. However, placing $\phi$-functions only at the **join sets** can be done easily using a simple **topological traversal** of the CFG as described in Chapter 4, Section 4.4. Classical techniques place $\phi$-functions of a variable $v$ at $\mathscr{J}(D_v \cup \{r\})$, with $r$ the entry node of the CFG. There are good reasons for that as we will explain further. Finally, as explained in Chapter 3, Section 3.3 for reducible flow graphs, some copy-propagation engines can easily turn a non-minimal SSA code into a minimal one.
 
 > 翻译: 目前尚没有任何优化算法要求必须严格满足极小性。不过，仅在汇合集位置插入$\phi$函数，可以通过对CFG做简单的拓扑序遍历轻松实现，详见第4章4.4节。经典算法会在$\mathscr{J}(D_v \cup \{r\})$处放置变量$v$的$\phi$函数，其中$r$是控制流图的入口节点，后续会解释这么做的原因。最后，正如第3章3.3节针对可归约流图所介绍的：部分拷贝传播引擎可以很方便地把**非极小SSA代码**转换为极小SSA代码。
-
-### 补充说明: 如何理解 SSA 中的 **Minimality（极小性）**
-
-极小性是静态单赋值（SSA）形式的一项**优化性质**，约束的是**φ函数插入阶段**，核心可以概括为：**在保证SSA核心语义（单一定义到达）成立的前提下，插入的φ函数数量尽可能少**。
-
-下面从定位、定义、数学刻画、工程意义四个层面拆解：
-
----
-
-#### 1. 性质的定位
-
-SSA 构造分为两个阶段：
-
-1. **φ函数插入**：在控制流汇合处插入φ函数，保证「单一定义到达」
-2. **变量重命名**：给每个定义分配唯一变量名，完成SSA转换
-
-极小性只约束第①阶段：它描述的是**已经插入φ函数、但尚未重命名**的代码的性质；它的前提是代码已经满足**单一定义到达性质**，极小性是在这个基础上，进一步要求φ函数的数量达到最小。
-
----
-
-#### 2. 核心含义
-
-通俗来说就是：**只在“不得不插”的地方插φ函数，能不插就不插**。
-
-- 如果不插φ函数，就会破坏“单一定义到达” → 必须插
-- 如果插了不影响正确性，但属于多余冗余 → 极小性要求去掉
-
-它回答的问题是：满足SSA语义，最少需要多少个φ函数？
-
----
-
-#### 3. 数学刻画：汇合集（Join Set）
-
-原文用**汇合节点、汇合集**给了极小性严格的数学定义，这也是整节的核心：
-
-##### （1）汇合节点（Join Node）
-
-如果一个基本块是**至少两条不同控制流路径的首个交汇点**（两条路径只在这里相遇，之前没有其他公共基本块），它就是这两个路径起点的汇合节点。
-
-- 本质：只有控制流汇合的“第一个路口”，才会出现「同一个变量的两个不同定义同时到达」的情况，才需要φ函数来合并多个定义。
-
-##### （2）汇合集 $\boldsymbol{\mathscr{J}(S)}$
-
-给定一个基本块集合 $S$，$S$ 中所有两两组合的汇合节点，共同构成 $S$ 的汇合集，记作 $\mathscr{J}(S)$。
-
-##### （3）和φ函数插入的对应关系
-
-设变量 $v$ 的所有原始定义所在的基本块构成集合 $D_v$，那么：
-
-> **只需要在 $\boldsymbol{\mathscr{J}(D_v)}$ 包含的每个基本块中，插入变量 $v$ 的φ函数，就刚好满足单一定义到达，并且φ函数的数量是最少的。**
-
-这里解释原文的关键等式 $\boldsymbol{\mathscr{J}(S\cup \mathscr{J}(S))=\mathscr{J}(S)}$：
-插入的φ函数本身也是变量的定义点，直觉上好像要对“新定义点”再求一次汇合集、再插一轮φ函数；但数学上可以证明：「原始定义点 + 插入的φ函数」的汇合集，和原始定义点的汇合集**完全相等**。
-→ 结论：只需要对原始定义点求一次汇合集，插入φ函数就足够了，不需要递归迭代，这个集合就是φ函数的最小插入位置集合。
-
----
-
-#### 4. 工程实践上的意义
-
-1. **非强制要求**：没有任何编译器优化必须严格满足极小性。多插入冗余φ函数不会破坏正确性，只会增加一点开销。
-2. **实现简单**：仅在汇合集插入φ函数，通过对控制流图（CFG）做拓扑遍历就能完成，算法成本很低。
-3. **经典算法的微调**：传统SSA构造算法会把CFG入口节点 $r$ 也加入集合，在 $\mathscr{J}(D_v \cup \{r\})$ 处插φ函数，后续章节会解释原因（通常是为了统一处理未初始化变量、简化算法逻辑）。
-4. **可后期转换**：对于可归约流图，即使先生成了非极小的SSA代码，通过**拷贝传播（copy propagation）**优化，也可以很容易地将其转化为极小SSA。
-
----
-
-#### 5. 通俗例子
-
-```c
-if (cond) {
-    x = 1;  // 变量x的定义1
-} else {
-    x = 2;  // 变量x的定义2
-}
-print(x); // 使用x
-```
-
-- 两个定义分别在 if、else 分支块中，它们的汇合节点是 if-else 之后的合并块（print 所在块）
-- 满足极小性：**只在这个合并块插入1个φ函数**即可
-- 非极小的冗余做法：在 if 块内部、else 块内部也插入φ函数，对正确性没有帮助，属于多余
