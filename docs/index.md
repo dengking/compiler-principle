@@ -1,9 +1,19 @@
-# compiler-principle
+# compiler
 
 
 
+- 前端
 
-zhihu [近十年来编译器有哪些关键的技术进步？](https://www.zhihu.com/question/23719466)
+- 终端
 
+- 后端
+
+前端: [dragon book](https://en.wikipedia.org/wiki/Dragon_Book) ，除了本书的理论知识，你还需要补充编程实践以达到理论和实现相结合的目的:
+
+- ANTLR
+
+- LLVM
+
+- 独立实现
 
 
