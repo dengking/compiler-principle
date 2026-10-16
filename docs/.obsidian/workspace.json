@@ -11,10 +11,14 @@
             "id": "cc6719705e103552",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
+              "type": "markdown",
+              "state": {
+                "file": "front-end/index.md",
+                "mode": "source",
+                "source": false
+              },
               "icon": "lucide-file",
-              "title": "新标签页"
+              "title": "index"
             }
           }
         ]
@@ -95,7 +99,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "front-end/Parse-tree&syntax-tree/index.md",
+                "file": "front-end/index.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -114,7 +118,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "front-end/Parse-tree&syntax-tree/index.md",
+                "file": "front-end/index.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
@@ -157,7 +161,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "front-end/Parse-tree&syntax-tree/index.md",
+                "file": "front-end/index.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -184,9 +188,20 @@
       "bases:新建数据库": false
     }
   },
-  "active": "37796b877fa77914",
+  "active": "cc6719705e103552",
   "lastOpenFiles": [
-    "front-end/Normal-form/index.md",
+    "front-end/name-binding/index.md",
+    "front-end/index.md",
+    "front-end/lexer",
+    "front-end/TODO.md",
+    "front-end/parser/Epsilon-empty-string.md",
+    "front-end/semantic-analysis/formal-semantic/Cambridge-semantics.pdf",
+    "front-end/parser/parsing-algorithm/index.md",
+    "front-end/parser",
+    "front-end/未命名.md",
+    "front-end/grammar/structure-is-semantics/expression-grammar-associativity-and-precedence.md",
+    "front-end/parser/parse-tree&syntax-tree/index.md",
+    "front-end/normal-form/index.md",
     "front-end/grammar/structure-is-semantics/if-then-else-grammar.md",
     "front-end/grammar/structure-is-semantics/left-recursion-recursion.md",
     "front-end/grammar/structure-is-semantics/index.md",
@@ -198,8 +213,6 @@
     "front-end/grammar/recursive-grammar/tag-left-recursive.md",
     "front-end/grammar",
     "front-end/grammar/structure-is-semantics/限制结构.md",
-    "front-end/Epsilon-empty-string.md",
-    "front-end/index.md",
     "index.md",
     "applications/index.md",
     "books&courses/index.md",
@@ -210,9 +223,6 @@
     "impls/parser-generator/lex&yacc/index.md",
     "Implementation/parser-generator/lex/index.md",
     "Implementation/parser-generator/lex",
-    "back-end/index.md",
-    "mid.md",
-    "middle-end/index.md",
-    "Front.md"
+    "back-end/index.md"
   ]
 }

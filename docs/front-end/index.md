@@ -1,4 +1,8 @@
 # Front end
+architecture
+lexer
+parser
+semantic-analysis
 
 前端: [dragon book](https://en.wikipedia.org/wiki/Dragon_Book) ，除了本书的理论知识，你还需要补充编程实践以达到理论和实现相结合的目的:
 

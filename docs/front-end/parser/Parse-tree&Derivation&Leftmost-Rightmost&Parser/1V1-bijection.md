@@ -2,7 +2,7 @@
 
 > **本文要解决的问题**：龙书 4.2.4 节末尾有这样一句结论——"每一棵语法分析树都唯一对应一个最左推导和一个最右推导"（*It is not hard to show that every parse tree has associated with it a unique leftmost and a unique rightmost derivation*）。书中把它一句带过，但这条性质恰恰是 LL 与 LR 两大类解析算法的理论前提。本文补足其中的推理：为什么"推导 → 语法树"是多对一的，固定替换顺序如何恢复双射，以及这个结论对解析器意味着什么。
 > 
-> 原文与笔记见 [4.2 Context-Free Grammars](front-end/Parse-tree&Derivation&Leftmost-Rightmost&Parser/index.md)。
+> 原文与笔记见 [4.2 Context-Free Grammars](front-end/parser/Parse-tree&Derivation&Leftmost-Rightmost&Parser/index.md)。
 
 ---
 
@@ -401,7 +401,7 @@ flowchart TD
 
 ## 延伸阅读
 
-- [4.2 Context-Free Grammars 原文与笔记](front-end/Parse-tree&Derivation&Leftmost-Rightmost&Parser/index.md) —— 推导的定义、归纳构造、二义性（4.2.3～4.2.5）
+- [4.2 Context-Free Grammars 原文与笔记](front-end/parser/Parse-tree&Derivation&Leftmost-Rightmost&Parser/index.md) —— 推导的定义、归纳构造、二义性（4.2.3～4.2.5）
 - [表达式文法如何"编码"结合性与优先级](../4.1-Introduction/expression-grammar-associativity-and-precedence.md) —— 用分层文法消除歧义的具体机制
 - [结构即语义：从表达式文法到类型系统的一条主线](../4.1-Introduction/structure-is-semantics.md) —— "用结构约束消除自由度"这一思路的系统展开
 - Aho, Lam, Sethi, Ullman. *Compilers: Principles, Techniques, and Tools*（龙书）：<https://suif.stanford.edu/dragonbook/>
