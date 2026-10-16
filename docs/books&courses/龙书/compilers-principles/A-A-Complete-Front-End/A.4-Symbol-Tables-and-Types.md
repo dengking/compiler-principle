@@ -35,7 +35,7 @@ Functions numeric (lines 11-14) and max (lines 15-20) are useful for type conver
 17) else if ( p1 == Type.Float || p2 == Type.Float ) return Type.Float;
 18) else if ( p1 == Type.Int || p2 == Type.Int ) return Type.Int;
 19) else return Type.Char;
-Conversions are allowed between the \numeric" types Type.Char, Type.Int, and Type.Float. When an arithmetic operator is applied to two numeric types, the result has the \max" of the two types.
+Conversions are allowed between the “numeric” types Type.Char, Type.Int, and Type.Float. When an arithmetic operator is applied to two numeric types, the result has the “max” of the two types.
 Arrays are the only constructed type in the source language. The call to super on line 7 sets field width, which is essential for address calculations. It also sets lexeme and tok to default values that are not used.
 1) package symbols; // File Array.java
 2) import lexer.*;

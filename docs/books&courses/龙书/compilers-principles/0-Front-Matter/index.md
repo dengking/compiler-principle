@@ -36,7 +36,7 @@ MA 02116, fax your request to 617-848-7047, or e-mail at http://www.pearsoned.co
 1 2 3 4 5 6 7 8 9 10—CW—10 09 08 07 06
 Preface
 In the time since the 1986 edition of this book, the world of compiler design has changed significantly. Programming languages have evolved to present new compilation problems. Computer architectures offer a variety of resources of which the compiler designer must take advantage. Perhaps most interestingly, the venerable technology of code optimization has found use outside compilers.
-It is now used in tools that find bugs in software, and most importantly, find security holes in existing code. And much of the \front-end" technology |
+It is now used in tools that find bugs in software, and most importantly, find security holes in existing code. And much of the “front-end” technology |
 grammars, regular expressions, parsers, and syntax-directed translators | are still in wide use.
 Thus, our philosophy from previous versions of the book has not changed.
 We recognize that few readers will build, or even maintain, a compiler for a major programming language. Yet the models, theory, and algorithms associated with a compiler can be applied to a wide range of problems in software design and software development. We therefore emphasize problems that are most commonly encountered in designing a language processor, regardless of the source language or target machine.
@@ -59,11 +59,11 @@ Courses from material in this book have been taught at Columbia, Harvard, and St
 At Stanford, a one-quarter introductory course covers roughly the material in Chapters 1 through 8, although there is an introduction to global code optimization from Chapter 9. The second compiler course covers Chapters 9 through 12, plus the more advanced material on garbage collection from Chapter 7. Students use a locally developed, Java-based system called Joeq for implementing data-flow analysis algorithms.
 PREFACE vii
 Prerequisites
-The reader should possess some \computer-science sophistication," including at least a second course on programming, and courses in data structures and discrete mathematics. Knowledge of several different programming languages is useful.
+The reader should possess some “computer-science sophistication,” including at least a second course on programming, and courses in data structures and discrete mathematics. Knowledge of several different programming languages is useful.
 Exercises
 The book contains extensive exercises, with some for almost every section. We indicate harder exercises or parts of exercises with an exclamation point. The hardest exercises have a double exclamation point.
 Gradiance On-Line Homeworks
-A feature of the new edition is that there is an accompanying set of on-line homeworks using a technology developed by Gradiance Corp. Instructors may assign these homeworks to their class, or students not enrolled in a class may enroll in an \omnibus class" that allows them to do the homeworks as a tutorial
+A feature of the new edition is that there is an accompanying set of on-line homeworks using a technology developed by Gradiance Corp. Instructors may assign these homeworks to their class, or students not enrolled in a class may enroll in an “omnibus class” that allows them to do the homeworks as a tutorial
 (without an instructor-created class). Gradiance questions look like ordinary questions, but your solutions are sampled. If you make an incorrect choice you are given specific advice or feedback to help you correct your solution. If your instructor permits, you are allowed to try again, until you get a perfect score.
 A subscription to the Gradiance service is offered with all new copies of this text sold in North America. For more information, visit the Addison-Wesley web site www.aw.com/gradiance or send email to computing@aw.com.
 Support on the World Wide Web

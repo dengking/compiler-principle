@@ -91,7 +91,7 @@ At most one instruction is generated if either t or f is the special label 0 (ag
 15) else if( t != 0 ) emit("if " + test + " goto L" + t);
 16) else if( f != 0 ) emit("iffalse " + test + " goto L" + f);
 17) else ; // nothing since both t and f fall through
-For another use of emitjumps, consider the code for class Access. The source language allows boolean values to be assigned to identifiers and array elements, so a boolean expression can be an array access. Class Access has method gen for generating \normal" code and method jumping for jumping code. Method jumping (line 11) calls emitjumps after reducing this array access to a temporary. The constructor (lines 6-9) is called with a flattened array a, an index i, and the type p of an element in the flattened array. Type checking is done during array address calculation.
+For another use of emitjumps, consider the code for class Access. The source language allows boolean values to be assigned to identifiers and array elements, so a boolean expression can be an array access. Class Access has method gen for generating “normal” code and method jumping for jumping code. Method jumping (line 11) calls emitjumps after reducing this array access to a temporary. The constructor (lines 6-9) is called with a flattened array a, an index i, and the type p of an element in the flattened array. Type checking is done during array address calculation.
 1) package inter; // File Access.java
 2) import lexer.*; import symbols.*;
 3) public class Access extends Op {

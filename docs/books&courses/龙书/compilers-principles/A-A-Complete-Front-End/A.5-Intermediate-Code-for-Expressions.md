@@ -20,10 +20,10 @@ Expression constructs are implemented by subclasses of Expr. Class Expr has fiel
 4) public Token op;
 5) public Type type;
 6) Expr(Token tok, Type p) { op = tok; type = p; }
-Method gen (line 7) returns a \term" that can fit the right side of a threeaddress instruction. Given expression E = E1+E2, method gen returns a term x1+x2, where x1 and x2 are addresses for the values of E1 and E2, respectively.
+Method gen (line 7) returns a “term” that can fit the right side of a threeaddress instruction. Given expression E = E1+E2, method gen returns a term x1+x2, where x1 and x2 are addresses for the values of E1 and E2, respectively.
 The return value this is appropriate if this object is an address; subclasses of
 Expr typically reimplement gen.
-Method reduce (line 8) computes or \reduces" an expression down to a single address; that is, it returns a constant, an identifier, or a temporary name.
+Method reduce (line 8) computes or “reduces” an expression down to a single address; that is, it returns a constant, an identifier, or a temporary name.
 Given expression E, method reduce returns a temporary t holding the value of
 E. Again, this is an appropriate return value if this object is an address.
 We defer discussion of methods jumping and emitjumps (lines 9-18) until

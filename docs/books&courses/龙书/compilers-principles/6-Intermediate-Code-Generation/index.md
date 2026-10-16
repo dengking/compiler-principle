@@ -27,7 +27,7 @@ Generator front end back end
 Figure 6.1: Logical structure of a compiler front end
 Static checking includes type checking, which ensures that operators are applied to compatible operands. It also includes any syntactic checks that remain after parsing. For example, static checking assures that a break-statement in
 C is enclosed within a while-, for-, or switch-statement; an error is reported if such an enclosing statement does not exist.
-The approach in this chapter can be used for a wide range of intermediate representations, including syntax trees and three-address code, both of which were introduced in Section 2.8. The term \three-address code" comes from instructions of the general form x = y op z with three addresses: two for the operands y and z and one for the result x.
+The approach in this chapter can be used for a wide range of intermediate representations, including syntax trees and three-address code, both of which were introduced in Section 2.8. The term “three-address code” comes from instructions of the general form x = y op z with three addresses: two for the operands y and z and one for the result x.
 In the process of translating a program in a given source language into code for a given target machine, a compiler may construct a sequence of intermediate representations, as in Fig. 6.2. High-level representations are close to the source language and low-level representations are close to the target machine. Syntax trees are high level; they depict the natural hierarchical structure of the source program and are well suited to tasks like static type checking.
 High Level Low Level
 Source Target

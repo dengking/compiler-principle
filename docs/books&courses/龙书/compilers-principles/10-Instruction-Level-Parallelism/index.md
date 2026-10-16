@@ -12,7 +12,7 @@
 
 Instruction-Level
 Parallelism
-Every modern high-performance processor can execute several operations in a single clock cycle. The \billion-dollar question" is how fast can a program be run on a processor with instruction-level parallelism? The answer depends on:
+Every modern high-performance processor can execute several operations in a single clock cycle. The “billion-dollar question” is how fast can a program be run on a processor with instruction-level parallelism? The answer depends on:
 1. The potential parallelism in the program.
 2. The available parallelism on the processor.
 3. Our ability to extract parallelism from the original sequential program.

@@ -141,7 +141,7 @@ The parsing of arithmetic and boolean expressions is similar. In each case, an a
 153) else if( look.tag == '!' ) {
 154) Token tok = look; move(); return new Not(tok, unary());
 156) else return factor();
-The rest of the code in the parser deals with \factors" in expressions. The auxiliary procedure offset generates code for array address calculations, as discussed in Section 6.4.3.
+The rest of the code in the parser deals with “factors” in expressions. The auxiliary procedure offset generates code for array address calculations, as discussed in Section 6.4.3.
 158) Expr factor() throws IOException {
 159) Expr x = null;
 160) switch( look.tag ) {
