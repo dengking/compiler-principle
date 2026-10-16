@@ -1,4 +1,7 @@
 # Front end
+
+
+[[front-end/grammar/index|grammar]] 
 architecture
 lexer
 parser
