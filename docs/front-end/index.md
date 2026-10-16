@@ -7,12 +7,17 @@ lexer
 parser
 semantic-analysis
 
-前端: [dragon book](https://en.wikipedia.org/wiki/Dragon_Book) ，除了本书的理论知识，你还需要补充编程实践以达到理论和实现相结合的目的:
+前端理论知识: 
+- [dragon book](https://en.wikipedia.org/wiki/Dragon_Book) 
+ 
+ 
+前端项目:
 
-- ANTLR
+- [[impls/parser-generator/ANTLR/index|ANTLR]]: 学习前端的非常好的工具
 
 - LLVM
 
-- 独立实现
+
+
 
 

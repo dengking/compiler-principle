@@ -11,10 +11,12 @@
             "id": "d2c8a807c2672e52",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
-              "icon": "lucide-file",
-              "title": "新标签页"
+              "type": "pdf",
+              "state": {
+                "file": "impls/parser-generator/ANTLR/The-Definitive-ANTLR-4-Reference/a91ace57a8c4c8cdd9f1663e1051bf93.pdf"
+              },
+              "icon": "lucide-file-text",
+              "title": "a91ace57a8c4c8cdd9f1663e1051bf93"
             }
           }
         ]
@@ -79,7 +81,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 453.24609375
+    "width": 237.7421875
   },
   "right": {
     "id": "62db58767f8dd99f",
@@ -95,6 +97,7 @@
             "state": {
               "type": "backlink",
               "state": {
+                "file": "impls/parser-generator/ANTLR/The-Definitive-ANTLR-4-Reference/a91ace57a8c4c8cdd9f1663e1051bf93.pdf",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -163,12 +166,11 @@
               "title": "大纲"
             }
           }
-        ],
-        "currentTab": 2
+        ]
       }
     ],
     "direction": "horizontal",
-    "width": 300
+    "width": 200
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -183,40 +185,41 @@
   },
   "active": "d2c8a807c2672e52",
   "lastOpenFiles": [
-    "front-end/index.md",
-    "front-end/grammar/index.md",
-    "front-end/architecture/index.md",
-    "front-end/TODO.md",
-    "index.md",
-    "front-end/name-binding/index.md",
-    "front-end/lexer",
-    "front-end/parser/Epsilon-empty-string.md",
-    "front-end/semantic-analysis/formal-semantic/Cambridge-semantics.pdf",
-    "front-end/parser/parsing-algorithm/index.md",
-    "front-end/parser",
-    "front-end/未命名.md",
-    "front-end/grammar/structure-is-semantics/expression-grammar-associativity-and-precedence.md",
-    "front-end/parser/parse-tree&syntax-tree/index.md",
-    "front-end/normal-form/index.md",
-    "front-end/grammar/structure-is-semantics/if-then-else-grammar.md",
-    "front-end/grammar/structure-is-semantics/left-recursion-recursion.md",
-    "front-end/grammar/structure-is-semantics/index.md",
-    "front-end/grammar/recursive-grammar/index.md",
-    "front-end/grammar/recursive-grammar/tag-recursive-grammar~left-recursive.md",
-    "books&courses/龙书/2-A-Simple-Syntax-Directed-Translator/2.4-Parsing/tag-recursive-grammar~left-recursive.txt",
-    "books&courses/龙书/2-A-Simple-Syntax-Directed-Translator/2.2-Syntax-Definition/tag-deadloop死循环/tag-recursive-grammar~left-recursive.txt",
-    "books&courses/龙书/4-Syntax-Analysis/4.3-Writing-a-Grammar/tag-recursive-grammar~left-recursive=左递归.txt",
-    "front-end/grammar/recursive-grammar/tag-left-recursive.md",
-    "front-end/grammar",
-    "front-end/grammar/structure-is-semantics/限制结构.md",
-    "applications/index.md",
-    "books&courses/index.md",
-    "impls/parser-generator/index.md",
-    "impls/parser-generator/tag-parser-generator~LALR(1).txt",
-    "Implementation/parser-generator/tag-parser-generator~LALR(1).md",
-    "impls/parser-generator/ANTLR/index.md",
-    "impls/parser-generator/lex&yacc/index.md",
-    "Implementation/parser-generator/lex/index.md",
-    "Implementation/parser-generator/lex"
+    "books&courses/龙书/compilers-principles/index.md",
+    "books&courses/龙书/compilers-principles/0-Front-Matter/index.md",
+    "books&courses/龙书/compilers-principles/0-Front-Matter",
+    "books&courses/龙书/compilers-principles/Index/index.md",
+    "books&courses/龙书/compilers-principles/Index",
+    "books&courses/龙书/compilers-principles/B-Finding-Linearly-Independent-Solutions/index.md",
+    "books&courses/龙书/compilers-principles/B-Finding-Linearly-Independent-Solutions",
+    "books&courses/龙书/compilers-principles/A-A-Complete-Front-End/A.6-Jumping-Code-for-Boolean-Expressions.md",
+    "books&courses/龙书/compilers-principles/A-A-Complete-Front-End/A.7-Intermediate-Code-for-Statements.md",
+    "books&courses/龙书/compilers-principles/A-A-Complete-Front-End/A.9-Creating-the-Front-End.md",
+    "books&courses/龙书/compilers-principles/A-A-Complete-Front-End/index.md",
+    "books&courses/龙书/compilers-principles/A-A-Complete-Front-End/A.8-Parser.md",
+    "books&courses/龙书/compilers-principles/A-A-Complete-Front-End/A.1-The-Source-Language.md",
+    "books&courses/龙书/compilers-principles/A-A-Complete-Front-End/A.5-Intermediate-Code-for-Expressions.md",
+    "books&courses/龙书/compilers-principles/A-A-Complete-Front-End/A.3-Lexical-Analyzer.md",
+    "books&courses/龙书/compilers-principles/A-A-Complete-Front-End/A.4-Symbol-Tables-and-Types.md",
+    "books&courses/龙书/compilers-principles/A-A-Complete-Front-End/A.2-Main.md",
+    "books&courses/龙书/compilers-principles/A-A-Complete-Front-End",
+    "books&courses/龙书/compilers-principles/12-Interprocedural-Analysis/index.md",
+    "books&courses/龙书/compilers-principles/12-Interprocedural-Analysis/12.8-Summary-of-Chapter-12.md",
+    "books&courses/龙书/compilers-principles/12-Interprocedural-Analysis/12.9-References-for-Chapter-12.md",
+    "books&courses/龙书/compilers-principles/12-Interprocedural-Analysis/12.7-Datalog-Implementation-by-BDD's.md",
+    "books&courses/龙书/compilers-principles/12-Interprocedural-Analysis/12.6-Context-Sensitive-Pointer-Analysis.md",
+    "books&courses/龙书/compilers-principles/12-Interprocedural-Analysis/12.5-Context-Insensitive-Interprocedural-Analysis.md",
+    "books&courses/龙书/compilers-principles/12-Interprocedural-Analysis/12.4-A-Simple-Pointer-Analysis-Algorithm.md",
+    "books&courses/龙书/compilers-principles/12-Interprocedural-Analysis/12.3-A-Logical-Representation-of-Data-Flow.md",
+    "books&courses/龙书/compilers-principles/12-Interprocedural-Analysis/12.2-Why-Interprocedural-Analysis.md",
+    "books&courses/龙书/compilers-principles/12-Interprocedural-Analysis/12.1-Basic-Concepts.md",
+    "books&courses/龙书/compilers-principles/12-Interprocedural-Analysis",
+    "books&courses/龙书/compilers-principles/11-Optimizing-for-Parallelism-and-Locality/index.md",
+    "books&courses/龙书/compilers-principles/11-Optimizing-for-Parallelism-and-Locality/11.9-Pipelining.md",
+    "books&courses/龙书/compilers-principles/11-Optimizing-for-Parallelism-and-Locality",
+    "books&courses/龙书/compilers-principles/10-Instruction-Level-Parallelism",
+    "books&courses/龙书/compilers-principles/9-Machine-Independent-Optimizations",
+    "books&courses/龙书/compilers-principles/8-Code-generation",
+    "books&courses/龙书/compilers-principles/7-Run-Time-Environments"
   ]
 }
