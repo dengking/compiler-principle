@@ -587,7 +587,7 @@ flowchart LR
 ### 本仓库内相关文章
 
 - [表达式文法如何"编码"结合性与优先级：拆解经典的 E-T-F 文法](expression-grammar-associativity-and-precedence.md) —— 本文的直接出发点
-- [4.1 Introduction 原文与笔记](front-end/Structure-is-semantics/index.md) —— 龙书 4.1 节，含 4.1 / 4.2 / 4.3 三个代表性文法
+- [4.1 Introduction 原文与笔记](front-end/grammar/structure-is-semantics/index.md) —— 龙书 4.1 节，含 4.1 / 4.2 / 4.3 三个代表性文法
 - [语法制导：SDD、SDT 与翻译方案](Syntax-directed-translation&SDD&SDT.md) —— 属性文法的声明式与过程式两种形式
 - [SDD 循环依赖判定：为什么"即使 P = NP 也难解"](NP-hard-to-cycle-detection-in-dependency-graph.md) —— "用结构保证性质"取代"检测性质"的经典案例
 
