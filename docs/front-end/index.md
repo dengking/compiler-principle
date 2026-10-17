@@ -16,8 +16,5 @@ semantic-analysis
 - [[impls/LLVM/index|LLVM]] 
 
 
-## syntax & semantic
-front end关注点: syntax和semantic
-
-syntax: context-free
-semantic: context-sensitive
+## syntax VS semantic
+[[front-end/syntax-VS-semantic/index]]

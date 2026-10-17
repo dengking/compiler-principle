@@ -4,21 +4,21 @@
     "type": "split",
     "children": [
       {
-        "id": "df703b0cbb831e84",
+        "id": "56b58a74dc37bf7a",
         "type": "tabs",
         "children": [
           {
-            "id": "c0479b74be1887bd",
+            "id": "24a5929ae263bd3c",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "front-end/index.md",
+                "file": "semantic/claude-动态语义.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "index"
+              "title": "claude-动态语义"
             }
           }
         ]
@@ -99,7 +99,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "front-end/index.md",
+                "file": "semantic/claude-动态语义.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -118,7 +118,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "front-end/index.md",
+                "file": "semantic/claude-动态语义.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
@@ -161,6 +161,7 @@
             "state": {
               "type": "outline",
               "state": {
+                "file": "semantic/claude-动态语义.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -169,7 +170,8 @@
               "title": "大纲"
             }
           }
-        ]
+        ],
+        "currentTab": 4
       }
     ],
     "direction": "horizontal",
@@ -186,43 +188,43 @@
       "bases:新建数据库": false
     }
   },
-  "active": "c0479b74be1887bd",
+  "active": "24a5929ae263bd3c",
   "lastOpenFiles": [
+    "semantic/tag-as-if-rule~side-channel-attack=侧信道攻击.txt",
+    "semantic/tag-as-if-rule~Side-Channel Attack=.txt",
+    "semantic/tag-as-if-rule.txt",
+    "semantic/tag-as-if-rule-exempt-copy-elision.txt",
+    "semantic/tag-abstract-machine=model-of-computation~semantic_副本.txt",
+    "semantic/tag-semantic~dynamic-semantic.txt",
+    "semantic/tag-semantic~axiomatic-semantic=公理语义_副本.txt",
+    "semantic/index.md",
+    "semantic/claude-动态语义.md",
+    "front-end/semantic-analysis/tag-multi-pass.md",
+    "semantic/tag-semantic~axiomatic-semantic=公理语义.txt",
+    "semantic/tag-semantic~denotational-semantic=指称语义_副本.txt",
+    "semantic/tag-semantic~denotational-semantic=指称语义.txt",
+    "semantic/tag-semantic~operational-semantic=操作语义_副本.txt",
+    "front-end/syntax-VS-semantic/index.md",
+    "semantic/formal-semantic/index.md",
+    "formal-semantic/index.md",
+    "front-end/semantic-analysis/formal-semantic/index.md",
+    "front-end/index.md",
+    "middle-end/IR/index.md",
+    "front-end/semantic-analysis/index.md",
+    "front-end/architecture/symbol-table/index.md",
+    "front-end/syntax-analysis/index.md",
+    "front-end/architecture/symbol-table/tag-type-table=类型表.md",
+    "front-end/architecture/symbol-table/tag-llvm-clang~IdentifierTable.md",
+    "front-end/semantic-analysis/tag-HM=Hindley–Milner-type-system~parametric-polymorphism.md",
+    "未命名.md",
     "index.md",
     "impls/LLVM/index.md",
-    "front-end/index.md",
     "front-end/architecture/index.md",
     "books&courses/龙书/1-Introduction/1.2-The-Structure-of-a-Compiler/index.md",
     "books&courses/龙书/1-Introduction/1.1-Language-Processors/index.md",
-    "front-end/architecture/symbol-table/index.md",
     "books&courses/龙书/1-Introduction/index.md",
     "front-end/syntax-analysis/tag-parser=syntax-analysis.md",
-    "front-end/syntax-analysis/index.md",
     "front-end/lexical-analysis/tag-lexer=lexical-analysis=analyzer=lexical-tokenization=词法分析=分词.md",
-    "books&courses/龙书/2-A-Simple-Syntax-Directed-Translator/2.1-Introduction/index.md",
-    "front-end/semantic-analysis/index.md",
-    "front-end/lexical-analysis/index.md",
-    "impls/parser-generator/ANTLR/index.md",
-    "impls/parser-generator/ANTLR/The-Definitive-ANTLR-4-Reference/a91ace57a8c4c8cdd9f1663e1051bf93.pdf",
-    "books&courses/龙书/2-A-Simple-Syntax-Directed-Translator/2.1-Introduction/tag-semantic=语义.txt",
-    "books&courses/龙书/2-A-Simple-Syntax-Directed-Translator/2.1-Introduction/tag-AST=abstract-syntax-tree=巴科斯范式.txt",
-    "books&courses/龙书/2-A-Simple-Syntax-Directed-Translator/2.1-Introduction/tag-BNF=Backus-Naur-Form.txt",
-    "books&courses/龙书/compilers-principles/index.md",
-    "books&courses/龙书/compilers-principles/0-Front-Matter/index.md",
-    "books&courses/龙书/compilers-principles/0-Front-Matter",
-    "books&courses/龙书/compilers-principles/Index/index.md",
-    "books&courses/龙书/compilers-principles/Index",
-    "books&courses/龙书/compilers-principles/B-Finding-Linearly-Independent-Solutions/index.md",
-    "books&courses/龙书/compilers-principles/B-Finding-Linearly-Independent-Solutions",
-    "books&courses/龙书/compilers-principles/A-A-Complete-Front-End/A.6-Jumping-Code-for-Boolean-Expressions.md",
-    "books&courses/龙书/compilers-principles/A-A-Complete-Front-End/A.7-Intermediate-Code-for-Statements.md",
-    "books&courses/龙书/compilers-principles/A-A-Complete-Front-End/A.9-Creating-the-Front-End.md",
-    "books&courses/龙书/compilers-principles/A-A-Complete-Front-End/index.md",
-    "books&courses/龙书/compilers-principles/A-A-Complete-Front-End/A.8-Parser.md",
-    "books&courses/龙书/compilers-principles/A-A-Complete-Front-End/A.1-The-Source-Language.md",
-    "books&courses/龙书/compilers-principles/A-A-Complete-Front-End/A.5-Intermediate-Code-for-Expressions.md",
-    "books&courses/龙书/compilers-principles/A-A-Complete-Front-End",
-    "books&courses/龙书/compilers-principles/12-Interprocedural-Analysis",
-    "books&courses/龙书/compilers-principles/11-Optimizing-for-Parallelism-and-Locality"
+    "books&courses/龙书/2-A-Simple-Syntax-Directed-Translator/2.1-Introduction/index.md"
   ]
 }
