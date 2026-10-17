@@ -1,17 +1,12 @@
 # LLVM
 
-
-
-## llvm [The LLVM Compiler Infrastructure](http://llvm.org/)
+## [The LLVM Compiler Infrastructure](http://llvm.org/)
 
 The primary sub-projects of LLVM are:
 
 1) The **LLVM Core** libraries
 
 2) **[Clang](http://clang.llvm.org/)** 
-
-
-
 
 
 ## 工程师的百宝箱
@@ -33,8 +28,6 @@ LeetCode后台使用clang进行santinizer:
 关于此，参见 Rust [Code generation](https://rustc-dev-guide.rust-lang.org/backend/codegen.html#code-generation) 。
 
 三、clang-format
-
-
 
 ## [**LLVM Download/Release Page**](https://releases.llvm.org/)
 

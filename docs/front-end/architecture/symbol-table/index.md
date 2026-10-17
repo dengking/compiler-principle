@@ -1,6 +1,6 @@
 # Symbol table
 
-Symbol table即符号表，在`Chapter-1-Introduction\1.2-The-Structure-of-a-Compiler.md`中提及了它，本章对它进行专门总结。
+Symbol table即符号表，在 [[books&courses/龙书/1-Introduction/1.2-The-Structure-of-a-Compiler/index|龙书#The-Structure-of-a-Compiler]] 中提及了它，本章对它进行专门总结。
 
 ## 龙书中涉及symbol table的章节
 
@@ -10,9 +10,9 @@ Symbol table即符号表，在`Chapter-1-Introduction\1.2-The-Structure-of-a-Com
 
 - 1.2.7 Symbol-Table Management
 
-- 2.7 Symbol Tables
+- [[books&courses/龙书/2-A-Simple-Syntax-Directed-Translator/2.7-Symbol-Tables/index|2.7 Symbol Tables]]
 
-- 5.2.5 Semantic Rules with Controlled Side Effects
+- [[books&courses/龙书/5-Syntax-Directed-Translation/5.2-Evaluation-Orders-for-SDD's/index|5.2.5 Semantic Rules with Controlled Side Effects]]
 
 ## What is symbol？
 
@@ -20,7 +20,7 @@ Symbol table即符号表，在`Chapter-1-Introduction\1.2-The-Structure-of-a-Com
 
 - [C++ `std` Symbol Index](http://en.cppreference.com/w/cpp/symbol_index) 
 
-## symbol table的重要价值
+## Symbol table的重要价值
 
 symbol table以结构化的方式存储着关于source code的信息。
 
