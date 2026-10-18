@@ -1,7 +1,6 @@
 # syntax VS semantic
 front end关注点: syntax和semantic
-syntax: context-free
-semantic: context-sensitive
+
 
 一句话:**Syntax 管"长什么样",Semantics 管"是什么意思"。** 但真正有价值的部分在于两者**在哪里分界、为什么分界、以及分界在哪里失效**——因为现实中的编译器几乎没法干净地把它们分成两层。
 
