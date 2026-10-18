@@ -75,15 +75,15 @@ factor → NUMBER | '(' expr ')' | IDENT
 
 典型内容:
 
-| 任务 | 例子 |
-|---|---|
-| 名字解析 | 每个标识符绑定到哪个声明 |
-| 类型检查 | 操作数类型是否相容 |
-| 类型推导 | `auto` / `var` / Hindley–Milner |
-| 可见性 | `private` / `pub` / 模块边界 |
-| 常量求值 | `constexpr`、数组维度、`case` 标签 |
-| 初始化检查 | Java 的 definite assignment |
-| 借用检查 | Rust 的生命周期与别名 |
+| 任务    | 例子                              |
+| ----- | ------------------------------- |
+| 名字解析  | 每个标识符绑定到哪个声明                    |
+| 类型检查  | 操作数类型是否相容                       |
+| 类型推导  | `auto` / `var` / Hindley–Milner |
+| 可见性   | `private` / `pub` / 模块边界        |
+| 常量求值  | `constexpr`、数组维度、`case` 标签      |
+| 初始化检查 | Java 的 definite assignment      |
+| 借用检查  | Rust 的生命周期与别名                   |
 
 **形式工具**:类型系统(推导规则)、属性文法、符号表、数据流分析。
 
