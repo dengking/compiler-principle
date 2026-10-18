@@ -1,9 +1,9 @@
-# Semantic analysis
-Sema=Semantic analysis=语义分析
+# Static semantic analysis
+Sema=Semantic analysis=语义分析，本文所讨论的是static semantic analysis
 ## What is semantic
 
 - [[books&courses/龙书/2-A-Simple-Syntax-Directed-Translator/2.1-Introduction/index|dragon-book#2.1 Introduction]]:  the **semantics** of the language defines what its programs mean; that is, what each program does when it executes.
-- [[front-end/syntax-VS-semantic/index]] 
+- [[syntax-VS-semantic]] 
 
 ## What Sema Does
 While the parser builds a syntactically valid [Abstract Syntax Tree (AST)](https://axion-resources.vercel.app/semantic-analysis/orchestrator), it doesn't know if variables exist(variable declared before use), if types match, or if operations are legal. Sema performs key **checks** and **transformations**: [[1](https://stackoverflow.com/questions/11510792/is-the-semantic-analysis-step-in-clang-an-essential-part-of-the-compiler)]

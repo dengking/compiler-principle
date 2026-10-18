@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "semantic/claude-动态语义.md",
+                "file": "impls/LLVM/middle-end/LLVM-IR/LLVM-IR-guide.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "claude-动态语义"
+              "title": "LLVM-IR-guide"
             }
           }
         ]
@@ -99,7 +99,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "semantic/claude-动态语义.md",
+                "file": "impls/LLVM/middle-end/LLVM-IR/LLVM-IR-guide.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -118,7 +118,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "semantic/claude-动态语义.md",
+                "file": "impls/LLVM/middle-end/LLVM-IR/LLVM-IR-guide.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
@@ -161,7 +161,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "semantic/claude-动态语义.md",
+                "file": "impls/LLVM/middle-end/LLVM-IR/LLVM-IR-guide.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -190,41 +190,41 @@
   },
   "active": "24a5929ae263bd3c",
   "lastOpenFiles": [
-    "semantic/tag-as-if-rule~side-channel-attack=侧信道攻击.txt",
+    "impls/LLVM/middle-end/LLVM-IR/tag-LLVM-IR~undef.md",
+    "impls/LLVM/middle-end/LLVM-IR/tag-LLVM-IR~poison_副本.md",
+    "impls/LLVM/middle-end/LLVM-IR/tag-latex~llbracket+rrbracket=⟦⟧.md",
+    "impls/LLVM/middle-end/LLVM-IR/LLVM-IR-guide.md",
+    "impls/LLVM/middle-end/LLVM-IR/index.md",
+    "impls/LLVM/middle-end/LLVM-IR/LLVM-IR-3-forms.md",
+    "3-layers-of-a-language-specification/dynamic-semantic/index.md",
+    "impls/LLVM/middle-end/LLVM-IR/tag-Wasm=WebAssembly.md",
+    "impls/LLVM/middle-end/LLVM-IR/tag-miscompilation.md",
+    "impls/LLVM/middle-end/LLVM-IR/tag-LLVM-IR~poison.md",
+    "impls/LLVM/middle-end/LLVM-IR/tag-形式化的推导规则.md",
+    "3-layers-of-a-language-specification/index.md",
+    "3-layers-of-a-language-specification/dynamic-semantic/claude-动态语义.md",
+    "impls/LLVM/middle-end/LLVM-IR/tag-LangRef=language-specification=语言规范~LLVM-IR~LLVM Language Reference Manual.md",
+    "impls/LLVM/MiddleEnd/LLVM-IR/tag-LangRef=language-specification=语言规范~LLVM Language Reference Manual.md",
+    "3-layers-of-a-language-specification/tag-LangRef=language-specification=语言规范.md",
+    "impls/LLVM/MiddleEnd/LLVM-IR/tag-LangRef=language-specification=语言规范.md",
+    "3-layers-of-a-language-specification/tag-LangRef.md",
+    "3-layers-of-a-language-specification/syntax-VS-semantic.md",
+    "未命名.md",
+    "front-end/syntax-analysis/index.md",
+    "front-end/static-semantic-analysis/index.md",
+    "3-layers-of-a-language-specification/dynamic-semantic/claude-静态语义与动态语义.md",
+    "index.md",
+    "3-layers-of-a-language-specification/dynamic-semantic/tag-miscompilation.txt",
+    "semantic/tag-refinement=精化_副本.txt",
+    "3-layers-of-a-language-specification/dynamic-semantic/tag-refinement=精化.txt",
+    "semantic/tag-semantic~operational-semantic=操作语义_副本.txt",
+    "3-layers-of-a-language-specification/dynamic-semantic/tag-as-if-rule~side-channel-attack=侧信道攻击.txt",
     "semantic/tag-as-if-rule~Side-Channel Attack=.txt",
     "semantic/tag-as-if-rule.txt",
     "semantic/tag-as-if-rule-exempt-copy-elision.txt",
     "semantic/tag-abstract-machine=model-of-computation~semantic_副本.txt",
-    "semantic/tag-semantic~dynamic-semantic.txt",
-    "semantic/tag-semantic~axiomatic-semantic=公理语义_副本.txt",
-    "semantic/index.md",
-    "semantic/claude-动态语义.md",
-    "front-end/semantic-analysis/tag-multi-pass.md",
-    "semantic/tag-semantic~axiomatic-semantic=公理语义.txt",
-    "semantic/tag-semantic~denotational-semantic=指称语义_副本.txt",
-    "semantic/tag-semantic~denotational-semantic=指称语义.txt",
-    "semantic/tag-semantic~operational-semantic=操作语义_副本.txt",
-    "front-end/syntax-VS-semantic/index.md",
-    "semantic/formal-semantic/index.md",
-    "formal-semantic/index.md",
-    "front-end/semantic-analysis/formal-semantic/index.md",
-    "front-end/index.md",
-    "middle-end/IR/index.md",
-    "front-end/semantic-analysis/index.md",
-    "front-end/architecture/symbol-table/index.md",
-    "front-end/syntax-analysis/index.md",
-    "front-end/architecture/symbol-table/tag-type-table=类型表.md",
-    "front-end/architecture/symbol-table/tag-llvm-clang~IdentifierTable.md",
-    "front-end/semantic-analysis/tag-HM=Hindley–Milner-type-system~parametric-polymorphism.md",
-    "未命名.md",
-    "index.md",
-    "impls/LLVM/index.md",
-    "front-end/architecture/index.md",
-    "books&courses/龙书/1-Introduction/1.2-The-Structure-of-a-Compiler/index.md",
-    "books&courses/龙书/1-Introduction/1.1-Language-Processors/index.md",
-    "books&courses/龙书/1-Introduction/index.md",
-    "front-end/syntax-analysis/tag-parser=syntax-analysis.md",
-    "front-end/lexical-analysis/tag-lexer=lexical-analysis=analyzer=lexical-tokenization=词法分析=分词.md",
-    "books&courses/龙书/2-A-Simple-Syntax-Directed-Translator/2.1-Introduction/index.md"
+    "3-layers-of-a-language-specification/dynamic-semantic/tag-semantic~dynamic-semantic.txt",
+    "front-end/static-semantic-analysis/tag-multi-pass.md",
+    "3-layers-of-a-language-specification/dynamic-semantic/formal-semantic/index.md"
   ]
 }

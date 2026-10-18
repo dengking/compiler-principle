@@ -17,4 +17,4 @@ semantic-analysis
 
 
 ## syntax VS semantic
-[[front-end/syntax-VS-semantic/index]]
+[[syntax-VS-semantic]]

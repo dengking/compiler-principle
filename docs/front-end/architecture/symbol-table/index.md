@@ -76,6 +76,6 @@ Symbol {
 2. `llvm_value` 那一行是前后端的缝合点。前端在符号表里给每个局部变量挂一个 `alloca`，所有读写都翻成 `load / store`；后续由 `mem2reg` 把它提升成 SSA 值。符号表在这里把"命名的可变变量"交给 IR，IR 再把它变成"单赋值的值" ——这就是为什么前端完全不需要自己插 φ。
 
 ## Sema&symbol table
-symbol table中的主要信息是由 [[front-end/semantic-analysis/index|Sema]] 维护生成的:
-- [[front-end/syntax-VS-semantic/index]]: 其中将symbol table归位Sema的输出 
-- [[front-end/semantic-analysis/index|Sema]]: Symbol Gathering功能
+symbol table中的主要信息是由 [[front-end/static-semantic-analysis/index|Sema]] 维护生成的:
+- [[syntax-VS-semantic]]: 其中将symbol table归位Sema的输出 
+- [[front-end/static-semantic-analysis/index|Sema]]: Symbol Gathering功能
