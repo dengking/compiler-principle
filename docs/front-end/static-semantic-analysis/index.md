@@ -26,6 +26,12 @@ While the parser builds a syntactically valid [Abstract Syntax Tree (AST)](https
 | 借用检查 (Rust)            | 生命周期与别名                               | 否(靠 MIR 数据流) |
 注意最后两类:**控制流类检查**不依赖符号表,而依赖 CFG。Java 的 definite assignment(JLS §16,"变量使用前必须在所有路径上被赋值")本质就是一个数据流分析——它和前面讨论的"单一定义到达"是同一个家族的问题,只是跑在 AST/CFG 上而不是 SSA 上。
 
+
+| 性质     | 工具                                |
+| ------ | --------------------------------- |
+| 类型、作用域 | 属性文法、类型系统、符号表                     |
+
+
 ---
 
 Examples in Real Compilers
