@@ -7,6 +7,12 @@ applications: [[applications/index|index]]
 
 theory&practice&implementation&application
 
+## Programming language
+[[3-layers-of-a-language-specification/index|语言规范的三层]]:
+- syntax: 语法
+- static semantic: 静态语义
+- dynamic semantic: 动态语义
+
 ## Compiler architecture
 
 | compiler组成部分 | 章节                             |
@@ -15,9 +21,3 @@ theory&practice&implementation&application
 | 中端           | [[middle-end/index\|index]]    |
 | 后端           | [[back-end/index\|index]]      |
 - [[books&courses/龙书/1-Introduction/1.1-Language-Processors/index|dragon-book#1.1-Language-Processors]] 
-
-## Programming language
-三层:
-- syntax: 形状
-- static semantic: 良构
-- dynamic semantic: 
