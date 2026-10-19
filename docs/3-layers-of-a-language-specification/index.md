@@ -348,4 +348,6 @@ UB 可以精确定义为:
 
 它不是 bug,是规范在语义层**主动留下的洞**,目的是换取优化空间。前面提过的 `add nsw` 溢出产生 poison、C 里有符号溢出是 UB,都是这个设计。这也是为什么"编译通过"从来不等于"程序正确"。
 
-
+## TODO
+还是按照3层的思路来进行编写。
+将 [[claude-静态语义与动态语义]] 和 本文融合，将静态语义的详细介绍放到[[front-end/static-semantic-analysis/index|static-semantic-analysis]]中。
