@@ -30,7 +30,7 @@ $$
 \underbrace{\text{Static Semantics}}_{\text{编译期可判定的良构性(Sema/类型检查)}} \;\longrightarrow\;
 \underbrace{\text{Dynamic Semantics}}_{\text{程序运行时做什么(语言规范定义,编译器据此优化)}}
 $$
-
+一句话:**Syntax 管"长什么样",Semantics 管"是什么意思"。
 
 一段代码必须**依次通过**三道关:
 
@@ -41,7 +41,6 @@ int x = y;             // ③ 挡在 static semantics(名字解析)
 int a[5]; a[10] = 1;   // ④ 三关全过 → dynamic semantics 说:UB
 ```
 
-一句话:**Syntax 管"长什么样",Semantics 管"是什么意思"。
 syntax: context-free
 static semantic: context-sensitive
 

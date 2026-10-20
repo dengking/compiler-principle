@@ -216,7 +216,7 @@ volatile int *reg = (volatile int*)0x1000;
 
 > **UB = 行为集合是全集 = 语义不作任何承诺。**
 
-它不是"会崩溃",也不是"结果随机"。它是**约束的缺失**。一旦触发 UB,从 $\llbracket P \rrbracket$ 里拿不到任何信息。
+它不是"会崩溃",也不是"结果随机"。它是**约束的缺失**。一旦触发 UB,从 $\lbrack\!\lbrack P \rbrack\!\rbrack$ 里拿不到任何信息。
 
 这解释了 UB 为何能被"利用":
 
@@ -246,9 +246,9 @@ $$
 
 落点:WebAssembly 官方规范、Rust MIR(Miri 直接实现它来检测 UB)、CompCert 的每层 IR、ISA 形式规范(RISC-V 的 Sail)。
 
-**(b) 指称语义** —— "它等于哪个数学函数"。把语句映射成状态上的部分函数 $\llbracket c\rrbracket : \Sigma \rightharpoonup \Sigma$,要求**组合性**:
+**(b) 指称语义** —— "它等于哪个数学函数"。把语句映射成状态上的部分函数 $\lbrack\!\lbrack c\rbrack\!\rbrack : \Sigma \rightharpoonup \Sigma$,要求**组合性**:
 
-$$\llbracket c_1; c_2 \rrbracket = \llbracket c_2 \rrbracket \circ \llbracket c_1 \rrbracket$$
+$$\lbrack\!\lbrack c_1; c_2 \rbrack\!\rbrack = \lbrack\!\lbrack c_2 \rbrack\!\rbrack \circ \lbrack\!\lbrack c_1 \rbrack\!\rbrack$$
 
 循环定义为**最小不动点**,需要域论(CPO、连续函数)这套机械,非终止用 $\bot$ 表示。
 
@@ -278,7 +278,7 @@ $$\frac{\{I \land b\}\ c\ \{I\}}{\{I\}\ \texttt{while}\ b\ \texttt{do}\ c\ \{I \
 
 它的产物是**决定**(接受/拒绝)加**充实后的 AST**。到达 IR 之后,静态语义的使命基本结束——注意一个重要后果:
 
-**IR 层的类型系统远弱于源语言。** LLVM IR 的 `i32` 不知道自己原本是 `int` 还是 `unsigned`——signedness 在 IR 里属于**操作**而非类型,故有 `sdiv`/`udiv` 之分。源语言的大量静态语义信息(作用域、访问控制、类名)在此丢失。
+**IR 层的类型系统远弱于源语言。** LLVM IR 的 `i32` 不知道自己原本是 `int` 还是 `unsigned`——signedness 在 IR 里属于**操作**而非**类型**,故有 `sdiv`/`udiv` 之分。源语言的大量**静态语义信息**(作用域、访问控制、类名)在此丢失。
 
 需要往下传的部分只能**另辟通道**:
 
@@ -313,7 +313,7 @@ MIR          ← 机器层语义(物理寄存器、栈帧、调用序列)
 
 每级箭头都要满足:
 
-$$\llbracket P_{\text{下层}} \rrbracket \;\subseteq\; \llbracket P_{\text{上层}} \rrbracket$$
+$$\lbrack\!\lbrack P_{\text{下层}} \rbrack\!\rbrack \;\subseteq\; \lbrack\!\lbrack P_{\text{上层}} \rbrack\!\rbrack$$
 
 **注意是 $\subseteq$ 而非 $=$**。编译器允许**收窄**非确定性(把"任选一种求值顺序"固定成一种实现),但不允许**产生**原本不允许的行为。这就是 refinement,也是 CompCert 的组织方式:每层 IR 配一套小步语义,优化正确性表述为相邻两层间存在**模拟关系(simulation)**,再由传递性组合成端到端定理。
 
@@ -328,7 +328,7 @@ dynamic sem.    ■            ■             ■          ■     ← 贯穿
 
 ### 4.3 各阶段的动态语义义务
 
-**前端**要把高层动态语义"烧进"IR 结构:
+**前端**要把**高层动态语义**"烧进"IR 结构:
 
 - C++ 的求值顺序与 sequenced-before 规则
 - 构造/析构顺序、异常展开中的清理范围、临时对象生命周期
@@ -423,7 +423,7 @@ C 选择"静态弱 + 动态松",换取最大优化自由;Rust 选择"静态强 +
 
 现在可以把这件事完整说清。一个 pass 合法,当且仅当:
 
-$$\forall P \text{ 良构}: \quad \llbracket \text{pass}(P) \rrbracket \subseteq \llbracket P \rrbracket$$
+$$\forall P \text{ 良构}: \quad \lbrack\!\lbrack \text{pass}(P) \rbrack\!\rbrack \subseteq \lbrack\!\lbrack P \rbrack\!\rbrack$$
 
 三个要点:
 
@@ -480,7 +480,7 @@ UB 最危险的表现恰恰是**不崩溃**:安静地产生错误结果,或在�
 
 因为**动态语义就是优化的合法性判据**。每个 pass 的正确性条件都可以写成同一个式子:
 
-$$\llbracket P_{\text{after}} \rrbracket \;\subseteq\; \llbracket P_{\text{before}} \rrbracket$$
+$$\lbrack\!\lbrack P_{\text{after}} \rbrack\!\rbrack \;\subseteq\; \lbrack\!\lbrack P_{\text{before}} \rbrack\!\rbrack$$
 
 即**精化(refinement)**:变换后的行为集合必须是变换前的子集。
 
@@ -520,7 +520,7 @@ $$\texttt{poison} \;\sqsubseteq\; \texttt{undef} \;\sqsubseteq\; \text{任意具
 
 ### UB 是优化的燃料
 
-把前面"UB = 行为集合是全集"的定义套进 refinement 公式:若 $\llbracket P_{\text{before}} \rrbracket$ 在某条路径上是全集,那么**任何** $P_{\text{after}}$ 在那条路径上都满足 $\subseteq$。所以:
+把前面"UB = 行为集合是全集"的定义套进 refinement 公式:若 $\lbrack\!\lbrack P_{\text{before}} \rbrack\!\rbrack$ 在某条路径上是全集,那么**任何** $P_{\text{after}}$ 在那条路径上都满足 $\subseteq$。所以:
 
 > **编译器遇到 UB,可以生成任意代码——这不是越权,而是精化条件被平凡满足。**
 
@@ -573,9 +573,9 @@ Rust 的位置值得注意:它没有选"少承诺"也没有选"运行时检查",
 
 不是。**动态语义是规范(一个集合),运行时行为是一次具体执行(集合里的一个元素)。**
 
-$$\text{一次执行} \in \llbracket P \rrbracket$$
+$$\text{一次执行} \in \lbrack\!\lbrack P \rbrack\!\rbrack$$
 
-直接后果:**一次执行没出错,完全不能说明程序没 UB。** 程序触发了 UB,意味着 $\llbracket P \rrbracket$ 变成全集,而"恰好得到你期望的结果"也在全集里。
+直接后果:**一次执行没出错,完全不能说明程序没 UB。** 程序触发了 UB,意味着 $\lbrack\!\lbrack P \rbrack\!\rbrack$ 变成全集,而"恰好得到你期望的结果"也在全集里。
 
 ### 误解 2:"动态语义只在运行期起作用"
 
