@@ -1,42 +1,763 @@
-# Dynamic semantic
+# Dynamic semantics:程序运行起来意味着什么
 
-**动态语义**定义的是"这段程序执行起来意味着什么"。程序设计语言形式语义学的**形式化方法**有三套经典路线/范式:
+> 本文是 [[3-layers-of-a-language-specification/index|语言规范的三层]] 中的第三层。三层的总览与横向对比(包括与静态语义的分界)见总纲;前两层见 [[front-end/grammar/index|grammar]] 与 [[front-end/static-semantic-analysis/index|static-semantic-analysis]]。
 
-| 方法                                | 做法                          | 典型用处                        |
-| --------------------------------- | --------------------------- | --------------------------- |
-| **操作语义** (operational semantics)  | 定义**状态转移规则**(小步 / 大步)       | 解释器、WebAssembly 规范、Rust MIR |
-| **指称语义** (denotational semantics) | 把程序映射成数学对象(函数)              | 理论研究、抽象解释的基础                |
-| **公理语义** (axiomatic semantics)    | Hoare 三元组 $\{P\}\,C\,\{Q\}$ | 程序验证、CompCert、契约式设计         |
+**目录**
 
-**优化器真正吃的是动态语义。** 这点很重要:一个 pass 合不合法,判据不是"改完后语法还对吗",而是"改完后的**可观察行为**和改之前一致吗"。所以语义规范写得越精确,优化器能做的就越激进——这正是 LangRef 把大半篇幅花在 poison / undef / UB / `nsw` 上的原因。
+| 部分 | 章节 |
+|---|---|
+| **基础** | 一 定位 · 二 规定哪些东西 |
+| **两个核心概念** | 三 抽象机与 as-if · 四 为什么是行为的"集合" |
+| **落到实处** | 五 完整示例 · 六 怎么写下来 |
+| **编译器视角** | 七 贯穿全流水线 · 八 优化的合法性判据 · 九 常见误解 · 十 中场小结 |
+| **三块硬骨头** | 十一 provenance · 十二 并发 · 十三 UB 分类与检测 |
+| **收束** | 十四 跨语言对比 · 十五 可操作结论 · 十六 总图 |
 
+## 一句话定义
 
+**动态语义(dynamic semantics)就是一门语言对"程序运行起来会发生什么"的完整规定。**
 
-## wikipedia [Semantics (programming languages)](https://en.wikipedia.org/wiki/Semantics_(programming_languages))
-  
-  > NOTE: 这篇文章所讲述的其实是动态语义
+更精确地说,它是从「程序文本」到「该程序所有允许的可观察行为集合」的映射:
 
-In [programming language theory](https://en.wikipedia.org/wiki/Programming_language_theory "Programming language theory"), **semantics** is the rigorous mathematical logic study of the meaning of [programming languages](https://en.wikipedia.org/wiki/Programming_language "Programming language").[[1]](https://en.wikipedia.org/wiki/Semantics_\(programming_languages\)#cite_note-1) Semantics assigns [computational](https://en.wikipedia.org/wiki/Computation "Computation") meaning to valid [strings](https://en.wikipedia.org/wiki/String_\(computer_science\)) in a [programming language syntax](https://en.wikipedia.org/wiki/Programming_language_syntax "Programming language syntax"). It is closely related to, and often crosses over with, the [semantics of mathematical proofs](https://en.wikipedia.org/wiki/Semantics_of_logic "Semantics of logic").
+$$
+\lbrack\!\lbrack \cdot \rbrack\!\rbrack : \text{Program} \longrightarrow \mathcal{P}(\text{Behavior})
+$$
 
-> 翻译: 在**编程语言理论**中，**语义学**是借助数理逻辑对编程语言的含义展开的严谨研究¹。语义学为符合**编程语言语法**的合法字符串赋予**计算**层面的含义，它与**逻辑语义学**联系紧密，研究领域多有交叉。
+注意是**集合**,不是单个行为。这个细节是理解全文的钥匙。
 
-Semantics describes the processes a computer follows when [executing](https://en.wikipedia.org/wiki/Execution_\(computing\) "Execution (computing)") a program in that specific language. This can be done by describing the relationship between the input and output of a program, or giving an explanation of how the program will be executed on a certain [platform](https://en.wikipedia.org/wiki/Computer_platform "Computer platform"), thereby creating a [model of computation](https://en.wikipedia.org/wiki/Model_of_computation "Model of computation").
+维基百科 [Semantics (programming languages)](https://en.wikipedia.org/wiki/Semantics_(programming_languages)) 所讲的"语义",其实就是动态语义:
 
-> 翻译: 语义学描述了计算机执行某一特定语言的程序时所遵循的过程。其研究路径分为两类：
-> 一是刻画程序输入与输出之间的对应关系
-> 二是阐释程序在特定**计算机平台**上的执行机制
-> 上述二者都可以构建出对应的**计算模型**。
+> In programming language theory, **semantics** is the rigorous mathematical logic study of the meaning of programming languages. Semantics assigns computational meaning to valid strings in a programming language syntax.
+>
+> Semantics describes the processes a computer follows when executing a program in that specific language. This can be done by describing the relationship between the input and output of a program, or giving an explanation of how the program will be executed on a certain platform, thereby creating a model of computation.
 
-## 每一级IR都有自己的一份动态语义
-每一级 IR 都有自己的一份动态语义，下面是一个例子:
+> 翻译:语义学为符合编程语言语法的合法字符串赋予**计算**层面的含义。其研究路径分为两类:一是刻画程序输入与输出之间的对应关系;二是阐释程序在特定平台上的执行机制。二者都可以构建出对应的**计算模型**。
+
+---
+
+## 一、定位:承诺书
+
+在三层中,静态语义是**守门人**,动态语义是**承诺书**:一旦程序通过了门,动态语义就负责回答"那么它意味着什么"。它不拒绝任何程序,只**描述**。
+
+```c
+int f(void) {
+    int a[2] = {10, 20};
+    return a[0] + a[1];
+}
+```
+
+- **静态语义**说:合法(类型对、名字都声明了)。
+- **动态语义**说:**返回 30**,期间读两次栈上的 int,无其他可观察效应,必然终止。
+
+更关键的一点:**编译器执行静态语义,但只能遵守动态语义。** 优化器不是动态语义的实现,而是它的受约束方。这决定了本文后半部分的全部内容。
+
+---
+
+## 二、它到底要规定哪些东西
+
+一份完整的动态语义必须覆盖以下八类内容。
+
+### 1. 程序状态由什么构成
+
+内存(对象、生命周期、地址)、变量绑定 / 环境、调用栈、线程状态、外部世界(文件、I/O 流)。
+
+### 2. 每个构造如何改变状态
+
+```c
+x = y + 1;
+```
+
+要说清:读 `y` 的当前值 → 加 1(**用什么算术?溢出怎么办?**)→ 写入 `x`。看似显然,每一步都有坑。
+
+### 3. 求值顺序与 sequencing
+
+```c
+int i = 0;
+f(i++, i++);         // 两个 i++ 谁先?
+a[i] = i++;          // 左值和右值谁先求值?
+```
+
+C++17 之前这些大多是未指定或 UB。**求值顺序是纯动态语义问题**,静态检查完全管不着。
+
+### 4. 算术的精确行为
+
+| 情形 | C 的规定 |
+|---|---|
+| 有符号溢出 | **UB** |
+| 无符号溢出 | 模 $2^N$ 回绕 |
+| 整数除零 | **UB** |
+| 浮点运算 | IEEE 754(含 NaN、Inf、舍入模式) |
+| 移位量 ≥ 位宽 | **UB** |
+
+这些差别巨大,却全部"语法合法、类型正确"。
+
+### 5. 内存模型
+
+- 单线程:对象何时诞生 / 死亡、别名规则(strict aliasing)、悬垂指针与越界访问的后果;
+- 并发:happens-before、数据竞争、`memory_order`。
+
+### 6. 控制转移
+
+函数调用与返回、异常抛出与栈展开中的析构顺序、`goto` / `longjmp`、协程挂起与恢复、尾调用是否保证。
+
+### 7. 终止与非终止
+
+`while(1);` 的语义是什么?在 C 里这是合法的无限循环;但**在 C++ 里无副作用的无限循环是 UB**(允许编译器假定循环终止)。这条规定让编译器能删掉某些循环——纯粹的动态语义决策。
+
+### 8. 可观察行为的边界
+
+| 算可观察(不能动) | 不算可观察(随便动) |
+|---|---|
+| I/O(文件、网络、控制台)、程序退出状态 | 执行了多少条指令 |
+| `volatile` 访问(次数、顺序都不能变) | 用了多少栈、哪些寄存器 |
+| 原子操作与同步 | 中间临时值 |
+| 异常终止的事实 | 缓存命中率、分支预测 |
+
+这张表的意义在下一节揭晓:**可观察性的定义,直接划定了优化器的权力边界。**
+
+---
+
+## 三、核心概念一:抽象机与 as-if
+
+动态语义通常通过一台**抽象机(abstract machine)**来定义:一个理想化的执行模型,与任何真实硬件无关。
+
+C 标准明确使用这个概念——它定义了一台抽象机,然后规定实现只需复现抽象机的**可观察行为**,而非每一步细节。这就是 **as-if 规则**:
+
+> 实现可以任意变换程序,只要最终可观察行为与抽象机上的执行一致。
+
+**这条规则是所有优化的法律依据。**
+
+```c
+int x = 0;
+for (int i = 0; i < 1000000; i++) x += i;
+printf("%d\n", x);
+```
+
+抽象机忠实地跑一百万次循环。但可观察行为只有一次 `printf`,所以编译器可以直接算出闭式结果 $\frac{n(n-1)}{2}$,一次输出。**这不是"违反语义",而是语义明确授权的。**
+
+反过来:
+
+```c
+volatile int *reg = (volatile int*)0x1000;
+*reg = 1;
+*reg = 2;
+```
+
+`volatile` 访问是可观察的,所以这两次写**不能**合并,哪怕看起来第一次是多余的。
+
+### as-if 的边界与侧信道
+
+"优化改变了性能特征"从来不是正确性问题;"优化改变了 `volatile` 写的次数"才是。
+
+侧信道攻击之所以棘手,正是因为它观测的恰好是 as-if 声明"不可观察"的那一列——**语义层面没有被破坏,但现实世界里信息泄漏了**。这是抽象机模型与物理机器之间的真实裂缝。
+
+---
+
+## 四、核心概念二:为什么是行为的**集合**
+
+一个程序往往不止一种合法行为,来源有以下几类:
+
+| 类别 | 含义 | 行为集合 | 实现的义务 | 例子 |
+|---|---|---|---|---|
+| **unspecified** | 有限几种,实现任选 | 有限集 | 任选其一,**无需文档化**,可每次不同 | 函数实参求值顺序 |
+| **implementation-defined** | 有限几种,实现选定 | 有限集 | 选一种并**必须文档化** | `int` 位宽、右移是否算术 |
+| **locale-specific** | 由 locale 决定 | 有限集 | 文档化 | `isalpha` 的行为 |
+| **并发非确定性** | 内存模型允许的所有交错 | 受内存模型约束的集合 | 遵守内存模型 | 两线程读写同一变量 |
+| **undefined (UB)** | **不作任何承诺** | **全集** | 无任何义务 | 有符号溢出、越界访问 |
+
+UB 的本质在这个框架下变得异常清晰:
+
+> **UB = 行为集合是全集 = 语义不作任何承诺。**
+
+它不是"会崩溃",也不是"结果随机"。它是**约束的缺失**。一旦程序触发 UB,就从 $\lbrack\!\lbrack P \rbrack\!\rbrack$ 里拿不到任何信息,编译器也不欠你任何保证。
+
+这解释了为什么 UB 能被优化器"利用":
+
+```c
+int f(int x) {
+    if (x + 1 < x) return 1;   // 有符号溢出是 UB
+    return 0;
+}
+```
+
+编译器推理:若 `x + 1 < x` 成立,则必然发生了溢出,即 UB,即这个程序**本就不在语义保证范围内**;所以可以假定该条件永不成立,直接返回 0。
+
+两点需要强调:
+
+1. **只有 UB 是全局性的。** 其他几类局部、有界;UB 一旦触发,整个程序的语义都失效——标准的措辞是 "no requirements on the behavior of **the program**"。
+2. **前几类是可移植性问题,UB 是正确性问题。** 换平台后前者结果可能不同,但程序仍有意义;后者则程序根本没有意义。三者在行为集合上是**量级不同**的东西,混为一谈会导致严重的风险误判。
+
+---
+
+## 五、完整示例:动态语义覆盖了多少
+
+```c
+#include <stdio.h>
+int sum(int *p, int n) {
+    int s = 0;
+    for (int i = 0; i < n; i++)
+        s += p[i];
+    return s;
+}
+int main(void) {
+    int a[3] = {1, 2, 3};
+    printf("%d\n", sum(a, 3));
+}
+```
+
+| 项 | 动态语义的规定 |
+|---|---|
+| `a` 的生命周期 | 从 `main` 进入到退出(自动存储期) |
+| `a` 的布局 | 3 个连续 `int`,元素间无填充 |
+| `sum(a, 3)` 的 `a` | 数组退化为指向首元素的指针 |
+| `p[i]` 的含义 | `*(p + i)`,地址按 `sizeof(int)` 缩放 |
+| `i < n` | 有符号比较 |
+| `s += p[i]` | 有符号加法,**若溢出则 UB** |
+| 循环终止 | $i$ 严格递增且有上界,必然终止 |
+| `printf` | 可观察行为,必须真的发生,且在 `sum` 返回之后 |
+| 若 `n > 3` | 越界读 → **UB**,整个程序无保证 |
+| `main` 返回 0 | 隐式,退出状态 0(可观察) |
+
+注意最后两行的对比:**同一份代码,参数不同就可能从"行为唯一确定"掉进"行为全集"。** 动态语义规定的是函数在**所有**输入下的行为,而不只是你测过的那些。
+
+---
+
+## 六、怎么把它写下来:形式语义
+
+程序设计语言形式语义学有三条经典路线(更多资料见 [[3-layers-of-a-language-specification/dynamic-semantic/formal-semantic/index|formal semantic]])。以 `while (x > 0) x = x - 1;` 为例:
+
+**(a) 操作语义(operational)——"一步步怎么跑"。** 数学对象是**状态转移关系**(小步 / 大步),用推导规则给出:
+
+$$
+\frac{\sigma(b) = \texttt{true}}{\langle \texttt{while}\ b\ \texttt{do}\ c,\ \sigma\rangle \to \langle c;\ \texttt{while}\ b\ \texttt{do}\ c,\ \sigma\rangle}
+$$
+
+这条规则把循环**展开一层**,循环语义就是它不断自我应用。最接近解释器,能自然表达非终止(无限转移链)、并发(交错)、异常。
+落点:WebAssembly 官方规范、Rust MIR(Miri 直接实现它来检测 UB)、CompCert 的每层 IR、ISA 形式规范(RISC-V 的 Sail)。
+
+**(b) 指称语义(denotational)——"它等于哪个数学函数"。** 把语句映射成状态上的部分函数 $\lbrack\!\lbrack c\rbrack\!\rbrack : \Sigma \rightharpoonup \Sigma$,要求**组合性**:
+
+$$\lbrack\!\lbrack c_1; c_2 \rbrack\!\rbrack = \lbrack\!\lbrack c_2 \rbrack\!\rbrack \circ \lbrack\!\lbrack c_1 \rbrack\!\rbrack$$
+
+循环定义为**最小不动点**,需要域论(CPO、连续函数),非终止用 $\bot$ 表示。
+落点:**它在编译器里的真正归宿是抽象解释**。常量传播、值域分析、SCCP 的理论基础正是格论与不动点——$\text{lfp}$ 的抽象化。每写一个数据流分析,其实都在做指称语义。
+
+**(c) 公理语义(axiomatic)——"它保证什么性质"。** Hoare 三元组 $\{P\}\,c\,\{Q\}$,循环规则靠**不变式** $I$:
+
+$$\frac{\{I \land b\}\ c\ \{I\}}{\{I\}\ \texttt{while}\ b\ \texttt{do}\ c\ \{I \land \neg b\}}$$
+
+它**不完整地描述语义**——只说保证什么,不说具体算什么;但正因为部分,最适合验证。
+落点:Dafny、Frama-C/ACSL、SPARK;分离逻辑(加 $P * Q$ 处理堆与别名)是 Iris、VST、Infer 的基础。SMT 求解器在此充当执行引擎。
+
+| 风格 | 形状 | 数学工具 | 适合 |
+|---|---|---|---|
+| **操作语义** | $\langle c,\sigma\rangle \to \langle c',\sigma'\rangle$ | 推导规则、归纳定义 | 写规范、写解释器、证模拟 |
+| **指称语义** | $\lbrack\!\lbrack c\rbrack\!\rbrack : \Sigma \rightharpoonup \Sigma$ | 域论、CPO、不动点 | 等价性推理、抽象解释之根 |
+| **公理语义** | $\{P\}\,c\,\{Q\}$ | 一阶逻辑、Hoare 规则 | 程序验证、契约 |
+
+**三者互补而非互斥。** 严谨的语言工作要证明它们一致:指称与操作的 adequacy、Hoare 逻辑相对操作语义的 soundness。
+
+实际语言规范分两派:
+
+- **散文派**:C、C++、Rust(目前)。可读性好,但有歧义——C 标准自己有上百条 Defect Report 在澄清语义。
+- **形式派**:WebAssembly(完整小步语义 + 机器检查的类型安全证明)、Standard ML、RISC-V 的 Sail 规范。
+
+LLVM IR 处境尴尬:LangRef 是散文,`poison` / `undef` 的精确语义至今有争议——这正是 Alive2 做起来困难的原因。
+
+---
+
+## 七、动态语义贯穿全流水线,且分层
+
+动态语义不属于任何单一阶段:
+
+> **一条 IR 链,每一级语言都有自己独立的动态语义;编译的每一步都是相邻两份语义之间的精化(refinement)。**
 
 ```
-C/C++ 源码      ← ISO 标准(散文)
-   │
-LLVM IR         ← LangRef(散文)          ← 本文主角
-   │
-MIR             ← 几乎没有正式规范
-   │
-机器码           ← ISA 手册(RISC-V 有 Sail 形式语义)
+C/C++ 源码   ← ISO 标准的抽象机语义(散文)
+   │ frontend
+LLVM IR      ← LangRef 定义的语义(poison/undef/UB/nsw/内存模型,散文)
+   │ middle-end(必须保 IR 语义)
+LLVM IR      ← 同一份语义
+   │ ISel
+MIR          ← 机器层语义(物理寄存器、栈帧、调用序列;几乎没有正式规范)
+   │ backend
+机器码        ← ISA 手册 / Sail 规范定义的语义
 ```
 
+每级箭头都要满足:
+
+$$\lbrack\!\lbrack P_{\text{下层}} \rbrack\!\rbrack \;\subseteq\; \lbrack\!\lbrack P_{\text{上层}} \rbrack\!\rbrack$$
+
+这也是 CompCert 的组织方式:每层 IR 配一套小步语义,优化正确性表述为相邻两层间存在**模拟关系(simulation)**,再由传递性组合成端到端定理。
+
+### 7.1 各阶段的动态语义义务
+
+**前端**要把**高层动态语义**"烧进"IR 结构:
+
+- C++ 的求值顺序与 sequenced-before 规则;
+- 构造/析构顺序、异常展开中的清理范围、临时对象生命周期;
+- 虚函数动态分派;
+- 隐式转换与整型提升。
+
+一旦降到 IR,`load`/`store` 的顺序就是 IR 语义说的顺序——源语言那套 sequencing 规则**已经不存在了**。
+
+**中端**不"实现"语义,它被语义**限制**。所有 pass 的合法性判据都是 refinement(见第八节)。
+
+**后端**独占一批义务,因为相关概念在 IR 层根本不存在:
+
+| 义务 | 内容 | 搞错的后果 |
+|---|---|---|
+| 架构内存模型 | `atomic`/`fence` 降成具体屏障(x86-TSO vs ARM/RISC-V 弱序) | 并发偶发错误,极难复现 |
+| 原子性粒度 | 保证 `atomic i32` 真用单条对齐访问 | 撕裂读写 |
+| `volatile` | 禁止合并、重排、消除 | MMIO 驱动失效 |
+| 浮点语义 | 舍入模式、denormal、FMA contraction、NaN payload | 数值与规范不符 |
+| ABI | 参数位置、`sret`、callee-saved | 跨 TU/跨语言调用崩溃 |
+| 异常展开 | `.eh_frame` / CFI / LSDA | 抛异常时栈无法展开 |
+| GC stack map | 哪些槽/寄存器含托管指针 | 堆损坏 |
+
+两个值得强调的点:
+
+- **`-ffast-math` 不是"优化更激进",而是换了一份动态语义。** 它声明程序不依赖 IEEE 754 结合律、不产生 NaN/Inf,于是编译器获得新的合法变换集。**语义先变,实现才跟着变。**
+- **内存模型是语义风险最高的一处。** "ARMv8 上 `acquire` 降成 `ldar` 还是 `ldr; dmb ishld`"是后端判断。做错不会被 verifier 抓到、不会稳定复现,只在特定微架构上偶发。
+
+**runtime system** 是离"执行语义"最近的东西,但它不是后端:
+
+```
+backend 生成:  .eh_frame / LSDA / stack map / 调用 __cxa_throw
+runtime 执行:  读这些表,真正做展开、扫栈、回收
+```
+
+两者是**契约的两端**,契约内容由动态语义规定。
+
+---
+
+## 八、编译器为什么必须在意:优化的合法性判据
+
+**优化器真正吃的是动态语义。** 一个 pass 合不合法,判据不是"改完后语法还对吗",而是"改完后的**可观察行为**是否被改之前允许"。所以语义规范写得越精确,优化器能做的就越激进——这正是 LangRef 把大半篇幅花在 poison / undef / UB / `nsw` 上的原因。
+
+每个 pass 的正确性条件都可以写成同一个式子:
+
+$$\forall P \text{ 良构}: \quad \lbrack\!\lbrack \text{pass}(P) \rbrack\!\rbrack \;\subseteq\; \lbrack\!\lbrack P \rbrack\!\rbrack$$
+
+三个要点:
+
+1. **前提是"良构"**——静态语义已经筛过一轮,pass 不需要处理类型错误的 IR;
+2. **判据是动态语义**——不是"IR 文本相似",不是"看起来等价";
+3. **方向是 $\subseteq$**——允许收窄,不允许扩张。这就是**精化(refinement)**。
+
+### 8.1 为什么是 ⊆ 而不是 =
+
+编译器被允许**收窄**非确定性,但不允许**产生**原本不允许的行为。
+
+```c
+f(g(), h());    // C++17 之前:g、h 的调用顺序未指定
+```
+
+源程序的行为集合里有两个元素。编译器选定一个顺序生成代码,集合变成单元素——**真子集**,合法。反之,如果生成的代码在某些输入下产生源程序不允许的结果,就是 **miscompilation**。
+
+LLVM IR 里这件事体现得特别直接,`poison` 和 `undef` 构成一个精化偏序:
+
+$$\texttt{poison} \;\sqsubseteq\; \texttt{undef} \;\sqsubseteq\; \text{任意具体值}$$
+
+产生 `poison` 的指令可以被替换成任何东西(其行为集合是全集),反过来不行。`freeze` 的作用正是**把这个偏序往下压一级**:把 poison/undef 固定成某个具体但不确定的值,阻止后续进一步利用其自由度。
+
+### 8.2 每个优化背后都有一条语义许可
+
+**优化不是"技巧",而是在兑现语义给的授权。**
+
+| 优化 | 依赖哪条动态语义 | 语义不成立会怎样 |
+|---|---|---|
+| 常量折叠 | 算术行为确定、可在编译期复现 | 浮点舍入模式可变时不能折叠 |
+| 死代码消除 | 无副作用的计算不可观察 | 有 `volatile` 或 I/O 时失效 |
+| **删除空循环** | C++ 的 forward progress 保证 | 在 C 里 `while(1);` 合法,**不能删** |
+| mem2reg / 寄存器提升 | 非 `volatile`、地址未逃逸 | 取过地址并传出去就不能提升 |
+| LICM | 该表达式无副作用、不抛异常、不触发 UB | 含除法时要先证明除数非零 |
+| 向量化 / 循环交换 | 迭代间无依赖 ← 无别名 ← provenance / `noalias` | 别名分析保守时直接放弃 |
+| 强度削弱、归纳变量重写 | `nsw` 保证无有符号溢出 | 没有 `nsw` 只能按回绕语义处理 |
+| 重排内存访问 | 非原子、无数据竞争 | 并发下必须按内存序约束 |
+| 尾调用优化 | 栈帧不可观察 | 若语言暴露栈则不行 |
+
+**第三行值得单独看**:同一段 `while(1);`,C 里必须保留(可能是嵌入式的死循环等中断),C++ 里可以删。**同样的代码、同样的后端,因为语言的动态语义不同,优化结论相反。** 这是"动态语义驱动实现"最干净的证据。
+
+### 8.3 UB 是优化的燃料
+
+把"UB = 行为集合是全集"套进 refinement 公式:若 $\lbrack\!\lbrack P_{\text{before}} \rbrack\!\rbrack$ 在某条路径上是全集,那么**任何** $P_{\text{after}}$ 在那条路径上都满足 $\subseteq$。所以:
+
+> **编译器遇到 UB 可以生成任意代码——这不是越权,而是精化条件被平凡满足。**
+
+```c
+int f(int *p) {
+    int x = *p;        // 解引用 → 若 p 为空则 UB
+    if (p == NULL)     // 所以此处 p 必非空
+        return -1;
+    return x;
+}
+```
+
+推理链:第 2 行若 `p == NULL` 则已 UB,该路径无任何保证;因此可假定到达第 3 行时 `p != NULL`,把判断整个删掉。这不是编译器在"找茬",而是一个完全标准的逻辑步骤:从"这条路径无约束"推出"这条路径可以当作不存在"。
+
+### 8.4 机器检查:Alive2 与 LEC
+
+**Alive2** 做的正是这件事:把一条 LLVM 优化前后的 IR 编码成 SMT 公式,证明 refinement 成立。回 UNSAT 即正确;回 SAT 则给出**具体反例输入**,直接定位 bug。它验证的是 $\sqsubseteq$ 关系,而不是严格相等。
+
+**EDA 的逻辑等价性检查(LEC)** 回答同一个问题形状——"RTL 与综合后网表功能一致吗"。组合电路无状态,退化成**布尔函数相等**,是这个问题最简形式。两边都归约到 SAT/SMT,因为两边都在问:**这个变换保不保语义?**
+
+### 8.5 根本的设计权衡
+
+$$\text{语义承诺多} \;\longleftrightarrow\; \text{优化空间小}$$
+
+| 语言 | 位置 | 后果 |
+|---|---|---|
+| C / C++ | 承诺极少(约 200 条 UB) | 优化空间最大,踩坑风险最高 |
+| Rust (safe) | 承诺多,靠**静态排除**而非运行时检查 | 两头兼顾,代价是类型系统复杂 |
+| Java | 承诺多(越界抛异常、溢出回绕) | 推理容易,部分优化被堵死 |
+| WebAssembly | 零 UB | 沙箱安全,但抽象层次低 |
+
+Rust 的位置值得注意:它既没选"少承诺",也没选"运行时检查",而是用**借用检查在编译期证明某些 UB 不可能发生**,从而既能承诺又不丢优化空间。这是过去二十年语言设计上最实质的一步。
+
+---
+
+## 九、常见误解
+
+> 跨层的误解("静态/动态语义 = 静态/动态类型"、"动态语义属于后端"等)见总纲第五节。这里只列动态语义自身的。
+
+### 误解 1:"动态语义 = 运行时行为"
+
+**动态语义是规范(一个集合),运行时行为是一次具体执行(集合里的一个元素)。**
+
+$$\text{一次执行} \in \lbrack\!\lbrack P \rbrack\!\rbrack$$
+
+直接后果:**一次执行没出错,完全不能说明程序没 UB。** 程序触发 UB 意味着 $\lbrack\!\lbrack P \rbrack\!\rbrack$ 变成全集,而"恰好得到你期望的结果"也在全集里。
+
+### 误解 2:"动态语义只在运行期起作用"
+
+恰恰相反,它**在编译期就被大量消耗**。常量折叠、循环删除、UB 推理、别名分析全部发生在编译期。一个有用的说法:**动态语义是编译期的输入,运行时行为是它的输出。**
+
+### 误解 3:"UB 意味着会崩溃"
+
+UB 最危险的表现恰恰是**不崩溃**:
+
+```
+崩溃                       ← 运气好,立刻暴露
+静默错误                   ← 常态,生产环境慢慢发酵
+-O0 正常 / -O2 出错        ← 典型,常被误判为"编译器 bug"
+换编译器版本后出错          ← 升级 toolchain 时集中爆发
+```
+
+安全漏洞主要来自第二类——程序继续跑,但内存已被写坏。
+
+### 误解 4:"UB 的影响是局部的"
+
+标准措辞是 "no requirements on the behavior of **the program**"——是 program,不是 statement。UB 的影响不受时间空间限制,**包括向前传播到 UB 发生之前**:
+
+```c
+int main(void) {
+    printf("before\n");
+    int *p = NULL;
+    return *p;              // UB
+}
+```
+
+编译器可以推理:`main` 必然执行到 UB,所以整个 `main` 的行为无约束,连 `printf` 都可以删。这叫 **time-travel UB**。更实际的例子:
+
+```c
+void f(int n) {
+    int a[10];
+    for (int i = 0; i <= n; i++)   // n >= 10 时越界
+        a[i] = i;
+    if (n < 10)                    // 编译器:既然循环没越界,必有 n < 10
+        g();                       // → 条件恒真,删掉判断
+}
+```
+
+**UB 的推理可以反向流动**,把"后面不能出问题"倒推成"前面的条件必然成立"。所以"把危险代码放在出错之后就没事"是错的。
+
+### 误解 5:"unspecified、implementation-defined、UB 差不多"
+
+三者在行为集合上是量级不同的东西:有限集 vs 全集,可移植性问题 vs 正确性问题。详见第四节。
+
+### 误解 6:"编译器利用 UB 是在故意为难人"
+
+编译器里没有一个叫 "exploit UB" 的 pass。实际发生的是:
+
+```
+别名分析 / 值域分析 / 支配关系推导
+        ↓  各自基于语义做出假设
+某些路径被推导为"不可达"或"条件恒真"
+        ↓
+常规的死代码消除、条件简化照常工作
+```
+
+每一步都局部、机械、完全标准。"UB 被利用"是这些**独立正确的推理叠加**之后的涌现结果。所有"编译器恶意利用 UB"的抱怨,本质上都是在抱怨语言给的行为集合太大。
+
+### 误解 7:"开 -O0 就安全了"
+
+`-O0` 只是减少了编译器利用 UB 的机会,**不会让 UB 变成有定义**。程序仍然是错的,只是暂时没显形。正确做法是用 UBSan/ASan 找出来,而不是靠降低优化等级掩盖。
+
+### 误解 8:"动态语义是确定的、权威的、不会有错"
+
+ISO 标准也是人写的工程文档。两个活例子(后文详述):
+
+- **指针 provenance** 在 C 里直到近几年才有正式提案(TS 6010),此前几十年都是"心照不宣";
+- **`relaxed` 原子的 OOTA 问题**至今无解,C++ 内存模型在这一角落是公认不健全的。
+
+遇到特别刁钻的语义问题,正确反应不是"标准一定说清楚了,是我没找到",而是"这可能真的还没定论"。
+
+---
+
+## 十、中场小结
+
+> **动态语义 = 语言对「合法程序运行起来会发生什么」的全部承诺,其内容是一个可观察行为的集合。**
+
+三个支点:
+
+| 概念 | 作用 |
+|---|---|
+| **抽象机** | 定义"标准答案"——程序在理想机器上的行为 |
+| **as-if 规则** | 定义"自由度"——实现只需复现可观察行为 |
+| **行为集合** | 定义"承诺强度"——集合越小承诺越强,UB 是集合等于全集 |
+
+整个编译器的工作,就是在这个集合内部做选择:
+
+$$\text{源码} \;\sqsupseteq\; \text{AST} \;\sqsupseteq\; \text{LLVM IR} \;\sqsupseteq\; \text{MIR} \;\sqsupseteq\; \text{机器码}$$
+
+每一步都是精化,每一步都不许越出上一层允许的集合。这就是"**动态语义不属于 backend,而是贯穿所有阶段的契约**"的精确含义。
+
+这个集合观同时统一了后面三块难题:
+
+- **provenance**(十一)—— 指针的行为集合不只由地址决定,还由来源决定;
+- **并发**(十二)—— 集合因交错而组合爆炸,SC-DRF 是把它压回直觉的那条定理;
+- **检测工具**(十三)—— 动态工具采样集合里的点,静态工具过近似整个集合。
+
+---
+
+## 十一、第一块硬骨头:指针不只是地址(provenance)
+
+这是**当前最棘手的动态语义难题**,直接影响优化合法性。
+
+### 11.1 问题现场
+
+```c
+int x = 1, y = 2;
+int *p = &x + 1;          // 指向 x 的"尾后"
+int *q = &y;
+if ((uintptr_t)p == (uintptr_t)q) {
+    *p = 42;              // 合法吗?
+    printf("%d\n", y);    // 打印 42 还是 2?
+}
+```
+
+假设编译器恰好把 `x`、`y` 相邻摆放,`p` 和 `q` 的**数值相同**。
+
+- 从"指针就是地址"的朴素模型看:`*p = 42` 能改到 `y`。
+- 从 C 标准看:**不能**。`p` 的来源是 `x`,只被授权访问 `x`;`&x + 1` 只允许用于比较,不允许解引用。
+
+所以**指针的语义值 ≠ 它的数值**。完整的指针值是一个二元组:
+
+$$\text{ptr} = (\text{provenance},\ \text{address})$$
+
+**provenance(来源)**记录"这个指针被授权访问哪块内存"。它是编译期的语义概念,在运行时**不存在任何表示**——寄存器里只有 64 位地址。
+
+### 11.2 为什么必须引入这个概念
+
+没有它,下面这类优化全部非法:
+
+```c
+void f(int *restrict a, int *restrict b) {
+    *a = 1;
+    *b = 2;
+    g(*a);   // 能不能复用寄存器里的 1?
+}
+```
+
+如果任意两个指针都可能别名,编译器必须在每次写之后重新加载——**所有基于别名分析的优化都死掉**。LLVM 的 TBAA、`noalias`、`inbounds` 全都建立在 provenance 之上。
+
+### 11.3 LLVM 里的具体表现
+
+| LLVM 构造 | provenance 含义 |
+|---|---|
+| `getelementptr inbounds` | 结果必须仍在同一分配对象内,否则 **poison** |
+| `noalias`(对应 `restrict`) | 该指针的 provenance 与其他参数不交 |
+| `ptrtoint` → `inttoptr` 往返 | **语义断裂点**——是否保留 provenance 至今无定论 |
+| `!tbaa` 元数据 | 把源语言的类型别名规则编码进 IR |
+
+往返问题是真正的开放难题:
+
+```llvm
+%i = ptrtoint ptr %p to i64
+%q = inttoptr i64 %i to ptr
+store i32 42, ptr %q        ; %q 继承了 %p 的 provenance 吗?
+```
+
+- 若说"继承",则整数运算也要携带 provenance,优化器对整数的所有变换都要重新审查;
+- 若说"不继承",则大量真实代码(指针标记、哈希表、GC)变成 UB。
+
+LLVM 目前**两头不靠**——有些 pass 假定继承,有些假定不继承,于是出现过真实的 miscompilation。这也是 `-fno-strict-aliasing` 这类"关掉一部分动态语义"开关存在的原因。
+
+### 11.4 标准侧的进展
+
+C 委员会有 **TS 6010 / N2577 "Pointer provenance"** 提案。Rust 更激进:**Strict Provenance** API(`ptr::addr()`、`with_addr()`、`expose_provenance()`)显式把"取地址数值"和"重建可用指针"分成两个操作,让 provenance 在类型层面可追踪。
+
+**这是动态语义正在被"补写"的活例子**:语言用了五十年,核心概念才刚被形式化。
+
+---
+
+## 十二、第二块硬骨头:并发
+
+单线程语义已经难,并发更甚——行为集合会**组合爆炸**。
+
+### 12.1 数据竞争的两种处理哲学
+
+| 语言 | 数据竞争的语义 |
+|---|---|
+| **C / C++** | **UB**,整个程序失去所有保证 |
+| **Java** | 良定义但"奇怪":可能看到撕裂值,但不破坏内存安全,不能伪造引用 |
+| **Rust** | 安全代码里**静态排除**(借用检查 + `Send`/`Sync`) |
+| **Go** | 未定义结果但 runtime 不崩(map 竞争会主动 panic) |
+
+C++ 选 UB 是为了性能:一旦承诺"竞争有定义",编译器就不能自由地把变量提到寄存器、不能重排非原子访问。Java 选"有界的奇怪"是为了安全性:必须保证**沙箱不可被突破**,所以不能让竞争导致任意行为。这正是 8.5 节那个权衡的两端。
+
+### 12.2 SC-DRF:整套内存模型的核心定理
+
+C++11 内存模型的根本承诺是 **SC-DRF(Sequential Consistency for Data-Race-Free programs)**:
+
+> **若程序无数据竞争,则其行为与"所有操作存在一个全局顺序"一致。**
+
+这条承诺的妙处是:**绝大多数程序员不需要理解弱内存模型。** 只要用锁、或者全用 `seq_cst`,就能按顺序一致的直觉推理。弱序的复杂性只在主动用 `relaxed`/`acquire`/`release` 时才暴露。
+
+### 12.3 memory_order 各级
+
+| 序 | 承诺 | 典型降级(ARMv8) |
+|---|---|---|
+| `relaxed` | 仅保证该变量自身的修改顺序(modification order)一致 | `ldr` / `str` |
+| `acquire` | 本次读之后的操作不能提前到它之前 | `ldar` |
+| `release` | 本次写之前的操作不能延后到它之后 | `stlr` |
+| `acq_rel` | 两者兼有 | `ldar` / `stlr` |
+| `seq_cst` | 全局单一顺序 | `ldar`/`stlr` + 必要屏障 |
+
+注意这张表的两列:**左列是动态语义,右列是 backend 的实现义务**(呼应 7.1 节)。语义说 `acquire`,backend 必须挑出在该微架构上刚好够强的指令——挑弱了是 miscompile,挑强了只是慢。
+
+### 12.4 一个至今没解决的洞:OOTA
+
+```c
+// 线程 1                    // 线程 2
+r1 = x.load(relaxed);        r2 = y.load(relaxed);
+if (r1 == 42)                if (r2 == 42)
+    y.store(42, relaxed);        x.store(42, relaxed);
+```
+
+`x`、`y` 初值为 0。直觉上 42 不可能出现——它需要自己证明自己。但 C++11 内存模型的形式定义**无法排除** `r1 == r2 == 42`,因为它只约束读写间的依赖关系,而控制依赖可以被优化掉。
+
+这叫 **out-of-thin-air (OOTA)**。公认结论是:**C/C++ 的 `relaxed` 语义目前不健全**——要么太弱(允许 OOTA),要么太强(禁止真实硬件优化)。学界有 Promising Semantics、Weakestmo 等候选,尚无定论。这是误解 8 最有力的佐证:**连 ISO 标准的动态语义也可能有洞。**
+
+---
+
+## 十三、第三块硬骨头:UB 的分类与检测
+
+既然 UB = 行为集合变全集,实践上就需要**把它抓出来**。
+
+### 13.1 UB 的六大类
+
+| 类别 | 例子 | 为什么是 UB |
+|---|---|---|
+| **空间内存错误** | 越界读写、野指针、栈溢出 | 访问未分配给该对象的内存 |
+| **时间内存错误** | use-after-free、double-free、悬垂引用 | 对象生命周期已结束 |
+| **算术** | 有符号溢出、除零、移位 ≥ 位宽 | 抽象机未定义结果 |
+| **类型 / 别名** | strict aliasing 违反、错误 `reinterpret_cast`、未初始化读 | 违反 provenance 或类型假设 |
+| **并发** | 数据竞争、原子性误用(死锁不是 UB) | 无 happens-before 约束 |
+| **契约** | 库函数前置条件违反(`memcpy` 重叠、`strlen` 非终止串) | 文档明确要求 |
+
+### 13.2 检测工具与能力边界
+
+| 工具 | 抓什么 | 原理 | 根本局限 |
+|---|---|---|---|
+| **ASan** | 空间+时间内存错误 | 红区 + 影子内存 + 隔离释放 | **只覆盖实际走过的路径** |
+| **UBSan** | 算术、对齐、类型混淆、空指针 | 编译期插桩 | 同上;部分检查有运行时开销 |
+| **TSan** | 数据竞争 | happens-before 向量时钟 | 需竞争真的交错发生 |
+| **MSan** | 未初始化读 | 位级影子传播 | 需全程序插桩(含 libc) |
+| **Valgrind** | 内存错误 | 动态二进制翻译 | 慢 10–50×,但不需重编译 |
+| **Miri** | Rust UB(含 provenance、别名) | **直接解释 MIR 的操作语义** | 慢;不支持所有 FFI |
+| **KLEE** | 全路径 | 符号执行 + SMT | **路径爆炸** |
+| **Astrée / Frama-C** | 全输入保证无 UB | **抽象解释**(不动点) | **假警报**;需人工标注 |
+
+这张表有一条贯穿的分界线:
+
+$$
+\underbrace{\text{ASan / TSan / Miri}}_{\text{动态:无假警报,但不完备}}
+\quad\text{vs.}\quad
+\underbrace{\text{Astrée / Frama-C}}_{\text{静态:完备,但有假警报}}
+$$
+
+**动态检测**只能说"我在这条路径上没发现问题";**静态分析**能说"在所有输入下都没有 UB",代价是必须接受假警报,因为它在格上做的是 **over-approximation**——这正好接回第六节的指称语义与不动点。
+
+**Miri 值得单独点出**:它不是插桩,而是**直接实现 Rust MIR 的小步操作语义并逐步解释执行**。所以它能抓到连 ASan 都看不见的东西——Stacked Borrows 别名违反、provenance 误用。**这是"形式语义直接变成工具"的最佳案例**:有了可执行的操作语义,检测器几乎是免费的。对比之下,C/C++ 没有官方形式语义,只能靠一堆各管一块的 sanitizer 拼凑。
+
+---
+
+## 十四、跨语言对比:同一道题的不同答案
+
+| 维度 | C / C++ | Rust (safe) | Java | Go | WebAssembly |
+|---|---|---|---|---|---|
+| 有符号溢出 | **UB** | panic(debug)/ 回绕(release) | 回绕 | 回绕 | 回绕 |
+| 数组越界 | **UB** | **panic** | 抛异常 | panic | trap |
+| use-after-free | **UB** | 静态排除 | GC 排除 | GC 排除 | 不适用(线性内存) |
+| 数据竞争 | **UB** | 静态排除 | 良定义但弱 | 未定义结果,不崩 | 有明确模型 |
+| 未初始化读 | **UB** | 静态排除 | 零初始化 | 零初始化 | 零初始化 |
+| 规范形式 | 散文(ISO) | 散文 + Miri 可执行语义 | 散文(内存模型形式化) | 散文 | **完整小步操作语义** |
+| UB 总量 | ~200 条 | `unsafe` 内才有 | 几乎为零 | 极少 | **零** |
+
+两点值得注意:
+
+**1. UB 清零不等于没有不确定性。** Java、Go 仍有大量**未指定行为**(哈希迭代顺序、调度顺序、finalizer 时机)。它们把行为集合**收窄到有界**,但没有收成单点。回到集合视角:**UB 是全集,未指定是有限集,确定行为是单元素集——三者是程度差异,不是种类差异。**
+
+**2. WebAssembly 是唯一做到"零 UB + 完整形式语义"的主流目标。** 代价是抽象层次很低(没有对象、没有指针类型,只有线性内存和数值),所以源语言的 UB 不会消失,只是**被挪到编译期**:C 的越界写在 wasm 里变成"在线性内存里写错地方",不会逃出沙箱,但也不会被抓住。**沙箱安全 ≠ 程序正确。**
+
+---
+
+## 十五、可操作结论
+
+**1. "我测过没问题"不是 UB 的证据。** 动态语义规定的是所有输入下的行为集合;测试只是集合里的几个点。UB 常常在某个优化级别、某个编译器版本、某个 CPU 上才显形。
+
+**2. CI 里把 sanitizer 当编译器用。** `-fsanitize=address,undefined` 开销通常 2–3×,完全可以常驻 CI。TSan 更贵但对并发代码不可替代。这是投入产出比最高的单项工程实践。
+
+**3. 看到 `-fno-strict-aliasing`、`-fwrapv`、`-ffast-math` 要警觉。** 它们的作用不是"调优化强度",而是**修改语言的动态语义**:前两个**收紧**承诺(以性能换安全),后一个**放松**承诺(以精度换性能)。知道自己在改语义,比记住 flag 名字重要。
+
+**4. 调试 "-O2 错 / -O0 对" 时,先怀疑 UB,不要先怀疑编译器。** 统计上前者概率高得多。用 UBSan 跑一遍比读汇编快得多。
+
+**5. 写并发代码默认用 `seq_cst` 或锁。** SC-DRF 给了你顺序一致的推理环境。只有 profile 证明确实是瓶颈、且你能说清 happens-before 链时,才下降到 `acquire`/`release`。`relaxed` 的语义连标准委员会都没理清(见 OOTA),不要赌自己理得清。
+
+**6. 指针转整数要小心。** 只用于打印、哈希、对齐检查是安全的;转回去再解引用则踩在 provenance 的未决地带。Rust 的 `expose_provenance` / `with_exposed_provenance` 命名本身就是在提醒这件事。
+
+---
+
+## 十六、一张总图
+
+```
+                语言规范(动态语义)
+                        │
+         ┌──────────────┼──────────────┐
+         │              │              │
+    行为集合的大小    抽象机 + as-if    形式化风格
+         │              │              │
+  UB=全集/未指定=有限集   优化的法律依据   操作/指称/公理
+         │              │              │
+         │              │              ├─ 操作 → 规范、解释器(Miri)、模拟证明(CompCert)
+         │              │              ├─ 指称 → 抽象解释、数据流分析
+         │              │              └─ 公理 → 契约验证 + SMT
+         │              │
+         │              └─ 各级 IR 各有一份语义,每步编译是 refinement
+         │                     源码 ⊒ AST ⊒ LLVM IR ⊒ MIR ⊒ 机器码
+         │                     前端烧入 / 中端受限 / 后端独占义务 / runtime 执行契约
+         │
+         ├─ 三块硬骨头
+         │     provenance   → 指针 = (来源, 地址)
+         │     并发         → SC-DRF 定理 / OOTA 开放问题
+         │     UB 检测      → 六大类
+         │
+         └─ 检测手段
+               动态(sanitizer):无假警报,不完备
+               静态(抽象解释):完备,有假警报
+               符号(KLEE):全路径,但爆炸
+```
+
+**一句话总括:动态语义是一份关于"行为集合"的契约。** 集合的大小决定了程序员能推理什么、编译器能优化什么、工具能检测什么——而 UB 就是契约上明写着"此处不作任何承诺"的那些条款。`poison` 与 `nsw`、Alive2 的 refinement 检查、backend 的内存模型降级、provenance、SC-DRF——都是在这同一份契约的不同角落上做工作。

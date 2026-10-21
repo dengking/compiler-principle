@@ -40,6 +40,9 @@ debug阶段：在debug的时候，只有读取了symbol table了，才能够灵�
 
 In [computer science](https://en.wikipedia.org/wiki/Computer_science), a **symbol table** is a [data structure](https://en.wikipedia.org/wiki/Data_structure) used by a language [translator](https://en.wikipedia.org/wiki/Translator) such as a [compiler](https://en.wikipedia.org/wiki/Compiler) or [interpreter](https://en.wikipedia.org/wiki/Interpreter_(computing)), where each [identifier](https://en.wikipedia.org/wiki/Identifier) (a.k.a. [symbol](https://en.wikipedia.org/wiki/Symbol_(programming))) in a program's [source code](https://en.wikipedia.org/wiki/Source_code) is associated with information relating to its declaration or appearance in the source. In other words, the entries of a symbol table store the information related to the entry's corresponding symbol.
 
+## Symbol Table 与 Semantic Analysis
+
+**static semantic analysis 是把"一串合法形状的 token"变成"一棵有意义的树"(annotated AST)的那一步,而 symbol table 是它的记忆。**
 ## Implementation
 
 可以参考下面两种实现：
@@ -77,5 +80,4 @@ Symbol {
 
 ## Sema&symbol table
 symbol table中的主要信息是由 [[front-end/static-semantic-analysis/index|Sema]] 维护生成的:
-- [[syntax-VS-semantic]]: 其中将symbol table归位Sema的输出 
-- [[front-end/static-semantic-analysis/index|Sema]]: Symbol Gathering功能
+- [[front-end/static-semantic-analysis/index|Sema]]: Symbol Gathering功能;"核心载体:符号表与类型表"一节将symbol table归为Sema的输出

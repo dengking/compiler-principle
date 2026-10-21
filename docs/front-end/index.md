@@ -17,4 +17,4 @@ semantic-analysis
 
 
 ## syntax VS semantic
-[[syntax-VS-semantic]]
+[[3-layers-of-a-language-specification/index|语言规范的三层]]
