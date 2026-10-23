@@ -1,0 +1,316 @@
+
+==============================================================================
+第 2 章  解析器
+==============================================================================
+(('cat', [('star', ('group', ('alt', ('char', 'a'), ('char', 'b')), 1), True), ('repeat', ('char', 'c'), 2, 3, True)]), 1)
+'(ab'                    -> unclosed group
+'[z-a]'                  -> bad range z-a
+'(((((((((((((((((((('   -> nesting limit 250 exceeded
+'a{2000}'                -> repeat count exceeds 1000
+
+==============================================================================
+第 3 章  AST 回溯：灾难性回溯与防御
+==============================================================================
+  n      (a+)+$ 步数     耗时(s)    (?>a+)+$ 步数    a++$ 步数
+  8          2,560     0.002            118         84
+ 10         10,240     0.007            155        113
+ 12         40,960     0.026            196        146
+ 14        163,840     0.106            241        183
+ 16        655,360     0.466            290        224
+ 18      2,621,440     2.304            343        269
+ 20     10,485,760     8.413            400        318
+budget exceeded after 100001 steps
+(a*)*                    'b'            perl=[(0, 0), (0, 0)]  fail=[(0, 0), (None, None)]  python=[(0, 0), (0, 0)]
+(a+)b\1                  'xaaabaa'      perl=[(2, 7), (2, 4)]  fail=[(2, 7), (2, 4)]  python=[(2, 7), (2, 4)]
+(a)?b\1                  'b'            perl=None  fail=None  python=None
+\w+(?=,)                 'ab,cd'        perl=[(0, 2)]  fail=[(0, 2)]  python=[(0, 2)]
+(?<=\$)\d+               'cost $42'     perl=[(6, 8)]  fail=[(6, 8)]  python=[(6, 8)]
+(?<!\$)\b\d+             '$42 and 17'   perl=[(8, 10)]  fail=[(8, 10)]  python=[(8, 10)]
+^b.(?:(?:[ab])*?)*       'baaabba'      perl=[(0, 2)]  fail=[(0, 7)]  python=[(0, 2)]
+
+==============================================================================
+第 4 章  Thompson 构造
+==============================================================================
+  0  save    0
+  1  char    a
+  2  split   3 10
+  3  save    2
+  4  split   5 7
+  5  char    b
+  6  jmp     8
+  7  char    c
+  8  save    3
+  9  jmp     2
+ 10  char    d
+ 11  save    1
+ 12  match   
+  0  save    0
+  1  char    x
+  2  char    x
+  3  split   4 7
+  4  char    x
+  5  split   6 7
+  6  char    x
+  7  save    1
+  8  match   
+(?:a{100}){10}               估计指令数        1,000  ok
+(?:a{100}){100}              估计指令数       10,000  ok
+(?:(?:a{100}){100}){100}     估计指令数    1,000,000  rejected: program would exceed 100000 instructions
+
+==============================================================================
+第 5 章  Pike VM 与有界回溯
+==============================================================================
+a(b|c)*d             'xxabcbd'       -> [(2, 7), (5, 6)]
+a(.*)b               'aXbYb'         -> [(0, 5), (1, 4)]
+a(.*?)b              'aXbYb'         -> [(0, 3), (1, 2)]
+(a+)+$               'aaaaaaaaaaaa'  -> None
+(a*)*                'b'             -> [(0, 0), (None, None)]
+(a|ab)(c|bcd)(d*)    'abcd'          -> [(0, 4), (0, 1), (1, 4), (4, 4)]
+BitState 步数（(a+)+$，文本 a^n b）：
+  n=    10  steps=          96  len(prog)*(n+2)=         108
+  n=   100  steps=         906  len(prog)*(n+2)=         918
+  n=  1000  steps=       9,006  len(prog)*(n+2)=       9,018
+  n= 10000  steps=      90,006  len(prog)*(n+2)=      90,018
+不带记忆化的程序回溯（同一模式）：
+  n= 10  steps=      14,288
+  n= 14  steps=     229,312
+  n= 18  steps=   3,669,936
+线程数上界验证：最多活跃线程数 <= len(prog)
+  (a|b)*a(a|b){8}        len(prog)= 60  Pike VM 处理 4000 字符耗时 0.020s
+  (?:a|ab|b)*c           len(prog)= 14  Pike VM 处理 4000 字符耗时 0.007s
+
+==============================================================================
+第 6 章  DFA
+==============================================================================
+(a|b)*abb 非锚定 DFA 状态数 4  等价类数 4  最小化后 4
+(a|b)*abb 锚定 DFA 状态数 5  最小化后 5
+[a-z]x 等价类起点: ["'\\x00'", "'a'", "'x'", "'y'", "'{'"]
+  k   NFA 指令    DFA 状态   Moore  Hopcroft  Moore(s) Hopcroft(s)
+  1       18         5       5         5     0.000       0.000
+  2       24         9       9         9     0.000       0.000
+  3       30        17      17        17     0.000       0.000
+  4       36        33      33        33     0.000       0.000
+  5       42        65      65        65     0.000       0.000
+  6       48       129     129       129     0.000       0.000
+  7       54       257     257       257     0.001       0.001
+  8       60       513     513       513     0.001       0.002
+  9       66      1025    1025      1025     0.003       0.003
+ 10       72      2049    2049      2049     0.007       0.006
+惰性 DFA：(a|b)*a(a|b){k}c 在 2×10^4 个随机 a/b 上搜索（不会匹配，必须读完全文）
+  k    最小DFA状态     生成状态   清空    放弃?    三段式(s) PikeVM(s)
+  3         16       16    0      否     0.003     0.054
+  6        128      128    0      否     0.004     0.077
+  8        512      512    0      否     0.008     0.094
+  9       1024     3000    3      是     0.135     0.105
+ 12       8192     3000    3      是     0.150     0.123
+reverse_prog(ab|cd):
+  0  jmp     11
+  1  jmp     15
+  2  jmp     1
+  3  jmp     2
+  4  char    a
+  5  jmp     3
+  6  char    b
+  7  jmp     4
+  8  jmp     2
+  9  char    c
+ 10  jmp     8
+ 11  split   12 13
+ 12  jmp     6
+ 13  char    d
+ 14  jmp     9
+ 15  match   
+
+==============================================================================
+第 7 章  直接构造
+==============================================================================
+  位置 1 [a]    followpos=[1, 2, 3]
+  位置 2 [b]    followpos=[1, 2, 3]
+  位置 3 [a]    followpos=[4]
+  位置 4 [b]    followpos=[5]
+  位置 5 [b]    followpos=[6]
+  位置 6 End(rule=0) followpos=[]
+followpos DFA 状态数: 5  状态= [[1, 2, 3], [], [1, 2, 3, 4], [1, 2, 3, 5], [1, 2, 3, 6]]
+Thompson+子集构造（锚定）状态数: 5
+“含 ab 且不含 ba” 导数 DFA 状态数 12 {'ab': True, 'aab': True, 'abb': True, 'aba': False, 'bab': False, 'xaby': True, 'ba': False, '': False}
+  equivalent((a|b)*, (a*b*)*) = True
+  equivalent((ab)*a, a(ba)*) = True
+  equivalent(a*, a+) = False
+Glushkov: 位置数 5  first= 0b111  last= 0b10000
+
+==============================================================================
+第 8 章  词法分析器生成器
+==============================================================================
+DFA 状态数 9  等价类数 16
+[('KW_IF', 'if'), ('IDENT', 'x1'), ('GE', '>='), ('NUMBER', '42'), ('IDENT', 'iffy')]
+把 IDENT 写在 KW_IF 前面时永远不会被选中的规则: [1]
+最长匹配的平方级回退（规则 a 与 a*b，输入 a^n）：
+  n= 1000  朴素读入     500,500 (0.052s)   Reps 读入   2,997 (0.001s)
+  n= 2000  朴素读入   2,001,000 (0.203s)   Reps 读入   5,997 (0.002s)
+  n= 4000  朴素读入   8,002,000 (0.851s)   Reps 读入  11,997 (0.003s)
+  n= 8000  朴素读入  32,004,000 (3.303s)   Reps 读入  23,997 (0.006s)
+  加兜底规则 a+ 后朴素驱动读入: 4000
+梳状压缩: 完整表 9×16=144 项 → nxt/chk 长度 45
+[('KW_IF', 'if', 0), ('IDENT', 'x1', 3), ('GE', '>=', 6), ('NUMBER', '42', 9), ('RAW_STR', 'say "hi"', 30), ('KW_ELSE', 'else', 44), ('EOF', '', 48)]
+
+==============================================================================
+第 9 章  ANTLR
+==============================================================================
+[(0, 'if'), (1, 'ifx'), (2, '42')] 缓存的转移数 10 misses 10 hits 3
+2322 个记号后：缓存转移 26，命中率 0.9978
+[SLL] 决策 s @ 'y'
+  ATN 模拟 D0 --'y'--> D1 {(p20,2,[p14 #]), (p23,2,[p20 p14 #])}
+  SLL 预测 alt 2（向前看 1 个记号）
+[SLL] 决策 a @ 'b'
+  ATN 模拟 D0 --'b'--> D1 {(p17,1,[#]), (p20,1,[#]), (p21,2,[#])}
+  ATN 模拟 D1 --'a'--> D2 {(p10,1,[#]), (p14,2,[#])}
+  ATN 模拟 D2 --'EOF'--> D3 {(p1,1,[#]), (p1,2,[#])}
+  D3 是 SLL 冲突状态 → 全上下文 LL
+  [LL] γ0=[p20 p14] {(p23,1,[p20 p14]), (p20,2,[p14])}
+  [LL] --'b'--> {(p20,1,[p14]), (p21,2,[p14])}
+  [LL] --'a'--> {(p14,2,[ε])}
+['s#2', 'y', ['c#1', ['a#2'], 'b', 'a'], '<EOF>']
+[SLL] 决策 s @ 'x'
+  ATN 模拟 D0 --'x'--> D2 {(p17,1,[p10 #]), (p23,1,[p17 p10 #])}
+  SLL 预测 alt 1（向前看 1 个记号）
+[SLL] 决策 a @ 'b'
+  DFA 命中 D0 --'b'--> D1
+  DFA 命中 D1 --'a'--> D2
+  DFA 命中 D2 --'EOF'--> D3
+  D3 是 SLL 冲突状态 → 全上下文 LL
+  [LL] γ0=[p17 p10] {(p23,1,[p17 p10]), (p17,2,[p10])}
+  [LL] --'b'--> {(p17,1,[p10])}
+['s#1', 'x', ['b#1', ['a#1', 'b'], 'a'], '<EOF>']
+{'atn_steps': 5, 'sll_ok': 2, 'sll_conflict': 2, 'll_predict': 2, 'dfa_hits': 3}
+[SLL] 决策 prog @ 'unsigned'
+  ATN 模拟 D0 --'unsigned'--> D1 {(p12,1,[p7 #]), (p17,1,[p7 #]), (p21,1,[p12 p7 #]), (p21,1,[p17 p7 #])}
+  SLL 预测 alt 1（向前看 1 个记号）
+[SLL] 决策 decl @ 'unsigned'
+  ATN 模拟 D0 --'unsigned'--> D0 {(p12,1,[#]), (p21,1,[p12 #]), (p17,2,[#]), (p21,2,[p17 #])}
+  DFA 命中 D0 --'unsigned'--> D0
+  DFA 命中 D0 --'unsigned'--> D0
+  ATN 模拟 D0 --'int'--> D1 {(p13,1,[#])}
+  SLL 预测 alt 1（向前看 4 个记号）
+[SLL] 决策 mods @ 'unsigned'
+  ATN 模拟 D0 --'unsigned'--> D1 {(p12,1,[#]), (p17,1,[#]), (p21,1,[#])}
+  SLL 预测 alt 1（向前看 1 个记号）
+[SLL] 决策 mods @ 'unsigned'
+  DFA 命中 D0 --'unsigned'--> D1
+  SLL 预测 alt 1（向前看 1 个记号）
+[SLL] 决策 mods @ 'unsigned'
+  DFA 命中 D0 --'unsigned'--> D1
+  SLL 预测 alt 1（向前看 1 个记号）
+[SLL] 决策 mods @ 'int'
+  ATN 模拟 D0 --'int'--> D2 {(p13,2,[#])}
+  SLL 预测 alt 2（向前看 1 个记号）
+[SLL] 决策 prog @ '<EOF>'
+  ATN 模拟 D0 --'EOF'--> D2 {(p1,2,[#])}
+  SLL 预测 alt 2（向前看 1 个记号）
+
+==============================================================================
+第 10 章  元引擎
+==============================================================================
+hello                strategy=literal   prefilter=None
+^\d+$                strategy=dfa       prefilter=None
+hello\w+             strategy=dfa       prefilter=['hello']
+\bfoo\b              strategy=pikevm    prefilter=None
+(a+)b\1              strategy=backtrack prefilter=None
+(\w+)@(\w+)\.com     strategy=dfa       prefilter=None
+[a-z]+ing            strategy=dfa       prefilter=None
+(6, 16) [(6, 16), (6, 9), (10, 12)]
+[(0, 0), (1, 3)]
+
+==============================================================================
+第 11 章  Unicode 与断言
+==============================================================================
+  U+0000–U+10FFFF:
+      [00-7F]
+      [C2-DF] [80-BF]
+      [E0] [A0-BF] [80-BF]
+      [E1-EC] [80-BF] [80-BF]
+      [ED] [80-9F] [80-BF]
+      [EE-EF] [80-BF] [80-BF]
+      [F0] [90-BF] [80-BF] [80-BF]
+      [F1-F3] [80-BF] [80-BF] [80-BF]
+      [F4] [80-8F] [80-BF] [80-BF]
+  U+00E0–U+00FF:
+      [C3] [A0-BF]
+  U+4E00–U+9FFF:
+      [E4] [B8-BF] [80-BF]
+      [E5-E9] [80-BF] [80-BF]
+  \b 由 Pike VM 处理: (7, 10)
+  'İ'.lower() 长度: 2   'ß'.upper(): SS   'K'(U+212A).lower(): 'k'
+
+==============================================================================
+第 12 章  字面量与预过滤
+==============================================================================
+  hello\w+     -> ['hello']
+  GET|POST     -> ['GET', 'POST']
+  a?b          -> ['ab', 'b']
+  x(ab)*y      -> ['xabababa', 'xabababy', 'xababy', 'xaby', 'xy']
+  \d+px        -> None
+  a*b          -> ['aaaaaaaa', 'aaaaaaab', 'aaaaaab', 'aaaaab', 'aaaab', 'aaab', 'aab', 'ab', 'b']
+  .*foo        -> None
+  (xa|y)b      -> ['xab', 'yb']
+  [ab]x        -> ['ax', 'bx']
+  ^ab          -> ['ab']
+AhoCorasick earliest start in "ushers": 1  Prefilter: 1
+Shift-And [ab]c 在 "xacbcabc" 的匹配终点: [3, 5, 8]
+  ERROR: \d+     结果(215844, 215854)  预过滤开     0.10ms  关    28.29ms  Python re   0.04ms
+  e\w+g          结果None  预过滤开    31.82ms  关    31.67ms  Python re   0.33ms
+
+==============================================================================
+第 14 章  ReDoS
+==============================================================================
+  (a+)+$                   搜索:exponential        锚定:exponential        步数 n=8:    2,560  n=16:    655,360
+  (a|a)*$                  搜索:exponential        锚定:exponential        步数 n=8:    5,090  n=16:  1,310,666
+  (a|aa)*$                 搜索:exponential        锚定:exponential        步数 n=8:    1,485  n=16:     72,344
+  (?:a*)*b                 搜索:exponential        锚定:exponential        步数 n=8:    2,564  n=16:    655,372
+  (\w+\s?)*$               搜索:exponential        锚定:exponential        步数 n=8:    4,086  n=16:  1,048,558
+  a*a*$                    搜索:polynomial(n^3)    锚定:polynomial(n^2)    步数 n=8:      444  n=16:      2,284
+  \s*\w*\s*x               搜索:polynomial(n^3)    锚定:polynomial(n^2)    步数 n=8:      536  n=16:      2,592
+  .*a.*a.*a                搜索:polynomial(n^4)    锚定:polynomial(n^3)    步数 n=8:      208  n=16:        512
+  .*(?:.*=.*)              搜索:polynomial(n^4)    锚定:polynomial(n^3)    步数 n=8:      483  n=16:      2,431
+  a+b                      搜索:polynomial(n^2)    锚定:linear             步数 n=8:      102  n=16:        326
+  ^a+b                     搜索:linear             锚定:linear             步数 n=8:       38  n=16:         70
+  [a-z]+@[a-z]+\.com       搜索:polynomial(n^2)    锚定:linear             步数 n=8:      102  n=16:        326
+  ^[a-z]+@[a-z]+\.com$     搜索:linear             锚定:linear             步数 n=8:       38  n=16:         70
+  abc                      搜索:linear             锚定:linear             步数 n=8:       28  n=16:         52
+
+==============================================================================
+第 15 章  差分模糊测试
+==============================================================================
+  cases                                            113760
+  note: pike captures != python captures           821
+  note: span != python re (nullable loop body)     417
+  patterns                                         1896
+  skipped_patterns                                 204
+—— 差分测试不含随机起点 pos 的检查 ——
+reverse_prog 不交换 ^ 与 $             发现  {'diff:lazy-dfa three-phase span': 2534, 'diff:meta span': 2534, 'diff:meta captures': 2534, 'diff:finditer': 2629, 'diff:reverse program': 310}
+                                   首个反例: 检查项='lazy-dfa three-phase span' 模式='^' 文本='aaabaabb' 得到=EXC:AssertionError 期望=(0, 0)
+惰性 DFA 找到匹配后仍注入新线程                 发现  {'diff:lazy-dfa three-phase span': 7290, 'diff:meta span': 6698, 'diff:meta captures': 6698, 'diff:finditer': 6698}
+                                   首个反例: 检查项='lazy-dfa three-phase span' 模式='' 文本='bb' 得到=(2, 2) 期望=(0, 0)
+minimize_literals 保留较长的字面量         发现  {'diff:finditer': 590, 'diff:lazy-dfa three-phase span': 538, 'diff:meta span': 538, 'diff:meta captures': 538, 'diff:prefix completeness': 539}
+                                   首个反例: 检查项='finditer' 模式='a(?:(.)|ab)' 文本='aabaaa' 得到=[(0, 2)] 期望=[(0, 2), (3, 5)]
+anchored_start 把 $ 当作起始锚点          未发现  {}
+Prefilter.find 的搜索上界写成 best        发现  {'diff:finditer': 10, 'diff:lazy-dfa three-phase span': 7, 'diff:meta span': 7, 'diff:meta captures': 7}
+                                   首个反例: 检查项='finditer' 模式='b()(?:[ab]|[ab])' 文本='bbbba' 得到=[(0, 2), (3, 5)] 期望=[(0, 2), (2, 4)]
+—— 差分测试包含随机起点 pos 的检查 ——
+reverse_prog 不交换 ^ 与 $             发现  {'diff:lazy-dfa three-phase span': 1762, 'diff:meta span': 1762, 'diff:meta captures': 1762, 'diff:finditer': 1762, 'diff:search from random pos': 975, 'diff:reverse program': 239}
+                                   首个反例: 检查项='lazy-dfa three-phase span' 模式='(?:b|[^a])(?:[^a])+?$' 文本='aabb' 得到=EXC:AssertionError 期望=(2, 4)
+惰性 DFA 找到匹配后仍注入新线程                 发现  {'diff:lazy-dfa three-phase span': 7660, 'diff:meta span': 6958, 'diff:meta captures': 6958, 'diff:search from random pos': 4633, 'diff:finditer': 6958}
+                                   首个反例: 检查项='lazy-dfa three-phase span' 模式='((?:[^a])*?)(?:($)|(?:)*)' 文本='aa' 得到=(2, 2) 期望=(0, 0)
+minimize_literals 保留较长的字面量         发现  {'diff:lazy-dfa three-phase span': 414, 'diff:meta span': 414, 'diff:meta captures': 414, 'diff:search from random pos': 251, 'diff:finditer': 430, 'diff:prefix completeness': 414}
+                                   首个反例: 检查项='lazy-dfa three-phase span' 模式='(?:ab)+' 文本='babbab' 得到=None 期望=(1, 3)
+anchored_start 把 $ 当作起始锚点          发现  {'diff:search from random pos': 508}
+                                   首个反例: 检查项='search from random pos' 模式='$' 文本='bbbabbaa' 得到=None 期望=(8, 8)
+Prefilter.find 的搜索上界写成 best        发现  {'diff:lazy-dfa three-phase span': 14, 'diff:meta span': 14, 'diff:meta captures': 14, 'diff:search from random pos': 5, 'diff:finditer': 20}
+                                   首个反例: 检查项='lazy-dfa three-phase span' 模式='(?:b)+ab' 文本='bbbbabba' 得到=(3, 6) 期望=(0, 6)
+
+==============================================================================
+附：性能对比（Python 实现，单位 ms，仅看相对量级）
+==============================================================================
+  needle\d+              (50000, 50008)  PikeVM      22.0  惰性DFA      7.8  元引擎     0.0  Python re   0.01
+  [a-c]+j                (11, 13)  PikeVM       0.0  惰性DFA      0.0  元引擎     0.0  Python re   0.00
+  (a|b)*c(a|b){3}d       (2156, 2161)  PikeVM       2.7  惰性DFA      0.4  元引擎     0.3  Python re   0.06
+  needle(\d+)            (50000, 50008)  PikeVM      21.8  惰性DFA      7.2  元引擎     0.0  Python re   0.01
