@@ -1,7 +1,5 @@
-# Grammar examples
 
-本文总结梳理一些经典的文法以帮助读者掌握如何书写文法，由难到易，从对每个production进行详细分析和展开再到对文法整体进行说明。
-## 经典的表达式文法(E-T-F)
+# 经典的表达式文法(E-T-F)
 [[front-end/grammar/index#三、形式工具 BNF / EBNF|经典的表达式文法(E-T-F)]]
 
 ```EBNF
@@ -94,3 +92,13 @@ def expr():
 
 `expr → term '+' term` 去掉了递归，使语言从"任意多个 term 相加"缩小为"至多两个 term 相加"，因此不能替换。`term → term '*' factor` 也是同样的道理。如果目的是消除左递归，应采用上面 3(b) 或 3(c) 的写法。
 
+
+
+### precedence
+下面是不包含优先级的写法:
+
+```
+ <expr> ::= <number>
+          | (<expr> * <expr>)
+          | (<expr> + <expr>)
+```

@@ -1,3 +1,4 @@
 nav:
     - Introduction: index.md
+    - examples: examples
     - direct-recursion&indirect-recursion: direct-recursion&indirect-recursion.md    

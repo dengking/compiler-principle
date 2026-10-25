@@ -15,3 +15,7 @@ wikipedia [Extended Backus–Naur form](https://en.wikipedia.org/wiki/Extended_B
 | comment                                                                                                                    | (* ... *) |             |              |
 | special sequence                                                                                                           | ? ... ?   |             |              |
 | exception                                                                                                                  | -         |             |              |
+
+## Examples
+
+`term { '+' term }*` 是错误写法：`{ }` 已经表示重复，再加 `*` 是多余的。在 ISO EBNF 中 `*` 另有含义，例如 `3 * 'a'` 表示重复 3 次。
