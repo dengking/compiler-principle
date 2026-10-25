@@ -1,27 +1,10 @@
-# Syntax:语言的形状
+# Context free grammar:语言的形状
+Context free grammar简称CFG，它是 [[3-layers-of-a-language-specification/index|语言规范的三层]] 中的第一层。三层的总览与横向对比见总纲;后两层见 [[front-end/static-semantic-analysis/index|static-semantic-analysis]] 与 [[3-layers-of-a-language-specification/dynamic-semantic/index|dynamic-semantic]]。
 
-> 本文是 [[3-layers-of-a-language-specification/index|语言规范的三层]] 中的第一层。三层的总览与横向对比见总纲;后两层见 [[front-end/static-semantic-analysis/index|static-semantic-analysis]] 与 [[3-layers-of-a-language-specification/dynamic-semantic/index|dynamic-semantic]]。
+CFG 是生成式 **VS** PEG 是识别式: [[gramars]] 
 
----
 
-## 一、它管什么
-
-**Syntax(语法)规定哪些字符串构成合法的程序文本。** 形式化地说,语言是字母表 $\Sigma$ 上字符串的集合 $L \subseteq \Sigma^*$,语法层要回答的就是一个成员判定问题:
-
-$$w \in L\ ?$$
-
-它只关心符号的**形状与排列**,不关心含义:
-
-```c
-int x = ;          // 不属于 L:= 后缺表达式,CFG 直接拒绝
-int x = "hello";   // 属于 L:形状完全合法(类型错误是静态语义的事)
-```
-
-在三层里,syntax 是最廉价、最"机械"的一层:可判定、近乎线性、错误位置精确。但下文会看到,它并不像看上去那么"纯形式"。
-
----
-
-## 二、两级结构:词法与句法
+## 两级结构:词法与句法
 
 工程上语法层被再切成两级:
 
@@ -37,11 +20,11 @@ int x = "hello";   // 属于 L:形状完全合法(类型错误是静态语义的
 
 ---
 
-## 三、形式工具:BNF / EBNF
+## 形式工具:BNF / EBNF
 
 句法用 CFG 描述,书写形式是 BNF / EBNF。经典的表达式文法(E-T-F):
 
-```
+```EBNF
 expr   → expr '+' term   | term
 term   → term '*' factor | factor
 factor → NUMBER | '(' expr ')' | IDENT

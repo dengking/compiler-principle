@@ -1,5 +1,6 @@
 nav:
     - Introduction: index.md
+    - grammars: grammars.md
     - Parse-tree&syntax-tree: Parse-tree&syntax-tree
     - Parsing-algorithm: Parsing-algorithm
     - Expression-tree: Expression-tree    
