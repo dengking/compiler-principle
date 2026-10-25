@@ -1,0 +1,1 @@
+在 LR 解析中，precedence cascade 的透传产生式会导致大量**单产生式归约（unit reductions）**。例如解析一个孤立的 `id` 时，C 风格文法可能要连续归约十几次，从原子层一路上升到顶层。这些归约不产生任何语义动作，因此一些解析器生成器会做 **unit reduction elimination** 优化来跳过它们。这也是 Yacc/Bison 风格的"歧义文法 + 优先级声明"在效率上的一个优点。

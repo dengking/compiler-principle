@@ -1,6 +1,6 @@
 # 结构即语义：从表达式文法到类型系统的一条主线
 
-> **本文的缘起**：在拆解龙书 4.1 的经典 E-T-F 表达式文法时（见 [表达式文法如何"编码"结合性与优先级](expression-grammar-associativity-and-precedence.md)），我们看到一个令人印象深刻的事实——运算符的优先级与结合性并没有写成一段 `if/else` 判断，而是被"雕刻"进了文法的产生式结构里。这个观察背后是一条贯穿编译原理、程序语言理论、形式语义学乃至类型系统的主线：**结构即语义**。本文把这条主线完整展开。
+> **本文的缘起**：在拆解龙书 4.1 的经典 E-T-F 表达式文法时（见 [表达式文法如何"编码"结合性与优先级](associativity-and-precedence.md)），我们看到一个令人印象深刻的事实——运算符的优先级与结合性并没有写成一段 `if/else` 判断，而是被"雕刻"进了文法的产生式结构里。这个观察背后是一条贯穿编译原理、程序语言理论、形式语义学乃至类型系统的主线：**结构即语义**。本文把这条主线完整展开。
 
 ---
 
@@ -143,7 +143,7 @@ $$
 | **递归方向**（`E → E + T` 左递归） | 结合性   | 左递归强制树向左偏斜，得到 $(a+b)+c$ 的分组；右递归则给出 $a+(b+c)$ |
 | **回路**（`F → (E)`）         | 显式覆盖  | 括号让最底层重新跳回最高层，从而人为改变分组                       |
 
-细节推导见 [表达式文法如何"编码"结合性与优先级](expression-grammar-associativity-and-precedence.md)。这里只强调一个必须守住的边界：
+细节推导见 [表达式文法如何"编码"结合性与优先级](associativity-and-precedence.md)。这里只强调一个必须守住的边界：
 
 > ⚠️ **文法结构决定的是「语法分组」，不是「运行时求值顺序」。**
 
@@ -586,7 +586,7 @@ flowchart LR
 
 ### 本仓库内相关文章
 
-- [表达式文法如何"编码"结合性与优先级：拆解经典的 E-T-F 文法](expression-grammar-associativity-and-precedence.md) —— 本文的直接出发点
+- [表达式文法如何"编码"结合性与优先级：拆解经典的 E-T-F 文法](associativity-and-precedence.md) —— 本文的直接出发点
 - [4.1 Introduction 原文与笔记](front-end/grammar/structure-is-semantics/index.md) —— 龙书 4.1 节，含 4.1 / 4.2 / 4.3 三个代表性文法
 - [语法制导：SDD、SDT 与翻译方案](Syntax-directed-translation&SDD&SDT.md) —— 属性文法的声明式与过程式两种形式
 - [SDD 循环依赖判定：为什么"即使 P = NP 也难解"](NP-hard-to-cycle-detection-in-dependency-graph.md) —— "用结构保证性质"取代"检测性质"的经典案例

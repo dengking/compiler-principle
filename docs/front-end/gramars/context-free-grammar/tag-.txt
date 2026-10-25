@@ -1,0 +1,36 @@
+# “分层链”的英文表达
+
+## 推荐译法
+
+| 英文 | 说明 | 推荐度 |
+|---|---|---|
+|  | ⭐⭐⭐ 首选 |
+| **precedence hierarchy** | 强调“层级高低”的关系，通用、易懂 | ⭐⭐⭐ |
+| **(layered) precedence levels** | 最朴素的说法，常见于龙书等教材的行文，如 “one nonterminal for each level of precedence” | ⭐⭐ |
+| **stratified grammar** / **grammar stratification** | 指“分层的文法”这一设计手法，偏学术化 | ⭐⭐ |
+| **precedence chain** / **layered chain** | 字面直译，能看懂，但不是标准术语 | ⭐ |
+
+## 用法建议
+
+- 指**这种文法构造方法**：用 *precedence cascade* 或 *stratified grammar*。
+  > Precedence is encoded by a **precedence cascade**: one nonterminal per precedence level, with each level referring only to itself and the next higher level.
+- 指**层级之间的高低关系**：用 *precedence hierarchy*。
+  > The grammar mirrors the **precedence hierarchy** of the operators.
+- 指**具体某一层**：用 *precedence level*。
+  > Operators at the same **precedence level** must share the same associativity.
+
+## 注意一个易混词
+
+**chain production**（链产生式）指的是形如 $A \rightarrow B$ 的单个产生式，也叫 **unit production**。它对应本文中的“透传产生式” $E_i \rightarrow E_{i+1}$，不是整条分层结构。所以不宜用 “chain” 来翻译“分层链”，以免与 chain production 混淆。
+
+## 文中相关术语对照
+
+| 中文 | 英文 |
+|---|---|
+| 分层链 | precedence cascade / precedence hierarchy |
+| 优先级层级 | precedence level |
+| 透传产生式 | unit production / chain production（也可描述为 pass-through production） |
+| 操作数槽位 | operand position (slot) |
+| 括号回边 | back edge through parentheses |
+| 终结符保护 | guarded by terminals |
+| 切分点 | split point |

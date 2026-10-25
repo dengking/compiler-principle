@@ -1,8 +1,8 @@
 # Context free grammar:语言的形状
 Context free grammar简称CFG，它是 [[3-layers-of-a-language-specification/index|语言规范的三层]] 中的第一层。三层的总览与横向对比见总纲;后两层见 [[front-end/static-semantic-analysis/index|static-semantic-analysis]] 与 [[3-layers-of-a-language-specification/dynamic-semantic/index|dynamic-semantic]]。
+## CFG VS PEG
 
-CFG 是生成式 **VS** PEG 是识别式: [[gramars]] 
-
+CFG 是生成式 **VS** PEG 是识别式: [[front-end/gramars/index]] 
 
 ## 两级结构:词法与句法
 
@@ -17,6 +17,8 @@ CFG 是生成式 **VS** PEG 是识别式: [[gramars]]
 | 代表工具 | lex/flex、re2c | yacc/bison、ANTLR、tree-sitter |
 
 切成两级不是理论必须(正则语言本就是上下文无关语言的子集),而是工程收益:词法用 DFA 一遍扫完,把空白、注释、关键字识别这些"琐事"挡在 parser 之外,让文法规模小一个量级。
+
+grammar=lexical+syntax
 
 ---
 
@@ -35,6 +37,10 @@ factor → NUMBER | '(' expr ')' | IDENT
 - **递归**让有限条规则生成无限多的句子,见 [[front-end/grammar/recursive-grammar/index|recursive grammar]];
 - `expr → expr '+' term` 是**左递归**,对 LR parser 友好,对 LL / 递归下降 parser 则必须先消除;
 - 同一个语言可以有多份文法,它们**生成同样的字符串集合,却给出不同形状的树**——这一点正是下一节的主题。
+
+## Examples
+
+[[front-end/gramars/context-free-grammar/examples/index|CFG examples]] 
 
 ---
 
@@ -74,20 +80,7 @@ factor → NUMBER | '(' expr ')' | IDENT
 
 ## 六、二义性与消歧
 
-一份文法若能为同一个句子给出两棵不同的树,就是**二义的(ambiguous)**。二义性本身不是语法错误,而是"同一形状有多种含义"——这又一次说明语法与语义的纠缠。
 
-消除二义有两条路:
-
-1. **改写文法**:像 E-T-F 那样分层,让多余的树无法推导;
-2. **外挂消歧规则(disambiguating rules)**:文法保持二义,另加规则选择其中一棵。yacc 的 `%left` / `%right` / `%prec`、dangling else 的"就近匹配"(else 与最近的未匹配 if 结合)都属此类。
-
-C++ 的 **most vexing parse** 是消歧规则的极端例子:
-
-```cpp
-Widget w(Thing());   // 变量定义?还是函数声明?
-```
-
-规则是"只要能解释成声明,就解释成声明"——消歧规则本身就是语法与语义混合的产物。
 
 ---
 
@@ -180,3 +173,10 @@ SSA 的不变量也分属两边:
 1. 语法层判定"形状",廉价、可判定、错误精确,是三层中最"工程化"的一层;
 2. 但它**并不纯形式**:文法结构编码了优先级、结合性等语义意图,二义性的消歧规则也掺杂语义;
 3. CFG 只是真实语言的近似,超出部分被推给静态语义——这条边界由实现决定,并且会被 lexer hack 这类技巧打穿。
+
+
+
+## operator: precedence
+precedence: 优先级
+associativity: 结合性
+
