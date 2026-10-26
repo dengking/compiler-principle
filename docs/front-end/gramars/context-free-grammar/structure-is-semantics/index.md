@@ -33,7 +33,7 @@
 
 这正是语言哲学与形式语义学中的**组合性原则（principle of compositionality）**，通常追溯到 Frege，并在 Montague 语法中被形式化（参见 [Stanford Encyclopedia of Philosophy: Compositionality](https://plato.stanford.edu/entries/compositionality/)）。
 
-它的工程价值在于**可计算性**：如果语义是组合的，那么就可以写出一个沿**语法树**递归的求值器、类型检查器或代码生成器，而不必对整个程序做全局分析。整个**语法制导翻译（syntax-directed translation）**的技术栈都建立在这个前提上。
+它的工程价值在于**可计算性**：如果语义是组合的，那么就可以写出一个沿**语法树**递归的求值器、类型检查器或代码生成器，而不必对整个程序做全局分析。整个**语法制导翻译（syntax-directed translation）** 的技术栈都建立在这个前提上。
 
 ### 1.2 强形式（构造性）：结构排除非法语义
 
@@ -79,15 +79,15 @@ $$
 选定一个**语义域** $D$，并为每个构造子指定一个 $D$ 上的运算，$D$ 便成为一个 $\Sigma$-代数。此时存在**唯一的**同态映射：
 
 $$
-\llbracket \cdot \rrbracket : T_\Sigma \longrightarrow D
+\lbrack\!\lbrack \cdot \rbrack\!\rbrack : T_\Sigma \longrightarrow D
 $$
 
 它满足对每个构造子的分配律：
 
 $$
-\llbracket \mathsf{add}(e_1, e_2) \rrbracket = \llbracket e_1 \rrbracket \;+_D\; \llbracket e_2 \rrbracket
+\lbrack\!\lbrack \mathsf{add}(e_1, e_2) \rbrack\!\rbrack = \lbrack\!\lbrack e_1 \rbrack\!\rbrack \;+_D\; \lbrack\!\lbrack e_2 \rbrack\!\rbrack
 \qquad
-\llbracket \mathsf{mul}(e_1, e_2) \rrbracket = \llbracket e_1 \rrbracket \;\times_D\; \llbracket e_2 \rrbracket
+\lbrack\!\lbrack \mathsf{mul}(e_1, e_2) \rbrack\!\rbrack = \lbrack\!\lbrack e_1 \rbrack\!\rbrack \;\times_D\; \lbrack\!\lbrack e_2 \rbrack\!\rbrack
 $$
 
 这条等式就是"结构即语义"的**数学定义**：等式左边是对**结构**的分解，右边是对**语义**的组合，二者一一对应。
@@ -212,7 +212,7 @@ expr : expr '+' expr
 | $F \to (E)$         | $F.val = E.val$                |
 | $F \to \mathbf{id}$ | $F.val = \mathbf{id}.lexval$   |
 
-这张表就是同态 $\llbracket \cdot \rrbracket$ 的"分片定义"：每一行说明一个构造子如何把子结构的语义组合成自身的语义。**结构提供骨架，属性沿骨架流动。**
+这张表就是同态 $\lbrack\!\lbrack \cdot \rbrack\!\rbrack$ 的"分片定义"：每一行说明一个构造子如何把子结构的语义组合成自身的语义。**结构提供骨架，属性沿骨架流动。**
 
 属性的流动方向进一步细分了两类信息传递：
 
@@ -317,7 +317,7 @@ eval (Add e1 e2) = eval e1 + eval e2
 eval (Mul e1 e2) = eval e1 * eval e2
 ```
 
-把这段代码与第 5 节的属性文法表逐行对照，会发现它们**是同一张表**：每个构造子一行，每行把子结构的语义组合成自身的语义。`eval` 就是那个唯一的同态 $\llbracket \cdot \rrbracket$。
+把这段代码与第 5 节的属性文法表逐行对照，会发现它们**是同一张表**：每个构造子一行，每行把子结构的语义组合成自身的语义。`eval` 就是那个唯一的同态 $\lbrack\!\lbrack \cdot \rbrack\!\rbrack$。
 
 这一对应关系在范畴论层面得到了精确表述：语法是某个函子的**初始代数（initial algebra）**，而"从初始代数到任意代数存在唯一同态"这条性质，正是 fold 的存在性与唯一性。Meijer、Fokkinga、Paterson 的经典论文系统发展了这套 recursion scheme 演算（[Functional Programming with Bananas, Lenses, Envelopes and Barbed Wire](https://ris.utwente.nl/ws/portalfiles/portal/6142049/meijer91functional.pdf)）。
 
