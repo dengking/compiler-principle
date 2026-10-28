@@ -473,7 +473,7 @@ evalAlg (MulF x y) = x * y
 
 ### 7.2 Visitor 模式：面向对象的对应物
 
-在面向对象语言中，同一件事以**访问者模式（Visitor）**的形式出现：每个 AST 节点类对应一个 `visit` 方法，遍历骨架由结构固定，语义放在 visitor 里替换。Nystrom 在 *Crafting Interpreters* 的 [Representing Code](https://craftinginterpreters.com/representing-code.html) 一章对此有清晰的讲解。
+在面向对象语言中，同一件事以 **访问者模式（Visitor）** 的形式出现：每个 AST 节点类对应一个 `visit` 方法，遍历骨架由结构固定，语义放在 visitor 里替换。Nystrom 在 *Crafting Interpreters* 的 [Representing Code](https://craftinginterpreters.com/representing-code.html) 一章对此有清晰的讲解。
 
 三者的关系可以概括为：
 
@@ -505,7 +505,7 @@ fn eval(e: &Expr) -> i64 {
 }
 ```
 
-如果新增一个构造子 `Neg(Box<Expr>)` 却忘了在 `match` 中处理，编译器的**穷尽性检查（exhaustiveness checking）**会直接报错。这是组合语义带来的额外红利：**结构的完备性，转化成了语义实现的完备性检查。** 每一套语义都必须对每个构造子给出解释，漏掉任何一个都无法通过编译。
+如果新增一个构造子 `Neg(Box<Expr>)` 却忘了在 `match` 中处理，编译器的 **穷尽性检查（exhaustiveness checking）** 会直接报错。这是**组合语义**带来的额外红利：**结构的完备性，转化成了语义实现的完备性检查。** 每一套语义都必须对每个构造子给出解释，漏掉任何一个都无法通过编译。
 
 这里也能看到 §1 两种形式的交汇：`eval` 本身体现弱形式，即语义沿结构计算；ADT 和穷尽性检查体现强形式，即不完整的树和不完整的语义都不可表示。这正是从第一部分过渡到第二部分的桥梁。
 
@@ -545,11 +545,11 @@ enum Connection {
 
 它与 E-T-F 文法的关系是一种**类比**：
 
-| E-T-F 文法 | 类型设计 |
-|---|---|
-| `T` 的产生式里没有 `+` | `Disconnected` 分支里没有 `Socket` 字段 |
-| ⟹ 错误分组无法推导 | ⟹ 非法状态无法构造 |
-| 无需在 parser 里检查优先级 | 无需在业务代码里检查一致性 |
+| E-T-F 文法              | 类型设计                             |
+| --------------------- | -------------------------------- |
+| `T` 的产生式里没有 `+`       | `Disconnected` 分支里没有 `Socket` 字段 |
+| ⟹ 错误分组无法推导            | ⟹ 非法状态无法构造                       |
+| 无需在 parser 里检查**优先级** | 无需在业务代码里检查**一致性**                |
 
 二者共享同一个动作：**删去结构中允许错误出现的那条路径。** 不同之处在于，前者约束的是语言的句子，后者约束的是程序运行时的数据。
 
