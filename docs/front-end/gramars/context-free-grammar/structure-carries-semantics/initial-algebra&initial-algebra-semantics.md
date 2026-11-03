@@ -137,7 +137,15 @@ $$
 
 翻译成日常语言：**有无穷多种数字块（每个整数一种，插孔数为 0），外加加号块和乘号块（插孔数都是 2）。** 上标里的数字叫**元数（Arity）**，也就是插孔数。
 
-**为什么数字块的元数是 0，而不是 1？** 它明明"带着"一个整数。区别在于，"刻在零件上的标签"和"插孔"是两回事。插孔里插的是**另一块积木**，即**子树（Subtree）**；而 `3` 这个整数刻在零件表面，那里插不进一个加号块。所以 `lit` 并不是一个一元构造子，而是**一族零元常量（a Family of Nullary Constants）**，每个整数对应一个。这个区分会在 §6.5 中与函子表述自然对接。
+数字块的名字 $\mathsf{lit}$ 取自 **literal（字面量）**。在程序语言中，字面量指源代码里直接写出来的常量值，如 `3`、`-7`、`42`。它与 `x + 1` 这类需要计算的表达式不同，它的值就是字面上写的那个数。所以 $\mathsf{lit}_3$ 读作"字面量 3"，对应一块刻着 3 的数字块，也就是语法树中的一片叶子。记号 $\mathsf{lit}_n^{(0)}$ 由三部分组成：名字 $\mathsf{lit}$ 说明这是数字块这一类零件，下标 $n$ 是刻在表面的整数，上标 $(0)$ 是插孔数。
+
+集合写法 $\{\mathsf{lit}_n^{(0)} \mid n\in\mathbb{Z}\}$ 的意思是：**对每个整数 $n$，都有一个独立的运算符 $\mathsf{lit}_n$。** 展开就是 $\dots,\mathsf{lit}_{-1},\mathsf{lit}_0,\mathsf{lit}_1,\mathsf{lit}_2,\dots$。严格说，签名里并没有一个叫 $\mathsf{lit}$ 的运算符，而是有无穷多个运算符，只是它们共用一个名字前缀。
+
+**为什么数字块的元数是 0，而不是 1？** 它明明"带着"一个整数。区别在于，"刻在零件上的标签"和"插孔"是两回事。插孔里插的是**另一块积木**，即**子树（Subtree）**。$\mathsf{add}$ 的两个插孔可以插数字块、加号块、乘号块，任何树都行。而 `3` 这个整数刻在零件表面，那里插不进一个加号块。
+
+反过来设想：如果把 $\mathsf{lit}$ 当作元数为 1 的运算符，按定义 3.1，它的参数就得是一棵树。于是会允许 $\mathsf{lit}(\mathsf{add}(\dots,\dots))$ 这种"字面量里装着一个加法表达式"的怪东西，而整数 3 本身反倒没地方放了。单类签名里只有一种"东西"，就是树，所以整数无法作为参数出现，只能作为运算符名字的一部分，也就是下标。
+
+所以 `lit` 并不是一个一元构造子，而是**一族零元常量（a Family of Nullary Constants）**，每个整数对应一个。
 
 在代码里，签名就是 **代数数据类型（Algebraic Data Type）** 的声明：
 
@@ -147,17 +155,20 @@ data Expr = Lit Int          -- 0 个插孔，表面刻一个整数
           | Mul Expr Expr    -- 2 个插孔
 ```
 
-**签名只说"有哪些零件、每种几个插孔"，完全不涉及任何意思。** `Add` 这个名字叫什么都可以，叫 `Foo` 也不影响结构。
+这里的 `Lit Int` 看起来像一个带参数的构造子，但它与"一族零元常量"并不矛盾。签名把每个整数看作一种零件；Haskell 则用一个构造子 `Lit`，再用一个整数参数**选出**是哪一种。二者描述的是同一组树。判断一个参数算不算插孔，标准是：**它的类型里有没有出现正在定义的类型本身。** `Add Expr Expr` 的参数类型是 `Expr`，所以是插孔；`Lit Int` 的参数类型是 `Int`，与 `Expr` 无关，所以是标签。这个区分会在 §6.5 中与函子表述自然对接。
+
+**签名只说"有哪些零件、每种几个插孔"，完全不涉及任何意思。** `Add` 这个名字叫什么都可以，叫 `Foo` 也不影响结构。同样，$\mathsf{lit}$ 叫"字面量"只是方便人读，它在签名中并不意味着"代表一个数"。代表什么，要等到手册（§4.1）来规定。
 
 > **定义 3.1（签名）**：一个**签名** $\Sigma$ 是一组**运算符（Operators）**，每个运算符 $\sigma$ 带有一个元数 $\mathrm{ar}(\sigma)\in\mathbb{N}$。元数为 0 的运算符称为**常量（Constant）**。
 
 ### 3.2 项代数：所有能拼出来的模型
 
-把签名中的零件按插孔规矩随意拼装，所有可能拼出的模型构成**项集合（Set of Terms）** $T_\Sigma$，也就是所有**抽象语法树（Abstract Syntax Tree, AST）**。关于它，有三件事值得在直觉层面想清楚。
+把签名中的零件按**插孔规矩**随意拼装，所有可能拼出的模型构成**项集合（Set of Terms）** $T_\Sigma$，也就是所有**抽象语法树（Abstract Syntax Tree, AST）**。关于它，有三件事值得在直觉层面想清楚。
+> NOTE: term=abstract syntax tree
 
 **（一）它是树，不是字符串。** 字符串 `2 + 3 * 4` 本身有**歧义（Ambiguity）**，既可以理解为 $(2+3)\times 4$，也可以理解为 $2+(3\times4)$。树没有这个问题，它的形状直接告诉你谁插在谁下面。
 
-括号、**优先级（Precedence）**、空格属于**具体语法（Concrete Syntax）**，是写给人看的拼装说明书。**解析器（Parser）** 读完说明、拼好模型之后，说明书就可以扔掉了。`(2 + 3)` 里的那对括号在树中不对应任何节点，它的全部作用就是让 `+` 块插在 `×` 块下面。
+括号、**优先级（Precedence）**、空格属于**具体语法（Concrete Syntax）**，是写给人看的拼装**说明书**。**解析器（Parser）** 读完说明、拼好模型之后，说明书就可以扔掉了。`(2 + 3)` 里的那对括号在树中不对应任何节点，它的全部作用就是让 `+` 块插在 `×` 块下面。
 
 **（二）自由生成：模型之间没有任何"视为相同"的约定。** 在项代数里：
 
@@ -178,13 +189,23 @@ data Expr = Lit Int          -- 0 个插孔，表面刻一个整数
 > $$
 > \sigma_{T_\Sigma}(t_1,\dots,t_n) = \sigma(t_1,\dots,t_n)
 > $$
-> 这样得到的代数称为**项代数（Term Algebra）**。
+> 这样得到的代数称为**项代数（Term Algebra）**。当 $\mathrm{ar}(\sigma)=0$ 时，上式即 $\sigma_{T_\Sigma}() = \sigma$：零元运算返回那片单独的叶子，例如 $(\mathsf{lit}_3)_{T_\Sigma}$ 就是一块刻着 3 的数字块。
 
 **例**：签名 $\{\mathtt{zero}:0,\ \mathtt{succ}:1\}$ 的项代数为 $\{\mathtt{zero},\ \mathtt{succ}(\mathtt{zero}),\ \mathtt{succ}(\mathtt{succ}(\mathtt{zero})),\dots\}$，同构于自然数 $\mathbb{N}$。
 
 ### 3.3 多类签名（Many-Sorted Signatures）
 
-在抽象数据类型理论中，通常需要**多类签名（Many-Sorted Signature）**：每个运算符带有输入类（Sort）和输出类，例如 `push : Stack × Elem → Stack`。用积木的话说，插孔有了形状，只有形状对应的积木才能插进去。本文的结论都可以直接推广到多类情形。为了简洁，下文以单类为主。
+在抽象数据类型理论中，通常需要**多类签名（Many-Sorted Signature）**：每个运算符带有输入类（Sort）和输出类，例如 `push : Stack × Elem → Stack`。用积木的话说，插孔有了形状，只有形状对应的积木才能插进去。
+
+多类签名也为 §3.1 的数字块提供了另一种写法。引入两个类 `Int` 和 `Expr`，就可以让整数作为真正的参数出现：
+
+$$
+\mathsf{lit}:\mathrm{Int}\to\mathrm{Expr},\qquad \mathsf{add},\mathsf{mul}:\mathrm{Expr}\times\mathrm{Expr}\to\mathrm{Expr}
+$$
+
+此时 $\mathsf{lit}$ 确实是一元的，但它的插孔是 `Int` 形状的，仍然插不进加号块。代价是整数本身也得由签名生成（比如用 `zero`、`succ`、`neg`），或者被当作预先给定的基础类型。本文采用"一族零元常量"的写法，是为了保持单类签名的简洁；两种写法拼出的语法树本质上相同。
+
+本文的结论都可以直接推广到多类情形。为了简洁，下文以单类为主。
 
 ---
 
@@ -218,6 +239,10 @@ data Expr = Lit Int          -- 0 个插孔，表面刻一个整数
 > - 对每个 $\sigma\in\Sigma$ 的**解释（Interpretation）** $\sigma_A : |A|^{\mathrm{ar}(\sigma)}\to|A|$。
 >
 > 在语义学语境中，载体集就是语义域 $D$。
+
+**零元运算符的解释。** 零元运算符没有输入，所以 $\sigma_A:|A|^0\to|A|$ 实际上就是指定载体中的**一个元素**。对运行示例来说，手册要为每个整数 $n$ 指定一个元素 $(\mathsf{lit}_n)_D\in D$。把这无穷多个选择打包起来，就是一个函数 $\mathsf{lit}_D:\mathbb{Z}\to D$。上表"数字块 $n$"一列和 §7.2 代码中的 `alg["lit"](n)`，用的都是这种打包形式（§6.1 会把它说得更精确）。
+
+手册可以随意使用或无视标签。例如深度手册把每个 $\mathsf{lit}_n$ 都解释为 1，与 $n$ 无关，这完全合法。组合性只禁止手册偷看孩子的**形状**（§4.3），而 $\mathsf{lit}_n$ 根本没有孩子。
 
 ### 4.2 同态：先拼后译，等于先译后拼
 
@@ -319,7 +344,7 @@ flowchart LR
 
 > **定理 5.1（项代数的初始性）**：$T_\Sigma$ 是 $\mathbf{Alg}_\Sigma$ 的初始对象。即对任意 Σ-代数 $A$，存在唯一的 Σ-同态 $h_A: T_\Sigma\to A$。
 >
-> **证明**：同态条件要求
+> **证明**：由定义 4.2，同态条件是 $h_A(\sigma_{T_\Sigma}(t_1,\dots,t_n))=\sigma_A(h_A(t_1),\dots,h_A(t_n))$。由定义 3.2，$\sigma_{T_\Sigma}(t_1,\dots,t_n)$ 就是树 $\sigma(t_1,\dots,t_n)$，所以同态条件化为
 > $$
 > h_A(\sigma(t_1,\dots,t_n)) = \sigma_A(h_A(t_1),\dots,h_A(t_n))
 > $$
@@ -407,7 +432,7 @@ $F$ 是**函子（Functor）**，意味着它不仅作用于对象，也作用�
 > $$
 > 这个同态称为**下态射（Catamorphism）**，在编程中也称为**折叠（Fold）**。
 
-记号 $(\!|\cdot|\!)$ 因形状被俗称为"香蕉括号（Banana Brackets）"（Meijer, Fokkinga & Paterson, 1991）。$\mathrm{in}:F(\mu F)\to\mu F$ 就是"把一层零件和若干棵子树拼成一棵新树"的拼装操作，也就是全体构造子打包而成的函数。
+记号 $(\!|\cdot|\!)$ 因形状被俗称为"香蕉括号（Banana Brackets）"（Meijer, Fokkinga & Paterson, 1991）。$\mathrm{in}:F(\mu F)\to\mu F$ 就是"把一层零件和若干棵子树拼成一棵新树"的拼装操作，也就是全体构造子打包而成的函数。换句话说，$\mathrm{in}$ 正是定义 3.2 中那组运算 $\sigma_{T_\Sigma}$ 打包后的样子，即 §7.2 的 `term_alg`。
 
 用本文的语言说：**$\mu F$ 是所有能拼出的模型，$\mathrm{in}$ 是拼装，$(\!|\alpha|\!)$ 是按手册 $\alpha$ 进行的那唯一一种解读。**
 
@@ -431,7 +456,7 @@ F_\Sigma(X)=\coprod_{n\in\mathbb{Z}}X^{0}\;+\;X^2\;+\;X^2
 \;\cong\;\mathbb{Z}+X\times X+X\times X
 $$
 
-"每个整数一个零元常量"的无穷余积 $\coprod_{n\in\mathbb{Z}}1$，恰好同构于 $\mathbb{Z}$ 本身。所以 Haskell 中的 `Lit Int` 与"一族零元常量"是同一件事。表面上它像是"带一个整数参数"，但这个参数的类型 $\mathbb{Z}$ 不含 $X$，所以它是标签，不是插孔。**插孔就是 $X$ 在 $F(X)$ 中出现的位置。**
+"每个整数一个零元常量"的无穷余积 $\coprod_{n\in\mathbb{Z}}1$，恰好同构于 $\mathbb{Z}$ 本身。所以 Haskell 中的 `Lit Int` 与"一族零元常量"是同一件事。§3.1 的判断标准"参数类型里有没有出现正在定义的类型"，在这里有了精确的形式：$\mathbb{Z}$ 这一项不含 $X$，所以它是标签，不是插孔。**插孔就是 $X$ 在 $F(X)$ 中出现的位置。**
 
 再举一例：$\{\mathtt{zero}:0,\ \mathtt{succ}:1,\ \mathtt{plus}:2\}$ 对应 $F_\Sigma(X)=1+X+X\times X$。
 
@@ -464,7 +489,7 @@ $$
 | 名称 | 规律 | 含义 |
 |---|---|---|
 | 消去律（Cancellation Law） | $(\!\vert\alpha\vert\!)\circ\mathrm{in}=\alpha\circ F(\!\vert\alpha\vert\!)$ | fold 的计算规则：先递归解读孩子，再用手册合成 |
-| 反射律（Reflection Law） | $(\!\vert\mathrm{in}\vert\!)=\mathrm{id}$ | 用"拼装"当手册来解读，等于什么都不做 |
+| 反射律（Reflection Law） | $(\!\vert\mathrm{in}\vert\!)=\mathrm{id}$ | 用"拼装"当手册来解读，等于什么都不做：项代数的运算按定义 3.2 只拼不算，所以把一棵树原样拼回 |
 | 融合律（Fusion Law） | 若 $h\circ\alpha=\beta\circ Fh$，则 $h\circ(\!\vert\alpha\vert\!)=(\!\vert\beta\vert\!)$ | 把后处理并入 fold |
 
 **融合律的直觉**：先用手册 $\alpha$ 解读整棵树，再对结果做 $h$；如果 $h$ 本身是从 $\alpha$ 到 $\beta$ 的同态，这两步就可以合成一步，直接用手册 $\beta$ 解读。例如"先求值，再取奇偶性"：只要后处理与每一页规则都"可交换"，就可以直接按一本新手册解读，不必先算出中间结果。§7.2 末尾给出了这个例子的完整推导。
@@ -612,6 +637,20 @@ print(fold(depth_alg, e))   # 3
 print(fold(code_alg,  e))   # ['PUSH 2', 'PUSH 3', 'PUSH 4', 'MUL', 'ADD']
 print(fold(sign_alg,  e))   # +
 ```
+
+项代数本身也是一本手册，就是下面的 `term_alg`（定义 3.2）。用它来解读，得到的正是原来那棵树：
+
+```python
+term_alg = {
+    "lit": lambda n:    Lit(n),
+    "add": lambda l, r: Add(l, r),
+    "mul": lambda l, r: Mul(l, r),
+}
+
+assert fold(term_alg, e) == e   # 反射律 (| in |) = id 的直接演示
+```
+
+这本手册的每一页都只调用构造函数，即定义 3.2 中的 $\sigma_{T_\Sigma}(t_1,\dots,t_n)=\sigma(t_1,\dots,t_n)$。在所有手册中，它是唯一"不压缩任何信息"的一本。在 Haskell 版里，这本手册打包起来就是 `In : ExprF Expr -> Expr`，也就是 §6.4 中的 $\mathrm{in}$。
 
 **Haskell 版**
 
@@ -1403,7 +1442,7 @@ build g = g (:) []
 |---|---|---|---|---|
 | 签名 | Signature | 零件目录：有哪些零件，每种几个插孔 | $\Sigma$；$F_\Sigma$ | §3.1, §6.5 |
 | 元数 | Arity | 插孔数；刻在表面的标签不算插孔 | $\mathrm{ar}(\sigma)$；$X$ 在 $F(X)$ 中的出现 | §3.1, §6.5 |
-| 项代数 | Term Algebra | 所有能拼出的模型；只会拼不会算，也不承认任何"视为相同" | $T_\Sigma\cong\mu F_\Sigma$ | §3.2 |
+| 项代数 | Term Algebra | 所有能拼出的模型；它的运算只拼不算（$\sigma_{T_\Sigma}(t_1,\dots,t_n)=\sigma(t_1,\dots,t_n)$），也不承认任何"视为相同" | $T_\Sigma\cong\mu F_\Sigma$ | §3.2 |
 | 语义域 | Semantic Domain | 解读结果的种类 | 载体 $D$ | §4.1 |
 | Σ-代数 / F-代数 | Σ-Algebra / F-Algebra | 一本手册：每种零件一页 | $\alpha:FD\to D$ | §4.1, §6.2 |
 | 同态 | Homomorphism | 先拼后译 = 先译后拼 | $h\circ\alpha=\beta\circ Fh$ | §4.2, §6.3 |
