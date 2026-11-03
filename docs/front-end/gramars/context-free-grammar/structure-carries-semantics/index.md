@@ -3,7 +3,7 @@
 
 > *Structure Carries Semantics: From Expression Grammars to Making Illegal States Unrepresentable*
 
-> **本文的缘起**：在拆解龙书 4.1 的经典 E-T-F 表达式文法时（见 [表达式文法如何"编码"结合性与优先级](associativity-and-precedence.md)），我们看到一个令人印象深刻的事实：运算符的优先级与结合性并没有写成一段 `if/else` 判断，而是被"雕刻"进了文法的**产生式结构**里。这个观察背后有一条贯穿编译原理、程序语言理论、形式语义学乃至类型系统与软件设计的主线：**让结构来承载语义**。本文把这条主线完整展开。
+> **本文的缘起**：在拆解龙书 4.1 的经典 E-T-F 表达式文法时（见 [表达式文法如何"编码"结合性与优先级](front-end/gramars/context-free-grammar/design-techniques/associativity-and-precedence.md)），我们看到一个令人印象深刻的事实：运算符的优先级与结合性并没有写成一段 `if/else` 判断，而是被"雕刻"进了文法的**产生式结构**里。这个观察背后有一条贯穿编译原理、程序语言理论、形式语义学乃至类型系统与软件设计的主线：**让结构来承载语义**。本文把这条主线完整展开。
 
 ---
 
@@ -223,7 +223,7 @@ $$
 | **递归方向**（`E → E + T` 左递归） | 结合性 | 左递归强制树向左偏斜，得到 $(a+b)+c$ 的分组；右递归则给出 $a+(b+c)$ |
 | **回路**（`F → (E)`） | 显式覆盖 | 括号让最底层重新跳回最高层，从而人为改变分组 |
 
-细节推导见 [[front-end/gramars/context-free-grammar/associativity-and-precedence/index|associativity-and-precedence]]
+细节推导见 [[front-end/gramars/context-free-grammar/design-techniques/associativity-and-precedence|associativity-and-precedence]]
 
 ### 3.1 严格说，这一层发生在语法内部
 
@@ -824,7 +824,7 @@ flowchart LR
 
 ### 本仓库内相关文章
 
-- [表达式文法如何"编码"结合性与优先级：拆解经典的 E-T-F 文法](associativity-and-precedence.md)：本文的直接出发点### 本仓库内相关文章（续）
+- [表达式文法如何"编码"结合性与优先级：拆解经典的 E-T-F 文法](front-end/gramars/context-free-grammar/design-techniques/associativity-and-precedence.md)：本文的直接出发点### 本仓库内相关文章（续）
 
 - [4.1 Introduction 原文与笔记](front-end/grammar/structure-is-semantics/index.md)：龙书 4.1 节，含 4.1 / 4.2 / 4.3 三个代表性文法
 - [语法制导：SDD、SDT 与翻译方案](Syntax-directed-translation&SDD&SDT.md)：属性文法的声明式与过程式两种形式

@@ -1,6 +1,6 @@
 # 上下文无关文法如何编码优先级与结合性：一套系统的方法论
 
-核心思路: constraint structure: 将实现运算符和结合性的问题转换为约束生成的解析树的现状，因为parse tree的structure能够编码precedence和associativity，CFG通过约束运算符的操作数从而实现对生成的解析树(parse tree)的约束。这其实是structure is semantic中的constraint structure。
+核心思路: constraint structure: 将实现运算符和结合性的问题转换为约束生成的解析树的现状，因为parse tree的structure能够编码precedence和associativity，CFG通过约束运算符的操作数从而实现对生成的解析树(parse tree)的约束。这其实是 [[front-end/gramars/context-free-grammar/structure-carries-semantics/index|structure carries semantics]] 中的: 强形式（构造性）：结构排除非法情况。
 
 ## 0. 引言：编译器怎么"知道"运算规则
 
@@ -96,7 +96,7 @@ flowchart TD
 
 ### 2.2 非终结符就是槽位类型
 
-在 CFG 中，槽位约束怎么表达？答案是：**产生式右部每个操作数位置上写哪个非终结符，就规定了这个槽位接受什么。** 每个非终结符 $A$ 定义了一个子语言 $L(A)$，即"允许放进这个槽位的表达式集合"。
+在 CFG 中，**槽位约束**怎么表达？答案是：**产生式右部每个操作数位置上写哪个非终结符，就规定了这个槽位接受什么。** 每个非终结符 $A$ 定义了一个子语言 $L(A)$，即"允许放进这个槽位的表达式集合"。
 
 > **设计表达式文法，就是设计一组嵌套的子语言，再把它们分配给各个槽位。**
 
@@ -121,7 +121,7 @@ flowchart TD
 
 ## 3. 优先级的通用机制：分层链
 
-分层链即**precedence cascade**，编译原理教材中的标准术语。Louden 的 *Compiler Construction: Principles and Practice* 把"按优先级分组、每层一个非终结符"的方法称为 **precedence cascade**。cascade 有"逐级下沉"之意，与 $E_1 \to E_2 \to \cdots \to E_{n+1}$ 的单向结构很贴合。
+**分层链**即**precedence cascade**，编译原理教材中的标准术语。Louden 的 *Compiler Construction: Principles and Practice* 把"按优先级分组、每层一个非终结符"的方法称为 **precedence cascade**。cascade 有"逐级下沉"之意，与 $E_1 \to E_2 \to \cdots \to E_{n+1}$ 的单向结构很贴合。
 
 ### 3.1 通用模板
 
@@ -233,7 +233,7 @@ flowchart LR
 
 ## 6. 无歧义性：为什么这套模板保证唯一的解析树
 
-### 6.1 无歧义是"结构即语义"的前提
+### 6.1 无歧义是"结构承载语义"的前提
 
 第 1.2 节的推理链是：**解析树的形状唯一 → 求值顺序唯一 → 优先级与结合性被确定地捕获**。这条链的第一环要求文法无歧义：如果一个串有两棵解析树，求值顺序就无法确定，"结构决定语义"也就无从谈起。
 

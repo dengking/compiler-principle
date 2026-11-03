@@ -112,7 +112,7 @@ r.strategy                        # 'dfa'：惰性 DFA 三段式 + 有界回溯�
 | 词法分析器生成器 | lex/flex、re2c、JFlex、ocamllex、Alex、ml-ulex、ANTLR lexer、Rust `logos` | 多规则同时匹配、最长匹配、离线生成、极致速度 |
 | 高吞吐多模式匹配 | Hyperscan / Vectorscan、Snort / Suricata 的匹配层 | 成千上万条规则、流式扫描、SIMD |
 
-它们共享同一套理论：正则语言与有限自动机等价。但工程取舍截然不同：
+它们共享同一套理论：**正则语言**与**有限自动机**等价。但工程取舍截然不同：
 
 - 通用库要支持反向引用、环视，还要报告捕获组；
 - 词法器只要“哪条规则、多长”，但要求每字节只花几个时钟周期；
@@ -231,17 +231,17 @@ $$x \equiv_L y \iff \forall z\in\Sigma^*:\ xz\in L \Leftrightarrow yz\in L$$
 
 ### 1.4 两大流派
 
-Jeffrey Friedl 在《Mastering Regular Expressions》中把引擎分为两类：
+Jeffrey Friedl 在《Mastering Regular Expressions》中从匹配过程的主导因素出发，区分了**正则导向**（regex-directed）和**文本导向**（text-directed）两种引擎。前者包括传统 NFA 和 POSIX NFA，后者主要指 DFA。
 
-| 流派 | 别称 | 工作方式 | 代表 |
-|---|---|---|---|
-| **正则导向**（regex-directed） | “传统 NFA”、回溯 | 按模式结构逐个尝试，失败则回退 | Perl、PCRE、Java、.NET、Python、Ruby、JavaScript |
-| **文本导向**（text-directed） | DFA、自动机模拟 | 每读一个字符，同时推进所有可能状态 | awk、GNU grep 的 DFA 部分、RE2、Rust、Go、lex |
+需要注意的是，Friedl 所说的“NFA 引擎”通常是**回溯**实现，与自动机理论中的 NFA 模拟不是一回事。Russ Cox 在 *Regular Expression Matching Can Be Simple And Fast*（2007）中比较了回溯与 Thompson NFA 模拟，展示了二者巨大的性能差异。
+为避免术语混淆，本文按实现策略分为两类：
 
-Friedl 所说的“NFA 引擎”其实是**回溯**引擎，与理论上的 NFA 模拟不是一回事。Russ Cox 在 *Regular Expression Matching Can Be Simple And Fast*（2007）中专门澄清了这一点。本文统一使用：
+| 类型 | 工作方式 | 代表 |
+|---|---|---|
+| **回溯引擎** | 深度优先搜索，按模式结构逐个尝试，失败则回退 | Perl、PCRE 默认匹配接口、Java、.NET 默认模式、Python `re`、Ruby、JavaScript 传统实现 |
+| **自动机引擎** | 广度优先模拟 NFA，同时跟踪所有可能状态；或预先或惰性地构造 DFA，每步只转移到一个确定状态 | awk、GNU grep 的 DFA 匹配器、lex、RE2、Go `regexp`、Rust `regex` crate |
 
-- **回溯引擎**：深度优先搜索；
-- **自动机引擎**：广度优先的 NFA 模拟，或者确定化后的 DFA。
+这里的划分只是为了便于讨论，许多现代引擎都是混合实现。例如，GNU grep 在处理反向引用时可能使用回溯匹配器，而 RE2 会根据模式和匹配需求，在 DFA、NFA 模拟等策略之间切换。
 
 ### 1.5 复杂度速览
 
@@ -261,7 +261,7 @@ Friedl 所说的“NFA 引擎”其实是**回溯**引擎，与理论上的 NFA 
 
 引擎的第一步是把模式字符串变成一棵语法树。这一步看似平凡，却决定了后面几个关键问题：
 
-- 编号规则：捕获组按什么顺序编号；
+- 编号规则：**捕获组**按什么顺序编号；
 - 资源上限：嵌套多深、重复多少次会被拒绝；
 - 报错质量：用户看到的错误能否指出真正的原因；
 - 特性划分：哪些特性交给哪个引擎。
