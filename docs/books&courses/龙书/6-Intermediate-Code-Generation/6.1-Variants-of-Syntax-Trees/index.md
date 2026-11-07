@@ -16,18 +16,18 @@ $$
 
 The leaf for $a$ has two parents, because $a$ appears twice in the expression. More interestingly, the two occurrences of the common subexpression $b-c$ are represented by one node, the node labeled $-$. That node has two parents, representing its two uses in the subexpressions $a*(b-c)$ and $(b-c)*d$. Even though $b$ and $c$ appear twice in the complete expression, their nodes each have one **parent**, since both uses are in the common subexpression $b-c$. $\quad \square$
 
-![](Figure-6.3-Dag-for-the-expression.png)
+![](books&courses/龙书/6-Intermediate-Code-Generation/6.1-Variants-of-Syntax-Trees/Figure-6.3-Dag-for-the-expression.png)
 
 The SDD of *Fig. 6.4* can construct either syntax trees or DAG’s. It was used to construct **syntax trees** in Example 5.11, where functions $Leaf$ and $Node$ created a fresh node each time they were called. It will construct a DAG if, before creating a new node, these functions first check whether an identical node already exists. If a previously created identical node exists, the existing node is returned. For instance, before constructing a new node, $Node(op, left, right)$, we check whether there is already a node with label $op$, and children $left$ and $right$, in that order. If so, $Node$ returns the existing node; otherwise, it creates a new node.
 
-![](Figure-6.4-Syntax-directed-definition.png)
+![](books&courses/龙书/6-Intermediate-Code-Generation/6.1-Variants-of-Syntax-Trees/Figure-6.4-Syntax-directed-definition.png)
 
 ### Example 6.2
 
 The sequence of steps shown in *Fig. 6.5* constructs the DAG in *Fig. 6.3*, provided $Node$ and $Leaf$ return an existing node, if possible, as discussed above. We assume that $entry$-$a$ points to the symbol-table entry for $a$, and similarly for the other identifiers.
 When the call to $Leaf(\mathbf{id}, entry\text{-}a)$ is repeated at step 2, the node created by the previous call is returned, so $p_2 = p_1$. Similarly, the nodes returned at steps 8 and 9 are the same as those returned at steps 3 and 4 (i.e., $p_8 = p_3$ and $p_9 = p_4$). Hence the node returned at step 10 must be the same at that returned at step 5; i.e., $p_{10} = p_5$. $\quad \square$
 
-![](Figure-6.5-Steps-for-constructing-the-DAG.png)
+![](books&courses/龙书/6-Intermediate-Code-Generation/6.1-Variants-of-Syntax-Trees/Figure-6.5-Steps-for-constructing-the-DAG.png)
 
 
 
@@ -43,7 +43,7 @@ In this array, we refer to nodes by giving the **integer index** of the record f
 
 
 
-![](Figure-6.6-Nodes-of-a-DAG.png)
+![](books&courses/龙书/6-Intermediate-Code-Generation/6.1-Variants-of-Syntax-Trees/Figure-6.6-Nodes-of-a-DAG.png)
 
 ### signature
 
@@ -73,7 +73,7 @@ Thus, given the input node $op$, $l$, and $r$, we compute the bucket index $h(op
 
 
 
-![](Figure-6.7-Data-structure-for-searching-buckets.png)
+![](books&courses/龙书/6-Intermediate-Code-Generation/6.1-Variants-of-Syntax-Trees/Figure-6.7-Data-structure-for-searching-buckets.png)
 
 
 

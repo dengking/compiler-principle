@@ -25,7 +25,7 @@ The **symbol table**, which stores information about the entire source program, 
 >
 > 关于symbol table的主要内容放到了`Chapter-2-A-Simple-Syntax-Directed-Translator\2.7-Symbol-Tables`中。
 
-![](Figure1.6Phases-of-a-compiler.jpg)
+![](books&courses/龙书/1-Introduction/1.2-The-Structure-of-a-Compiler/Figure1.6Phases-of-a-compiler.jpg)
 
 Some compilers have a **machine-independent optimization** phase between the **front end** and the **back end**. The purpose of this optimization phase is to perform transformations on the **intermediate representation**, so that the back end can produce a better target program than it would have otherwise produced from an unoptimized intermediate representation. Since optimization is optional, one or the other of the two optimization phases shown in Fig. 1.6 may be missing.
 
@@ -100,7 +100,7 @@ Figure 1.7 shows the representation of the assignment statement (1.1) after lexi
 <id, 1> <=> <id, 2> <+> <id, 3> <?> <60> 										(1.2)
 ```
 
-![](Figure-1.7Translation-of-an-assignment-statement.jpg)
+![](books&courses/龙书/1-Introduction/1.2-The-Structure-of-a-Compiler/Figure-1.7Translation-of-an-assignment-statement.jpg)
 
 
 

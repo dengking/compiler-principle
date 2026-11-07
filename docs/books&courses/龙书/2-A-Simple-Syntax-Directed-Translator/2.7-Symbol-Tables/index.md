@@ -10,7 +10,7 @@ This section contains a symbol-table module suitable for use with the Java trans
 
 > 翻译: 本节给出一个符号表模块，可配合本章的 Java 翻译程序片段使用。在附录 A 整合完整翻译器时，会直接使用该模块。为简化讨论，本节的主要示例采用了一门精简语言，仅保留和符号表相关的核心构造：程序块、声明、因子。其余所有**语句**与**表达式**构造全部省略，以便我们专注于**符号表**的操作。该语言的程序由若干程序块构成，块内可包含声明；语句仅由单个标识符组成，每一条这样的语句代表对该标识符的一次引用。下面给出该语言的一段示例程序。
 
-![](2.7.png)
+![](books&courses/龙书/2-A-Simple-Syntax-Directed-Translator/2.7-Symbol-Tables/2.7.png)
 
 The examples of block structure in Section 1.6.3 dealt with the definitions and uses of names; the input $ 2.7 $ consists solely of definitions and uses of names. The task we shall perform is to print a revised program, in which the declarations have been removed and each "statement" has its identifier followed by a colon and its type.
 
@@ -64,7 +64,7 @@ The translation scheme in Fig. 2.38 illustrates how class Env can be used. The t
 
 > 翻译: 图 2.38 中的翻译方案演示了`Env`类的使用方法。该翻译方案聚焦于**作用域、声明与引用**，实现了例 2.14 中描述的翻译逻辑。正如前文所述，面对输入
 
-![](Figure-2.38-The-use-of-symbol-tables-for-translating-a-language-with-blocks.png)
+![](books&courses/龙书/2-A-Simple-Syntax-Directed-Translator/2.7-Symbol-Tables/Figure-2.38-The-use-of-symbol-tables-for-translating-a-language-with-blocks.png)
 
 As noted earlier, on input
 

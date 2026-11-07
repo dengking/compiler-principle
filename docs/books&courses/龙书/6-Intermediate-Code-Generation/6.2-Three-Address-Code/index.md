@@ -17,7 +17,7 @@ where $t_1$ and $t_2$ are compiler-generated temporary names. This unraveling(�
 
 **Three-address code** is a linearized representation of a **syntax tree** or a **DAG** in which explicit names correspond to the **interior nodes** of the graph. The DAG in *Fig. 6.3* is repeated in *Fig. 6.8*, together with a corresponding three-address sequence. $\quad \square$
 
-![](Figure-6.8-A-DAG-and-its-corresponding-three-address-code.png)
+![](books&courses/龙书/6-Intermediate-Code-Generation/6.2-Three-Address-Code/Figure-6.8-A-DAG-and-its-corresponding-three-address-code.png)
 
 ## 6.2.1 Addresses and Instructions
 
@@ -148,7 +148,7 @@ Two possible translations of this statement are shown in Fig. 6.9. The translati
 
 The translation in (b) shows position numbers for the instructions, starting arbitrarily at position 100. In both translations, the last instruction is a conditional jump to the first instruction. The multiplication $i * 8$ is appropriate for an array of elements that each take 8 units of space. $\quad \square$
 
-![](Figure-6.9-Two-ways-of-assigning-labels-to-three-address-statements.png)
+![](books&courses/龙书/6-Intermediate-Code-Generation/6.2-Three-Address-Code/Figure-6.9-Two-ways-of-assigning-labels-to-three-address-statements.png)
 
 The choice of allowable operators is an important issue in the design of an intermediate form. The operator set clearly must be rich enough to implement the operations in the source language. Operators that are close to **machine instructions** make it easier to implement the intermediate form on a target machine. However, if the **front end** must generate long sequences of instructions for some source‑language operations, then the optimizer and code generator may have to work harder to rediscover the structure and generate good code for these operations.
 
@@ -173,7 +173,7 @@ A quadruple (or just "quad") has four fields, which we call $op$, $arg_1$, $arg_
 
 Static single‑assignment form (SSA) is an intermediate representation that facilitates certain code optimizations. Two distinctive aspects distinguish SSA from **three‑address code**. The first is that all assignments in SSA are to variables with distinct names; hence the term static single‑assignment. Figure 6.13 shows the same intermediate program in three‑address code and in **static single‑assignment form**. Note that subscripts distinguish each definition of variables p and q in the SSA representation.
 
-![](Figure-6.13-Intermediate-program-in-three-address-code-and-SSA.png)
+![](books&courses/龙书/6-Intermediate-Code-Generation/6.2-Three-Address-Code/Figure-6.13-Intermediate-program-in-three-address-code-and-SSA.png)
 
 The same variable may be defined in two different **control‑flow paths** in a program. For example, the source program
 

@@ -20,7 +20,7 @@ How do es a shift-reduce parser know when to shift and when to reduce? For examp
 
 An **LR parser** makes shift-reduce decisions by maintaining **states** to keep track of where we are in a parse. States represent sets of "items." An *LR(0) item* (*item* for short) of a grammar G is a production of G with a dot at some position of the body. Thus, production $A \to XYZ$ yields the four items
 
-![](A-to-XYZ.jpg)
+![](books&courses/龙书/4-Syntax-Analysis/4.6-Introduction-to-LR-Parsing-Simple-LR/A-to-XYZ.jpg)
 
 The production $A \to \epsilon$ generates only one item, $A \to \bullet$ .
 
@@ -36,7 +36,7 @@ To construct the **canonical LR(0) collection** for a grammar, we define an **au
 
 If $G$ is a grammar with start symbol $S$ , then $\acute{G}$ , the augmented grammar for G, is $G$ with a new start symbol $\acute{S}$ and production $\acute{S} \to S $. The purpose of this new starting production is to indicate to the parser when it should stop parsing and announce acceptance of the input. That is, acceptance occurs when and only when the parser is about to reduce by $\acute{S} \to S $.
 
-![](Figure4.31-LR(0)-automaton-for-the-expression-grammar(4.1).jpg)
+![](books&courses/龙书/4-Syntax-Analysis/4.6-Introduction-to-LR-Parsing-Simple-LR/Figure4.31-LR(0)-automaton-for-the-expression-grammar(4.1).jpg)
 
 ### Closure of Item Sets
 

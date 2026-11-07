@@ -16,7 +16,7 @@
 - [[books&courses/龙书/1-Introduction/1.1-Language-Processors/index|dragon-book#1.1-Language-Processors]] 
 
 
-books&courses: [[books&courses/index|books&courses]] 
+books&courses: [[learning-path/learning-path|books&courses]] 
 experts: [[experts/index|index]]  
 implementations: [[impls/index|implementations]] 
 applications: [[applications/index|index]] 

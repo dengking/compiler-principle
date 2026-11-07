@@ -4,7 +4,7 @@ As the first phase of a compiler, the main task of the lexical analyzer is to re
 
 These interactions are suggested in Fig. 3.1. Commonly, the interaction is implemented by having the parser call the **lexical analyzer**. The call, suggestedby the `getNextToken` command, causes the **lexical analyzer** to read characters from its input until it can identify the **next lexeme** and produce for it the **next token**, which it returns to the **parser**.
 
-![](figure-3.1-Interactions-between-lexical-analyzer-and-parser.png)
+![](books&courses/龙书/3-Lexical-Analysis/3.1-The-Role-of-the-Lexical-Analyzer/figure-3.1-Interactions-between-lexical-analyzer-and-parser.png)
 
 
 

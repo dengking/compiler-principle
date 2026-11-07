@@ -1,18 +1,18 @@
 # 11 Optimizing for Parallelism and Locality
 
-- [11.1 Basic Concepts](11.1-Basic-Concepts.md)
-- [11.10 Locality Optimizations](11.10-Locality-Optimizations.md)
-- [11.11 Other Uses of Affine Transforms](11.11-Other-Uses-of-Affine-Transforms.md)
-- [11.12 Summary of Chapter 11](11.12-Summary-of-Chapter-11.md)
-- [11.13 References for Chapter 11](11.13-References-for-Chapter-11.md)
-- [11.2 Matrix Multiply: An In-Depth Example](11.2-Matrix-Multiply-an-In-Depth-Example.md)
-- [11.3 Iteration Spaces](11.3-Iteration-Spaces.md)
-- [11.4 Affine Array Indexes](11.4-Affine-Array-Indexes.md)
-- [11.5 Data Reuse](11.5-Data-Reuse.md)
-- [11.6 Array Data-Dependence Analysis](11.6-Array-Data-Dependence-Analysis.md)
-- [11.7 Finding Synchronization-Free Parallelism](11.7-Finding-Synchronization-Free-Parallelism.md)
-- [11.8 Synchronization Between Parallel Loops](11.8-Synchronization-Between-Parallel-Loops.md)
-- [11.9 Pipelining](11.9-Pipelining.md)
+- [11.1 Basic Concepts](books&courses/龙书/compilers-principles/11-Optimizing-for-Parallelism-and-Locality/11.1-Basic-Concepts.md)
+- [11.10 Locality Optimizations](books&courses/龙书/compilers-principles/11-Optimizing-for-Parallelism-and-Locality/11.10-Locality-Optimizations.md)
+- [11.11 Other Uses of Affine Transforms](books&courses/龙书/compilers-principles/11-Optimizing-for-Parallelism-and-Locality/11.11-Other-Uses-of-Affine-Transforms.md)
+- [11.12 Summary of Chapter 11](books&courses/龙书/compilers-principles/11-Optimizing-for-Parallelism-and-Locality/11.12-Summary-of-Chapter-11.md)
+- [11.13 References for Chapter 11](books&courses/龙书/compilers-principles/11-Optimizing-for-Parallelism-and-Locality/11.13-References-for-Chapter-11.md)
+- [11.2 Matrix Multiply: An In-Depth Example](books&courses/龙书/compilers-principles/11-Optimizing-for-Parallelism-and-Locality/11.2-Matrix-Multiply-an-In-Depth-Example.md)
+- [11.3 Iteration Spaces](books&courses/龙书/compilers-principles/11-Optimizing-for-Parallelism-and-Locality/11.3-Iteration-Spaces.md)
+- [11.4 Affine Array Indexes](books&courses/龙书/compilers-principles/11-Optimizing-for-Parallelism-and-Locality/11.4-Affine-Array-Indexes.md)
+- [11.5 Data Reuse](books&courses/龙书/compilers-principles/11-Optimizing-for-Parallelism-and-Locality/11.5-Data-Reuse.md)
+- [11.6 Array Data-Dependence Analysis](books&courses/龙书/compilers-principles/11-Optimizing-for-Parallelism-and-Locality/11.6-Array-Data-Dependence-Analysis.md)
+- [11.7 Finding Synchronization-Free Parallelism](books&courses/龙书/compilers-principles/11-Optimizing-for-Parallelism-and-Locality/11.7-Finding-Synchronization-Free-Parallelism.md)
+- [11.8 Synchronization Between Parallel Loops](books&courses/龙书/compilers-principles/11-Optimizing-for-Parallelism-and-Locality/11.8-Synchronization-Between-Parallel-Loops.md)
+- [11.9 Pipelining](books&courses/龙书/compilers-principles/11-Optimizing-for-Parallelism-and-Locality/11.9-Pipelining.md)
 
 ## 章首内容
 

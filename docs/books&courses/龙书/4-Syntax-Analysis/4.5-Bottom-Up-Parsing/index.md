@@ -9,7 +9,7 @@ building an **explicit tree**. The sequence of tree snapshots in Fig. 4.25 illus
 
 > NOTE: Thinking of parsing as the process of building parse trees can help us grasp the content more easily.
 
-![](Figure4.25A-bottom-up-parse-for-id-product-id.jpg)
+![](books&courses/龙书/4-Syntax-Analysis/4.5-Bottom-Up-Parsing/Figure4.25A-bottom-up-parse-for-id-product-id.jpg)
 
 This section introduces a general style of **bottom-up parsing** known as **shift-reduce parsing**. The largest class of grammars for which **shift-reduce parsers** can be built, the **LR grammars**, will be discussed in Sections 4.6 and 4.7. Although it is too much work to build an **LR parser** by hand, tools called **automatic parser generators** make it easy to construct efficient **LR parsers** from suitable grammars. The concepts in this section are helpful for writing suitable grammars to make effective use of an LR parser generator. Algorithms for implementing parser generators appear in Section 4.7.
 
@@ -88,7 +88,7 @@ To reconstruct this derivation in reverse order, we locate the **handle** $\beta
 
 Up on entering this **configuration**, the parser halts and announces successful completion of parsing. Figure 4.28 steps through the actions a shift-reduce parser might take in parsing the input string $id \ast id$ according to the expression grammar (4.1).
 
-![](Figure4.28Configurations-of-a-shift-reduce-parser-on-input-id-product-id.jpg)
+![](books&courses/龙书/4-Syntax-Analysis/4.5-Bottom-Up-Parsing/Figure4.28Configurations-of-a-shift-reduce-parser-on-input-id-product-id.jpg)
 
 While the primary operations are shift and reduce, there are actually four possible actions a shift-reduce parser can make: (1) shift, (2) reduce, (3) accept, and (4) error.
 
@@ -103,7 +103,7 @@ The use of a **stack** in **shift-reduce parsing** is justified by an important 
 
 In case (2), $A$ is again expanded first, but this time the body is a string $y$ of terminals only. The next rightmost nonterminal $B$ will be somewhere to the left of $y$ .
 
-![](Figure4.29Cases-for-two-successive-steps-of-a-rightmost-derivation.jpg)
+![](books&courses/龙书/4-Syntax-Analysis/4.5-Bottom-Up-Parsing/Figure4.29Cases-for-two-successive-steps-of-a-rightmost-derivation.jpg)
 
 > NOTE: The proof is omitted because I think it's a natural conclusion. If you read the note in 4.5.1 Reductions, you will find the conclusion is easy to understand. Here the author enumerates one example to support this.
 

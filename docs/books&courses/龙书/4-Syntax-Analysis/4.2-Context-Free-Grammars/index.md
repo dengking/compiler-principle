@@ -2,7 +2,7 @@
 
 Grammars were introduced in Section 2.2 to systematically describe the syntaxof programming language constructs like **expressions** and **statements**. Usinga syntactic variable `stmt` to denote **statements** and variable `expr` to denote **expressions**, the production
 
-![](grammar-4.4.png)
+![](books&courses/龙书/4-Syntax-Analysis/4.2-Context-Free-Grammars/grammar-4.4.png)
 
 species the structure of this form of **conditional statement**. Other **productions** then dene precisely what an `expr` is and what else a `stmt` can be.
 
@@ -46,7 +46,7 @@ id + - * / ( )
 
 The **nonterminal symbols** are ***expression***, ***term*** and ***factor***, and ***expression*** is the **start symbol**
 
-![](figure-4.2-grammar-for-simple-arithmetic-expressions.png)
+![](books&courses/龙书/4-Syntax-Analysis/4.2-Context-Free-Grammars/figure-4.2-grammar-for-simple-arithmetic-expressions.png)
 
 ## 4.2.2 Notational Conventions(文法记法约)
 
@@ -95,7 +95,7 @@ A set of productions $A \to \alpha_1$, $A \to \alpha_2$,...,$A \to \alpha_k$, wi
 
 Example 4.6 : Using these conventions, the grammar of Example 4.5 can be rewritten concisely as
 
-![](example-4.6.png)
+![](books&courses/龙书/4-Syntax-Analysis/4.2-Context-Free-Grammars/example-4.6.png)
 
 The **notational conventions** tell us that `E`, `T`, and `F` are nonterminals, with `E` the start symbol. The remaining symbols are terminals
 
@@ -111,7 +111,7 @@ The construction of a **parse tree** can be made precise by taking a **derivatio
 
 For example, consider the following grammar, with a single nonterminal `E`, which adds a production $E \to - E$ to the grammar (4.3)
 
-![](grammar-4.7.png)
+![](books&courses/龙书/4-Syntax-Analysis/4.2-Context-Free-Grammars/grammar-4.7.png)
 
 The production $E \to -E$ signifies(表示) that if `E` denotes an expression, the  `-E` must also denote an expression. The **replacement**(其实就是前面提到的rewrite) of a single `E` by `-E` will be described by writing
 
@@ -238,7 +238,7 @@ A **parse tree** is a graphical representation of a **derivation** that filters 
 
 For example, the parse tree for $-(\mathbf{id}+\mathbf{id})$ in Fig. 4.3, results from the derivation (4.8) as well as derivation (4.9).
 
-![](Figure-4.3-Parse-tree.png)
+![](books&courses/龙书/4-Syntax-Analysis/4.2-Context-Free-Grammars/Figure-4.3-Parse-tree.png)
 
 The leaves of a **parse tree** are labeled by nonterminals or terminals and, read from left to right, constitute a **sentential form**, called the *yield* or *frontier* of the tree.
 
@@ -575,7 +575,7 @@ flowchart TD
 
 The sequence of parse trees constructed from the derivation (4.8) is shown in Fig. 4.4. In the first step of the derivation, $E \Rightarrow -E$. To model this step, add two children, labeled $-$ and $E$, to the root $E$ of the initial tree. The result is the second tree.
 In the second step of the derivation, $-E \Rightarrow -(E)$. Consequently, add three children, labeled $(,E,\text{ and })$, to the leaf labeled $E$ of the second tree, to obtain the third tree with yield $-(E)$. Continuing in this fashion we obtain the complete parse tree as the sixth tree. $\square$
-![](Figure-4.4-Sequence-of-parse-trees-for-derivation.png)
+![](books&courses/龙书/4-Syntax-Analysis/4.2-Context-Free-Grammars/Figure-4.4-Sequence-of-parse-trees-for-derivation.png)
 
 ### parse tree和derivation的relationship
 
@@ -629,7 +629,7 @@ $$
 
 The corresponding parse trees appear in Fig. 4.5.
 
-![](Figure-4.5-Two-parse-trees.png)
+![](books&courses/龙书/4-Syntax-Analysis/4.2-Context-Free-Grammars/Figure-4.5-Two-parse-trees.png)
 
 Note that the parse tree of Fig. 4.5(a) reflects the commonly assumed precedence of $+$ and $*$, while the tree of Fig. 4.5(b) does not. That is, it is customary to treat operator $*$ as having higher precedence than $+$, corresponding to the fact that we would normally evaluate an expression like $a + b * c$ as $a + (b * c)$, rather than as $(a + b) * c$. $\square$
 

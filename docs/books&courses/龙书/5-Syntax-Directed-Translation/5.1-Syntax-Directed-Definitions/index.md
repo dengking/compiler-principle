@@ -127,7 +127,7 @@ No additional translations are enabled if we allow an **inherited attribute $B.c
 
 The SDD in Fig. 5.1 is based on our familiar grammar for arithmetic expressions with operators `+` and `*`. It evaluates expressions terminated by an endmarker **n**. In the SDD, each of the nonterminals has a single **synthesized attribute**, called `val`. We also suppose that the terminal **digit** has a **synthesized attribute** `lexval`, which is an integer value returned by the **lexical analyzer**.
 
-![](figure-5.1-Syntax-directed-definition-of-a-simple-desk-calculator.png)
+![](books&courses/龙书/5-Syntax-Directed-Translation/5.1-Syntax-Directed-Definitions/figure-5.1-Syntax-directed-definition-of-a-simple-desk-calculator.png)
 
 The rule for production 1, $L \to E {\bf n}$, sets $L.val$ to $E.val$, which we shall see is the **numerical value** of the entire expression.
 
@@ -209,7 +209,7 @@ For SDD's with both **inherited** and **synthesized** attributes, there is no gu
 
 These rules are circular; it is impossible to evaluate either `A.s` at a node `N` or `B.i` at the child of `N` without first evaluating the other. The [circular dependency](https://en.wikipedia.org/wiki/Circular_dependency) of `A.s` and `B.i` at some pair of nodes in a parse tree is suggested by Fig. 5.2.
 
-![](Figure-5.2-The-circular-dependency-of-A.s-and-B.i-on-one-another.jpg)
+![](books&courses/龙书/5-Syntax-Directed-Translation/5.1-Syntax-Directed-Definitions/Figure-5.2-The-circular-dependency-of-A.s-and-B.i-on-one-another.jpg)
 
 It is computationally difficult to determine whether or not there exist any **circularities** in any of the parse trees that a given SDD could have to translate. $^1$ Fortunately, there are useful sub classes of SDD's that are sufficient to guarantee that an order of evaluation exists, as we shall see in Section 5.2.
 
@@ -223,7 +223,7 @@ It is computationally difficult to determine whether or not there exist any **ci
 
 Figure 5.3 shows an **annotated parse tree** for the input string `3 * 5 + 4`, constructed using the grammar and rules of *Fig. 5.1*. The values of *lexval* are presumed supplied by the **lexical analyzer**. Each of the nodes for the nonterminals has attribute *val* computed in a **bottom-up order**, and we see the resulting values associated with each node. For instance, at the node with a child labeled `*`, after computing $T.val = 3$ and $F.val = 5$ at its first and third children, we apply the rule that says $T.val$ is the product of these two values, or $15$. $\quad \square$
 
-![](Figure-5.3-Annotated-parse-tree.png)
+![](books&courses/龙书/5-Syntax-Directed-Translation/5.1-Syntax-Directed-Definitions/Figure-5.3-Annotated-parse-tree.png)
 
 ### Resolving-Parse-Tree–Abstract-Syntax-Mismatch-with-Inherited-Attributes
 
@@ -252,7 +252,7 @@ Each of the nonterminals `T` and `F` has a **synthesized attribute** `val` ; the
 
 The **semantic rules** are based on the idea that the left operand of the operator `*` is inherited. More precisely, the head `T'` of the production $T' \to * F T_1'$ inherits the left operand of `*` in the production body. Given a term `x * y * z` , the root of the subtree for $* y * z$ inherits `x`. Then, the root of the subtree for `* z` inherits the value of `* x * y` , and so on, if there are more factors in the term. Once all the factors have been accumulated, the result is passed back up the tree using **synthesized attributes**.
 
-![](Figure-5.5-Annotated-parse-tree-for-3-times-5.jpg)
+![](books&courses/龙书/5-Syntax-Directed-Translation/5.1-Syntax-Directed-Definitions/Figure-5.5-Annotated-parse-tree-for-3-times-5.jpg)
 
 To see how the **semantic rules** are used, consider the annotated parse tree for `3 * 5` in Fig. 5.5. The leftmost leaf in the **parse tree**, labeled **digit**, has attribute value `lexval = 3`, where the `3` is supplied by the **lexical analyzer**. Its parent is for production 4, $F \to digit$. The only **semantic rule** associated with this production defines $F.val = digit.lexval$ , which equals 3.
 

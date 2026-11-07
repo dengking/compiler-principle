@@ -1,14 +1,14 @@
 # 12 Interprocedural Analysis
 
-- [12.1 Basic Concepts](12.1-Basic-Concepts.md)
-- [12.2 Why Interprocedural Analysis?](12.2-Why-Interprocedural-Analysis.md)
-- [12.3 A Logical Representation of Data Flow](12.3-A-Logical-Representation-of-Data-Flow.md)
-- [12.4 A Simple Pointer-Analysis Algorithm](12.4-A-Simple-Pointer-Analysis-Algorithm.md)
-- [12.5 Context-Insensitive Interprocedural Analysis](12.5-Context-Insensitive-Interprocedural-Analysis.md)
-- [12.6 Context-Sensitive Pointer Analysis](12.6-Context-Sensitive-Pointer-Analysis.md)
-- [12.7 Datalog Implementation by BDD's](12.7-Datalog-Implementation-by-BDD's.md)
-- [12.8 Summary of Chapter 12](12.8-Summary-of-Chapter-12.md)
-- [12.9 References for Chapter 12](12.9-References-for-Chapter-12.md)
+- [12.1 Basic Concepts](books&courses/龙书/compilers-principles/12-Interprocedural-Analysis/12.1-Basic-Concepts.md)
+- [12.2 Why Interprocedural Analysis?](books&courses/龙书/compilers-principles/12-Interprocedural-Analysis/12.2-Why-Interprocedural-Analysis.md)
+- [12.3 A Logical Representation of Data Flow](books&courses/龙书/compilers-principles/12-Interprocedural-Analysis/12.3-A-Logical-Representation-of-Data-Flow.md)
+- [12.4 A Simple Pointer-Analysis Algorithm](books&courses/龙书/compilers-principles/12-Interprocedural-Analysis/12.4-A-Simple-Pointer-Analysis-Algorithm.md)
+- [12.5 Context-Insensitive Interprocedural Analysis](books&courses/龙书/compilers-principles/12-Interprocedural-Analysis/12.5-Context-Insensitive-Interprocedural-Analysis.md)
+- [12.6 Context-Sensitive Pointer Analysis](books&courses/龙书/compilers-principles/12-Interprocedural-Analysis/12.6-Context-Sensitive-Pointer-Analysis.md)
+- [12.7 Datalog Implementation by BDD's](books&courses/龙书/compilers-principles/12-Interprocedural-Analysis/12.7-Datalog-Implementation-by-BDD's.md)
+- [12.8 Summary of Chapter 12](books&courses/龙书/compilers-principles/12-Interprocedural-Analysis/12.8-Summary-of-Chapter-12.md)
+- [12.9 References for Chapter 12](books&courses/龙书/compilers-principles/12-Interprocedural-Analysis/12.9-References-for-Chapter-12.md)
 
 ## 章首内容
 

@@ -2,7 +2,7 @@
 
 The final phase in our compiler model is the **code generator**. It takes as input the **intermediate representation (IR)** produced by the **front end** of the compiler, along with relevant **symbol table information**, and produces as output a semantically equivalent target program, as shown in Fig. 8.1.
 
-![](Figure-8.1-Position-of-code-generator.png)The requirements imposed on a code generator are severe. The target program must preserve the semantic meaning of the source program and be of high quality; that is, it must make effective use of the available resources of the target machine. Moreover, the **code generator** itself must run efficiently.
+![](books&courses/龙书/8-Code-generation/Figure-8.1-Position-of-code-generator.png)The requirements imposed on a code generator are severe. The target program must preserve the semantic meaning of the source program and be of high quality; that is, it must make effective use of the available resources of the target machine. Moreover, the **code generator** itself must run efficiently.
 
 翻译: 代码生成器需要满足严苛的设计要求
 

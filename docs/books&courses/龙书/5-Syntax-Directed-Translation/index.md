@@ -10,7 +10,7 @@ This chapter develops the theme of Section 2.3: the translation of languages gui
 
 We associate information with a language construct by attaching **attributes** to the grammar symbol(s) representing the construct, as discussed in Section 2.3.2. A **syntax-directed definition** specifies the values of **attributes** by associating **semantic rules** with the **grammar productions**. For example, an infix-to-postfix translator might have a production and rule
 
-![](Figure-5.1.jpg)
+![](books&courses/龙书/5-Syntax-Directed-Translation/Figure-5.1.jpg)
 
 This production has two nonterminals, $E$ and $T$; the subscript in $E_1$ distinguishes the occurrence of $E$ in the production body from the occurrence of $E$ as the head. Both $E$ and $T$ have a string-valued attribute $code$. The semantic rule specifies that the string $E.code$ is formed by concatenating $E_1.code$, $T.code$, and the character '$+$'. While the rule makes it explicit that the translation of $E$ is built up from the translations of $E_1$, $T$, and '$+$', it may be inefficient to implement the translation directly by manipulating strings.
 
@@ -20,7 +20,7 @@ This production has two nonterminals, $E$ and $T$; the subscript in $E_1$ distin
 
 From Section 2.3.5, a **syntax-directed translation scheme** embeds program fragments called **semantic actions** within production bodies, as in
 
-![](Figure-5.2.jpg)
+![](books&courses/龙书/5-Syntax-Directed-Translation/Figure-5.2.jpg)
 
 By convention, **semantic actions** are enclosed within curly braces. (If curly
 braces occur as grammar symbols, we enclose them within single quotes, as in$'\{'$ and $'\}'$.) The position of a **semantic action** in a **production body** determines the order in which the action is executed. In production $(5.2)$, the action occurs at the end, after all the grammar symbols; in general, semantic actions may occur at any position in a production body.

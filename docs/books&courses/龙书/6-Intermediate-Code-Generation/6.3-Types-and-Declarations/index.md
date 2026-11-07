@@ -16,7 +16,7 @@ Types have structure, which we shall represent using **type expressions**: a **t
 
 **Example 6.8** : The array type `int[2][3]` can be read as array of 2 arrays of 3 integers each and written as a **type expression** `array (2; array (3; integer))`.This type is represented by the tree in Fig. 6.14. The operator **array** takes two parameters, a number and a type(如下所示，array节点有两个子节点). 
 
-![](Figure-6.14-Type-expression-for-int[2][3].png)
+![](books&courses/龙书/6-Intermediate-Code-Generation/6.3-Types-and-Declarations/Figure-6.14-Type-expression-for-int[2][3].png)
 
 We shall use the following definition of **type expressions**:
 

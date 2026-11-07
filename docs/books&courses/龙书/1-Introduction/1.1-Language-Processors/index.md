@@ -8,7 +8,7 @@ Simply stated, a **compiler** is a program that can read a program in one langua
 >
 > wikipedia [Compiler](https://en.wikipedia.org/wiki/Compiler)
 
-![](Figure1.1-A-compiler.jpg)
+![](books&courses/龙书/1-Introduction/1.1-Language-Processors/Figure1.1-A-compiler.jpg)
 
 If the **target program** is an **executable machine-language program**, it can then be called by the user to process inputs and produce outputs; see Fig. 1.2.
 
@@ -20,7 +20,7 @@ If the **target program** is an **executable machine-language program**, it can 
 
 
 
-![](Figure1.2-Running-the-target-program.jpg)
+![](books&courses/龙书/1-Introduction/1.1-Language-Processors/Figure1.2-Running-the-target-program.jpg)
 
 > NOTE: 
 >
@@ -34,7 +34,7 @@ If the **target program** is an **executable machine-language program**, it can 
 
 An **interpreter** is another common kind of language processor. Instead of producing a **target program** as a translation, an interpreter appears to directly execute the operations specified in the **source program** on inputs supplied by the user, as shown in Fig. 1.3.
 
-![](Figure1.3An-interpreter.jpg)
+![](books&courses/龙书/1-Introduction/1.1-Language-Processors/Figure1.3An-interpreter.jpg)
 
 The machine-language target program produced by a compiler is usually much faster than an interpreter at mapping inputs to outputs . An interpreter, however, can usually give better error diagnostics than a compiler, because it executes the source program statement by statement.
 
@@ -59,7 +59,7 @@ In order to achieve faster processing of inputs to outputs, some Java compilers,
 >
 > - [Just-in-time compilation](https://en.wikipedia.org/wiki/Just-in-time_compilation)
 
-![](Figure1.4A-hybrid-compiler.jpg)
+![](books&courses/龙书/1-Introduction/1.1-Language-Processors/Figure1.4A-hybrid-compiler.jpg)
 
 
 
@@ -88,7 +88,7 @@ In addition to a compiler, several other programs may be required to create an e
 
 
 
-![](Figure1.5A-language-processing-system.jpg)
+![](books&courses/龙书/1-Introduction/1.1-Language-Processors/Figure1.5A-language-processing-system.jpg)
 
 > NOTE: This book focus only on compiler and the others is not included.
 

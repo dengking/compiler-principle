@@ -1,16 +1,16 @@
 # 3 Lexical Analysis
 
-- [3.1 The Role of the Lexical Analyzer](3.1-The-Role-of-the-Lexical-Analyzer.md)
-- [3.10 Summary of Chapter 3](3.10-Summary-of-Chapter-3.md)
-- [3.11 References for Chapter 3](3.11-References-for-Chapter-3.md)
-- [3.2 Input Buffering](3.2-Input-Buffering.md)
-- [3.3 Specification of Tokens](3.3-Specification-of-Tokens.md)
-- [3.4 Recognition of Tokens](3.4-Recognition-of-Tokens.md)
-- [3.5 The Lexical-Analyzer Generator Lex](3.5-The-Lexical-Analyzer-Generator-Lex.md)
-- [3.6 Finite Automata](3.6-Finite-Automata.md)
-- [3.7 From Regular Expressions to Automata](3.7-From-Regular-Expressions-to-Automata.md)
-- [3.8 Design of a Lexical-Analyzer Generator](3.8-Design-of-a-Lexical-Analyzer-Generator.md)
-- [3.9 Optimization of DFA-Based Pattern Matchers](3.9-Optimization-of-DFA-Based-Pattern-Matchers.md)
+- [3.1 The Role of the Lexical Analyzer](books&courses/龙书/compilers-principles/3-Lexical-Analysis/3.1-The-Role-of-the-Lexical-Analyzer.md)
+- [3.10 Summary of Chapter 3](books&courses/龙书/compilers-principles/3-Lexical-Analysis/3.10-Summary-of-Chapter-3.md)
+- [3.11 References for Chapter 3](books&courses/龙书/compilers-principles/3-Lexical-Analysis/3.11-References-for-Chapter-3.md)
+- [3.2 Input Buffering](books&courses/龙书/compilers-principles/3-Lexical-Analysis/3.2-Input-Buffering.md)
+- [3.3 Specification of Tokens](books&courses/龙书/compilers-principles/3-Lexical-Analysis/3.3-Specification-of-Tokens.md)
+- [3.4 Recognition of Tokens](books&courses/龙书/compilers-principles/3-Lexical-Analysis/3.4-Recognition-of-Tokens.md)
+- [3.5 The Lexical-Analyzer Generator Lex](books&courses/龙书/compilers-principles/3-Lexical-Analysis/3.5-The-Lexical-Analyzer-Generator-Lex.md)
+- [3.6 Finite Automata](books&courses/龙书/compilers-principles/3-Lexical-Analysis/3.6-Finite-Automata.md)
+- [3.7 From Regular Expressions to Automata](books&courses/龙书/compilers-principles/3-Lexical-Analysis/3.7-From-Regular-Expressions-to-Automata.md)
+- [3.8 Design of a Lexical-Analyzer Generator](books&courses/龙书/compilers-principles/3-Lexical-Analysis/3.8-Design-of-a-Lexical-Analyzer-Generator.md)
+- [3.9 Optimization of DFA-Based Pattern Matchers](books&courses/龙书/compilers-principles/3-Lexical-Analysis/3.9-Optimization-of-DFA-Based-Pattern-Matchers.md)
 
 ## 章首内容
 

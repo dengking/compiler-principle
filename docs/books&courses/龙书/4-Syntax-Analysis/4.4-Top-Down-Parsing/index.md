@@ -6,13 +6,13 @@
 
 **Example 4.27** : The sequence of **parse trees** in Fig. 4.12 for the input `id+id*id` is a **top-down parse** according to grammar (4.2), repeated here:
 
-![](grammar-4.28.png)
+![](books&courses/龙书/4-Syntax-Analysis/4.4-Top-Down-Parsing/grammar-4.28.png)
 
 > NOTE: grammar中，越是底层越是不可分，上述的`F`就是这样的一个例子
 
 This sequence of trees corresponds to a **leftmost derivation** of the input.
 
-![](figure-4.12-top-down-parse-for-id+id-multiply-id.png)
+![](books&courses/龙书/4-Syntax-Analysis/4.4-Top-Down-Parsing/figure-4.12-top-down-parse-for-id+id-multiply-id.png)
 
 At each step of a **top-down parse**, the key problem is that of determining the **production** to be applied for a **nonterminal**, say `A`. Once an A-production is chosen, the rest of the parsing process consists of "matching" the **terminal symbols** in the **production body** with the input string.
 
@@ -30,7 +30,7 @@ In Section 4.4.4 we give a **nonrecursive parsing algorithm** that maintains a *
 
 ## 4.4.1 Recursive-Descent Parsing
 
-![](figure-4.13-A-typical-procedure-for-a-nonterminal-in-a-top-down-parser.png)
+![](books&courses/龙书/4-Syntax-Analysis/4.4-Top-Down-Parsing/figure-4.13-A-typical-procedure-for-a-nonterminal-in-a-top-down-parser.png)
 
 A **recursive-descent parsing** program consists of a set of procedures, one for each nonterminal. Execution begins with the procedure for the **start symbol**, which halts and announces success if its procedure body scans the entire input string. Pseudocode for a typical nonterminal appears in Fig. 4.13. Note that this pseudocode is nondeterministic, since it begins by choosing the A-production to apply in a manner that is not specified.
 
@@ -50,11 +50,11 @@ To allow backtracking, the code of Fig. 4.13 needs to be modied. First, we canno
 
 Example 4.29 : Consider the grammar
 
-![](grammar-example-4.29.png)
+![](books&courses/龙书/4-Syntax-Analysis/4.4-Top-Down-Parsing/grammar-example-4.29.png)
 
 To construct a **parse tree top-down** for the input string $w = cad$, begin with a tree consisting of a single node labeled S, and the **input pointer** pointing to `c`, the first symbol of `w`. `S` has only one production, so we use it to expand `S` and obtain the tree of Fig. 4.14(a). The **leftmost leaf**, labeled `c`, matches the first symbol of input `w`, so we advance the **input pointer** to `a`, the second symbol of `w`, and consider the next leaf, labeled `A`.
 
-![](figure-4.14-steps-in-a-top-down-parse.png)
+![](books&courses/龙书/4-Syntax-Analysis/4.4-Top-Down-Parsing/figure-4.14-steps-in-a-top-down-parse.png)
 
 ......
 
@@ -68,7 +68,7 @@ The construction of both **top-down** and **bottom-up** parsers is aided by two 
 
 Define $FIRST(\alpha)$, where $\alpha$ is any string of grammar symbols, to be the set of terminals that begin strings derived from $\alpha$. If  $\alpha \xRightarrow {\text{*}} \epsilon$ , then $\epsilon$ is also in $FIRST(\alpha)$. For example, in Fig. 4.15, $A \xRightarrow {\text{*}} c\gamma$, so c is in FIRST(A).
 
-![](figure-4.15-terminal-c-in-FIRST-A-and-a-in-FOLLOW-A.png)
+![](books&courses/龙书/4-Syntax-Analysis/4.4-Top-Down-Parsing/figure-4.15-terminal-c-in-FIRST-A-and-a-in-FOLLOW-A.png)
 
 This idea will be explored when **LL(1) grammars** are dened in Section 4.4.3.
 

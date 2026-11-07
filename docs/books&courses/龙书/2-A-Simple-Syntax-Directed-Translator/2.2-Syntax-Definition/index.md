@@ -118,7 +118,7 @@ list \to digit  \\
 digit \to 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
 \end{align}
 $$
-![](Figure2.7Parse-trees-for-left-and-right-associative-grammars.jpg)
+![](books&courses/龙书/2-A-Simple-Syntax-Directed-Translator/2.2-Syntax-Definition/Figure2.7Parse-trees-for-left-and-right-associative-grammars.jpg)
 
 The contrast between a parse tree for a left-associative operator like `-` and a parse tree for a right-associative operator like `= is` shown by Fig. 2.7. Note that the parse tree for `9-5-2` grows down towards the left, whereas the parse tree for `a=b=c` grows down towards the right.
 
@@ -132,7 +132,7 @@ For comparison, here are the ambiguous grammars and its parse tree.
 $$
 list \to list + digit | list - digit | 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9
 $$
-![](Figure2.6Two-parse-trees-for-9-5+2.jpg)
+![](books&courses/龙书/2-A-Simple-Syntax-Directed-Translator/2.2-Syntax-Definition/Figure2.6Two-parse-trees-for-9-5+2.jpg)
 
 ## 2.2.6 Precedence of Operators
 

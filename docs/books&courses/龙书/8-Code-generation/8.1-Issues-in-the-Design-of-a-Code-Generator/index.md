@@ -121,7 +121,7 @@ Now, consider the two three‑address code sequences in [Fig. 8.2] in which the
 only difference in (a) and (b) is the operator in the second statement. The
 shortest assembly‑code sequences for (a) and (b) are given in [Fig. 8.3].
 
-![](Figure-8.3-Optimal-machine-code-sequences.png)
+![](books&courses/龙书/8-Code-generation/8.1-Issues-in-the-Design-of-a-Code-Generator/Figure-8.3-Optimal-machine-code-sequences.png)
 
 $Ri$ stands for register i. SRDA stands for Shift‑Right‑Double‑Arithmetic and
 SRDA R0,32 shifts the dividend into R1 and clears R0 so all bits equal its sign

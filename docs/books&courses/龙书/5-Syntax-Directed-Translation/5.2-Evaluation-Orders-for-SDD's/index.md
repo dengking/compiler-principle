@@ -50,13 +50,13 @@ Consider the following production and rule:
 
 At every node $N$ labeled $E$, with children corresponding to the body of this production, the **synthesized attribute** $val$ at $N$ is computed using the values of $val$ at the two children, labeled $E$ and $T$. Thus, a portion of the **dependency graph** for every **parse tree** in which this production is used looks like *Fig. 5.6*. As a convention, we shall show the **parse tree** edges as dotted lines, while the edges of the **dependency graph** are solid. $\quad \square$
 
-![](Figure-5.6-E-val-is-synthesized-from-E1-val-and-T-val.png)
+![](books&courses/龙书/5-Syntax-Directed-Translation/5.2-Evaluation-Orders-for-SDD's/Figure-5.6-E-val-is-synthesized-from-E1-val-and-T-val.png)
 
 ### Example 5.5
 
 An example of a complete **dependency graph** appears in *Fig. 5.7*. The nodes of the **dependency graph**, represented by the numbers 1 through 9, correspond to the attributes in the **annotated parse tree** in *Fig. 5.5*.
 
-![](Figure-5.7-Dependency-graph-for-the-annotated-parse-tree-of-Fig-5.5.png)
+![](books&courses/龙书/5-Syntax-Directed-Translation/5.2-Evaluation-Orders-for-SDD's/Figure-5.7-Dependency-graph-for-the-annotated-parse-tree-of-Fig-5.5.png)
 
 Nodes 1 and 2 represent the attribute *lexval* associated with the two leaves labeled **digit**. Nodes 3 and 4 represent the attribute *val* associated with the two nodes labeled $F$. The edges to node 3 from 1 and to node 4 from 2 result from the **semantic rule** that defines $F.val$ in terms of **digit**.*lexval*. In fact, $F.val$ equals **digit**.*lexval*, but the edge represents dependence, not equality.
 
@@ -88,7 +88,7 @@ The first class is defined as follows:
 
 When an SDD is **S-attributed**, we can evaluate its attributes in any bottom-up order of the nodes of the **parse tree**. It is often especially simple to evaluate the attributes by performing a **postorder traversal** of the **parse tree** and evaluating the attributes at a node `N` when the traversal leaves `N` for the last time. That is, we apply the function `postorder`, defined below, to the root of the parse tree (see also the box "Preorder and Postorder Traversals" in Section 2.3.4):
 
-![](S-attribute-post-order.jpg)
+![](books&courses/龙书/5-Syntax-Directed-Translation/5.2-Evaluation-Orders-for-SDD's/S-attribute-post-order.jpg)
 
 **S-attributed definitions** can be implemented during **bottom-up parsing**, since a bottom-up parse corresponds to a **postorder traversal**. Specifically, **postorder** corresponds exactly to the order in which an **LR parser** reduces a **production body** to its **head**. This fact will be used in Section 5.4.2 to evaluate **synthesized attributes** and store them on the **stack** during **LR parsing**, without creating the tree nodes explicitly.
 
@@ -128,7 +128,7 @@ Suppose that there is a production $A \to X_1, X_2, \dots,  X_n$, and that there
 
 The SDD in Fig. 5.4 is **L-attributed**. To see why, consider the semantic rules for inherited attributes, which are repeated here for convenience:
 
-![](SDD-in-Fig54.jpg)
+![](books&courses/龙书/5-Syntax-Directed-Translation/5.2-Evaluation-Orders-for-SDD's/SDD-in-Fig54.jpg)
 
 The first of these rules defines the inherited attribute `T'.inh` using only `F.val` , and `F` appears to the left of `T'` in the production body, as required. The second rule defines $T_1'.inh$ using the inherited attribute `T'inh` associated with the **head**, and `F.val` , where `F` appears to the left of $T_1'$ in the production body.
 
@@ -138,7 +138,7 @@ In each of these cases, the rules use information "from above or from the left,"
 
 Any SDD containing the following production and rules cannot be L-attributed:
 
-![](Example5.9.jpg)
+![](books&courses/龙书/5-Syntax-Directed-Translation/5.2-Evaluation-Orders-for-SDD's/Example5.9.jpg)
 
 The second rule defines an inherited attribute `B.i`, so the entire SDD cannot be S-attributed. Further, although the rule is legal, the SDD cannot be L-attributed, because the attribute `C.c` is used to help define `B.i`, and `C` is to the right of `B` in the production body. 
 
@@ -173,7 +173,7 @@ As an example of an incidental **side effect**, let us modify the desk calculato
 
 The SDD in *Fig. 5.8* takes a simple declaration $D$ consisting of a basic type $T$ followed by a list $L$ of identifiers. $T$ can be **int** or **float**. For each identifier on the list, the type is entered into the **symbol-table entry** for the **identifier**. We assume that entering the type for one identifier does not affect the **symbol-table entry** for any other identifier. Thus, entries can be updated in any order. This SDD does not check whether an identifier is declared more than once; it can be modified to do so.
 
-![](Figure-5.8-Syntax-directed-definition-for-simple-type-declarations.png)
+![](books&courses/龙书/5-Syntax-Directed-Translation/5.2-Evaluation-Orders-for-SDD's/Figure-5.8-Syntax-directed-definition-for-simple-type-declarations.png)
 
 Nonterminal $D$ represents a declaration, which, from production 1, consists of a type $T$ followed by a list $L$ of identifiers. $T$ has one attribute, $T.type$, which is the type in the declaration $D$. Nonterminal $L$ also has one attribute, which we call $inh$ to emphasize that it is an inherited attribute. The purpose of $L.inh$ is to pass the declared type down the list of identifiers, so that it can be added to the appropriate symbol-table entries.
 

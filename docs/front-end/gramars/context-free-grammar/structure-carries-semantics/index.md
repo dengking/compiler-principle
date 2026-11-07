@@ -356,7 +356,7 @@ flowchart TB
 
 对这两类文法，"无环且存在求值顺序"是**结构白送的保证**。
 
-> 完整推导见：[SDD 循环依赖判定：为什么"即使 P = NP 也难解"](NP-hard-to-cycle-detection-in-dependency-graph.md)；SDD 与 SDT 的概念区分见 [语法制导：SDD、SDT 与翻译方案](Syntax-directed-translation&SDD&SDT.md)。
+> 完整推导见：[SDD 循环依赖判定：为什么"即使 P = NP 也难解"](books&courses/龙书/5-Syntax-Directed-Translation/5.1-Syntax-Directed-Definitions/NP-hard-to-cycle-detection-in-dependency-graph.md)；SDD 与 SDT 的概念区分见 [语法制导：SDD、SDT 与翻译方案](books&courses/龙书/5-Syntax-Directed-Translation/Syntax-directed-translation&SDD&SDT.md)。
 
 这个案例的方法论价值极高：
 
@@ -827,8 +827,8 @@ flowchart LR
 - [表达式文法如何"编码"结合性与优先级：拆解经典的 E-T-F 文法](front-end/gramars/context-free-grammar/design-techniques/associativity-and-precedence.md)：本文的直接出发点### 本仓库内相关文章（续）
 
 - [4.1 Introduction 原文与笔记](front-end/grammar/structure-is-semantics/index.md)：龙书 4.1 节，含 4.1 / 4.2 / 4.3 三个代表性文法
-- [语法制导：SDD、SDT 与翻译方案](Syntax-directed-translation&SDD&SDT.md)：属性文法的声明式与过程式两种形式
-- [SDD 循环依赖判定：为什么"即使 P = NP 也难解"](NP-hard-to-cycle-detection-in-dependency-graph.md)：用结构保证性质、取代检测性质的经典案例
+- [语法制导：SDD、SDT 与翻译方案](books&courses/龙书/5-Syntax-Directed-Translation/Syntax-directed-translation&SDD&SDT.md)：属性文法的声明式与过程式两种形式
+- [SDD 循环依赖判定：为什么"即使 P = NP 也难解"](books&courses/龙书/5-Syntax-Directed-Translation/5.1-Syntax-Directed-Definitions/NP-hard-to-cycle-detection-in-dependency-graph.md)：用结构保证性质、取代检测性质的经典案例
 
 ### 教材与工具文档
 

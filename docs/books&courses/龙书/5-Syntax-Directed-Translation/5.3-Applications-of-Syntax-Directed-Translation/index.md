@@ -32,7 +32,7 @@ We shall implement the nodes of a **syntax tree** by objects with a suitable num
 
 The **S-attributed definition** in Fig. 5.10 constructs **syntax trees** for a simple expression grammar involving only the binary operators `+` and `-`. As usual, these operators are at the same precedence level and are jointly left associative. All nonterminals have one synthesized attribute `node` , which represents a node of the **syntax tree**.
 
-![](Figure5.10Constructing-syntax-trees-for-simple-expressions.jpg)
+![](books&courses/龙书/5-Syntax-Directed-Translation/5.3-Applications-of-Syntax-Directed-Translation/Figure5.10Constructing-syntax-trees-for-simple-expressions.jpg)
 
 Every time the first production $E \to E_1 + T$  is used, its rule creates a node with `+` for `op` and two children, $E_1.node$ and $T.node$, for the sub expressions. The second production has a similar rule.
 
@@ -46,7 +46,7 @@ Rule 2 causes us to create a node with $op$ equal to the minus sign and pointers
 
 If the rules are evaluated during a **postorder traversal** of the **parse tree**, or with reductions during a **bottom-up parse**, then the sequence of steps shown in *Fig. 5.12* ends with $p_5$ pointing to the root of the constructed **syntax tree**. $\quad \square$
 
-![](Figure-5.11-5.12.png)
+![](books&courses/龙书/5-Syntax-Directed-Translation/5.3-Applications-of-Syntax-Directed-Translation/Figure-5.11-5.12.png)
 
 With a grammar designed for top-down parsing, the same syntax trees are constructed, using the same sequence of steps, even though the structure of the parse trees differs significantly from that of syntax trees.
 
@@ -54,7 +54,7 @@ With a grammar designed for top-down parsing, the same syntax trees are construc
 
 The L-attributed definition in [Fig. 5.13] performs the same translation as the S-attributed definition in [Fig. 5.10]. The attributes for the grammar symbols $E$, $T$, $\mathbf{id}$, and $\mathbf{num}$ are as discussed in Example 5.11.
 
-![](Figure-5.13-Constructing-syntax-trees-during-top-down-parsing.png)
+![](books&courses/龙书/5-Syntax-Directed-Translation/5.3-Applications-of-Syntax-Directed-Translation/Figure-5.13-Constructing-syntax-trees-during-top-down-parsing.png)
 
 The rules for building **syntax trees** in this example are similar to the rules for the desk calculator in Example 5.3. In the desk-calculator example, a term $x * y$ was evaluated by passing $x$ as an **inherited attribute**, since $x$ and $* y$ appeared in different portions of the parse tree. Here, the idea is to build a **syntax tree** for $x + y$ by passing $x$ as an **inherited attribute**, since $x$ and $+ y$ appear in different subtrees. Nonterminal $E'$ is the counterpart of nonterminal $T'$ in Example 5.3. Compare the **dependency graph** for $a - 4 + c$ in *Fig. 5.14* with that for $3 * 5$ in *Fig. 5.7*.
 Nonterminal $E'$ has an **inherited attribute** $inh$ and a **synthesized attribute** $syn$. Attribute $E'.inh$ represents the partial syntax tree constructed so far. Specifically, it represents the root of the tree for the prefix of the input string that is to the left of the subtree for $E'$. At node 5 in the dependency graph in *Fig. 5.14*, $E'.inh$ denotes the root of the partial syntax tree for the identifier $a$; that is, the leaf for $a$. At node 6, $E'.inh$ denotes the root for the partial syntax tree for the input $a-4$. At node 9, $E'.inh$ denotes the syntax tree for $a-4+c$.
@@ -66,7 +66,7 @@ Since there is no more input, at node 9, $E'.inh$ points to the root of the enti
 
 
 
-![](Figure-5.14-Dependency-graph.png)
+![](books&courses/龙书/5-Syntax-Directed-Translation/5.3-Applications-of-Syntax-Directed-Translation/Figure-5.14-Dependency-graph.png)
 
 ## 5.3.2 The Structure of a Type
 
@@ -78,13 +78,13 @@ In C, the type $\mathbf{int}\ [2][3]$ can be read as, "array of 2 arrays of 3 in
 
 
 
-![](Figure-5.15-Type-expression.png)
+![](books&courses/龙书/5-Syntax-Directed-Translation/5.3-Applications-of-Syntax-Directed-Translation/Figure-5.15-Type-expression.png)
 
 With the SDD in *Fig. 5.16*, nonterminal $T$ generates either a **basic type** or an **array type**. Nonterminal $B$ generates one of the basic types $\mathbf{int}$ and $\mathbf{float}$. $T$ generates a basic type when $T$ derives $B\ C$ and $C$ derives $\epsilon$. Otherwise, $C$ generates array components consisting of a sequence of integers, each integer surrounded by brackets.
 
 
 
-![](Figure-5.16-T-generates-either-a-basic-type-or-an-array-type.png)
+![](books&courses/龙书/5-Syntax-Directed-Translation/5.3-Applications-of-Syntax-Directed-Translation/Figure-5.16-T-generates-either-a-basic-type-or-an-array-type.png)
 
 The nonterminals $B$ and $T$ have a **synthesized attribute** $t$ representing a type. The nonterminal $C$ has two attributes: an **inherited attribute** $b$ and a **synthesized attribute** $t$. The inherited $b$ attributes pass a basic type down the tree, and the synthesized $t$ attributes accumulate the result.
 
@@ -92,4 +92,4 @@ The nonterminals $B$ and $T$ have a **synthesized attribute** $t$ representing a
 An **annotated parse tree** for the input string $\mathbf{int}[2][3]$ is shown in *Fig. 5.17*. The corresponding **type expression** in *Fig. 5.15* is constructed by passing the type $integer$ from $B$, down the chain of $C$'s through the **inherited attributes** $b$. The array type is synthesized up the chain of $C$'s through the attributes $t$.
 In more detail, at the root for $T \to B\ C$, nonterminal $C$ inherits the type from $B$, using the inherited attribute $C.b$. At the rightmost node for $C$, the production is $C \to \epsilon$, so $C.t$ equals $C.b$. The semantic rules for the production $C \to [\mathbf{num}]\ C_1$ form $C.t$ by applying the operator $array$ to the operands $\mathbf{num}.val$ and $C_1.t$. $\quad \square$
 
-![](Figure-5.17-Syntax-directed-translation-of-array-types.png)
+![](books&courses/龙书/5-Syntax-Directed-Translation/5.3-Applications-of-Syntax-Directed-Translation/Figure-5.17-Syntax-directed-translation-of-array-types.png)

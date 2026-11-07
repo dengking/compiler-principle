@@ -1,16 +1,16 @@
 # 6 Intermediate-Code Generation
 
-- [6.1 Variants of Syntax Trees](6.1-Variants-of-Syntax-Trees.md)
-- [6.10 Summary of Chapter 6](6.10-Summary-of-Chapter-6.md)
-- [6.11 References for Chapter 6](6.11-References-for-Chapter-6.md)
-- [6.2 Three-Address Code](6.2-Three-Address-Code.md)
-- [6.3 Types and Declarations](6.3-Types-and-Declarations.md)
-- [6.4 Translation of Expressions](6.4-Translation-of-Expressions.md)
-- [6.5 Type Checking](6.5-Type-Checking.md)
-- [6.6 Control Flow](6.6-Control-Flow.md)
-- [6.7 Backpatching](6.7-Backpatching.md)
-- [6.8 Switch-Statements](6.8-Switch-Statements.md)
-- [6.9 Intermediate Code for Procedures](6.9-Intermediate-Code-for-Procedures.md)
+- [6.1 Variants of Syntax Trees](books&courses/龙书/compilers-principles/6-Intermediate-Code-Generation/6.1-Variants-of-Syntax-Trees.md)
+- [6.10 Summary of Chapter 6](books&courses/龙书/compilers-principles/6-Intermediate-Code-Generation/6.10-Summary-of-Chapter-6.md)
+- [6.11 References for Chapter 6](books&courses/龙书/compilers-principles/6-Intermediate-Code-Generation/6.11-References-for-Chapter-6.md)
+- [6.2 Three-Address Code](books&courses/龙书/compilers-principles/6-Intermediate-Code-Generation/6.2-Three-Address-Code.md)
+- [6.3 Types and Declarations](books&courses/龙书/compilers-principles/6-Intermediate-Code-Generation/6.3-Types-and-Declarations.md)
+- [6.4 Translation of Expressions](books&courses/龙书/compilers-principles/6-Intermediate-Code-Generation/6.4-Translation-of-Expressions.md)
+- [6.5 Type Checking](books&courses/龙书/compilers-principles/6-Intermediate-Code-Generation/6.5-Type-Checking.md)
+- [6.6 Control Flow](books&courses/龙书/compilers-principles/6-Intermediate-Code-Generation/6.6-Control-Flow.md)
+- [6.7 Backpatching](books&courses/龙书/compilers-principles/6-Intermediate-Code-Generation/6.7-Backpatching.md)
+- [6.8 Switch-Statements](books&courses/龙书/compilers-principles/6-Intermediate-Code-Generation/6.8-Switch-Statements.md)
+- [6.9 Intermediate Code for Procedures](books&courses/龙书/compilers-principles/6-Intermediate-Code-Generation/6.9-Intermediate-Code-for-Procedures.md)
 
 ## 章首内容
 

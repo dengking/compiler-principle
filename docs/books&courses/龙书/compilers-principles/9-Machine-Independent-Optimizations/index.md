@@ -1,15 +1,15 @@
 # 9 Machine-Independent Optimizations
 
-- [9.1 The Principal Sources of Optimization](9.1-The-Principal-Sources-of-Optimization.md)
-- [9.10 References for Chapter 9](9.10-References-for-Chapter-9.md)
-- [9.2 Introduction to Data-Flow Analysis](9.2-Introduction-to-Data-Flow-Analysis.md)
-- [9.3 Foundations of Data-Flow Analysis](9.3-Foundations-of-Data-Flow-Analysis.md)
-- [9.4 Constant Propagation](9.4-Constant-Propagation.md)
-- [9.5 Partial-Redundancy Elimination](9.5-Partial-Redundancy-Elimination.md)
-- [9.6 Loops in Flow Graphs](9.6-Loops-in-Flow-Graphs.md)
-- [9.7 Region-Based Analysis](9.7-Region-Based-Analysis.md)
-- [9.8 Symbolic Analysis](9.8-Symbolic-Analysis.md)
-- [9.9 Summary of Chapter 9](9.9-Summary-of-Chapter-9.md)
+- [9.1 The Principal Sources of Optimization](books&courses/龙书/compilers-principles/9-Machine-Independent-Optimizations/9.1-The-Principal-Sources-of-Optimization.md)
+- [9.10 References for Chapter 9](books&courses/龙书/compilers-principles/9-Machine-Independent-Optimizations/9.10-References-for-Chapter-9.md)
+- [9.2 Introduction to Data-Flow Analysis](books&courses/龙书/compilers-principles/9-Machine-Independent-Optimizations/9.2-Introduction-to-Data-Flow-Analysis.md)
+- [9.3 Foundations of Data-Flow Analysis](books&courses/龙书/compilers-principles/9-Machine-Independent-Optimizations/9.3-Foundations-of-Data-Flow-Analysis.md)
+- [9.4 Constant Propagation](books&courses/龙书/compilers-principles/9-Machine-Independent-Optimizations/9.4-Constant-Propagation.md)
+- [9.5 Partial-Redundancy Elimination](books&courses/龙书/compilers-principles/9-Machine-Independent-Optimizations/9.5-Partial-Redundancy-Elimination.md)
+- [9.6 Loops in Flow Graphs](books&courses/龙书/compilers-principles/9-Machine-Independent-Optimizations/9.6-Loops-in-Flow-Graphs.md)
+- [9.7 Region-Based Analysis](books&courses/龙书/compilers-principles/9-Machine-Independent-Optimizations/9.7-Region-Based-Analysis.md)
+- [9.8 Symbolic Analysis](books&courses/龙书/compilers-principles/9-Machine-Independent-Optimizations/9.8-Symbolic-Analysis.md)
+- [9.9 Summary of Chapter 9](books&courses/龙书/compilers-principles/9-Machine-Independent-Optimizations/9.9-Summary-of-Chapter-9.md)
 
 ## 章首内容
 

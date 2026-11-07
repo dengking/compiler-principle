@@ -14,7 +14,7 @@ In the **analysis-synthesis model** of a compiler, the **front end** analyzes a 
 
 This chapter deals with **intermediate representations**, **static type checking**, and **intermediate code generation**. For simplicity, we assume that a **compiler front end** is organized as in Fig. 6.1, where **parsing**, **static checking**, and **intermediate-code generation** are done sequentially; sometimes they can be combined and folded into **parsing**. We shall use the syntax-directed formalisms(形式化方法) of Chapters 2 and 5 to specify checking and translation. Many of the **translation schemes** can be implemented during either bottom-up or top-down parsing, using the techniques of Chapter 5. All schemes can be implemented by creatinga **syntax tree** and then walking the tree.
 
-![](Figure-6.1-Logical-structure-of-a-compiler-front-end.png)
+![](books&courses/龙书/6-Intermediate-Code-Generation/Figure-6.1-Logical-structure-of-a-compiler-front-end.png)
 
 ## Static checking
 
@@ -26,7 +26,7 @@ The approach in this chapter can be used for a wide range of intermediate repres
 
 In the process of translating a program in a given source language into code for a given target machine, a compiler may construct a sequence of **intermediate representations**, as in Fig. 6.2. **High-level representations** are close to the source language and **low-level representations** are close to the target machine. **Syntax trees** are high level; they depict(描述) the natural **hierarchical structure** of the source program and are well suited to tasks like **static type checking**.
 
-![](Figure-6.2-A-compiler-might-use-a-sequence-of-intermediate-representations.png)
+![](books&courses/龙书/6-Intermediate-Code-Generation/Figure-6.2-A-compiler-might-use-a-sequence-of-intermediate-representations.png)
 
 A **low-level representation** is suitable for **machine-dependent tasks** like **register allocation** and **instruction selection**. **Three-address code** can range from high- to low-level, depending on the choice of operators. For expressions, the differences between **syntax trees** and **three-address code** are superficial, as we shall see in Section 6.2.3. For looping statements, for example, a syntax tree represents the components of a statement, whereas three-address code contains labels and jump instructions to represent the flow of control, as in machine language.
 

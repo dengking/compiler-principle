@@ -1,14 +1,14 @@
 # A: A Complete Front End
 
-- [A.1 The Source Language](A.1-The-Source-Language.md)
-- [A.2 Main](A.2-Main.md)
-- [A.3 Lexical Analyzer](A.3-Lexical-Analyzer.md)
-- [A.4 Symbol Tables and Types](A.4-Symbol-Tables-and-Types.md)
-- [A.5 Intermediate Code for Expressions](A.5-Intermediate-Code-for-Expressions.md)
-- [A.6 Jumping Code for Boolean Expressions](A.6-Jumping-Code-for-Boolean-Expressions.md)
-- [A.7 Intermediate Code for Statements](A.7-Intermediate-Code-for-Statements.md)
-- [A.8 Parser](A.8-Parser.md)
-- [A.9 Creating the Front End](A.9-Creating-the-Front-End.md)
+- [A.1 The Source Language](books&courses/龙书/compilers-principles/A-A-Complete-Front-End/A.1-The-Source-Language.md)
+- [A.2 Main](books&courses/龙书/compilers-principles/A-A-Complete-Front-End/A.2-Main.md)
+- [A.3 Lexical Analyzer](books&courses/龙书/compilers-principles/A-A-Complete-Front-End/A.3-Lexical-Analyzer.md)
+- [A.4 Symbol Tables and Types](books&courses/龙书/compilers-principles/A-A-Complete-Front-End/A.4-Symbol-Tables-and-Types.md)
+- [A.5 Intermediate Code for Expressions](books&courses/龙书/compilers-principles/A-A-Complete-Front-End/A.5-Intermediate-Code-for-Expressions.md)
+- [A.6 Jumping Code for Boolean Expressions](books&courses/龙书/compilers-principles/A-A-Complete-Front-End/A.6-Jumping-Code-for-Boolean-Expressions.md)
+- [A.7 Intermediate Code for Statements](books&courses/龙书/compilers-principles/A-A-Complete-Front-End/A.7-Intermediate-Code-for-Statements.md)
+- [A.8 Parser](books&courses/龙书/compilers-principles/A-A-Complete-Front-End/A.8-Parser.md)
+- [A.9 Creating the Front End](books&courses/龙书/compilers-principles/A-A-Complete-Front-End/A.9-Creating-the-Front-End.md)
 
 ## 章首内容
 

@@ -1,12 +1,12 @@
 # 10 Instruction-Level Parallelism
 
-- [10.1 Processor Architectures](10.1-Processor-Architectures.md)
-- [10.2 Code-Scheduling Constraints](10.2-Code-Scheduling-Constraints.md)
-- [10.3 Basic-Block Scheduling](10.3-Basic-Block-Scheduling.md)
-- [10.4 Global Code Scheduling](10.4-Global-Code-Scheduling.md)
-- [10.5 Software Pipelining](10.5-Software-Pipelining.md)
-- [10.6 Summary of Chapter 10](10.6-Summary-of-Chapter-10.md)
-- [10.7 References for Chapter 10](10.7-References-for-Chapter-10.md)
+- [10.1 Processor Architectures](books&courses/龙书/compilers-principles/10-Instruction-Level-Parallelism/10.1-Processor-Architectures.md)
+- [10.2 Code-Scheduling Constraints](books&courses/龙书/compilers-principles/10-Instruction-Level-Parallelism/10.2-Code-Scheduling-Constraints.md)
+- [10.3 Basic-Block Scheduling](books&courses/龙书/compilers-principles/10-Instruction-Level-Parallelism/10.3-Basic-Block-Scheduling.md)
+- [10.4 Global Code Scheduling](books&courses/龙书/compilers-principles/10-Instruction-Level-Parallelism/10.4-Global-Code-Scheduling.md)
+- [10.5 Software Pipelining](books&courses/龙书/compilers-principles/10-Instruction-Level-Parallelism/10.5-Software-Pipelining.md)
+- [10.6 Summary of Chapter 10](books&courses/龙书/compilers-principles/10-Instruction-Level-Parallelism/10.6-Summary-of-Chapter-10.md)
+- [10.7 References for Chapter 10](books&courses/龙书/compilers-principles/10-Instruction-Level-Parallelism/10.7-References-for-Chapter-10.md)
 
 ## 章首内容
 

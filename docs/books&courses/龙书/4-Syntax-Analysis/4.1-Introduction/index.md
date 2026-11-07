@@ -12,7 +12,7 @@ In our compiler model, the parser obtains a string of tokens from the **lexical 
 
 > NOTE: topic: parser error handling
 
-![](figure-4.1-position-of-parser-in-compiler-model.png)
+![](books&courses/龙书/4-Syntax-Analysis/4.1-Introduction/figure-4.1-position-of-parser-in-compiler-model.png)
 
 Conceptually, for well-formed programs, the parser constructs a **parse tree** and passes it to the rest of the compiler for further processing. In fact, the **parse tree** need not be constructed explicitly, since **checking** and **translation actions** can be interspersed(穿插) with parsing, as we shall see. Thus, the parser and the rest of the **front end** could well be implemented by a single module.
 
@@ -71,7 +71,7 @@ Some of the grammars that will be examined in this chapter are presented here fo
 
 **Associativity** and **precedence** are captured in the following grammar, whichis similar to ones used in Chapter 2 for describing **expressions**, **terms**, and **factors**. `E` represents expressions consisting of **terms** separated by `+` signs, `T` represents **terms** consisting of **factors** separated by `*` signs, and `F` represents **factors** that can be either parenthesized expressions or identifiers:
 
-![](expression-grammar-4.1.png)
+![](books&courses/龙书/4-Syntax-Analysis/4.1-Introduction/expression-grammar-4.1.png)
 
 **Expression grammar** (4.1) belongs to the class of **LR grammars** that are suitable for **bottom-up parsing**. This grammar can be adapted to handle additional operators and additional levels of **precedence**. However, it cannot be used for **top-down parsing** because it is **left recursive**.
 
@@ -81,13 +81,13 @@ Some of the grammars that will be examined in this chapter are presented here fo
 
 The following **non-left-recursive** variant of the **expression grammar** (4.1) will be used for **top-down parsing**:
 
-![](expression-grammar-4.2.png)
+![](books&courses/龙书/4-Syntax-Analysis/4.1-Introduction/expression-grammar-4.2.png)
 
 #### ambiguous
 
 The following grammar treats + and `*` alike, so it is useful for illustrating techniques for handling ambiguities during parsing:
 
-![](expression-grammar-4.3.png)
+![](books&courses/龙书/4-Syntax-Analysis/4.1-Introduction/expression-grammar-4.3.png)
 
 Here, `E` represents expressions of all types. Grammar (4.3) permits more than one **parse tree** for expressions like `a + b * c`.
 

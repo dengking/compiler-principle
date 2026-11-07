@@ -1,16 +1,16 @@
 # 4 Syntax Analysis
 
-- [4.1 Introduction](4.1-Introduction.md)
-- [4.10 Summary of Chapter 4](4.10-Summary-of-Chapter-4.md)
-- [4.11 References for Chapter 4](4.11-References-for-Chapter-4.md)
-- [4.2 Context-Free Grammars](4.2-Context-Free-Grammars.md)
-- [4.3 Writing a Grammar](4.3-Writing-a-Grammar.md)
-- [4.4 Top-Down Parsing](4.4-Top-Down-Parsing.md)
-- [4.5 Bottom-Up Parsing](4.5-Bottom-Up-Parsing.md)
-- [4.6 Introduction to LR Parsing: Simple LR](4.6-Introduction-to-LR-Parsing-Simple-LR.md)
-- [4.7 More Powerful LR Parsers](4.7-More-Powerful-LR-Parsers.md)
-- [4.8 Using Ambiguous Grammars](4.8-Using-Ambiguous-Grammars.md)
-- [4.9 Parser Generators](4.9-Parser-Generators.md)
+- [4.1 Introduction](books&courses/龙书/compilers-principles/4-Syntax-Analysis/4.1-Introduction.md)
+- [4.10 Summary of Chapter 4](books&courses/龙书/compilers-principles/4-Syntax-Analysis/4.10-Summary-of-Chapter-4.md)
+- [4.11 References for Chapter 4](books&courses/龙书/compilers-principles/4-Syntax-Analysis/4.11-References-for-Chapter-4.md)
+- [4.2 Context-Free Grammars](books&courses/龙书/compilers-principles/4-Syntax-Analysis/4.2-Context-Free-Grammars.md)
+- [4.3 Writing a Grammar](books&courses/龙书/compilers-principles/4-Syntax-Analysis/4.3-Writing-a-Grammar.md)
+- [4.4 Top-Down Parsing](books&courses/龙书/compilers-principles/4-Syntax-Analysis/4.4-Top-Down-Parsing.md)
+- [4.5 Bottom-Up Parsing](books&courses/龙书/compilers-principles/4-Syntax-Analysis/4.5-Bottom-Up-Parsing.md)
+- [4.6 Introduction to LR Parsing: Simple LR](books&courses/龙书/compilers-principles/4-Syntax-Analysis/4.6-Introduction-to-LR-Parsing-Simple-LR.md)
+- [4.7 More Powerful LR Parsers](books&courses/龙书/compilers-principles/4-Syntax-Analysis/4.7-More-Powerful-LR-Parsers.md)
+- [4.8 Using Ambiguous Grammars](books&courses/龙书/compilers-principles/4-Syntax-Analysis/4.8-Using-Ambiguous-Grammars.md)
+- [4.9 Parser Generators](books&courses/龙书/compilers-principles/4-Syntax-Analysis/4.9-Parser-Generators.md)
 
 ## 章首内容
 

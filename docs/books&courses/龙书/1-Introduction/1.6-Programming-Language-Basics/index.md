@@ -41,7 +41,7 @@ the **name** `x`. More specifically, the assignment changes the **value** in wha
 
 It may be less clear that the **location** denoted by `x` can change at **run time**. For instance, as we discussed in Example 1.3, if `x` is not a **static** (or "**class**") variable, then every object of the class has its own location for an instance of variable x. In that case, the assignment to `x` can change any of those "instance" variables, depending on the **object** to which a method containing that assignment is applied.
 
-![](Figure-1.8-Two-stage-mapping-from-names-to-values.png)
+![](books&courses/龙书/1-Introduction/1.6-Programming-Language-Basics/Figure-1.8-Two-stage-mapping-from-names-to-values.png)
 
 The association of **names** with **locations** in memory (the store) and then with **values** can be described by two mappings that change as the program runs (see Fig. 1.8):
 

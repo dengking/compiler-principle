@@ -20,7 +20,7 @@ Because of the amount of time taken to process characters and the large number o
 >
 > "如图所示，一个重要的方案涉及两个交替重新加载的缓冲区"
 
-![](figure-3.3-using-a-pair-of-input-buffers.png)
+![](books&courses/龙书/3-Lexical-Analysis/3.2-Input-Buffering/figure-3.3-using-a-pair-of-input-buffers.png)
 
 Each buffer is of the same size `N`, and `N` is usually the size of a **disk block**, e.g., 4096 bytes. Using one **system read** command we can read N characters into a **buffer**, rather than using one **system call** per character. If fewer than N characters remain in the input file, then a special character, represented by `eof`, marks the end of the source file and is different from any possible character of the source program.
 
@@ -64,13 +64,13 @@ We can combine the buffer-end test with the test for the current character if we
 
 
 
-![](figure-3.4-sentinels-at-end-of-each-buffer.png)
+![](books&courses/龙书/3-Lexical-Analysis/3.2-Input-Buffering/figure-3.4-sentinels-at-end-of-each-buffer.png)
 
 Figure 3.4 shows the same arrangement as Fig. 3.3, but with the **sentinels** added. Note that `eof` retains its use as a marker for the end of the entire input. Any `eof` that appears other than at the end of a buffer means that the input is at an end. Figure 3.5 summarizes the algorithm for advancing `forward`. Notice how the first test, which can be part of a multiway branch based on the character pointed to by `forward`, is the only test we make, except in the case where we actually are at the end of a buffer or the end of the input.
 
 
 
-![](figure-3.5-lookahead-code-with-sentinels.png)
+![](books&courses/龙书/3-Lexical-Analysis/3.2-Input-Buffering/figure-3.5-lookahead-code-with-sentinels.png)
 
 
 

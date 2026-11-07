@@ -28,7 +28,7 @@ Most parsing methods fall into one of two classes, called the [top-down](https:/
 
 We introduce **top-down parsing** by considering a grammar that is well-suited for this class of methods. Later in this section, we consider the construction of **top-down parsers** in general. The grammar in Fig. 2.16 generates a subset of the statements of C or Java. We use the boldface terminals **if** and **for** for the keywords "`if`" and "`for`", respectively, to emphasize that these character sequences are treated as units, i.e., as single terminal symbols. Further, the terminal `expr` represents expressions; a more complete grammar would use a nonterminal `expr` and have productions for nonterminal `expr`. Similarly, `other` is a terminal representing other statement constructs.
 
-![](Figure-2.16-A-grammar-for-some-statements-in-C-and-Java.jpg)
+![](books&courses/龙书/2-A-Simple-Syntax-Directed-Translator/2.4-Parsing/Figure-2.16-A-grammar-for-some-statements-in-C-and-Java.jpg)
 
 The **top-down** construction of a **parse tree** like the one in Fig. 2.17, is done by starting with the root, labeled with the starting nonterminal `stmt`, and repeatedly performing the following two steps.
 
@@ -66,7 +66,7 @@ The **top-down** construction of a **parse tree** like the one in Fig. 2.17, is 
 >
 > 
 
-![](Figure-2.17-A-parse-tree-according-to-the-grammar-in-Fig2.16.jpg)
+![](books&courses/龙书/2-A-Simple-Syntax-Directed-Translator/2.4-Parsing/Figure-2.17-A-parse-tree-according-to-the-grammar-in-Fig2.16.jpg)
 
 
 
@@ -100,7 +100,7 @@ Each of the three snapshots in Fig. 2.18 has arrows marking the **lookahead symb
 
 
 
-![](Figure-2.18-Top-down-parsing-while-scanning-the-input-from-left-to-right.jpg)
+![](books&courses/龙书/2-A-Simple-Syntax-Directed-Translator/2.4-Parsing/Figure-2.18-Top-down-parsing-while-scanning-the-input-from-left-to-right.jpg)
 
 ### Match terminal symbol
 

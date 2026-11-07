@@ -1,13 +1,13 @@
 # 1 Introduction
 
-- [1.1 Language Processors](1.1-Language-Processors.md)
-- [1.2 The Structure of a Compiler](1.2-The-Structure-of-a-Compiler.md)
-- [1.3 The Evolution of Programming Languages](1.3-The-Evolution-of-Programming-Languages.md)
-- [1.4 The Science of Building a Compiler](1.4-The-Science-of-Building-a-Compiler.md)
-- [1.5 Applications of Compiler Technology](1.5-Applications-of-Compiler-Technology.md)
-- [1.6 Programming Language Basics](1.6-Programming-Language-Basics.md)
-- [1.7 Summary of Chapter 1](1.7-Summary-of-Chapter-1.md)
-- [1.8 References for Chapter 1](1.8-References-for-Chapter-1.md)
+- [1.1 Language Processors](books&courses/龙书/compilers-principles/1-Introduction/1.1-Language-Processors.md)
+- [1.2 The Structure of a Compiler](books&courses/龙书/compilers-principles/1-Introduction/1.2-The-Structure-of-a-Compiler.md)
+- [1.3 The Evolution of Programming Languages](books&courses/龙书/compilers-principles/1-Introduction/1.3-The-Evolution-of-Programming-Languages.md)
+- [1.4 The Science of Building a Compiler](books&courses/龙书/compilers-principles/1-Introduction/1.4-The-Science-of-Building-a-Compiler.md)
+- [1.5 Applications of Compiler Technology](books&courses/龙书/compilers-principles/1-Introduction/1.5-Applications-of-Compiler-Technology.md)
+- [1.6 Programming Language Basics](books&courses/龙书/compilers-principles/1-Introduction/1.6-Programming-Language-Basics.md)
+- [1.7 Summary of Chapter 1](books&courses/龙书/compilers-principles/1-Introduction/1.7-Summary-of-Chapter-1.md)
+- [1.8 References for Chapter 1](books&courses/龙书/compilers-principles/1-Introduction/1.8-References-for-Chapter-1.md)
 
 ## 章首内容
 

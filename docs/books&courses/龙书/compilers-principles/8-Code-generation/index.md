@@ -1,18 +1,18 @@
 # 8 Code Generation
 
-- [8.1 Issues in the Design of a Code Generator](8.1-Issues-in-the-Design-of-a-Code-Generator.md)
-- [8.10 Optimal Code Generation for Expressions](8.10-Optimal-Code-Generation-for-Expressions.md)
-- [8.11 Dynamic Programming Code-Generation](8.11-Dynamic-Programming-Code-Generation.md)
-- [8.12 Summary of Chapter 8](8.12-Summary-of-Chapter-8.md)
-- [8.13 References for Chapter 8](8.13-References-for-Chapter-8.md)
-- [8.2 The Target Language](8.2-The-Target-Language.md)
-- [8.3 Addresses in the Target Code](8.3-Addresses-in-the-Target-Code.md)
-- [8.4 Basic Blocks and Flow Graphs](8.4-Basic-Blocks-and-Flow-Graphs.md)
-- [8.5 Optimization of Basic Blocks](8.5-Optimization-of-Basic-Blocks.md)
-- [8.6 A Simple Code Generator](8.6-A-Simple-Code-Generator.md)
-- [8.7 Peephole Optimization](8.7-Peephole-Optimization.md)
-- [8.8 Register Allocation and Assignment](8.8-Register-Allocation-and-Assignment.md)
-- [8.9 Instruction Selection by Tree Rewriting](8.9-Instruction-Selection-by-Tree-Rewriting.md)
+- [8.1 Issues in the Design of a Code Generator](books&courses/龙书/compilers-principles/8-Code-generation/8.1-Issues-in-the-Design-of-a-Code-Generator.md)
+- [8.10 Optimal Code Generation for Expressions](books&courses/龙书/compilers-principles/8-Code-generation/8.10-Optimal-Code-Generation-for-Expressions.md)
+- [8.11 Dynamic Programming Code-Generation](books&courses/龙书/compilers-principles/8-Code-generation/8.11-Dynamic-Programming-Code-Generation.md)
+- [8.12 Summary of Chapter 8](books&courses/龙书/compilers-principles/8-Code-generation/8.12-Summary-of-Chapter-8.md)
+- [8.13 References for Chapter 8](books&courses/龙书/compilers-principles/8-Code-generation/8.13-References-for-Chapter-8.md)
+- [8.2 The Target Language](books&courses/龙书/compilers-principles/8-Code-generation/8.2-The-Target-Language.md)
+- [8.3 Addresses in the Target Code](books&courses/龙书/compilers-principles/8-Code-generation/8.3-Addresses-in-the-Target-Code.md)
+- [8.4 Basic Blocks and Flow Graphs](books&courses/龙书/compilers-principles/8-Code-generation/8.4-Basic-Blocks-and-Flow-Graphs.md)
+- [8.5 Optimization of Basic Blocks](books&courses/龙书/compilers-principles/8-Code-generation/8.5-Optimization-of-Basic-Blocks.md)
+- [8.6 A Simple Code Generator](books&courses/龙书/compilers-principles/8-Code-generation/8.6-A-Simple-Code-Generator.md)
+- [8.7 Peephole Optimization](books&courses/龙书/compilers-principles/8-Code-generation/8.7-Peephole-Optimization.md)
+- [8.8 Register Allocation and Assignment](books&courses/龙书/compilers-principles/8-Code-generation/8.8-Register-Allocation-and-Assignment.md)
+- [8.9 Instruction Selection by Tree Rewriting](books&courses/龙书/compilers-principles/8-Code-generation/8.9-Instruction-Selection-by-Tree-Rewriting.md)
 
 ## 章首内容
 

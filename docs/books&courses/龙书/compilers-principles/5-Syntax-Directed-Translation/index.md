@@ -1,12 +1,12 @@
 # 5 Syntax-Directed Translation
 
-- [5.1 Syntax-Directed Definitions](5.1-Syntax-Directed-Definitions.md)
-- [5.2 Evaluation Orders for SDD's](5.2-Evaluation-Orders-for-SDD's.md)
-- [5.3 Applications of Syntax-Directed Translation](5.3-Applications-of-Syntax-Directed-Translation.md)
-- [5.4 Syntax-Directed Translation Schemes](5.4-Syntax-Directed-Translation-Schemes.md)
-- [5.5 Implementing L-Attributed SDD's](5.5-Implementing-L-Attributed-SDD's.md)
-- [5.6 Summary of Chapter 5](5.6-Summary-of-Chapter-5.md)
-- [5.7 References for Chapter 5](5.7-References-for-Chapter-5.md)
+- [5.1 Syntax-Directed Definitions](books&courses/龙书/compilers-principles/5-Syntax-Directed-Translation/5.1-Syntax-Directed-Definitions.md)
+- [5.2 Evaluation Orders for SDD's](books&courses/龙书/compilers-principles/5-Syntax-Directed-Translation/5.2-Evaluation-Orders-for-SDD's.md)
+- [5.3 Applications of Syntax-Directed Translation](books&courses/龙书/compilers-principles/5-Syntax-Directed-Translation/5.3-Applications-of-Syntax-Directed-Translation.md)
+- [5.4 Syntax-Directed Translation Schemes](books&courses/龙书/compilers-principles/5-Syntax-Directed-Translation/5.4-Syntax-Directed-Translation-Schemes.md)
+- [5.5 Implementing L-Attributed SDD's](books&courses/龙书/compilers-principles/5-Syntax-Directed-Translation/5.5-Implementing-L-Attributed-SDD's.md)
+- [5.6 Summary of Chapter 5](books&courses/龙书/compilers-principles/5-Syntax-Directed-Translation/5.6-Summary-of-Chapter-5.md)
+- [5.7 References for Chapter 5](books&courses/龙书/compilers-principles/5-Syntax-Directed-Translation/5.7-References-for-Chapter-5.md)
 
 ## 章首内容
 

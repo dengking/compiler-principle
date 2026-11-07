@@ -8,7 +8,7 @@ In the previous section we learned how to express patterns using regular express
 
 
 
-![](figure-3.10-A-grammar-for-branching-statements.png)
+![](books&courses/龙书/3-Lexical-Analysis/3.4-Recognition-of-Tokens/figure-3.10-A-grammar-for-branching-statements.png)
 
 ## Example 3.8
 
@@ -20,19 +20,19 @@ The terminals of the grammar, which are `if`, `then`, `else`, `relop`, `id`, and
 
 
 
-![](figure-3.11-Patterns-for-tokens-of-Example-3.8.png)
+![](books&courses/龙书/3-Lexical-Analysis/3.4-Recognition-of-Tokens/figure-3.11-Patterns-for-tokens-of-Example-3.8.png)
 
 For this language, the **lexical analyzer** will recognize the keywords `if`, `then`, and `else`, as well as lexemes that match the patterns for `relop`, id, and number. To simplify matters, we make the common assumption that keywords are also reserved words : that is, they are not identiers, even though their lexemes match the pattern for identiers.
 
 In addition, we assign the **lexical analyzer** the job of stripping out whitespace, by recognizing the "token" `ws` defined by:
 
-![](figure-regex-white-space.png)
+![](books&courses/龙书/3-Lexical-Analysis/3.4-Recognition-of-Tokens/figure-regex-white-space.png)
 
 
 
 Here, `blank`, `tab`, and `newline` are abstract symbols that we use to express the ASCII characters of the same names. Token `ws` is different from the other tokens in that, when we recognize it, we do not return it to the parser, but rather restart the lexical analysis from the character that follows the whitespace. It is the following token that gets returned to the parser.
 
-![](figure-3.12-Tokens-their-patterns-and-attribute-values.png)
+![](books&courses/龙书/3-Lexical-Analysis/3.4-Recognition-of-Tokens/figure-3.12-Tokens-their-patterns-and-attribute-values.png)
 
 ## 3.4.1 Transition Diagrams 
 
@@ -46,7 +46,7 @@ Transition diagrams have a collection of **nodes** or **circles**, called ***sta
 
 
 
-![](figure-3.13-transition-diagram-for-relop.png)
+![](books&courses/龙书/3-Lexical-Analysis/3.4-Recognition-of-Tokens/figure-3.13-transition-diagram-for-relop.png)
 
 
 
@@ -68,11 +68,11 @@ There are two ways that we can handle **reserved words** that look like identier
 
 
 
-![](figure-3.16-A-transition-diagram-for-unsigned-numbers.png)
+![](books&courses/龙书/3-Lexical-Analysis/3.4-Recognition-of-Tokens/figure-3.16-A-transition-diagram-for-unsigned-numbers.png)
 
 
 
-![](figure-3.17-A-transition-diagram-for-whitespace.png)
+![](books&courses/龙书/3-Lexical-Analysis/3.4-Recognition-of-Tokens/figure-3.17-A-transition-diagram-for-whitespace.png)
 
 
 
@@ -82,7 +82,7 @@ There are several ways that a collection of transition diagrams can be usedto bu
 
 
 
-![](figure-3.18-sketch-of-implementation-of-relop-transition-diagram.png)
+![](books&courses/龙书/3-Lexical-Analysis/3.4-Recognition-of-Tokens/figure-3.18-sketch-of-implementation-of-relop-transition-diagram.png)
 
 ## 3.4.5 Exercises for Section 3.4 
 
@@ -102,7 +102,7 @@ The following exercises, up to Exercise 3.4.12, introduce the **Aho-Corasick alg
 
 Knuth, Morris, and Pratt presented an algorithm for recognizing a single keyword $b_1 b_2 \dots b_n$(length of the word is n) in a text string. Here the **trie** is a **transition diagram** with n+ 1 states, 0 through n. State 0 is the **initial state**, and state n represents **acceptance**, that is, discovery of the keyword. From each state s from 0 through n - 1, there is a transition to state s + 1, labeled by symbol $b_{s+1}$ . For example, the **trie** for the keyword `ababaa` is:
 
-![](figure-trie-.jpg)
+![](books&courses/龙书/3-Lexical-Analysis/3.4-Recognition-of-Tokens/figure-trie-.jpg)
 
 In order to process text strings rapidly and search those strings for a keyword, it is useful to define, for keyword $b_1 b_2 \dots b_n$ and position `s` in that keyword (corresponding to state `s` of its trie),  a ***failure function***, `f(s)`, computed as in Fig. 3.19.  The objective is that $b_1 b_2 \dots b_{f(s)}$ is the longest proper prefix of $b_1 b_2 \dots b_s$ that is also a suffix of $b_1 b_2 \dots b_s$.  The reason $f (s)$ is important is that if we are trying to match a text string for $b_1 b_2 \dots b_n$,  and we have matched the first `s` positions, but we then fail (i.e., the next position of the text string does not hold $b_{s+1}$ ), then $f (s)$ is the longest prefix of  $b_1 b_2 \dots b_n$ that could possibly match the text string up to the point we are at. Of course, the next character of the text string must be $b_{f (s)+1}$, or else we still have problems and must consider a yet shorter prefix, which will be $b_{f (f (s))}$.
 
@@ -140,12 +140,12 @@ For instance, states 3 and 1 represent prefixes `aba` and `a`, respectively. `f 
 
 Having computed the **failure function** for a keyword $b_1 b_2 \dots b_n$, we can scana string $a_1 a_2 \dots a_m$ in time $O(m)$ to tell whether the keyword occurs in the string. The algorithm, shown in Fig. 3.20, slides the keyword along the string, trying to make progress by matching the next character of the keyword with the next character of the string. If it cannot do so after matching `s` characters, then it "slides" the keyword right `s - f (s)` positions, so only the first `f (s)` characters of the keyword are considered matched with the string.
 
-![](figure-3.20-the-KMP-algorithm.png)
+![](books&courses/龙书/3-Lexical-Analysis/3.4-Recognition-of-Tokens/figure-3.20-the-KMP-algorithm.png)
 
 
 
 **Aho and Corasick** generalized the **KMP algorithm** to recognize any of a set of keywords in a text string. In this case, the trie is a true tree, with branching from the root. There is one state for every string that is a prefix (not necessarily proper) of any keyword. The parent of a state corresponding to string $b_1 b_2 \dots b_n$ is the state that corresponds to $b_1 b_2 \dots b_k$. A state is accepting if it corresponds to a complete keyword. For example, Fig. 3.21 shows the trie for the keywords `he`, `she`, `his`, and `hers`.
 
-![](figure-3.21-Trie-for-keywords-he-she-his-hers.jpg)
+![](books&courses/龙书/3-Lexical-Analysis/3.4-Recognition-of-Tokens/figure-3.21-Trie-for-keywords-he-she-his-hers.jpg)
 
 ! Exercise 3.4.10: Modify the algorithm of Fig. 3.19 to compute the **failure function** for general tries. s. Hint : The major difference is that we cannot simply test for equality or inequality of $b_{s+1}$ and $b_{t+1}$ in lines (4) and (5) of Fig. 3.19. . Rather, from any state there may be several transitions out on several characters, as there are transitions on both `e` and `i` from **state 1** in Fig. 3. \1. Any of those transitions could lead to a state that represents the longest suffix that is also a prefix.

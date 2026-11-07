@@ -20,4 +20,4 @@ The (Kleene) closure of a language $L$, denoted $L^\ast$ , is the set of strings
 
 
 
-![](Figure-3.6-Definitions-of-operations-on-languages.jpg)
+![](books&courses/龙书/3-Lexical-Analysis/3.3-Specication-of-Tokens/Figure-3.6-Definitions-of-operations-on-languages.jpg)

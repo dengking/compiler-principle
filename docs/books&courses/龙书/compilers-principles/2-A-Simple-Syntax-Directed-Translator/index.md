@@ -1,14 +1,14 @@
 # 2 A Simple Syntax-Directed Translator
 
-- [2.1 Introduction](2.1-Introduction.md)
-- [2.2 Syntax Definition](2.2-Syntax-Definition.md)
-- [2.3 Syntax-Directed Translation](2.3-Syntax-Directed-Translation.md)
-- [2.4 Parsing](2.4-Parsing.md)
-- [2.5 A Translator for Simple Expressions](2.5-A-Translator-for-Simple-Expressions.md)
-- [2.6 Lexical Analysis](2.6-Lexical-Analysis.md)
-- [2.7 Symbol Tables](2.7-Symbol-Tables.md)
-- [2.8 Intermediate Code Generation](2.8-Intermediate-Code-Generation.md)
-- [2.9 Summary of Chapter 2](2.9-Summary-of-Chapter-2.md)
+- [2.1 Introduction](books&courses/龙书/compilers-principles/2-A-Simple-Syntax-Directed-Translator/2.1-Introduction.md)
+- [2.2 Syntax Definition](books&courses/龙书/compilers-principles/2-A-Simple-Syntax-Directed-Translator/2.2-Syntax-Definition.md)
+- [2.3 Syntax-Directed Translation](books&courses/龙书/compilers-principles/2-A-Simple-Syntax-Directed-Translator/2.3-Syntax-Directed-Translation.md)
+- [2.4 Parsing](books&courses/龙书/compilers-principles/2-A-Simple-Syntax-Directed-Translator/2.4-Parsing.md)
+- [2.5 A Translator for Simple Expressions](books&courses/龙书/compilers-principles/2-A-Simple-Syntax-Directed-Translator/2.5-A-Translator-for-Simple-Expressions.md)
+- [2.6 Lexical Analysis](books&courses/龙书/compilers-principles/2-A-Simple-Syntax-Directed-Translator/2.6-Lexical-Analysis.md)
+- [2.7 Symbol Tables](books&courses/龙书/compilers-principles/2-A-Simple-Syntax-Directed-Translator/2.7-Symbol-Tables.md)
+- [2.8 Intermediate Code Generation](books&courses/龙书/compilers-principles/2-A-Simple-Syntax-Directed-Translator/2.8-Intermediate-Code-Generation.md)
+- [2.9 Summary of Chapter 2](books&courses/龙书/compilers-principles/2-A-Simple-Syntax-Directed-Translator/2.9-Summary-of-Chapter-2.md)
 
 ## 章首内容
 

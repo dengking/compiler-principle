@@ -49,7 +49,7 @@ b) An edge may be labeled by $\epsilon$, the empty string, instead of, or in add
 **Example 3.14** : The transition graph for an NFA recognizing the language of regular expression $(a|b)*abb$ is shown in Fig. 3.24. This abstract example, describing all strings of `a`'s and `b`'s ending in the particular string `abb`, will be used throughout this section. It is similar to regular expressions that describe languages of real interest, however. For instance, an expression describing all files whose name ends in `.o` is any
 `*.o`, where any stands for any printable character.
 
-![](figure-3.24-A-NFA=nondeterministic-finite-machine-automaton.jpg)
+![](books&courses/龙书/3-Lexical-Analysis/3.6-Finite-Automata/figure-3.24-A-NFA=nondeterministic-finite-machine-automaton.jpg)
 
 > NOTE: 
 >
@@ -66,7 +66,7 @@ pair, we put $\phi$ in the table for the pair.
 
 **Example 3.15** : The transition table for the NFA of Fig. 3.24 is shown in Fig. 3.25.
 
-![](figure-3.25-transition-table-for-the-NFA-of-fig-3.24.jpg)
+![](books&courses/龙书/3-Lexical-Analysis/3.6-Finite-Automata/figure-3.25-transition-table-for-the-NFA-of-fig-3.24.jpg)
 
 The transition table has the advantage that we can easily find the transitions on a given state and input. Its disadvantage is that it takes a lot of space, when the input alphabet is large, yet most states do not have any moves on most of the input symbols.
 
@@ -94,11 +94,11 @@ While the NFA is an abstract representation of an algorithm to recognize the str
 
 **METHOD**: Apply the algorithm in Fig. 3.27 to the input string `x`. The function `move(s, c)` gives the state to which there is an edge from state `s` on input `c`. The function `nextChar` returns the next character of the input string `x`. 
 
-![](figure-3.27-simulating-a-DFA=deterministic-finite-machine-automaton.jpg)
+![](books&courses/龙书/3-Lexical-Analysis/3.6-Finite-Automata/figure-3.27-simulating-a-DFA=deterministic-finite-machine-automaton.jpg)
 
 
 
 **Example 3.19** : In Fig. 3.28 we see the transition graph of a DFA accepting the language $(a|b)*abb$ , the same as that accepted by the NFA of Fig. 3.24. Given the input string `ababb`, this DFA enters the sequence of states 0, 1, 2, 1, 2, 3 and returns  " yes." 
 
-![](figure-3.28-DFA=deterministic-finite-machine-automaton-accepting-state.jpg)
+![](books&courses/龙书/3-Lexical-Analysis/3.6-Finite-Automata/figure-3.28-DFA=deterministic-finite-machine-automaton-accepting-state.jpg)
 
