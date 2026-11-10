@@ -7,6 +7,7 @@
 - dynamic semantic: 动态语义
 
 ## Compiler architecture
+方式1:
 
 | compiler组成部分 | 章节                             |
 | ------------ | ------------------------------ |
@@ -15,6 +16,9 @@
 | 后端           | [[back-end/index\|index]]      |
 - [[books&courses/龙书/1-Introduction/1.1-Language-Processors/index|dragon-book#1.1-Language-Processors]] 
 
+方式2:
+- analysis phase: source program->IR
+- synthesis phase: IR->target program
 
 books&courses: [[learning-path/learning-path|books&courses]] 
 experts: [[experts/index|index]]  
