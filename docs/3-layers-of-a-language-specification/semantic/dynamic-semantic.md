@@ -224,7 +224,7 @@ int main(void) {
 
 ## 六、怎么把它写下来:形式语义
 
-程序设计语言形式语义学有三条经典路线(更多资料见 [[3-layers-of-a-language-specification/dynamic-semantic/formal-semantic/index|formal semantic]])。以 `while (x > 0) x = x - 1;` 为例:
+程序设计语言形式语义学有三条经典路线(更多资料见 [[3-layers-of-a-language-specification/semantic/formal-semantic/index|formal semantic]])。以 `while (x > 0) x = x - 1;` 为例:
 
 **(a) 操作语义(operational)——"一步步怎么跑"。** 数学对象是**状态转移关系**(小步 / 大步),用推导规则给出:
 

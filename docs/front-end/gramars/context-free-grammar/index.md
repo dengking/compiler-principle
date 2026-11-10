@@ -1,5 +1,5 @@
 # Context free grammar:语言的形状
-Context free grammar简称CFG，它是 [[3-layers-of-a-language-specification/index|语言规范的三层]] 中的第一层。三层的总览与横向对比见总纲;后两层见 [[front-end/static-semantic-analysis/index|static-semantic-analysis]] 与 [[3-layers-of-a-language-specification/dynamic-semantic/index|dynamic-semantic]]。
+Context free grammar简称CFG，它是 [[3-layers-of-a-language-specification/index|语言规范的三层]] 中的第一层。三层的总览与横向对比见总纲;后两层见 [[front-end/static-semantic-analysis/index|static-semantic-analysis]] 与 [[3-layers-of-a-language-specification/semantic/dynamic-semantic|dynamic-semantic]]。
 ## CFG VS PEG
 
 CFG 是生成式 **VS** PEG 是识别式: [[front-end/gramars/index]] 

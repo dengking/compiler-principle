@@ -6,7 +6,7 @@ language-specification=语言规范
 >
 > - Syntax → [[front-end/grammar/index|grammar]]
 > - Static Semantics → [[front-end/static-semantic-analysis/index|static-semantic-analysis]]
-> - Dynamic Semantics → [[3-layers-of-a-language-specification/dynamic-semantic/index|dynamic-semantic]]
+> - Dynamic Semantics → [[3-layers-of-a-language-specification/semantic/dynamic-semantic|dynamic-semantic]]
 
 ---
 
@@ -69,7 +69,7 @@ $$
 $$\lbrack\!\lbrack \cdot \rbrack\!\rbrack : \text{Program} \longrightarrow \mathcal{P}(\text{Behavior})$$
 
 注意是**集合**:集合越小承诺越强,UB 就是集合等于全集。它不拒绝任何程序,只**描述**;它通过抽象机与 as-if 规则定义,是一切优化的合法性判据。
-→ 详见 [[3-layers-of-a-language-specification/dynamic-semantic/index|dynamic-semantic]]
+→ 详见 [[3-layers-of-a-language-specification/semantic/dynamic-semantic|dynamic-semantic]]
 
 一句话区分后两层:
 
@@ -391,4 +391,4 @@ Rust (2015)   + 所有权 + 生命周期 + Send/Sync
 
 - Syntax → [[front-end/grammar/index|grammar]]
 - Static Semantics → [[front-end/static-semantic-analysis/index|static-semantic-analysis]]
-- Dynamic Semantics → [[3-layers-of-a-language-specification/dynamic-semantic/index|dynamic-semantic]]
+- Dynamic Semantics → [[3-layers-of-a-language-specification/semantic/dynamic-semantic|dynamic-semantic]]

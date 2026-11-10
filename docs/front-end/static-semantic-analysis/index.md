@@ -1,6 +1,6 @@
 # Static semantics 与语义分析(Sema)
 
-> 本文是 [[3-layers-of-a-language-specification/index|语言规范的三层]] 中的第二层。三层的总览与横向对比见总纲;前后两层见 [[front-end/grammar/index|grammar]] 与 [[3-layers-of-a-language-specification/dynamic-semantic/index|dynamic-semantic]]。
+> 本文是 [[3-layers-of-a-language-specification/index|语言规范的三层]] 中的第二层。三层的总览与横向对比见总纲;前后两层见 [[front-end/grammar/index|grammar]] 与 [[3-layers-of-a-language-specification/semantic/dynamic-semantic|dynamic-semantic]]。
 >
 > Sema = Semantic analysis = 语义分析。本文讨论的是 **static** semantic analysis。
 

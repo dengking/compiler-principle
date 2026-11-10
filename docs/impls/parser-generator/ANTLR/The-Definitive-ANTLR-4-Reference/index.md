@@ -28,7 +28,7 @@ If you give your ANTLR-generated parser valid input, the parser will always reco
 
 **ANTLR parsers** use a new parsing technology called Adaptive LL(`*`) or ALL(`*`) ("all star") that I developed with Sam Harwell.² ALL(`*`) is an extension to v3's LL(`*`) that performs grammar analysis dynamically at runtime rather than statically, before the generated parser executes. Because ALL(`*`) parsers have access to actual input sequences, they can always figure out how to recognize the sequences by appropriately weaving through the grammar. Static analysis, on the other hand, has to consider all possible (infinitely long) input sequences.
 
-> 翻译: ANTLR 解析器采用了名为**自适应LL(`*`)（Adaptive LL(`*`)，简称ALL(`*`)，别称“全星”）**的新型解析技术，由我与萨姆·哈威尔（Sam Harwell）共同开发²。ALL(`*`) 是v3版本LL(`*`)算法的扩展：它不在生成的解析器执行前做静态文法分析，而是在**运行时动态完成文法分析**。 由于ALL(`*`)解析器可以读取实际输入序列，因此总能通过在文法中灵活回溯穿行，匹配出对应序列的识别路径。反观静态分析，则必须穷尽所有可能的（乃至无限长的）输入序列。
+> 翻译: ANTLR 解析器采用了名为 **自适应LL(`*`)（Adaptive LL(`*`)，简称ALL(`*`)，别称“全星”）** 的新型解析技术，由我与萨姆·哈威尔（Sam Harwell）共同开发²。ALL(`*`) 是v3版本LL(`*`)算法的扩展：它不在生成的解析器执行前做静态文法分析，而是在**运行时动态完成文法分析**。 由于ALL(`*`)解析器可以读取实际输入序列，因此总能通过在文法中灵活回溯穿行，匹配出对应序列的识别路径。反观静态分析，则必须穷尽所有可能的（乃至无限长的）输入序列。
 
 In practice, having ALL(`*`) means you don't have to contort your grammars to fit the underlying parsing strategy as you would with most other parser generator tools, including ANTLR v3. If you've ever pulled your hair out because of an ambiguity warning in ANTLR v3 or a reduce/reduce conflict in yacc, ANTLR v4 is for you!
 

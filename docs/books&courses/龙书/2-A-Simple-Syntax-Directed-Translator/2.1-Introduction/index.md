@@ -6,19 +6,16 @@ The synthesis phase translates the intermediate code into the target program.
 
 ## What "syntax" of programming language can do
 
-Analysis is organized around the "**syntax**" of the language to be compiled. The syntax of a programming language describes the proper form of its programs, while the **semantics** of the language defines what its programs mean; that is, what each program does when it executes. For specifying syntax, we present a widely used notation, called [**context-free grammars**](https://en.wikipedia.org/wiki/Context-free_grammar) or **BNF (for Backus-Naur Form)** in Section 2.2. With the notations currently available, the **semantics** of a language is much more difficult to describe than the **syntax**. For specifying semantics, we shall therefore use informal descriptions and suggestive examples. 
+Analysis is organized around the "**syntax**" of the language to be compiled. The syntax of a programming language describes the proper form of its programs, while the **semantics** of the language defines what its programs mean; that is, what each program does when it executes. For specifying syntax, we present a widely used notation, called [**context-free grammars**](https://en.wikipedia.org/wiki/Context-free_grammar) or **BNF (for Backus-Naur Form)** in Section 2.2. With the notations currently available, the **semantics** of a language is much more difficult to describe than the **syntax**. For specifying **semantics**, we shall therefore use informal descriptions and suggestive examples. 
+> NOTE: 如何形式化地描述语义? 这其实是formal semantic，参见 [[3-layers-of-a-language-specification/semantic/index|Semantic]] 
 
-Besides specifying the **syntax** of a language, a **context-free grammar** can be used to help guide the translation of programs. In Section 2.3, we introduce a grammar-oriented compiling technique known as **syntax-directed translation**. Parsing or syntax analysis is introduced in Section 2.4.
+Besides specifying the **syntax** of a language, a **context-free grammar** can be used to help guide the translation of programs. In Section 2.3, we introduce a **grammar-oriented compiling technique** known as **syntax-directed translation**. Parsing or syntax analysis is introduced in Section 2.4.
 
-> NOTE:
->
-> 一、For compiler, what can **syntax** do?
+> NOTE: For compiler, what can **syntax** do?
 >
 > 1、Specify syntax as described in Section 2.2
 >
 > 2、Help guide the translation of programs, a grammar-oriented compiling technique known as [*syntax-directed translation*](https://en.wikipedia.org/wiki/Syntax-directed_translation) introduced  in Section 2.4
-
-
 
 ## The model of a compiler front end 
 
