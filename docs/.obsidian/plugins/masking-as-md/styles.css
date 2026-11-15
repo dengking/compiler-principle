@@ -1,0 +1,246 @@
+/* Masking as MD - Code Editor Styles */
+
+/* ===== View Container ===== */
+.masking-code-editor-view {
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+	overflow: hidden;
+	background: var(--background-primary);
+}
+
+/* ===== Frontmatter Display ===== */
+.masking-frontmatter {
+	padding: 8px 12px;
+	background: var(--background-secondary);
+	border-bottom: 1px solid var(--background-modifier-border);
+	font-size: 12px;
+}
+
+.masking-fm-header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 8px;
+}
+
+.masking-fm-title {
+	font-weight: 600;
+	color: var(--text-muted);
+	text-transform: uppercase;
+	letter-spacing: 0.5px;
+}
+
+.masking-fm-toggle {
+	padding: 2px 8px;
+	font-size: 11px;
+	background: var(--background-modifier-hover);
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+	color: var(--text-muted);
+}
+
+.masking-fm-toggle:hover {
+	background: var(--background-modifier-border);
+	color: var(--text-normal);
+}
+
+.masking-fm-content {
+	overflow-x: auto;
+}
+
+.masking-fm-table {
+	width: 100%;
+	border-collapse: collapse;
+}
+
+.masking-fm-table tr {
+	border-bottom: 1px solid var(--background-modifier-border-hover);
+}
+
+.masking-fm-table tr:last-child {
+	border-bottom: none;
+}
+
+.masking-fm-key {
+	padding: 4px 8px 4px 0;
+	font-weight: 500;
+	color: var(--text-accent);
+	white-space: nowrap;
+	font-family: var(--font-monospace);
+}
+
+.masking-fm-value {
+	padding: 4px 0;
+	color: var(--text-normal);
+}
+
+.masking-fm-tag {
+	display: inline-block;
+	padding: 1px 6px;
+	margin: 1px 4px 1px 0;
+	background: var(--interactive-accent);
+	color: var(--text-on-accent);
+	border-radius: 3px;
+	font-size: 11px;
+}
+
+/* ===== Editor Container ===== */
+.masking-editor-container {
+	flex: 1;
+	overflow: hidden;
+	display: flex;
+	flex-direction: column;
+}
+
+.masking-editor-container .cm-editor {
+	height: 100%;
+	flex: 1;
+}
+
+.masking-editor-container .cm-scroller {
+	overflow: auto;
+}
+
+/* ===== CodeMirror Theme Overrides ===== */
+.masking-code-editor-view .cm-editor {
+	background: var(--background-primary);
+}
+
+.masking-code-editor-view .cm-gutters {
+	background: var(--background-secondary);
+	border-right: 1px solid var(--background-modifier-border);
+}
+
+.masking-code-editor-view .cm-lineNumbers .cm-gutterElement {
+	color: var(--text-muted);
+	padding: 0 8px;
+	min-width: 40px;
+}
+
+.masking-code-editor-view .cm-activeLineGutter {
+	background: var(--background-modifier-hover);
+}
+
+.masking-code-editor-view .cm-activeLine {
+	background: var(--background-modifier-hover);
+}
+
+.masking-code-editor-view .cm-editor .cm-selectionBackground,
+.masking-code-editor-view .cm-focused .cm-selectionBackground {
+	background: var(--text-selection);
+}
+
+.masking-code-editor-view .cm-cursor {
+	border-left-color: var(--text-normal);
+}
+
+.masking-code-editor-view .cm-content {
+	padding: 8px 0;
+	caret-color: var(--text-normal);
+}
+
+.masking-code-editor-view .cm-line {
+	padding: 0 12px;
+}
+
+/* ===== Syntax Highlighting Colors ===== */
+.masking-code-editor-view .cm-keyword {
+	color: var(--text-accent);
+}
+
+.masking-code-editor-view .cm-string {
+	color: var(--color-green);
+}
+
+.masking-code-editor-view .cm-string-2 {
+	color: var(--color-cyan);
+}
+
+.masking-code-editor-view .cm-number {
+	color: var(--color-orange);
+}
+
+.masking-code-editor-view .cm-comment {
+	color: var(--text-faint);
+	font-style: italic;
+}
+
+.masking-code-editor-view .cm-variableName {
+	color: var(--text-normal);
+}
+
+.masking-code-editor-view .cm-propertyName {
+	color: var(--color-blue);
+}
+
+.masking-code-editor-view .cm-typeName {
+	color: var(--color-yellow);
+}
+
+.masking-code-editor-view .cm-operator {
+	color: var(--text-muted);
+}
+
+.masking-code-editor-view .cm-punctuation {
+	color: var(--text-muted);
+}
+
+.masking-code-editor-view .cm-meta {
+	color: var(--color-purple);
+}
+
+.masking-code-editor-view .cm-tag {
+	color: var(--color-red);
+}
+
+.masking-code-editor-view .cm-attribute {
+	color: var(--color-orange);
+}
+
+/* ===== Settings Page Styles ===== */
+.masking-quick-add {
+	margin-top: 8px;
+	padding: 8px;
+	background: var(--background-secondary);
+	border-radius: 4px;
+}
+
+.masking-ext-list {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 4px;
+	margin-top: 8px;
+}
+
+/* ===== Scrollbar Styling ===== */
+.masking-code-editor-view .cm-scroller::-webkit-scrollbar {
+	width: 8px;
+	height: 8px;
+}
+
+.masking-code-editor-view .cm-scroller::-webkit-scrollbar-track {
+	background: var(--background-secondary);
+}
+
+.masking-code-editor-view .cm-scroller::-webkit-scrollbar-thumb {
+	background: var(--background-modifier-border);
+	border-radius: 4px;
+}
+
+.masking-code-editor-view .cm-scroller::-webkit-scrollbar-thumb:hover {
+	background: var(--text-muted);
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 600px) {
+	.masking-fm-table {
+		font-size: 11px;
+	}
+
+	.masking-fm-tag {
+		font-size: 10px;
+		padding: 0 4px;
+	}
+}

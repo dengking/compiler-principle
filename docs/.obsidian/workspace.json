@@ -4,16 +4,16 @@
     "type": "split",
     "children": [
       {
-        "id": "56b58a74dc37bf7a",
+        "id": "9305e9c25ddcb706",
         "type": "tabs",
         "children": [
           {
-            "id": "24a5929ae263bd3c",
+            "id": "b8cd25b6e5b263cd",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "front-end/static-semantic-analysis/index.md",
+                "file": "impls/parser-generator/ANTLR/The-Definitive-ANTLR-4-Reference/chapter-2/index.md",
                 "mode": "source",
                 "source": false
               },
@@ -22,17 +22,17 @@
             }
           },
           {
-            "id": "8d8a2c1fd6b827f5",
+            "id": "5bc82f55f08842d6",
             "type": "leaf",
             "state": {
               "type": "markdown",
               "state": {
-                "file": "3-layers-of-a-language-specification/syntax-VS-semantic.md",
+                "file": "front-end/static-semantic-analysis/syntax-directed-translation/syntax-directed-translation-in-modern-compiler.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "syntax-VS-semantic"
+              "title": "syntax-directed-translation-in-modern-compiler"
             }
           }
         ],
@@ -71,7 +71,7 @@
               "type": "search",
               "state": {
                 "query": "",
-                "matchingCase": false,
+                "matchingCase": true,
                 "explainSearch": false,
                 "collapseAll": false,
                 "extraContext": false,
@@ -98,7 +98,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 474.26953125
+    "width": 726.97265625
   },
   "right": {
     "id": "62db58767f8dd99f",
@@ -114,7 +114,6 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "impls/LLVM/middle-end/LLVM-IR/LLVM-IR-guide.md",
                 "collapseAll": false,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -133,7 +132,6 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "impls/LLVM/middle-end/LLVM-IR/LLVM-IR-guide.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
@@ -176,7 +174,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "3-layers-of-a-language-specification/syntax-VS-semantic.md",
+                "file": "front-end/static-semantic-analysis/syntax-directed-translation/syntax-directed-translation-in-modern-compiler.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -200,46 +198,49 @@
       "daily-notes:打开/创建今天的日记": false,
       "templates:插入模板": false,
       "command-palette:打开命令面板": false,
-      "bases:新建数据库": false
+      "bases:新建数据库": false,
+      "masking-as-md:Open text file": false
     }
   },
-  "active": "8d8a2c1fd6b827f5",
+  "active": "37796b877fa77914",
   "lastOpenFiles": [
-    "front-end/static-semantic-analysis/index.md",
-    "3-layers-of-a-language-specification/syntax-VS-semantic.md",
-    "3-layers-of-a-language-specification/index.md",
-    "3-layers-of-a-language-specification/tag-unspecified-behavior&undefined-behavior&implementation-defined.txt",
-    "3-layers-of-a-language-specification/tag-SDT=syntax-directed-translation~syntax+semantic~ANTLR-listener-visitor.txt",
-    "3-layers-of-a-language-specification/tag-SDT=syntax-directed-translation~syntax+semantic~ANTLR-.txt",
-    "3-layers-of-a-language-specification/tag-SDT=syntax-directed-translation~syntax+semantic~yacc-bison-action-block_副本.txt",
-    "3-layers-of-a-language-specification/tag-SDT=syntax-directed-translation~syntax+semantic~yacc-bison-action-block.txt",
-    "3-layers-of-a-language-specification/tag-SDT=syntax-directed-translation~syntax+semantic.txt",
-    "3-layers-of-a-language-specification/tag-SDT=syntax-directed-translation-scheme~syntax-driven~parser-driven.txt",
-    "books&courses/龙书/4-Syntax-Analysis/tag-SDT=syntax-directed-translation~generate-intermediate-code.txt",
-    "books&courses/龙书/4-Syntax-Analysis/tag-SDT=syntax-directed-translation~generate-symbol-table=符号表.txt",
-    "3-layers-of-a-language-specification/dynamic-semantic/claude-静态语义与动态语义.md",
-    "3-layers-of-a-language-specification/dynamic-semantic/index.md",
-    "impls/LLVM/middle-end/LLVM-IR/tag-latex~llbracket+rrbracket=⟦⟧=.md",
-    "front-end/architecture/tag-compiler-front-end.txt",
-    "front-end/static-semantic-analysis/name-binding/index.md",
-    "front-end/static-semantic-analysis/symbol-table/tag-type-table=类型表.md",
-    "front-end/static-semantic-analysis/symbol-table/tag-llvm-clang~IdentifierTable.md",
-    "front-end/static-semantic-analysis/symbol-table/index.md",
-    "impls/LLVM/middle-end/LLVM-IR/LLVM-IR-guide.md",
-    "impls/LLVM/middle-end/LLVM-IR/tag-LLVM-IR~undef.md",
-    "impls/LLVM/middle-end/LLVM-IR/tag-LLVM-IR~poison_副本.md",
-    "impls/LLVM/middle-end/LLVM-IR/tag-latex~llbracket+rrbracket=⟦⟧.md",
-    "impls/LLVM/middle-end/LLVM-IR/index.md",
-    "impls/LLVM/middle-end/LLVM-IR/LLVM-IR-3-forms.md",
-    "impls/LLVM/middle-end/LLVM-IR/tag-Wasm=WebAssembly.md",
-    "impls/LLVM/middle-end/LLVM-IR/tag-miscompilation.md",
-    "impls/LLVM/middle-end/LLVM-IR/tag-LLVM-IR~poison.md",
-    "impls/LLVM/middle-end/LLVM-IR/tag-形式化的推导规则.md",
-    "3-layers-of-a-language-specification/dynamic-semantic/claude-动态语义.md",
-    "impls/LLVM/middle-end/LLVM-IR/tag-LangRef=language-specification=语言规范~LLVM-IR~LLVM Language Reference Manual.md",
-    "impls/LLVM/MiddleEnd/LLVM-IR/tag-LangRef=language-specification=语言规范~LLVM Language Reference Manual.md",
-    "3-layers-of-a-language-specification/tag-LangRef=language-specification=语言规范.md",
-    "impls/LLVM/MiddleEnd/LLVM-IR/tag-LangRef=language-specification=语言规范.md",
-    "3-layers-of-a-language-specification/tag-LangRef.md"
+    "front-end/static-semantic-analysis/syntax-directed-translation/attribute-grammar/index.md",
+    "front-end/static-semantic-analysis/syntax-directed-translation/syntax-directed-translation-in-modern-compiler.md",
+    "back-end/Code-generation/instruction-selection/instruction-selection.md",
+    "front-end/static-semantic-analysis/syntax-directed-translation",
+    "books&courses/南京大学-软件分析/data-flow-analysis-I/tag-program-point~data-flow-value.md",
+    "books&courses/南京大学-软件分析/data-flow-analysis-I/tag-meet-operator~abstract~union.md",
+    "3-layers-of-a-language-specification/semantic/formal-semantic/umass-edu-MGU091_2-up-formal-semantic-and-formal-pragmatics.pdf",
+    "books&courses/南京大学-软件分析/data-flow-analysis-I/tag-control-flow~diverge.md",
+    "books&courses/南京大学-软件分析/data-flow-analysis-I/tag-input-state+output-state.md",
+    "books&courses/南京大学-软件分析/data-flow-analysis-I/data-flow-analysis-I.md",
+    "books&courses/南京大学-软件分析/data-flow-analysis-I/tag-control-flow~meet.md",
+    "learning-path/instruction-selection.md",
+    "books&courses/南京大学-软件分析/data-flow-analysis-I",
+    "books&courses/南京大学-软件分析",
+    "back-end/Code-generation/instruction-selection/tag-tile.md",
+    "back-end/Code-generation/index.md",
+    "back-end/Code-generation/instruction-selection",
+    "back-end/Code-generation/未命名文件夹",
+    "books&courses/龙书/5-Syntax-Directed-Translation/5.2-Evaluation-Orders-for-SDD's/S-attribute-post-order.jpg",
+    "books&courses/龙书/5-Syntax-Directed-Translation/5.2-Evaluation-Orders-for-SDD's/SDD-VS-Attribute-grammar-VS-Translation-scheme.md",
+    "books&courses/龙书/5-Syntax-Directed-Translation/5.4-Syntax-Directed-Translation-Schemes/index.md",
+    "books&courses/龙书/5-Syntax-Directed-Translation/5.5-Implementing-L-Attributed-SDD's/index.md",
+    "impls/parser-generator/ANTLR/syntax-directed-translation.md",
+    "books&courses/龙书/5-Syntax-Directed-Translation/5.1-Syntax-Directed-Definitions/index.md",
+    "books&courses/龙书/5-Syntax-Directed-Translation/5.1-Syntax-Directed-Definitions/Inherited-attribute.md",
+    "books&courses/龙书/5-Syntax-Directed-Translation/index.md",
+    "books&courses/龙书/5-Syntax-Directed-Translation/Syntax-directed-translation&SDD&SDT.md",
+    "books&courses/龙书/5-Syntax-Directed-Translation/SDT-is-inefficient.md",
+    "impls/parser-generator/ANTLR/tag-ATN=augmented-transition-network=增广转移网络.md",
+    "impls/parser-generator/ANTLR/tag-backpatch=回填.txt",
+    "impls/parser-generator/ANTLR/antlr4-allstar/ANTLR的突破.md",
+    "impls/parser-generator/ANTLR/词法+语法一体化的分析器生成器.md",
+    "impls/parser-generator/ANTLR/index.md",
+    "learning-path/AST-to-3AC.md",
+    "learning-path/tag-QBE.txt",
+    "learning-path/tag-.txt",
+    "impls/parser-generator/ANTLR/The-Definitive-ANTLR-4-Reference/a91ace57a8c4c8cdd9f1663e1051bf93.pdf",
+    "impls/parser-generator/ANTLR/The-Definitive-ANTLR-4-Reference/chapter-2/ambiguous.png"
   ]
 }
