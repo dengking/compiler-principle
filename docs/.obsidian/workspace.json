@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "front-end/lexical-analysis/NFA->DFA/index.md",
+                "file": "front-end/modern-compiler/modern-compiler.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "index"
+              "title": "modern-compiler"
             }
           }
         ],
@@ -174,7 +174,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "front-end/lexical-analysis/NFA->DFA/index.md",
+                "file": "front-end/modern-compiler/modern-compiler.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -202,11 +202,19 @@
       "masking-as-md:Open text file": false
     }
   },
-  "active": "37796b877fa77914",
+  "active": "5bc82f55f08842d6",
   "lastOpenFiles": [
-    "back-end/万能锤/backend-optimization-silver-bullet.md",
+    "front-end/static-semantic-analysis/syntax-directed-translation/tag-modern-compiler.md",
+    "impls/parser-generator/ANTLR/The-Definitive-ANTLR-4-Reference/chapter-2/index.md",
+    "front-end/static-semantic-analysis/syntax-directed-translation/syntax-directed-translation-in-modern-compiler.md",
+    "front-end/modern-compiler/modern-compiler.md",
     "back-end/万能锤/编译器领域的其他万能锤/index.md",
+    "front-end/modern-compiler",
+    "back-end/万能锤/backend-optimization-silver-bullet.md",
+    "front-end/error-recovery/index.md",
+    "index.md",
     "front-end/index.md",
+    "front-end/lexical-analysis/NFA->DFA/index.md",
     "middle-end/static-analysis/Control-flow&Control-flow-graph&Control-flow-analysis/Basic-block/index.md",
     "middle-end/static-analysis/Lattices&Fixpoints/index.md",
     "middle-end/static-analysis/may-must.md",
@@ -222,7 +230,6 @@
     "middle-end/static-analysis/Lattices&Fixpoints/tag-fix-point~MFP=最大不动点~meet~top-down=自上而下.md",
     "middle-end/static-analysis/Lattices&Fixpoints/tag-fix-point~LFP=最小不动点~join~bottom-up=自上而下.md",
     "middle-end/static-analysis/Lattices&Fixpoints/tag-constant-propagation=常量传播.md",
-    "impls/parser-generator/ANTLR/The-Definitive-ANTLR-4-Reference/chapter-2/index.md",
     "books&courses/南京大学-软件分析/data-flow-analysis-I/tag-may-analysis~over-approximation~all~不放过任何一条路径.md",
     "books&courses/南京大学-软件分析/data-flow-analysis-I/tag-data-flow-analysis~iterative-algorithm.txt",
     "books&courses/南京大学-软件分析/data-flow-analysis-I/tag-iterative-method-optimization-jump-flooding-algorithm.txt",
@@ -230,16 +237,9 @@
     "middle-end/static-analysis/Data-flow&Data-flow-graph&Data-flow-analysis/Use-define-chain&Define-use-chain/tag-data-flow-equation=数据流方程.txt",
     "books&courses/南京大学-软件分析/data-flow-analysis-I/tag-data-flow-analysis~abstraction+approximation+transfer-function.txt",
     "books&courses/南京大学-软件分析/data-flow-analysis-I/tag-data-flow-analysis~reaching-definition~bit-vector.txt",
-    "books&courses/南京大学-软件分析/data-flow-analysis-I/tag-data-flow-analysis~abstraction=fact=data-flow-value-at-program-point.txt",
     "middle-end/static-analysis/Data-flow&Data-flow-graph&Data-flow-analysis/Use-define-chain&Define-use-chain/index.md",
     "books&courses/南京大学-软件分析/data-flow-analysis-I/tag-reaching-definition.md",
     "front-end/static-semantic-analysis/syntax-directed-translation/未命名.md",
-    "front-end/static-semantic-analysis/syntax-directed-translation/value-stack.md",
-    "front-end/static-semantic-analysis/syntax-directed-translation/tag-parse-stack.md",
-    "front-end/static-semantic-analysis/syntax-directed-translation/side-table.md",
-    "front-end/static-semantic-analysis/syntax-directed-translation/annotated-parse-tree.md",
-    "front-end/static-semantic-analysis/syntax-directed-translation/tag-attribute-grammar.md",
-    "front-end/static-semantic-analysis/syntax-directed-translation/syntax-directed-translation-in-modern-compiler.md",
     "books&courses/龙书/5-Syntax-Directed-Translation/5.2-Evaluation-Orders-for-SDD's/S-attribute-post-order.jpg",
     "impls/parser-generator/ANTLR/The-Definitive-ANTLR-4-Reference/chapter-2/ambiguous.png"
   ]
