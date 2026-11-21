@@ -1,10 +1,27 @@
-# 现代编译器前端的"万能锤"：递归下降 + Pratt 解析
+# 现代编译器前端
+
+现代编译器前端的典型实现方式: 
+
+```
+源码 ──► 词法分析 ──► 语法分析 ──► AST ──► 语义分析
+         手写状态机    递归下降        Visitor/模式匹配
+                      + Pratt
+```
+
+1. **词法分析**：手写 `switch` 状态机，不用正则或 lex。记录行列号以便报错。
+2. **语句/声明**：递归下降，`parseStatement()` 根据首 token 分派到 `parseIf()`、`parseWhile()`、`parseFn()`……
+3. **表达式**：Pratt。
+4. **错误恢复**：遇错后跳到"同步点"（`;`、`}`、关键字）继续解析，一次报出多个错误。
+5. **AST**：用代数数据类型 / tagged union 表示，后续阶段用模式匹配或 Visitor 遍历。
+
+
+## "万能锤"：递归下降 + Pratt 解析
 
 如果只能选一种技术打天下，业界的共识基本是：**手写递归下降解析器，表达式部分用 Pratt 解析（运算符优先级爬升）**。GCC、Clang、Go、Rust（rustc）、V8、TypeScript、Swift 等主流编译器的前端都是这样手写的，而不是用 yacc/bison 生成。
 
 ---
 
-## 为什么是它？
+### 为什么是它？
 
 | 优势 | 说明 |
 |---|---|
@@ -18,7 +35,7 @@
 
 ---
 
-## 核心：Pratt 解析器
+### 核心：Pratt 解析器
 
 思想很简单：每个运算符有一个**绑定力（binding power）**，循环吃掉绑定力比当前更强的运算符。
 
@@ -80,23 +97,7 @@ def parse_expr(lexer, min_bp=0):
 
 ---
 
-## 完整的"万能锤"套装
-
-```
-源码 ──► 词法分析 ──► 语法分析 ──► AST ──► 语义分析
-         手写状态机    递归下降        Visitor/模式匹配
-                      + Pratt
-```
-
-1. **词法分析**：手写 `switch` 状态机，不用正则或 lex。记录行列号以便报错。
-2. **语句/声明**：递归下降，`parseStatement()` 根据首 token 分派到 `parseIf()`、`parseWhile()`、`parseFn()`……
-3. **表达式**：Pratt。
-4. **错误恢复**：遇错后跳到"同步点"（`;`、`}`、关键字）继续解析，一次报出多个错误。
-5. **AST**：用代数数据类型 / tagged union 表示，后续阶段用模式匹配或 Visitor 遍历。
-
----
-
-## 什么时候不用这把锤子？
+### 什么时候不用这把锤子？
 
 - **快速原型 / DSL**：用 ANTLR、parser combinator（如 Haskell 的 Parsec、Rust 的 nom/chumsky）更快
 - **编辑器语法高亮 / 增量解析**：tree-sitter
@@ -104,10 +105,13 @@ def parse_expr(lexer, min_bp=0):
 
 ---
 
-## 推荐阅读
+### 推荐阅读
 
 - **Bob Nystrom《Crafting Interpreters》**（免费在线）——递归下降 + Pratt 的最佳入门
 - **Vaughan Pratt, "Top Down Operator Precedence" (1973)**——原始论文
 - **matklad, "Simple but Powerful Pratt Parsing"**——rust-analyzer 作者的经典博客文章
 
 一句话总结：**递归下降管结构，Pratt 管表达式，手写词法器打底**——这就是编译器前端的万能锤。
+
+## 语义分析
+[[front-end/static-semantic-analysis/syntax-directed-translation/syntax-directed-translation-in-modern-compiler|syntax-directed-translation-in-modern-compiler]] 
