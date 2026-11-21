@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "back-end/Backend-optimization/Lattices&Fixpoints/intuition-2.md",
+                "file": "middle-end/static-analysis/may-must.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "intuition-2"
+              "title": "may-must"
             }
           }
         ],
@@ -174,7 +174,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "back-end/Backend-optimization/Lattices&Fixpoints/intuition-2.md",
+                "file": "middle-end/static-analysis/may-must.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -204,9 +204,15 @@
   },
   "active": "5bc82f55f08842d6",
   "lastOpenFiles": [
+    "middle-end/static-analysis/alias-analysis/alias-analysis.md",
+    "middle-end/static-analysis/may-must.md",
+    "middle-end/static-analysis/alias-analysis",
+    "middle-end/static-analysis",
+    "back-end/Backend-optimization/index.md",
+    "back-end/Backend-optimization/Lattices&Fixpoints/intuition-2.md",
+    "back-end/Optimization/static",
     "back-end/Backend-optimization/Lattices&Fixpoints/tag-UNDEF=undefined~起点端.md",
     "back-end/Backend-optimization/Lattices&Fixpoints/tag-NAC=not-a-constant=终点端.md",
-    "back-end/Backend-optimization/Lattices&Fixpoints/intuition-2.md",
     "back-end/Backend-optimization/Lattices&Fixpoints/tag-transfer-function~monotonic.md",
     "back-end/Backend-optimization/Lattices&Fixpoints/intuition-1.md",
     "back-end/Backend-optimization/Lattices&Fixpoints/tag-fix-point~MFP=最大不动点~meet~top-down=自上而下.md",
@@ -222,9 +228,6 @@
     "books&courses/南京大学-软件分析/data-flow-analysis-I/tag-data-flow-analysis~abstraction+approximation+transfer-function.txt",
     "books&courses/南京大学-软件分析/data-flow-analysis-I/tag-data-flow-analysis~reaching-definition~bit-vector.txt",
     "books&courses/南京大学-软件分析/data-flow-analysis-I/tag-data-flow-analysis~abstraction=fact=data-flow-value-at-program-point.txt",
-    "books&courses/南京大学-软件分析/data-flow-analysis-I/tag-data-flow-analysis~abstraction=fact=data-flow-value-at.txt",
-    "books&courses/南京大学-软件分析/data-flow-analysis-I/tag-data-flow-analysis~abstraction+approximation_副本.txt",
-    "books&courses/南京大学-软件分析/data-flow-analysis-I/tag-data-flow-analysis~abstraction+approximation.txt",
     "back-end/Optimization/Data-flow&Data-flow-graph&Data-flow-analysis/Use-define-chain&Define-use-chain/index.md",
     "books&courses/南京大学-软件分析/data-flow-analysis-I/tag-reaching-definition.md",
     "front-end/static-semantic-analysis/syntax-directed-translation/未命名.md",
@@ -237,9 +240,6 @@
     "front-end/static-semantic-analysis/syntax-directed-translation/tag-侧表.md",
     "learning-path/AST-to-IR~3AC.md",
     "front-end/static-semantic-analysis/syntax-directed-translation/tag-AST-to-IR~3AC.md",
-    "front-end/static-semantic-analysis/syntax-directed-translation/tag-tree-sitter.md",
-    "front-end/static-semantic-analysis/syntax-directed-translation/tag-error-recovery=错误恢复~clang-ExpectAndConsume~fix-it 提示.md",
-    "front-end/static-semantic-analysis/syntax-directed-translation/attribute-grammar/index.md",
     "books&courses/龙书/5-Syntax-Directed-Translation/5.2-Evaluation-Orders-for-SDD's/S-attribute-post-order.jpg",
     "impls/parser-generator/ANTLR/The-Definitive-ANTLR-4-Reference/chapter-2/ambiguous.png"
   ]
