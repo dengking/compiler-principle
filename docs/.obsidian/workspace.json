@@ -27,12 +27,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "front-end/static-semantic-analysis/syntax-directed-translation/syntax-directed-translation-in-modern-compiler.md",
+                "file": "back-end/Backend-optimization/Lattices&Fixpoints/intuition-2.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "syntax-directed-translation-in-modern-compiler"
+              "title": "intuition-2"
             }
           }
         ],
@@ -70,7 +70,7 @@
             "state": {
               "type": "search",
               "state": {
-                "query": "",
+                "query": " ",
                 "matchingCase": true,
                 "explainSearch": false,
                 "collapseAll": false,
@@ -98,7 +98,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 726.97265625
+    "width": 603.8203125
   },
   "right": {
     "id": "62db58767f8dd99f",
@@ -174,7 +174,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "front-end/static-semantic-analysis/syntax-directed-translation/syntax-directed-translation-in-modern-compiler.md",
+                "file": "back-end/Backend-optimization/Lattices&Fixpoints/intuition-2.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -202,45 +202,45 @@
       "masking-as-md:Open text file": false
     }
   },
-  "active": "37796b877fa77914",
+  "active": "5bc82f55f08842d6",
   "lastOpenFiles": [
-    "front-end/static-semantic-analysis/syntax-directed-translation/attribute-grammar/index.md",
+    "back-end/Backend-optimization/Lattices&Fixpoints/tag-UNDEF=undefined~起点端.md",
+    "back-end/Backend-optimization/Lattices&Fixpoints/tag-NAC=not-a-constant=终点端.md",
+    "back-end/Backend-optimization/Lattices&Fixpoints/intuition-2.md",
+    "back-end/Backend-optimization/Lattices&Fixpoints/tag-transfer-function~monotonic.md",
+    "back-end/Backend-optimization/Lattices&Fixpoints/intuition-1.md",
+    "back-end/Backend-optimization/Lattices&Fixpoints/tag-fix-point~MFP=最大不动点~meet~top-down=自上而下.md",
+    "back-end/Backend-optimization/Lattices&Fixpoints/tag-fix-point~LFP=最小不动点~join~bottom-up=自上而下.md",
+    "back-end/Backend-optimization/Lattices&Fixpoints/tag-constant-propagation=常量传播.md",
+    "impls/parser-generator/ANTLR/The-Definitive-ANTLR-4-Reference/chapter-2/index.md",
+    "back-end/Backend-optimization/Lattices&Fixpoints/index.md",
+    "books&courses/南京大学-软件分析/data-flow-analysis-I/tag-may-analysis~over-approximation~all~不放过任何一条路径.md",
+    "books&courses/南京大学-软件分析/data-flow-analysis-I/tag-data-flow-analysis~iterative-algorithm.txt",
+    "books&courses/南京大学-软件分析/data-flow-analysis-I/tag-iterative-method-optimization-jump-flooding-algorithm.txt",
+    "books&courses/南京大学-软件分析/data-flow-analysis-I/tag-data-flow-equation=数据流方程.txt",
+    "back-end/Optimization/Data-flow&Data-flow-graph&Data-flow-analysis/Use-define-chain&Define-use-chain/tag-data-flow-equation=数据流方程.txt",
+    "books&courses/南京大学-软件分析/data-flow-analysis-I/tag-data-flow-analysis~abstraction+approximation+transfer-function.txt",
+    "books&courses/南京大学-软件分析/data-flow-analysis-I/tag-data-flow-analysis~reaching-definition~bit-vector.txt",
+    "books&courses/南京大学-软件分析/data-flow-analysis-I/tag-data-flow-analysis~abstraction=fact=data-flow-value-at-program-point.txt",
+    "books&courses/南京大学-软件分析/data-flow-analysis-I/tag-data-flow-analysis~abstraction=fact=data-flow-value-at.txt",
+    "books&courses/南京大学-软件分析/data-flow-analysis-I/tag-data-flow-analysis~abstraction+approximation_副本.txt",
+    "books&courses/南京大学-软件分析/data-flow-analysis-I/tag-data-flow-analysis~abstraction+approximation.txt",
+    "back-end/Optimization/Data-flow&Data-flow-graph&Data-flow-analysis/Use-define-chain&Define-use-chain/index.md",
+    "books&courses/南京大学-软件分析/data-flow-analysis-I/tag-reaching-definition.md",
+    "front-end/static-semantic-analysis/syntax-directed-translation/未命名.md",
+    "front-end/static-semantic-analysis/syntax-directed-translation/value-stack.md",
+    "front-end/static-semantic-analysis/syntax-directed-translation/tag-parse-stack.md",
+    "front-end/static-semantic-analysis/syntax-directed-translation/side-table.md",
+    "front-end/static-semantic-analysis/syntax-directed-translation/annotated-parse-tree.md",
+    "front-end/static-semantic-analysis/syntax-directed-translation/tag-attribute-grammar.md",
     "front-end/static-semantic-analysis/syntax-directed-translation/syntax-directed-translation-in-modern-compiler.md",
-    "back-end/Code-generation/instruction-selection/instruction-selection.md",
-    "front-end/static-semantic-analysis/syntax-directed-translation",
-    "books&courses/南京大学-软件分析/data-flow-analysis-I/tag-program-point~data-flow-value.md",
-    "books&courses/南京大学-软件分析/data-flow-analysis-I/tag-meet-operator~abstract~union.md",
-    "3-layers-of-a-language-specification/semantic/formal-semantic/umass-edu-MGU091_2-up-formal-semantic-and-formal-pragmatics.pdf",
-    "books&courses/南京大学-软件分析/data-flow-analysis-I/tag-control-flow~diverge.md",
-    "books&courses/南京大学-软件分析/data-flow-analysis-I/tag-input-state+output-state.md",
-    "books&courses/南京大学-软件分析/data-flow-analysis-I/data-flow-analysis-I.md",
-    "books&courses/南京大学-软件分析/data-flow-analysis-I/tag-control-flow~meet.md",
-    "learning-path/instruction-selection.md",
-    "books&courses/南京大学-软件分析/data-flow-analysis-I",
-    "books&courses/南京大学-软件分析",
-    "back-end/Code-generation/instruction-selection/tag-tile.md",
-    "back-end/Code-generation/index.md",
-    "back-end/Code-generation/instruction-selection",
-    "back-end/Code-generation/未命名文件夹",
+    "front-end/static-semantic-analysis/syntax-directed-translation/tag-侧表.md",
+    "learning-path/AST-to-IR~3AC.md",
+    "front-end/static-semantic-analysis/syntax-directed-translation/tag-AST-to-IR~3AC.md",
+    "front-end/static-semantic-analysis/syntax-directed-translation/tag-tree-sitter.md",
+    "front-end/static-semantic-analysis/syntax-directed-translation/tag-error-recovery=错误恢复~clang-ExpectAndConsume~fix-it 提示.md",
+    "front-end/static-semantic-analysis/syntax-directed-translation/attribute-grammar/index.md",
     "books&courses/龙书/5-Syntax-Directed-Translation/5.2-Evaluation-Orders-for-SDD's/S-attribute-post-order.jpg",
-    "books&courses/龙书/5-Syntax-Directed-Translation/5.2-Evaluation-Orders-for-SDD's/SDD-VS-Attribute-grammar-VS-Translation-scheme.md",
-    "books&courses/龙书/5-Syntax-Directed-Translation/5.4-Syntax-Directed-Translation-Schemes/index.md",
-    "books&courses/龙书/5-Syntax-Directed-Translation/5.5-Implementing-L-Attributed-SDD's/index.md",
-    "impls/parser-generator/ANTLR/syntax-directed-translation.md",
-    "books&courses/龙书/5-Syntax-Directed-Translation/5.1-Syntax-Directed-Definitions/index.md",
-    "books&courses/龙书/5-Syntax-Directed-Translation/5.1-Syntax-Directed-Definitions/Inherited-attribute.md",
-    "books&courses/龙书/5-Syntax-Directed-Translation/index.md",
-    "books&courses/龙书/5-Syntax-Directed-Translation/Syntax-directed-translation&SDD&SDT.md",
-    "books&courses/龙书/5-Syntax-Directed-Translation/SDT-is-inefficient.md",
-    "impls/parser-generator/ANTLR/tag-ATN=augmented-transition-network=增广转移网络.md",
-    "impls/parser-generator/ANTLR/tag-backpatch=回填.txt",
-    "impls/parser-generator/ANTLR/antlr4-allstar/ANTLR的突破.md",
-    "impls/parser-generator/ANTLR/词法+语法一体化的分析器生成器.md",
-    "impls/parser-generator/ANTLR/index.md",
-    "learning-path/AST-to-3AC.md",
-    "learning-path/tag-QBE.txt",
-    "learning-path/tag-.txt",
-    "impls/parser-generator/ANTLR/The-Definitive-ANTLR-4-Reference/a91ace57a8c4c8cdd9f1663e1051bf93.pdf",
     "impls/parser-generator/ANTLR/The-Definitive-ANTLR-4-Reference/chapter-2/ambiguous.png"
   ]
 }
