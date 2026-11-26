@@ -1,10 +1,5 @@
 nav:
     - Home: index.md
-    - Books: Books
-    - Guide: Guide
-    - Optimization: Optimization
-    - Tools: Tools
-    - Implementation: Implementation
-    - Expert: Expert
-    
-
+    - compiler: compiler
+    - dl-compiler: dl-compiler
+   

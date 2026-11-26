@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "compiler/impls/parser-generator/ANTLR/The-Definitive-ANTLR-4-Reference/chapter-2/index.md",
+                "file": "index.md",
                 "mode": "source",
                 "source": false
               },
@@ -53,12 +53,14 @@
             "id": "ff070e1583885c4f",
             "type": "leaf",
             "state": {
-              "type": "masking-text-view",
+              "type": "markdown",
               "state": {
-                "file": "compiler/tag-precedence-cascade=分层链=优先级链~unit-production=单产生式-透传产生式=pass-through.txt"
+                "file": "index.md",
+                "mode": "source",
+                "source": false
               },
-              "icon": "file-text",
-              "title": "tag-precedence-cascade=分层链=优先级链~unit-production=单产生式-透传产生式=pass-through.txt"
+              "icon": "lucide-file",
+              "title": "index"
             }
           },
           {
@@ -75,8 +77,7 @@
               "title": "tag-order-dual=上下翻转"
             }
           }
-        ],
-        "currentTab": 3
+        ]
       }
     ],
     "direction": "vertical"
@@ -214,7 +215,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "compiler/tag-precedence-cascade=分层链=优先级链~unit-production=单产生式-透传产生式=pass-through.txt",
+                "file": "index.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -242,8 +243,15 @@
       "masking-as-md:Open text file": false
     }
   },
-  "active": "37796b877fa77914",
+  "active": "b8cd25b6e5b263cd",
   "lastOpenFiles": [
+    "tag-Roofline.md",
+    "index.md",
+    "tag-Halide.txt",
+    "dl-compiler/jobs/index.md",
+    "dl-compiler/jobs/~$~$编译器与EDA岗位汇总.xlsx",
+    "compiler/impls/parser-generator/ANTLR/The-Definitive-ANTLR-4-Reference/chapter-2/index.md",
+    "compiler/tag-precedence-cascade=分层链=优先级链~unit-production=单产生式-透传产生式=pass-through.txt",
     "compiler/mkdocs.yml",
     "dl-compiler/impls/TVM/doc/Relax/Operators/tag-tvm~relax~StructInfo~type+shape~symbolic-shape+dynamic-shape.txt",
     "dl-compiler/impls/TVM/doc/Relax/Operators/tag-TIR=TensorIR~tir.Var=符号化变量~编译期的符号推导.txt",
@@ -253,10 +261,6 @@
     "dl-compiler/impls/TVM/doc/Optimization/Operator-Fusion/tag-post-dominator-analysis-algorithm.txt",
     "dl-compiler/impls/TVM/doc/Optimization/Operator-Fusion/tag-legalize_passes.txt",
     "dl-compiler/impls/TVM/doc/Optimization/Operator-Fusion/tag-TIR-kernel.txt",
-    "dl-compiler/impls/TVM/doc/Optimization/Operator-Fusion/tag-TIR-function.txt",
-    "dl-compiler/impls/TVM/doc/Optimization/Operator-Fusion/tag-LegalizeOps.txt",
-    "dl-compiler/impls/TVM/doc/Optimization/Operator-Fusion/tag-LCA=lowest-common-ancestor=最近公共祖先=least.txt",
-    "dl-compiler/impls/TVM/doc/Optimization/Operator-Fusion/tag-FoldConstant.txt",
     "dl-compiler/impls/TVM/doc/Optimization/Operator-Fusion/index.md",
     "dl-compiler/impls/TVM/doc/Optimization/Vectorization/index.md",
     "dl-compiler/impls/TVM/doc/TensorIR/index.md",
@@ -277,9 +281,6 @@
     "dl-compiler/pipeline/graph-optimizer/Parallel-and-Device-Placement/index.md",
     "dl-compiler/pipeline/graph-optimizer/Dynamic-Shape-and-Control-Flow/index.md",
     "dl-compiler/pipeline/graph-optimizer/Distributed-and-Communication/index.md",
-    "dl-compiler/pipeline/graph-optimizer/Computational-graph-simplification/index.md",
-    "dl-compiler/pipeline/graph-optimizer/Computational-graph-simplification/elimination.md",
-    "dl-compiler/pipeline/graph-optimizer/Computational-graph-simplification/Operator-fusion.md",
     "dl-compiler/books/新智元-深度学习的IR之争/programming-language-IR.png",
     "dl-compiler/books/新智元-深度学习的IR之争/XLA.jpeg",
     "dl-compiler/books/新智元-深度学习的IR之争/XLA-GPU-backend.jpeg",
