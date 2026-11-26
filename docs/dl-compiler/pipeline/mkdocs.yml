@@ -1,0 +1,9 @@
+nav:
+    - Introduction: index.md
+    - graph-IR: graph-IR
+    - graph-optimizer: graph-optimizer
+    - tensor-IR: tensor-IR
+    - operator-optimizer: operator-optimizer
+    - codegen: codegen
+    - Memory-Optimization: Memory-Optimization
+    - LLM-Specific-Optimization: LLM-Specific-Optimization

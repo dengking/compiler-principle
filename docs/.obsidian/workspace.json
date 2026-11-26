@@ -13,7 +13,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "impls/parser-generator/ANTLR/The-Definitive-ANTLR-4-Reference/chapter-2/index.md",
+                "file": "compiler/impls/parser-generator/ANTLR/The-Definitive-ANTLR-4-Reference/chapter-2/index.md",
                 "mode": "source",
                 "source": false
               },
@@ -27,7 +27,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "front-end/modern-compiler/modern-compiler-front-end.md",
+                "file": "compiler/front-end/modern-compiler/modern-compiler-front-end.md",
                 "mode": "source",
                 "source": false
               },
@@ -41,7 +41,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "middle-end/static-analysis/Lattices&Fixpoints/intuition-1.md",
+                "file": "compiler/middle-end/static-analysis/Lattices&Fixpoints/intuition-1.md",
                 "mode": "source",
                 "source": false
               },
@@ -53,14 +53,12 @@
             "id": "ff070e1583885c4f",
             "type": "leaf",
             "state": {
-              "type": "markdown",
+              "type": "masking-text-view",
               "state": {
-                "file": "middle-end/static-analysis/Lattices&Fixpoints/lattice-in-compiler-summary.md",
-                "mode": "source",
-                "source": false
+                "file": "compiler/tag-precedence-cascade=分层链=优先级链~unit-production=单产生式-透传产生式=pass-through.txt"
               },
-              "icon": "lucide-file",
-              "title": "lattice-in-compiler-summary"
+              "icon": "file-text",
+              "title": "tag-precedence-cascade=分层链=优先级链~unit-production=单产生式-透传产生式=pass-through.txt"
             }
           },
           {
@@ -69,7 +67,7 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "middle-end/static-analysis/Lattices&Fixpoints/tag-order-dual=上下翻转.md",
+                "file": "compiler/middle-end/static-analysis/Lattices&Fixpoints/tag-order-dual=上下翻转.md",
                 "mode": "source",
                 "source": false
               },
@@ -140,7 +138,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 200
+    "width": 658.28515625
   },
   "right": {
     "id": "62db58767f8dd99f",
@@ -216,7 +214,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "middle-end/static-analysis/Lattices&Fixpoints/lattice-in-compiler-summary.md",
+                "file": "compiler/tag-precedence-cascade=分层链=优先级链~unit-production=单产生式-透传产生式=pass-through.txt",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -244,45 +242,53 @@
       "masking-as-md:Open text file": false
     }
   },
-  "active": "ff070e1583885c4f",
+  "active": "37796b877fa77914",
   "lastOpenFiles": [
-    "middle-end/static-analysis/Lattices&Fixpoints/tag-bit-vector=位向量.md",
-    "middle-end/static-analysis/Lattices&Fixpoints/lattice-in-compiler-summary.md",
-    "middle-end/static-analysis/Lattices&Fixpoints/tag-LLVM-attributor.md",
-    "middle-end/static-analysis/Lattices&Fixpoints/intuition-1.md",
-    "middle-end/static-analysis/Lattices&Fixpoints/tag-order-dual=上下翻转.md",
-    "front-end/tag-top-down-parser~predictive-parsing~LL(k)=predict+match.txt",
-    "middle-end/static-analysis/Lattices&Fixpoints/tag-Galois-connection=Galois连接~soundness=可信.md",
-    "middle-end/static-analysis/Lattices&Fixpoints/tag-Rice's-theorem.md",
-    "middle-end/static-analysis/Lattices&Fixpoints/intuition-2.md",
-    "middle-end/static-analysis/Lattices&Fixpoints/tag-monotone-dataflow-framework=单调数据流框架.md",
-    "middle-end/static-analysis/Lattices&Fixpoints/tag-abstract-interpretation=抽象解释.md",
-    "middle-end/static-analysis/Lattices&Fixpoints/tag-control-flow-join-point=控制流汇合处.md",
-    "middle-end/static-analysis/Lattices&Fixpoints/tag-information-lattice=信息格.md",
-    "middle-end/static-analysis/Lattices&Fixpoints/tag-constant-propagation.md",
-    "middle-end/static-analysis/Lattices&Fixpoints/tag-constant-propagation=常量传播~powerset-lattice=幂集格.md",
-    "middle-end/static-analysis/Lattices&Fixpoints/tag-live-variable-analysis.md",
-    "front-end/lexical-analysis/NFA->DFA/intuition.md",
-    "back-end/万能锤/编译器领域的其他万能锤/index.md",
-    "back-end/万能锤/backend-optimization-silver-bullet.md",
-    "front-end/static-semantic-analysis/syntax-directed-translation/syntax-directed-translation-in-modern-compiler.md",
-    "front-end/modern-compiler/modern-compiler-front-end.md",
-    "impls/parser-generator/ANTLR/The-Definitive-ANTLR-4-Reference/chapter-2/index.md",
-    "front-end/modern-compiler/tag-Pratt-parsing~top-down-operator-precedence.md",
-    "front-end/modern-compiler/tag-error-recovery.md",
-    "front-end/static-semantic-analysis/syntax-directed-translation/tag-modern-compiler.md",
-    "front-end/modern-compiler",
-    "front-end/error-recovery/index.md",
-    "index.md",
-    "middle-end/static-analysis/alias-analysis",
-    "middle-end/static-analysis",
-    "back-end/Optimization/static",
-    "books&courses/南京大学-软件分析/data-flow-analysis-I/tag-data-flow-analysis~iterative-algorithm.txt",
-    "books&courses/南京大学-软件分析/data-flow-analysis-I/tag-iterative-method-optimization-jump-flooding-algorithm.txt",
-    "books&courses/南京大学-软件分析/data-flow-analysis-I/tag-data-flow-equation=数据流方程.txt",
-    "middle-end/static-analysis/Data-flow&Data-flow-graph&Data-flow-analysis/Use-define-chain&Define-use-chain/tag-data-flow-equation=数据流方程.txt",
-    "books&courses/南京大学-软件分析/data-flow-analysis-I/tag-data-flow-analysis~abstraction+approximation+transfer-function.txt",
-    "books&courses/龙书/5-Syntax-Directed-Translation/5.2-Evaluation-Orders-for-SDD's/S-attribute-post-order.jpg",
-    "impls/parser-generator/ANTLR/The-Definitive-ANTLR-4-Reference/chapter-2/ambiguous.png"
+    "compiler/mkdocs.yml",
+    "dl-compiler/impls/TVM/doc/Relax/Operators/tag-tvm~relax~StructInfo~type+shape~symbolic-shape+dynamic-shape.txt",
+    "dl-compiler/impls/TVM/doc/Relax/Operators/tag-TIR=TensorIR~tir.Var=符号化变量~编译期的符号推导.txt",
+    "dl-compiler/impls/TVM/doc/Relax/Operators/index.md",
+    "dl-compiler/impls/TVM/doc/Relax/Operators/mkdocs.yml",
+    "dl-compiler/impls/TVM/doc/Relax/Operators/Code.md",
+    "dl-compiler/impls/TVM/doc/Optimization/Operator-Fusion/tag-post-dominator-analysis-algorithm.txt",
+    "dl-compiler/impls/TVM/doc/Optimization/Operator-Fusion/tag-legalize_passes.txt",
+    "dl-compiler/impls/TVM/doc/Optimization/Operator-Fusion/tag-TIR-kernel.txt",
+    "dl-compiler/impls/TVM/doc/Optimization/Operator-Fusion/tag-TIR-function.txt",
+    "dl-compiler/impls/TVM/doc/Optimization/Operator-Fusion/tag-LegalizeOps.txt",
+    "dl-compiler/impls/TVM/doc/Optimization/Operator-Fusion/tag-LCA=lowest-common-ancestor=最近公共祖先=least.txt",
+    "dl-compiler/impls/TVM/doc/Optimization/Operator-Fusion/tag-FoldConstant.txt",
+    "dl-compiler/impls/TVM/doc/Optimization/Operator-Fusion/index.md",
+    "dl-compiler/impls/TVM/doc/Optimization/Vectorization/index.md",
+    "dl-compiler/impls/TVM/doc/TensorIR/index.md",
+    "dl-compiler/impls/TVM/doc/Target/index.md",
+    "dl-compiler/impls/TVM/doc/Relax/index.md",
+    "dl-compiler/impls/TVM/doc/Optimization/index.md",
+    "dl-compiler/impls/TVM/doc/IRModule/tvm_ffi.register_object.md",
+    "dl-compiler/impls/TVM/doc/IRModule/index.md",
+    "dl-compiler/impls/TVM/doc/Design-and-Architecture/index.md",
+    "dl-compiler/impls/MLIR/读物/MLIR的缺陷/index.md",
+    "dl-compiler/impls/MLIR/读物/zhihu-error418/index.md",
+    "dl-compiler/pipeline/operator-optimizer/Polyhedral-Model之后-Auto-Tiling-与-Auto-Tensorize的技术演进/index.md",
+    "dl-compiler/pipeline/graph-optimizer/Scheduling-and-Execution/index.md",
+    "dl-compiler/pipeline/operator-optimizer/Polyhedral-compilation/index.md",
+    "dl-compiler/pipeline/operator-optimizer/Operator-Level-Optimization/index.md",
+    "dl-compiler/pipeline/graph-optimizer/Operator-Transformation/index.md",
+    "dl-compiler/pipeline/graph-optimizer/Precision-and-Quantization/index.md",
+    "dl-compiler/pipeline/graph-optimizer/Parallel-and-Device-Placement/index.md",
+    "dl-compiler/pipeline/graph-optimizer/Dynamic-Shape-and-Control-Flow/index.md",
+    "dl-compiler/pipeline/graph-optimizer/Distributed-and-Communication/index.md",
+    "dl-compiler/pipeline/graph-optimizer/Computational-graph-simplification/index.md",
+    "dl-compiler/pipeline/graph-optimizer/Computational-graph-simplification/elimination.md",
+    "dl-compiler/pipeline/graph-optimizer/Computational-graph-simplification/Operator-fusion.md",
+    "dl-compiler/books/新智元-深度学习的IR之争/programming-language-IR.png",
+    "dl-compiler/books/新智元-深度学习的IR之争/XLA.jpeg",
+    "dl-compiler/books/新智元-深度学习的IR之争/XLA-GPU-backend.jpeg",
+    "dl-compiler/books/新智元-深度学习的IR之争/NVM-architecture.jpeg",
+    "dl-compiler/books/新智元-深度学习的IR之争/NNVM-IR.png",
+    "dl-compiler/books/新智元-深度学习的IR之争/NNVM-2-TVM.jpeg",
+    "dl-compiler/books/新智元-深度学习的IR之争/Intel-NGraph.jpeg",
+    "dl-compiler/books/新智元-深度学习的IR之争/Microsoft-Project-Brainwave.jpeg",
+    "dl-compiler/books/新智元-深度学习的IR之争/LLVM-IR.jpeg",
+    "AI-compiler/books/新智元-深度学习的IR之争/programming-language-IR.png"
   ]
 }

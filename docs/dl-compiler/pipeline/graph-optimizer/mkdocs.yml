@@ -1,0 +1,9 @@
+nav:
+    - Introduction: index.md
+    - Computational-graph-simplification: Computational-graph-simplification
+    - Parallel-and-Device-Placement: Parallel-and-Device-Placement
+    - Precision-and-Quantization: Precision-and-Quantization
+    - Scheduling-and-Execution: Scheduling-and-Execution
+    - Operator-Transformation: Operator-Transformation
+    - Distributed-and-Communication: Distributed-and-Communication
+    - Dynamic-Shape-and-Control-Flow: Dynamic-Shape-and-Control-Flow

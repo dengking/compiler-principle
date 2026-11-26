@@ -1,0 +1,5 @@
+nav:
+    - Introduction: index.md
+    - Operator-fusion: Operator-fusion.md
+    - Algebraic-simplification&Constant-folding&Strength-reduction: Algebraic-simplification&Constant-folding&Strength-reduction.md
+    - elimination: elimination.md
