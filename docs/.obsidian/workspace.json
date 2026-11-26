@@ -41,16 +41,44 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "front-end/lexical-analysis/NFA->DFA/intuition.md",
+                "file": "middle-end/static-analysis/Lattices&Fixpoints/intuition-1.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "intuition"
+              "title": "intuition-1"
+            }
+          },
+          {
+            "id": "ff070e1583885c4f",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "middle-end/static-analysis/Lattices&Fixpoints/lattice-in-compiler-summary.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "lattice-in-compiler-summary"
+            }
+          },
+          {
+            "id": "59dea71862b71d5f",
+            "type": "leaf",
+            "state": {
+              "type": "markdown",
+              "state": {
+                "file": "middle-end/static-analysis/Lattices&Fixpoints/tag-order-dual=上下翻转.md",
+                "mode": "source",
+                "source": false
+              },
+              "icon": "lucide-file",
+              "title": "tag-order-dual=上下翻转"
             }
           }
         ],
-        "currentTab": 2
+        "currentTab": 3
       }
     ],
     "direction": "vertical"
@@ -112,7 +140,7 @@
       }
     ],
     "direction": "horizontal",
-    "width": 603.8203125
+    "width": 200
   },
   "right": {
     "id": "62db58767f8dd99f",
@@ -188,7 +216,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "front-end/lexical-analysis/NFA->DFA/intuition.md",
+                "file": "middle-end/static-analysis/Lattices&Fixpoints/lattice-in-compiler-summary.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -216,10 +244,26 @@
       "masking-as-md:Open text file": false
     }
   },
-  "active": "0f52911caa1cdc2e",
+  "active": "ff070e1583885c4f",
   "lastOpenFiles": [
-    "back-end/万能锤/编译器领域的其他万能锤/index.md",
+    "middle-end/static-analysis/Lattices&Fixpoints/tag-bit-vector=位向量.md",
+    "middle-end/static-analysis/Lattices&Fixpoints/lattice-in-compiler-summary.md",
+    "middle-end/static-analysis/Lattices&Fixpoints/tag-LLVM-attributor.md",
+    "middle-end/static-analysis/Lattices&Fixpoints/intuition-1.md",
+    "middle-end/static-analysis/Lattices&Fixpoints/tag-order-dual=上下翻转.md",
+    "front-end/tag-top-down-parser~predictive-parsing~LL(k)=predict+match.txt",
+    "middle-end/static-analysis/Lattices&Fixpoints/tag-Galois-connection=Galois连接~soundness=可信.md",
+    "middle-end/static-analysis/Lattices&Fixpoints/tag-Rice's-theorem.md",
+    "middle-end/static-analysis/Lattices&Fixpoints/intuition-2.md",
+    "middle-end/static-analysis/Lattices&Fixpoints/tag-monotone-dataflow-framework=单调数据流框架.md",
+    "middle-end/static-analysis/Lattices&Fixpoints/tag-abstract-interpretation=抽象解释.md",
+    "middle-end/static-analysis/Lattices&Fixpoints/tag-control-flow-join-point=控制流汇合处.md",
+    "middle-end/static-analysis/Lattices&Fixpoints/tag-information-lattice=信息格.md",
+    "middle-end/static-analysis/Lattices&Fixpoints/tag-constant-propagation.md",
+    "middle-end/static-analysis/Lattices&Fixpoints/tag-constant-propagation=常量传播~powerset-lattice=幂集格.md",
+    "middle-end/static-analysis/Lattices&Fixpoints/tag-live-variable-analysis.md",
     "front-end/lexical-analysis/NFA->DFA/intuition.md",
+    "back-end/万能锤/编译器领域的其他万能锤/index.md",
     "back-end/万能锤/backend-optimization-silver-bullet.md",
     "front-end/static-semantic-analysis/syntax-directed-translation/syntax-directed-translation-in-modern-compiler.md",
     "front-end/modern-compiler/modern-compiler-front-end.md",
@@ -230,30 +274,14 @@
     "front-end/modern-compiler",
     "front-end/error-recovery/index.md",
     "index.md",
-    "front-end/index.md",
-    "front-end/lexical-analysis/NFA->DFA/index.md",
-    "middle-end/static-analysis/Control-flow&Control-flow-graph&Control-flow-analysis/Basic-block/index.md",
-    "middle-end/static-analysis/Lattices&Fixpoints/index.md",
-    "middle-end/static-analysis/may-must.md",
-    "middle-end/static-analysis/alias-analysis/alias-analysis.md",
     "middle-end/static-analysis/alias-analysis",
     "middle-end/static-analysis",
-    "middle-end/static-analysis/Lattices&Fixpoints/intuition-2.md",
     "back-end/Optimization/static",
-    "middle-end/static-analysis/Lattices&Fixpoints/tag-UNDEF=undefined~起点端.md",
-    "middle-end/static-analysis/Lattices&Fixpoints/tag-NAC=not-a-constant=终点端.md",
-    "middle-end/static-analysis/Lattices&Fixpoints/tag-transfer-function~monotonic.md",
-    "middle-end/static-analysis/Lattices&Fixpoints/intuition-1.md",
-    "middle-end/static-analysis/Lattices&Fixpoints/tag-fix-point~MFP=最大不动点~meet~top-down=自上而下.md",
-    "middle-end/static-analysis/Lattices&Fixpoints/tag-fix-point~LFP=最小不动点~join~bottom-up=自上而下.md",
-    "middle-end/static-analysis/Lattices&Fixpoints/tag-constant-propagation=常量传播.md",
-    "books&courses/南京大学-软件分析/data-flow-analysis-I/tag-may-analysis~over-approximation~all~不放过任何一条路径.md",
     "books&courses/南京大学-软件分析/data-flow-analysis-I/tag-data-flow-analysis~iterative-algorithm.txt",
     "books&courses/南京大学-软件分析/data-flow-analysis-I/tag-iterative-method-optimization-jump-flooding-algorithm.txt",
     "books&courses/南京大学-软件分析/data-flow-analysis-I/tag-data-flow-equation=数据流方程.txt",
     "middle-end/static-analysis/Data-flow&Data-flow-graph&Data-flow-analysis/Use-define-chain&Define-use-chain/tag-data-flow-equation=数据流方程.txt",
     "books&courses/南京大学-软件分析/data-flow-analysis-I/tag-data-flow-analysis~abstraction+approximation+transfer-function.txt",
-    "books&courses/南京大学-软件分析/data-flow-analysis-I/tag-data-flow-analysis~reaching-definition~bit-vector.txt",
     "books&courses/龙书/5-Syntax-Directed-Translation/5.2-Evaluation-Orders-for-SDD's/S-attribute-post-order.jpg",
     "impls/parser-generator/ANTLR/The-Definitive-ANTLR-4-Reference/chapter-2/ambiguous.png"
   ]
