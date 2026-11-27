@@ -1,5 +1,5 @@
 # Compiler
-
+传统编译器
 ## Programming language
 [[compiler/3-layers-of-a-language-specification/index|语言规范的三层]]:
 - syntax: 语法

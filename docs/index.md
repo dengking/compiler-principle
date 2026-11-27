@@ -561,19 +561,19 @@ $$
 
 ### 1.7.4　代表性系统概览
 
-| 系统 | 主要发起方 | 定位 | 关键特征 |
-|---|---|---|---|
-| Halide | MIT 等 | 图像处理/张量 DSL | 算法与调度分离 |
-| XLA / OpenXLA | Google 及社区 | 全栈编译器 | HLO/StableHLO，TPU 主要编译路径，GSPMD |
-| TVM / Apache TVM | 华盛顿大学等，后成为 Apache 项目 | 全栈编译器 | 多后端，自动调优，TensorIR、Relax |
-| TensorRT | NVIDIA | 推理优化器 | 图优化、精度校准、深度结合 NVIDIA 硬件 |
-| MLIR | Google 发起，LLVM 社区 | 基础设施 | 方言、渐进式降级 |
-| IREE | Google 发起，开源社区 | 基于 MLIR 的全栈编译器与运行时 | 面向多种设备的部署 |
-| Triton | OpenAI 等 | GPU 核函数语言与编译器 | 块级编程 |
-| TorchDynamo + TorchInductor | Meta / PyTorch 社区 | 全栈 JIT 编译器 | 字节码图捕获，生成 Triton/C++ 代码 |
-| Glow | Meta | 图编译器 | 面向推理加速器 |
-| Tensor Comprehensions | Meta 等 | 张量编译器 | 多面体模型 |
-| AKG | 华为 | 张量编译器 | 多面体模型，面向昇腾等硬件 |
+| 系统                          | 主要发起方                | 定位                 | 关键特征                           |
+| --------------------------- | -------------------- | ------------------ | ------------------------------ |
+| Halide                      | MIT 等                | 图像处理/张量 DSL        | 算法与调度分离                        |
+| XLA / OpenXLA               | Google 及社区           | 全栈编译器              | HLO/StableHLO，TPU 主要编译路径，GSPMD |
+| TVM / Apache TVM            | 华盛顿大学等，后成为 Apache 项目 | 全栈编译器              | 多后端，自动调优，TensorIR、Relax        |
+| TensorRT                    | NVIDIA               | 推理优化器              | 图优化、精度校准、深度结合 NVIDIA 硬件        |
+| MLIR                        | Google 发起，LLVM 社区    | 基础设施               | 方言、渐进式降级                       |
+| IREE                        | Google 发起，开源社区       | 基于 MLIR 的全栈编译器与运行时 | 面向多种设备的部署                      |
+| Triton                      | OpenAI 等             | GPU 核函数语言与编译器      | 块级编程                           |
+| TorchDynamo + TorchInductor | Meta / PyTorch 社区    | 全栈 JIT 编译器         | 字节码图捕获，生成 Triton/C++ 代码        |
+| Glow                        | Meta                 | 图编译器               | 面向推理加速器                        |
+| Tensor Comprehensions       | Meta 等               | 张量编译器              | 多面体模型                          |
+| AKG                         | 华为                   | 张量编译器              | 多面体模型，面向昇腾等硬件                  |
 
 注：表中仅列出若干具有代表性的系统。这个领域变化很快，读者应以各项目的最新文档为准。本书会在相应部分对主要系统进行剖析。
 
