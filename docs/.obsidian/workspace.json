@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "compiler/middle-end/index.md",
+                "file": "compiler/middle-end/analysis/may-must.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "index"
+              "title": "may-must"
             }
           },
           {
@@ -201,7 +201,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "compiler/middle-end/index.md",
+                "file": "compiler/middle-end/analysis/may-must.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -231,9 +231,11 @@
   },
   "active": "5bc82f55f08842d6",
   "lastOpenFiles": [
-    "compiler/middle-end/tag-vectorization=向量化~SIMD=single-instruction-multiple-data=单指令多数据.md",
+    "compiler/middle-end/analysis/data-flow-analysis/sparse-data-flow-analysis/index.md",
     "compiler/middle-end/index.md",
-    "compiler/middle-end/static-analysis/data-flow-analysis/index.md",
+    "compiler/middle-end/optimization",
+    "compiler/middle-end/tag-vectorization=向量化~SIMD=single-instruction-multiple-data=单指令多数据.md",
+    "compiler/middle-end/analysis/data-flow-analysis/index.md",
     "compiler/middle-end/tag-canonicalization=规范化.md",
     "compiler/middle-end/tag-IPA=interprocedural-analysis=过程间分析.md",
     "compiler/middle-end/tag-SCEV=scalar-evolution=标量演化.md",
@@ -255,13 +257,11 @@
     "compiler/middle-end/tag-iterative-algorithm.md",
     "compiler/middle-end/tag-data-flow-analysis-framework=数据流分析框架.md",
     "compiler/middle-end/tag-poison-value=毒值.md",
-    "compiler/middle-end/未命名",
     "compiler/middle-end/tag-back-edge=回边.md",
-    "compiler/middle-end/tag-data-dependence-graph=数据依赖图.md",
-    "compiler/middle-end/static-analysis/data-flow-analysis/tag-register-allocation~live-variable-analysis=活跃变量分析.txt",
+    "compiler/middle-end/analysis/data-flow-analysis/tag-register-allocation~live-variable-analysis=活跃变量分析.txt",
     "compiler/middle-end/static-analysis/data-flow-analysis/tag-register-allocation.txt",
-    "compiler/middle-end/static-analysis/data-flow-analysis/tag-DCE=dead-code-elimination~live-variable-analysis=活跃变量分析.txt",
-    "compiler/middle-end/static-analysis/dead-code-elimination/tag-DCE=dead-code-elimination.txt",
+    "compiler/middle-end/analysis/data-flow-analysis/tag-DCE=dead-code-elimination~live-variable-analysis=活跃变量分析.txt",
+    "compiler/middle-end/optimization/dead-code-elimination/tag-DCE=dead-code-elimination.txt",
     "compiler/middle-end/SSA-based/Global-value-numbering/tag-value-number-method=值编号法~GVN=global-value-numbering=全局值编号.txt",
     "compiler/middle-end/SSA-based/Global-value-numbering/tag-CSE=.txt",
     "compiler/middle-end/SSA-based/Global-value-numbering/mkdocs.yml",
