@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "docs/dl-compiler/trade-off-graph/tradeoff-graph.md",
+                "file": "docs/compiler/books&courses/南京大学-软件分析/data-flow-analysis-I/tag-control-flow~meet.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "tradeoff-graph"
+              "title": "tag-control-flow~meet"
             }
           }
         ]
@@ -99,7 +99,7 @@
             "state": {
               "type": "backlink",
               "state": {
-                "file": "docs/dl-compiler/trade-off-graph/tradeoff-graph.md",
+                "file": "docs/compiler/books&courses/南京大学-软件分析/data-flow-analysis-I/tag-control-flow~meet.md",
                 "collapseAll": true,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -118,7 +118,7 @@
             "state": {
               "type": "outgoing-link",
               "state": {
-                "file": "docs/dl-compiler/trade-off-graph/tradeoff-graph.md",
+                "file": "docs/compiler/books&courses/南京大学-软件分析/data-flow-analysis-I/tag-control-flow~meet.md",
                 "linksCollapsed": false,
                 "unlinkedCollapsed": true
               },
@@ -161,7 +161,7 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "docs/dl-compiler/trade-off-graph/tradeoff-graph.md",
+                "file": "docs/compiler/books&courses/南京大学-软件分析/data-flow-analysis-I/tag-control-flow~meet.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
@@ -190,22 +190,41 @@
   },
   "active": "0644f45564660ffc",
   "lastOpenFiles": [
-    "docs/dl-compiler/trade-off-graph/tag-SuperPod=超级节点.md",
-    "docs/dl-compiler/trade-off-graph/tradeoff-graph.md",
-    "docs/dl-compiler/impls/Halide/Halide.md",
-    "docs/dl-compiler/impls/Halide/tag-Halide~triangle-tradeoff=three-way=三角权衡~parallelism=并行性~locality=局部性~redundant-work=冗余计算.md",
-    "tag-Halide~triangle-tradeoff=three-way=三角权衡~parallelism=并行性~locality=局部性~redundant-work=冗余计算.md",
-    "docs/dl-compiler/index.md",
-    "docs/dl-compiler/trade-off-graph",
-    "docs/dl-compiler/未命名文件夹",
-    "docs/dl-compiler/tradeoff-graph.md",
-    "docs/dl-compiler/AI编译器的权衡图_优化版.md",
-    "docs/index.md",
-    "README.md",
-    "docs/dl-compiler/impls/Halide/decouple-algorithms-from-schedules.md",
-    "docs/dl-compiler/impls/Halide/tag-SIMD.md",
-    "docs/dl-compiler/impls/Halide/未命名",
-    "docs/dl-compiler/impls/Halide",
-    "docs/compiler/index.md"
+    "docs/compiler/middle-end/tag-vectorization=向量化~SIMD=single-instruction-multiple-data=单指令多数据.md",
+    "docs/compiler/middle-end/tag-vectorization=向量化.md",
+    "docs/compiler/middle-end/未命名.md",
+    "docs/compiler/middle-end/tag-canonicalization=规范化.md",
+    "docs/compiler/middle-end/tag-IPA=interprocedural-analysis=过程间分析.md",
+    "docs/compiler/middle-end/tag-SCEV=scalar-evolution=标量演化.md",
+    "docs/compiler/middle-end/tag-PDG=program-dependence-graph=数据依赖图.md",
+    "docs/compiler/middle-end/tag-Program Dependence Graph.md",
+    "docs/compiler/middle-end/tag-polyhedral-model=多面体模型.md",
+    "docs/compiler/middle-end/tag-dependence-analysis=依赖分析.md",
+    "docs/compiler/middle-end/tag-GVN=global-value-mumbering=全局值编号.md",
+    "docs/compiler/middle-end/tag-DSE=dead-store-elimination.md",
+    "docs/compiler/middle-end/tag-LICM=loop-invariant-code-motion=循环不变代码外提.md",
+    "docs/compiler/middle-end/tag-AA=alias-analysis=别名分析~MemorySSA.md",
+    "docs/compiler/middle-end/tag.md",
+    "docs/compiler/middle-end/tag-AA=alias-analysis=别名分析~.md",
+    "docs/compiler/middle-end/tag-MemorySSA.md",
+    "docs/compiler/middle-end/tag-AA=alias-analysis=别名分析.md",
+    "docs/compiler/middle-end/tag-SCCP=sparse-conditional-constant-propagation=稀疏条件常量传播.md",
+    "docs/compiler/middle-end/tag-data-flow-analysis~SSA-based-sparse-analysis.md",
+    "docs/compiler/middle-end/tag-data-flow-analysis.md",
+    "docs/compiler/middle-end/tag-control-flow-analysis=控制流分析~dominator-tree=支配树.md",
+    "docs/compiler/middle-end/tag-control-flow-analysis=控制流分析.md",
+    "docs/compiler/middle-end/tag-abstract-interpretation~a unified lattice model for static analysis of programs by construction or approximation of fixpoints.md",
+    "docs/compiler/middle-end/tag-MOP=meet-over-all-paths=全路径交汇解.md",
+    "docs/compiler/middle-end/tag-approximation~conservative=保守近似.md",
+    "docs/compiler/middle-end/未命名",
+    "docs/compiler/middle-end/static-analysis/data-flow-analysis/tag-register-allocation~live-variable-analysis=活跃变量分析.txt",
+    "docs/compiler/middle-end/static-analysis/data-flow-analysis/tag-register-allocation.txt",
+    "docs/compiler/middle-end/static-analysis/data-flow-analysis/tag-DCE=dead-code-elimination~live-variable-analysis=活跃变量分析.txt",
+    "docs/compiler/middle-end/static-analysis/data-flow-analysis/tag-DCE=dead-code-elimination~live-variable-analysis=.txt",
+    "docs/compiler/middle-end/SSA-based/Global-value-numbering/mkdocs.yml",
+    "docs/compiler/middle-end/SSA-based/Global-value-numbering/tag-value-number-method=值编号法~GVN=global-value-numbering=全局值编号.txt",
+    "docs/compiler/middle-end/SSA-based/Global-value-numbering/tag-CSE=.txt",
+    "docs/compiler/middle-end/SSA-based/tag-SSA~Vanilla=Maximal=strict=基础版~dominance-frontier=支配前沿.txt",
+    "docs/compiler/middle-end/SSA-based/tag-SSA~Pruned=剪枝版~LLVM~GCC.txt"
   ]
 }
